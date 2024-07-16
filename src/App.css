@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  background-color: lightblue;
+  display: grid;
+  position: relative;
+}
+
+.header_container {
+  height: 3rem;
+  background-color: lightcoral;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.presentation_container {
+  height: 100svh;
+}
+
+.footer_container {
+  height: 20rem;
+  background-color: lightgray;
+}
