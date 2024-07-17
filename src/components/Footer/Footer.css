@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap");
+footer {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 9.5rem 1fr;
+  background-color: #a18276;
+}
+
+.footer-header {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.footer-header > h1 {
+  font-family: "Ms Madi", cursive;
+  color: rgba(255, 255, 255, 0.769);
+  font-size: 2.3rem;
+  margin-left: 9rem;
+  font-weight: lighter;
+}
+
+.footer-cards {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.footer-item {
+  width: 24rem;
+  height: 16rem;
+  border: 2px solid rgba(255, 255, 255, 0.597);
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  border-radius: 0.1rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: end;
+  padding-left: 1.5rem;
+}
+
+.card-header h2 {
+  color: rgba(255, 255, 255, 0.769);
+  font-family: var(--cards-footer-font);
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-bottom: 1.8rem;
+}
+
+.location-icon {
+  color: rgba(255, 255, 255, 0.769);
+  font-size: 1.2rem;
+}
+
+.card-body p {
+  font-family: var(--cards-footer-font);
+  color: rgba(255, 255, 255, 0.769);
+  display: flex;
+  gap: 1rem;
+  font-weight: 400;
+  max-width: 30ch;
+  align-items: center;
+  font-size: 0.94rem;
+}
+
+.schedule-container {
+  /* background-color: red; */
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.social-network {
+  width: 24rem;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1.5fr;
+  margin-left: -1.5rem;
+  margin-bottom: -1.4rem;
+}
+
+.social-network_icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  padding-top: 1rem;
+}
+
+.social-network_icons div {
+  border: 2px solid rgba(255, 255, 255, 0.769);
+  height: 2.5rem;
+  width: 2.5rem;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.769);
+}
+
+.social-network_recommend {
+  /* background-color: lightcyan; */
+  display: grid;
+  place-content: center;
+}
+
+.social-network_recommend div {
+  /* background-color: red; */
+  width: 18rem;
+  height: 3.4rem;
+  border: 2px solid rgba(255, 255, 255, 0.769);
+  border-radius: 3rem;
+  display: grid;
+  place-content: center;
+  font-family: var(--cards-footer-font);
+  color: rgba(255, 255, 255, 0.769);
+  font-weight: 300;
+  padding-bottom: .1rem;
+}

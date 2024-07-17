@@ -1,14 +1,21 @@
 import "./App.css";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <>
-      {/* <Header />
-      <Hero /> */}
       <main>
-        <section className="header_container">Header</section>
-        <section className="presentation_container">Presentation</section>
-        <section className="footer_container">Footer</section>
+        <section className="header_container">
+          <Header />
+        </section>
+        <section className="presentation_container">
+
+        </section>
+        <section className="idk_container"></section>
+        <section className="footer_container">
+          <Footer />
+        </section>
       </main>
     </>
   );
