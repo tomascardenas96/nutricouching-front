@@ -11,9 +11,6 @@ import { FaTiktok } from "react-icons/fa";
 function Footer() {
   return (
     <footer>
-      <div className="footer-header">
-        <h1>Natasha Dirialdi</h1>
-      </div>
       <div className="footer-cards">
         <div className="footer-item">
           <div className="card-header">
@@ -75,9 +72,7 @@ function Footer() {
                 </div>
               </div>
               <div className="social-network_recommend">
-                <div>
-                    Etiquetanos en tus fotos!
-                </div>
+                <div>Etiquetanos en tus fotos! 🩵</div>
               </div>
             </div>
           </div>

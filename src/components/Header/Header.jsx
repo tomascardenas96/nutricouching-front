@@ -3,7 +3,7 @@ import React from "react";
 
 function Header() {
   return (
-    <>
+    <div className="header">
       <div className="header-logo">
         <div>
           <img src="../src/assets/nutricouching-logo.jpg" alt="" />
@@ -15,17 +15,18 @@ function Header() {
         <ul>
           <li>INICIO</li>
           <li>PRODUCTOS</li>
+          <li>SERVICIOS</li>
           <li>RECETAS</li>
-          <li>SOBRE MI</li>
+          <li>OPINIONES</li>
         </ul>
       </div>
       <div className="header-login">
         <div>
+          <p>Registrate gratis</p>
           <input type="button" value="Iniciar sesion" />
-          <p>O registrate gratis</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
