@@ -22,9 +22,9 @@ function Services() {
             "https://www.adherencia-cronicidad-pacientes.com/wp-content/uploads/2020/03/Recurso_comida_saludable-scaled.jpg"
           }
           color="#DCB8CB"
-          title={"COUCHING"}
+          title={"COACHING"}
           description={` Mejora tu desarrollo personal y profesional con sesiones de
-              couching personalizadas. Descubre tus fortalezas, supera tus
+              coaching personalizadas. Descubre tus fortalezas, supera tus
               limitaciones y alcanza tus objetivos con la guía de nuestros
               expertos.`}
           icon={<GiWeightLiftingUp />}
@@ -34,11 +34,10 @@ function Services() {
             "https://www.instacart.com/company/wp-content/uploads/2021/10/meal-plan-paper.jpg"
           }
           color={"#7F96FF"}
-          title={"PLAN DE ALIMENTACION"}
-          description={`Recibe un plan de alimentación equilibrado y adaptado a tus
-          necesidades. Nuestra asesoría nutricional te ayudará a mantener
-          una dieta saludable y alcanzar tus metas de bienestar.`}
+          title={"GUIA ALIMENTARIA PERSONALIZADA"}
+          description={`Recibe una guia adaptada a tus necesidades, nuestra asesoria profesional te ayudara a crear habitos saludables y alcanzar el bienestar.`}
           icon={<IoNutritionOutline />}
+          className="food-guide_card"
         />
         <ServiceCard
           image={
@@ -47,8 +46,7 @@ function Services() {
           color={"#55D6BE"}
           title={"PLAN INTELIGENTE"}
           description={`Optimiza tu bienestar con nuestro plan inteligente, diseñado para
-          obtener resultados efectivos. Combina estrategias personalizadas y
-          seguimiento constante para mejorar tu calidad de vida.`}
+          obtener resultados efectivos.`}
           icon={<RiMentalHealthLine />}
         />
         <ServiceCard

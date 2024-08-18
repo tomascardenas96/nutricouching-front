@@ -1,6 +1,6 @@
 .services-card_container {
-  width: 19.9rem;
-  height: 29rem;
+  width: 19rem;
+  height: 27.5rem;
   border-radius: 0.2rem;
   display: grid;
   grid-template-rows: 27% 1fr;
@@ -46,8 +46,7 @@
 .services-card_container .card-description {
   border-radius: 0 0 0.2rem 0.2rem;
   display: grid;
-  grid-template-rows: 6.2rem 1fr 4rem;
-  gap: 0.5rem;
+  grid-template-rows: 6.2rem 1fr 2.4rem;
   width: 100%;
   margin-left: 0.05rem;
   justify-self: center;
@@ -56,24 +55,27 @@
   & h1 {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: start;
     text-align: center;
+    justify-self: center;
+    max-width: 30ch;
     font-family: var(--service-cards-title);
-    font-size: 1.15rem;
+    font-size: 1rem;
+    margin-top: 4.3rem;
   }
   & p {
     margin-top: 1rem;
     text-align: center;
     padding: 0 0.7rem;
     font-family: var(--primary-font);
-    font-size: 0.94rem;
+    font-size: 0.9rem;
     line-height: 1.45rem;
   }
 
   & div.know-more {
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: start;
     padding-right: 1rem;
 
     & div {
@@ -92,4 +94,8 @@
       }
     }
   }
+}
+
+.food-guide_card .services-card_container .card-description {
+  grid-template-rows: 7rem 1fr 2.4rem;
 }

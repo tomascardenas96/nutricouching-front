@@ -1,0 +1,19 @@
+.products-carousel_container {
+  width: 85%;
+  display: flex;
+  gap: 1.5%;
+  position: relative;
+}
+
+.products-carousel_arrows {
+  position: absolute;
+  top: 28%;
+}
+
+.arrow-left {
+  left: -3rem;
+}
+
+.arrow-forward {
+  right: -3rem;
+}

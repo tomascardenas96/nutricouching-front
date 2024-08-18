@@ -3,6 +3,7 @@ import Categories from "./components/Categories/Categories";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Presentation from "./components/Presentation/Presentation";
+import Carousel from "./components/Recipes/Carousel";
 import Services from "./components/Services/Services";
 
 function App() {
@@ -29,7 +30,9 @@ function App() {
           <Services />
         </section>
 
-        <section className="recipes_container"></section>
+        <section className="recipes_container">
+          <Carousel />
+        </section>
 
         <section className="footer_container">
           <Footer />
