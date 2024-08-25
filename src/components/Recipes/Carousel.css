@@ -58,6 +58,7 @@
     font-weight: lighter;
     color: rgba(0, 0, 0, 0.516);
     font-size: 1.5rem;
+    background-color: white;
   }
 }
 
@@ -75,7 +76,7 @@
     font-size: 2.9rem;
     font-family: var(--carousel-title);
     font-weight: lighter;
-    max-width: 10ch;
+    max-width: 20ch;
     color: rgba(0, 0, 0, 0.737);
   }
 }
@@ -96,7 +97,7 @@
   align-items: center;
 
   & div.decoration-line {
-    width: 70%;
+    width: 75%;
     height: 2px;
     background-color: rgba(0, 0, 0, 0.44);
   }

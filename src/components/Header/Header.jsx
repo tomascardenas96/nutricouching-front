@@ -8,15 +8,15 @@ function Header() {
       <div className="header-logo">
         <div>
           <img src="../src/public/assets/nutricouching-logo.jpg" alt="" />
-          <p>Nutri-couching</p>
+          <p>Nutri-coaching</p>
           <p>Integral</p>
         </div>
       </div>
       <div className="header-menu">
         <ul>
           <li>INICIO</li>
-          <li>PRODUCTOS</li>
           <li>SERVICIOS</li>
+          <li>PRODUCTOS</li>
           <li>VIANDAS</li>
           <li>CONOCENOS</li>
           <li className="header-cart_container">

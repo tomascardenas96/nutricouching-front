@@ -5,6 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   margin: 0;
@@ -14,11 +15,16 @@
 :root {
   --primary-font: "Quicksand", sans-serif;
   --section-font: "Ubuntu", sans-serif;
+  --presentation-banner-font: "Raleway", sans-serif;
   --products-card_price: "Lora", serif;
   --cards-footer-font: "Heebo", sans-serif;
   --primary-font-color: rgba(255, 255, 255, 0.769);
   --service-cards-title: "Caveat", cursive;
   --carousel-title: "Libre Baskerville", serif;
+}
+
+body {
+  background-color: #ebebeb;
 }
 
 main {
@@ -39,11 +45,10 @@ main {
 }
 
 .presentation_container {
-  height: 37svh;
+  height: 38svh;
   min-height: 18rem;
   margin-top: 4rem;
   position: relative;
-  padding-bottom: 1.8rem;
 }
 
 .presentation_container .decoration-line {
@@ -57,13 +62,12 @@ main {
 .categories_container {
   width: 100%;
   display: grid;
-  height: calc(63svh - 4rem);
+  height: calc(59svh - 4rem);
 }
 
 .services_container {
   width: 100%;
-  min-height: 52.8125rem;
-  height: 86.5svh;
+  height: 63svh;
   position: relative;
 }
 

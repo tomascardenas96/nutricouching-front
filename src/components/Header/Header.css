@@ -46,7 +46,7 @@
 .header-menu > ul {
   display: flex;
   list-style: none;
-  gap: 2.5rem;
+  gap: 2.4rem;
 }
 
 .header-menu > ul li {

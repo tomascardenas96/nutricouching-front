@@ -41,24 +41,31 @@ function Carousel() {
             <h1>01</h1>
           </div>
           <div className="author-recipe">
-            <h1>PAUL WALKER</h1>
+            <h1>NATASHA DIRIALDI</h1>
           </div>
           <div className="name-recipe">
-            <h1>New Brunch Recipe</h1>
+            <h1>Selección de Lentejas y Vegetales</h1>
           </div>
           <div className="ingredients-recipe">
             <p>
               <span style={{ textDecoration: "underline" }}>Ingredientes:</span>{" "}
-              1 taza de lentejas cocidas, 1/2 cebolla picada, 1 diente de ajo
-              picado, 1 zanahoria rallada, 1/2 taza de pan rallado, 1/4 taza de
-              avena, 2 cucharadas de harina, comino, pimentón, orégano, sal y
+              lentejas cocidas, cebolla picada, ajo picado, zanahoria rallada,
+              pan rallado, avena, harina, comino, pimentón, orégano, sal,
               pimienta, aceite de oliva.
+              <br />
+              <br />
+              <p>
+                Una vianda saludable que combina croquetas de lentejas ricas en
+                proteínas y fibra con vegetales frescos y especias naturales.
+                Perfecta para quienes buscan una comida nutritiva y llena de
+                sabor.
+              </p>
             </p>
           </div>
           <div className="footer-recipe">
             <div className="decoration-line"></div>
             <div className="see-recipe">
-              <p>VER RECETA</p>
+              <p>COMPRAR</p>
               <FaArrowRight />
             </div>
           </div>

@@ -4,23 +4,62 @@ import { LuHeartPulse } from "react-icons/lu";
 import { MdOutlineHealthAndSafety } from "react-icons/md";
 import { LuWheatOff } from "react-icons/lu";
 import { BsPersonArmsUp } from "react-icons/bs";
-import { FaArrowRight } from "react-icons/fa6";
+
 import ProductsCarousel from "./ProductsCarousel";
+import ServiceCard from "../Services/ServicesCard";
+import { GiWeightLiftingUp } from "react-icons/gi";
+import { IoNutritionOutline } from "react-icons/io5";
+import { RiMentalHealthLine, RiFootprintFill } from "react-icons/ri";
 
 function Categories() {
   return (
     <div className="categories-menu">
       <div className="title">
         <h1>
-          Echa un vistazo a algunos de nuestros productos, agrega al carrito el
-          que mas te guste.
+          Nuestros servicios disponibles, donde podrás obtener un asesoramiento
+          completo.
         </h1>
       </div>
       <div className="categories">
-        <ProductsCarousel />
-        <div className="see-more-products">
-          <p>VER MAS</p>
-          <FaArrowRight className="enter-here" />
+        <div className="services-list">
+          <ServiceCard
+            image={
+              "https://www.adherencia-cronicidad-pacientes.com/wp-content/uploads/2020/03/Recurso_comida_saludable-scaled.jpg"
+            }
+            color="#DCB8CB"
+            title={"COACHING"}
+            description={` Mejora tu desarrollo personal y profesional con sesiones de
+              coaching personalizadas.`}
+            icon={<GiWeightLiftingUp />}
+          />
+          <ServiceCard
+            image={
+              "https://www.instacart.com/company/wp-content/uploads/2021/10/meal-plan-paper.jpg"
+            }
+            color={"#7F96FF"}
+            title={"GUÍA ALIMENTARIA PERSONALIZADA"}
+            description={`Recibe una guía adaptada a tus necesidades. Nuestra asesoría profesional te ayudará a crear hábitos saludables y alcanzar el bienestar.`}
+            icon={<IoNutritionOutline />}
+            className="food-guide_card"
+          />
+          <ServiceCard
+            image={
+              "https://living.life.edu/wp-content/uploads/2021/12/slice-brain-food-dec8.png"
+            }
+            color={"#55D6BE"}
+            title={"PLAN INTELIGENTE"}
+            description={`Optimiza tu bienestar con nuestro plan inteligente, diseñado para obtener resultados efectivos.`}
+            icon={<RiMentalHealthLine />}
+          />
+          <ServiceCard
+            image={
+              "https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png"
+            }
+            color={"#FFEFBD"}
+            title={"ASESORAMIENTO CONTINUO"}
+            description={`Accede a soporte y guía constante para alcanzar tus metas de manera eficaz. Nuestro equipo de profesionales estará contigo en cada paso.`}
+            icon={<RiFootprintFill />}
+          />
         </div>
       </div>
     </div>
@@ -28,46 +67,3 @@ function Categories() {
 }
 
 export default Categories;
-
-{
-  /* <div className="category-section">
-          <MdOutlineSportsSoccer className="category-icon" />
-          <h2>
-            Deportistas amateur y personas activas que buscan optimizar su
-            rendimiento
-          </h2>
-          <div className="divider-line"></div>
-        </div>
-
-        <div className="category-section">
-          <LuHeartPulse className="category-icon" />
-          <h2>
-            Personas con diabetes {`(tipo 2)`} que requieren asesoramiento
-            nutricional especializado.
-          </h2>
-          <div className="divider-line"></div>
-        </div>
-
-        <div className="category-section">
-          <MdOutlineHealthAndSafety className="category-icon" />
-          <h2>
-            Opciones equilibradas para ayudar en el control de peso y mejora de
-            salud.
-          </h2>
-          <div className="divider-line"></div>
-        </div>
-
-        <div className="category-section">
-          <LuWheatOff className="category-icon" />
-          <h2>
-            Platos libres de gluten, seguros y sabrosos para personas con
-            enfermedad celíaca.
-          </h2>
-          <div className="divider-line"></div>
-        </div>
-
-        <div className="category-section">
-          <BsPersonArmsUp className="category-icon" />
-          <h2>Alternativas saludables para cualquier estilo de vida.</h2>
-        </div> */
-}

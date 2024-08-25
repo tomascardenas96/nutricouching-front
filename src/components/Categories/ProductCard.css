@@ -1,22 +1,19 @@
 .product-card_container {
-  width: 23rem;
-  height: 13rem;
-  /* background-color: green; */
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 13.3rem;
+  height: 95%;
   border-radius: 0.1rem;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.039);
   display: grid;
-  grid-template-rows: 2rem 1fr;
-  grid-template-columns: 10rem 1fr;
+  grid-template-rows: 1fr 1fr;
+  background-color: white;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .product-card_header {
-  grid-column: 1 / 3;
   border-bottom: 2px solid rgba(0, 0, 0, 0.053);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.7em;
 
   & p {
     font-family: var(--primary-font);
@@ -33,14 +30,13 @@
 }
 
 .product-card_image {
-  border-right: 2px solid rgba(0, 0, 0, 0.053);
   height: 97.6%;
   display: grid;
-  place-content: center;
+  justify-content: center;
 
   & img {
-    width: 90%;
-    height: 90%;
+    width: 96%;
+    height: 96%;
     object-fit: cover;
     object-position: center;
   }
@@ -48,36 +44,43 @@
 
 .product-card_body {
   display: grid;
-  grid-template-rows: 1fr 0.5fr 1.5fr;
-  gap: 0.3em;
-  padding: 0 5%;
+  grid-template-rows: max-content max-content 1fr;
+  padding: 0 2%;
 
   & .product-title,
   .product-description,
   .product-price {
     font-family: var(--primary-font);
     color: rgba(0, 0, 0, 0.599);
-    font-size: 0.75em;
+    font-size: 0.8em;
   }
 
   & .product-title {
     display: flex;
     height: 100%;
-    align-items: center;
-    font-weight: bold;
+    font-weight: 500;
     line-height: 1.1rem;
+    margin-bottom: 0.3em;
   }
 
   & .product-description {
-    color: rgba(0, 0, 0, 0.698);
+    color: #00a650;
+    margin-bottom: 0.2em;
   }
 
   & .product-price {
-    display: grid;
-    place-content: center;
-    font-family: var(--products-card_price);
-    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    font-family: var(--cards-footer-font);
+    font-size: 1.5em;
     font-weight: lighter;
-    height: 50%;
+    font-weight: 400;
+    margin-top: 0.4rem;
+
+    & span {
+      font-size: 0.7rem;
+      height: 100%;
+      padding-top: 5%;
+    }
   }
 }

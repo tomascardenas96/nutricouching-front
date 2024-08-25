@@ -17,7 +17,6 @@ function App() {
 
           <section className="presentation_container">
             <Presentation />
-            <div className="decoration-line"></div>
           </section>
 
           <section className="categories_container">
@@ -26,7 +25,7 @@ function App() {
         </div>
 
         <section className="services_container">
-          <div className="decoration-line"></div>
+          {/* <div className="decoration-line"></div> */}
           <Services />
         </section>
 

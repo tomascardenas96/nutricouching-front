@@ -1,10 +1,18 @@
 .services-card_container {
   width: 19rem;
-  height: 27.5rem;
+  height: 99%;
   border-radius: 0.2rem;
   display: grid;
-  grid-template-rows: 27% 1fr;
+  grid-template-rows: 28% 1fr;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.124);
+  background-color: white;
+}
+
+@keyframes identifier {
+  from {
+  }
+  to {
+  }
 }
 
 .services-card_container .card-header {
@@ -13,16 +21,16 @@
 
   & .icon {
     position: absolute;
-    top: 1.3rem;
-    left: 1.3rem;
-    font-size: 1.3rem;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.1rem;
     color: white;
     filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.698));
   }
 
   & .card-img {
-    width: 7.5rem;
-    height: 7.5rem;
+    width: 5.5rem;
+    height: 5.5rem;
     background-color: white;
     border-radius: 50%;
     position: absolute;
@@ -35,8 +43,8 @@
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
 
     & img {
-      width: 7rem;
-      height: 7rem;
+      width: 5rem;
+      height: 5rem;
       object-fit: cover;
       border-radius: 50%;
     }
@@ -46,30 +54,25 @@
 .services-card_container .card-description {
   border-radius: 0 0 0.2rem 0.2rem;
   display: grid;
-  grid-template-rows: 6.2rem 1fr 2.4rem;
+  grid-template-rows: 0.65fr 1fr 0.4fr;
   width: 100%;
-  margin-left: 0.05rem;
   justify-self: center;
-  background-color: white;
 
   & h1 {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: end;
     text-align: center;
     justify-self: center;
-    max-width: 30ch;
     font-family: var(--service-cards-title);
-    font-size: 1rem;
-    margin-top: 4.3rem;
+    font-size: 0.9rem;
   }
   & p {
-    margin-top: 1rem;
     text-align: center;
-    padding: 0 0.7rem;
     font-family: var(--primary-font);
-    font-size: 0.9rem;
-    line-height: 1.45rem;
+    font-size: 0.8rem;
+    padding: 4% 0.7rem 0;
+    line-height: 1.2rem;
   }
 
   & div.know-more {
@@ -84,7 +87,7 @@
       cursor: pointer;
       & p {
         margin: 0;
-        font-size: 0.87rem;
+        font-size: 0.8rem;
         text-decoration: underline;
       }
       & .arrow-right {

@@ -1,0 +1,17 @@
+.dots_container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  & div {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.053);
+  }
+
+  & .selected-dot {
+    background-color: rgb(94, 193, 115);
+  }
+}
