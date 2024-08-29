@@ -87,11 +87,30 @@
 
   .carousel-header {
     & p {
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
-  
+
     & .carousel-more {
       font-size: 0.8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .products-carousel_container {
+    width: 74.5rem;
+    height: 21rem;
+    grid-template-rows: 2rem 1fr;
+  }
+
+  .carousel-header {
+    & p {
+      font-size: 0.8rem;
+      padding-left: 1.5rem;
+    }
+
+    & .carousel-more {
+      font-size: 0.7rem;
     }
   }
 }

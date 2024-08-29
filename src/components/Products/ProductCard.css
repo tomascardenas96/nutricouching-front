@@ -126,3 +126,26 @@
     }
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .product-card_container {
+    width: 12rem;
+    height: 95%;
+  }
+
+  .product-card_body {
+    & .product-title,
+    .product-description,
+    .product-price {
+      font-size: 0.7em;
+    }
+
+    & .product-price {
+      font-size: 1.3em;
+
+      & span {
+        font-size: 0.6rem;
+      }
+    }
+  }
+}

@@ -27,6 +27,10 @@
   --about-us-role: "Poppins", sans-serif;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   background-color: #ebebeb;
 }
@@ -75,6 +79,7 @@ main {
   height: 59svh;
   position: relative;
   min-height: 30.3125rem;
+  max-height: 33.4375rem;
 }
 
 .services_container .decoration-line {
@@ -87,8 +92,9 @@ main {
 
 .recipes_container {
   display: flex;
-  height: 80svh;
+  height: 83svh;
   min-height: 41.875rem;
+  margin-bottom: 1rem;
 }
 
 .about-us_container {
@@ -99,4 +105,11 @@ main {
 .footer_container {
   height: 23rem;
   width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  .recipes_container {
+    min-height: 40.875rem;
+    margin-bottom: 2.5rem;
+  }
 }

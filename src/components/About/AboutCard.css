@@ -72,43 +72,14 @@
   }
 
   .about-card_description {
-    width: 62%;
-    height: 9rem;
-    background-color: #ebebeb;
-    bottom: -6rem;
-    left: 18.5%;
-    border-radius: 0.1rem;
-    display: grid;
-    grid-template-rows: 3.5rem 4rem 1fr;
-    color: #161925;
+    grid-template-rows: 3.2rem 4rem 1fr;
 
     & h1 {
-      font-family: var(--about-us-title);
       font-size: 0.95rem;
-      letter-spacing: 0.05rem;
-      display: grid;
-      place-content: center;
     }
 
     & h2 {
-      font-family: var(--about-us-role);
-      font-weight: 200;
       font-size: 0.8rem;
-      letter-spacing: 0.15rem;
-      text-align: center;
-      width: 100%;
-      max-width: 15ch;
-      display: flex;
-      justify-self: center;
-    }
-
-    & div.social-networks {
-      display: flex;
-      align-items: end;
-      justify-content: center;
-      gap: 0.5rem;
-      font-size: 0.95rem;
-      padding-bottom: 2rem;
     }
   }
 }

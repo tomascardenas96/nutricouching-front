@@ -127,3 +127,9 @@
     }
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .services-card_container {
+    width: 17rem;
+  }
+}

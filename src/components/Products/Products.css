@@ -64,7 +64,20 @@
   }
 
   .services-section {
-  
+    & h1 {
+      font-size: 1.3rem;
+      padding: 1rem 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .services {
+    grid-template-rows: max-content 1fr;
+    gap: 1.7rem;
+  }
+
+  .services-section {
     & h1 {
       font-size: 1.3rem;
       padding: 1rem 0;

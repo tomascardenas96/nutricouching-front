@@ -126,11 +126,7 @@
   }
 
   .header-logo p {
-    font-family: "Quicksand", sans-serif;
     font-size: 0.7rem;
-    font-weight: 500;
-    padding-left: 0.5rem;
-    color: rgba(0, 0, 0, 0.768);
   }
 
   .header-menu > ul li {
@@ -139,6 +135,28 @@
 
   .header-login > div > p {
     font-size: 0.65rem;
+  }
+
+  .header-login > div > input {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .header-logo img {
+    width: 2.3rem;
+  }
+
+  .header-logo p {
+    font-size: 0.65rem;
+  }
+
+  .header-menu > ul li {
+    font-size: 0.74em;
+  }
+
+  .header-login > div > p {
+    font-size: 0.64rem;
   }
 
   .header-login > div > input {

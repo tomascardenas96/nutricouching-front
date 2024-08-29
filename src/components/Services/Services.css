@@ -99,7 +99,7 @@
 
   .categories-menu > .title {
     & h1 {
-      padding-top: .3rem;
+      padding-top: 0.3rem;
       font-size: 1.3rem;
     }
   }
@@ -108,11 +108,18 @@
     height: 20rem;
   }
 
-  .services-list {
-    display: flex;
-    gap: 2.2rem;
-    justify-content: center;
-    padding-top: 0.5rem;
-    padding: 0 2rem;
+
+}
+
+@media screen and (max-width: 1400px) {
+  .categories-menu {
+    display: grid;
+    grid-template-rows: 0.23fr 1fr;
   }
+
+  .categories {
+    height: 19.5rem;
+  }
+
+
 }
