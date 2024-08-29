@@ -1,6 +1,11 @@
 .carousel_container {
   width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 4.5rem;
+  position: relative;
 }
 
 .carousel-recipes_header {
@@ -10,25 +15,25 @@
   font-family: var(--section-font);
   font-weight: lighter;
   color: #9e7682;
-  height: 16svh;
+  height: 11svh;
 }
 
 .carousel {
-  height: 63svh;
   display: grid;
   grid-template-columns: 50% 50%;
-  padding: 1% 13% 12% 13%;
   gap: 1rem;
-  position: relative;
+  justify-self: center;
+  width: 70rem;
+  height: 100%;
 
   & .recipe-card_text {
     display: grid;
-    grid-template-rows: 0.6fr 0.3fr 0.9fr 1.3fr 0.5fr;
+    grid-template-rows: 6fr 3fr 9.5fr 15fr 4fr;
     gap: 0.5rem;
   }
 
   & .recipe-card_img {
-    padding-left: 10%;
+    padding-left: 14%;
 
     & img {
       width: 100%;
@@ -57,7 +62,7 @@
     font-family: var(--section-font);
     font-weight: lighter;
     color: rgba(0, 0, 0, 0.516);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     background-color: white;
   }
 }
@@ -65,7 +70,7 @@
 .author-recipe {
   & h1 {
     font-family: var(--primary-font);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: lighter;
     color: rgba(0, 0, 0, 0.516);
   }
@@ -73,7 +78,7 @@
 
 .name-recipe {
   & h1 {
-    font-size: 2.9rem;
+    font-size: 2.7rem;
     font-family: var(--carousel-title);
     font-weight: lighter;
     max-width: 20ch;
@@ -117,7 +122,7 @@
 
 .carousel-btn {
   position: absolute;
-  top: 40%;
+  top: 51%;
 }
 
 .carousel-btn_left {
@@ -126,4 +131,68 @@
 
 .carousel-btn_right {
   right: 5%;
+}
+
+@media screen and (max-width: 1550px) {
+  .carousel {
+    & .recipe-card_text {
+      grid-template-rows: 5.2fr 2fr 7fr 15fr 4fr;
+    }
+  }
+
+  .carousel-recipes_header {
+    font-size: 1.3rem;
+    height: 6rem;
+  }
+
+  .number-recipe {
+    & h1 {
+      width: 3.9rem;
+      height: 4.5rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  .author-recipe {
+    & h1 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .name-recipe {
+    & h1 {
+      font-size: 2.1rem;
+    }
+  }
+
+  .ingredients-recipe {
+    & p {
+      font-size: 0.9rem;
+      line-height: 2rem;
+    }
+  }
+
+  .footer-recipe {
+    & .see-recipe {
+      gap: 1rem;
+      font-size: 0.85rem;
+
+      & p {
+        font-family: var(--primary-font);
+        font-weight: lighter;
+      }
+    }
+  }
+
+  .carousel-btn {
+    position: absolute;
+  }
+
+  .carousel-btn_left {
+    left: 5%;
+  }
+
+  .carousel-btn_right {
+    right: 5%;
+  }
 }

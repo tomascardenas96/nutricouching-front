@@ -119,3 +119,29 @@
   font-weight: 600;
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1550px) {
+  .header-logo img {
+    width: 2.5rem;
+  }
+
+  .header-logo p {
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding-left: 0.5rem;
+    color: rgba(0, 0, 0, 0.768);
+  }
+
+  .header-menu > ul li {
+    font-size: 0.77em;
+  }
+
+  .header-login > div > p {
+    font-size: 0.65rem;
+  }
+
+  .header-login > div > input {
+    font-size: 0.7rem;
+  }
+}

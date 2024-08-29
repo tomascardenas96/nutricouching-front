@@ -6,6 +6,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
   margin: 0;
@@ -21,6 +23,8 @@
   --primary-font-color: rgba(255, 255, 255, 0.769);
   --service-cards-title: "Caveat", cursive;
   --carousel-title: "Libre Baskerville", serif;
+  --about-us-title: "Playfair Display", serif;
+  --about-us-role: "Poppins", sans-serif;
 }
 
 body {
@@ -34,6 +38,7 @@ main {
 
 .main-screen_container {
   height: 100svh;
+  min-height: 48.25rem;
 }
 
 .header_container {
@@ -67,8 +72,9 @@ main {
 
 .services_container {
   width: 100%;
-  height: 63svh;
+  height: 59svh;
   position: relative;
+  min-height: 30.3125rem;
 }
 
 .services_container .decoration-line {
@@ -81,9 +87,16 @@ main {
 
 .recipes_container {
   display: flex;
+  height: 80svh;
+  min-height: 41.875rem;
+}
+
+.about-us_container {
+  height: 77svh;
+  min-height: 40.9375rem;
 }
 
 .footer_container {
-  height: 25rem;
+  height: 23rem;
   width: 100%;
 }

@@ -1,6 +1,6 @@
 .products-carousel_container {
   width: 82.8rem;
-  height: 26rem;
+  height: 25rem;
   display: grid;
   position: relative;
   align-self: center;
@@ -10,7 +10,7 @@
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.057);
   background-color: white;
   grid-template-rows: 2.5rem 1fr;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .carousel-header {
@@ -74,5 +74,24 @@
 
   & .selected-dot {
     background-color: #3483fa;
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .products-carousel_container {
+    width: 79rem;
+    height: 23rem;
+    grid-template-rows: 2.5rem 1fr;
+    gap: 0rem;
+  }
+
+  .carousel-header {
+    & p {
+      font-size: .9rem;
+    }
+  
+    & .carousel-more {
+      font-size: 0.8rem;
+    }
   }
 }

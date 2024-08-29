@@ -7,7 +7,7 @@ function Header() {
     <div className="header">
       <div className="header-logo">
         <div>
-          <img src="../src/public/assets/nutricouching-logo.jpg" alt="" />
+          <img src="../src/public/assets/nutricouching-logo.jpg" alt="nutricoaching-logo" />
           <p>Nutri-coaching</p>
           <p>Integral</p>
         </div>

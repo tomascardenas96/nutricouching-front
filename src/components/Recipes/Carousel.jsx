@@ -54,12 +54,12 @@ function Carousel() {
               pimienta, aceite de oliva.
               <br />
               <br />
-              <p>
+              <span>
                 Una vianda saludable que combina croquetas de lentejas ricas en
                 proteínas y fibra con vegetales frescos y especias naturales.
                 Perfecta para quienes buscan una comida nutritiva y llena de
                 sabor.
-              </p>
+              </span>
             </p>
           </div>
           <div className="footer-recipe">

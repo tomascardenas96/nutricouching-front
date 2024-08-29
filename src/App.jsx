@@ -1,5 +1,6 @@
 import "./App.css";
-import Categories from "./components/Categories/Categories";
+import About from "./components/About/About";
+import Products from "./components/Products/Products";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Presentation from "./components/Presentation/Presentation";
@@ -20,17 +21,20 @@ function App() {
           </section>
 
           <section className="categories_container">
-            <Categories />
+            <Services />
           </section>
         </div>
 
         <section className="services_container">
-          {/* <div className="decoration-line"></div> */}
-          <Services />
+          <Products />
         </section>
 
         <section className="recipes_container">
           <Carousel />
+        </section>
+
+        <section className="about-us_container">
+          <About />
         </section>
 
         <section className="footer_container">

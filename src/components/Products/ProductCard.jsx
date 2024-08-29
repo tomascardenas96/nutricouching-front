@@ -1,11 +1,10 @@
 import "./ProductCard.css";
-import { IoCartOutline } from "react-icons/io5";
 
 function ProductCard({ image, category, title, kcal, price }) {
   return (
     <div className="product-card_container">
       <div className="product-card_image">
-        <img src={image} alt="" />
+        <img src={image} alt="product-picture" />
       </div>
       <div className="product-card_body">
         <div>

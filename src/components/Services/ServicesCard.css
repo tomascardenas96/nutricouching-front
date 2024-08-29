@@ -102,3 +102,28 @@
 .food-guide_card .services-card_container .card-description {
   grid-template-rows: 7rem 1fr 2.4rem;
 }
+
+@media screen and (max-width: 1550px) {
+  .services-card_container {
+    width: 18rem;
+  }
+
+  .services-card_container .card-description {
+    grid-template-rows: 0.65fr 1fr 0.4fr;
+
+    & h1 {
+      font-size: 0.7rem;
+    }
+    & p {
+      font-size: 0.75rem;
+    }
+
+    & div.know-more {
+      & div {
+        & p {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}

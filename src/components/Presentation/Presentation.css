@@ -14,11 +14,13 @@
   display: flex;
   justify-content: center;
   position: relative;
+  min-height: 18.75rem;
+
 
   & .banner {
-    width: 38%;
+    width: 38rem;
     height: max-content;
-    margin-top: 2.2%;
+    margin-top: 0.9rem;
     position: relative;
 
     & img {
@@ -61,5 +63,17 @@
   }
   to {
     opacity: 0.2;
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .presentation-banner_container {
+    & .banner {
+      width: 36rem;
+
+      & img {
+        height: 16rem;
+      }
+    }
   }
 }

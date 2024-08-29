@@ -1,6 +1,5 @@
-import ProductCard from "./ProductCard";
-import { MdArrowBackIosNew } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
+import ProductCard from "./ProductCard";
 import Dots from "../Common/Dots";
 import "./ProductsCarousel.css";
 
@@ -8,7 +7,10 @@ function ProductsCarousel() {
   return (
     <div className="products-carousel_container">
       <div className="carousel-header">
-        <p>Mirá los ultimos productos que ingresaron <span className="carousel-more">Ver más</span></p>
+        <p>
+          Mirá los ultimos productos que ingresaron{" "}
+          <span className="carousel-more">Ver más</span>
+        </p>
       </div>
       <div className="product-list">
         <ProductCard
