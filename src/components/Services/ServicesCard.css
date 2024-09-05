@@ -85,6 +85,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
+
       & p {
         margin: 0;
         font-size: 0.8rem;
@@ -102,6 +103,8 @@
 .food-guide_card .services-card_container .card-description {
   grid-template-rows: 7rem 1fr 2.4rem;
 }
+
+/* Media queries */
 
 @media screen and (max-width: 1550px) {
   .services-card_container {
@@ -130,6 +133,41 @@
 
 @media screen and (max-width: 1400px) {
   .services-card_container {
-    width: 17rem;
+    width: 15rem;
+  }
+
+  .services-card_container .card-header {
+    & .icon {
+      font-size: 0.9rem;
+    }
+
+    & .card-img {
+      width: 5rem;
+      height: 5rem;
+
+      & img {
+        width: 4.5rem;
+        height: 4.5rem;
+      }
+    }
+  }
+
+  .services-card_container .card-description {
+    grid-template-rows: 0.65fr 1fr 0.4fr;
+
+    & h1 {
+      font-size: 0.75rem;
+    }
+    & p {
+      font-size: 0.65rem;
+    }
+
+    & div.know-more {
+      & div {
+        & p {
+          font-size: 0.6rem;
+        }
+      }
+    }
   }
 }

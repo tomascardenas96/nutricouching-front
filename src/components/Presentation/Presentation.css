@@ -16,7 +16,6 @@
   position: relative;
   min-height: 18.75rem;
 
-
   & .banner {
     width: 38rem;
     height: max-content;
@@ -73,6 +72,18 @@
 
       & img {
         height: 16rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .presentation-banner_container {
+    & .banner {
+      width: 34rem;
+
+      & img {
+        height: 14.5rem;
       }
     }
   }

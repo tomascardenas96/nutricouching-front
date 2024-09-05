@@ -37,9 +37,9 @@
 }
 
 .brand-footer {
-  bottom: -2.5rem;
+  bottom: 0;
   font-size: 0.8rem;
-  left: 42%;
+  left: 44%;
   font-family: var(--primary-font);
   color: white;
   display: flex;
@@ -54,24 +54,7 @@
   }
 }
 
-@media screen and (max-width: 1550px) {
-  .about-header {
-    & h1 {
-      font-size: 1.3rem;
-    }
-  }
-
-  .about-body {
-    & .cards-container {
-      width: 84rem;
-      height: 33rem;
-    }
-  }
-
-  .brand-footer {
-    font-size: 0.7rem;
-  }
-}
+/* Media queries */
 
 @media screen and (max-width: 1550px) {
   .about-header {
@@ -83,7 +66,7 @@
   .about-body {
     & .cards-container {
       width: 80rem;
-      height: 33rem;
+      height: 20rem;
     }
   }
 
@@ -95,13 +78,30 @@
 @media screen and (max-width: 1400px) {
   .about-header {
     & h1 {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
   }
 
   .about-body {
     & .cards-container {
-      width: 78rem;
+      width: 72rem;
+    }
+  }
+
+  .about-body {
+    background-color: transparent;
+    position: relative;
+    display: grid;
+    justify-content: center;
+
+    & .cards-container {
+      width: 72rem;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+      border-radius: 0.2rem;
+      display: flex;
+      margin-bottom: 0;
     }
   }
 

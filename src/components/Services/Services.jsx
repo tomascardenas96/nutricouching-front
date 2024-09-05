@@ -29,7 +29,7 @@ function Services() {
             image={
               "https://www.instacart.com/company/wp-content/uploads/2021/10/meal-plan-paper.jpg"
             }
-            color={"#7F96FF"}
+            color={"#8499B1"}
             title={"GUÍA ALIMENTARIA PERSONALIZADA"}
             description={`Recibe una guía adaptada a tus necesidades. Nuestra asesoría profesional te ayudará a crear hábitos saludables y alcanzar el bienestar.`}
             icon={<IoNutritionOutline />}
@@ -39,7 +39,7 @@ function Services() {
             image={
               "https://living.life.edu/wp-content/uploads/2021/12/slice-brain-food-dec8.png"
             }
-            color={"#55D6BE"}
+            color={"#93C0A4"}
             title={"PLAN INTELIGENTE"}
             description={`Optimiza tu bienestar con nuestro plan inteligente, diseñado para obtener resultados efectivos.`}
             icon={<RiMentalHealthLine />}
@@ -48,7 +48,7 @@ function Services() {
             image={
               "https://www.heart.org/-/media/Images/Healthy-Living/Healthy-Eating/Superfoods.png"
             }
-            color={"#FFEFBD"}
+            color={"#DECDF5"}
             title={"ASESORAMIENTO CONTINUO"}
             description={`Accede a soporte y guía constante para alcanzar tus metas de manera eficaz. Nuestro equipo de profesionales estará contigo en cada paso.`}
             icon={<RiFootprintFill />}

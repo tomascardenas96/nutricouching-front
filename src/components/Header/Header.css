@@ -129,6 +129,10 @@
     font-size: 0.7rem;
   }
 
+  .header-menu > ul {
+    gap: 2rem;
+  }
+
   .header-menu > ul li {
     font-size: 0.77em;
   }
@@ -161,5 +165,35 @@
 
   .header-login > div > input {
     font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .header-logo img {
+    width: 2.1rem;
+  }
+
+  .header-logo p {
+    font-size: 0.6rem;
+  }
+
+  .header-menu > ul li {
+    font-size: 0.65em;
+  }
+
+  .header-login > div > p {
+    font-size: 0.6rem;
+  }
+
+  .header-login > div > input {
+    font-size: 0.7rem;
+  }
+
+  .header-cart_container {
+    gap: 0.3em;
+
+    .header-cart {
+      font-size: 0.9rem;
+    }
   }
 }

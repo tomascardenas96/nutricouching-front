@@ -2,8 +2,9 @@
 
 .categories-menu {
   display: grid;
-  grid-template-rows: 0.3fr 1fr;
+  grid-template-rows: max-content 1fr;
   min-height: 24.6875rem;
+  gap: 8%;
 }
 
 .categories-menu > .title {
@@ -94,8 +95,7 @@
 @media screen and (max-width: 1550px) {
   .categories-menu {
     display: grid;
-    grid-template-rows: 0.23fr 1fr;
-  }
+    }
 
   .categories-menu > .title {
     & h1 {
@@ -107,19 +107,21 @@
   .categories {
     height: 20rem;
   }
-
-
 }
 
 @media screen and (max-width: 1400px) {
   .categories-menu {
     display: grid;
-    grid-template-rows: 0.23fr 1fr;
+  }
+
+  .categories-menu > .title {
+    & h1 {
+      padding-top: 0.3rem;
+      font-size: 1.15rem;
+    }
   }
 
   .categories {
-    height: 19.5rem;
+    height: 17rem;
   }
-
-
 }

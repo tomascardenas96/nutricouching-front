@@ -22,7 +22,7 @@
   height: 9rem;
   background-color: #ebebeb;
   bottom: -6rem;
-  left: 18.5%;
+  left: 19%;
   border-radius: 0.1rem;
   display: grid;
   grid-template-rows: 3.5rem 4rem 1fr;
@@ -58,6 +58,8 @@
   }
 }
 
+/* Media queries */
+
 @media screen and (max-width: 1550px) {
   .about-card_container {
     height: 19rem;
@@ -80,6 +82,43 @@
 
     & h2 {
       font-size: 0.8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .about-card_container {
+    height: 17rem;
+    padding: 2rem;
+  }
+
+  .about-card_image {
+    & img {
+      height: 18rem;
+    }
+  }
+
+  .about-card_description {
+    grid-template-rows: 3rem 3.5rem 1fr;
+    width: 60%;
+    height: 8rem;
+    background-color: #ebebeb;
+    bottom: -5rem;
+    left: 19.7%;
+    border-radius: 0.1rem;
+    display: grid;
+    color: #161925;
+
+    & h1 {
+      font-size: 0.85rem;
+    }
+
+    & h2 {
+      font-size: 0.7rem;
+    }
+
+    & div.social-networks {
+      font-size: 0.9rem;
     }
   }
 }

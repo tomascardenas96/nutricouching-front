@@ -85,6 +85,8 @@
   }
 }
 
+/* Media queries */
+
 @media screen and (max-width: 1550px) {
   .product-card_container {
     width: 12.5rem;
@@ -146,6 +148,19 @@
       & span {
         font-size: 0.6rem;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .product-card_container {
+    width: 10.9rem;
+  }
+
+  .product-card_image {
+    & img {
+      width: 70%;
+      height: 70%;
     }
   }
 }
