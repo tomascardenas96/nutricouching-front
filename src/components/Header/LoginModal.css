@@ -1,0 +1,105 @@
+.login-modal_background {
+  background-color: rgba(68, 65, 65, 0.493);
+  width: 100%;
+  height: 100svh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2000;
+  display: grid;
+  place-content: center;
+}
+
+.login_container {
+  width: 28rem;
+  height: 31rem;
+  background-color: white;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.123);
+  border-radius: 1rem;
+  display: grid;
+  grid-template-rows: 5rem 1fr;
+}
+
+.login-title {
+  display: grid;
+  place-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.208);
+  position: relative;
+
+  & h1 {
+    font-family: var(--presentation-banner-font);
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  & .login-modal-close {
+    position: absolute;
+    right: 2.5rem;
+    top: 2.1rem;
+    cursor: pointer;
+  }
+}
+
+.login-form {
+  padding: 2.5rem 3.1rem;
+  display: grid;
+  grid-template-rows: 1.3fr 1.3fr 0.8fr 0.9fr 1fr;
+
+  & label {
+    position: relative;
+    & input {
+      width: 100%;
+      height: 2.5rem;
+      border: none;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.124);
+      padding-left: 0.3rem;
+      font-family: var(--presentation-banner-font);
+    }
+
+    & .login-password_show-hide {
+      position: absolute;
+      right: 0.3rem;
+      top: 1rem;
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.458);
+    }
+  }
+
+  & input[type="submit"] {
+    border-radius: 3rem;
+    border: none;
+    color: white;
+    border: 1px solid #cc3f0c9a;
+    color: #cc3f0c9a;
+    background-color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  & input[type="submit"]:hover {
+    background-color: #cc3f0c9a;
+    color: white;
+    border: 1px solid white;
+  }
+
+  & p {
+    font-family: var(--presentation-banner-font);
+    font-size: 0.9rem;
+  }
+
+  & p.forgot-password {
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  & p.create-account {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 0.25rem;
+    & span {
+      color: #cc3f0c9a;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

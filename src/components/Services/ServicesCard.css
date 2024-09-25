@@ -8,13 +8,6 @@
   background-color: white;
 }
 
-@keyframes identifier {
-  from {
-  }
-  to {
-  }
-}
-
 .services-card_container .card-header {
   border-radius: 0.2rem 0.2rem 0 0;
   position: relative;
@@ -54,7 +47,7 @@
 .services-card_container .card-description {
   border-radius: 0 0 0.2rem 0.2rem;
   display: grid;
-  grid-template-rows: 0.65fr 1fr 0.4fr;
+  grid-template-rows: 0.7fr 1fr 0.4fr;
   width: 100%;
   justify-self: center;
 
@@ -64,15 +57,19 @@
     align-items: end;
     text-align: center;
     justify-self: center;
-    font-family: var(--service-cards-title);
+    font-family: var(--services-modal-header);
     font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.906);
   }
+
   & p {
     text-align: center;
     font-family: var(--primary-font);
-    font-size: 0.8rem;
-    padding: 4% 0.7rem 0;
+    font-size: 0.75rem;
+    padding: 3% 0.7rem 0;
     line-height: 1.2rem;
+    color: rgba(0, 0, 0, 0.823);
   }
 
   & div.know-more {

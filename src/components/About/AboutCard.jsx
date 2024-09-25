@@ -13,7 +13,7 @@ function AboutCard({ image, name, role }) {
       </div>
       <div className="about-card_description">
         <h1>{name}</h1>
-        <h2>{role}</h2>
+        <h2>{role.toUpperCase()}</h2>
         <div className="social-networks">
           <FaFacebookF />
           <FaYoutube />

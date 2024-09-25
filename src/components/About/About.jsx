@@ -1,7 +1,11 @@
+import useGetProfessionals from "../../hooks/useGetProfessionals";
 import "./About.css";
 import AboutCard from "./AboutCard";
 
 function About() {
+  const { professionals, professionalsLoading, professionalsError } =
+    useGetProfessionals();
+
   return (
     <div className="about">
       <div className="about-header">
@@ -9,26 +13,14 @@ function About() {
       </div>
       <div className="about-body">
         <div className="cards-container">
-          <AboutCard
-            image="natasha.png"
-            name="Natasha Dirialdi"
-            role="NUTRICIONISTA / COACHING"
-          />
-          <AboutCard
-            image="lore.jpg"
-            name="Lorena Arlan"
-            role="COACHING PROFESIONAL"
-          />
-          <AboutCard
-            image="mica.png"
-            name="Micaela Aguilar"
-            role="EDUCACION FISICA"
-          />
-          <AboutCard
-            image="pepa.png"
-            name="Joaquin Cardenas"
-            role="KINESIOLOGIA HOLISTICA"
-          />
+          {professionals?.map((professional) => (
+            <AboutCard
+              key={professional.professionalId}
+              image={professional.image}
+              name={professional.fullname}
+              role={professional.specialty}
+            />
+          ))}
         </div>
       </div>
       <div className="brand-footer">

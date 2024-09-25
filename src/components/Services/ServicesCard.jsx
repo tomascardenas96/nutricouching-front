@@ -1,7 +1,15 @@
+import MoreInfo from "./MoreInfo";
 import "./ServicesCard.css";
 import { FaArrowRight } from "react-icons/fa6";
 
-function ServiceCard({ image, color, title, description, icon }) {
+function ServiceCard({
+  image,
+  color,
+  description,
+  title,
+  icon,
+  handleOpenServiceModal,
+}) {
   return (
     <div className="services-card_container">
       <div className="card-header" style={{ backgroundColor: color }}>
@@ -11,12 +19,12 @@ function ServiceCard({ image, color, title, description, icon }) {
         </div>
       </div>
       <div className="card-description">
-        <h1>{title}</h1>
+        <h1>{title?.toUpperCase()}</h1>
         <p>{description}</p>
         <div className="know-more">
-          <div>
+          <div onClick={handleOpenServiceModal}>
             <p>Saber más</p>
-            <FaArrowRight className="arrow-right" style={{ color: color }} />
+            <FaArrowRight className="arrow-right" style={{ color }} />
           </div>
         </div>
       </div>

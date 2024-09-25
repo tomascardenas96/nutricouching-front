@@ -1,0 +1,88 @@
+main {
+  display: grid;
+  position: relative;
+}
+
+.main-screen_container {
+  height: 100svh;
+  min-height: 48.25rem;
+}
+
+.header_container {
+  height: 4rem;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.presentation_container {
+  height: 38svh;
+  min-height: 18rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.presentation_container .decoration-line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #dac6b571;
+  bottom: -3px;
+}
+
+.services_container {
+  width: 100%;
+  display: grid;
+  height: calc(59svh - 4rem);
+}
+
+.products_container {
+  width: 100%;
+  height: 62svh;
+  position: relative;
+  min-height: 30.3125rem;
+  max-height: 40.4375rem;
+}
+
+.products_container .decoration-line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  top: 0;
+}
+
+.recipes_container {
+  display: flex;
+  min-height: 44.875rem;
+  margin-bottom: 6rem;
+}
+
+.about-us_container {
+  height: 70svh;
+  min-height: 38rem;
+}
+
+.footer_container {
+  height: 23rem;
+  width: 100%;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 1550px) {
+  .about-us_container {
+    min-height: 39rem;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .recipes_container {
+    min-height: 40.875rem;
+    margin-bottom: 2.5rem;
+  }
+  .about-us_container {
+    min-height: 34rem;
+  }
+}
