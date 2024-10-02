@@ -8,8 +8,13 @@ function ServiceCard({
   description,
   title,
   icon,
+  handleSelectService,
   handleOpenServiceModal,
 }) {
+  const handleSelectServiceAndOpenModal = () => {
+    handleSelectService();
+    handleOpenServiceModal();
+  };
   return (
     <div className="services-card_container">
       <div className="card-header" style={{ backgroundColor: color }}>
@@ -22,7 +27,7 @@ function ServiceCard({
         <h1>{title?.toUpperCase()}</h1>
         <p>{description}</p>
         <div className="know-more">
-          <div onClick={handleOpenServiceModal}>
+          <div onClick={handleSelectServiceAndOpenModal}>
             <p>Saber más</p>
             <FaArrowRight className="arrow-right" style={{ color }} />
           </div>

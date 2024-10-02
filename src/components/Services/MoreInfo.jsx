@@ -2,11 +2,15 @@ import "./MoreInfo.css";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { reviews } from "./reviews/reviews";
 
-function MoreInfo({ handleServicesModal, title }) {
+function MoreInfo({
+  handleOpenRequestReservation,
+  title,
+  handleOpenServiceModal,
+}) {
   return (
     <div
       className="services_more-info_container"
-      onClick={(e) => handleServicesModal()}
+      onClick={handleOpenServiceModal}
     >
       <div className="services_more-info" onClick={(e) => e.stopPropagation()}>
         <div className="service-modal_header">
@@ -18,25 +22,25 @@ function MoreInfo({ handleServicesModal, title }) {
         </div>
 
         <div className="service-modal_body">
-          {title === "coaching ontologico" ? (
+          {title === "Coaching ontologico" ? (
             <>
               <p>{reviews[0]}</p>
               <br />
               <p>{reviews[1]}</p>
             </>
-          ) : title === "plan inteligente" ? (
+          ) : title === "Plan inteligente" ? (
             <>
               <p>{reviews[2]}</p>
               <br />
               <p>{reviews[3]}</p>
             </>
-          ) : title === "guia alimentaria personalizada" ? (
+          ) : title === "Guia alimentaria personalizada" ? (
             <>
               <p>{reviews[4]}</p>
               <br />
               <p>{reviews[5]}</p>
             </>
-          ) : title === "asesoramiento continuo" ? (
+          ) : title === "Asesoramiento continuo" ? (
             <>
               <p>{reviews[6]}</p>
               <br />
@@ -48,7 +52,7 @@ function MoreInfo({ handleServicesModal, title }) {
         </div>
 
         <div className="service-modal_footer">
-          <button onClick={handleServicesModal}>
+          <button onClick={handleOpenRequestReservation}>
             SOLICITAR TURNO <RiCalendarScheduleFill className="schedule-icon" />
           </button>
         </div>

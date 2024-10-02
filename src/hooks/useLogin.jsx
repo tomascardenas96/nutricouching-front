@@ -34,7 +34,10 @@ function useLogin() {
       loading: "Loading...",
       success: (data) => {
         localStorage.setItem("authToken", data.token);
-        location.reload();
+
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
         return "Registro exitoso!";
       },
       error: "Email o contraseña incorrectos",

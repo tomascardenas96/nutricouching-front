@@ -1,0 +1,64 @@
+.request-reservation_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  background-color: rgba(0, 0, 0, 0.188);
+  z-index: 2000;
+  display: grid;
+  place-content: center;
+}
+
+.request-reservation {
+  width: 27rem;
+  height: 30rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.171);
+  display: grid;
+  grid-template-rows: 5rem 1fr 5rem;
+  padding: 2rem;
+}
+
+.request-reservation > .reservation_title {
+  display: grid;
+  place-content: center;
+
+  & h1,
+  h2 {
+    font-family: var(--services-modal-header);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+  }
+
+  & h1 {
+    height: 2rem;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  & h2 {
+    font-size: 1.9rem;
+    height: 2rem;
+  }
+}
+
+.request-reservation > .reservation_body {
+    
+}
+
+.request-reservation > .reservation_btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  & button {
+    height: 3rem;
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: 3rem;
+  }
+}
