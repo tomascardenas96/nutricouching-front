@@ -3,9 +3,10 @@ import { useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetProfessionalSchedule() {
-  const [selectedProfessional, setSelectedProfessional] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedProfessional, setSelectedProfessional] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
   const [professionalSchedule, setProfessionalSchedule] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const getProfessionalSchedule = async () => {
@@ -29,7 +30,7 @@ function useGetProfessionalSchedule() {
       }
     };
 
-    if (selectedDate && selectedProfessional) {
+    if (selectedDate !== null && selectedProfessional) {
       getProfessionalSchedule();
     }
   }, [selectedDate, selectedProfessional]);
@@ -40,6 +41,8 @@ function useGetProfessionalSchedule() {
     setSelectedDate,
     selectedProfessional,
     selectedDate,
+    setSelectedTime,
+    selectedTime,
   };
 }
 

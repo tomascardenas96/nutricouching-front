@@ -17,7 +17,7 @@
   border-radius: 1rem;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.171);
   display: grid;
-  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-rows: 5rem 1fr;
   padding: 2rem;
 }
 
@@ -34,7 +34,7 @@
   }
 
   & h1 {
-    height: 2rem;
+    height: 1.3rem;
     font-size: 1.3rem;
     display: flex;
     justify-content: center;
@@ -47,18 +47,58 @@
 }
 
 .request-reservation > .reservation_body {
-    
+  display: grid;
+  padding: 1rem 0;
 }
 
-.request-reservation > .reservation_btn {
-  display: flex;
-  justify-content: end;
-  align-items: center;
+.reservation_body > form {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 6rem;
 
-  & button {
-    height: 3rem;
-    padding: 0 1.5rem;
-    border: none;
-    border-radius: 3rem;
+  & label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: var(--primary-font);
+    font-size: 0.9rem;
+
+    & input,
+    select,
+    option {
+      height: 2rem;
+      border-radius: 0.3rem;
+      border: 1px solid black;
+      outline: none;
+      padding: 0 0.5rem;
+      font-family: var(--primary-font);
+    }
+  }
+
+  .reservation_btn {
+    display: flex;
+    align-items: center;
+
+    & button {
+      border-radius: 3rem;
+      border: none;
+      color: white;
+      border: 1px solid #cc3f0c9a;
+      color: #cc3f0c9a;
+      background-color: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    & button:hover {
+      background-color: #cc3f0c9a;
+      color: white;
+      border: 1px solid white;
+    }
   }
 }

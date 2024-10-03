@@ -80,6 +80,7 @@ function Services() {
         <ReservationModal
           handleOpenRequestReservation={handleOpenRequestReservation}
           selectedService={selectedService}
+          setIsRequestReservationOpen={setIsRequestReservationOpen}
         />
       )}
     </div>

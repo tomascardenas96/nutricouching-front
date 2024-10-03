@@ -1,16 +1,30 @@
 import { IoIosTime } from "react-icons/io";
+import { useUser } from "../../context/UserProvider";
+import useBookAppointment from "../../hooks/useBookAppointment";
 import useGetProfessionalSchedule from "../../hooks/useGetProfessionalSchedule";
 import useGetProfessionalsByService from "../../hooks/useGetProfessionalsByService";
 import "./ReservationModal.css";
 
-function ReservationModal({ handleOpenRequestReservation, selectedService }) {
+function ReservationModal({
+  handleOpenRequestReservation,
+  selectedService,
+  setIsRequestReservationOpen,
+}) {
+  const { user } = useUser();
+
   const {
     professionalSchedule,
     setSelectedProfessional,
     setSelectedDate,
     selectedProfessional,
     selectedDate,
+    setSelectedTime,
+    selectedTime,
   } = useGetProfessionalSchedule();
+
+  const { handleSubmitBookAppointment } = useBookAppointment(
+    setIsRequestReservationOpen
+  );
 
   const { professionalsByService } = useGetProfessionalsByService(
     selectedService?.serviceId
@@ -28,13 +42,23 @@ function ReservationModal({ handleOpenRequestReservation, selectedService }) {
         </div>
 
         <div className="reservation_body">
-          <form>
+          <form
+            onSubmit={(e) =>
+              handleSubmitBookAppointment(
+                e,
+                selectedDate,
+                selectedTime,
+                selectedService.serviceId,
+                user.userId,
+                selectedProfessional
+              )
+            }
+          >
             <label htmlFor="professional">
               Seleccione un profesional:
               <select
                 id="professional"
                 onChange={(e) => setSelectedProfessional(e.target.value)}
-                value={selectedProfessional}
               >
                 <option value="">Seleccione un profesional</option>
                 {professionalsByService?.map((professional) => (
@@ -53,12 +77,14 @@ function ReservationModal({ handleOpenRequestReservation, selectedService }) {
                 type="date"
                 id="date"
                 onChange={(e) => setSelectedDate(e.target.value)}
-                value={selectedDate}
               />
             </label>
             <label htmlFor="time">
               Hora
-              <select id="time">
+              <select
+                id="time"
+                onChange={(e) => setSelectedTime(e.target.value)}
+              >
                 <option value="">Seleccione un horario</option>
                 {professionalSchedule?.map((time) => (
                   <option key={time.availabilityId} value={time.startTime}>
@@ -67,13 +93,12 @@ function ReservationModal({ handleOpenRequestReservation, selectedService }) {
                 ))}
               </select>
             </label>
+            <div className="reservation_btn">
+              <button type="submit">
+                Reservar turno <IoIosTime />{" "}
+              </button>
+            </div>
           </form>
-        </div>
-
-        <div className="reservation_btn">
-          <button>
-            Reservar turno <IoIosTime />{" "}
-          </button>
         </div>
       </div>
     </section>
