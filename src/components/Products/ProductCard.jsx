@@ -1,22 +1,24 @@
 import "./ProductCard.css";
 
-function ProductCard({ image, category, title, kcal, price }) {
+function ProductCard({ image, description, name, stock, price }) {
   return (
     <div className="product-card_container">
       <div className="product-card_image">
-        <img src={image} alt="product-picture" />
+        <img
+          src={`http://localhost:3010/uploads/products/${image}`}
+          alt="product-picture"
+        />
       </div>
       <div className="product-card_body">
         <div>
-          <p className="product-title">{title}</p>
+          <p className="product-title">{name}</p>
         </div>
         <div>
-          <p className="product-description">Valor energetico: {kcal}kcal</p>
+          <p className="product-description">Stock: {stock} unidades</p>
         </div>
         <div>
           <h1 className="product-price">
             <p>${price}</p>
-            <span>00</span>
           </h1>
         </div>
       </div>

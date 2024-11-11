@@ -17,6 +17,7 @@
   display: flex;
   align-items: end;
   color: rgba(0, 0, 0, 0.761);
+  width: 80rem;
 
   & p {
     font-family: var(--primary-font);
@@ -35,7 +36,7 @@
 .products-carousel_container .product-list {
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 80rem;
 }
 
 .products-carousel_container .next-page {
@@ -75,6 +76,12 @@
   & .selected-dot {
     background-color: #3483fa;
   }
+}
+
+.products-carousel_dots {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
 }
 
 @media screen and (max-width: 1550px) {

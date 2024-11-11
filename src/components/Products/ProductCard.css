@@ -1,5 +1,5 @@
 .product-card_container {
-  width: 13.3rem;
+  width: 16.66%;
   height: 95%;
   border-radius: 0.1rem;
   display: grid;
@@ -7,6 +7,7 @@
   background-color: white;
   z-index: 10;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .product-card_header {

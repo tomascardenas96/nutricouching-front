@@ -1,13 +1,24 @@
+import { IoIosArrowBack } from "react-icons/io";
 import About from "../../components/About/About";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Presentation from "../../components/Presentation/Presentation";
+import Products from "../../components/Products/Products";
 import Carousel from "../../components/Recipes/Carousel";
 import Services from "../../components/Services/Services";
-import Products from "../../components/Products/Products";
+import { useState } from "react";
+import CmsModal from "../../components/cms/CmsModal";
 import "./Home.css";
+import { useUser } from "../../context/UserProvider";
 
 function Home() {
+  const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
+  const { user } = useUser();
+
+  const handleCmsModal = () => {
+    setIsCmsModalOpen(!isCmsModalOpen);
+  };
+
   return (
     <main>
       {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
@@ -15,6 +26,22 @@ function Home() {
         <section className="header_container">
           <Header />
         </section>
+
+        {user?.role === "admin" && (
+          <>
+            {!isCmsModalOpen && (
+              <section className="cms-flap_container" onClick={handleCmsModal}>
+                <IoIosArrowBack />
+              </section>
+            )}
+
+            {isCmsModalOpen && (
+              <section className="cms-modal_container" onClick={handleCmsModal}>
+                <CmsModal handleCmsModal={handleCmsModal} />
+              </section>
+            )}
+          </>
+        )}
 
         <section className="presentation_container">
           <Presentation />

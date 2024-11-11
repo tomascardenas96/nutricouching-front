@@ -1,9 +1,20 @@
 import { MdArrowForwardIos } from "react-icons/md";
-import ProductCard from "./ProductCard";
+import useGetAllProducts from "../../hooks/useGetAllProducts";
 import Dots from "../Common/Dots";
+import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
 
 function ProductsCarousel() {
+  const {
+    products,
+    productsError,
+    productsLoading,
+    currentPage,
+    currentProducts,
+    nextPage,
+    previousPage,
+  } = useGetAllProducts();
+
   return (
     <div className="products-carousel_container">
       <div className="carousel-header">
@@ -13,54 +24,23 @@ function ProductsCarousel() {
         </p>
       </div>
       <div className="product-list">
-        <ProductCard
-          image="../../../src/public/assets/papitas.jpg"
-          category="Celiacos"
-          title="PAPAS FRITAS CLASICAS KRACHITOS S/TACC X 125gr."
-          kcal="90"
-          price="1.800"
-        />
-        <ProductCard
-          image="../../../src/public/assets/ddl.jpg"
-          category="Sobre-peso"
-          title="DULCE DE LECHE CACHAFAZ X 500gr."
-          kcal="110"
-          price="5.600"
-        />
-        <ProductCard
-          image="../../../src/public/assets/masitas.jpg"
-          category="Celiacos"
-          title="GALLETITAS DOMINOS LIBRES DE GLUTEN X 200gr."
-          kcal="80"
-          price="1.950"
-        />
-        <ProductCard
-          image="../../../src/public/assets/proteina.jpg"
-          category="Hipertrofia"
-          title="PROTEINA SOYPROTEIN PULVER X 1KG"
-          kcal="30"
-          price="25.000"
-        />
-        <ProductCard
-          image="../../../src/public/assets/premezcla.png"
-          category="Hipertrofia"
-          title="HARINA PREMEZCLA S/TACC DOÑA ALEJANDRA x 500gr"
-          kcal="30"
-          price="2.300"
-        />
-        <ProductCard
-          image="../../../src/public/assets/mermelada.png"
-          category="Hipertrofia"
-          title="MERMELADA BAGLEY S/AZUCAR X 450cc."
-          kcal="30"
-          price="1.700"
-        />
-        <div className="next-page">
-          <MdArrowForwardIos />
-        </div>
-        <div className="products-carousel_dots">
-          <Dots />
-        </div>
+        {currentProducts?.map((product) => (
+          <ProductCard
+            key={product.productId}
+            image={product.image}
+            description={product.description}
+            name={product.name}
+            stock={product.stock}
+            price={product.price}
+            productId={product.productId}
+          />
+        ))}
+      </div>
+      <div className="next-page" onClick={nextPage}>
+        <MdArrowForwardIos />
+      </div>
+      <div className="products-carousel_dots">
+        <Dots />
       </div>
     </div>
   );

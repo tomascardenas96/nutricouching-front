@@ -1,0 +1,81 @@
+.cms-services {
+  width: 100%;
+  background-color: white;
+  border-radius: 0.5rem 0 0 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.108);
+  display: grid;
+  grid-template-rows: max-content 1.8rem 1fr;
+  padding: 0.8rem 1.2rem 1.7rem 1.2rem;
+  gap: 0.8rem;
+}
+
+.cms-services_header {
+  display: flex;
+  gap: 0.1rem;
+
+  & p {
+    height: 1.8rem;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.92rem;
+    font-family: var(--services-modal-header);
+    display: grid;
+    place-content: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.835);
+  }
+
+  & p:nth-child(2) {
+    background-color: #4055f418;
+    color: #4056f4;
+  }
+}
+
+.cms-services_filter {
+  display: flex;
+
+  & form {
+    display: flex;
+    position: relative;
+
+    & input {
+      width: 15rem;
+      border-radius: 0.3rem;
+      border: 1px solid rgba(0, 0, 0, 0.491);
+      padding: 0 0.7rem;
+      font-family: var(--primary-font);
+      outline: none;
+      font-size: 0.75rem;
+    }
+
+    & .search-filter_icon {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.35rem;
+    }
+  }
+}
+
+.cms-services_body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & table .header_table {
+    & .header_table-name {
+      display: flex;
+      font-family: var(--primary-font);
+      font-size: 0.7rem;
+    }
+
+    & .header_table-price,
+    .header_table-options {
+      font-family: var(--primary-font);
+      font-size: 0.7rem;
+    }
+  }
+  & td {
+    font-family: var(--primary-font);
+    font-size: 0.8rem;
+  }
+}

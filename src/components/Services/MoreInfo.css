@@ -8,11 +8,12 @@
   z-index: 2000;
   display: grid;
   place-content: center;
+
 }
 
 .services_more-info {
-  width: 28rem;
-  height: 38.5rem;
+  width: 33rem;
+  height: 41rem;
   background-color: white;
   border-radius: 1rem;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.171);
@@ -66,9 +67,10 @@
   & .service-modal_body {
     & p {
       text-align: justify;
-      font-family: var(--services-modal-header);
+      font-family: var(--primary-font);
+
       line-height: 1.8rem;
-      font-size: 1rem;
+      font-size: .85rem;
       color: rgba(0, 0, 0, 0.705);
     }
   }
