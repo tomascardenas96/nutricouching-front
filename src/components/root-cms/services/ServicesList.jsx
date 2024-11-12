@@ -8,10 +8,6 @@ function ServicesList() {
 
   return (
     <div className="cms-services">
-      <div className="cms-services_header">
-        <p>Servicios</p>
-        <p>Agregar nuevo</p>
-      </div>
       <div className="cms-services_filter">
         <form>
           <input type="text" placeholder="Buscar" />

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import About from "../../components/About/About";
 import Footer from "../../components/Footer/Footer";
@@ -6,10 +7,9 @@ import Presentation from "../../components/Presentation/Presentation";
 import Products from "../../components/Products/Products";
 import Carousel from "../../components/Recipes/Carousel";
 import Services from "../../components/Services/Services";
-import { useState } from "react";
-import CmsModal from "../../components/cms/CmsModal";
-import "./Home.css";
+import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import { useUser } from "../../context/UserProvider";
+import "./Home.css";
 
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
@@ -37,7 +37,7 @@ function Home() {
 
             {isCmsModalOpen && (
               <section className="cms-modal_container" onClick={handleCmsModal}>
-                <CmsModal handleCmsModal={handleCmsModal} />
+                <RootCmsModal handleCmsModal={handleCmsModal} />
               </section>
             )}
           </>

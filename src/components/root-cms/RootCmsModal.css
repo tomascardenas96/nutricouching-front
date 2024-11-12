@@ -53,3 +53,35 @@
   }
 }
 
+.root-cms_list {
+  background-color: white;
+  border-radius: 0.5rem 0 0 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.108);
+  display: grid;
+  grid-template-rows: 2.8rem 1fr;
+
+  & ul {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    padding-left: 1.4rem;
+    align-items: end;
+    user-select: none;
+
+    & li {
+      cursor: pointer;
+      font-family: var(--services-modal-header);
+      font-size: 0.93rem;
+      font-weight: 500;
+      height: 2rem;
+      border-radius: 0.2rem;
+      padding: 0 0.5rem;
+      color: rgba(0, 0, 0, 0.695);
+    }
+
+    & .selected-option {
+      background-color: #603dc11a;
+      color: #613dc1;
+    }
+  }
+}
