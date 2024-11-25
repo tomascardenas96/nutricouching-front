@@ -1,5 +1,5 @@
 .cms-modal_container {
-  & h1 {
+  & .root-panel_info {
     font-family: var(--services-modal-header);
     font-weight: 400;
     font-size: 1.15rem;

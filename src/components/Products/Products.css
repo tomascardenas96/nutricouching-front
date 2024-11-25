@@ -1,4 +1,4 @@
-.services {
+.products-section_container {
   position: relative;
   height: 100%;
   width: 100%;
@@ -8,7 +8,7 @@
   gap: 1.7rem;
 }
 
-.services-section {
+.products-section {
   display: grid;
   align-items: end;
   justify-content: center;
@@ -37,12 +37,12 @@
   gap: 0.5rem;
 }
 
-.scroll-animated {
+.products-section_title {
   transform: translateY(-2rem);
   transition: transform 2s ease-out;
 }
 
-.scroll-animated.show {
+.products-section_title.show {
   animation: show-left_sections 2s forwards;
 }
 

@@ -7,11 +7,16 @@ function useGetAllProducts() {
   const [productsError, setProductsError] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
 
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [isModifyProductModalOpen, setIsModifyProductModalOpen] =
+    useState(false);
+
   const itemsPerPage = 6;
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
   const currentProducts = products.slice(startIndex, endIndex);
 
   useEffect(() => {
@@ -40,7 +45,7 @@ function useGetAllProducts() {
     };
 
     getProducts();
-  }, []);
+  }, [setProducts]);
 
   const nextPage = () => {
     setCurrentPage((prevPage) => (prevPage + 1) % totalPages);
@@ -48,6 +53,14 @@ function useGetAllProducts() {
 
   const previousPage = () => {
     setCurrentPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
+  };
+
+  const handleAddProductModal = () => {
+    setIsAddProductModalOpen(!isAddProductModalOpen);
+  };
+
+  const handleModifyProductModal = () => {
+    setIsModifyProductModalOpen(!isModifyProductModalOpen);
   };
 
   return {
@@ -58,6 +71,12 @@ function useGetAllProducts() {
     currentProducts,
     nextPage,
     previousPage,
+    totalPages,
+    isAddProductModalOpen,
+    isModifyProductModalOpen,
+    handleAddProductModal,
+    handleModifyProductModal,
+    setProducts,
   };
 }
 

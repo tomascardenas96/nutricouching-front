@@ -54,3 +54,31 @@
     font-size: 0.8rem;
   }
 }
+
+.cms-service-add {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.175);
+  padding-top: 1.3rem;
+  cursor: pointer;
+  margin: 0.2rem 0.9rem 0;
+
+  .add-service_icon {
+    display: flex;
+    color: #613dc1;
+  }
+
+  & h1 {
+    font-family: var(--primary-font);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #613dc1;
+  }
+
+  & h1:hover {
+    color: #603dc1b4;
+  }
+}
+

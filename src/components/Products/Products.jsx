@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import ProductsCarousel from "./ProductsCarousel";
 import "./Products.css";
 
-function Services() {
+function Products() {
   const h1Ref = useRef(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Services() {
         });
       },
       {
-        threshold: 0.1,
+        threshold: 0.5,
       }
     );
 
@@ -33,20 +33,20 @@ function Services() {
   }, []);
 
   return (
-    <div className="services">
-      <div className="services-section">
+    <div className="products-section_container">
+      <div className="products-section">
         <div>
-          <h1 ref={h1Ref} className="scroll-animated">
+          <h1 ref={h1Ref} className="products-section_title">
             Echa un vistazo a algunos de nuestros productos, agrega al carrito
             el que mas te guste.
           </h1>
         </div>
       </div>
       <div className="products-container">
-        <ProductsCarousel h1Ref={h1Ref} />
+        <ProductsCarousel />
       </div>
     </div>
   );
 }
 
-export default Services;
+export default Products;

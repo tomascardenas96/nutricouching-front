@@ -1,24 +1,38 @@
 import "./ServicesCmsCard.css";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { HOST } from "../../../api/data";
 
-function ServicesCmsCard({ service }) {
+function ServicesCmsCard({
+  service,
+  handleModifyServiceModal,
+  setSelectedService,
+  openModal,
+}) {
+  const handleModifyServiceModalWithData = () => {
+    handleModifyServiceModal();
+    setSelectedService(service);
+  };
+
   return (
     <>
       <td className="services-cms_name">
         <div className="service-img">
-          <img src={service.image} alt="" />
+          <img
+            src={`${HOST}/uploads/services/${service.image}`}
+            alt="service-image"
+          />
         </div>
         <div className="service-title">{service.title}</div>
-        <div className="service-other">service@service.com</div>
+        <div className="service-other">N profesionales disponibles</div>
       </td>
       <td className="services-cms_price">
         <p>${service.price}</p>
       </td>
       <td className="services-cms_options">
         <p>
-          <FaRegEdit />
-          <FaRegTrashAlt />
+          <FaRegEdit onClick={handleModifyServiceModalWithData} />
+          <FaRegTrashAlt onClick={() => openModal(service.serviceId)} />
         </p>
       </td>
     </>

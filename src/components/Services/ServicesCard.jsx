@@ -1,3 +1,4 @@
+import { HOST } from "../../api/data";
 import MoreInfo from "./MoreInfo";
 import "./ServicesCard.css";
 import { FaArrowRight } from "react-icons/fa6";
@@ -20,7 +21,10 @@ function ServiceCard({
       <div className="card-header" style={{ backgroundColor: color }}>
         <p className="icon">{icon}</p>
         <div className="card-img">
-          <img src={image} alt="services-picture-nutricouching" />
+          <img
+            src={`${HOST}/uploads/services/${image}`}
+            alt="services-picture-nutricouching"
+          />
         </div>
       </div>
       <div className="card-description">

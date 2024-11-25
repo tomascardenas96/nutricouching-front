@@ -1,0 +1,127 @@
+.modal-cms_modify-service_container {
+  position: fixed;
+  height: 100svh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.606);
+  display: grid;
+  place-content: center;
+}
+
+.modify-service-modal_form {
+  width: 30rem;
+  height: 35rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.065);
+  display: grid;
+  grid-template-rows: 5rem 1fr 7rem;
+}
+
+.modify-service-modal_form > .modify-service_title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.208);
+  display: grid;
+  place-content: center;
+  position: relative;
+
+  & h1 {
+    font-family: var(--presentation-banner-font);
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  & .modify-service-modal-close {
+    position: absolute;
+    right: 2.5rem;
+    top: 2.1rem;
+    cursor: pointer;
+  }
+}
+
+.modify-service-modal_form > .modify-service_body {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr) 1.5fr;
+  width: 100%;
+
+  & label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    & input {
+      width: 81%;
+      height: 2.5rem;
+      border: none;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.124);
+      padding-left: 0.3rem;
+      font-family: var(--presentation-banner-font);
+      outline: none;
+    }
+
+    & input[type="file"] {
+      display: none;
+    }
+  }
+
+  & .modify-service_upload-photo {
+    display: flex;
+    gap: 1.2rem;
+
+    & div {
+      width: 4.2rem;
+      height: 4.2rem;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.386);
+
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+        padding: 0.05rem;
+      }
+    }
+
+    & p {
+      font-family: var(--presentation-banner-font);
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.59);
+      background-color: rgba(0, 0, 0, 0.081);
+      padding: 0.5rem 0.8rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.modify-service-modal_form > .modify-service_buttons {
+  display: flex;
+  align-items: start;
+  justify-content: space-around;
+  padding-top: 1.5rem;
+
+  & .modify-cancel-service {
+    font-size: 1.6rem;
+    cursor: pointer;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.648));
+  }
+
+  & .modify-cancel-service_close {
+    color: #cc3f0c;
+  }
+
+  & .modify-cancel-service_done {
+    color: #72b01d;
+    transition: all 0.1s ease;
+  }
+
+  & .modify-cancel-service:active {
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.648));
+  }
+}
+
+#modify-service_submit {
+  display: none;
+}

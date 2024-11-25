@@ -27,7 +27,7 @@ function Home() {
           <Header />
         </section>
 
-        {user?.role === "admin" && (
+        {user?.role === "root" && (
           <>
             {!isCmsModalOpen && (
               <section className="cms-flap_container" onClick={handleCmsModal}>

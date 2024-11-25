@@ -5,7 +5,9 @@ function useGetServices() {
   const [services, setServices] = useState([]);
   const [servicesLoading, setServicesLoading] = useState(false);
   const [servicesError, setServicesError] = useState(false);
-  const [isServicesModalOpen, setIsServicesModalOpen] = useState(false);
+  const [isAddServiceModalOpen, setIsAddServiceModalOpen] = useState(false);
+  const [isModifyServiceModalOpen, setIsModifyServiceModalOpen] =
+    useState(false);
 
   useEffect(() => {
     const getAllServices = async () => {
@@ -30,16 +32,23 @@ function useGetServices() {
     getAllServices();
   }, []);
 
-  const handleServicesModal = () => {
-    setIsServicesModalOpen(!isServicesModalOpen);
+  const handleAddServiceModal = () => {
+    setIsAddServiceModalOpen(!isAddServiceModalOpen);
+  };
+
+  const handleModifyServiceModal = () => {
+    setIsModifyServiceModalOpen(!isModifyServiceModalOpen);
   };
 
   return {
     services,
     servicesLoading,
     servicesError,
-    handleServicesModal,
-    isServicesModalOpen,
+    handleAddServiceModal,
+    handleModifyServiceModal,
+    isAddServiceModalOpen,
+    isModifyServiceModalOpen,
+    setServices
   };
 }
 

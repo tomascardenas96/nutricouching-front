@@ -37,6 +37,8 @@
   gap: 0.5rem;
 
   & .header_table {
+    height: 1.4rem;
+
     & .header_table-name {
       display: flex;
       font-family: var(--primary-font);
@@ -47,11 +49,43 @@
     .header_table-options {
       font-family: var(--primary-font);
       font-size: 0.7rem;
+      text-align: end;
     }
 
     & td {
       font-family: var(--primary-font);
       font-size: 0.8rem;
     }
+  }
+
+  & .cms-professional_tr-table {
+    height: 3.3rem;
+  }
+}
+
+.cms-professional-add {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.175);
+  padding-top: 1.3rem;
+  cursor: pointer;
+  margin: 0.2rem 0.9rem 0;
+
+  & .add-professional_icon {
+    display: flex;
+    color: #613dc1;
+  }
+
+  & h1 {
+    font-family: var(--primary-font);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #613dc1;
+  }
+
+  & h1:hover {
+    color: #603dc1b4;
   }
 }

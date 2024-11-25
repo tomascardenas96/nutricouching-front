@@ -13,7 +13,7 @@ function RootCmsModal({ handleCmsModal }) {
   return (
     <aside onClick={(e) => e.stopPropagation()}>
       <IoMdClose className="close-cms-icon" onClick={handleCmsModal} />
-      <h1>
+      <h1 className="root-panel_info">
         Panel de administracion <CiBoxList className="panel-icon" />
       </h1>
       <div>
