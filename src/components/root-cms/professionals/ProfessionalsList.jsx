@@ -1,12 +1,31 @@
-import "./ProfessionalList.css";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { CiSearch } from "react-icons/ci";
+import { LiaAddressCard } from "react-icons/lia";
 import useGetProfessionals from "../../../hooks/useGetProfessionals";
 import ProfessionalCmsCard from "./ProfessionalCmsCard";
-import { LiaAddressCard } from "react-icons/lia";
+import "./ProfessionalList.css";
+import ManageProfessionalModal from "./modals/ManageProfessionalModal";
 
 function ProfessionalsList() {
-  const { professionals, professionalsError, professionalsLoading } =
-    useGetProfessionals();
+  const {
+    professionals,
+    professionalsError,
+    professionalsLoading,
+    setProfessionals,
+  } = useGetProfessionals();
+
+  const [isManageProfessionalsModalOpen, setIsManageProfessionalsModalOpen] =
+    useState(false);
+
+  const handleManageProfessionalsModal = () => {
+    setIsManageProfessionalsModalOpen((prev) => !prev);
+  };
+
+  // Cuando el componente se monte, se eliminara
+  useEffect(() => {
+    localStorage.removeItem("new-specialties");
+  }, [isManageProfessionalsModalOpen]);
 
   return (
     <div className="cms-professional-list">
@@ -36,10 +55,25 @@ function ProfessionalsList() {
           </tbody>
         </table>
       </div>
-      <div className="cms-professional-add">
+      <div
+        className="cms-professional-add"
+        onClick={handleManageProfessionalsModal}
+      >
         <LiaAddressCard className="add-professional_icon" />
         <h1>GESTIONAR PROFESIONALES</h1>
       </div>
+
+      {isManageProfessionalsModalOpen &&
+        createPortal(
+          <ManageProfessionalModal
+            handleManageProfessionalsModal={handleManageProfessionalsModal}
+            professionals={professionals}
+            professionalsError={professionalsError}
+            professionalsLoading={professionalsLoading}
+            setProfessionals={setProfessionals}
+          />,
+          document.body
+        )}
     </div>
   );
 }

@@ -17,7 +17,7 @@ function LoginModal({ handleLoginModal }) {
       <div className="login_container" onClick={(e) => e.stopPropagation()}>
         <div className="login-title">
           <h1>Iniciar sesion</h1>
-          <IoMdClose className="login-modal-close" />
+          <IoMdClose className="login-modal-close" onClick={handleLoginModal} />
         </div>
         <form className="login-form" onSubmit={handleSubmitLogin}>
           <label htmlFor="email">

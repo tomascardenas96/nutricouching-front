@@ -35,11 +35,7 @@ function Home() {
               </section>
             )}
 
-            {isCmsModalOpen && (
-              <section className="cms-modal_container" onClick={handleCmsModal}>
-                <RootCmsModal handleCmsModal={handleCmsModal} />
-              </section>
-            )}
+            {isCmsModalOpen && <RootCmsModal handleCmsModal={handleCmsModal} />}
           </>
         )}
 

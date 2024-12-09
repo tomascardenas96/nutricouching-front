@@ -32,6 +32,25 @@
   --about-us-role: "Poppins", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #00000051, rgba(0, 0, 0, 0.372));
+  border-radius: 10px;
+  border: 2px solid #f4f4f4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #00000037, rgba(0, 0, 0, 0.372));
+}
+
 html {
   font-size: 16px;
 }

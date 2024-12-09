@@ -85,7 +85,10 @@ function ModifyServiceModal({
         </div>
 
         <div className="modify-service_buttons">
-          <ImCross className="modify-cancel-service modify-cancel-service_close" />
+          <ImCross
+            className="modify-cancel-service modify-cancel-service_close"
+            onClick={handleModifyServiceModal}
+          />
           <div>
             <label htmlFor="modify-service_submit">
               <input type="submit" id="modify-service_submit" />

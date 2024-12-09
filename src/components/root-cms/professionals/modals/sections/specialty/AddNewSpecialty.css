@@ -1,0 +1,92 @@
+.new-specialty-modal_container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.052);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  display: grid;
+  place-content: center;
+  font-family: var(--presentation-banner-font);
+}
+
+.new-specialty-form {
+  width: 20rem;
+  height: 21.5rem;
+  display: grid;
+  grid-template-rows: 5rem 1fr 5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.109);
+  background-color: rgb(250, 250, 250);
+}
+
+.new-specialty-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.208);
+  display: grid;
+  place-content: center;
+
+  & h1 {
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+}
+
+.add-new-specialty_form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  & label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: var(--presentation-banner-font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.706);
+  }
+
+  & input,
+  select {
+    height: 2.2rem;
+    outline: none;
+    padding: 0 0.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.218);
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+  }
+}
+
+.new-specialty-btns {
+  display: flex;
+  align-items: center;
+  padding: 0 0.7rem;
+  justify-content: space-evenly;
+  border-top: 1px solid rgba(0, 0, 0, 0.208);
+
+  & button {
+    border: none;
+    background: none;
+  }
+
+  & .add-cancel-specialty {
+    cursor: pointer;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.648));
+    font-size: 1.3rem;
+  }
+
+  & .add-cancel-specialty:active {
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.409));
+  }
+
+  & .add-cancel-specialty_close {
+    color: #cc3f0c;
+  }
+
+  .add-cancel-specialty_done {
+    color: #72b01d;
+  }
+}

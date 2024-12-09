@@ -1,0 +1,41 @@
+.professional-abm-card {
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 3rem;
+  gap: 0.8rem;
+}
+
+.professional-abm_image {
+  display: grid;
+  place-content: center;
+
+  & img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+}
+
+.professional-abm_fullname {
+  display: grid;
+  align-items: center;
+
+  & p {
+    font-family: var(--presentation-banner-font);
+    font-size: 0.85rem;
+  }
+
+  & p:first-child {
+    align-self: end;
+  }
+}
+
+.professional-abm_options {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.768);
+}

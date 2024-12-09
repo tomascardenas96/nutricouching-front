@@ -97,7 +97,10 @@ function ModifyViandModal({
         </div>
 
         <div className="modify-viand_buttons">
-          <ImCross className="modify-cancel-viand modify-cancel-viand_close" />
+          <ImCross
+            className="modify-cancel-viand modify-cancel-viand_close"
+            onClick={handleModifyViandModal}
+          />
           <div>
             <label htmlFor="modify-viand_submit">
               <input type="submit" id="modify-viand_submit" />

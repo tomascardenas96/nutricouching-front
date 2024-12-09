@@ -67,8 +67,6 @@
 
   & input[type="submit"] {
     border-radius: 3rem;
-    border: none;
-    color: white;
     border: 1px solid #cc3f0c9a;
     color: #cc3f0c9a;
     background-color: white;

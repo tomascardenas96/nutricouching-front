@@ -29,7 +29,7 @@ function useGetProfessionals() {
     getAllProfessionals();
   }, []);
 
-  return { professionals, professionalsLoading, professionalsError };
+  return { professionals, professionalsLoading, professionalsError, setProfessionals };
 }
 
 export default useGetProfessionals;

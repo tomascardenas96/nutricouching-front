@@ -40,16 +40,6 @@ main {
   transform: scale(1.1);
 }
 
-.cms-modal_container {
-  position: fixed;
-  width: 100%;
-  height: 100svh;
-  background-color: rgba(0, 0, 0, 0.119);
-  z-index: 3000;
-  display: flex;
-  justify-content: end;
-}
-
 .presentation_container {
   height: 38svh;
   min-height: 18rem;

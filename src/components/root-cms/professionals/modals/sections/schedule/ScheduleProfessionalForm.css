@@ -1,0 +1,77 @@
+
+
+span.professionals-modal_required-field {
+  font-size: 1.2rem;
+  color: #cc3f0c;
+  display: flex;
+  align-items: end;
+}
+
+fieldset.professional-business-days {
+  display: flex;
+  gap: 0.5rem;
+  border: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-self: center;
+  max-width: 25rem;
+  height: max-content;
+  row-gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+.week-days_tags {
+  font-family: var(--presentation-banner-font);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  background-color: #2f485826;
+  color: rgba(0, 0, 0, 0.657);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.manage-professionals_time-slot {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem 0;
+
+  & div {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  & h2 {
+    font-family: var(--presentation-banner-font);
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
+
+.manage-professionals_time-slot-button {
+  display: flex;
+  justify-content: end;
+  padding-right: 3rem;
+
+  & button {
+    padding: 0.5rem 1.3rem;
+    outline: none;
+    border: none;
+    font-family: var(--presentation-banner-font);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #cc3f0c9a;
+    color: white;
+    border: 1px solid white;
+    margin-bottom: 0.5rem;
+  }
+
+  & button:hover {
+    border: 1px solid #cc3f0c9a;
+    color: #cc3f0c9a;
+    background-color: white;
+  }
+}
