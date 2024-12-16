@@ -40,7 +40,7 @@ function useDeleteProfessional(setProfessionals) {
     toast.promise(deleteProfessional(), {
       success: () => {
         setProfessionals((prev) =>
-          prev.filter((prof) => prof.profId !== selectedProfessionalId)
+          prev.filter((prof) => prof.professionalId !== selectedProfessionalId)
         );
         setIsDeleteProfessionalModalOpen(false);
         return "Profesional eliminado";

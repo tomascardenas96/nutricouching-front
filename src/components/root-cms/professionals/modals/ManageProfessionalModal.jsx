@@ -1,13 +1,14 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
+import useAddNewSpecialty from "../../../../hooks/useAddNewSpecialty";
+import useCreateProfessional from "../../../../hooks/useCreateProfessional";
 import useGetSpecialtiesByQuery from "../../../../hooks/useGetSpecialtiesByQuery";
 import useGetUsersByQuery from "../../../../hooks/useGetUsersByQuery";
+import useHandleProfessionalSchedule from "../../../../hooks/useHandleProfessionalSchedule";
 import "./ManageProfessionalModal.css";
 import ScheduleProfessionalForm from "./sections/schedule/ScheduleProfessionalForm";
 import UserToProfessionalForm from "./sections/select-user/UserToProfessionalForm";
 import SpecialtyProfessionalForm from "./sections/specialty/SpecialtyProfessionalForm";
-import useAddNewSpecialty from "../../../../hooks/useAddNewSpecialty";
-import { useEffect } from "react";
 
 function ManageProfessionalModal({
   handleManageProfessionalsModal,
@@ -58,9 +59,32 @@ function ManageProfessionalModal({
     setSpecialtiesUserInput
   );
 
+  const {
+    addNewSchedule,
+    currentSchedule,
+    handleChangeDaysSchedule,
+    handleChangeTimeRange,
+    selectedSchedules,
+  } = useHandleProfessionalSchedule();
+
+  const { handleSubmitCreateProfessional } = useCreateProfessional(
+    selectedSpecialties,
+    setProfessionals,
+    closeModal
+  );
+
   return (
     <section className="manage-professional-modal_container">
-      <form className="manage-professional-modal">
+      <form
+        className="manage-professional-modal"
+        onSubmit={(e) =>
+          handleSubmitCreateProfessional(
+            e,
+            selectedUser.userId,
+            selectedSchedules
+          )
+        }
+      >
         {/* Titulo del formulario */}
         <div className="manage-professional_title">
           <h1>ABM de profesionales</h1>
@@ -114,7 +138,13 @@ function ManageProfessionalModal({
           </div>
 
           <div className="manage-professional_schedules">
-            <ScheduleProfessionalForm />
+            <ScheduleProfessionalForm
+              handleChangeDaysSchedule={handleChangeDaysSchedule}
+              handleChangeTimeRange={handleChangeTimeRange}
+              currentSchedule={currentSchedule}
+              selectedSchedules={selectedSchedules}
+              addNewSchedule={addNewSchedule}
+            />
           </div>
         </div>
 
@@ -124,7 +154,9 @@ function ManageProfessionalModal({
             className="add-cancel-professional add-cancel-professional_close"
             onClick={closeModal}
           />
-          <ImCheckmark className="add-cancel-professional add-cancel-professional_done  " />
+          <button type="submit">
+            <ImCheckmark className="add-cancel-professional add-cancel-professional_done" />
+          </button>
         </div>
       </form>
     </section>

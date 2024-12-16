@@ -16,7 +16,9 @@ function ProfessionalCmsCard({ professional }) {
         <h1 className="professional-fullname">{professional.fullname}</h1>
         <p className="professional-email">{professional.email}</p>
       </td>
-      <td className="cms-professional_specialty">{professional.specialty}</td>
+      <td className="cms-professional_specialty">
+        {professional.role.toUpperCase()}
+      </td>
     </>
   );
 }

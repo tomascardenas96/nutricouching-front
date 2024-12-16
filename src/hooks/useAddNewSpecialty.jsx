@@ -22,6 +22,7 @@ function useAddNewSpecialty(
 
   const handleSubmitCreateSpecialty = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (true) {
       const allSpecialtiesLocalStorage =

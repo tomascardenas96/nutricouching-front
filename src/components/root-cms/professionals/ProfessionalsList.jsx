@@ -35,12 +35,13 @@ function ProfessionalsList() {
           <CiSearch className="professionals_search-filter_icon" />
         </form>
       </div>
+
       <div className="cms-professional_body">
         <table>
           <thead>
             <tr className="header_table">
               <th className="header_table-name">Nombre</th>
-              <th className="header_table-options">Profesion</th>
+              <th className="header_table-options">Permisos</th>
             </tr>
           </thead>
           <tbody>
@@ -55,6 +56,7 @@ function ProfessionalsList() {
           </tbody>
         </table>
       </div>
+      
       <div
         className="cms-professional-add"
         onClick={handleManageProfessionalsModal}

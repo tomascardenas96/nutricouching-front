@@ -1,74 +1,142 @@
+import React from "react";
 import "./ScheduleProfessionalForm.css";
 
-function ScheduleProfessionalForm() {
+function ScheduleProfessionalForm({
+  handleChangeDaysSchedule,
+  handleChangeTimeRange,
+  currentSchedule,
+  addNewSchedule,
+  selectedSchedules,
+}) {
+  const spanishDays = [
+    "lunes",
+    "martes",
+    "miércoles",
+    "jueves",
+    "viernes",
+    "sábado",
+    "domingo",
+  ];
+
   return (
     <>
       <h1 className="manage-professional-modal_section-title">
-        Horarios de atencion
+        Horarios de atención
         <span className="professionals-modal_required-field">*</span>
       </h1>
 
       <fieldset className="professional-business-days">
-        <label htmlFor="monday" className="week-days_tags">
-          <input type="checkbox" id="monday" name="monday" />
-          Lunes
-        </label>
-
-        <label htmlFor="tuesday" className="week-days_tags">
-          <input
-            type="checkbox"
-            id="tuesday"
-            name="tuesday"
-            onClick={(e) => console.log(e.target.checked)}
-          />
-          Martes
-        </label>
-
-        <label htmlFor="wednesday" className="week-days_tags">
-          <input type="checkbox" id="wednesday" name="wednesday" />
-          Miercoles
-        </label>
-
-        <label htmlFor="thursday" className="week-days_tags">
-          <input type="checkbox" id="thursday" name="thursday" />
-          Jueves
-        </label>
-
-        <label htmlFor="friday" className="week-days_tags">
-          <input type="checkbox" id="friday" name="friday" />
-          Viernes
-        </label>
-
-        <label htmlFor="saturday" className="week-days_tags">
-          <input type="checkbox" id="saturday" name="saturday" />
-          Sabado
-        </label>
-
-        <label htmlFor="sunday" className="week-days_tags">
-          <input type="checkbox" id="sunday" name="sunday" />
-          Domingo
-        </label>
+        <legend>Seleccionar días hábiles:</legend>
+        {[
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday",
+        ].map((day, idx) => (
+          <label key={day} className="week-days_tags">
+            <input
+              type="checkbox"
+              value={day}
+              checked={currentSchedule?.day?.includes(day)}
+              onChange={handleChangeDaysSchedule}
+            />
+            {spanishDays[idx].charAt(0).toUpperCase() +
+              spanishDays[idx].slice(1)}
+          </label>
+        ))}
       </fieldset>
 
       <div className="manage-professionals_time-slot">
         <div>
-          <h2>Desde:</h2>
-          <input type="time" name="" id="" />
+          <h2 className="start-end-time">Desde:</h2>
+          <input
+            type="time"
+            name="startTime"
+            value={currentSchedule.startTime || ""}
+            onChange={handleChangeTimeRange}
+          />
         </div>
 
         <div>
-          <h2>Hasta:</h2>
-          <input type="time" name="" id="" />
+          <h2 className="start-end-time">Hasta:</h2>
+          <input
+            type="time"
+            name="endTime"
+            value={currentSchedule.endTime || ""}
+            onChange={handleChangeTimeRange}
+          />
         </div>
       </div>
 
       <div className="manage-professionals_time-slot-button">
-        <button>Agregar horario</button>
+        <div className="time-interval">
+          <h2>Intervalo:</h2>
+          <select
+            name="interval"
+            onChange={handleChangeTimeRange}
+            value={currentSchedule.interval || ""}
+          >
+            <option value="">-</option>
+            {[15, 30, 45, 60].map((numb) => (
+              <option key={numb} value={numb}>
+                {numb} minutos
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button type="button" onClick={() => addNewSchedule(currentSchedule)}>
+          Agregar horario
+        </button>
       </div>
 
-      <p className="professional-modal_no-selected-data">
-        No hay horarios agregados
-      </p>
+      {selectedSchedules.length === 0 ? (
+        <p className="professional-modal_no-selected-data">
+          No hay días seleccionados.
+        </p>
+      ) : (
+        selectedSchedules.map((schedule, idx) => (
+          <div key={idx} className="schedule-item">
+            <h2>Turno {idx + 1}</h2>
+            <div className="schedule_selected-days">
+              {schedule.day.map((day, i) => (
+                <span key={`${day}-${i}`} className="selected-day">
+                  {spanishDays[
+                    [
+                      "monday",
+                      "tuesday",
+                      "wednesday",
+                      "thursday",
+                      "friday",
+                      "saturday",
+                      "sunday",
+                    ].indexOf(day)
+                  ]
+                    .charAt(0)
+                    .toUpperCase() +
+                    spanishDays[
+                      [
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday",
+                        "saturday",
+                        "sunday",
+                      ].indexOf(day)
+                    ].slice(1)}
+                </span>
+              ))}
+            </div>
+            <p>
+              Desde las {schedule.startTime}hs hasta las {schedule.endTime}hs
+            </p>
+          </div>
+        ))
+      )}
     </>
   );
 }

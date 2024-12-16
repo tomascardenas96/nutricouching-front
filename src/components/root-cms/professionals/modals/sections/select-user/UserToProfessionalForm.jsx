@@ -19,7 +19,6 @@ function UserToProfessionalForm({
   handleSelectUserAndCloseModal,
   selectedUser,
   handleUnselectUser,
-
 }) {
   const {
     closeDeleteProfessionalModal,
