@@ -10,13 +10,20 @@ import Services from "../../components/Services/Services";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import { useUser } from "../../context/UserProvider";
 import "./Home.css";
+import { createPortal } from "react-dom";
+import CartModal from "../../components/Cart/CartModal";
 
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const { user } = useUser();
 
   const handleCmsModal = () => {
     setIsCmsModalOpen(!isCmsModalOpen);
+  };
+
+  const handleCartModal = () => {
+    setIsCartModalOpen(!isCartModalOpen);
   };
 
   return (
@@ -24,20 +31,8 @@ function Home() {
       {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
       <div className="main-screen_container">
         <section className="header_container">
-          <Header />
+          <Header handleCartModal={handleCartModal} />
         </section>
-
-        {user?.professional.role === "root" && (
-          <>
-            {!isCmsModalOpen && (
-              <section className="cms-flap_container" onClick={handleCmsModal}>
-                <IoIosArrowBack />
-              </section>
-            )}
-
-            {isCmsModalOpen && <RootCmsModal handleCmsModal={handleCmsModal} />}
-          </>
-        )}
 
         <section className="presentation_container">
           <Presentation />
@@ -63,6 +58,24 @@ function Home() {
       <section className="footer_container">
         <Footer />
       </section>
+
+      {user?.professional?.role === "root" && (
+        <>
+          {!isCmsModalOpen && (
+            <section className="cms-flap_container" onClick={handleCmsModal}>
+              <IoIosArrowBack />
+            </section>
+          )}
+
+          {isCmsModalOpen && <RootCmsModal handleCmsModal={handleCmsModal} />}
+        </>
+      )}
+
+      {isCartModalOpen &&
+        createPortal(
+          <CartModal handleCartModal={handleCartModal} />,
+          document.body
+        )}
     </main>
   );
 }
