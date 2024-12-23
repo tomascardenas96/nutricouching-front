@@ -4,7 +4,7 @@ import Dots from "../Common/Dots";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
 
-function ProductsCarousel() {
+function ProductsCarousel({ productsInCart, setProductsInCart }) {
   const {
     products,
     productsError,
@@ -27,12 +27,9 @@ function ProductsCarousel() {
         {currentProducts?.map((product) => (
           <ProductCard
             key={product.productId}
-            image={product.image}
-            description={product.description}
-            name={product.name}
-            stock={product.stock}
-            price={product.price}
-            productId={product.productId}
+            product={product}
+            productsInCart={productsInCart}
+            setProductsInCart={setProductsInCart}
           />
         ))}
       </div>

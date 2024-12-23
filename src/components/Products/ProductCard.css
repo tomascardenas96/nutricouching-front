@@ -34,13 +34,39 @@
   height: 100%;
   display: grid;
   justify-content: center;
+  position: relative;
+  transition: opacity 0.3s ease; /* Añadido para transición suave si se necesita en el contenedor */
+}
 
-  & img {
-    width: 9.5rem;
-    height: 10rem;
-    object-fit: cover;
-    object-position: center;
-  }
+.product-card_container:hover img,
+.product-card_container:hover .add-to-cart_icon {
+  /* Ambos elementos reaccionan al hover del contenedor */
+  opacity: 0.5; /* Puedes ajustar la opacidad para ambos */
+}
+
+.product-card_container img {
+  width: 9.5rem;
+  height: 10rem;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.3s ease; /* Transición suave para la imagen */
+}
+
+.add-to-cart_icon {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  right: 50%;
+  opacity: 0; /* Inicia con opacidad 0 */
+  transition: opacity 0.3s ease; /* Transición suave para el icono */
+  font-size: 3rem;
+  color: rgb(40, 40, 40);
+}
+
+.product-card_container:hover .add-to-cart_icon {
+  opacity: 0.8; /* El icono aparece cuando se hace hover sobre el contenedor */
 }
 
 .product-card_body {
@@ -88,6 +114,7 @@
 
 /* Media queries */
 
+/* Consolidado max-width: 1400px y max-width: 1550px */
 @media screen and (max-width: 1550px) {
   .product-card_container {
     width: 12.5rem;
@@ -125,29 +152,6 @@
         font-size: 0.7rem;
         height: 2rem;
         padding-top: 0;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .product-card_container {
-    width: 12rem;
-    height: 95%;
-  }
-
-  .product-card_body {
-    & .product-title,
-    .product-description,
-    .product-price {
-      font-size: 0.7em;
-    }
-
-    & .product-price {
-      font-size: 1.3em;
-
-      & span {
-        font-size: 0.6rem;
       }
     }
   }

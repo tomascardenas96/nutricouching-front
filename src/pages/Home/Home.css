@@ -1,6 +1,7 @@
 main {
   display: grid;
   position: relative;
+  overflow-x: hidden;
 }
 
 .main-screen_container {

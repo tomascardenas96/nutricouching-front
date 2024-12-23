@@ -1,12 +1,10 @@
-import "./CartModal.css";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { IoMdArrowDropup } from "react-icons/io";
-import { SiMercadopago } from "react-icons/si";
-import { GrClearOption } from "react-icons/gr";
-import ProductInCartCard from "./ProductInCartCard";
 import { useState } from "react";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import { SiMercadopago } from "react-icons/si";
+import "./CartModal.css";
+import ProductInCartCard from "./ProductInCartCard";
 
-function CartModal({ handleCartModal }) {
+function CartModal({ handleCartModal, productsInCart, setProductsInCart }) {
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
 
@@ -16,6 +14,15 @@ function CartModal({ handleCartModal }) {
 
   const handleOpenCloseViandsList = () => {
     setIsViandsListDeployed(!isViandsListDeployed);
+  };
+
+  const calculateTotal = () => {
+    const total = productsInCart.reduce(
+      (acc, product) => acc + product.price * product.quantity,
+      0
+    );
+
+    return total;
   };
 
   return (
@@ -50,7 +57,7 @@ function CartModal({ handleCartModal }) {
             />
           </div>
 
-          {false && (
+          {!productsInCart.length && (
             <div className="products-list_modal">
               <p>No hay productos agregados aun.</p>
             </div>
@@ -58,9 +65,14 @@ function CartModal({ handleCartModal }) {
 
           {isProductsListDeployed && (
             <div className="products-in-cart_list-container">
-              <ProductInCartCard />
-              <ProductInCartCard />
-              <ProductInCartCard />
+              {productsInCart.map((product) => (
+                <ProductInCartCard
+                  key={`product-cart-${product.productId}`}
+                  product={product}
+                  setProductsInCart={setProductsInCart}
+                  productsInCart={productsInCart}
+                />
+              ))}
             </div>
           )}
         </div>
@@ -83,7 +95,7 @@ function CartModal({ handleCartModal }) {
             />
           </div>
 
-          {false && (
+          {true && (
             <div className="viands-list_modal">
               <p>No hay viandas agregadas aun.</p>
             </div>
@@ -91,15 +103,15 @@ function CartModal({ handleCartModal }) {
 
           {isViandsListDeployed && (
             <div className="products-in-cart_list-container">
+              {/* <ProductInCartCard />
               <ProductInCartCard />
-              <ProductInCartCard />
-              <ProductInCartCard />
+              <ProductInCartCard /> */}
             </div>
           )}
         </div>
 
         <div className="cart-modal_total">
-          <h2>TOTAL: $15.000</h2>
+          <h2>TOTAL: ${calculateTotal()}</h2>
         </div>
 
         <div className="cart-modal_buttons">

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import About from "../../components/About/About";
+import CartModal from "../../components/Cart/CartModal";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Presentation from "../../components/Presentation/Presentation";
@@ -10,12 +12,11 @@ import Services from "../../components/Services/Services";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import { useUser } from "../../context/UserProvider";
 import "./Home.css";
-import { createPortal } from "react-dom";
-import CartModal from "../../components/Cart/CartModal";
 
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [productsInCart, setProductsInCart] = useState([]);
   const { user } = useUser();
 
   const handleCmsModal = () => {
@@ -44,7 +45,10 @@ function Home() {
       </div>
 
       <section className="products_container">
-        <Products />
+        <Products
+          productsInCart={productsInCart}
+          setProductsInCart={setProductsInCart}
+        />
       </section>
 
       <section className="recipes_container">
@@ -73,7 +77,11 @@ function Home() {
 
       {isCartModalOpen &&
         createPortal(
-          <CartModal handleCartModal={handleCartModal} />,
+          <CartModal
+            handleCartModal={handleCartModal}
+            productsInCart={productsInCart}
+            setProductsInCart={setProductsInCart}
+          />,
           document.body
         )}
     </main>
