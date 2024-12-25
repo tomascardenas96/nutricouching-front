@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import ProductsCarousel from "./ProductsCarousel";
 import "./Products.css";
 
-function Products({ productsInCart, setProductsInCart }) {
+function Products({ setProductsInCart }) {
   const h1Ref = useRef(null);
 
   useEffect(() => {
@@ -43,10 +43,7 @@ function Products({ productsInCart, setProductsInCart }) {
         </div>
       </div>
       <div className="products-container">
-        <ProductsCarousel
-          productsInCart={productsInCart}
-          setProductsInCart={setProductsInCart}
-        />
+        <ProductsCarousel setProductsInCart={setProductsInCart} />
       </div>
     </div>
   );

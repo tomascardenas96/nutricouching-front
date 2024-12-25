@@ -1,13 +1,42 @@
 import { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { SiMercadopago } from "react-icons/si";
+import useAddOrSubtractProduct from "../../hooks/useAddOrSubtractProduct";
+import useAddOrSubtractViand from "../../hooks/useAddOrSubtractViand";
+import useRemoveProductFromCart from "../../hooks/useRemoveProductFromCart";
+import useRemoveViandFromCart from "../../hooks/useRemoveViandFromCart";
 import "./CartModal.css";
 import ProductInCartCard from "./ProductInCartCard";
 
-function CartModal({ handleCartModal, productsInCart, setProductsInCart }) {
+function CartModal({
+  handleCartModal,
+  productsInCart,
+  setProductsInCart,
+  viandsInCart,
+  setViandsInCart,
+}) {
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
 
+  // Metodo para remover un producto o una vianda del carrito
+  const { handleRemoveProduct } = useRemoveProductFromCart(
+    setProductsInCart,
+    productsInCart
+  );
+
+  const { handleRemoveViand } = useRemoveViandFromCart(
+    setViandsInCart,
+    viandsInCart
+  );
+
+  // Metodos para agregar o restar una unidad de un producto
+  const { addUnityOfProduct, subtractUnityOfProduct } =
+    useAddOrSubtractProduct(setProductsInCart);
+
+  const { addUnityOfViand, subtractUnityOfViand } =
+    useAddOrSubtractViand(setViandsInCart);
+
+  // Metodos para abrir o cerrar la lista de productos o viandas
   const handleOpenCloseProductsList = () => {
     setIsProductsListDeployed(!isProductsListDeployed);
   };
@@ -16,13 +45,19 @@ function CartModal({ handleCartModal, productsInCart, setProductsInCart }) {
     setIsViandsListDeployed(!isViandsListDeployed);
   };
 
+  // Metodo para calcular el total de la compra
   const calculateTotal = () => {
-    const total = productsInCart.reduce(
+    const totalProducts = productsInCart?.reduce(
       (acc, product) => acc + product.price * product.quantity,
       0
     );
 
-    return total;
+    const totalViands = viandsInCart?.reduce(
+      (acc, viand) => acc + viand.price * viand.quantity,
+      0
+    );
+
+    return totalProducts + totalViands;
   };
 
   return (
@@ -69,8 +104,9 @@ function CartModal({ handleCartModal, productsInCart, setProductsInCart }) {
                 <ProductInCartCard
                   key={`product-cart-${product.productId}`}
                   product={product}
-                  setProductsInCart={setProductsInCart}
-                  productsInCart={productsInCart}
+                  remove={handleRemoveProduct}
+                  add={addUnityOfProduct}
+                  subtract={subtractUnityOfProduct}
                 />
               ))}
             </div>
@@ -95,7 +131,7 @@ function CartModal({ handleCartModal, productsInCart, setProductsInCart }) {
             />
           </div>
 
-          {true && (
+          {!viandsInCart.length && (
             <div className="viands-list_modal">
               <p>No hay viandas agregadas aun.</p>
             </div>
@@ -103,9 +139,15 @@ function CartModal({ handleCartModal, productsInCart, setProductsInCart }) {
 
           {isViandsListDeployed && (
             <div className="products-in-cart_list-container">
-              {/* <ProductInCartCard />
-              <ProductInCartCard />
-              <ProductInCartCard /> */}
+              {viandsInCart.map((viand) => (
+                <ProductInCartCard
+                  key={`viand-cart-${viand.viandId}`}
+                  viand={viand}
+                  remove={handleRemoveViand}
+                  add={addUnityOfViand}
+                  subtract={subtractUnityOfViand}
+                />
+              ))}
             </div>
           )}
         </div>

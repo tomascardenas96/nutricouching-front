@@ -3,9 +3,10 @@ import { TbShoppingCartPlus } from "react-icons/tb";
 import useAddProductToCart from "../../hooks/useAddProductToCart";
 import useGetAllProducts from "../../hooks/useGetAllProducts";
 import "./ProductCard.css";
+import { HOST } from "../../api/data";
 
-function ProductCard({ product, productsInCart, setProductsInCart }) {
-  const { addProductToCart, cart } = useAddProductToCart();
+function ProductCard({ product, setProductsInCart }) {
+  const { addProductToCart, productsCart } = useAddProductToCart();
   const { products } = useGetAllProducts();
 
   // Tomamos los Id's de los productos del carrito y obtenemos los datos completos de cada uno.
@@ -14,9 +15,9 @@ function ProductCard({ product, productsInCart, setProductsInCart }) {
     // Crear un array de productos que coincidan con el carrito
     const productsInCartToShow = products
       .map((product) => {
-        const productInCart = cart?.find(
-          (prodInCart) => prodInCart.productId === product.productId
-        );
+        const productInCart = productsCart?.products?.find((prodInCart) => {
+          return prodInCart.productId === product.productId;
+        });
         return productInCart
           ? { ...product, quantity: productInCart.quantity } // Agregar detalles del carrito al producto
           : null; // Ignorar productos no encontrados
@@ -24,7 +25,7 @@ function ProductCard({ product, productsInCart, setProductsInCart }) {
       .filter((prod) => prod !== null); // Eliminar nulls del resultado
 
     setProductsInCart(productsInCartToShow);
-  }, [cart, products]);
+  }, [productsCart, products]);
 
   return (
     <div
@@ -33,7 +34,7 @@ function ProductCard({ product, productsInCart, setProductsInCart }) {
     >
       <div className="product-card_image">
         <img
-          src={`http://localhost:3010/uploads/products/${product.image}`}
+          src={`${HOST}/uploads/products/${product.image}`}
           alt="product-picture"
         />
         <TbShoppingCartPlus className="add-to-cart_icon" />

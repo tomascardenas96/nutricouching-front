@@ -4,7 +4,7 @@ import Dots from "../Common/Dots";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
 
-function ProductsCarousel({ productsInCart, setProductsInCart }) {
+function ProductsCarousel({ setProductsInCart }) {
   const {
     products,
     productsError,
@@ -28,7 +28,6 @@ function ProductsCarousel({ productsInCart, setProductsInCart }) {
           <ProductCard
             key={product.productId}
             product={product}
-            productsInCart={productsInCart}
             setProductsInCart={setProductsInCart}
           />
         ))}

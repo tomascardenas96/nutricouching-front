@@ -4,7 +4,7 @@ import { useUser } from "../context/UserProvider";
 
 function useAddViandToCart() {
   const { user } = useUser();
-  const [cart, setCart] = useState([]);
+  const [viandsCart, setViandsCart] = useState([]);
 
   // Función para agregar una vianda al carrito
   const addViandToCart = async (viand) => {
@@ -17,7 +17,7 @@ function useAddViandToCart() {
           : { viands: [] };
 
         // Verificar si la vianda ya está en el carrito
-        const existentViandsInCart = parsedAddedViands?.viands.find(
+        const existentViandsInCart = parsedAddedViands?.viands?.find(
           (via) => via.viandId === viand.viandId
         );
 
@@ -36,7 +36,7 @@ function useAddViandToCart() {
         localStorage.setItem("viands-cart", JSON.stringify(parsedAddedViands));
 
         // Actualizar el estado del carrito, lo que provocará un re-renderizado
-        setCart(parsedAddedViands.viands);
+        setViandsCart({ viands: [...parsedAddedViands.viands] });
         toast.success("Vianda agregada al carrito");
       } else {
         // Aquí podrías manejar el caso cuando el usuario está logueado, usando una API
@@ -60,10 +60,10 @@ function useAddViandToCart() {
     const parsedAddedViands = addedViands
       ? JSON.parse(addedViands)
       : { viands: [] };
-    setCart(parsedAddedViands.viands); // Sincronizar el estado con el carrito del localStorage
+    setViandsCart({ viands: [...parsedAddedViands.viands] }); // Sincronizar el estado con el carrito del localStorage
   }, []); // Solo se ejecuta una vez al montar el componente
 
-  return { addViandToCart, cart };
+  return { addViandToCart, viandsCart, setViandsCart };
 }
 
 export default useAddViandToCart;

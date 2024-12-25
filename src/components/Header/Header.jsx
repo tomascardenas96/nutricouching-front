@@ -10,7 +10,7 @@ import useRegister from "../../hooks/useRegister";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 
-function Header({ handleCartModal }) {
+function Header({ handleCartModal, quantityOfProductsInCart }) {
   const { user } = useUser();
   const { handleLogOut } = useLogOut();
 
@@ -40,7 +40,7 @@ function Header({ handleCartModal }) {
           <li className="header-cart_container" onClick={handleCartModal}>
             <BsCart4 className="header-cart" />
             <div className="cart-amount">
-              <p>0</p>
+              <p>{quantityOfProductsInCart().toString()}</p>
             </div>
           </li>
         </ul>

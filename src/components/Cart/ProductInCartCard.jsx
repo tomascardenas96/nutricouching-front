@@ -1,47 +1,44 @@
 import { IoMdClose } from "react-icons/io";
 import { HOST } from "../../api/data";
-import useAddOrSubtractProduct from "../../hooks/useAddOrSubtractProduct";
-import useRemoveProductFromCart from "../../hooks/useRemoveProductFromCart";
 import "./ProductInCartCard.css";
 
-function ProductInCartCard({ product, setProductsInCart, productsInCart }) {
-  const { addUnityOfProduct, subtractUnityOfProduct } =
-    useAddOrSubtractProduct(setProductsInCart);
-
-  const { handleRemoveProduct } = useRemoveProductFromCart(
-    setProductsInCart,
-    productsInCart
-  );
-
+function ProductInCartCard({ product, viand, remove, add, subtract }) {
   return (
     <div className="cart-product-card">
       <IoMdClose
         className="remove-product"
-        onClick={() => handleRemoveProduct(product)}
+        onClick={() => remove(product || viand)}
       />
       <div className="cart-product_img">
         <img
-          src={`${HOST}/uploads/products/${product?.image}`}
+          src={
+            product
+              ? `${HOST}/uploads/products/${product?.image}`
+              : `${HOST}/uploads/viands/${viand?.image}`
+          }
           alt="product-added-cart"
         />
       </div>
 
       <div className="cart-product_description">
-        <p>{product?.name}</p>
+        <p>{product?.name || viand?.name}</p>
       </div>
 
       <div className="cart-product_unit-price">
-        <p>${product?.price}</p>
+        <p>${product?.price || viand?.price}</p>
       </div>
 
       <div className="cart-product_amount">
-        <span onClick={() => subtractUnityOfProduct(product)}>-</span>
-        <p>{product?.quantity}</p>
-        <span onClick={() => addUnityOfProduct(product)}>+</span>
+        <span onClick={() => subtract(product || viand)}>-</span>
+        <p>{product?.quantity || viand?.quantity}</p>
+        <span onClick={() => add(product || viand)}>+</span>
       </div>
 
       <div className="cart-product_sub-total">
-        <p>${product?.price * product?.quantity}</p>
+        <p>
+          $
+          {product?.price * product?.quantity || viand?.price * viand?.quantity}
+        </p>
       </div>
     </div>
   );

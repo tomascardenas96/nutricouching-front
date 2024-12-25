@@ -1,6 +1,6 @@
 function useRemoveProductFromCart(setProductsInCart, productsInCart) {
   const handleRemoveProduct = (product) => {
-    const filterProducts = productsInCart.filter(
+    const filterProducts = productsInCart?.filter(
       (prod) => prod.productId !== product.productId
     );
 

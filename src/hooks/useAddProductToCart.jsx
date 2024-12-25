@@ -4,7 +4,7 @@ import { useUser } from "../context/UserProvider";
 
 function useAddProductToCart() {
   const { user } = useUser();
-  const [cart,  setCart] = useState([]);
+  const [productsCart, setProductsCart] = useState([]);
 
   // Función para agregar un producto al carrito
   const addProductToCart = async (product) => {
@@ -39,7 +39,7 @@ function useAddProductToCart() {
         );
 
         // Actualizar el estado del carrito, lo que provocará un re-renderizado
-        setCart(parsedAddedProducts.products);
+        setProductsCart({ products: [...parsedAddedProducts.products] });
         toast.success("Producto agregado al carrito");
       } else {
         // Aquí podrías manejar el caso cuando el usuario está logueado, usando una API
@@ -58,15 +58,17 @@ function useAddProductToCart() {
   };
 
   // useEffect para actualizar el estado del carrito cuando cambie el localStorage
+  // Es necesario para que el carrito se actualice de acuerdo al local storage al recargar la página
   useEffect(() => {
     const addedProducts = localStorage.getItem("products-cart");
     const parsedAddedProducts = addedProducts
       ? JSON.parse(addedProducts)
       : { products: [] };
-    setCart(parsedAddedProducts.products); // Sincronizar el estado con el carrito del localStorage
+
+    setProductsCart({ products: [...parsedAddedProducts.products] });
   }, []); // Solo se ejecuta una vez al montar el componente
 
-  return { addProductToCart, cart, setCart };
+  return { addProductToCart, productsCart, setProductsCart };
 }
 
 export default useAddProductToCart;

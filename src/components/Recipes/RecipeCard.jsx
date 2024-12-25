@@ -3,6 +3,8 @@ import "./RecipeCard.css";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsCart4 } from "react-icons/bs";
 import { HOST } from "../../api/data";
+import useAddViandToCart from "../../hooks/useAddViandToCart";
+import { useEffect } from "react";
 
 function RecipeCard({
   previous,
@@ -11,13 +13,35 @@ function RecipeCard({
   setLoaded,
   loaded,
   index,
+  setViandsInCart,
+  allViands,
 }) {
+  const { addViandToCart, viandsCart, setViandsCart } = useAddViandToCart();
+
+  // Funcion para rellenar con ceros a la izquierda
   function pad(toPad, padChar, length) {
     return String(toPad).length < length
       ? new Array(length - String(toPad).length + 1).join(padChar) +
           String(toPad)
       : toPad;
   }
+
+  // Actualizar el estado de las viandas en el carrito cuando se monta el componente, es necesario para que se actualice el carrito al recargar la página
+  useEffect(() => {
+    // Crear un array de productos que coincidan con el carrito
+    const viandsInCartToShow = allViands
+      .map((viand) => {
+        const viandInCart = viandsCart?.viands?.find((viaInCart) => {
+          return viaInCart.viandId === viand.viandId;
+        });
+        return viandInCart
+          ? { ...viand, quantity: viandInCart.quantity } // Agregar detalles del carrito al producto
+          : null; // Ignorar productos no encontrados
+      })
+      .filter((via) => via !== null); // Eliminar nulls del resultado
+
+    setViandsInCart(viandsInCartToShow);
+  }, [viandsCart, allViands]);
 
   return (
     <section>
@@ -46,7 +70,7 @@ function RecipeCard({
           <div className="footer-recipe">
             <div className="decoration-line"></div>
             <div className="see-recipe">
-              <p>AGREGAR AL CARRITO</p>
+              <p onClick={() => addViandToCart(viand)}>AGREGAR AL CARRITO</p>
               <BsCart4 className="cart-icon" />
             </div>
           </div>

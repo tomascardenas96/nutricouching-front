@@ -17,6 +17,8 @@ function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [productsInCart, setProductsInCart] = useState([]);
+  const [viandsInCart, setViandsInCart] = useState([]);
+
   const { user } = useUser();
 
   const handleCmsModal = () => {
@@ -27,12 +29,28 @@ function Home() {
     setIsCartModalOpen(!isCartModalOpen);
   };
 
+  const quantityOfProductsInCart = () => {
+    const productsQuantity = productsInCart.reduce((acc, product) => {
+      return acc + product.quantity;
+    }, 0);
+    console.log(productsQuantity);
+
+    const viandsQuantity = viandsInCart.reduce((acc, viand) => {
+      return acc + viand.quantity;
+    }, 0);
+
+    return productsQuantity + viandsQuantity;
+  };
+
   return (
     <main>
       {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
       <div className="main-screen_container">
         <section className="header_container">
-          <Header handleCartModal={handleCartModal} />
+          <Header
+            handleCartModal={handleCartModal}
+            quantityOfProductsInCart={quantityOfProductsInCart}
+          />
         </section>
 
         <section className="presentation_container">
@@ -45,14 +63,11 @@ function Home() {
       </div>
 
       <section className="products_container">
-        <Products
-          productsInCart={productsInCart}
-          setProductsInCart={setProductsInCart}
-        />
+        <Products setProductsInCart={setProductsInCart} />
       </section>
 
       <section className="recipes_container">
-        <Carousel />
+        <Carousel setViandsInCart={setViandsInCart} />
       </section>
 
       <section className="about-us_container">
@@ -81,6 +96,8 @@ function Home() {
             handleCartModal={handleCartModal}
             productsInCart={productsInCart}
             setProductsInCart={setProductsInCart}
+            viandsInCart={viandsInCart}
+            setViandsInCart={setViandsInCart}
           />,
           document.body
         )}

@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { MdArrowBackIosNew } from "react-icons/md";
-import { MdArrowForwardIos } from "react-icons/md";
-import { FaArrowRight } from "react-icons/fa";
-import "./Carousel.css";
-import useGetAllViands from "../../hooks/useGetAllViands";
-import RecipeCard from "./RecipeCard";
 import { HOST } from "../../api/data";
+import useGetAllViands from "../../hooks/useGetAllViands";
+import "./Carousel.css";
+import RecipeCard from "./RecipeCard";
 
-function Carousel() {
-  const images = ["a.jpg", "b.jpg", "c.jpg"];
+function Carousel({ setViandsInCart }) {
   const [selectedViand, setSelectedViand] = useState({});
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const { viands } = useGetAllViands();
 
+  // Dependiendo del indice seleccionado, se muestra la informacion completa de la vianda
   useEffect(() => {
     setSelectedViand(viands[selectedIndex]);
   }, [selectedIndex, viands]);
 
+  // Funcion para retroceder un indice en el carousel
   const previous = () => {
     setLoaded(false);
     const condition = selectedIndex > 0;
@@ -27,6 +25,7 @@ function Carousel() {
     }, 500);
   };
 
+  // Funcion para avanzar un indice en el carousel
   const next = () => {
     setLoaded(false);
     setTimeout(() => {
@@ -50,13 +49,15 @@ function Carousel() {
           setLoaded={setLoaded}
           loaded={loaded}
           index={selectedIndex}
+          setViandsInCart={setViandsInCart}
+          allViands={viands}
         />
 
         <div className="carousel_all-viands">
           <div className="all-viands_list">
             {viands.map((viand, index) => (
               <div
-                key={viand._id}
+                key={`viand-${viand.viandId}`}
                 className={`all-viands_item ${
                   selectedIndex === index ? "selected" : ""
                 }`}
@@ -65,7 +66,10 @@ function Carousel() {
                   setSelectedIndex(index);
                 }}
               >
-                <img src={`${HOST}/uploads/viands/${viand.image}`} alt="" />
+                <img
+                  src={`${HOST}/uploads/viands/${viand.image}`}
+                  alt="viand-image_carousel"
+                />
               </div>
             ))}
           </div>
