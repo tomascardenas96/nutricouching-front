@@ -48,12 +48,13 @@
   background: #ebebeb;
 
   & .all-viands_list {
-    width: 70%;
+    width: 73rem;
     display: flex;
     overflow-x: auto;
-    gap: 2.6rem;
+    gap: 3.5rem;
     padding: 2rem 2rem 1.7rem;
     position: relative;
+    margin-bottom: 1rem;
 
     & .all-viands_item {
       cursor: pointer;
@@ -67,10 +68,12 @@
 
     & img {
       width: 11rem;
-      height: 6rem;
+      height: 7rem;
       border-radius: 0.5rem;
       box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.135);
       padding: 0.1rem;
+      object-fit: cover;
+      object-position: center;
     }
 
     & .selected {

@@ -33,6 +33,7 @@
   display: flex;
   align-items: center;
   max-width: 10rem;
+  text-transform: capitalize;
 }
 
 .cart-product_unit-price {

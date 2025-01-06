@@ -1,20 +1,67 @@
-import "./Header.css";
-import { BsCart4 } from "react-icons/bs";
 import React from "react";
-import { useUser } from "../../context/UserProvider";
-import { RiLogoutBoxRLine } from "react-icons/ri";
+import { BsCart4 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
-import useLogOut from "../../hooks/useLogOut";
-import useLogin from "../../hooks/useLogin";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { useLogin } from "../../context/UserProvider";
+import "./Header.css";
 import useRegister from "../../hooks/useRegister";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
+import { useElementsInCart } from "../../context/ElementsInCartProvider";
 
-function Header({ handleCartModal, quantityOfProductsInCart }) {
-  const { user } = useUser();
-  const { handleLogOut } = useLogOut();
+function Header({
+  handleCartModal,
+  setProductsInCart,
+  setViandsInCart,
+  user,
+  productsInCart,
+  viandsInCart,
+}) {
+  const {
+    loginInput,
+    loginLoading,
+    loginError,
+    handleSubmitLogin,
+    handleChangeLogin,
+    handleLoginModal,
+    isLoginModalOpen,
+    handleLogOut,
+  } = useLogin();
 
-  const { handleLoginModal, isLoginModalOpen } = useLogin();
+  const { elementsInCart, setElementsInCart } = useElementsInCart();
+
+  // Metodo para calcular la cantidad de elementos en el carrito.
+  const quantityOfProductsInCart = () => {
+    if (elementsInCart.length > 0) {
+      const totalPriceElementsInCart = elementsInCart.reduce((acc, sub) => {
+        if (sub.product) {
+          return acc + sub.quantity;
+        } else if (sub.viand) {
+          return acc + sub.quantity;
+        }
+      }, 0);
+
+      return totalPriceElementsInCart;
+    }
+
+    const productsQuantity = productsInCart.reduce((acc, product) => {
+      return acc + product.quantity;
+    }, 0);
+
+    const viandsQuantity = viandsInCart.reduce((acc, viand) => {
+      return acc + viand.quantity;
+    }, 0);
+
+    return productsQuantity + viandsQuantity;
+  };
+
+  const logOut = () => {
+    handleLogOut();
+    // Limpiamos el carrito (Tanto los productos en el local storage como en la DB)
+    setElementsInCart([]);
+    setProductsInCart([]);
+    setViandsInCart([]);
+  };
 
   const { isRegisterModalOpen, handleRegisterModal } = useRegister();
 
@@ -52,7 +99,7 @@ function Header({ handleCartModal, quantityOfProductsInCart }) {
             {user?.name} {user?.lastname}
           </p>
           <span>|</span>
-          <p className="log-out" onClick={handleLogOut}>
+          <p className="log-out" onClick={logOut}>
             {" "}
             <RiLogoutBoxRLine className="log-out-icon" />
             Salir
@@ -73,7 +120,17 @@ function Header({ handleCartModal, quantityOfProductsInCart }) {
         </div>
       )}
       {/* Modales con renderizado condicional */}
-      {isLoginModalOpen && <LoginModal handleLoginModal={handleLoginModal} />}
+      {isLoginModalOpen && (
+        <LoginModal
+          handleLoginModal={handleLoginModal}
+          loginInput={loginInput}
+          loginLoading={loginLoading}
+          loginError={loginError}
+          handleSubmitLogin={handleSubmitLogin}
+          handleChangeLogin={handleChangeLogin}
+          isLoginModalOpen={isLoginModalOpen}
+        />
+      )}
 
       {isRegisterModalOpen && (
         <RegisterModal handleRegisterModal={handleRegisterModal} />

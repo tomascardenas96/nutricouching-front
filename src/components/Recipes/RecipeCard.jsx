@@ -59,9 +59,11 @@ function RecipeCard({
           <div className="ingredients-recipe">
             <p>
               <span style={{ textDecoration: "underline" }}>Ingredientes:</span>{" "}
-              lentejas cocidas, cebolla picada, ajo picado, zanahoria rallada,
-              pan rallado, avena, harina, comino, pimentón, orégano, sal,
-              pimienta, aceite de oliva.
+              {viand?.ingredients?.length > 0
+                ? viand?.ingredients
+                    ?.map((ingredient) => ingredient.name)
+                    .join(", ")
+                : "No hay ingredientes"}
               <br />
               <br />
               <span>{viand?.description}</span>
@@ -75,6 +77,7 @@ function RecipeCard({
             </div>
           </div>
         </div>
+        
         <div className="recipe-card_img">
           <img
             src={`${HOST}/uploads/viands/${viand?.image}`}

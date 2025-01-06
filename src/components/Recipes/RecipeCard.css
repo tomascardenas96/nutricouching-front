@@ -3,8 +3,7 @@
   grid-template-columns: 50% 50%;
   gap: 1em;
   justify-self: center;
-  width: 70em;
-  height: 100%;
+  width: 65em;  
 
   & .recipe-card_text {
     display: grid;
@@ -96,7 +95,7 @@
   & .see-recipe {
     display: flex;
     align-items: center;
-    gap: .8em;
+    gap: 0.8em;
     font-size: 0.9em;
     cursor: pointer;
     padding: 1rem;

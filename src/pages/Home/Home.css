@@ -80,7 +80,6 @@ main {
 
 .recipes_container {
   display: flex;
-  min-height: 44.875rem;
   margin-bottom: 6rem;
 }
 

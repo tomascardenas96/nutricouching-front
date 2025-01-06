@@ -1,60 +1,52 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "../context/UserProvider";
+import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
-function useAddProductToCart() {
+function useAddProductToCart(setElementsInCart) {
   const { user } = useUser();
   const [productsCart, setProductsCart] = useState([]);
+  const { handleAddOneElementToCart } =
+    useAddOneElementToCartWhenLoggedIn(user, setElementsInCart);
 
-  // Función para agregar un producto al carrito
+  // Función para agregar un producto al carrito (ya sea en localStorage o en el backend)
   const addProductToCart = async (product) => {
-    const addProductPromise = () => {
-      if (!user) {
-        // Recuperar los productos del carrito del localStorage
-        const addedProducts = localStorage.getItem("products-cart");
-        const parsedAddedProducts = addedProducts
-          ? JSON.parse(addedProducts)
-          : { products: [] };
+    if (!user) {
+      // Recuperar los productos del carrito del localStorage
+      const addedProducts = localStorage.getItem("products-cart");
+      const parsedAddedProducts = addedProducts
+        ? JSON.parse(addedProducts)
+        : { products: [] };
 
-        // Verificar si el producto ya está en el carrito
-        const existentProductInCart = parsedAddedProducts?.products.find(
-          (prod) => prod.productId === product.productId
-        );
+      // Verificar si el producto ya está en el carrito
+      const existentProductInCart = parsedAddedProducts?.products.find(
+        (prod) => prod.productId === product.productId
+      );
 
-        if (existentProductInCart) {
-          // Si el producto ya existe, aumentar su cantidad
-          existentProductInCart.quantity += 1;
-        } else {
-          // Si el producto no existe, agregarlo al carrito con cantidad 1
-          parsedAddedProducts.products.push({
-            productId: product.productId,
-            quantity: 1,
-          });
-        }
-
-        // Guardar los productos actualizados en el localStorage
-        localStorage.setItem(
-          "products-cart",
-          JSON.stringify(parsedAddedProducts)
-        );
-
-        // Actualizar el estado del carrito, lo que provocará un re-renderizado
-        setProductsCart({ products: [...parsedAddedProducts.products] });
-        toast.success("Producto agregado al carrito");
+      if (existentProductInCart) {
+        // Si el producto ya existe, aumentar su cantidad
+        existentProductInCart.quantity += 1;
       } else {
-        // Aquí podrías manejar el caso cuando el usuario está logueado, usando una API
-        // para agregar el producto al carrito del backend.
-        console.log("Usuario logueado, agregar al carrito en el backend");
+        // Si el producto no existe, agregarlo al carrito con cantidad 1
+        parsedAddedProducts.products.push({
+          productId: product.productId,
+          quantity: 1,
+        });
       }
-    };
 
-    // toast.promise(addProductPromise(), {
-    //   loading: "Agregando producto al carrito...",
-    //   success: "Producto agregado al carrito",
-    //   error: "Ocurrió un error al agregar el producto al carrito",
-    // });
+      // Guardar los productos actualizados en el localStorage
+      localStorage.setItem(
+        "products-cart",
+        JSON.stringify(parsedAddedProducts)
+      );
 
-    addProductPromise();
+      // Actualizar el estado del carrito, lo que provocará un re-renderizado
+      setProductsCart({ products: [...parsedAddedProducts.products] });
+      toast.success("Producto agregado al carrito");
+    } else {
+      handleAddOneElementToCart(product);
+      console.log("Usuario logueado, agregar al carrito en el backend");
+    }
   };
 
   // useEffect para actualizar el estado del carrito cuando cambie el localStorage

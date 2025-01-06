@@ -75,7 +75,7 @@
 }
 
 .products-in-cart_list-container {
-  padding: 0.5rem 0;
+  padding: 0.9rem 0;
 }
 
 .cart-option_dropdown-bar {
@@ -94,15 +94,9 @@
     font-weight: 500;
   }
 
-  /* & .up-arrow,  {
-  } */
-
   & .no-visible-arrow {
     display: none;
   }
-}
-
-.cart-modal_viands-list {
 }
 
 .cart-modal_viands-list .viands-list_modal {

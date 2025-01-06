@@ -43,7 +43,9 @@ function Products({ setProductsInCart }) {
         </div>
       </div>
       <div className="products-container">
-        <ProductsCarousel setProductsInCart={setProductsInCart} />
+        <ProductsCarousel
+          setProductsInCart={setProductsInCart}
+        />
       </div>
     </div>
   );

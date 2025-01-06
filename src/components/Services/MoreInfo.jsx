@@ -22,13 +22,13 @@ function MoreInfo({
         </div>
 
         <div className="service-modal_body">
-          {title === "Coaching ontologico" ? (
+          {title === "Coaching" ? (
             <>
               <p>{reviews[0]}</p>
               <br />
               <p>{reviews[1]}</p>
             </>
-          ) : title === "Plan inteligente" ? (
+          ) : title === "Plan Inteligente" ? (
             <>
               <p>{reviews[2]}</p>
               <br />
@@ -47,7 +47,7 @@ function MoreInfo({
               <p>{reviews[7]}</p>
             </>
           ) : (
-            <p>No hay servicios para mostrar.</p>
+            <p>No hay descripcion para mostrar.</p>
           )}
         </div>
 

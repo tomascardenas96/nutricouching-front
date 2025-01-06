@@ -2,7 +2,15 @@ import { IoMdClose } from "react-icons/io";
 import { HOST } from "../../api/data";
 import "./ProductInCartCard.css";
 
-function ProductInCartCard({ product, viand, remove, add, subtract }) {
+function ProductInCartCard({
+  product,
+  viand,
+  quantity,
+  remove,
+  add,
+  subtract,
+  elementsInCart,
+}) {
   return (
     <div className="cart-product-card">
       <IoMdClose
@@ -21,7 +29,7 @@ function ProductInCartCard({ product, viand, remove, add, subtract }) {
       </div>
 
       <div className="cart-product_description">
-        <p>{product?.name || viand?.name}</p>
+        <p>{product?.name?.toLowerCase() || viand?.name?.toLowerCase()}</p>
       </div>
 
       <div className="cart-product_unit-price">
@@ -30,15 +38,12 @@ function ProductInCartCard({ product, viand, remove, add, subtract }) {
 
       <div className="cart-product_amount">
         <span onClick={() => subtract(product || viand)}>-</span>
-        <p>{product?.quantity || viand?.quantity}</p>
+        <p>{quantity}</p>
         <span onClick={() => add(product || viand)}>+</span>
       </div>
 
       <div className="cart-product_sub-total">
-        <p>
-          $
-          {product?.price * product?.quantity || viand?.price * viand?.quantity}
-        </p>
+        <p>${product?.price * quantity || viand?.price * quantity}</p>
       </div>
     </div>
   );

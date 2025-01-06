@@ -1,25 +1,29 @@
-import "./LoginModal.css";
-import { IoMdClose } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
-import useLogin from "../../hooks/useLogin";
+import { IoMdClose } from "react-icons/io";
+import "./LoginModal.css";
 
-function LoginModal({ handleLoginModal }) {
-  const {
-    loginInput,
-    loginLoading,
-    loginError,
-    handleSubmitLogin,
-    handleChangeLogin,
-  } = useLogin();
+function LoginModal({
+  handleLoginModal,
+  loginInput,
+  loginLoading,
+  loginError,
+  handleSubmitLogin,
+  handleChangeLogin,
+  isLoginModalOpen,
+}) {
+  const login = (e) => {
+    handleLoginModal();
+    handleSubmitLogin(e);
+  };
 
   return (
-    <div className="login-modal_background" onClick={handleLoginModal}>
-      <div className="login_container" onClick={(e) => e.stopPropagation()}>
+    <div className="login-modal_background">
+      <div className="login_container">
         <div className="login-title">
           <h1>Iniciar sesion</h1>
           <IoMdClose className="login-modal-close" onClick={handleLoginModal} />
         </div>
-        <form className="login-form" onSubmit={handleSubmitLogin}>
+        <form className="login-form" onSubmit={login}>
           <label htmlFor="email">
             <input
               type="text"
