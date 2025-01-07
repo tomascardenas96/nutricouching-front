@@ -27,15 +27,7 @@ function ScheduleProfessionalForm({
 
       <fieldset className="professional-business-days">
         <legend>Seleccionar días hábiles:</legend>
-        {[
-          "monday",
-          "tuesday",
-          "wednesday",
-          "thursday",
-          "friday",
-          "saturday",
-          "sunday",
-        ].map((day, idx) => (
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, idx) => (
           <label key={day} className="week-days_tags">
             <input
               type="checkbox"
@@ -105,27 +97,21 @@ function ScheduleProfessionalForm({
               {schedule.day.map((day, i) => (
                 <span key={`${day}-${i}`} className="selected-day">
                   {spanishDays[
-                    [
-                      "monday",
-                      "tuesday",
-                      "wednesday",
-                      "thursday",
-                      "friday",
-                      "saturday",
-                      "sunday",
-                    ].indexOf(day)
+                    ["Mon", "Tue", "Wed", "Thu", "Fri", "Satu", "Sun"].indexOf(
+                      day
+                    )
                   ]
                     .charAt(0)
                     .toUpperCase() +
                     spanishDays[
                       [
-                        "monday",
-                        "tuesday",
-                        "wednesday",
-                        "thursday",
-                        "friday",
-                        "saturday",
-                        "sunday",
+                        "Mon",
+                        "Tue",
+                        "Wed",
+                        "Thu",
+                        "Fri",
+                        "Satu",
+                        "Sun",
                       ].indexOf(day)
                     ].slice(1)}
                 </span>

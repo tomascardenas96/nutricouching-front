@@ -8,7 +8,7 @@ function useGetProfessionalsByService(serviceId) {
     const getProfessionalsByService = async () => {
       try {
         const response = await fetch(
-          `${HOST}/professional/service?id=${serviceId}`,
+          `${HOST}/professional/service/${serviceId}`,
           {
             method: "GET",
             headers: {
