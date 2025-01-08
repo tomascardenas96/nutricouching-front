@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { HOST } from "../api/data";
 
-function useGetProfessionalSchedule() {
-  const [selectedProfessional, setSelectedProfessional] = useState(null);
+function useGetProfessionalSchedule(selectedProfessional) {
   const [selectedTime, setSelectedTime] = useState(null);
   const [professionalSchedule, setProfessionalSchedule] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -11,20 +10,22 @@ function useGetProfessionalSchedule() {
   useEffect(() => {
     const getProfessionalSchedule = async () => {
       try {
-        const response = await fetch(
-          `${HOST}/availability?professional=${selectedProfessional}&date=${selectedDate}`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+        if (selectedProfessional && selectedDate) {
+          const response = await fetch(
+            `${HOST}/availability?professional=${selectedProfessional}&date=${selectedDate}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.message);
           }
-        );
-        const data = await response.json();
 
-        if (data.error) {
-          throw new Error(data.message);
+          setProfessionalSchedule(data);
         }
-
-        setProfessionalSchedule(data);
       } catch (error) {
         console.error(error);
       }
@@ -37,9 +38,7 @@ function useGetProfessionalSchedule() {
 
   return {
     professionalSchedule,
-    setSelectedProfessional,
     setSelectedDate,
-    selectedProfessional,
     selectedDate,
     setSelectedTime,
     selectedTime,

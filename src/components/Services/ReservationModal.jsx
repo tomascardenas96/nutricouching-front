@@ -1,8 +1,10 @@
 import { IoIosTime } from "react-icons/io";
 import { useUser } from "../../context/UserProvider";
 import useBookAppointment from "../../hooks/useBookAppointment";
+import useGetAllSpecialtiesByService from "../../hooks/useGetAllSpecialtiesByService";
 import useGetProfessionalSchedule from "../../hooks/useGetProfessionalSchedule";
 import useGetProfessionalsByService from "../../hooks/useGetProfessionalsByService";
+import useGetProfessionalsBySpecialty from "../../hooks/useGetProfessionalsBySpecialty";
 import "./ReservationModal.css";
 
 function ReservationModal({
@@ -11,19 +13,38 @@ function ReservationModal({
   setIsRequestReservationOpen,
 }) {
   const { user } = useUser();
+  const {
+    specialties,
+    specialtiesError,
+    specialtiesLoading,
+    selectedSpecialty,
+    setSelectedSpecialty,
+  } = useGetAllSpecialtiesByService(selectedService);
+
+  const {
+    professionalsBySpecialty,
+    professionalsBySpecialtyError,
+    professionalsBySpecialtyLoading,
+    setSelectedProfessional,
+    selectedProfessional,
+  } = useGetProfessionalsBySpecialty(selectedSpecialty);
 
   const {
     professionalSchedule,
-    setSelectedProfessional,
     setSelectedDate,
-    selectedProfessional,
     selectedDate,
     setSelectedTime,
     selectedTime,
-  } = useGetProfessionalSchedule();
+  } = useGetProfessionalSchedule(selectedProfessional);
 
   const { handleSubmitBookAppointment } = useBookAppointment(
-    setIsRequestReservationOpen
+    setIsRequestReservationOpen,
+    selectedDate,
+    selectedTime,
+    selectedService.serviceId,
+    user.userId,
+    selectedProfessional,
+    selectedSpecialty
   );
 
   const { professionalsByService } = useGetProfessionalsByService(
@@ -42,26 +63,30 @@ function ReservationModal({
         </div>
 
         <div className="reservation_body">
-          <form
-            onSubmit={(e) =>
-              handleSubmitBookAppointment(
-                e,
-                selectedDate,
-                selectedTime,
-                selectedService.serviceId,
-                user.userId,
-                selectedProfessional
-              )
-            }
-          >
+          <form onSubmit={handleSubmitBookAppointment}>
+            <label htmlFor="specialty">
+              Indique una especialidad
+              <select onChange={(e) => setSelectedSpecialty(e.target.value)}>
+                <option value="">Indique una especialidad</option>
+                {specialties?.map((specialty) => (
+                  <option
+                    key={`specialty-${specialty.specialtyId}`}
+                    value={specialty.specialtyId}
+                  >
+                    {specialty.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
             <label htmlFor="professional">
-              Seleccione un profesional:
+              Seleccione un profesional
               <select
                 id="professional"
                 onChange={(e) => setSelectedProfessional(e.target.value)}
               >
                 <option value="">Seleccione un profesional</option>
-                {professionalsByService?.map((professional) => (
+                {professionalsBySpecialty?.map((professional) => (
                   <option
                     key={professional.professionalId}
                     value={professional.professionalId}

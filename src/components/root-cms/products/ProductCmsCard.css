@@ -30,6 +30,10 @@
     text-transform: capitalize;
     font-weight: 500;
     font-size: 0.75rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   & .product-other {

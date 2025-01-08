@@ -2,22 +2,37 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "sonner";
 import { HOST } from "../api/data";
 
-function useBookAppointment(setIsRequestReservationOpen) {
+function useBookAppointment(
+  setIsRequestReservationOpen,
+  date,
+  time,
+  serviceId,
+  userId,
+  professionalId,
+  specialtyId
+) {
   const token = localStorage.getItem("authToken");
 
-  const handleSubmitBookAppointment = async (
-    e,
-    date,
-    time,
-    serviceId,
-    userId,
-    professionalId
-  ) => {
+  const handleSubmitBookAppointment = async (e) => {
     e.preventDefault();
 
     const bookAppointment = async () => {
-      if (date && time && serviceId && userId && professionalId) {
-        const createBooking = { date, time, serviceId, userId, professionalId };
+      if (
+        date &&
+        time &&
+        serviceId &&
+        userId &&
+        professionalId &&
+        specialtyId
+      ) {
+        const createBooking = {
+          specialtyId,
+          date,
+          time,
+          serviceId,
+          userId,
+          professionalId,
+        };
         try {
           const response = await fetch(`${HOST}/booking/create`, {
             method: "POST",
