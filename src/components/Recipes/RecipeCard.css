@@ -1,9 +1,9 @@
 .carousel {
   display: grid;
   grid-template-columns: 50% 50%;
-  gap: 1em;
+  gap: 2em;
   justify-self: center;
-  width: 65em;  
+  width: 65em;
 
   & .recipe-card_text {
     display: grid;
@@ -76,7 +76,7 @@
     font-size: 0.9em;
     font-family: var(--primary-font);
     text-align: justify;
-    line-height: 2.2em;
+    line-height: 2em;
     color: #90323d;
   }
 }

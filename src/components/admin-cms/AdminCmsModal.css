@@ -1,0 +1,88 @@
+.admin-cms-modal_container {
+  z-index: 2100;
+  width: 100%;
+  height: 100svh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.admin-cms-modal {
+  background-color: #f2f2f2;
+  box-shadow: -1px 0px 10px 5px rgba(0, 0, 0, 0.055);
+  width: 25rem;
+  height: 98svh;
+  border-radius: 1rem 0 0 1rem;
+}
+
+.admin-cms-modal {
+  padding: 1.7rem 0 0.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  & .title-professional-modal {
+    font-family: var(--presentation-banner-font);
+    color: rgba(0, 0, 0, 0.63);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem;
+
+    & .title-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    & h1 {
+      font-weight: 500;
+      padding-left: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    & .user-circle,
+    .close-icon {
+      font-size: 1.1rem;
+    }
+
+    & .close-icon {
+      cursor: pointer;
+    }
+  }
+
+  & .body-professional-modal {
+    background-color: white;
+    width: 98%;
+    border-radius: 0.5rem 0 0 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.108);
+    display: grid;
+    grid-template-rows: 2.6rem 1fr;
+    padding: 0 0.9rem;
+
+    & div.table-header {
+      display: flex;
+      padding-left: 0.4rem;
+      align-items: center;
+      gap: 0.3rem;
+
+      & p {
+        font-family: var(--presentation-banner-font);
+        font-size: 0.8rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 0.2rem;
+        cursor: pointer;
+      }
+
+      & p.selectedOption {
+        background-color: #603dc123;
+        color: #613dc1;
+      }
+    }
+  }
+}

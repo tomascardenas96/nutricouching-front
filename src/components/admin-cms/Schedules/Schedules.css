@@ -1,0 +1,16 @@
+.professional-schedules_container {
+  & .add-new-schedule {
+    height: 4rem;
+    margin-top: 1.5rem;
+    display: grid;
+    place-content: center;
+    border-top: 1.5px solid #603dc1c7;
+    color: #603dc1c7;
+    font-family: var(--services-modal-header);
+    cursor: pointer;
+
+    & h1 {
+      font-weight: 400;
+    }
+  }
+}

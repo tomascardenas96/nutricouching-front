@@ -1,0 +1,29 @@
+.previous-shift-user-card {
+  height: 3rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.261);
+  padding: 0 0.5rem;
+  color: rgba(0, 0, 0, 0.708);
+
+  & .left {
+    display: flex;
+    height: 1.1rem;
+    justify-content: space-between;
+
+    & p {
+      height: 100%;
+    }
+  }
+
+  & .right {
+    display: flex;
+    height: 1.5rem;
+    align-items: start;
+    justify-content: space-between;
+
+    & p {
+      height: 100%;
+      display: flex;
+      align-items: start;
+    }
+  }
+}

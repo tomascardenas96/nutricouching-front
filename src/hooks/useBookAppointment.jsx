@@ -9,7 +9,9 @@ function useBookAppointment(
   serviceId,
   userId,
   professionalId,
-  specialtyId
+  specialtyId,
+  professionalSchedule,
+  setEndTime
 ) {
   const token = localStorage.getItem("authToken");
 
@@ -25,10 +27,16 @@ function useBookAppointment(
         professionalId &&
         specialtyId
       ) {
+        const filteredDate = professionalSchedule.find(
+          (d) => d.startTime === time
+        );
+
         const createBooking = {
           specialtyId,
           date,
-          time,
+          startTime: time,
+          endTime: filteredDate.endTime,
+          interval: filteredDate.interval,
           serviceId,
           userId,
           professionalId,
@@ -43,11 +51,12 @@ function useBookAppointment(
             body: JSON.stringify(createBooking),
           });
 
-          if (!response.ok) {
+          const data = await response.json();
+
+          if (data.error) {
+            console.error(data);
             throw new Error(data.message || "Error en el servidor");
           }
-
-          const data = await response.json();
 
           return data;
         } catch (error) {

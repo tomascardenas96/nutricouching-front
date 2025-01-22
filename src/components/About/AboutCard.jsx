@@ -15,11 +15,15 @@ function AboutCard({ image, name, role }) {
         />
       </div>
       <div className="about-card_description">
-        <h1>{name}</h1>
-        <div className="social-networks">
-          <FaFacebookF />
-          <FaYoutube />
-          <FaInstagram />
+        <div className="about-card_info">
+          <div className="name-social">
+            <h1>{name}</h1>
+            <div className="social-networks">
+              <FaFacebookF />
+              <FaYoutube />
+              <FaInstagram />
+            </div>
+          </div>
         </div>
       </div>
     </div>

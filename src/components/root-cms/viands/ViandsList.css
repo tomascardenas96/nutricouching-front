@@ -13,7 +13,7 @@
     position: relative;
 
     & input {
-      width: 15rem;
+      width: 100%;
       border-radius: 0.3rem;
       border: 1px solid rgba(0, 0, 0, 0.491);
       padding: 0 0.7rem;
@@ -24,8 +24,8 @@
 
     & .viands_search-filter_icon {
       position: absolute;
-      left: 13.5rem;
       top: 0.35rem;
+      right: 0.6rem;
     }
   }
 }

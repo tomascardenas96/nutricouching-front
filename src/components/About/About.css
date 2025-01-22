@@ -1,9 +1,8 @@
 .about {
   width: 100%;
-  height: 80%;
   display: grid;
   grid-template-rows: max-content 1fr;
-  gap: 1.7rem;
+  gap: 2rem;
 }
 
 .about-header {
@@ -25,15 +24,29 @@
   justify-content: center;
 
   & .cards-container {
-    width: 90rem;
-    height: 33rem;
-    background-color: #ebebeb;
-    position: relative;
-    z-index: 2;
-    border-radius: 0.2rem;
+    width: 82.8125rem;
     display: flex;
-    margin-bottom: 3rem;
-    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 2.5rem;
+    margin-bottom: 5rem;
+    gap: 4rem;
+    padding-bottom: 2rem;
+    /* Estilo de la barra de scroll */
+    &::-webkit-scrollbar {
+      height: 3px; /* Altura de la barra horizontal */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #00000051, rgba(0, 0, 0, 0.372));
+      border-radius: 4px; /* Esquinas redondeadas */
+      border: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgba(200, 200, 200, 0.3); /* Color del fondo */
+      border-radius: 4px; /* Esquinas redondeadas */
+    }
   }
 }
 

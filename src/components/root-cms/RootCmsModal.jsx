@@ -76,7 +76,7 @@ function RootCmsModal({ handleCmsModal }) {
                 Viandas
               </li>
             </ul>
-            
+
             {/* Dependiendo de la opcion seleccionada, sera el modal que se abrirá  */}
             {selectedOption === "products" ? (
               <ProductsCmsList />

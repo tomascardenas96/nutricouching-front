@@ -21,7 +21,7 @@ main {
   position: fixed;
   top: 8%;
   right: 0;
-  width: 2.5rem;
+  width: 2rem;
   height: 4rem;
   z-index: 2000;
   border-radius: 1rem 0 0 1rem;
@@ -30,8 +30,8 @@ main {
   cursor: pointer;
   display: grid;
   place-content: center;
-  font-size: 1.1rem;
-  color: rgba(0, 0, 0, 0.418);
+  font-size: 1rem;
+  color: #cc3f0c;
   transition: all 0.3s ease;
 }
 
@@ -39,6 +39,37 @@ main {
   font-size: 1.2rem;
   background-color: #fbfbfb;
   transform: scale(1.1);
+}
+
+.admin-cms-flap_container {
+  width: 2rem;
+  height: 10rem;
+  background-color: white;
+  position: fixed;
+  right: 0;
+  top: 16%;
+  cursor: pointer;
+  border-radius: 1rem 0 0 1rem;
+  background-color: #fbfbfb;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.055);
+
+  & p {
+    position: fixed;
+    right: 0;
+    top: 16%;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    width: 1.7rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--header-user-font);
+    font-size: 0.7rem;
+    letter-spacing: 0.33rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.641);
+  }
 }
 
 .presentation_container {
@@ -84,8 +115,6 @@ main {
 }
 
 .about-us_container {
-  height: 70svh;
-  min-height: 42.9rem;
 }
 
 .footer_container {

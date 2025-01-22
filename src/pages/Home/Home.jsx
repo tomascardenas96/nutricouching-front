@@ -9,6 +9,8 @@ import Presentation from "../../components/Presentation/Presentation";
 import Products from "../../components/Products/Products";
 import Carousel from "../../components/Recipes/Carousel";
 import Services from "../../components/Services/Services";
+import AdminCmsModal from "../../components/admin-cms/AdminCmsModal";
+import NotificationPopUp from "../../components/notifications/NotificationPopUp";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import ElementsInCartProvider from "../../context/ElementsInCartProvider";
 import { useUser } from "../../context/UserProvider";
@@ -17,6 +19,7 @@ import "./Home.css";
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
 
   // Productos y viandas agregadas al carrito desde el local storage.
   const [productsInCart, setProductsInCart] = useState([]);
@@ -25,10 +28,17 @@ function Home() {
   // Custom hooks
   const { user } = useUser();
 
+  // Abrir / cerrar modal ROOT
   const handleCmsModal = () => {
     setIsCmsModalOpen(!isCmsModalOpen);
   };
 
+  // Abrir / cerrar modal ADMIN
+  const handleAdminCmsModal = () => {
+    setIsAdminCmsOpen(!isAdminCmsOpen);
+  };
+
+  // Abrir / cerrar modal carrito
   const handleCartModal = () => {
     setIsCartModalOpen(!isCartModalOpen);
   };
@@ -107,6 +117,23 @@ function Home() {
           {isCmsModalOpen && <RootCmsModal handleCmsModal={handleCmsModal} />}
         </>
       )}
+
+      {(user?.professional?.role === "root" ||
+        user?.professional?.role === "admin") && (
+        <section className="admin-cms-flap_container">
+          <p onClick={handleAdminCmsModal}>ADMIN</p>
+        </section>
+      )}
+
+      {isAdminCmsOpen &&
+        createPortal(
+          <AdminCmsModal handleAdminCmsModal={handleAdminCmsModal} />,
+          document.body
+        )}
+
+      {user &&
+        !user?.professional &&
+        createPortal(<NotificationPopUp />, document.body)}
     </main>
   );
 }

@@ -35,6 +35,8 @@ function ReservationModal({
     selectedDate,
     setSelectedTime,
     selectedTime,
+    endTime,
+    setEndTime,
   } = useGetProfessionalSchedule(selectedProfessional);
 
   const { handleSubmitBookAppointment } = useBookAppointment(
@@ -44,7 +46,9 @@ function ReservationModal({
     selectedService.serviceId,
     user.userId,
     selectedProfessional,
-    selectedSpecialty
+    selectedSpecialty,
+    professionalSchedule,
+    setEndTime
   );
 
   const { professionalsByService } = useGetProfessionalsByService(

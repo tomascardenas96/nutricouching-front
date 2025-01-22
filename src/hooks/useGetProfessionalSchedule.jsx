@@ -4,6 +4,7 @@ import { HOST } from "../api/data";
 
 function useGetProfessionalSchedule(selectedProfessional) {
   const [selectedTime, setSelectedTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
   const [professionalSchedule, setProfessionalSchedule] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -42,6 +43,8 @@ function useGetProfessionalSchedule(selectedProfessional) {
     selectedDate,
     setSelectedTime,
     selectedTime,
+    endTime,
+    setEndTime,
   };
 }
 
