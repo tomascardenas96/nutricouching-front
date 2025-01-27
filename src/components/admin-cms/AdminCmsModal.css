@@ -63,7 +63,7 @@
     border: 1px solid rgba(0, 0, 0, 0.108);
     display: grid;
     grid-template-rows: 2.6rem 1fr;
-    padding: 0 0.9rem;
+    padding: 0.3rem 0.9rem 0;
 
     & div.table-header {
       display: flex;
