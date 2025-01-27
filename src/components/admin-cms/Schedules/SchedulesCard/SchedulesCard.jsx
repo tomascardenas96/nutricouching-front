@@ -2,7 +2,8 @@ import "./SchedulesCard.css";
 
 import React from "react";
 
-function SchedulesCard({ from, to, interval }) {
+function SchedulesCard({ from, to, interval, schedule }) {
+  console.log(schedule);
   return (
     <div className="schedules-card_container">
       <div className="left">
@@ -12,7 +13,7 @@ function SchedulesCard({ from, to, interval }) {
 
       <div className="right">
         <p>Hasta: {to}hs</p>
-        <button>Cancelar Turno</button>
+        <button>Eliminar Horario</button>
       </div>
     </div>
   );
