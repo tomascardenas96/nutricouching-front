@@ -19,12 +19,12 @@ main {
 
 .cms-flap_container {
   position: fixed;
-  top: 8%;
+  top: 21.8%;
   right: 0;
   width: 2rem;
   height: 4rem;
   z-index: 2000;
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 0.5rem 0 0 0.5rem;
   background-color: #fbfbfb;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.055);
   cursor: pointer;
@@ -43,32 +43,33 @@ main {
 
 .admin-cms-flap_container {
   width: 2rem;
-  height: 10rem;
+  height: 8rem;
   background-color: white;
   position: fixed;
   right: 0;
-  top: 16%;
+  top: 8%;
   cursor: pointer;
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 0.5rem 0 0 0.5rem;
   background-color: #fbfbfb;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.055);
 
   & p {
     position: fixed;
     right: 0;
-    top: 16%;
+    top: 8%;
     writing-mode: vertical-rl;
     text-orientation: upright;
     width: 1.7rem;
-    height: 10rem;
+    height: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: var(--header-user-font);
     font-size: 0.7rem;
-    letter-spacing: 0.33rem;
+    letter-spacing: 0.15rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.641);
+    padding-right: 0.15rem;
   }
 }
 

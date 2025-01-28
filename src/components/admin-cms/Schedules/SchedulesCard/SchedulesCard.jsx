@@ -3,7 +3,6 @@ import "./SchedulesCard.css";
 import React from "react";
 
 function SchedulesCard({ from, to, interval, schedule }) {
-  console.log(schedule);
   return (
     <div className="schedules-card_container">
       <div className="left">

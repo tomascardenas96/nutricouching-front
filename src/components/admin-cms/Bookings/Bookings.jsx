@@ -27,6 +27,13 @@ function Bookings() {
     return dateObj < today;
   };
 
+  // Ordenar los horarios por hora de inicio.
+  const orderBookings = (events) => {
+    return events.sort((a, b) => {
+      return a.startTime.localeCompare(b.startTime);
+    });
+  };
+
   return (
     <section className="professional-bookings_container">
       {/* Pasamos el objeto bookings a un array para verificar si tiene un length (si existe al menos un turno reservado) */}
@@ -37,7 +44,7 @@ function Bookings() {
               <>
                 <BookingsHeader date={date} />
                 <div className="bookings-list">
-                  {events.map((event) => (
+                  {orderBookings(events).map((event) => (
                     <BookingsCard
                       key={date + event.startTime}
                       name={event.user.name + " " + event.user.lastname}

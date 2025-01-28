@@ -2,9 +2,9 @@
   display: flex;
   align-items: start;
   justify-content: space-between;
-  color: #603dc1c7;
+  color: #603dc193;
   font-family: var(--services-modal-header);
-  border-bottom: 1.5px solid #603dc1c7;
+  border-bottom: 1.5px solid #603dc193;
   height: 2rem;
   margin: 0 0.5rem;
 

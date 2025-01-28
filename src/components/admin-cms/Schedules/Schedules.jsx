@@ -25,21 +25,45 @@ function Schedules() {
     return weekDays[`${day}`];
   };
 
+  // Ordenar los horarios por hora de inicio.
+  const orderSchedules = (events) => {
+    return events.sort((a, b) => {
+      return a.startTime.localeCompare(b.startTime);
+    });
+  };
+
   return (
     <section className="professional-schedules_container">
-      {Object.entries(availabilities).map(([day, sched]) => (
-        <>
+      {
+        // Si hay un error al obtener los horarios, mostrar mensaje de error.
+        availabilitiesError && (
+          <p className="error-message">
+            Ocurrió un error al obtener los horarios.
+          </p>
+        )
+      }
+      {
+        // Si no hay horarios, mostrar mensaje de que no hay horarios.
+        !availabilitiesLoading && !Object.entries(availabilities).length && (
+          <p className="no-schedules">No hay horarios disponibles.</p>
+        )
+      }
+
+      {/* Recorrer los horarios y mostrarlos en tarjetas. */}
+      {Object.entries(availabilities).map(([day, sched], idx) => (
+        <div key={day}>
           <SchedulesHeader date={getDay(day)} />
           <div className="bookings-list">
-            {sched.map((schedule) => (
+            {orderSchedules(sched).map((schedule) => (
               <SchedulesCard
+                key={schedule.availabilityId}
                 from={schedule?.startTime}
                 to={schedule?.endTime}
                 interval={schedule?.interval}
               />
             ))}
           </div>
-        </>
+        </div>
       ))}
 
       <div className="add-new-schedule">

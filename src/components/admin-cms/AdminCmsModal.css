@@ -15,7 +15,7 @@
   box-shadow: -1px 0px 10px 5px rgba(0, 0, 0, 0.055);
   width: 25rem;
   height: 98svh;
-  border-radius: 1rem 0 0 1rem;
+  border-radius: .2rem;
 }
 
 .admin-cms-modal {
