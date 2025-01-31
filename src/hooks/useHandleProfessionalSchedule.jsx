@@ -38,12 +38,23 @@ function useHandleProfessionalSchedule() {
     }));
   };
 
+  const spanishDays = [
+    "lunes",
+    "martes",
+    "miércoles",
+    "jueves",
+    "viernes",
+    "sábado",
+    "domingo",
+  ];
+
   return {
     selectedSchedules,
     currentSchedule,
     addNewSchedule,
     handleChangeTimeRange,
     handleChangeDaysSchedule,
+    spanishDays,
   };
 }
 

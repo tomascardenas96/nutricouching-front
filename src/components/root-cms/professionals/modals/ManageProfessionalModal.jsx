@@ -65,6 +65,7 @@ function ManageProfessionalModal({
     handleChangeDaysSchedule,
     handleChangeTimeRange,
     selectedSchedules,
+    spanishDays,
   } = useHandleProfessionalSchedule();
 
   const { handleSubmitCreateProfessional } = useCreateProfessional(
@@ -144,6 +145,7 @@ function ManageProfessionalModal({
               currentSchedule={currentSchedule}
               selectedSchedules={selectedSchedules}
               addNewSchedule={addNewSchedule}
+              spanishDays={spanishDays}
             />
           </div>
         </div>

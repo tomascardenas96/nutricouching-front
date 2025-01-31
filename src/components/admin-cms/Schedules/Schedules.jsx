@@ -1,14 +1,25 @@
+import { createPortal } from "react-dom";
 import { useUser } from "../../../context/UserProvider";
 import useGetAvailabilitiesByProfessional from "../../../hooks/useGetAvailabilitiesByProfessional";
+import AddScheduleModal from "./AddScheduleModal/AddScheduleModal";
 import "./Schedules.css";
 import SchedulesCard from "./SchedulesCard/SchedulesCard";
 import SchedulesHeader from "./SchedulesHeader/SchedulesHeader";
+import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
+import { useState } from "react";
 
 function Schedules() {
+  const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState(false);
   const { user } = useUser();
 
-  const { availabilities, availabilitiesError, availabilitiesLoading } =
-    useGetAvailabilitiesByProfessional(user.professional.professionalId);
+  const {
+    availabilities,
+    availabilitiesError,
+    availabilitiesLoading,
+    setAvailabilities,
+  } = useGetAvailabilitiesByProfessional(user.professional.professionalId);
+
+  const { handleDeleteTimeSlot } = useDeleteTimeSlot(setAvailabilities);
 
   // Obtener el dia de la semana en Español.
   const getDay = (day) => {
@@ -50,9 +61,10 @@ function Schedules() {
       }
 
       {/* Recorrer los horarios y mostrarlos en tarjetas. */}
-      {Object.entries(availabilities).map(([day, sched], idx) => (
+      {Object.entries(availabilities).map(([day, sched]) => (
         <div key={day}>
-          <SchedulesHeader date={getDay(day)} />
+          {sched.length > 0 && <SchedulesHeader date={getDay(day)} />}
+
           <div className="bookings-list">
             {orderSchedules(sched).map((schedule) => (
               <SchedulesCard
@@ -60,15 +72,29 @@ function Schedules() {
                 from={schedule?.startTime}
                 to={schedule?.endTime}
                 interval={schedule?.interval}
+                schedule={schedule}
+                handleDeleteTimeSlot={handleDeleteTimeSlot}
+                day={day}
               />
             ))}
           </div>
         </div>
       ))}
 
-      <div className="add-new-schedule">
+      <div
+        className="add-new-schedule"
+        onClick={() => setIsAddScheduleModalOpen(true)}
+      >
         <h1>+ Agregar nuevo horario</h1>
       </div>
+
+      {isAddScheduleModalOpen &&
+        createPortal(
+          <AddScheduleModal
+            setIsAddScheduleModalOpen={setIsAddScheduleModalOpen}
+          />,
+          document.body
+        )}
     </section>
   );
 }

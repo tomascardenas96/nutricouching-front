@@ -1,14 +1,28 @@
+import { useState } from "react";
 import { useUser } from "../../../context/UserProvider";
+import useCancelBooking from "../../../hooks/useCancelBooking";
 import useGetBookingsByProfessional from "../../../hooks/useGetBookingsByProfessional";
 import "./Bookings.css";
 import BookingsCard from "./BookingsCard/BookingsCard";
 import BookingsHeader from "./BookingsHeader/BookingsHeader";
+import { createPortal } from "react-dom";
+import ConfirmationModal from "../../Common/ConfirmationModal";
 
 function Bookings() {
+  const [isConfirmationDeleteBookingOpen, setIsConfirmationDeleteBookingOpen] =
+    useState(false);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
+  const handleOpenConfirmationDeleteBooking = () => {
+    setIsConfirmationDeleteBookingOpen(!isConfirmationDeleteBookingOpen);
+  };
+
   const { user } = useUser();
 
-  const { bookings, errorBookings, loadingBookings } =
+  const { bookings, setBookings, errorBookings, loadingBookings } =
     useGetBookingsByProfessional(user.professional.professionalId);
+
+  const { handleCancelBooking } = useCancelBooking(setBookings);
 
   // Función para recortar la hora de los turnos de 8:00:00 a 8:00 (solo la hora y minutos).
   const shortTime = (time) => {
@@ -51,7 +65,15 @@ function Bookings() {
                       specialty={event.specialtyId}
                       startTimetable={shortTime(event.startTime)}
                       endTimetable={shortTime(event.endTime)}
-                      event={event}
+                      id={event.bookingId}
+                      handleCancelBooking={handleCancelBooking}
+                      isConfirmationDeleteBookingOpen={
+                        isConfirmationDeleteBookingOpen
+                      }
+                      handleOpenConfirmationDeleteBooking={
+                        handleOpenConfirmationDeleteBooking
+                      }
+                      setSelectedBookingId={setSelectedBookingId}
                     />
                   ))}
                 </div>
@@ -62,6 +84,15 @@ function Bookings() {
       ) : (
         <p className="no-bookings-paragraph">No hay turnos realizados.</p>
       )}
+      {isConfirmationDeleteBookingOpen &&
+        createPortal(
+          <ConfirmationModal
+            message="Seguro que desea cancelar este turno?"
+            onClose={handleOpenConfirmationDeleteBooking}
+            onConfirm={() => handleCancelBooking(selectedBookingId)}
+          />,
+          document.body
+        )}
     </section>
   );
 }

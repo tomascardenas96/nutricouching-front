@@ -7,17 +7,8 @@ function ScheduleProfessionalForm({
   currentSchedule,
   addNewSchedule,
   selectedSchedules,
+  spanishDays,
 }) {
-  const spanishDays = [
-    "lunes",
-    "martes",
-    "miércoles",
-    "jueves",
-    "viernes",
-    "sábado",
-    "domingo",
-  ];
-
   return (
     <>
       <h1 className="manage-professional-modal_section-title">

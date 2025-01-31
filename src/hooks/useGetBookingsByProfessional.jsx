@@ -36,7 +36,7 @@ function useGetBookingsByProfessional(professionalId) {
     getBookings();
   }, []);
 
-  return { bookings, loadingBookings, errorBookings };
+  return { bookings, setBookings, loadingBookings, errorBookings };
 }
 
 export default useGetBookingsByProfessional;

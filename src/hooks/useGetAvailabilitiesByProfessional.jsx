@@ -32,7 +32,12 @@ function useGetAvailabilitiesByProfessional(professionalId) {
     getAvailabilities();
   }, [professionalId]);
 
-  return { availabilities, availabilitiesLoading, availabilitiesError };
+  return {
+    availabilities,
+    availabilitiesLoading,
+    availabilitiesError,
+    setAvailabilities,
+  };
 }
 
 export default useGetAvailabilitiesByProfessional;
