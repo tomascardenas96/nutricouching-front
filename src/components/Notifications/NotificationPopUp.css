@@ -13,7 +13,7 @@
   background: linear-gradient(#ff6e6e, #ff5b5b);
   box-shadow: -1px 1px 5px 5px rgba(0, 0, 0, 0.055);
   cursor: pointer;
-  z-index: 1500;
+  z-index: 1600;
 
   & div {
     display: flex;

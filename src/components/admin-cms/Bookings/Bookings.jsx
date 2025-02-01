@@ -11,14 +11,19 @@ import ConfirmationModal from "../../Common/ConfirmationModal";
 function Bookings() {
   const [isConfirmationDeleteBookingOpen, setIsConfirmationDeleteBookingOpen] =
     useState(false);
+
+  // ID del turno seleccionado para ser eliminado.
   const [selectedBookingId, setSelectedBookingId] = useState(null);
 
+  // Abrir/cerrar modal de confirmacion.
   const handleOpenConfirmationDeleteBooking = () => {
     setIsConfirmationDeleteBookingOpen(!isConfirmationDeleteBookingOpen);
   };
 
+  // Usuario logueado.
   const { user } = useUser();
 
+  // Reservaciones del profesional logueado.
   const { bookings, setBookings, errorBookings, loadingBookings } =
     useGetBookingsByProfessional(user.professional.professionalId);
 
@@ -84,12 +89,17 @@ function Bookings() {
       ) : (
         <p className="no-bookings-paragraph">No hay turnos realizados.</p>
       )}
+
       {isConfirmationDeleteBookingOpen &&
         createPortal(
           <ConfirmationModal
             message="Seguro que desea cancelar este turno?"
             onClose={handleOpenConfirmationDeleteBooking}
-            onConfirm={() => handleCancelBooking(selectedBookingId)}
+            onConfirm={() =>
+              handleCancelBooking(selectedBookingId).then(
+                handleOpenConfirmationDeleteBooking()
+              )
+            }
           />,
           document.body
         )}

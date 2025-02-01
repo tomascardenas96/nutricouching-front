@@ -4,10 +4,32 @@ import { GrSchedule } from "react-icons/gr";
 import { MdHistory } from "react-icons/md";
 import BookingsCard from "../admin-cms/Bookings/BookingsCard/BookingsCard";
 import BookingsHeader from "../admin-cms/Bookings/BookingsHeader/BookingsHeader";
-import React from "react";
+import React, { useState } from "react";
 import PreviousShiftUserCard from "./PreviousShiftUserCard";
+import useGetBookingsByUser from "../../hooks/useGetBookingsByUser";
+import ConfirmationModal from "../Common/ConfirmationModal";
+import { createPortal } from "react-dom";
+import useCancelBooking from "../../hooks/useCancelBooking";
 
 function UserBookingsModal({ closeModal }) {
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+  const [isConfirmationDeleteBookingOpen, setIsConfirmationDeleteBookingOpen] =
+    useState(false);
+
+  const {
+    setBookingsOfUser,
+    bookingsOfUserLoading,
+    bookingsOfUserError,
+    previousBookings,
+    nextBookings,
+  } = useGetBookingsByUser();
+
+  const { handleCancelBooking } = useCancelBooking(setBookingsOfUser);
+
+  const handleOpenConfirmationDeleteBooking = () => {
+    setIsConfirmationDeleteBookingOpen(!isConfirmationDeleteBookingOpen);
+  };
+
   return (
     <div className="user-notifications-modal_container" onClick={closeModal}>
       <section
@@ -21,27 +43,30 @@ function UserBookingsModal({ closeModal }) {
           <IoMdClose className="close-icon" onClick={closeModal} />
         </div>
         <div className="pending-shifts_container">
-          {true ? (
+          {Object.entries(nextBookings).length ? (
             <>
-              <BookingsHeader date="Lunes 23 de Enero" />
-              <BookingsCard
-                name="Natasha Dirialdi"
-                specialty="Coach Ontologico"
-                timetable="09:00hs - 09:30hs"
-              />
-              <BookingsCard
-                name="Natasha Dirialdi"
-                specialty="Coach Ontologico"
-                timetable="09:00hs - 09:30hs"
-              />
-
-              <BookingsHeader date="Miercoles 25 de Enero" />
-
-              <BookingsCard
-                name="Natasha Dirialdi"
-                specialty="Coach Ontologico"
-                timetable="09:00hs - 09:30hs"
-              />
+              {Object.entries(nextBookings).map(([date, bookings]) => (
+                <>
+                  <BookingsHeader date={date} />
+                  {bookings.map((booking) => (
+                    <BookingsCard
+                      name={booking.professional.fullname}
+                      specialty={booking.specialtyId}
+                      startTimetable={booking.startTime}
+                      endTimetable={booking.endTime}
+                      setSelectedBookingId={setSelectedBookingId}
+                      isConfirmationDeleteBookingOpen={
+                        isConfirmationDeleteBookingOpen
+                      }
+                      handleOpenConfirmationDeleteBooking={
+                        handleOpenConfirmationDeleteBooking
+                      }
+                      handleCancelBooking={handleCancelBooking}
+                      id={booking.bookingId}
+                    />
+                  ))}
+                </>
+              ))}
             </>
           ) : (
             <p className="no-pending-bookings">No hay turnos pendientes.</p>
@@ -54,32 +79,42 @@ function UserBookingsModal({ closeModal }) {
           </h1>
         </div>
         <div className="previous-shifts_container">
-          {false ? (
+          {Object.entries(previousBookings).length ? (
             <>
-              <PreviousShiftUserCard
-                name="Micaela Aguilar"
-                date="25/12/24"
-                specialty="Coach Ontologico"
-                timetable="14:00hs - 14:30hs"
-              />
-              <PreviousShiftUserCard
-                name="Lorena Arlan"
-                date="21/12/24"
-                specialty="Coach Deportivo"
-                timetable="17:00hs - 17:30hs"
-              />
-              <PreviousShiftUserCard
-                name="Joaquin Cardenas"
-                date="19/12/24"
-                specialty="Coach Ejecutivo"
-                timetable="10:00hs - 10:30hs"
-              />
+              {Object.entries(previousBookings).map(([date, bookings]) =>
+                bookings.map((booking) => (
+                  <>
+                    <PreviousShiftUserCard
+                      name={booking.professional.fullname}
+                      date={date}
+                      specialty={booking.specialtyId}
+                      startTimetable={booking.startTime}
+                      endTimetable={booking.endTime}
+                      booking={booking}
+                    />
+                  </>
+                ))
+              )}
             </>
           ) : (
             <p className="no-previous-shifts">No hay turnos anteriores.</p>
           )}
         </div>
       </section>
+
+      {isConfirmationDeleteBookingOpen &&
+        createPortal(
+          <ConfirmationModal
+            message="Seguro que desea cancelar este turno?"
+            onClose={handleOpenConfirmationDeleteBooking}
+            onConfirm={() =>
+              handleCancelBooking(selectedBookingId).then(
+                handleOpenConfirmationDeleteBooking()
+              )
+            }
+          />,
+          document.body
+        )}
     </div>
   );
 }

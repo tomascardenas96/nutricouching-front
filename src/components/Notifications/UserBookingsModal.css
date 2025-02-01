@@ -12,9 +12,9 @@
   width: 29rem;
   background-color: #f2f2f2;
   position: fixed;
-  right: 4rem;
+  right: 6rem;
   bottom: 7.5rem;
-  border-radius: 1rem 1rem 0 1rem;
+  border-radius: .2rem;
   box-shadow: -1px 1px 5px 5px rgba(0, 0, 0, 0.052);
   font-family: var(--services-modal-header);
   padding: 0.7rem 1rem 1.5rem 1rem;
@@ -69,7 +69,7 @@
 .pending-shifts_container,
 .previous-shifts_container {
   min-height: 5rem;
-  max-height: 9.2rem;
+  max-width: 32.0625rem;
   display: grid;
   background-color: white;
   border-radius: 0.2rem;
@@ -86,5 +86,5 @@
 }
 
 .previous-shifts_container {
-  max-height: 9.6rem;
+  max-height: 10rem;
 }

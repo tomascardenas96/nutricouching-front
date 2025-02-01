@@ -1,8 +1,5 @@
-import { useState } from "react";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import "./BookingsCard.css";
-import ConfirmationModal from "../../../Common/ConfirmationModal";
-import { createPortal } from "react-dom";
 
 function BookingsCard({
   name,
@@ -34,7 +31,10 @@ function BookingsCard({
       <div className="bookings-card_container">
         <div className="left">
           <p>{name}</p>
-          <p>{`${startTimetable}hs - ${endTimetable}hs`}</p>
+          <p>{`${startTimetable.substring(0, 5)}hs - ${endTimetable.substring(
+            0,
+            5
+          )}hs`}</p>
         </div>
 
         <div className="right">
