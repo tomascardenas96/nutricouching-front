@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { HOST } from "../api/data";
 import useGetElementsByCartId from "../hooks/useGetElementsByCartId";
+import { io } from "socket.io-client";
 
 // Creación del contexto
 const UserContext = createContext(null);

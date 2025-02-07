@@ -1,0 +1,49 @@
+div.notification-card_container {
+  display: grid;
+  grid-template-columns: 3.7rem 1fr;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+
+  & .notification-delete-icon {
+    display: grid;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1.3rem;
+    color: rgba(118, 118, 118, 0.998);
+  }
+
+  & .notification-body {
+    display: flex;
+    flex-direction: column;
+
+    & .notification-description {
+      font-size: 0.7rem;
+      font-family: var(--primary-font);
+      line-height: 1.3rem;
+    }
+
+    & .notification-time {
+      font-size: 0.65rem;
+      font-family: var(--primary-font);
+      color: rgba(118, 118, 118, 0.998);
+      margin-top: 0.3rem;
+    }
+  }
+}
+
+div.notification-card_container:last-child {
+  border-bottom: none;
+}
+
+.visible-notification_deleted-booking {
+  animation: hide-off 7s ease-out;
+}
+
+@keyframes hide-off {
+  from {
+    background-color: rgba(0, 0, 0, 0.132);
+  }
+  to {
+    background-color: transparent;
+  }
+}

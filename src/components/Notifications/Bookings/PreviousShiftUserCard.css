@@ -27,3 +27,7 @@
     }
   }
 }
+
+.previous-shift-user-card:last-child {
+  border: none;
+}

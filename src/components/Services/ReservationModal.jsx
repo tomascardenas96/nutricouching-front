@@ -44,7 +44,7 @@ function ReservationModal({
     selectedDate,
     selectedTime,
     selectedService.serviceId,
-    user.userId,
+    user?.userId,
     selectedProfessional,
     selectedSpecialty,
     professionalSchedule,

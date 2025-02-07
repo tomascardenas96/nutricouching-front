@@ -1,15 +1,34 @@
-import { useState } from "react";
-import "./NotificationPopUp.css";
+import { useEffect, useState } from "react";
 import { IoIosNotifications } from "react-icons/io";
-import UserBookingsModal from "./UserBookingsModal";
+import useGetNotifications from "../../hooks/useGetNotifications";
+import "./NotificationPopUp.css";
+import NotificationsModal from "./NotificationsModal";
 
 function NotificationPopUp() {
+  const [unreadNotifications, setUnreadNotifications] = useState(0);
+
+  const { notifications, setNotifications } = useGetNotifications();
+
   const [isNotificationsModalOpen, setIsNotificationsModalOpen] =
     useState(false);
 
   const handleCloseModal = () => {
     setIsNotificationsModalOpen(false);
   };
+
+  useEffect(() => {
+    const filterUnread = notifications.filter(
+      (notification) => !notification.isRead
+    );
+
+    if (filterUnread) {
+      const quantity = filterUnread.reduce((acc, curr) => {
+        return (acc += 1);
+      }, 0);
+
+      setUnreadNotifications(quantity);
+    }
+  }, [notifications]);
 
   return (
     <>
@@ -19,14 +38,21 @@ function NotificationPopUp() {
       >
         <div>
           <IoIosNotifications className="bell-icon" />
-          <div className="red-circle">
-            <p>0</p>
-          </div>
+          {unreadNotifications !== 0 && (
+            <div className="red-circle">
+              <p>{unreadNotifications}</p>
+            </div>
+          )}
         </div>
       </div>
 
       {isNotificationsModalOpen && (
-        <UserBookingsModal closeModal={handleCloseModal} />
+        <NotificationsModal
+          closeModal={handleCloseModal}
+          notifications={notifications}
+          setUnreadNotifications={setUnreadNotifications}
+          setNotifications={setNotifications}
+        />
       )}
     </>
   );

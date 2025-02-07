@@ -1,4 +1,4 @@
-import useGetAllSpecialties from "../../hooks/useGetAllSpecialties";
+import useGetAllSpecialties from "../../../hooks/useGetAllSpecialties";
 import "./PreviousShiftUserCard.css";
 
 import React from "react";

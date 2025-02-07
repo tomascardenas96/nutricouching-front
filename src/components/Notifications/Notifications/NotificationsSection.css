@@ -1,0 +1,30 @@
+.notifications-section_container {
+  margin-top: 0.5rem;
+  background-color: white;
+  padding: 0.5rem 1.2625rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .notifications-header_time {
+    .header-day {
+      font-family: var(--primary-font);
+      font-size: 0.75rem;
+      font-weight: 500;
+      height: 1.8rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .notifications-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  & hr.divider-line {
+    margin: 0.8rem 1rem 0.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.131);
+  }
+}

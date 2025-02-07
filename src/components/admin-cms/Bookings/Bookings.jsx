@@ -53,10 +53,16 @@ function Bookings() {
     });
   };
 
+  // Verificar si hay algún booking para el futuro (hoy o posterior)
+  const hasFutureBookings = () => {
+    return Object.keys(bookings).some((date) => !isPreviousDate(date));
+  };
+
   return (
     <section className="professional-bookings_container">
-      {/* Pasamos el objeto bookings a un array para verificar si tiene un length (si existe al menos un turno reservado) */}
-      {Object.entries(bookings).length ? (
+      {Object.entries(bookings).length === 0 ? (
+        <p className="no-bookings-paragraph">No hay turnos realizados.</p>
+      ) : hasFutureBookings() ? (
         Object.entries(bookings).map(([date, events], idx) => (
           <div key={date + idx}>
             {!isPreviousDate(date) && (
@@ -87,7 +93,7 @@ function Bookings() {
           </div>
         ))
       ) : (
-        <p className="no-bookings-paragraph">No hay turnos realizados.</p>
+        <p className="no-bookings-paragraph">No hay turnos disponibles.</p>
       )}
 
       {isConfirmationDeleteBookingOpen &&

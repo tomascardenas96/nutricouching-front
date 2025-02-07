@@ -24,7 +24,7 @@
 }
 
 :root {
-  --primary-font: "Quicksand", sans-serif;
+  /* --primary-font: "Quicksand", sans-serif; */
   --header-user-font: "SUSE", system-ui;
   --services-modal-header: "NTR", sans-serif;
   --section-font: "Ubuntu", sans-serif;
@@ -43,6 +43,9 @@
   --primary-font: "Montserrat", serif;
   --secondary-font: "Lora", serif;
   --terciary-font: "Hind Madurai", serif;
+  --background-shadow-color: rgba(0, 0, 0, 0.184);
+  --selected-option-background: #603dc118;
+  --selected-option-text: #603dc1d9;
 }
 
 ::-webkit-scrollbar {

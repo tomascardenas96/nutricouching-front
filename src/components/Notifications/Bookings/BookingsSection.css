@@ -1,0 +1,49 @@
+.pending-shifts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.652);
+
+  & h1 {
+    font-weight: bold;
+  }
+
+  & .schedule-icon {
+    margin-bottom: 0.2rem;
+  }
+}
+
+.previous-shifts-header {
+  & h1 {
+    font-weight: bold;
+  }
+
+  & .history-icon {
+    font-size: 1.23rem;
+    margin-bottom: 0.15rem;
+  }
+}
+
+.pending-shifts_container,
+.previous-shifts_container {
+  min-height: 5rem;
+  max-width: 32.0625rem;
+  display: grid;
+  background-color: white;
+  border-radius: 0.2rem;
+  border: 1px solid #e6e6e6;
+  padding: 0.5rem 0.7rem;
+  overflow-y: auto;
+
+  & p.no-pending-bookings,
+  p.no-previous-shifts {
+    display: grid;
+    place-content: center;
+    color: rgba(0, 0, 0, 0.652);
+  }
+}
+
+.previous-shifts_container {
+  max-height: 10rem;
+  min-height: 4.3rem;
+}
