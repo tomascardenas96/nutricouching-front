@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-height: 29.5369rem;
+  overflow-y: auto;
 
   .notifications-header_time {
     .header-day {

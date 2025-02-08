@@ -1,28 +1,39 @@
 import { useEffect } from "react";
-import useGetNotifications from "../../../hooks/useGetNotifications";
 import useMarkNotificationAsRead from "../../../hooks/useMarkNotificationAsRead";
 import NotificationCard from "./NotificationCard";
 import "./NotificationsSection.css";
 
 function NotificationsSection({ notifications, setUnreadNotifications }) {
-  const {} = useMarkNotificationAsRead(notifications);
+  const { markAsReadError } = useMarkNotificationAsRead(notifications);
 
   useEffect(() => {
     setUnreadNotifications(0);
   }, []);
 
+  const isToday = (date) => {
+    const now = new Date(Date.now());
+    now.setHours(-3, 0, 0, 0);
+
+    const verifiedDate = new Date(date);
+    verifiedDate.setHours(-3, 0, 0, 0);
+
+    return verifiedDate.toDateString() === now.toDateString();
+  };
+
   return (
     <div className="notifications-section_container">
       <div className="notifications-header_time">
         <h2 className="header-day">Hoy</h2>
-
         <div className="notifications-list">
-          {notifications.map((notification) => (
-            <NotificationCard
-              key={`notification_${notification.notificationId}`}
-              notification={notification}
-            />
-          ))}
+          {notifications.map(
+            (notification) =>
+              isToday(notification.createdAt) && (
+                <NotificationCard
+                  key={`next-notification_${notification.notificationId}`}
+                  notification={notification}
+                />
+              )
+          )}
         </div>
       </div>
 
@@ -31,22 +42,15 @@ function NotificationsSection({ notifications, setUnreadNotifications }) {
       <div className="notifications-header_time">
         <h2 className="header-day">Anterior</h2>
         <div className="notifications-list">
-          {notifications.map((notification) => (
-            <>
-              <NotificationCard
-                key={`notification_${notification.notificationId}1`}
-                notification={notification}
-              />
-              <NotificationCard
-                key={`notification_${notification.notificationId}2`}
-                notification={notification}
-              />
-              <NotificationCard
-                key={`notification_${notification.notificationId}3`}
-                notification={notification}
-              />
-            </>
-          ))}
+          {notifications.map(
+            (notification) =>
+              !isToday(notification.createdAt) && (
+                <NotificationCard
+                  key={`prev-notification_${notification.notificationId}`}
+                  notification={notification}
+                />
+              )
+          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
 function useMarkNotificationAsRead(notifications) {
+  const [markAsReadError, setMarkAsReadError] = useState(null);
+
   useEffect(() => {
     // Filtramos productos que no fueron leido y obtenemos un arreglo con sus id`s
     const notificationsId = notifications
@@ -21,7 +23,9 @@ function useMarkNotificationAsRead(notifications) {
         if (!response.ok) {
           throw new Error(data.message);
         }
-      } catch (error) {}
+      } catch (error) {
+        setMarkAsReadError(error);
+      }
     };
 
     // Ejectutar la funcion unicamente si existe alguna notificacion sin leer
@@ -30,7 +34,7 @@ function useMarkNotificationAsRead(notifications) {
     }
   }, [notifications]);
 
-  return {};
+  return { markAsReadError };
 }
 
 export default useMarkNotificationAsRead;
