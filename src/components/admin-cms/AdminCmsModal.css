@@ -15,7 +15,7 @@
   box-shadow: -1px 0px 10px 5px rgba(0, 0, 0, 0.055);
   width: 25rem;
   height: 98svh;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
 }
 
 .admin-cms-modal {
@@ -69,11 +69,11 @@
       display: flex;
       padding-left: 0.4rem;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.1rem;
 
       & p {
         font-family: var(--presentation-banner-font);
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 0.45rem 0.8rem;
         border-radius: 0.2rem;
         cursor: pointer;

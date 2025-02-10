@@ -57,9 +57,7 @@ function AddNewSpecialtyModal({
                 onChange={handleChangeCreateSpecialty}
                 required
               >
-                <option value={null} className="pprruu">
-                  Seleccionar un servicio
-                </option>
+                <option value="">Seleccionar un servicio</option>
                 {services.map((service) => (
                   <option
                     key={`service-${service.serviceId}`}

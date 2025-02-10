@@ -8,7 +8,7 @@ import BookingsHeader from "./BookingsHeader/BookingsHeader";
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../Common/ConfirmationModal";
 
-function Bookings() {
+function Bookings({ user }) {
   const [isConfirmationDeleteBookingOpen, setIsConfirmationDeleteBookingOpen] =
     useState(false);
 
@@ -19,9 +19,6 @@ function Bookings() {
   const handleOpenConfirmationDeleteBooking = () => {
     setIsConfirmationDeleteBookingOpen(!isConfirmationDeleteBookingOpen);
   };
-
-  // Usuario logueado.
-  const { user } = useUser();
 
   // Reservaciones del profesional logueado.
   const { bookings, setBookings, errorBookings, loadingBookings } =

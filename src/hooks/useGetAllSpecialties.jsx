@@ -32,7 +32,7 @@ function useGetAllSpecialties() {
     getSpecialties();
   }, []);
 
-  return { specialties, loadingSpecialties, errorSpecialties };
+  return { specialties, loadingSpecialties, errorSpecialties, setSpecialties };
 }
 
 export default useGetAllSpecialties;

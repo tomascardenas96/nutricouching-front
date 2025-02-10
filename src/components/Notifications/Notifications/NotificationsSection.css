@@ -9,16 +9,16 @@
   overflow-y: auto;
 
   .notifications-header_time {
-    .header-day {
-      font-family: var(--primary-font);
+    & .header-day {
       font-size: 0.75rem;
+      font-family: var(--primary-font);
       font-weight: 500;
       height: 1.8rem;
       display: flex;
       align-items: center;
     }
 
-    .notifications-list {
+    & .notifications-list {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -28,5 +28,14 @@
   & hr.divider-line {
     margin: 0.8rem 1rem 0.4rem;
     border: 1px solid rgba(0, 0, 0, 0.131);
+  }
+
+  & .no-notifications {
+    display: flex;
+    justify-content: center;
+    font-family: var(--primary-font);
+    margin: 0.5rem 0 1rem;
+    font-size: 0.9rem;
+    color: rgb(65, 65, 65);
   }
 }

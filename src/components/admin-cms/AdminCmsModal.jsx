@@ -1,12 +1,16 @@
-import "./AdminCmsModal.css";
-import { MdSupervisedUserCircle } from "react-icons/md";
+import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { MdSupervisedUserCircle } from "react-icons/md";
+import "./AdminCmsModal.css";
 import Bookings from "./Bookings/Bookings";
 import Schedules from "./Schedules/Schedules";
-import { useState } from "react";
+import Specialties from "./Specialties/Specialties";
+import { useUser } from "../../context/UserProvider";
 
 function AdminCmsModal({ handleAdminCmsModal }) {
   const [selectedOption, setSelectedOption] = useState("bookings");
+
+  const { user } = useUser();
 
   return (
     <section
@@ -38,10 +42,20 @@ function AdminCmsModal({ handleAdminCmsModal }) {
             >
               Horarios de Atencion
             </p>
+            <p
+              onClick={() => setSelectedOption("specialties")}
+              className={
+                selectedOption === "specialties" ? "selectedOption" : ""
+              }
+            >
+              Especialidades
+            </p>
           </div>
 
           <div className="table-body">
-            {selectedOption === "bookings" ? <Bookings /> : <Schedules />}
+            {selectedOption === "bookings" && <Bookings user={user} />}
+            {selectedOption === "schedules" && <Schedules user={user} />}
+            {selectedOption === "specialties" && <Specialties user={user} />}
           </div>
         </div>
       </aside>

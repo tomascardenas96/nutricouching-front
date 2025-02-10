@@ -8,9 +8,8 @@ import SchedulesHeader from "./SchedulesHeader/SchedulesHeader";
 import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
 import { useState } from "react";
 
-function Schedules() {
+function Schedules({ user }) {
   const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState(false);
-  const { user } = useUser();
 
   const {
     availabilities,
@@ -62,13 +61,13 @@ function Schedules() {
 
       {/* Recorrer los horarios y mostrarlos en tarjetas. */}
       {Object.entries(availabilities).map(([day, sched]) => (
-        <div key={day}>
+        <div key={`day-${day}`}>
           {sched.length > 0 && <SchedulesHeader date={getDay(day)} />}
 
           <div className="bookings-list">
             {orderSchedules(sched).map((schedule) => (
               <SchedulesCard
-                key={schedule.availabilityId}
+                key={`schedule-${schedule.availabilityId}`}
                 from={schedule?.startTime}
                 to={schedule?.endTime}
                 interval={schedule?.interval}

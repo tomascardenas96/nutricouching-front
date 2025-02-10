@@ -1,13 +1,13 @@
-import "./ServicesList.css";
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import useGetServices from "../../../hooks/useGetServices";
-import ServicesCmsCard from "./ServicesCmsCard";
 import { LiaAddressCard } from "react-icons/lia";
+import useDeleteService from "../../../hooks/useDeleteService";
+import useGetServices from "../../../hooks/useGetServices";
+import ConfirmationModal from "../../Common/ConfirmationModal";
+import ServicesCmsCard from "./ServicesCmsCard";
+import "./ServicesList.css";
 import AddServiceModal from "./modals/AddServiceModal";
 import ModifyServiceModal from "./modals/ModifyServiceModal";
-import { useState } from "react";
-import useDeleteService from "../../../hooks/useDeleteService";
-import ConfirmationModal from "../../Common/ConfirmationModal";
 
 function ServicesList() {
   const [selectedService, setSelectedService] = useState(null);
@@ -31,13 +31,14 @@ function ServicesList() {
   } = useDeleteService(setServices);
 
   return (
-    <div className="cms-services">
+    <section className="cms-services">
       <div className="cms-services_filter">
         <form>
           <input type="text" placeholder="Buscar" />
           <CiSearch className="search-filter_icon" />
         </form>
       </div>
+
       <div className="cms-services_body">
         <table>
           <thead>
@@ -61,6 +62,7 @@ function ServicesList() {
           </tbody>
         </table>
       </div>
+
       <div onClick={handleAddServiceModal} className="cms-service-add">
         <LiaAddressCard className="add-service_icon" />
         <h1>CREAR NUEVO SERVICIO</h1>
@@ -88,7 +90,7 @@ function ServicesList() {
           onConfirm={handleDeleteService}
         />
       )}
-    </div>
+    </section>
   );
 }
 

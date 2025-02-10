@@ -1,0 +1,12 @@
+.specialties-list_container {
+}
+
+.specialties-list_container > .cms-specialties_filter {
+}
+
+.specialties-list_container > .cms-specialties_body {
+}
+
+.specialties-list_container > .cms-specialty-add {
+  cursor: pointer;
+}

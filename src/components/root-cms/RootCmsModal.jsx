@@ -6,9 +6,10 @@ import ProductsCmsList from "./products/ProductsCmsList";
 import ProfessionalsList from "./professionals/ProfessionalsList";
 import ServicesList from "./services/ServicesList";
 import ViandsList from "./viands/ViandsList";
+import SpecialtiesList from "./specialties/SpecialtiesList";
 
 function RootCmsModal({ handleCmsModal }) {
-  const [selectedOption, setSelectedOption] = useState("services");
+  const [selectedOption, setSelectedOption] = useState("products");
   const [isRootModalAnimating, setIsRootModalAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
@@ -52,12 +53,20 @@ function RootCmsModal({ handleCmsModal }) {
                 Productos
               </li>
               <li
-                onClick={() => setSelectedOption("services")}
+                onClick={() => setSelectedOption("viands")}
                 className={
-                  selectedOption === "services" ? "selected-option" : null
+                  selectedOption === "viands" ? "selected-option" : null
                 }
               >
-                Servicios
+                Viandas
+              </li>
+              <li
+                onClick={() => setSelectedOption("specialties")}
+                className={
+                  selectedOption === "specialties" ? "selected-option" : null
+                }
+              >
+                Especialidades
               </li>
               <li
                 onClick={() => setSelectedOption("professionals")}
@@ -67,21 +76,13 @@ function RootCmsModal({ handleCmsModal }) {
               >
                 Profesionales
               </li>
-              <li
-                onClick={() => setSelectedOption("viands")}
-                className={
-                  selectedOption === "viands" ? "selected-option" : null
-                }
-              >
-                Viandas
-              </li>
             </ul>
 
             {/* Dependiendo de la opcion seleccionada, sera el modal que se abrirá  */}
             {selectedOption === "products" ? (
               <ProductsCmsList />
-            ) : selectedOption === "services" ? (
-              <ServicesList />
+            ) : selectedOption === "specialties" ? (
+              <SpecialtiesList />
             ) : selectedOption === "professionals" ? (
               <ProfessionalsList />
             ) : selectedOption === "viands" ? (

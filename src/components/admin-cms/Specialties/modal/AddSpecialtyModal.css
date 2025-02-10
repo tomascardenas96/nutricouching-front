@@ -1,0 +1,17 @@
+.add-specialty-modal_container {
+  background-color: var(--background-shadow-color);
+  width: 100%;
+  height: 100svh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 2100;
+  display: grid;
+  place-content: center;
+}
+
+.add-specialty-modal_container > form.add-specialty-modal {
+  width: 30rem;
+  height: 30rem;
+  background-color: white;
+}
