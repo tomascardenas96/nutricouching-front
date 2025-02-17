@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function useGetElementsByCartId(
   user,
+  activeCart,
   productsInCart,
   viandsInCart,
   setProductsInCart,
@@ -11,10 +12,10 @@ function useGetElementsByCartId(
 
   useEffect(() => {
     const fetchElements = async () => {
-      if (user && user.cart) {
+      if (activeCart) {
         try {
           const response = await fetch(
-            `http://localhost:3010/cart-item/get/${user.cart.cartId}`,
+            `http://localhost:3010/cart-item/get/${activeCart.cartId}`,
             {
               method: "GET",
               headers: {
@@ -34,7 +35,7 @@ function useGetElementsByCartId(
           if (productsInCart.length > 0) {
             combinedElements.push(
               ...productsInCart.map((product) => ({
-                cart: user.cart,
+                cart: activeCart,
                 product,
                 viand: null,
                 quantity: product.quantity,
@@ -45,7 +46,7 @@ function useGetElementsByCartId(
           if (viandsInCart.length > 0) {
             combinedElements.push(
               ...viandsInCart.map((viand) => ({
-                cart: user.cart,
+                cart: activeCart,
                 product: null,
                 viand,
                 quantity: viand.quantity,
@@ -61,7 +62,7 @@ function useGetElementsByCartId(
     };
 
     fetchElements();
-  }, [user]);
+  }, [activeCart]);
 
   return { elementsInCart, setElementsInCart };
 }

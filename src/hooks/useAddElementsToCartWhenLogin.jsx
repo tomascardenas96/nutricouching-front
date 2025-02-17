@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { HOST } from "../api/data";
-import { useUser } from "../context/UserProvider";
+import { useActiveCart, useUser } from "../context/UserProvider";
 
 function useAddElementsToCartWhenLogin(setElementsInCart) {
   const [addElementsError, setAddElementsError] = useState(null);
   const { user } = useUser();
+  const { activeCart } = useActiveCart();
 
   // Referencia para evitar múltiples ejecuciones
   const hasSyncedCart = useRef(false);
@@ -34,7 +35,7 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
       });
 
       const response = await fetch(
-        `${HOST}/cart-item/add/${user.cart.cartId}`,
+        `${HOST}/cart-item/add/${activeCart.cartId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

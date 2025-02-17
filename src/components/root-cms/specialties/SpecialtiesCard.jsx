@@ -1,7 +1,7 @@
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./SpecialtiesCard.css";
 
-function SpecialtyCard({ specialty }) {
+function SpecialtyCard({ specialty, handleDeleteSpecialty }) {
   return (
     <>
       <td>{specialty.name}</td>
@@ -10,8 +10,9 @@ function SpecialtyCard({ specialty }) {
 
       <td className="services-cms_options">
         <p>
-          <FaRegEdit />
-          <FaRegTrashAlt />
+          <FaRegTrashAlt
+            onClick={() => handleDeleteSpecialty(specialty.specialtyId)}
+          />
         </p>
       </td>
     </>

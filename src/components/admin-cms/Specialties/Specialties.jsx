@@ -4,11 +4,16 @@ import "./Specialties.css";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import AddSpecialtyModal from "./modal/AddSpecialtyModal";
+import useUnlinkSpecialtyOfProfessional from "../../../hooks/useUnlinkSpecialtyOfProfessional";
 
 function Specialties({ user }) {
   const [isAddSpecialtyModalOpen, setIsAddSpecialtyModalOpen] = useState(false);
+
   const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
     useGetAllSpecialtiesByProfessional(user.professional.professionalId);
+
+  const { handleUnlinkSpecialtyOfProfessional } =
+    useUnlinkSpecialtyOfProfessional(setSpecialties);
 
   const handleOpenCloseModal = () => {
     setIsAddSpecialtyModalOpen(!isAddSpecialtyModalOpen);
@@ -31,7 +36,14 @@ function Specialties({ user }) {
               <td>{specialty.name}</td>
               <td>{specialty.service.title}</td>
               <td>
-                <FaRegTrashAlt />
+                <FaRegTrashAlt
+                  onClick={() =>
+                    handleUnlinkSpecialtyOfProfessional(
+                      specialty.specialtyId,
+                      user.professional.professionalId
+                    )
+                  }
+                />
               </td>
             </tr>
           ))}

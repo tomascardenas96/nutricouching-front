@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useUser } from "../context/UserProvider";
+import { useActiveCart, useUser } from "../context/UserProvider";
 import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
 function useAddProductToCart(setElementsInCart) {
   const { user } = useUser();
+  const { activeCart } = useActiveCart();
+
   const [productsCart, setProductsCart] = useState([]);
-  const { handleAddOneElementToCart } =
-    useAddOneElementToCartWhenLoggedIn(user, setElementsInCart);
+  const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn(
+    user,
+    setElementsInCart,
+    activeCart
+  );
 
   // Función para agregar un producto al carrito (ya sea en localStorage o en el backend)
   const addProductToCart = async (product) => {
@@ -44,8 +49,8 @@ function useAddProductToCart(setElementsInCart) {
       setProductsCart({ products: [...parsedAddedProducts.products] });
       toast.success("Producto agregado al carrito");
     } else {
+      // Si hay un usuario logueado guardar directamente el producto en la DB.
       handleAddOneElementToCart(product);
-      console.log("Usuario logueado, agregar al carrito en el backend");
     }
   };
 

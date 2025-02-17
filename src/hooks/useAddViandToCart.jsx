@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useUser } from "../context/UserProvider";
+import { useActiveCart, useUser } from "../context/UserProvider";
 import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
-function useAddViandToCart() {
+function useAddViandToCart(setElementsInCart) {
   const { user } = useUser();
+  const { activeCart } = useActiveCart();
+
   // Este metodo llama a la API para agregar una vianda al carrito (solo cuando el usuario está logueado).
-  const { handleAddOneElementToCart } =
-    useAddOneElementToCartWhenLoggedIn(user);
   const [viandsCart, setViandsCart] = useState([]);
+  const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn(
+    user,
+    setElementsInCart,
+    activeCart
+  );
 
   // Función para agregar una vianda al carrito
   const addViandToCart = async (viand) => {
@@ -42,6 +47,7 @@ function useAddViandToCart() {
       setViandsCart({ viands: [...parsedAddedViands.viands] });
       toast.success("Vianda agregada al carrito");
     } else {
+      // Si hay un usuario logueado enviar la vianda en la DB.
       handleAddOneElementToCart(viand);
     }
   };
@@ -53,7 +59,7 @@ function useAddViandToCart() {
       ? JSON.parse(addedViands)
       : { viands: [] };
     setViandsCart({ viands: [...parsedAddedViands.viands] }); // Sincronizar el estado con el carrito del localStorage
-  }, []); // Solo se ejecuta una vez al montar el componente
+  }, []);
 
   return { addViandToCart, viandsCart, setViandsCart };
 }

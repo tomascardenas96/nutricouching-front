@@ -8,6 +8,7 @@ export const useElementsInCart = () => useContext(ElementsInCartContext);
 function ElementsInCartProvider({
   children,
   user,
+  activeCart,
   productsInCart,
   viandsInCart,
   setProductsInCart,
@@ -15,6 +16,7 @@ function ElementsInCartProvider({
 }) {
   const { elementsInCart, setElementsInCart } = useGetElementsByCartId(
     user,
+    activeCart,
     productsInCart,
     viandsInCart,
     setProductsInCart,

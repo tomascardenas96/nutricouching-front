@@ -13,7 +13,7 @@ import AdminCmsModal from "../../components/admin-cms/AdminCmsModal";
 import NotificationPopUp from "../../components/notifications/NotificationPopUp";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import ElementsInCartProvider from "../../context/ElementsInCartProvider";
-import { useUser } from "../../context/UserProvider";
+import { useActiveCart, useUser } from "../../context/UserProvider";
 import "./Home.css";
 
 function Home() {
@@ -27,6 +27,7 @@ function Home() {
 
   // Custom hooks
   const { user } = useUser();
+  const { activeCart } = useActiveCart();
 
   // Abrir / cerrar modal ROOT
   const handleCmsModal = () => {
@@ -48,6 +49,7 @@ function Home() {
       {/* Contexto elementos en el carrito */}
       <ElementsInCartProvider
         user={user}
+        activeCart={activeCart}
         productsInCart={productsInCart}
         viandsInCart={viandsInCart}
         setProductsInCart={setProductsInCart}

@@ -1,3 +1,4 @@
+import { useActiveCart } from "../context/UserProvider";
 import useAddOrSubtractElement from "./useAddOrSubtractElement";
 
 function useAddOrSubtractProduct(
@@ -13,7 +14,10 @@ function useAddOrSubtractProduct(
     setElementsInCart
   );
 
+  const { activeCart } = useActiveCart();
+
   const addUnityOfProduct = (product) => {
+    // Si el usuario no esta logueado, agregar una unidad al local storage.
     if (!user) {
       const productIndex = parsedProductsInLocalStorage.products.findIndex(
         (prod) => prod.productId === product.productId
@@ -38,11 +42,13 @@ function useAddOrSubtractProduct(
         });
       });
     } else {
-      handleAddOrSubtractElement(product, user.cart.cartId, "add");
+      // De lo contrario agregarlo directamente a la DB.
+      handleAddOrSubtractElement(product, activeCart.cartId, "add");
     }
   };
 
   const subtractUnityOfProduct = (product) => {
+    // Si el usuario no esta logueado, restar una unidad al local storage.
     if (!user) {
       if (product.quantity === 1) {
         return;
@@ -71,7 +77,8 @@ function useAddOrSubtractProduct(
         });
       });
     } else {
-      handleAddOrSubtractElement(product, user.cart.cartId, "subtract");
+      // De lo contrario restarlo directamente de la DB.
+      handleAddOrSubtractElement(product, activeCart.cartId, "subtract");
     }
   };
 

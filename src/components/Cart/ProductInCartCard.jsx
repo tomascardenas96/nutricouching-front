@@ -11,6 +11,7 @@ function ProductInCartCard({
   subtract,
   elementsInCart,
 }) {
+  
   return (
     <div className="cart-product-card">
       <IoMdClose

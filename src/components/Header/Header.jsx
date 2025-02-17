@@ -55,9 +55,9 @@ function Header({
     return productsQuantity + viandsQuantity;
   };
 
+  // Limpiamos el carrito (Tanto los productos en el local storage como en la DB)
   const logOut = () => {
     handleLogOut();
-    // Limpiamos el carrito (Tanto los productos en el local storage como en la DB)
     setElementsInCart([]);
     setProductsInCart([]);
     setViandsInCart([]);

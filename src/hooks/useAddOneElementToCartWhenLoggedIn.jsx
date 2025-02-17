@@ -2,9 +2,11 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 import { useElementsInCart } from "../context/ElementsInCartProvider";
 
-function useAddOneElementToCartWhenLoggedIn(user) {
-  const { setElementsInCart } = useElementsInCart();
-
+function useAddOneElementToCartWhenLoggedIn(
+  user,
+  setElementsInCart,
+  activeCart
+) {
   const handleAddOneElementToCart = (element) => {
     const AddOneElementToCartPromise = () => {
       try {
@@ -28,7 +30,7 @@ function useAddOneElementToCartWhenLoggedIn(user) {
   const handleAddProductWhenLoggedIn = async (productId) => {
     try {
       const response = await fetch(
-        `${HOST}/cart-item/add-element/${user.cart.cartId}`,
+        `${HOST}/cart-item/add-element/${activeCart.cartId}`,
         {
           method: "POST",
           headers: {
@@ -67,7 +69,7 @@ function useAddOneElementToCartWhenLoggedIn(user) {
   const handleAddViandWhenLoggedIn = async (viandId) => {
     try {
       const response = await fetch(
-        `${HOST}/cart-item/add-element/${user.cart.cartId}`,
+        `${HOST}/cart-item/add-element/${activeCart.cartId}`,
         {
           method: "POST",
           headers: {

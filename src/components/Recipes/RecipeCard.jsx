@@ -5,6 +5,7 @@ import { BsCart4 } from "react-icons/bs";
 import { HOST } from "../../api/data";
 import useAddViandToCart from "../../hooks/useAddViandToCart";
 import { useEffect } from "react";
+import { useElementsInCart } from "../../context/ElementsInCartProvider";
 
 function RecipeCard({
   previous,
@@ -16,7 +17,10 @@ function RecipeCard({
   setViandsInCart,
   allViands,
 }) {
-  const { addViandToCart, viandsCart, setViandsCart } = useAddViandToCart();
+  const { elementsInCart, setElementsInCart } = useElementsInCart();
+
+  const { addViandToCart, viandsCart, setViandsCart } =
+    useAddViandToCart(setElementsInCart);
 
   // Funcion para rellenar con ceros a la izquierda
   function pad(toPad, padChar, length) {
@@ -77,7 +81,7 @@ function RecipeCard({
             </div>
           </div>
         </div>
-        
+
         <div className="recipe-card_img">
           <img
             src={`${HOST}/uploads/viands/${viand?.image}`}

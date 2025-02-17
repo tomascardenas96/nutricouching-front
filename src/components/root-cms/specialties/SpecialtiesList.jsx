@@ -7,6 +7,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import CreateSpecialtiesModal from "./modals/CreateSpecialtyModal";
 import CreateSpecialtyModal from "./modals/CreateSpecialtyModal";
+import useDeleteSpecialty from "../../../hooks/useDeleteSpecialty";
 
 function SpecialtiesList() {
   const [isAddSpecialtiesModalOpen, setIsAddSpecialtiesModalOpen] =
@@ -14,6 +15,8 @@ function SpecialtiesList() {
 
   const { specialties, loadingSpecialties, errorSpecialties, setSpecialties } =
     useGetAllSpecialties();
+
+  const { handleDeleteSpecialty } = useDeleteSpecialty(setSpecialties);
 
   const openModal = () => {
     setIsAddSpecialtiesModalOpen(true);
@@ -49,7 +52,10 @@ function SpecialtiesList() {
             {specialties.length > 0 &&
               specialties?.map((specialty) => (
                 <tr key={`specialty-${specialty.specialtyId}`}>
-                  <SpecialtyCard specialty={specialty} />
+                  <SpecialtyCard
+                    specialty={specialty}
+                    handleDeleteSpecialty={handleDeleteSpecialty}
+                  />
                 </tr>
               ))}
           </tbody>

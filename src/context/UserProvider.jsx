@@ -7,15 +7,21 @@ import { io } from "socket.io-client";
 // Creación del contexto
 const UserContext = createContext(null);
 const LoginContext = createContext(null);
+const CartContext = createContext(null);
 
 // Custom hooks para usar los contextos
 export const useUser = () => useContext(UserContext);
 export const useLogin = () => useContext(LoginContext);
+export const useActiveCart = () => useContext(CartContext);
 
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
   const [userError, setUserError] = useState(false);
+
+  const [activeCart, setActiveCart] = useState(null);
+  const [activeCartError, setActiveCartError] = useState(null);
+
   const [authToken, setAuthToken] = useState("");
   const [loginInput, setLoginInput] = useState({
     email: "",
@@ -52,6 +58,21 @@ function UserProvider({ children }) {
       },
       error: "Email o contraseña incorrectos",
     });
+  };
+
+  const handleGetActiveCart = async (userId) => {
+    try {
+      const response = await fetch(`${HOST}/cart/active/${userId}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error();
+      }
+
+      setActiveCart(data);
+    } catch (error) {
+      setActiveCartError(error);
+    }
   };
 
   const handleChangeLogin = (e) => {
@@ -99,6 +120,8 @@ function UserProvider({ children }) {
           }
 
           setUser(data);
+          // Obtener el carrito activo
+          handleGetActiveCart(data.userId);
         } catch (error) {
           localStorage.removeItem("authToken");
           console.error(error);
@@ -126,8 +149,10 @@ function UserProvider({ children }) {
       }}
     >
       <UserContext.Provider value={{ user, userLoading, userError }}>
-        {children}
-        <Toaster />
+        <CartContext.Provider value={{ activeCart, activeCartError }}>
+          {children}
+          <Toaster />
+        </CartContext.Provider>
       </UserContext.Provider>
     </LoginContext.Provider>
   );

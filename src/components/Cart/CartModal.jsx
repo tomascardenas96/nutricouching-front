@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-import { SiMercadopago } from "react-icons/si";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
+import useAddElementsToCartWhenLogin from "../../hooks/useAddElementsToCartWhenLogin";
 import useAddOrSubtractProduct from "../../hooks/useAddOrSubtractProduct";
 import useAddOrSubtractViand from "../../hooks/useAddOrSubtractViand";
 import useRemoveProductFromCart from "../../hooks/useRemoveProductFromCart";
 import useRemoveViandFromCart from "../../hooks/useRemoveViandFromCart";
 import "./CartModal.css";
 import ProductInCartCard from "./ProductInCartCard";
-import useAddElementsToCartWhenLogin from "../../hooks/useAddElementsToCartWhenLogin";
+import PreferenceButton from "./payment/preferenceButton";
+import useEmptyCart from "../../hooks/useEmptyCart";
 
 function CartModal({
   handleCartModal,
@@ -18,14 +19,17 @@ function CartModal({
   setViandsInCart,
   user,
 }) {
-  const { elementsInCart, setElementsInCart } = useElementsInCart();
-
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
 
+  // Obtenemos todos los elementos dentro del carrito
+  const { elementsInCart, setElementsInCart } = useElementsInCart();
+  const { handleEmptyCart } = useEmptyCart(setElementsInCart);
+
+  // Al iniciar sesion, guardamos todos los elementos desde el local storage a la base de datos.
   const { addElementsError } = useAddElementsToCartWhenLogin(setElementsInCart);
 
-  // Metodo para remover un producto o una vianda del carrito
+  // Metodos para remover un producto o una vianda del carrito
   const { handleRemoveProduct } = useRemoveProductFromCart(
     setProductsInCart,
     productsInCart
@@ -62,17 +66,27 @@ function CartModal({
 
   // Metodo para calcular el total de la compra
   const calculateTotal = () => {
-    const totalProducts = productsInCart?.reduce(
-      (acc, product) => acc + product.price * product.quantity,
+    if (productsInCart.length > 0 || viandsInCart.length > 0) {
+      console.log(productsInCart);
+      const subTotalProducts = productsInCart.reduce(
+        (acc, product) => acc + product?.price * product.quantity,
+        0
+      );
+
+      const subTotalViands = viandsInCart.reduce(
+        (acc, viand) => acc + viand?.price * viand.quantity,
+        0
+      );
+
+      return subTotalProducts + subTotalViands;
+    }
+
+    return elementsInCart.reduce(
+      (acc, element) =>
+        acc + element?.product?.price * element?.quantity ||
+        acc + element?.viand?.price * element?.quantity,
       0
     );
-
-    const totalViands = viandsInCart?.reduce(
-      (acc, viand) => acc + viand.price * viand.quantity,
-      0
-    );
-
-    return totalProducts + totalViands;
   };
 
   return (
@@ -217,12 +231,16 @@ function CartModal({
         </div>
 
         <div className="cart-modal_buttons">
-          <div>
-            <button className="clean-cart">Vaciar Carrito</button>
+          <div className="options-buttons">
+            <button
+              className="clean-cart"
+              onClick={() => handleEmptyCart(user?.cart?.cartId)}
+            >
+              Vaciar Carrito
+            </button>
           </div>
-          <div>
-            <button className="confirm-purchase">Realizar Compra</button>
-            <SiMercadopago className="cart-option_icons mercado-pago_icon" />
+          <div className="options-buttons">
+            <PreferenceButton productsInCart={elementsInCart} user={user} />
           </div>
         </div>
 
