@@ -1,15 +1,23 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
+import { useUser } from "../context/UserProvider";
 
 function useCancelBooking(setBookings) {
+  const { user } = useUser();
+
   const handleCancelBooking = async (bookingId) => {
     const cancelBooking = async () => {
-      const response = await fetch(`${HOST}/booking/delete/${bookingId}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${HOST}/booking/delete/${bookingId}/active-user/${user?.userId}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       const data = await response.json();
+
+      console.log(data);
 
       if (!response.ok) {
         throw new Error(data.message);

@@ -1,10 +1,13 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
+import { useActiveCart } from "../context/UserProvider";
 
 function useEmptyCart(setElementsInCart) {
-  const handleEmptyCart = async (cartId) => {
+  const { activeCart } = useActiveCart();
+
+  const handleEmptyCart = async () => {
     try {
-      const response = await fetch(`${HOST}/cart-item/${cartId}`, {
+      const response = await fetch(`${HOST}/cart-item/${activeCart.cartId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

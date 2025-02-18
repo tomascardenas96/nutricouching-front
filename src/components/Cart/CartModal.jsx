@@ -232,10 +232,7 @@ function CartModal({
 
         <div className="cart-modal_buttons">
           <div className="options-buttons">
-            <button
-              className="clean-cart"
-              onClick={() => handleEmptyCart(user?.cart?.cartId)}
-            >
+            <button className="clean-cart" onClick={handleEmptyCart}>
               Vaciar Carrito
             </button>
           </div>
