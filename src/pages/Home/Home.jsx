@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { IoIosArrowBack } from "react-icons/io";
+import { io } from "socket.io-client";
+import { toast } from "sonner";
+import { HOST } from "../../api/data";
 import About from "../../components/About/About";
 import CartModal from "../../components/Cart/CartModal";
 import Footer from "../../components/Footer/Footer";
@@ -43,6 +46,26 @@ function Home() {
   const handleCartModal = () => {
     setIsCartModalOpen(!isCartModalOpen);
   };
+
+  // Notificacion cuando la compra es exitosa
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    const socket = io(`${HOST}`, {
+      query: { userId: user.userId },
+    });
+
+    socket.on("successfullPurchaseNotify", (data) => {
+      toast.success(data.message);
+    });
+
+    return () => {
+      socket.off("successfullPurchaseNotify");
+      socket.disconnect();
+    };
+  }, [user]);
 
   return (
     <main>
