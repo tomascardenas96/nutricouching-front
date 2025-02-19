@@ -5,13 +5,14 @@ import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLogg
 
 function useAddProductToCart(setElementsInCart) {
   const { user } = useUser();
-  const { activeCart } = useActiveCart();
+  const { activeCart, setActiveCart } = useActiveCart();
 
   const [productsCart, setProductsCart] = useState([]);
   const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn(
     user,
     setElementsInCart,
-    activeCart
+    activeCart,
+    setActiveCart
   );
 
   // Función para agregar un producto al carrito (ya sea en localStorage o en el backend)

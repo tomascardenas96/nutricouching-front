@@ -1,11 +1,13 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
-import { useElementsInCart } from "../context/ElementsInCartProvider";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 
 function useAddOneElementToCartWhenLoggedIn(
   user,
   setElementsInCart,
-  activeCart
+  activeCart,
+  setActiveCart
 ) {
   const handleAddOneElementToCart = (element) => {
     const AddOneElementToCartPromise = () => {

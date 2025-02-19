@@ -17,6 +17,7 @@ import NotificationPopUp from "../../components/notifications/NotificationPopUp"
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import ElementsInCartProvider from "../../context/ElementsInCartProvider";
 import { useActiveCart, useUser } from "../../context/UserProvider";
+import useGetElementsByCartId from "../../hooks/useGetElementsByCartId";
 import "./Home.css";
 
 function Home() {
@@ -24,13 +25,23 @@ function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
 
+  // Custom hooks
+  const { user } = useUser();
+  const { activeCart, setActiveCart } = useActiveCart();
+
   // Productos y viandas agregadas al carrito desde el local storage.
   const [productsInCart, setProductsInCart] = useState([]);
   const [viandsInCart, setViandsInCart] = useState([]);
 
-  // Custom hooks
-  const { user } = useUser();
-  const { activeCart } = useActiveCart();
+  // Productos y viandas agregadas al carrito desde la DB (usuario logueado)
+  const { elementsInCart, setElementsInCart } = useGetElementsByCartId(
+    user,
+    activeCart,
+    productsInCart,
+    viandsInCart,
+    setProductsInCart,
+    setViandsInCart
+  );
 
   // Abrir / cerrar modal ROOT
   const handleCmsModal = () => {
@@ -47,9 +58,9 @@ function Home() {
     setIsCartModalOpen(!isCartModalOpen);
   };
 
-  // Notificacion cuando la compra es exitosa
+  // Notificacion cuando la compra es exitosa y creacion de carrito nuevo
   useEffect(() => {
-    if (!user) {
+    if (!user || !activeCart) {
       return;
     }
 
@@ -57,26 +68,42 @@ function Home() {
       query: { userId: user.userId },
     });
 
-    socket.on("successfullPurchaseNotify", (data) => {
-      toast.success(data.message);
+    socket.on("sendNewCart", (data) => {
+      setActiveCart(data);
+    });
+
+    socket.on("afterPurchaseNotify", (data) => {
+      if (data.message === "Tu compra ha sido exitosa!") {
+        handleCartModal();
+        toast.success(data.message);
+        setElementsInCart([]);
+      } else if (
+        data.message === "Tu compra ha sido rechazada, intente nuevamente"
+      ) {
+        handleCartModal();
+        toast.error(data.message);
+      } else if (
+        data.message ===
+        "Tu pago está en proceso, te notificaremos cuando se confirme."
+      ) {
+        handleCartModal();
+        toast.info(data.message);
+      }
     });
 
     return () => {
-      socket.off("successfullPurchaseNotify");
+      socket.off("afterPurchaseNotify");
+      socket.off("sendNewCart");
       socket.disconnect();
     };
-  }, [user]);
+  }, [user?.userId, activeCart]);
 
   return (
     <main>
       {/* Contexto elementos en el carrito */}
       <ElementsInCartProvider
-        user={user}
-        activeCart={activeCart}
-        productsInCart={productsInCart}
-        viandsInCart={viandsInCart}
-        setProductsInCart={setProductsInCart}
-        setViandsInCart={setViandsInCart}
+        elementsInCart={elementsInCart}
+        setElementsInCart={setElementsInCart}
       >
         {/* Carrito de compras */}
         {isCartModalOpen &&

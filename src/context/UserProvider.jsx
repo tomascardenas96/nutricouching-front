@@ -149,7 +149,9 @@ function UserProvider({ children }) {
       }}
     >
       <UserContext.Provider value={{ user, userLoading, userError }}>
-        <CartContext.Provider value={{ activeCart, activeCartError }}>
+        <CartContext.Provider
+          value={{ activeCart, activeCartError, setActiveCart }}
+        >
           {children}
           <Toaster />
         </CartContext.Provider>
