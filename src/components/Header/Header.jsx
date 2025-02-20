@@ -5,8 +5,8 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useLogin } from "../../context/UserProvider";
 import "./Header.css";
 import useRegister from "../../hooks/useRegister";
-import LoginModal from "./LoginModal";
-import RegisterModal from "./RegisterModal";
+import LoginModal from "../Login/LoginModal";
+import RegisterModal from "../Register/RegisterModal";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
 
 function Header({

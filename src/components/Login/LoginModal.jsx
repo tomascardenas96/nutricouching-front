@@ -1,6 +1,9 @@
 import { FaEye } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import "./LoginModal.css";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import ForgotPasswordModal from "./Forgot-password/ForgotPasswordModal";
 
 function LoginModal({
   handleLoginModal,
@@ -11,9 +14,15 @@ function LoginModal({
   handleChangeLogin,
   isLoginModalOpen,
 }) {
+  const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
+    useState(false);
   const login = (e) => {
     handleLoginModal();
     handleSubmitLogin(e);
+  };
+
+  const handleOpenForgotPasswordModal = () => {
+    setIsForgotPasswordModalOpen(!isForgotPasswordModalOpen);
   };
 
   return (
@@ -45,13 +54,21 @@ function LoginModal({
             />
             <FaEye className="login-password_show-hide" />
           </label>
-          <p className="forgot-password">¿Olvidaste tu contraseña?</p>
+          <p
+            className="forgot-password"
+            onClick={handleOpenForgotPasswordModal}
+          >
+            ¿Olvidaste tu contraseña?
+          </p>
           <input type="submit" value="Ingresar" />
           <p className="create-account">
             ¿No tenes una cuenta? ingresa <span>aqui</span>
           </p>
         </form>
       </div>
+
+      {isForgotPasswordModalOpen &&
+        createPortal(<ForgotPasswordModal />, document.body)}
     </div>
   );
 }
