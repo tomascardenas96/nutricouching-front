@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { RiLogoutBoxRLine } from "react-icons/ri";
@@ -8,6 +8,8 @@ import useRegister from "../../hooks/useRegister";
 import LoginModal from "../Login/LoginModal";
 import RegisterModal from "../Register/RegisterModal";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
+import { createPortal } from "react-dom";
+import UpdateUserModal from "../Update-user/UpdateUserModal";
 
 function Header({
   handleCartModal,
@@ -17,6 +19,8 @@ function Header({
   productsInCart,
   viandsInCart,
 }) {
+  const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
+
   const {
     loginInput,
     loginLoading,
@@ -27,6 +31,8 @@ function Header({
     isLoginModalOpen,
     handleLogOut,
   } = useLogin();
+
+  const { isRegisterModalOpen, handleRegisterModal } = useRegister();
 
   const { elementsInCart, setElementsInCart } = useElementsInCart();
 
@@ -63,7 +69,9 @@ function Header({
     setViandsInCart([]);
   };
 
-  const { isRegisterModalOpen, handleRegisterModal } = useRegister();
+  const handleOpenUpdateUserModal = () => {
+    setIsUpdateUserModalOpen(!isUpdateUserModalOpen);
+  };
 
   return (
     <div className="header">
@@ -94,7 +102,7 @@ function Header({
       </div>
       {user ? (
         <div className="header-user">
-          <p>
+          <p onClick={handleOpenUpdateUserModal}>
             <FaUser className="user-icon" />
             {user?.name} {user?.lastname}
           </p>
@@ -135,6 +143,9 @@ function Header({
       {isRegisterModalOpen && (
         <RegisterModal handleRegisterModal={handleRegisterModal} />
       )}
+
+      {isUpdateUserModalOpen &&
+        createPortal(<UpdateUserModal />, document.body)}
     </div>
   );
 }

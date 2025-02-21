@@ -6,7 +6,6 @@ function useRegister() {
   const [registerInput, setRegisterInput] = useState({
     name: "",
     lastname: "",
-    username: "",
     email: "",
     password: "",
     repeatPassword: "",
@@ -26,7 +25,6 @@ function useRegister() {
         body: JSON.stringify({
           name: registerInput.name,
           lastname: registerInput.lastname,
-          username: registerInput.username,
           email: registerInput.email,
           password: registerInput.password,
         }),

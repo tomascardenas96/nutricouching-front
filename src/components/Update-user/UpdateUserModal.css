@@ -1,0 +1,17 @@
+.update-user_modal {
+  position: fixed;
+  width: 100%;
+  height: 100svh;
+  top: 0;
+  left: 0;
+  background-color: var(--background-shadow-color);
+  z-index: 2000;
+  display: grid;
+  place-content: center;
+
+  > form {
+    width: 30rem;
+    height: 30rem;
+    background-color: white;
+  }
+}

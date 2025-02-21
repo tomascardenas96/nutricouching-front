@@ -2,19 +2,25 @@ import { useState } from "react";
 import "./ForgotPasswordModal.css";
 import useSendForgotPasswordMail from "../../../hooks/useSendForgotPasswordMail";
 
-function ForgotPasswordModal() {
+function ForgotPasswordModal({ handleOpenForgotPasswordModal }) {
   const [userEmail, setUserEmail] = useState("");
-  const { handleSendForgotPasswordMail } = useSendForgotPasswordMail();
+  const { handleSendForgotPasswordMail } = useSendForgotPasswordMail(
+    handleOpenForgotPasswordModal
+  );
 
   return (
-    <div className="forgot-password_modal">
-      <div className="forgot-password">
+    <div
+      className="forgot-password_modal"
+      onClick={handleOpenForgotPasswordModal}
+    >
+      <div className="forgot-password" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={(e) => handleSendForgotPasswordMail(e, userEmail)}>
-          <label htmlFor="">
+          <label htmlFor="email">
             {" "}
             Ingrese su e-mail
             <input
               type="email"
+              name="email"
               onChange={(e) => setUserEmail(e.target.value)}
               value={userEmail}
             />

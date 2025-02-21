@@ -44,17 +44,6 @@ function RegisterModal({ handleRegisterModal }) {
               />
             </label>
 
-            <label htmlFor="username" className="username">
-              <input
-                type="text"
-                placeholder="Nombre de usuario"
-                name="username"
-                onChange={handleChangeRegister}
-                value={registerInput.username}
-                required
-              />
-            </label>
-
             <label htmlFor="email" className="email">
               <input
                 type="email"

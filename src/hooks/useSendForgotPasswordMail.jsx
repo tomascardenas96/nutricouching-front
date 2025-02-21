@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
 
-function useSendForgotPasswordMail() {
+function useSendForgotPasswordMail(handleOpenForgotPasswordModal) {
   const handleSendForgotPasswordMail = async (e, email) => {
     e.preventDefault();
 
@@ -16,6 +16,8 @@ function useSendForgotPasswordMail() {
       if (!response.ok) {
         throw new Error();
       }
+
+      handleOpenForgotPasswordModal();
 
       return data;
     };

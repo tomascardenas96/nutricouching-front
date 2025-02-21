@@ -68,7 +68,12 @@ function LoginModal({
       </div>
 
       {isForgotPasswordModalOpen &&
-        createPortal(<ForgotPasswordModal />, document.body)}
+        createPortal(
+          <ForgotPasswordModal
+            handleOpenForgotPasswordModal={handleOpenForgotPasswordModal}
+          />,
+          document.body
+        )}
     </div>
   );
 }
