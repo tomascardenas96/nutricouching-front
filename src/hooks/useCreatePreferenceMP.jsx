@@ -9,6 +9,7 @@ function useCreatePreferenceMP(productsInCart, user) {
   const [total, setTotal] = useState(0);
 
   const { activeCart } = useActiveCart();
+  const authToken = localStorage.getItem("authToken");
 
   const { handleCreateOrder, createOrderError } = useCreateOrder();
 
@@ -30,7 +31,10 @@ function useCreatePreferenceMP(productsInCart, user) {
     try {
       const response = await fetch(`${HOST}/mercadopago/preference`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
         body: JSON.stringify(productsInCart),
       });
 

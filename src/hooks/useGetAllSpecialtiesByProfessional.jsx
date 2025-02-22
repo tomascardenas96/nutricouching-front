@@ -14,7 +14,14 @@ function useGetAllSpecialtiesByProfessional(professionalId) {
         }
 
         const response = await fetch(
-          `${HOST}/specialty/professional/${professionalId}`
+          `${HOST}/specialty/professional/${professionalId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
         );
         const data = await response.json();
 

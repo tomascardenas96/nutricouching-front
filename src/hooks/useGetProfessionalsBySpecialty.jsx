@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetProfessionalsBySpecialty(selectedSpecialty) {
+  const authToken = localStorage.getItem("authToken");
+
   const [professionalsBySpecialty, setProfessionalsBySpecialty] = useState([]);
   const [professionalsBySpecialtyLoading, setProfessionalsBySpecialtyLoading] =
     useState(false);
@@ -18,7 +20,10 @@ function useGetProfessionalsBySpecialty(selectedSpecialty) {
             `${HOST}/professional/specialty?id=${selectedSpecialty}`,
             {
               method: "GET",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+              },
             }
           );
 

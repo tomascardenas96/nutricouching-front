@@ -3,6 +3,8 @@ import { HOST } from "../api/data";
 import { toast } from "sonner";
 
 function useRegister() {
+  const authToken = localStorage.getItem("authToken");
+
   const [registerInput, setRegisterInput] = useState({
     name: "",
     lastname: "",
@@ -21,7 +23,10 @@ function useRegister() {
     const registerUser = async () => {
       const response = await fetch(`${HOST}/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
         body: JSON.stringify({
           name: registerInput.name,
           lastname: registerInput.lastname,

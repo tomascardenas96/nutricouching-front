@@ -3,6 +3,8 @@ import { useUser } from "../context/UserProvider";
 import { HOST } from "../api/data";
 
 function useGetBookingsByUser() {
+  const authToken = localStorage.getItem("authToken");
+
   const [bookingsOfUser, setBookingsOfUser] = useState();
   const [previousBookings, setPreviousBookings] = useState({});
   const [nextBookings, setNextBookings] = useState({});
@@ -16,7 +18,14 @@ function useGetBookingsByUser() {
       setBookingsOfUserLoading(true);
       try {
         const response = await fetch(
-          `${HOST}/booking/user?userId=${user?.userId}`
+          `${HOST}/booking/user?userId=${user?.userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
         );
 
         const data = await response.json();

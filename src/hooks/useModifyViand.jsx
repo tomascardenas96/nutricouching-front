@@ -3,6 +3,8 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useModifyViand(selectedViand, handleModifyViandModal, setViands) {
+  const authToken = localStorage.getItem("authToken");
+
   const [modifyViandInput, setModifyViandInput] = useState(selectedViand);
   const [fileModifyViand, setFileModifyViand] = useState(null);
   const [imagePreviewModifyViand, setImagePreviewModifyViand] = useState(null);
@@ -26,6 +28,7 @@ function useModifyViand(selectedViand, handleModifyViandModal, setViands) {
         `${HOST}/viand/update/${selectedViand.viandId}`,
         {
           method: "PATCH",
+          headers: { Authorization: `Bearer ${authToken}` },
           body: formData,
         }
       );

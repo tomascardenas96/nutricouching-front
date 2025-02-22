@@ -29,11 +29,11 @@ function useGetAllProducts() {
           },
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
           throw new Error("Error getting products");
         }
-
-        const data = await response.json();
 
         setProducts(data);
       } catch (error) {

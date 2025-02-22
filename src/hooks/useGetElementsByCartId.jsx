@@ -8,6 +8,8 @@ function useGetElementsByCartId(
   setProductsInCart,
   setViandsInCart
 ) {
+  const authToken = localStorage.getItem("authToken");
+
   const [elementsInCart, setElementsInCart] = useState([]);
 
   useEffect(() => {
@@ -20,6 +22,7 @@ function useGetElementsByCartId(
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
               },
             }
           );

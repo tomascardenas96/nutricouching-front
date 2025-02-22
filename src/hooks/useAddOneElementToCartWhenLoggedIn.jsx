@@ -1,7 +1,5 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
-import { useEffect } from "react";
-import { io } from "socket.io-client";
 
 function useAddOneElementToCartWhenLoggedIn(
   user,
@@ -9,6 +7,8 @@ function useAddOneElementToCartWhenLoggedIn(
   activeCart,
   setActiveCart
 ) {
+  const authToken = localStorage.getItem("authToken");
+
   const handleAddOneElementToCart = (element) => {
     const AddOneElementToCartPromise = () => {
       try {
@@ -37,6 +37,7 @@ function useAddOneElementToCartWhenLoggedIn(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify({ productId }),
         }
@@ -76,6 +77,7 @@ function useAddOneElementToCartWhenLoggedIn(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify({ viandId }),
         }

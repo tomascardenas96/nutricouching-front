@@ -7,6 +7,8 @@ function useModifyProduct(
   handleModifyProductModal,
   setProducts
 ) {
+  const authToken = localStorage.getItem("authToken");
+
   const [modifyProductInput, setModifyProductInput] = useState(selectedProduct);
   const [fileModifyProduct, setFileModifyProduct] = useState(null);
   const [imagePreviewModifyProduct, setImagePreviewModifyProduct] =
@@ -31,6 +33,9 @@ function useModifyProduct(
         `${HOST}/product/update/${selectedProduct.productId}`,
         {
           method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
           body: formData,
         }
       );

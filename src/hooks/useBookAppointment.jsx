@@ -13,7 +13,7 @@ function useBookAppointment(
   professionalSchedule,
   setEndTime
 ) {
-  const token = localStorage.getItem("authToken");
+  const authToken = localStorage.getItem("authToken");
 
   const handleSubmitBookAppointment = async (e) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ function useBookAppointment(
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              authorization: `Bearer ${token}`,
+              authorization: `Bearer ${authToken}`,
             },
             body: JSON.stringify(createBooking),
           });

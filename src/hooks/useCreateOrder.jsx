@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import { HOST } from "../api/data";
 
 function useCreateOrder() {
+  const authToken = localStorage.getItem("authToken");
+
   const [createOrderError, setCreateOrderError] = useState(null);
 
   const handleCreateOrder = async (cartId, total) => {
     try {
       const response = await fetch(`${HOST}/client-order/create/${cartId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
         body: JSON.stringify({ total }),
       });
 

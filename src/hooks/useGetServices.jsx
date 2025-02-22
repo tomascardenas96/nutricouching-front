@@ -13,7 +13,12 @@ function useGetServices() {
     const getAllServices = async () => {
       setServicesLoading(true);
       try {
-        const response = await fetch(`${HOST}/service`);
+        const response = await fetch(`${HOST}/service`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
 
         if (data.error) {
@@ -48,7 +53,7 @@ function useGetServices() {
     handleModifyServiceModal,
     isAddServiceModalOpen,
     isModifyServiceModalOpen,
-    setServices
+    setServices,
   };
 }
 

@@ -3,6 +3,8 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useUnlinkSpecialtyOfProfessional(setSpecialties) {
+  const authToken = localStorage.getItem("authToken");
+
   const handleUnlinkSpecialtyOfProfessional = async (
     specialtyId,
     professionalId
@@ -12,7 +14,10 @@ function useUnlinkSpecialtyOfProfessional(setSpecialties) {
         `${HOST}/specialty/unlink/${specialtyId}/professional/${professionalId}`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
 

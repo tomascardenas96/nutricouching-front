@@ -3,6 +3,8 @@ import { HOST } from "../api/data";
 import { toast } from "sonner";
 
 function useCreateService(handleAddServiceModal, setServices) {
+  const authToken = localStorage.getItem("authToken");
+
   const [createServiceInput, setCreateServiceInput] = useState({
     title: "",
     description: "",
@@ -28,6 +30,7 @@ function useCreateService(handleAddServiceModal, setServices) {
 
       const response = await fetch(`${HOST}/service/create`, {
         method: "POST",
+        headers: { Authorization: `Bearer ${authToken}` },
         body: formData,
       });
 

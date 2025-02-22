@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetUsersByQuery() {
+  const authToken = localStorage.getItem("authToken");
+
   const [usersByQuery, setUsersByQuery] = useState([]);
   const [usersByQueryLoading, setUsersByQueryLoading] = useState(true);
   const [usersByQueryError, setUsersByQueryError] = useState(null);
@@ -24,7 +26,14 @@ function useGetUsersByQuery() {
   const handleSubmitGetUsersByQuery = async () => {
     try {
       const response = await fetch(
-        `${HOST}/user/filter?email=${userInputGetUsersByQuery}`
+        `${HOST}/user/filter?email=${userInputGetUsersByQuery}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
       );
       const data = await response.json();
 
@@ -53,7 +62,7 @@ function useGetUsersByQuery() {
     userInputGetUsersByQuery,
     handleSelectUserAndCloseModal,
     selectedUser,
-    handleUnselectUser
+    handleUnselectUser,
   };
 }
 

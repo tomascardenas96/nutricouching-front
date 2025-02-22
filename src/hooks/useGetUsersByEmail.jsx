@@ -9,7 +9,12 @@ function useGetUsersByEmail() {
 
   const handleGetUsersByEmail = async () => {
     try {
-      const response = await fetch(`${HOST}/user/filter?email=${emailInput}`);
+      const response = await fetch(`${HOST}/user/filter?email=${emailInput}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
 
       if (!response.ok) {

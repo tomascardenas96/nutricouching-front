@@ -6,6 +6,7 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
   const [addElementsError, setAddElementsError] = useState(null);
   const { user } = useUser();
   const { activeCart } = useActiveCart();
+  const authToken = localStorage.getItem("authToken");
 
   // Referencia para evitar múltiples ejecuciones
   const hasSyncedCart = useRef(false);
@@ -38,7 +39,10 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
         `${HOST}/cart-item/add/${activeCart.cartId}`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
           body,
         }
       );

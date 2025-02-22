@@ -2,13 +2,18 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useSendForgotPasswordMail(handleOpenForgotPasswordModal) {
+  const authToken = localStorage.getItem("authToken");
+
   const handleSendForgotPasswordMail = async (e, email) => {
     e.preventDefault();
 
     const sendMailPromise = async () => {
       const response = await fetch(`${HOST}/auth/forgot-password/${email}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
       });
 
       const data = await response.json();

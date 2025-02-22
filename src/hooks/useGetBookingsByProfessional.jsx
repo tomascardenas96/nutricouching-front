@@ -3,6 +3,8 @@ import { useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetBookingsByProfessional(professionalId) {
+  const authToken = localStorage.getItem("authToken");
+
   const [bookings, setBookings] = useState([]);
   const [loadingBookings, setLoadingBookings] = useState(false);
   const [errorBookings, setErrorBookings] = useState(null);
@@ -15,7 +17,10 @@ function useGetBookingsByProfessional(professionalId) {
           `${HOST}/booking/professional?professionalId=${professionalId}`,
           {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`,
+            },
           }
         );
 

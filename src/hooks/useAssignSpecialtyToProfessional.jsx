@@ -6,7 +6,10 @@ function useAssignSpecialtyToProfessional(
   setSpecialties,
   handleOpenCloseModal
 ) {
+  const authToken = localStorage.getItem("authToken");
+
   const [selectedSpecialtyId, setSelectedSpecialtyId] = useState("");
+  
   const assignSpecialtyToProfessional = async (
     e,
     specialtyId,
@@ -18,7 +21,10 @@ function useAssignSpecialtyToProfessional(
         `${HOST}/specialty/${specialtyId}/professional/${professionalId}`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
 

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetSpecialtiesByQuery() {
+  const authToken = localStorage.getItem("authToken");
+
   const [specialties, setSpecialties] = useState([]);
   const [specialtiesUserInput, setSpecialtiesUserInput] = useState("");
   const [specialtiesLoading, setSpecialtiesLoading] = useState(true);
@@ -55,7 +57,13 @@ function useGetSpecialtiesByQuery() {
   const getSpecialtiesByQuery = async () => {
     try {
       const response = await fetch(
-        `${HOST}/specialty/filter?name=${specialtiesUserInput}`
+        `${HOST}/specialty/filter?name=${specialtiesUserInput}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
       );
 
       const data = await response.json();

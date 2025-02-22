@@ -5,6 +5,7 @@ import { useState } from "react";
 
 function useAddNewScheduleToProfessional() {
   const { user } = useUser();
+  const authToken = localStorage.getItem("authToken");
 
   const handleSubmitAddNewSchedule = async (e, schedule) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ function useAddNewScheduleToProfessional() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify(schedule),
         }

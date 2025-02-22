@@ -7,6 +7,8 @@ function useModifyService(
   handleModifyServiceModal,
   setServices
 ) {
+  const authToken = localStorage.getItem("authToken");
+
   const [modifyServiceInput, setModifyServiceInput] = useState(selectedService);
   const [fileModifyService, setFileModifyService] = useState(null);
   const [imagePreviewModifyService, setImagePreviewModifyService] =
@@ -30,6 +32,9 @@ function useModifyService(
         `${HOST}/service/update/${selectedService.serviceId}`,
         {
           method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
           body: formData,
         }
       );

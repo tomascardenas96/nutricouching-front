@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetAllSpecialtiesByService(selectedService) {
+  const authToken = localStorage.getItem("authToken");
+
   const [specialties, setSpecialties] = useState([]);
   const [specialtiesLoading, setSpecialtiesLoading] = useState(false);
   const [specialtiesError, setSpecialtiesError] = useState(null);
@@ -16,7 +18,10 @@ function useGetAllSpecialtiesByService(selectedService) {
             `${HOST}/specialty/service/${selectedService.serviceId}`,
             {
               method: "GET",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+              },
             }
           );
 

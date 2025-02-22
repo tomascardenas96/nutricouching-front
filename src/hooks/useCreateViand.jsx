@@ -3,6 +3,8 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useCreateViand(setViands, handleAddViandModal) {
+  const authToken = localStorage.getItem("authToken");
+
   const [createViandInput, setCreateViandInput] = useState({
     name: "",
     description: "",
@@ -64,6 +66,7 @@ function useCreateViand(setViands, handleAddViandModal) {
 
       const res = await fetch(`${HOST}/viand/create`, {
         method: "POST",
+        headers: { Authorization: `Bearer ${authToken}` },
         body: formData,
       });
 

@@ -3,6 +3,8 @@ import { HOST } from "../api/data";
 import { useState } from "react";
 
 function useDeleteProduct(setProducts) {
+  const authToken = localStorage.getItem("authToken");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -24,6 +26,7 @@ function useDeleteProduct(setProducts) {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );

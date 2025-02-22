@@ -3,6 +3,8 @@ import { HOST } from "../api/data";
 import { toast } from "sonner";
 
 function useCreateProduct(setProducts, handleAddProductModal) {
+  const authToken = localStorage.getItem("authToken");
+
   const [createProductInput, setCreateProductInput] = useState({
     name: "",
     description: "",
@@ -29,6 +31,7 @@ function useCreateProduct(setProducts, handleAddProductModal) {
 
       const response = await fetch(`${HOST}/product`, {
         method: "POST",
+        headers: { Authorization: `Bearer ${authToken}` },
         body: formData,
       });
 

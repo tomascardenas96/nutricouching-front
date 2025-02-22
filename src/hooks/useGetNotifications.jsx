@@ -11,7 +11,13 @@ function useGetNotifications() {
   useEffect(() => {
     if (user) {
       const getNotifications = async () => {
-        const response = await fetch(`${HOST}/notification/${user.userId}`);
+        const response = await fetch(`${HOST}/notification/${user.userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
         const data = await response.json();
 
         if (!response.ok) {

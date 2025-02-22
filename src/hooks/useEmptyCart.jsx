@@ -4,6 +4,7 @@ import { useActiveCart } from "../context/UserProvider";
 
 function useEmptyCart(setElementsInCart) {
   const { activeCart } = useActiveCart();
+  const authToken = localStorage.getItem("authToken");
 
   const handleEmptyCart = async () => {
     try {
@@ -11,6 +12,7 @@ function useEmptyCart(setElementsInCart) {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
         },
       });
 

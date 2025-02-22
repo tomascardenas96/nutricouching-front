@@ -1,6 +1,8 @@
 import { HOST } from "../api/data";
 
 function useAddOrSubtractElement(elementsInCart, setElementsInCart) {
+  const authToken = localStorage.getItem("authToken");
+
   const handleAddOrSubtractElement = async (product, cartId, action) => {
     try {
       const response = await fetch(
@@ -11,6 +13,7 @@ function useAddOrSubtractElement(elementsInCart, setElementsInCart) {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify({ action }),
         }

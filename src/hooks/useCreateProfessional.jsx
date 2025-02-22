@@ -2,6 +2,8 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useCreateProfessional(specialties, setProfessionals, closeModal) {
+  const authToken = localStorage.getItem("authToken");
+
   const handleSubmitCreateProfessional = async (e, userId, schedules) => {
     e.preventDefault();
     e.stopPropagation();
@@ -39,7 +41,10 @@ function useCreateProfessional(specialties, setProfessionals, closeModal) {
   const createSpecialtiesNonExistent = async (specialties) => {
     const response = await fetch(`${HOST}/specialty/list`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
       body: JSON.stringify(specialties),
     });
     const data = await response.json();
@@ -55,7 +60,10 @@ function useCreateProfessional(specialties, setProfessionals, closeModal) {
   const createSchedule = async (schedules, professionalId) => {
     const response = await fetch(`${HOST}/availability/${professionalId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
       body: JSON.stringify(schedules),
     });
     const data = await response.json();
@@ -71,7 +79,10 @@ function useCreateProfessional(specialties, setProfessionals, closeModal) {
   const createProfessional = async (professional) => {
     const response = await fetch(`${HOST}/professional/create`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
       body: JSON.stringify(professional),
     });
     const data = await response.json();

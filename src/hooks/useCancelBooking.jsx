@@ -4,6 +4,7 @@ import { useUser } from "../context/UserProvider";
 
 function useCancelBooking(setBookings) {
   const { user } = useUser();
+  const authToken = localStorage.getItem("authToken");
 
   const handleCancelBooking = async (bookingId) => {
     const cancelBooking = async () => {
@@ -11,13 +12,14 @@ function useCancelBooking(setBookings) {
         `${HOST}/booking/delete/${bookingId}/active-user/${user?.userId}`,
         {
           method: "DELETE",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
 
       const data = await response.json();
-
-      console.log(data);
 
       if (!response.ok) {
         throw new Error(data.message);

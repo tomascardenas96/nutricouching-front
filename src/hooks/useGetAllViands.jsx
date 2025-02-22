@@ -11,7 +11,12 @@ function useGetAllViands() {
   useEffect(() => {
     const getAllViands = async () => {
       try {
-        const response = await fetch(`${HOST}/viand`);
+        const response = await fetch(`${HOST}/viand`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!response.ok) {
           throw new Error("Error getting viands");
@@ -47,7 +52,7 @@ function useGetAllViands() {
     isModifyViandModalOpen,
     handleAddViandModal,
     handleModifyViandModal,
-    setViands
+    setViands,
   };
 }
 

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetAllSpecialties() {
+  const authToken = localStorage.getItem("authToken");
+
   const [specialties, setSpecialties] = useState([]);
   const [loadingSpecialties, setLoadingSpecialties] = useState(false);
   const [errorSpecialties, setErrorSpecialties] = useState(null);
@@ -12,7 +14,10 @@ function useGetAllSpecialties() {
       try {
         const response = await fetch(`${HOST}/specialty`, {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
         });
 
         const data = await response.json();

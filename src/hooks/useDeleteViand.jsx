@@ -3,6 +3,8 @@ import { HOST } from "../api/data";
 import { toast } from "sonner";
 
 function useDeleteViand(setViands) {
+  const authToken = localStorage.getItem("authToken");
+
   const [isDeleteViandModalOpen, setIsDeleteViandModalOpen] = useState(false);
   const [selectedViandId, setSelectedViandId] = useState(null);
 
@@ -20,7 +22,10 @@ function useDeleteViand(setViands) {
     const deleteViand = async () => {
       const response = await fetch(`${HOST}/viand/delete/${selectedViandId}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
       });
 
       const data = response.json();

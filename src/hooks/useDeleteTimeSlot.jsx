@@ -4,6 +4,7 @@ import { useUser } from "../context/UserProvider";
 
 function useDeleteTimeSlot(setAvailabilities) {
   const { user } = useUser();
+  const authToken = localStorage.getItem("authToken");
 
   const handleDeleteTimeSlot = async (startTime, day) => {
     const deleteTimeSlot = async () => {
@@ -13,6 +14,7 @@ function useDeleteTimeSlot(setAvailabilities) {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );

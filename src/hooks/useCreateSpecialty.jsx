@@ -3,6 +3,8 @@ import { HOST } from "../api/data";
 import { useState } from "react";
 
 function useCreateSpecialty(setSpecialties, closeModal) {
+  const authToken = localStorage.getItem("authToken");
+
   const [newSpecialtyInput, setNewSpecialtyInput] = useState({
     name: "",
     serviceId: "",
@@ -13,7 +15,10 @@ function useCreateSpecialty(setSpecialties, closeModal) {
     const createSpecialty = async () => {
       const response = await fetch(`${HOST}/specialty`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
         body: JSON.stringify(newSpecialtyInput),
       });
 

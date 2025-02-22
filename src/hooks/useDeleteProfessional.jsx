@@ -3,6 +3,8 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useDeleteProfessional(setProfessionals) {
+  const authToken = localStorage.getItem("authToken");
+
   const [selectedProfessionalId, setSelectedProductId] = useState(null);
   const [isDeleteProfessionalModalOpen, setIsDeleteProfessionalModalOpen] =
     useState(false);
@@ -23,7 +25,10 @@ function useDeleteProfessional(setProfessionals) {
         `${HOST}/professional/delete/${selectedProfessionalId}`,
         {
           method: "DELETE",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
 

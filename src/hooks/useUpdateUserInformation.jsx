@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useUpdateUserInformation() {
+  const authToken = localStorage.getItem("authToken");
   const { user } = useUser();
 
   const [updateUserInput, setUpdateUserInput] = useState({
@@ -41,7 +42,10 @@ function useUpdateUserInformation() {
 
       const response = await fetch(`${HOST}/auth/update/${user.userId}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
         body: JSON.stringify(updateUserInput),
       });
 
