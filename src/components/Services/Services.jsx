@@ -46,9 +46,12 @@ function Services() {
           completo.
         </h1>
       </div>
+
       <div className="services-list_container">
-        <div className="services-list">
-          {services?.map((service, idx) => (
+        {services?.map((service, idx) => {
+          const isEven = idx % 2 === 0;
+
+          return (
             <ServiceCard
               key={service?.serviceId}
               image={service?.image}
@@ -59,9 +62,10 @@ function Services() {
               handleSelectService={() => handleSelectService(service)}
               handleOpenServiceModal={handleOpenServiceModal}
               handleOpenRequestReservation={handleOpenRequestReservation}
+              isEven={isEven}
             />
-          ))}
-        </div>
+          );
+        })}
       </div>
 
       {/* Mostrar modal si hay un servicio seleccionado */}

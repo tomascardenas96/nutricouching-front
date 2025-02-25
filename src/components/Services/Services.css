@@ -3,8 +3,8 @@
 .services-menu {
   display: grid;
   grid-template-rows: max-content 1fr;
-  min-height: 24.6875rem;
-  gap: 9%;
+  gap: 7%;
+  margin-top: 1.5rem;
 }
 
 .services-menu > .title {
@@ -12,12 +12,12 @@
   justify-content: center;
 
   & h1 {
-    font-family: var(--section-font);
-    font-weight: lighter;
-    font-size: 1.4rem;
+    font-family: var(--primary-font);
+    font-weight: 400;
+    font-size: 1.2rem;
     max-width: 40ch;
     text-align: center;
-    color: #9e7682;
+    color: var(--section-font-color);
     display: flex;
     z-index: 1500;
     animation: show-left 1s ease;
@@ -36,20 +36,27 @@
 }
 
 .services-list_container {
-  display: flex;
   width: 100%;
   justify-content: center;
-  overflow-x: auto;
   position: relative;
-  height: 22rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+
+  & .list-left {
+    background-color: red;
+  }
+
+  & .list-right {
+    background-color: green;
+  }
 }
 
 .services-list {
-  display: flex;
-  gap: 2.2rem;
   justify-content: center;
-  padding-top: 0.5rem;
-  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .category-icon {

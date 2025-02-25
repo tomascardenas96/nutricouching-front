@@ -85,6 +85,7 @@ function Header({
           <p>Integral</p>
         </div>
       </div>
+
       <div className="header-menu">
         <ul>
           <li>INICIO</li>
@@ -100,6 +101,7 @@ function Header({
           </li>
         </ul>
       </div>
+
       {user ? (
         <div className="header-user">
           <p onClick={handleOpenUpdateUserModal}>
@@ -127,6 +129,7 @@ function Header({
           </div>
         </div>
       )}
+
       {/* Modales con renderizado condicional */}
       {isLoginModalOpen && (
         <LoginModal

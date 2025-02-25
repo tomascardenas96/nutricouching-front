@@ -1,11 +1,34 @@
 .presentation {
-  display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  background: linear-gradient(#dac6b571 85%, #ebebeb),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='%239C92AC' fill-opacity='0.04'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  align-items: start;
+  padding: 0 14rem;
+}
+
+.background-image {
+  width: 100%;
+  height: 95%;
+
+  position: relative;
+  display: inline-block;
+  background-image: url("/src/public/assets/banner.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.background-image::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(
+    to top,
+    rgba(246, 246, 246, 1) 0%,
+    rgba(246, 246, 246, 0.8) 30%,
+    rgba(246, 246, 246, 0) 100%
+  );
+  pointer-events: none;
 }
 
 .presentation-banner_container {
@@ -14,19 +37,21 @@
   display: flex;
   justify-content: center;
   position: relative;
-  min-height: 18.75rem;
 
   & .banner {
-    width: 37rem;
-    height: max-content;
-    margin-top: 1.9rem;
+    width: 37%;
+    height: 15rem;
     position: relative;
+    align-self: center;
+    border-radius: 0.8rem;
+    display: flex;
 
     & img {
       width: 100%;
-      height: 16.5rem;
       border-radius: 0.8rem;
-      box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.132);
+      box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.107),
+        4px 4px 5px 5px rgba(0, 0, 0, 0.02);
+      object-fit: cover;
     }
   }
 }
@@ -41,7 +66,7 @@
   width: 31%;
   box-shadow: none;
   position: absolute;
-  left: 0;
+  left: 0rem;
   top: -14%;
   opacity: 0.2;
   animation: fade-in 1.5s ease;
@@ -50,8 +75,8 @@
 .background-stencil_hug {
   width: 25%;
   position: absolute;
-  right: 3%;
-  bottom: 20%;
+  right: 2rem;
+  bottom: 16%;
   opacity: 0.2;
   animation: fade-in 2.5s ease;
 }

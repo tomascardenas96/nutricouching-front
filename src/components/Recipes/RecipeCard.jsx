@@ -62,17 +62,26 @@ function RecipeCard({
           </div>
           <div className="ingredients-recipe">
             <p>
-              <span style={{ textDecoration: "underline" }}>Ingredientes:</span>{" "}
+              <span
+                style={{ textDecoration: "underline" }}
+                className="ingredients-span"
+              >
+                Ingredientes:
+              </span>{" "}
               {viand?.ingredients?.length > 0
                 ? viand?.ingredients
                     ?.map((ingredient) => ingredient.name)
                     .join(", ")
                 : "No hay ingredientes"}
               <br />
-              <br />
-              <span>{viand?.description}</span>
+              <span className="recipe-description">{viand?.description}</span>
             </p>
           </div>
+
+          <div className="price-recipe">
+            <h1>Precio: ${viand?.price}</h1>
+          </div>
+
           <div className="footer-recipe">
             <div className="decoration-line"></div>
             <div className="see-recipe">

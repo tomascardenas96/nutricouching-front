@@ -19,6 +19,7 @@ import ElementsInCartProvider from "../../context/ElementsInCartProvider";
 import { useActiveCart, useUser } from "../../context/UserProvider";
 import useGetElementsByCartId from "../../hooks/useGetElementsByCartId";
 import "./Home.css";
+import SubMenu from "../../components/Sub-menu/SubMenu";
 
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
@@ -132,6 +133,10 @@ function Home() {
             />
           </section>
 
+          <section className="sub-menu_container">
+            <SubMenu />
+          </section>
+
           <section className="presentation_container">
             <Presentation />
           </section>
@@ -158,6 +163,13 @@ function Home() {
         <Footer />
       </section>
 
+      {(user?.professional?.role === "root" ||
+        user?.professional?.role === "admin") && (
+        <section className="admin-cms-flap_container">
+          <p onClick={handleAdminCmsModal}>ADMIN</p>
+        </section>
+      )}
+
       {user?.professional?.role === "root" && (
         <>
           {!isCmsModalOpen && (
@@ -168,13 +180,6 @@ function Home() {
 
           {isCmsModalOpen && <RootCmsModal handleCmsModal={handleCmsModal} />}
         </>
-      )}
-
-      {(user?.professional?.role === "root" ||
-        user?.professional?.role === "admin") && (
-        <section className="admin-cms-flap_container">
-          <p onClick={handleAdminCmsModal}>ADMIN</p>
-        </section>
       )}
 
       {isAdminCmsOpen &&

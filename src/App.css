@@ -24,28 +24,23 @@
 }
 
 :root {
-  /* --primary-font: "Quicksand", sans-serif; */
-  --header-user-font: "SUSE", system-ui;
-  --services-modal-header: "NTR", sans-serif;
-  --section-font: "Ubuntu", sans-serif;
-  --presentation-banner-font: "Raleway", sans-serif;
-  --products-card_price: "Lora", serif;
-  --cards-footer-font: "Heebo", sans-serif;
-  --primary-font-color: rgba(255, 255, 255, 0.769);
-  --service-cards-title: "Caveat", cursive;
-  --carousel-title: "Libre Baskerville", serif;
-  --about-us-title: "Playfair Display", serif;
-  --about-us-role: "Poppins", sans-serif;
-  --cart-title-font: "Strait", serif;
-  --total-cart-font: "Titillium Web", serif;
-  --cart-product-card-font: "Inter", serif;
-
   --primary-font: "Montserrat", serif;
   --secondary-font: "Lora", serif;
   --terciary-font: "Hind Madurai", serif;
   --background-shadow-color: rgba(0, 0, 0, 0.184);
   --selected-option-background: #603dc118;
   --selected-option-text: #603dc1d9;
+  --border-radius-modal: 0.7rem;
+  --header-font-color: #8f5d0d;
+  --section-font-color: #9e7682;
+  --primary-color: ;
+  --secondary-color: ;
+  --tertiary-color: ;
+  --primary-details-color: #cc3f0c;
+  --secondary-details-color: #00a650;
+  --tertiary-details-color: #296eb4;
+  --primary-font-color: #412908;
+  --secondary-font-color: #41290891;
 }
 
 ::-webkit-scrollbar {
@@ -72,5 +67,5 @@ html {
 }
 
 body {
-  background-color: #ebebeb;
+  background-color: #f6f6f6;
 }

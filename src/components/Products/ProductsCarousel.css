@@ -21,14 +21,15 @@
 
   & p {
     font-family: var(--primary-font);
-    font-weight: 500;
-    font-size: 1.08rem;
+    font-weight: 400;
+    font-size: 0.96rem;
+    color: var(--primary-font-color);
   }
 
   & .carousel-more {
     font-size: 0.8rem;
     margin-left: 0.4rem;
-    color: #3483fa;
+    color: var(--tertiary-details-color);
     cursor: pointer;
   }
 }
@@ -50,7 +51,7 @@
   border-radius: 50%;
   display: grid;
   place-content: center;
-  color: #3483fa;
+  color: var(--tertiary-details-color);
   background-color: white;
   box-shadow: 2px 0px 4px 2px rgba(0, 0, 0, 0.034);
   cursor: pointer;

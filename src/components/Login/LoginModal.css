@@ -25,9 +25,9 @@
   place-content: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.208);
   position: relative;
+  font-family: var(--primary-font);
 
   & h1 {
-    font-family: var(--presentation-banner-font);
     font-weight: 400;
     font-size: 1.2rem;
   }
@@ -47,13 +47,13 @@
 
   & label {
     position: relative;
+    font-family: var(--primary-font);
     & input {
       width: 100%;
       height: 2.5rem;
       border: none;
       border-bottom: 2px solid rgba(0, 0, 0, 0.124);
       padding-left: 0.3rem;
-      font-family: var(--presentation-banner-font);
     }
 
     & .login-password_show-hide {
@@ -81,7 +81,7 @@
   }
 
   & p {
-    font-family: var(--presentation-banner-font);
+    font-family: var(--primary-font);
     font-size: 0.9rem;
   }
 

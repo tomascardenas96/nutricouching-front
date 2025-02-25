@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
 function useGetAllSpecialtiesByProfessional(professionalId) {
+  const authToken = localStorage.getItem("authToken");
+
   const [specialties, setSpecialties] = useState([]);
   const [specialtiesError, setSpecialtiesError] = useState(null);
   const [specialtiesLoading, setSpecialtiesLoading] = useState(true);

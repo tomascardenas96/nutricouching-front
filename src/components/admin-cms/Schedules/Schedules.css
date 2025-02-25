@@ -6,7 +6,7 @@
     place-content: center;
     border-top: 1.5px solid #00000022;
     color: #603dc193;
-    font-family: var(--services-modal-header);
+    font-family: var(--primary-font);
     cursor: pointer;
 
     & h1 {
@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     margin: 1.5rem 0 0.5rem;
-    font-family: var(--presentation-banner-font);
+    font-family: var(--primary-font);
     font-size: 0.85rem;
   }
 }

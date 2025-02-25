@@ -78,8 +78,8 @@
   .product-description,
   .product-price {
     font-family: var(--primary-font);
-    color: rgba(0, 0, 0, 0.599);
-    font-size: 0.8em;
+    color: var(--primary-font-color);
+    font-size: 0.75em;
   }
 
   & .product-title {
@@ -91,14 +91,13 @@
   }
 
   & .product-description {
-    color: #00a650;
+    color: var(--secondary-details-color);
     margin-bottom: 0.2em;
   }
 
   & .product-price {
     display: flex;
     align-items: center;
-    font-family: var(--cards-footer-font);
     font-size: 1.5em;
     font-weight: lighter;
     font-weight: 400;

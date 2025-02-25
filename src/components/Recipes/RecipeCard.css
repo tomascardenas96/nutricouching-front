@@ -7,7 +7,7 @@
 
   & .recipe-card_text {
     display: grid;
-    grid-template-rows: 4fr 2.5fr max-content 15fr 4fr;
+    grid-template-rows: 4fr 1.5fr max-content 8fr 3fr 4fr;
     gap: 0.5em;
   }
 
@@ -37,15 +37,15 @@
 
 .number-recipe {
   & h1 {
-    border: 1.5px solid rgba(0, 0, 0, 0.421);
+    border: 1.5px solid var(--primary-font-color);
     width: 2.6em;
     height: 3em;
     display: grid;
     place-content: center;
     border-radius: 50%;
-    font-family: var(--section-font);
-    font-weight: lighter;
-    color: rgba(0, 0, 0, 0.516);
+    font-family: var(--primary-font);
+    font-weight: 400;
+    color: var(--primary-font-color);
     font-size: 1.2em;
     background-color: white;
   }
@@ -54,30 +54,51 @@
 .author-recipe {
   & h1 {
     font-family: var(--primary-font);
-    font-size: 1.35em;
-    font-weight: lighter;
-    color: rgba(0, 0, 0, 0.516);
+    font-size: 1.2em;
+    font-weight: 300;
+    color: var(--primary-font-color);
   }
 }
 
 .name-recipe {
   & h1 {
-    font-size: 2em;
-    font-family: var(--carousel-title);
-    font-weight: lighter;
+    font-size: 1.85em;
+    font-family: var(--primary-font);
     max-width: 20ch;
-    color: #90323d;
+    color: var(--primary-details-color);
     margin-bottom: 1rem;
+    font-weight: 400;
   }
 }
 
 .ingredients-recipe {
+  font-family: var(--primary-font);
+  color: var(--primary-font-color);
+
   & p {
     font-size: 0.9em;
-    font-family: var(--primary-font);
     text-align: justify;
     line-height: 2em;
-    color: #90323d;
+  }
+
+  & span.ingredients-span {
+    font-weight: 500;
+    color: var(--primary-details-color);
+    margin-right: 0.4rem;
+  }
+
+  & .recipe-description {
+    font-family: var(--secondary-font);
+    color: var(--secondary-font-color);
+  }
+}
+
+.price-recipe {
+  > h1 {
+    font-family: var(--primary-font);
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--primary-font-color);
   }
 }
 
@@ -89,7 +110,7 @@
   & div.decoration-line {
     width: 65%;
     height: 2px;
-    background-color: #a61c3ccf;
+    background-color: var(--primary-details-color);
   }
 
   & .see-recipe {

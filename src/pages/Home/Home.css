@@ -6,15 +6,24 @@ main {
 
 .main-screen_container {
   height: 100svh;
-  min-height: 48.25rem;
+  display: grid;
+  grid-template-rows: 3.3rem 1.5rem 2.2fr 4fr;
 }
 
 .header_container {
-  height: 4rem;
   width: 100%;
-  position: absolute;
   left: 0;
   top: 0;
+}
+
+.sub-menu_container {
+  background-color: #706359;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.services_container {
+  padding: 0 19rem;
 }
 
 .cms-flap_container {
@@ -31,7 +40,7 @@ main {
   display: grid;
   place-content: center;
   font-size: 1rem;
-  color: #cc3f0c;
+  color: var(--primary-details-color);
   transition: all 0.3s ease;
 }
 
@@ -44,7 +53,6 @@ main {
 .admin-cms-flap_container {
   width: 2rem;
   height: 8rem;
-  background-color: white;
   position: fixed;
   right: 0;
   top: 8%;
@@ -64,7 +72,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: var(--header-user-font);
+    font-family: var(--primary-font);
     font-size: 0.7rem;
     letter-spacing: 0.15rem;
     font-weight: 600;
@@ -73,25 +81,12 @@ main {
   }
 }
 
-.presentation_container {
-  height: 38svh;
-  min-height: 18rem;
-  margin-top: 4rem;
-  position: relative;
-}
-
 .presentation_container .decoration-line {
   position: absolute;
   width: 100%;
   height: 1px;
   background-color: #dac6b571;
   bottom: -3px;
-}
-
-.services_container {
-  width: 100%;
-  display: grid;
-  height: calc(59svh - 4rem);
 }
 
 .products_container {

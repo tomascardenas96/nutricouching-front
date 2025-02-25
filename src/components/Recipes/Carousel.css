@@ -10,10 +10,10 @@
 .carousel-recipes_header {
   display: grid;
   place-content: center;
-  font-size: 1.4rem;
-  font-family: var(--section-font);
-  font-weight: lighter;
-  color: #9e7682;
+  font-size: 1.2rem;
+  font-family: var(--primary-font);
+  font-weight: 400;
+  color: var(--section-font-color);
 }
 
 .viand-carousel_container {
@@ -54,7 +54,6 @@
     position: relative;
     margin-bottom: 1rem;
     border-top: 1px solid #f4ab4589;
-  
 
     & .all-viands_item {
       cursor: pointer;
@@ -86,7 +85,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, #00000051, rgba(0, 0, 0, 0.372));
+      background: var(--primary-details-color);
       border-radius: 4px; /* Esquinas redondeadas */
       border: none;
     }

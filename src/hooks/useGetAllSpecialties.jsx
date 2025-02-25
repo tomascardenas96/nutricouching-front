@@ -10,6 +10,7 @@ function useGetAllSpecialties() {
 
   useEffect(() => {
     const getSpecialties = async () => {
+      if (!authToken) return;
       setLoadingSpecialties(true);
       try {
         const response = await fetch(`${HOST}/specialty`, {
@@ -35,7 +36,7 @@ function useGetAllSpecialties() {
     };
 
     getSpecialties();
-  }, []);
+  }, [authToken]);
 
   return { specialties, loadingSpecialties, errorSpecialties, setSpecialties };
 }
