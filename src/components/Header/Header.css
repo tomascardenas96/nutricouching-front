@@ -3,8 +3,8 @@
   height: 100%;
   grid-template-columns: repeat(3, max-content);
   border-radius: 0 0 0.2rem 0.2rem;
-  padding: 0 15rem;
-  background-color: #ebebeb;
+  padding: 0 5rem;
+  background-color: #f6f6f6;
   justify-content: space-between;
 }
 

@@ -26,7 +26,7 @@ function ServiceCard({
     >
       <div
         className="color-line"
-        style={{ borderTop: `3px solid ${color}` }}
+        style={{ borderTop: `1.5px solid ${color}` }}
       ></div>
       <div className="card-img" style={{ gridColumn: !isEven && "2 / 3" }}>
         <img

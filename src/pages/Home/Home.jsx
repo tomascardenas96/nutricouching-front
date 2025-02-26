@@ -101,66 +101,70 @@ function Home() {
 
   return (
     <main>
-      {/* Contexto elementos en el carrito */}
-      <ElementsInCartProvider
-        elementsInCart={elementsInCart}
-        setElementsInCart={setElementsInCart}
-      >
-        {/* Carrito de compras */}
-        {isCartModalOpen &&
-          createPortal(
-            <CartModal
-              handleCartModal={handleCartModal}
-              productsInCart={productsInCart}
-              setProductsInCart={setProductsInCart}
-              viandsInCart={viandsInCart}
-              setViandsInCart={setViandsInCart}
-              user={user}
-            />,
-            document.body
-          )}
+      <div className="blur-background"></div>
 
-        {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
-        <div className="main-screen_container">
-          <section className="header_container">
-            <Header
-              handleCartModal={handleCartModal}
-              setProductsInCart={setProductsInCart}
-              setViandsInCart={setViandsInCart}
-              user={user}
-              productsInCart={productsInCart}
-              viandsInCart={viandsInCart}
-            />
+      <section className="main-background">
+        {/* Contexto elementos en el carrito */}
+        <ElementsInCartProvider
+          elementsInCart={elementsInCart}
+          setElementsInCart={setElementsInCart}
+        >
+          {/* Carrito de compras */}
+          {isCartModalOpen &&
+            createPortal(
+              <CartModal
+                handleCartModal={handleCartModal}
+                productsInCart={productsInCart}
+                setProductsInCart={setProductsInCart}
+                viandsInCart={viandsInCart}
+                setViandsInCart={setViandsInCart}
+                user={user}
+              />,
+              document.body
+            )}
+
+          {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
+          <div className="main-screen_container">
+            <section className="header_container">
+              <Header
+                handleCartModal={handleCartModal}
+                setProductsInCart={setProductsInCart}
+                setViandsInCart={setViandsInCart}
+                user={user}
+                productsInCart={productsInCart}
+                viandsInCart={viandsInCart}
+              />
+            </section>
+
+            <section className="sub-menu_container">
+              <SubMenu />
+            </section>
+
+            <section className="presentation_container">
+              <Presentation />
+            </section>
+
+            <section className="services_container">
+              <Services />
+            </section>
+          </div>
+
+          <section className="products_container">
+            <Products setProductsInCart={setProductsInCart} />
           </section>
 
-          <section className="sub-menu_container">
-            <SubMenu />
+          <section className="recipes_container">
+            <Carousel setViandsInCart={setViandsInCart} />
           </section>
+        </ElementsInCartProvider>
 
-          <section className="presentation_container">
-            <Presentation />
-          </section>
-
-          <section className="services_container">
-            <Services />
-          </section>
-        </div>
-
-        <section className="products_container">
-          <Products setProductsInCart={setProductsInCart} />
+        <section className="about-us_container">
+          <About />
         </section>
 
-        <section className="recipes_container">
-          <Carousel setViandsInCart={setViandsInCart} />
+        <section className="footer_container">
+          <Footer />
         </section>
-      </ElementsInCartProvider>
-
-      <section className="about-us_container">
-        <About />
-      </section>
-
-      <section className="footer_container">
-        <Footer />
       </section>
 
       {(user?.professional?.role === "root" ||

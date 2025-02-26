@@ -41,6 +41,7 @@
   --tertiary-details-color: #296eb4;
   --primary-font-color: #412908;
   --secondary-font-color: #41290891;
+  --light-font-color: white;
 }
 
 ::-webkit-scrollbar {
@@ -48,18 +49,17 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f4f4;
+  background: #ffffff;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, #00000051, rgba(0, 0, 0, 0.372));
-  border-radius: 10px;
-  border: 2px solid #f4f4f4;
+  background: linear-gradient(90deg, #2f4858, #2f4858);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(90deg, #00000037, rgba(0, 0, 0, 0.372));
+  background: linear-gradient(90deg, #2f4858b0, #2f48589a);
 }
 
 html {
@@ -68,4 +68,8 @@ html {
 
 body {
   background-color: #f6f6f6;
+}
+
+* {
+  box-sizing: border-box;
 }

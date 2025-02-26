@@ -34,14 +34,14 @@
     transform: translateX(0);
   }
 }
-
+  
 .services-list_container {
   width: 100%;
   justify-content: center;
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.8rem;
+  gap: 2.3rem;
 
   & .list-left {
     background-color: red;

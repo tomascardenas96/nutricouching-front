@@ -1,12 +1,10 @@
 .sub-menu {
-    /* width: 100%;
-    padding: 0 10rem;
-    height: 3rem;
-    background-color: #706359; */
-    display: grid;
-    place-content: center;
-    color: white;
-    font-family: var(--primary-font);
-    font-size: .75rem;
-    height: 100%;
+  display: grid;
+  place-content: center;
+  color: white;
+  font-family: var(--primary-font);
+  font-size: 0.68rem;
+  height: 100%;
+  background-color: #2F4858;
+  border-radius: .2rem;
 }

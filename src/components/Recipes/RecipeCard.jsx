@@ -6,6 +6,7 @@ import { HOST } from "../../api/data";
 import useAddViandToCart from "../../hooks/useAddViandToCart";
 import { useEffect } from "react";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
+import TurnPageArrow from "../Common/TurnPageArrow";
 
 function RecipeCard({
   previous,
@@ -79,7 +80,9 @@ function RecipeCard({
           </div>
 
           <div className="price-recipe">
-            <h1>Precio: ${viand?.price}</h1>
+            <h1>
+              Precio: <span>${viand?.price}</span>
+            </h1>
           </div>
 
           <div className="footer-recipe">
@@ -99,14 +102,14 @@ function RecipeCard({
             onLoad={() => setLoaded(true)}
           />
         </div>
-        <MdArrowBackIosNew
-          className="carousel-btn carousel-btn_left"
-          onClick={() => previous()}
-        />
-        <MdArrowForwardIos
-          className="carousel-btn carousel-btn_right"
-          onClick={() => next()}
-        />
+
+        <div className="carousel-btn carousel-btn_left">
+          <TurnPageArrow color="#00a650" direction="left" turnPage={previous} />
+        </div>
+
+        <div className="carousel-btn carousel-btn_right">
+          <TurnPageArrow color="#00a650" direction="right" turnPage={next} />
+        </div>
       </div>
     </section>
   );

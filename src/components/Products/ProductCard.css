@@ -1,5 +1,5 @@
 .product-card_container {
-  width: 16%;
+  width: 19%;
   height: 95%;
   border-radius: 0.1rem;
   display: grid;
@@ -36,6 +36,7 @@
   justify-content: center;
   position: relative;
   transition: opacity 0.3s ease; /* Añadido para transición suave si se necesita en el contenedor */
+  margin-bottom: 0.5rem;
 }
 
 .product-card_container:hover img,
@@ -45,8 +46,8 @@
 }
 
 .product-card_container img {
-  width: 9.5rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8.5rem;
   object-fit: cover;
   object-position: center;
   transition: opacity 0.3s ease; /* Transición suave para la imagen */
@@ -98,7 +99,7 @@
   & .product-price {
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: lighter;
     font-weight: 400;
     margin-top: 0.4rem;

@@ -52,28 +52,32 @@ function Carousel({ setViandsInCart }) {
           setViandsInCart={setViandsInCart}
           allViands={viands}
         />
+      </div>
 
-        <div className="carousel_all-viands">
-          <div className="all-viands_list">
-            {viands.map((viand, index) => (
-              <div
-                key={`viand-${viand.viandId}`}
-                className={`all-viands_item ${
-                  selectedIndex === index ? "selected" : ""
-                }`}
-                onClick={() => {
-                  setLoaded(false);
-                  setSelectedIndex(index);
-                }}
-              >
-                <img
-                  src={`${HOST}/uploads/viands/${viand.image}`}
-                  alt="viand-image_carousel"
-                />
-              </div>
-            ))}
-          </div>
+      <div className="carousel_all-viands">
+        <div className="all-viands_list">
+          {viands.map((viand, index) => (
+            <div
+              key={`viand-${viand.viandId}`}
+              className={`all-viands_item ${
+                selectedIndex === index ? "selected" : ""
+              }`}
+              onClick={() => {
+                setLoaded(false);
+                setSelectedIndex(index);
+              }}
+            >
+              <img
+                src={`${HOST}/uploads/viands/${viand.image}`}
+                alt="viand-image_carousel"
+              />
+            </div>
+          ))}
         </div>
+      </div>
+
+      <div className="recipes-carousel_footer">
+
       </div>
     </section>
   );

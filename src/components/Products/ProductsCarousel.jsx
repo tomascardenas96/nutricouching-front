@@ -3,6 +3,7 @@ import useGetAllProducts from "../../hooks/useGetAllProducts";
 import Dots from "../Common/Dots";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
+import TurnPageArrow from "../Common/TurnPageArrow";
 
 function ProductsCarousel({ setProductsInCart }) {
   const {
@@ -23,6 +24,7 @@ function ProductsCarousel({ setProductsInCart }) {
           <span className="carousel-more">Ver más</span>
         </p>
       </div>
+
       <div className="product-list">
         {currentProducts?.map((product) => (
           <ProductCard
@@ -32,9 +34,15 @@ function ProductsCarousel({ setProductsInCart }) {
           />
         ))}
       </div>
-      <div className="next-page" onClick={nextPage}>
-        <MdArrowForwardIos />
+
+      <div className="previous-page">
+        <TurnPageArrow color="#296eb4" direction="left" turnPage={nextPage} />
       </div>
+
+      <div className="next-page">
+        <TurnPageArrow color="#296eb4" direction="right" turnPage={nextPage} />
+      </div>
+
       <div className="products-carousel_dots">
         <Dots />
       </div>

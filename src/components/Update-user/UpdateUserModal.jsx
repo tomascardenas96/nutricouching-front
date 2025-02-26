@@ -44,7 +44,6 @@ function UpdateUserModal() {
             name="oldPassword"
             onChange={handleChangeUserInput}
             value={updateUserInput.oldPassword}
-            required
           />
         </label>
 
@@ -55,7 +54,6 @@ function UpdateUserModal() {
             name="password"
             onChange={handleChangeUserInput}
             value={updateUserInput.password}
-            required
           />
         </label>
 
@@ -66,7 +64,6 @@ function UpdateUserModal() {
             name="confirm-password"
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             value={confirmNewPassword}
-            required
           />
           {incorrectConfirmPassword && <p>La contraseña no coincide</p>}
         </label>

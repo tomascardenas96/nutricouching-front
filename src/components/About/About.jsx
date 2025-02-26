@@ -12,7 +12,7 @@ function About() {
         <h1>Nuestro equipo de profesionales... </h1>
       </div>
       <div className="about-body">
-        <div className="cards-container">
+        {/* <div className="cards-container">
           {professionals?.map((professional) => (
             <AboutCard
               key={professional.professionalId}
@@ -21,7 +21,7 @@ function About() {
               role={professional.specialty}
             />
           ))}
-        </div>
+        </div> */}
       </div>
       <div className="brand-footer">
         <img src="/src/public/assets/nutricouching-logo.jpg" alt="" />

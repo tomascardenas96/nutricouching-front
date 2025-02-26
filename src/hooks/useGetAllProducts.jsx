@@ -11,7 +11,7 @@ function useGetAllProducts() {
   const [isModifyProductModalOpen, setIsModifyProductModalOpen] =
     useState(false);
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const startIndex = currentPage * itemsPerPage;
