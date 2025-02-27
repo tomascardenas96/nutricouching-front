@@ -2,6 +2,7 @@ import "./AboutCard.css";
 import { FaFacebookF } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 import { HOST } from "../../api/data";
 import React from "react";
 
@@ -14,15 +15,16 @@ function AboutCard({ image, name, role }) {
           alt="professional-picture"
         />
       </div>
+
       <div className="about-card_description">
         <div className="about-card_info">
-          <div className="name-social">
-            <h1>{name}</h1>
-            <div className="social-networks">
-              <FaFacebookF />
-              <FaYoutube />
-              <FaInstagram />
-            </div>
+          <h1>{name}</h1>
+          <h2>Coach Ontologico</h2>
+          <div className="social-networks">
+            <FaFacebookF />
+            <SiGmail />
+            <FaYoutube />
+            <FaInstagram />
           </div>
         </div>
       </div>

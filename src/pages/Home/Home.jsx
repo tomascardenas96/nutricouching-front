@@ -12,6 +12,7 @@ import Presentation from "../../components/Presentation/Presentation";
 import Products from "../../components/Products/Products";
 import Carousel from "../../components/Recipes/Carousel";
 import Services from "../../components/Services/Services";
+import SubMenu from "../../components/Sub-menu/SubMenu";
 import AdminCmsModal from "../../components/admin-cms/AdminCmsModal";
 import NotificationPopUp from "../../components/notifications/NotificationPopUp";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
@@ -19,7 +20,6 @@ import ElementsInCartProvider from "../../context/ElementsInCartProvider";
 import { useActiveCart, useUser } from "../../context/UserProvider";
 import useGetElementsByCartId from "../../hooks/useGetElementsByCartId";
 import "./Home.css";
-import SubMenu from "../../components/Sub-menu/SubMenu";
 
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);

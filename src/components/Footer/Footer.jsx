@@ -11,71 +11,78 @@ import { FaTiktok } from "react-icons/fa";
 function Footer() {
   return (
     <footer>
-      <div className="footer-cards">
-        <div className="footer-item">
-          <div className="card-header">
-            <h2>Direccion</h2>
+      <div className="top-container">
+        <div className="footer_links">
+          <div className="footer_logo">
+            <h1>NUTRICOACHING INTEGRAL</h1>
+            <img src="/src/public/assets/nutricouching-logo.jpg"></img>
           </div>
-          <div className="card-body">
-            <p>
-              <FaLocationDot className="location-icon" />
-              Calle falsa 123 Benito Juarez, Buenos Aires
-            </p>
-            <p>
-              <IoIosPhonePortrait className="location-icon" />
-              +549 2281-504490
-            </p>
-            <p>
-              <FaEnvelope className="location-icon" />
-              natashadirialdi@gmail.com
-            </p>
+
+          <div>
+            <ul>
+              <li>WEEBLY THEMES</li>
+              <li>PRE-SALE FAQS</li>
+              <li>SUBMIT A TICKET</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li>SERVICES</li>
+              <li>THEME TWEAK</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li>SHOWCASE</li>
+              <li>WIDGETKIT</li>
+              <li>SUPPORT</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li>ABOUT US</li>
+              <li>CONTACT US</li>
+              <li>AFFILIATES</li>
+              <li>RESOURCES</li>
+            </ul>
           </div>
         </div>
-        <div className="footer-item">
-          <div className="card-header">
-            <h2>Horarios de atencion</h2>
-          </div>
-          <div className="card-body">
-            <div className="schedule-container">
-              <div>
-                <p>Martes a Viernes</p>
-                <p>9:00am a 18:00pm</p>
-              </div>
-              <div>
-                <p>Sabado</p>
-                <p>9:00am a 23:00pm</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="footer-item">
-          <div className="card-header">
-            <h2>Redes sociales</h2>
-          </div>
-          <div className="card-body">
-            <div className="social-network">
-              <div className="social-network_icons">
-                <div>
-                  <FaFacebookF />
-                </div>
-                <div>
-                  <FaXTwitter />
-                </div>
-                <div>
-                  <FaInstagram />
-                </div>
-                <div>
-                  <FaLinkedin />
-                </div>
-                <div>
-                  <FaTiktok />
-                </div>
-              </div>
-              <div className="social-network_recommend">
-                <div>Etiquetanos en tus fotos! 🩵</div>
-              </div>
-            </div>
-          </div>
+      </div>
+
+      <div className="bottom-container">
+        <div className="footer">
+          <ul>
+            <li>
+              <a>
+                <FaFacebookF />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaXTwitter />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaInstagram />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaLinkedin />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaTiktok />
+              </a>
+            </li>
+          </ul>
+
+          <p>Creado por Tomas Cardenas - http://www.tomascardenas.com</p>
         </div>
       </div>
     </footer>

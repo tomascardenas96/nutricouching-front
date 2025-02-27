@@ -6,13 +6,15 @@ function About() {
   const { professionals, professionalsLoading, professionalsError } =
     useGetProfessionals();
 
+
   return (
     <div className="about">
       <div className="about-header">
         <h1>Nuestro equipo de profesionales... </h1>
       </div>
+
       <div className="about-body">
-        {/* <div className="cards-container">
+        <div className="cards-container">
           {professionals?.map((professional) => (
             <AboutCard
               key={professional.professionalId}
@@ -21,10 +23,14 @@ function About() {
               role={professional.specialty}
             />
           ))}
-        </div> */}
+        </div>
       </div>
+
       <div className="brand-footer">
-        <img src="/src/public/assets/nutricouching-logo.jpg" alt="" />
+        <img
+          src="/src/public/assets/nutricouching-logo.jpg"
+          alt="nutricoaching logo"
+        />
         <p>Nutri-coaching Integral ©</p>
       </div>
     </div>

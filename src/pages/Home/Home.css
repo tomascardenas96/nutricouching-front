@@ -13,7 +13,7 @@ main {
 .blur-background {
   position: fixed;
   inset: 0;
-  background: url("/src/public/assets/banner17.jpg"), rgba(0, 0, 0, 0.327);
+  background: url("/src/public/assets/banner17.jpg"), rgba(0, 0, 0, 0.383);
   background-blend-mode: darken;
   background-size: cover;
   filter: blur(3px); /* Aplica el blur */
@@ -134,14 +134,17 @@ main {
 
 .recipes_container {
   display: flex;
-  margin-bottom: 6rem;
 }
 
 .about-us_container {
+  height: 100svh;
+  display: grid;
+  place-content: center;
+  position: relative;
 }
 
 .footer_container {
-  height: 23rem;
+  height: 29rem;
   width: 100%;
 }
 
