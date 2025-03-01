@@ -148,7 +148,13 @@ function Header({
       )}
 
       {isUpdateUserModalOpen &&
-        createPortal(<UpdateUserModal />, document.body)}
+        createPortal(
+          <UpdateUserModal
+            handleOpenUpdateUserModal={handleOpenUpdateUserModal}
+            setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
+          />,
+          document.body
+        )}
     </div>
   );
 }

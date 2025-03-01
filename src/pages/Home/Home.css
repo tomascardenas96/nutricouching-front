@@ -13,7 +13,7 @@ main {
 .blur-background {
   position: fixed;
   inset: 0;
-  background: url("/src/public/assets/banner17.jpg"), rgba(0, 0, 0, 0.383);
+  background: url("/src/public/assets/banner17.jpg"), rgba(0, 0, 0, 0.445);
   background-blend-mode: darken;
   background-size: cover;
   filter: blur(3px); /* Aplica el blur */
@@ -149,19 +149,3 @@ main {
 }
 
 /* Media queries */
-
-@media screen and (max-width: 1550px) {
-  .about-us_container {
-    min-height: 39rem;
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .recipes_container {
-    min-height: 40.875rem;
-    margin-bottom: 2.5rem;
-  }
-  .about-us_container {
-    min-height: 34rem;
-  }
-}

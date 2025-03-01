@@ -1,0 +1,25 @@
+.input-error {
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  display: grid;
+  grid-template-columns: 2rem max-content;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.832);
+
+  > .icon {
+    color: rgba(255, 0, 0, 0.491);
+  }
+
+  > .message {
+    background-color: white;
+    font-size: 0.8rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-left: 2.5px solid rgba(255, 0, 0, 0.542);
+  }
+}

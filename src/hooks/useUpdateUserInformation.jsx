@@ -3,7 +3,10 @@ import { useUser } from "../context/UserProvider";
 import { toast } from "sonner";
 import { HOST } from "../api/data";
 
-function useUpdateUserInformation() {
+function useUpdateUserInformation(
+  setConfirmChangesModal,
+  setIsUpdateUserModalOpen
+) {
   const authToken = localStorage.getItem("authToken");
   const { user } = useUser();
 
@@ -15,8 +18,11 @@ function useUpdateUserInformation() {
   });
 
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
   const [incorrectConfirmPassword, setIncorrectConfirmPassword] =
     useState(null);
+  const [currentPasswordError, setCurrentPasswordError] = useState(null);
+  const [passwordCharError, setPasswordCharError] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -33,13 +39,17 @@ function useUpdateUserInformation() {
 
   const onSubmitUpdateUserInformation = async (e) => {
     e.preventDefault();
+    setIncorrectConfirmPassword(null);
+    setCurrentPasswordError(null);
+
+    const hasInputsError = verifyInputs();
+
+    if (hasInputsError) {
+      setConfirmChangesModal(false);
+      return;
+    }
 
     const updateUserInformationPromise = async () => {
-      if (confirmNewPassword !== updateUserInput.password) {
-        setIncorrectConfirmPassword(true);
-        throw new Error("La contraseña no coincide");
-      }
-
       const response = await fetch(`${HOST}/auth/update/${user.userId}`, {
         method: "PATCH",
         headers: {
@@ -51,17 +61,66 @@ function useUpdateUserInformation() {
 
       const data = await response.json();
 
-      if (!response.ok)
-        throw new Error("Error al actualizar los datos de usuario");
+      if (data.statusCode === 400) {
+        setCurrentPasswordError("Contraseña incorrecta");
+        throw new Error();
+      }
+
+      if (!response.ok) throw new Error();
 
       return data;
     };
 
     toast.promise(updateUserInformationPromise(), {
-      success: "Usuario actualizado!",
+      success: (data) => {
+        setIsUpdateUserModalOpen(false);
+        return "Usuario actualizado!";
+      },
       loading: "Actualizando usuario...",
-      error: (err) => err.message,
+      error: (err) => {
+        setConfirmChangesModal(false);
+
+        return "Error en los datos ingresados";
+      },
     });
+  };
+
+  const verifyInputs = () => {
+    let hasErrors = false;
+
+    if (
+      (updateUserInput.password || confirmNewPassword) &&
+      !updateUserInput.oldPassword
+    ) {
+      setCurrentPasswordError("Ingrese su contraseña actual");
+      hasErrors = true;
+    }
+
+    if (
+      updateUserInput.password.length < 8 ||
+      updateUserInput.password.length > 12
+    ) {
+      setPasswordCharError("La contraseña debe tener entre 8 y 12 caracteres");
+      hasErrors = true;
+    }
+
+    if (confirmNewPassword !== updateUserInput.password) {
+      setIncorrectConfirmPassword("La contraseña no coincide");
+      hasErrors = true;
+    }
+
+    if (
+      !updateUserInput.password &&
+      (confirmNewPassword || updateUserInput.oldPassword)
+    ) {
+      setIncorrectConfirmPassword("La contraseña no coincide");
+      hasErrors = true;
+    }
+
+    // Si hay errores, no ejecutar la API
+    if (hasErrors) {
+      return hasErrors;
+    }
   };
 
   const handleChangeUserInput = (e) => {
@@ -77,6 +136,8 @@ function useUpdateUserInformation() {
     confirmNewPassword,
     setConfirmNewPassword,
     incorrectConfirmPassword,
+    currentPasswordError,
+    passwordCharError,
   };
 }
 
