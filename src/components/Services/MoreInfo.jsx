@@ -1,12 +1,21 @@
 import "./MoreInfo.css";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { reviews } from "./reviews/reviews";
+import { useUser } from "../../context/UserProvider";
 
 function MoreInfo({
   handleOpenRequestReservation,
   title,
   handleOpenServiceModal,
+  handleLoginModal,
 }) {
+  const { user } = useUser();
+
+  const openLoginModal = () => {
+    handleOpenServiceModal();
+    handleLoginModal();
+  };
+
   return (
     <div
       className="services_more-info_container"
@@ -52,7 +61,9 @@ function MoreInfo({
         </div>
 
         <div className="service-modal_footer">
-          <button onClick={handleOpenRequestReservation}>
+          <button
+            onClick={user ? handleOpenRequestReservation : openLoginModal}
+          >
             SOLICITAR TURNO <RiCalendarScheduleFill className="schedule-icon" />
           </button>
         </div>

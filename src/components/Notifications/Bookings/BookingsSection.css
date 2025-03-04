@@ -2,25 +2,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: rgba(0, 0, 0, 0.652);
+  color: var(--primary-font-color);
+  height: 2.5rem;
 
   & h1 {
-    font-weight: bold;
-  }
-
-  & .schedule-icon {
-    margin-bottom: 0.2rem;
+    font-weight: 400;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 0.5rem;
   }
 }
 
 .previous-shifts-header {
-  & h1 {
-    font-weight: bold;
+  color: var(--primary-font-color);
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > h1 {
+    font-weight: 400;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 0.5rem;
   }
 
   & .history-icon {
-    font-size: 1.23rem;
-    margin-bottom: 0.15rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -32,14 +44,17 @@
   background-color: white;
   border-radius: 0.2rem;
   border: 1px solid #e6e6e6;
-  padding: 0.5rem 0.7rem;
+  padding: 1.3rem 0.7rem;
   overflow-y: auto;
+  gap: 0.8rem;
 
   & p.no-pending-bookings,
   p.no-previous-shifts {
     display: grid;
     place-content: center;
-    color: rgba(0, 0, 0, 0.652);
+    font-family: var(--primary-font);
+    font-size: 0.83rem;
+    color: rgb(65, 65, 65);
   }
 }
 

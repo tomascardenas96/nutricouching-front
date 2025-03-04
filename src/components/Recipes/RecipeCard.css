@@ -172,3 +172,88 @@
 .carousel-btn_right {
   right: -9%;
 }
+
+@media screen and (max-width: 1330px) {
+  .carousel {
+    & .recipe-card_text {
+      padding-right: 3.5rem;
+    }
+  }
+
+  .number-recipe {
+    & h1 {
+      font-size: 1em;
+      width: 2.3em;
+      height: 2.6em;
+    }
+  }
+
+  .author-recipe {
+    & h1 {
+      font-size: 1em;
+    }
+  }
+
+  .name-recipe {
+    & h1 {
+      font-size: 1.3em;
+    }
+  }
+
+  .ingredients-recipe {
+    & p {
+      font-size: 0.75em;
+      line-height: 1.95em;
+    }
+  }
+
+  .price-recipe {
+    > h1 {
+      font-size: 1rem;
+
+      > span {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .footer-recipe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .see-recipe {
+      & p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .carousel {
+    grid-template-columns: minmax(15rem, 40rem);
+    gap: 1rem;
+  }
+
+  .recipe-card_img {
+    grid-row: 1/ 2;
+
+    & img {
+      width: 100% !important;
+    }
+  }
+
+  .carousel-btn {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .carousel {
+    & .recipe-card_text {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}

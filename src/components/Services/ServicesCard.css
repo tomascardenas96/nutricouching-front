@@ -8,6 +8,10 @@
   border: 1px solid #c9c9c9;
 }
 
+.right-service-cards {
+  grid-template-columns: 1fr 12rem;
+}
+
 .services-card_container {
   border-radius: 0.6rem;
   position: relative;
@@ -68,6 +72,11 @@
     padding: 4% 0.7rem 0;
     line-height: 1.1rem;
     color: rgba(0, 0, 0, 0.823);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    max-height: 4rem;
   }
 
   & div.know-more {
@@ -80,7 +89,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      width: 50%;
+      width: 8rem;
       height: 1.8rem;
       justify-content: center;
       border-radius: 0.5rem;
@@ -104,67 +113,111 @@
 
 /* Media queries */
 
-@media screen and (max-width: 1550px) {
+@media screen and (max-width: 1390px) {
   .services-card_container {
-    width: 18rem;
+    height: 12rem;
+    grid-template-columns: 10rem 1fr;
+  }
+
+  .right-service-cards {
+    grid-template-columns: 1fr 10rem;
+  }
+
+  .service-image {
+    width: 8.5rem;
+    height: 8.5rem;
   }
 
   .services-card_container .card-description {
-    grid-template-rows: 0.65fr 1fr 0.4fr;
-
     & h1 {
       font-size: 0.7rem;
     }
+
     & p {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .service-image {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .services-card_container {
+    height: 11rem;
+    grid-template-columns: 10rem 1fr;
+  }
+
+  .right-service-cards {
+    grid-template-columns: 1fr 10rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .services-card_container {
+    max-width: 30.5rem;
+    justify-self: center;
+    height: 14rem;
+    grid-template-columns: 12rem 1fr;
+  }
+
+  .right-service-cards {
+    grid-template-columns: 1fr 12rem;
+  }
+
+  .service-image {
+    width: 9.5rem;
+    height: 9.5rem;
+  }
+
+  .services-card_container .card-description {
+    & h1 {
+      font-size: 0.85rem;
     }
 
+    & p {
+      font-size: 0.8rem;
+    }
     & div.know-more {
       & div {
-        & p {
-          font-size: 0.75rem;
-        }
+        width: 13rem;
       }
     }
   }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 540px) {
   .services-card_container {
-    width: 15rem;
+    min-width: 75%;
+    grid-template-columns: 8rem 1fr;
+    border-left: none;
+    border-right: none;
   }
 
-  .services-card_container .card-header {
-    & .icon {
-      font-size: 0.9rem;
-    }
+  .right-service-cards {
+    grid-template-columns: 1fr 8rem;
+  }
 
-    & .card-img {
-      width: 5rem;
-      height: 5rem;
-
-      & img {
-        width: 4.5rem;
-        height: 4.5rem;
-      }
-    }
+  .service-image {
+    width: 7rem;
+    height: 7rem;
   }
 
   .services-card_container .card-description {
-    grid-template-rows: 0.65fr 1fr 0.4fr;
-
     & h1 {
       font-size: 0.75rem;
     }
-    & p {
-      font-size: 0.65rem;
-    }
 
+    & p {
+      font-size: 0.7rem;
+    }
     & div.know-more {
       & div {
-        & p {
-          font-size: 0.6rem;
-        }
+        width: 10rem;
       }
     }
   }

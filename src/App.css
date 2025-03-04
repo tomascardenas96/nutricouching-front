@@ -59,3 +59,15 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 1050px) {
+    /* Ocultar la barra de scroll en navegadores WebKit (Chrome, Edge, Safari) */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  
+    /* Ocultar la barra de scroll en Firefox */
+    html, body {
+      scrollbar-width: none;
+    }
+}

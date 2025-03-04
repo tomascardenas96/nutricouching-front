@@ -10,6 +10,7 @@ import RegisterModal from "../Register/RegisterModal";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
 import { createPortal } from "react-dom";
 import UpdateUserModal from "../Update-user/UpdateUserModal";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function Header({
   handleCartModal,
@@ -75,6 +76,10 @@ function Header({
 
   return (
     <div className="header">
+      <div className="burger-menu">
+        <GiHamburgerMenu />
+      </div>
+
       <div className="header-logo">
         <div>
           <img

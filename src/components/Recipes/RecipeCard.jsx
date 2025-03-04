@@ -1,12 +1,10 @@
-import { FaArrowRight } from "react-icons/fa";
-import "./RecipeCard.css";
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+import { useEffect } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { HOST } from "../../api/data";
-import useAddViandToCart from "../../hooks/useAddViandToCart";
-import { useEffect } from "react";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
+import useAddViandToCart from "../../hooks/useAddViandToCart";
 import TurnPageArrow from "../Common/TurnPageArrow";
+import "./RecipeCard.css";
 
 function RecipeCard({
   previous,

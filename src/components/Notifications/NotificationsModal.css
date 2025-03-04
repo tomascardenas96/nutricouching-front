@@ -5,19 +5,19 @@
   top: 0;
   left: 0;
   z-index: 1500;
-  background-color: rgba(0, 0, 0, 0.295);
+  background-color: var(--background-shadow-color);
 }
 
 .user-notifications-modal {
   width: 29rem;
   background-color: #f2f2f2;
   position: fixed;
-  right: 6rem;
-  bottom: 7.5rem;
-  border-radius: 0.2rem;
+  right: 12rem;
+  bottom: 3rem;
+  border-radius: 0.8rem;
   box-shadow: -1px 1px 5px 5px rgba(0, 0, 0, 0.052);
   font-family: var(--services-modal-header);
-  padding: 0.7rem 1rem 1.5rem 1rem;
+  padding: 0.7rem 1rem 3rem 1rem;
 
   & .close-icon {
     display: flex;
@@ -42,6 +42,9 @@
       padding: 0 0.6rem;
       border-radius: 0.3rem;
       color: rgb(72, 72, 72);
+      font-size: 0.75rem;
+      display: grid;
+      place-content: center;
     }
 
     & p.selected-section_notifications-modal {
@@ -50,7 +53,7 @@
     }
   }
 
-  & h1 {
+  > h1 {
     font-weight: 300;
     font-size: 1rem;
     padding-left: 1rem;

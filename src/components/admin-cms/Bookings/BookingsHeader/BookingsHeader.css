@@ -5,13 +5,14 @@
   color: #603dc193;
   font-family: var(--services-modal-header);
   border-bottom: 1.5px solid #603dc193;
-  height: 2rem;
+  height: 1.3rem;
   margin: 0 0.5rem;
+  margin-bottom: 0.4rem;
 
   & p {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: 1.07rem;
+    font-size: 0.82rem;
   }
 }

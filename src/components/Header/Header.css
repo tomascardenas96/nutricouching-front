@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.burger-menu {
+  display: none;
+}
+
 .header-logo {
   display: grid;
   padding-left: 2rem;
@@ -162,7 +166,7 @@
   }
 
   .header-logo p {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .header-menu > ul {
@@ -170,7 +174,7 @@
   }
 
   .header-menu > ul li {
-    font-size: 0.77em;
+    font-size: 0.7em;
   }
 
   .header-login > div > p {
@@ -183,53 +187,52 @@
 }
 
 @media screen and (max-width: 1400px) {
-  .header-logo img {
-    width: 2.3rem;
-  }
-
-  .header-logo p {
-    font-size: 0.65rem;
-  }
-
-  .header-menu > ul li {
-    font-size: 0.74em;
-  }
-
-  .header-login > div > p {
-    font-size: 0.64rem;
-  }
-
-  .header-login > div > input {
-    font-size: 0.7rem;
-  }
-}
-
-@media screen and (max-width: 1300px) {
-  .header-logo img {
-    width: 2.1rem;
-  }
-
-  .header-logo p {
-    font-size: 0.6rem;
-  }
-
   .header-menu > ul li {
     font-size: 0.65em;
   }
+}
 
-  .header-login > div > p {
-    font-size: 0.6rem;
+@media screen and (max-width: 1200px) {
+  .header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
   }
 
-  .header-login > div > input {
-    font-size: 0.7rem;
+  .burger-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    height: 2.7rem;
+    width: 2.7rem;
+    align-self: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
   }
 
-  .header-cart_container {
-    gap: 0.3em;
+  .burger-menu:hover {
+    background-color: rgba(85, 85, 85, 0.091);
+  }
 
-    .header-cart {
-      font-size: 0.9rem;
-    }
+  .header-logo {
+    display: none;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .header-user {
+    display: none;
+  }
+
+  .header-login {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header {
+    padding: 0 5%;
   }
 }

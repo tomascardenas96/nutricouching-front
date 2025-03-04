@@ -19,10 +19,9 @@ function ServiceCard({
   };
   return (
     <div
-      className="services-card_container"
-      style={{
-        gridTemplateColumns: !isEven && "1fr 12rem",
-      }}
+    // services-card_container
+      className={`services-card_container ${!isEven && "right-service-cards"}`}
+
     >
       <div
         className="color-line"

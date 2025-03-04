@@ -7,7 +7,7 @@ import ReservationModal from "./ReservationModal";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
 
-function Services() {
+function Services({ handleLoginModal }) {
   const { services, servicesLoading, servicesError } = useGetServices();
   const [selectedService, setSelectedService] = useState(null);
 
@@ -76,6 +76,7 @@ function Services() {
           description={selectedService?.description}
           image={selectedService?.image}
           handleOpenServiceModal={handleOpenServiceModal}
+          handleLoginModal={handleLoginModal}
         />
       )}
 

@@ -89,26 +89,12 @@
   }
 }
 
-@media screen and (max-width: 1550px) {
-  .presentation-banner_container {
-    & .banner {
-      width: 36rem;
-
-      & img {
-        height: 16rem;
-      }
-    }
+@media screen and (max-width: 1200px) {
+  .presentation {
+    padding: 0;
   }
-}
 
-@media screen and (max-width: 1400px) {
-  .presentation-banner_container {
-    & .banner {
-      width: 34rem;
-
-      & img {
-        height: 14.5rem;
-      }
-    }
+  .background-image::after {
+    height: 70%;
   }
 }

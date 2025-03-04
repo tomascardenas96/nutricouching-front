@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HOST } from "../api/data";
 
-function useGetAllProducts() {
+function useGetAllProducts(itemsPerPage) {
   const [products, setProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [productsError, setProductsError] = useState(true);
@@ -11,7 +11,6 @@ function useGetAllProducts() {
   const [isModifyProductModalOpen, setIsModifyProductModalOpen] =
     useState(false);
 
-  const itemsPerPage = 5;
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const startIndex = currentPage * itemsPerPage;

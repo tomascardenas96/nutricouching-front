@@ -138,6 +138,7 @@ main {
 
 .about-us_container {
   height: 100svh;
+  min-height: 102.6875rem;
   display: grid;
   place-content: center;
   position: relative;
@@ -149,3 +150,48 @@ main {
 }
 
 /* Media queries */
+
+@media screen and (max-width: 1350px) {
+  .about-us_container {
+    height: 120svh;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .footer_container {
+    height: 50rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-screen_container {
+    height: max-content;
+    display: grid;
+    grid-template-rows: 3.4rem 0.95fr 4fr;
+  }
+
+  .sub-menu_container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .services_container {
+    padding: 0 6rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .about-us_container {
+    height: 220svh;
+    display: grid;
+    place-content: center;
+    position: relative;
+  }
+
+  .services_container {
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+  }
+}

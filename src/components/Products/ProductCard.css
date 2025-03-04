@@ -1,6 +1,6 @@
 .product-card_container {
-  width: 19%;
-  height: 95%;
+  width: 11.875rem;
+  height: 14rem;
   border-radius: 0.1rem;
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -8,6 +8,7 @@
   z-index: 10;
   cursor: pointer;
   transition: all 0.3s ease;
+  align-items: center;
 }
 
 .product-card_header {
@@ -114,58 +115,68 @@
 
 /* Media queries */
 
-/* Consolidado max-width: 1400px y max-width: 1550px */
-@media screen and (max-width: 1550px) {
-  .product-card_container {
-    width: 12.5rem;
-    height: 95%;
-  }
-
-  .product-card_image {
-    & img {
-      width: 85%;
-      height: 85%;
-      align-self: center;
-    }
-  }
-
+@media screen and (max-width: 1200px) {
   .product-card_body {
+    display: grid;
+    grid-template-rows: max-content max-content 1fr;
+    padding: 0 2%;
+
     & .product-title,
     .product-description,
     .product-price {
-      font-size: 0.75em;
+      font-family: var(--primary-font);
+      color: var(--primary-font-color);
+      font-size: 0.65rem;
     }
 
     & .product-title {
-      margin-bottom: 0.4em;
+      display: flex;
+      height: 100%;
+      font-weight: 500;
+      line-height: 1.1rem;
+      margin-bottom: 0.3em;
     }
 
     & .product-description {
-      margin-bottom: 1em;
+      color: var(--secondary-details-color);
+      margin-bottom: 0.2em;
     }
 
     & .product-price {
-      font-size: 1.4em;
-      margin-top: 0.3rem;
+      display: flex;
+      align-items: center;
+      font-size: 1.3em;
+      font-weight: lighter;
+      font-weight: 400;
+      margin-top: 0.4rem;
 
       & span {
         font-size: 0.7rem;
-        height: 2rem;
-        padding-top: 0;
+        height: 100%;
+        padding-top: 5%;
       }
     }
   }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1050px) {
   .product-card_container {
-    width: 10.9rem;
+    width: 25%;
   }
+}
+@media screen and (max-width: 970px) {
+  .product-card_container {
+    width: 33%;
+  }
+}
+@media screen and (max-width: 815px) {
+  .product-card_container {
+    width: 50%;
+  }
+}
 
-  .product-card_image {
-    & img {
-      width: 70%;
-      height: 70%;
-    }
+@media screen and (max-width: 470px) {
+  .product-card_container {
+    width: 60%;
   }
 }

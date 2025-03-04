@@ -14,7 +14,14 @@ function ForgotPasswordModal({ handleOpenForgotPasswordModal }) {
       onClick={handleOpenForgotPasswordModal}
     >
       <div className="forgot-password" onClick={(e) => e.stopPropagation()}>
+        <h2 className="title">Recuperar Contraseña</h2>
+
         <form onSubmit={(e) => handleSendForgotPasswordMail(e, userEmail)}>
+          <p>
+            Te enviaremos un mensaje a tu correo electronico con un link para
+            reestablecer la contraseña
+          </p>
+
           <label htmlFor="email">
             {" "}
             Ingrese su e-mail
@@ -25,11 +32,11 @@ function ForgotPasswordModal({ handleOpenForgotPasswordModal }) {
               value={userEmail}
             />
           </label>
-          <p>
-            Te enviaremos un mensaje a tu correo electronico con un link para
-            reestablecer la contraseña
-          </p>
-          <input type="submit" value="Enviar" />
+
+          <div className="send-button">
+            <input type="submit" value="Enviar" />
+            <p onClick={handleOpenForgotPasswordModal}>Volver al login</p>
+          </div>
         </form>
       </div>
     </div>

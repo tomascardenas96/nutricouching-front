@@ -1,1 +1,1 @@
-export const HOST = import.meta.env.VITE_HOST || "http://localhost:3010";
+export const HOST = import.meta.env.VITE_HOST || "http://192.168.1.132:3010";

@@ -1,11 +1,33 @@
-import { MdArrowForwardIos } from "react-icons/md";
+import { useMediaQuery } from "react-responsive";
 import useGetAllProducts from "../../hooks/useGetAllProducts";
 import Dots from "../Common/Dots";
+import TurnPageArrow from "../Common/TurnPageArrow";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
-import TurnPageArrow from "../Common/TurnPageArrow";
 
 function ProductsCarousel({ setProductsInCart }) {
+  const firstMeasure = useMediaQuery({ query: "(max-width: 1260px)" });
+  const secondMeasure = useMediaQuery({ query: "(max-width: 970px)" });
+  const thirdMeasure = useMediaQuery({ query: "(max-width: 815px)" });
+  const fourthMeasure = useMediaQuery({ query: "(max-width: 470px)" });
+
+  let itemsPerPage = 5;
+  if (firstMeasure) {
+    itemsPerPage = 4;
+  }
+
+  if (secondMeasure) {
+    itemsPerPage = 3;
+  }
+
+  if (thirdMeasure) {
+    itemsPerPage = 2;
+  }
+
+  if (fourthMeasure) {
+    itemsPerPage = 1;
+  }
+
   const {
     products,
     productsError,
@@ -14,7 +36,7 @@ function ProductsCarousel({ setProductsInCart }) {
     currentProducts,
     nextPage,
     previousPage,
-  } = useGetAllProducts();
+  } = useGetAllProducts(itemsPerPage);
 
   return (
     <div className="products-carousel_container">

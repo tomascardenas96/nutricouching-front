@@ -11,7 +11,7 @@
   }
 
   & p {
-    font-size: 1.03rem;
+    font-size: 0.82rem;
   }
 
   & .right {
@@ -39,6 +39,6 @@
 
   & .left,
   .right {
-    height: 1.5rem;
+    height: 1.15rem;
   }
 }

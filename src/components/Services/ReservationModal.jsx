@@ -55,6 +55,13 @@ function ReservationModal({
     selectedService?.serviceId
   );
 
+  // Le damos un maximo y un minimo de dias para mostrar en el calendario (Hasta 1 mes)
+  const today = new Date();
+  const nextMonth = new Date();
+  nextMonth.setMonth(today.getMonth() + 1);
+
+  const formDate = (date) => date.toISOString().split("T")[0];
+
   return (
     <section
       className="request-reservation_modal"
@@ -106,6 +113,8 @@ function ReservationModal({
                 type="date"
                 id="date"
                 onChange={(e) => setSelectedDate(e.target.value)}
+                min={formDate(today)}
+                max={formDate(nextMonth)}
               />
             </label>
             <label htmlFor="time">

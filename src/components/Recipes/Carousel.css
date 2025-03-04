@@ -47,7 +47,7 @@
     position: relative;
     margin-bottom: 1rem;
     background-color: #f6f6f6;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.057);
 
     & .all-viands_item {
@@ -101,109 +101,31 @@
 
 /* Media queries */
 
-@media screen and (max-width: 1550px) {
-  .carousel {
-    & .recipe-card_text {
-      grid-template-rows: 5.2fr 2fr 7fr 15fr 4fr;
-    }
-  }
-
+@media screen and (max-width: 1050px) {
   .carousel-recipes_header {
-    font-size: 1.3em;
-    height: 6em;
+    font-size: 0.95rem;
+    max-width: 30ch;
+    margin-bottom: 1rem;
+    justify-self: center;
   }
 
-  .number-recipe {
-    & h1 {
-      width: 3.9em;
-      height: 4.5em;
-      font-size: 1.2em;
-    }
+  .viand-carousel_container {
+    padding: 4rem 3rem 5rem;
   }
 
-  .author-recipe {
-    & h1 {
-      font-size: 1.2em;
-    }
-  }
-
-  .name-recipe {
-    & h1 {
-      font-size: 2.1em;
-    }
-  }
-
-  .ingredients-recipe {
-    & p {
-      font-size: 0.9em;
-      line-height: 2em;
-    }
-  }
-
-  .footer-recipe {
-    & .see-recipe {
-      gap: 1em;
-      font-size: 0.85em;
-
-      & p {
-        font-family: var(--primary-font);
-        font-weight: lighter;
-      }
-    }
-  }
-
-  .carousel-btn {
-    position: absolute;
-  }
-
-  .carousel-btn_left {
-    left: 5%;
-  }
-
-  .carousel-btn_right {
-    right: 5%;
+  .carousel_all-viands {
+    padding: 0 7rem;
   }
 }
 
-@media screen and (max-width: 1400px) {
-  .carousel-recipes_header {
-    font-size: 1.1em;
-    height: 11svh;
+@media screen and (max-width: 930px) {
+  .carousel_all-viands {
+    padding: 0 3rem;
   }
+}
 
-  .carousel {
-    width: 60em;
-  }
-
-  .number-recipe {
-    & h1 {
-      width: 3em;
-      height: 3.5em;
-      font-size: 0.9em;
-    }
-  }
-
-  .author-recipe {
-    & h1 {
-      font-size: 1.1em;
-    }
-  }
-
-  .name-recipe {
-    & h1 {
-      font-size: 1.7em;
-    }
-  }
-
-  .ingredients-recipe {
-    & p {
-      font-size: 0.77em;
-    }
-  }
-
-  .footer-recipe {
-    & .see-recipe {
-      font-size: 0.75em;
-    }
+@media screen and (max-width: 640px) {
+  .viand-carousel_container {
+    padding: 3rem 1rem 4rem;
   }
 }

@@ -37,6 +37,7 @@ function NotificationPopUp() {
         onClick={() => setIsNotificationsModalOpen(!isNotificationsModalOpen)}
       >
         <div>
+          <h2 className="notifications-title">NOTIFICACIONES</h2>
           <IoIosNotifications className="bell-icon" />
           {unreadNotifications !== 0 && (
             <div className="red-circle">

@@ -17,7 +17,7 @@ import AdminCmsModal from "../../components/admin-cms/AdminCmsModal";
 import NotificationPopUp from "../../components/notifications/NotificationPopUp";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import ElementsInCartProvider from "../../context/ElementsInCartProvider";
-import { useActiveCart, useUser } from "../../context/UserProvider";
+import { useActiveCart, useLogin, useUser } from "../../context/UserProvider";
 import useGetElementsByCartId from "../../hooks/useGetElementsByCartId";
 import "./Home.css";
 
@@ -29,6 +29,15 @@ function Home() {
   // Custom hooks
   const { user } = useUser();
   const { activeCart, setActiveCart } = useActiveCart();
+  const {
+    loginInput,
+    loginLoading,
+    loginError,
+    handleSubmitLogin,
+    handleChangeLogin,
+    handleLoginModal,
+    isLoginModalOpen,
+  } = useLogin();
 
   // Productos y viandas agregadas al carrito desde el local storage.
   const [productsInCart, setProductsInCart] = useState([]);
@@ -145,7 +154,7 @@ function Home() {
             </section>
 
             <section className="services_container">
-              <Services />
+              <Services handleLoginModal={handleLoginModal} />
             </section>
           </div>
 

@@ -41,6 +41,7 @@ function useUpdateUserInformation(
     e.preventDefault();
     setIncorrectConfirmPassword(null);
     setCurrentPasswordError(null);
+    setPasswordCharError(null);
 
     const hasInputsError = verifyInputs();
 
@@ -85,6 +86,7 @@ function useUpdateUserInformation(
     });
   };
 
+  // Validacion de los inputs.
   const verifyInputs = () => {
     let hasErrors = false;
 
@@ -97,9 +99,11 @@ function useUpdateUserInformation(
     }
 
     if (
-      updateUserInput.password.length < 8 ||
-      updateUserInput.password.length > 12
+      (updateUserInput.password.length < 8 ||
+        updateUserInput.password.length > 12) &&
+      (updateUserInput.password || confirmNewPassword)
     ) {
+      console.log(updateUserInput.password.length);
       setPasswordCharError("La contraseña debe tener entre 8 y 12 caracteres");
       hasErrors = true;
     }
@@ -117,10 +121,7 @@ function useUpdateUserInformation(
       hasErrors = true;
     }
 
-    // Si hay errores, no ejecutar la API
-    if (hasErrors) {
-      return hasErrors;
-    }
+    return hasErrors;
   };
 
   const handleChangeUserInput = (e) => {

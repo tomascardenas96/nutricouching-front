@@ -57,3 +57,32 @@
 }
 
 /* Media queries */
+
+@media screen and (max-width: 1050px) {
+  .products-section_container {
+    padding: 0 5rem;
+  }
+
+  .products-section {
+    display: grid;
+    align-items: end;
+    justify-content: center;
+    position: relative;
+
+    & div {
+      z-index: 1600;
+    }
+
+    & h1 {
+      font-size: 0.95rem;
+      max-width: 30ch;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .products-section_container {
+    padding: 0 1rem;
+  }
+}

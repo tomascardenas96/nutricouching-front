@@ -1,24 +1,36 @@
 .notification-pop-up_btn {
   position: fixed;
-  width: 3rem;
-  height: 3rem;
+  width: 14rem;
+  height: 2.5rem;
   border: 50%;
-  right: 6rem;
-  bottom: 4rem;
-  border-radius: 50%;
-  display: grid;
-  place-content: center;
+  right: 12rem;
+  bottom: 0;
   font-size: 1.4rem;
-  color: white;
-  background: linear-gradient(#ff6e6e, #ff5b5b);
-  box-shadow: -1px 1px 5px 5px rgba(0, 0, 0, 0.055);
+  box-shadow: -1px 1px 5px 5px rgba(0, 0, 0, 0.094);
   cursor: pointer;
   z-index: 1600;
+  border-radius: 0.7rem 0.7rem 0 0;
+  /* background: linear-gradient(#d24c1c, #db6135); */
+  display: flex;
+  color: #d24d1cca;
+  background-color: white;
+  border: 1px solid #d24d1c90;
 
-  & div {
+  > div {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
     position: relative;
+    height: 100%;
+
+    > .notifications-title {
+      font-size: 0.77rem;
+      font-weight: 400;
+      color: black;
+      letter-spacing: 0.03rem;
+      color: #d24d1cca;
+    }
 
     & .red-circle {
       position: absolute;
@@ -40,5 +52,24 @@
 
   & .bell-icon {
     filter: drop-shadow(-1px 1px 5px rgba(0, 0, 0, 0.424));
+    font-size: 1.15rem;
+  }
+}
+
+@media screen and (max-width: 1490px) {
+  .notification-pop-up_btn {
+    right: 7rem;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .notification-pop-up_btn {
+    right: 4rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .notification-pop-up_btn {
+    display: none;
   }
 }
