@@ -15,11 +15,13 @@ function RecipeCard({
   index,
   setViandsInCart,
   allViands,
+  activeCart,
+  setElementsInCart,
 }) {
-  const { elementsInCart, setElementsInCart } = useElementsInCart();
-
-  const { addViandToCart, viandsCart, setViandsCart } =
-    useAddViandToCart(setElementsInCart);
+  const { addViandToCart, viandsCart, setViandsCart } = useAddViandToCart(
+    setElementsInCart,
+    activeCart
+  );
 
   // Funcion para rellenar con ceros a la izquierda
   function pad(toPad, padChar, length) {

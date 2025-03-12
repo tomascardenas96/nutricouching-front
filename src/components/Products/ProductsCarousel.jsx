@@ -5,7 +5,11 @@ import TurnPageArrow from "../Common/TurnPageArrow";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
 
-function ProductsCarousel({ setProductsInCart }) {
+function ProductsCarousel({
+  setProductsInCart,
+  activeCart,
+  setElementsInCart,
+}) {
   const firstMeasure = useMediaQuery({ query: "(max-width: 1260px)" });
   const secondMeasure = useMediaQuery({ query: "(max-width: 970px)" });
   const thirdMeasure = useMediaQuery({ query: "(max-width: 815px)" });
@@ -53,6 +57,8 @@ function ProductsCarousel({ setProductsInCart }) {
             key={product.productId}
             product={product}
             setProductsInCart={setProductsInCart}
+            activeCart={activeCart}
+            setElementsInCart={setElementsInCart}
           />
         ))}
       </div>

@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { HOST } from "../api/data";
 import useCreateOrder from "./useCreateOrder";
-import { toast } from "sonner";
-import { useActiveCart } from "../context/UserProvider";
 
-function useCreatePreferenceMP(productsInCart, user) {
+function useCreatePreferenceMP(elementsInCart, activeCart) {
   const [preferenceLoading, setPreferenceLoading] = useState(false);
   const [total, setTotal] = useState(0);
 
-  const { activeCart } = useActiveCart();
   const authToken = localStorage.getItem("authToken");
 
   const { handleCreateOrder, createOrderError } = useCreateOrder();
 
   useEffect(() => {
-    if (!!productsInCart) {
-      const calculateTotal = productsInCart.reduce(
+    if (!!elementsInCart) {
+      const calculateTotal = elementsInCart.reduce(
         (acc, element) =>
           acc + element?.product?.price * element.quantity ||
           acc + element?.viand?.price * element.quantity,
@@ -24,9 +22,9 @@ function useCreatePreferenceMP(productsInCart, user) {
 
       setTotal(calculateTotal);
     }
-  }, [productsInCart]);
+  }, [elementsInCart]);
 
-  const handleCreatePreference = async (productsInCart) => {
+  const handleCreatePreference = async (elementsInCart) => {
     setPreferenceLoading(true);
     try {
       const response = await fetch(`${HOST}/mercadopago/preference`, {
@@ -35,7 +33,7 @@ function useCreatePreferenceMP(productsInCart, user) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify(productsInCart),
+        body: JSON.stringify(elementsInCart),
       });
 
       const data = await response.json();

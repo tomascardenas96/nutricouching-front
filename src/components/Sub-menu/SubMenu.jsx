@@ -4,8 +4,11 @@ function SubMenu() {
   return (
     <div className="sub-menu">
       <p>
-        🚀 Dentro de nuestra web podras encontrar la posibilidad de contratar
-        nuestros servicios, comprar nuestros productos, y mas!!!
+        🔥 Descubre todo lo que tenemos para vos en nuestra web: 🛒 Compra
+        productos exclusivos, 📅 Reserva nuestros servicios y mucho más... ¡Todo
+        en un solo lugar! 🚀✨ <span />  🔥 Descubre todo lo que tenemos para vos en nuestra web: 🛒 Compra
+        productos exclusivos, 📅 Reserva nuestros servicios y mucho más... ¡Todo
+        en un solo lugar! 🚀✨
       </p>
     </div>
   );

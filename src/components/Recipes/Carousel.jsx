@@ -4,7 +4,7 @@ import useGetAllViands from "../../hooks/useGetAllViands";
 import "./Carousel.css";
 import RecipeCard from "./RecipeCard";
 
-function Carousel({ setViandsInCart }) {
+function Carousel({ setViandsInCart, activeCart, setElementsInCart }) {
   const [selectedViand, setSelectedViand] = useState({});
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -51,6 +51,8 @@ function Carousel({ setViandsInCart }) {
           index={selectedIndex}
           setViandsInCart={setViandsInCart}
           allViands={viands}
+          activeCart={activeCart}
+          setElementsInCart={setElementsInCart}
         />
       </div>
 
@@ -76,9 +78,7 @@ function Carousel({ setViandsInCart }) {
         </div>
       </div>
 
-      <div className="recipes-carousel_footer">
-
-      </div>
+      <div className="recipes-carousel_footer"></div>
     </section>
   );
 }

@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-import { useElementsInCart } from "../../context/ElementsInCartProvider";
-import useAddElementsToCartWhenLogin from "../../hooks/useAddElementsToCartWhenLogin";
+import {
+  IoIosArrowBack,
+  IoMdArrowDropdown,
+  IoMdArrowDropup,
+} from "react-icons/io";
 import useAddOrSubtractProduct from "../../hooks/useAddOrSubtractProduct";
 import useAddOrSubtractViand from "../../hooks/useAddOrSubtractViand";
+import useEmptyCart from "../../hooks/useEmptyCart";
 import useRemoveProductFromCart from "../../hooks/useRemoveProductFromCart";
 import useRemoveViandFromCart from "../../hooks/useRemoveViandFromCart";
 import "./CartModal.css";
 import ProductInCartCard from "./ProductInCartCard";
 import PreferenceButton from "./payment/preferenceButton";
-import useEmptyCart from "../../hooks/useEmptyCart";
 
 function CartModal({
   handleCartModal,
@@ -18,16 +20,22 @@ function CartModal({
   viandsInCart,
   setViandsInCart,
   user,
+  activeCart,
+  elementsInCart,
+  setElementsInCart,
 }) {
+  console.log("Elements in cart: ", elementsInCart);
+  // console.log("Products in cart: ", productsInCart);
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
 
   // Obtenemos todos los elementos dentro del carrito
-  const { elementsInCart, setElementsInCart } = useElementsInCart();
-  const { handleEmptyCart } = useEmptyCart(setElementsInCart);
-
-  // Al iniciar sesion, guardamos todos los elementos desde el local storage a la base de datos.
-  const { addElementsError } = useAddElementsToCartWhenLogin(setElementsInCart);
+  const { handleEmptyCart, handleEmptyLocalStorageCart } = useEmptyCart(
+    setElementsInCart,
+    activeCart,
+    setProductsInCart,
+    setViandsInCart
+  );
 
   // Metodos para remover un producto o una vianda del carrito
   const { handleRemoveProduct } = useRemoveProductFromCart(
@@ -42,6 +50,7 @@ function CartModal({
 
   // Metodos para agregar o restar una unidad de un producto
   const { addUnityOfProduct, subtractUnityOfProduct } = useAddOrSubtractProduct(
+    activeCart,
     setProductsInCart,
     user,
     elementsInCart,
@@ -67,7 +76,6 @@ function CartModal({
   // Metodo para calcular el total de la compra
   const calculateTotal = () => {
     if (productsInCart.length > 0 || viandsInCart.length > 0) {
-      console.log(productsInCart);
       const subTotalProducts = productsInCart.reduce(
         (acc, product) => acc + product?.price * product.quantity,
         0
@@ -196,17 +204,18 @@ function CartModal({
 
           {isViandsListDeployed && (
             <div className="products-in-cart_list-container">
-              {viandsInCart.length > 0 &&
-                viandsInCart.map((viand) => (
-                  <ProductInCartCard
-                    key={`viand-cart-local-${viand.viandId}`}
-                    viand={viand}
-                    quantity={viand.quantity}
-                    remove={handleRemoveViand}
-                    add={addUnityOfViand}
-                    subtract={subtractUnityOfViand}
-                  />
-                ))}
+              {viandsInCart.length > 0 && !user
+                ? viandsInCart?.map((viand) => (
+                    <ProductInCartCard
+                      key={`viand-cart-local-${viand.viandId}`}
+                      viand={viand}
+                      quantity={viand.quantity}
+                      remove={handleRemoveViand}
+                      add={addUnityOfViand}
+                      subtract={subtractUnityOfViand}
+                    />
+                  ))
+                : null}
 
               {elementsInCart?.length > 0 &&
                 elementsInCart?.map(
@@ -232,17 +241,30 @@ function CartModal({
 
         <div className="cart-modal_buttons">
           <div className="options-buttons">
-            <button className="clean-cart" onClick={handleEmptyCart}>
+            <button
+              className="clean-cart"
+              onClick={user ? handleEmptyCart : handleEmptyLocalStorageCart}
+            >
               Vaciar Carrito
             </button>
           </div>
           <div className="options-buttons">
-            <PreferenceButton productsInCart={elementsInCart} user={user} />
+            <PreferenceButton
+              productsInCart={elementsInCart}
+              activeCart={activeCart}
+              user={user}
+            />
           </div>
         </div>
 
         <div className="cart-modal_information">
           <p>Los precios estan sujetos a posibles variaciones</p>
+        </div>
+
+        <div className="close-modal" onClick={handleCartModal}>
+          <div>
+            <IoIosArrowBack className="back-icon" /> <span>Volver</span>
+          </div>
         </div>
       </div>
     </section>

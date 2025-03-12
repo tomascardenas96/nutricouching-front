@@ -1,16 +1,21 @@
 import { useEffect } from "react";
 import { TbShoppingCartPlus } from "react-icons/tb";
+import { HOST } from "../../api/data";
 import useAddProductToCart from "../../hooks/useAddProductToCart";
 import useGetAllProducts from "../../hooks/useGetAllProducts";
 import "./ProductCard.css";
-import { HOST } from "../../api/data";
-import { useElementsInCart } from "../../context/ElementsInCartProvider";
 
-function ProductCard({ product, setProductsInCart }) {
-  const { elementsInCart, setElementsInCart } = useElementsInCart();
+function ProductCard({
+  product,
+  setProductsInCart,
+  activeCart,
+  setElementsInCart,
+}) {
+  const { addProductToCart, productsCart } = useAddProductToCart(
+    setElementsInCart,
+    activeCart
+  );
 
-  const { addProductToCart, productsCart } =
-    useAddProductToCart(setElementsInCart);
   const { products } = useGetAllProducts();
 
   // Tomamos los Id's de los productos del carrito y obtenemos los datos completos de cada uno.

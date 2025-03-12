@@ -8,8 +8,33 @@
   justify-content: space-between;
 }
 
-.burger-menu {
+.header-scrolled {
+  transition: all 0.3s ease-in-out;
+  background-color: #515751;
+  width: 100%;
+  margin-top: 0.1rem;
+}
+
+.responsive-menu_mobile {
   display: none;
+  align-items: center;
+  justify-content: space-between;
+
+  > .burger-menu {
+    display: flex;
+    gap: 1rem;
+  }
+
+  & .icon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.45rem;
+    color: var(--primary-font-color);
+  }
+
+  & .icon-scrolled {
+    color: white;
+  }
 }
 
 .header-logo {
@@ -194,24 +219,82 @@
 
 @media screen and (max-width: 1200px) {
   .header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
-  }
-
-  .burger-menu {
-    display: flex;
-    align-items: center;
+    padding: 0 1rem;
     justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    height: 2.7rem;
-    width: 2.7rem;
-    align-self: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+    gap: 5rem;
   }
 
-  .burger-menu:hover {
-    background-color: rgba(85, 85, 85, 0.091);
+  .header-logo img {
+    width: 2rem;
+  }
+
+  .header-logo p {
+    font-size: 0.6rem;
+  }
+  .header-menu > ul {
+    gap: 1.5rem;
+  }
+
+  .header-menu > ul li {
+    font-size: 0.6rem;
+  }
+
+  .header-cart_container {
+    display: flex;
+    gap: 0.3em;
+
+    .header-cart {
+      font-size: 0.9rem;
+    }
+  }
+
+  .header-user {
+    gap: 0.5rem;
+
+    & p,
+    span {
+      font-size: 0.65rem;
+    }
+
+    & .user-icon,
+    .log-out-icon {
+      font-size: 0.7rem;
+    }
+  }
+
+  .header-login > div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .header-login > div > input {
+    width: 7.5rem;
+    height: 1.6rem;
+  }
+
+  .header-login .register-button {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .header {
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 3rem;
+    position: fixed;
+    top: 0rem;
+    height: 3.4rem;
+    z-index: 2500;
+    box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.138);
+  }
+
+  .responsive-menu_mobile {
+    display: flex;
   }
 
   .header-logo {
@@ -234,5 +317,17 @@
 @media screen and (max-width: 650px) {
   .header {
     padding: 0 5%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .responsive-menu_mobile {
+    > .burger-menu {
+      gap: 0.5rem;
+    }
+
+    & .icon {
+      font-size: 1.2rem;
+    }
   }
 }

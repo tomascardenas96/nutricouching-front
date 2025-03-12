@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useActiveCart, useUser } from "../context/UserProvider";
+import { useUser } from "../context/UserProvider";
 import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
-function useAddProductToCart(setElementsInCart) {
+function useAddProductToCart(setElementsInCart, activeCart) {
   const { user } = useUser();
-  const { activeCart, setActiveCart } = useActiveCart();
 
   const [productsCart, setProductsCart] = useState([]);
   const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn(
-    user,
     setElementsInCart,
-    activeCart,
-    setActiveCart
+    activeCart
   );
 
   // Función para agregar un producto al carrito (ya sea en localStorage o en el backend)

@@ -108,17 +108,8 @@
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.3rem;
     place-content: center;
     margin-top: 1.5rem;
-
-    & .list-left {
-      background-color: red;
-    }
-
-    & .list-right {
-      background-color: green;
-    }
   }
 }
 
@@ -132,5 +123,11 @@
       max-width: 30ch;
       margin-bottom: 1rem;
     }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .services-list_container {
+    gap: 2rem;
   }
 }

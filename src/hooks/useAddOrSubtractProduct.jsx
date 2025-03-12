@@ -1,7 +1,7 @@
-import { useActiveCart } from "../context/UserProvider";
 import useAddOrSubtractElement from "./useAddOrSubtractElement";
 
 function useAddOrSubtractProduct(
+  activeCart,
   setProductsInCart,
   user,
   elementsInCart,
@@ -13,8 +13,6 @@ function useAddOrSubtractProduct(
     elementsInCart,
     setElementsInCart
   );
-
-  const { activeCart } = useActiveCart();
 
   const addUnityOfProduct = (product) => {
     // Si el usuario no esta logueado, agregar una unidad al local storage.

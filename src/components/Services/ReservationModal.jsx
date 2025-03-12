@@ -58,7 +58,7 @@ function ReservationModal({
   // Le damos un maximo y un minimo de dias para mostrar en el calendario (Hasta 1 mes)
   const today = new Date();
   const nextMonth = new Date();
-  nextMonth.setMonth(today.getMonth() + 1);
+  nextMonth.setMonth(today.getMonth() + 2);
 
   const formDate = (date) => date.toISOString().split("T")[0];
 

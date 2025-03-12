@@ -1,9 +1,13 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
-import { useActiveCart } from "../context/UserProvider";
 
-function useEmptyCart(setElementsInCart) {
-  const { activeCart } = useActiveCart();
+function useEmptyCart(
+  setElementsInCart,
+  activeCart,
+  setProductsInCart,
+  setViandsInCart,
+  
+) {
   const authToken = localStorage.getItem("authToken");
 
   const handleEmptyCart = async () => {
@@ -23,13 +27,24 @@ function useEmptyCart(setElementsInCart) {
       }
 
       setElementsInCart([]);
+      setProductsInCart([]);
+      setViandsInCart([]);
       toast.success("Carrito vaciado");
     } catch (error) {
       toast.error("Ocurrio un error al limpiar el carrito");
     }
   };
 
-  return { handleEmptyCart };
+  const handleEmptyLocalStorageCart = () => {
+    localStorage.removeItem("products-cart");
+    localStorage.removeItem("viands-cart");
+    setProductsInCart([]);
+    setViandsInCart([]);
+    setElementsInCart([])
+    toast.success("Carrito vaciado");
+  };
+
+  return { handleEmptyCart, handleEmptyLocalStorageCart };
 }
 
 export default useEmptyCart;

@@ -22,22 +22,23 @@
 .about-body {
   position: relative;
   display: grid;
-  height: 21.7rem;
-  padding: 0 10rem;
+  padding: 0 3rem;
   margin-bottom: 5rem;
+  height: max-content;
 
   & .cards-container {
-    height: 100%;
     width: 100%;
-    display: flex;
     overflow-x: auto;
     overflow-y: hidden;
-    gap: 4rem;
     border-radius: 0.3rem;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.057);
     background-color: white;
-    gap: 1.2rem;
     padding: 0.5rem;
+    height: max-content;
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 19.7rem);
 
     /* Estilo de la barra de scroll */
     &::-webkit-scrollbar {
@@ -78,30 +79,6 @@
 }
 
 /* Media queries */
-
-@media screen and (max-width: 1350px) {
-  .about-header {
-    display: grid;
-
-    & h1 {
-      font-size: 1.2rem;
-    }
-  }
-
-  .about-body {
-    padding: 0 3rem;
-    margin-bottom: 5rem;
-    height: max-content;
-
-    & .cards-container {
-      height: max-content;
-      display: grid;
-      gap: 2.5rem;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 19.7rem);
-    }
-  }
-}
 
 @media screen and (max-width: 1050px) {
   .about-header {

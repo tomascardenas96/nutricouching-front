@@ -2,10 +2,8 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 
 function useAddOneElementToCartWhenLoggedIn(
-  user,
   setElementsInCart,
   activeCart,
-  setActiveCart
 ) {
   const authToken = localStorage.getItem("authToken");
 

@@ -1,25 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { BsCart4 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoIosNotifications } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useLogin } from "../../context/UserProvider";
-import "./Header.css";
+import useEmptyCart from "../../hooks/useEmptyCart";
 import useRegister from "../../hooks/useRegister";
 import LoginModal from "../Login/LoginModal";
 import RegisterModal from "../Register/RegisterModal";
-import { useElementsInCart } from "../../context/ElementsInCartProvider";
-import { createPortal } from "react-dom";
 import UpdateUserModal from "../Update-user/UpdateUserModal";
-import { GiHamburgerMenu } from "react-icons/gi";
+import "./Header.css";
 
 function Header({
   handleCartModal,
-  setProductsInCart,
-  setViandsInCart,
   user,
   productsInCart,
   viandsInCart,
+  handleChangeBurgerMenu,
+  elementsInCart,
+  handleEmptyCartModal,
+  setProductsInCart,
+  activeCart,
+  setViandsInCart,
+  setElementsInCart,
+  setActiveCart,
+  hasSyncedCart,
 }) {
+  const [scrolled, setScrolled] = useState(null);
   const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
 
   const {
@@ -34,8 +43,6 @@ function Header({
   } = useLogin();
 
   const { isRegisterModalOpen, handleRegisterModal } = useRegister();
-
-  const { elementsInCart, setElementsInCart } = useElementsInCart();
 
   // Metodo para calcular la cantidad de elementos en el carrito.
   const quantityOfProductsInCart = () => {
@@ -62,22 +69,60 @@ function Header({
     return productsQuantity + viandsQuantity;
   };
 
-  // Limpiamos el carrito (Tanto los productos en el local storage como en la DB)
-  const logOut = () => {
-    handleLogOut();
-    setElementsInCart([]);
-    setProductsInCart([]);
-    setViandsInCart([]);
-  };
-
+  // Abrir o cerrar el modal para actualizar un usuario
   const handleOpenUpdateUserModal = () => {
     setIsUpdateUserModalOpen(!isUpdateUserModalOpen);
   };
 
+  const { handleEmptyLocalStorageCart } = useEmptyCart(
+    setProductsInCart,
+    activeCart,
+    setViandsInCart,
+    setElementsInCart
+  );
+
+  const handleLogOutEmptyCart = () => {
+    handleLogOut();
+    handleEmptyLocalStorageCart();
+    setActiveCart(null);
+    hasSyncedCart.current = false;
+  };
+
+  // Cambiamos de color el header al hacer scroll
+  useEffect(() => {
+    const mainElement = document.querySelector("main");
+
+    if (!mainElement) return;
+
+    const handleScroll = () => {
+      setScrolled(mainElement.scrollTop > 50);
+    };
+
+    mainElement.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      mainElement.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="header">
-      <div className="burger-menu">
-        <GiHamburgerMenu />
+    <div className={scrolled ? "header header-scrolled" : "header"}>
+      <div className="responsive-menu_mobile">
+        <GiHamburgerMenu
+          onClick={handleChangeBurgerMenu}
+          className={scrolled ? "icon icon-scrolled" : "icon"}
+        />
+
+        <div className="burger-menu">
+          <BsCart4
+            className={scrolled ? "icon icon-scrolled" : "icon"}
+            onClick={handleCartModal}
+          />
+          <IoIosNotifications
+            className={scrolled ? "icon icon-scrolled" : "icon"}
+          />
+        </div>
       </div>
 
       <div className="header-logo">
@@ -114,7 +159,7 @@ function Header({
             {user?.name} {user?.lastname}
           </p>
           <span>|</span>
-          <p className="log-out" onClick={logOut}>
+          <p className="log-out" onClick={handleLogOutEmptyCart}>
             {" "}
             <RiLogoutBoxRLine className="log-out-icon" />
             Salir

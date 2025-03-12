@@ -1,34 +1,21 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { HOST } from "../api/data";
-import { useActiveCart, useUser } from "../context/UserProvider";
 
 function useAddElementsToCartWhenLogin(setElementsInCart) {
   const [addElementsError, setAddElementsError] = useState(null);
-  const { user } = useUser();
-  const { activeCart } = useActiveCart();
   const authToken = localStorage.getItem("authToken");
 
-  // Referencia para evitar múltiples ejecuciones
-  const hasSyncedCart = useRef(false);
-
-  useEffect(() => {
-    if (user && !hasSyncedCart.current) {
-      addElementsToCartWhenLogin(user);
-      hasSyncedCart.current = true; // Marca como ejecutado
-    }
-  }, [user]);
-
-  const addElementsToCartWhenLogin = async (user) => {
+  const addElementsToCartWhenLogin = async (activeCart) => {
     try {
       const productsInLocal = localStorage.getItem("products-cart");
       const viandsInLocal = localStorage.getItem("viands-cart");
 
-      if (!productsInLocal && !viandsInLocal) {
-        return;
-      }
-
       const parsedProducts = JSON.parse(productsInLocal) || { products: [] };
       const parsedViands = JSON.parse(viandsInLocal) || { viands: [] };
+
+      if (!parsedProducts.products.length && !parsedViands.viands.length) {
+        return;
+      }
 
       const body = JSON.stringify({
         products: parsedProducts.products,
@@ -54,28 +41,33 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
       }
 
       setElementsInCart((prev) => {
-        const uniqueItems = new Map();
+        console.log("prev", prev);
+        console.log("data", data);
+        const mergedMap = new Map();
 
-        const addToMap = (key, item) => {
-          if (!uniqueItems.has(key)) {
-            uniqueItems.set(key, { ...item });
-          } else {
-            uniqueItems.get(key).quantity += item.quantity;
-          }
-        };
+        // Agregamos los elementos previos al Map
+        prev.forEach((item) => mergedMap.set(item.cartItemId, item));
 
-        prev.forEach((item) => {
-          const key = item.product ? item.product.name : item.viand.name;
-          addToMap(key, item);
-        });
-
+        // Agregamos los nuevos elementos sin eliminar productos o viandas existentes
         data.forEach((item) => {
-          const key = item.product ? item.product.name : item.viand.name;
-          addToMap(key, item);
+          const existingItem = mergedMap.get(item.cartItemId);
+
+          if (existingItem) {
+            mergedMap.set(item.cartItemId, {
+              ...existingItem,
+              quantity: item.quantity, // Actualizamos la cantidad
+              product: existingItem.product || null, // Si hay nuevo producto, lo actualiza
+              viand: existingItem.viand || null, // Si hay nueva vianda, la actualiza
+            });
+          } else {
+            mergedMap.set(item.cartItemId, item); // Si es nuevo, lo agregamos directamente
+          }
         });
 
-        // Solo retorna valores únicos
-        return Array.from(uniqueItems.values());
+        console.log("arrayFrom", Array.from(mergedMap.values()));
+
+        // Retornamos el nuevo array actualizado
+        return Array.from(mergedMap.values());
       });
 
       localStorage.removeItem("products-cart");
@@ -87,7 +79,7 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
     }
   };
 
-  return { addElementsError };
+  return { addElementsError, addElementsToCartWhenLogin };
 }
 
 export default useAddElementsToCartWhenLogin;

@@ -1,25 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { HOST } from "../api/data";
-import useGetElementsByCartId from "../hooks/useGetElementsByCartId";
 
 // Creación del contexto
 const UserContext = createContext(null);
 const LoginContext = createContext(null);
-const CartContext = createContext(null);
 
 // Custom hooks para usar los contextos
 export const useUser = () => useContext(UserContext);
 export const useLogin = () => useContext(LoginContext);
-export const useActiveCart = () => useContext(CartContext);
 
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
   const [userError, setUserError] = useState(false);
-
-  const [activeCart, setActiveCart] = useState(null);
-  const [activeCartError, setActiveCartError] = useState(null);
 
   const [authToken, setAuthToken] = useState("");
   const [loginInput, setLoginInput] = useState({
@@ -27,7 +21,6 @@ function UserProvider({ children }) {
     password: "",
   });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { setElementsInCart } = useGetElementsByCartId();
 
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
@@ -59,21 +52,6 @@ function UserProvider({ children }) {
     });
   };
 
-  const handleGetActiveCart = async (userId) => {
-    try {
-      const response = await fetch(`${HOST}/cart/active/${userId}`);
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      setActiveCart(data);
-    } catch (error) {
-      setActiveCartError(error);
-    }
-  };
-
   const handleChangeLogin = (e) => {
     const { name, value } = e.target;
     setLoginInput({ ...loginInput, [name]: value });
@@ -90,7 +68,6 @@ function UserProvider({ children }) {
   const handleLogOut = () => {
     localStorage.removeItem("authToken");
     setUser(null);
-    setElementsInCart([]);
   };
 
   // Cuando se monta el componente, se inicializa el token de autenticación si existe en localStorage y se setea en el estado
@@ -119,8 +96,6 @@ function UserProvider({ children }) {
           }
 
           setUser(data);
-          // Obtener el carrito activo
-          handleGetActiveCart(data.userId);
         } catch (error) {
           localStorage.removeItem("authToken");
           console.error(error);
@@ -147,13 +122,11 @@ function UserProvider({ children }) {
         handleLogOut,
       }}
     >
-      <UserContext.Provider value={{ user, userLoading, userError }}>
-        <CartContext.Provider
-          value={{ activeCart, activeCartError, setActiveCart }}
-        >
-          {children}
-          <Toaster />
-        </CartContext.Provider>
+      <UserContext.Provider
+        value={{ user, userLoading, userError, handleLogOut }}
+      >
+        {children}
+        <Toaster />
       </UserContext.Provider>
     </LoginContext.Provider>
   );

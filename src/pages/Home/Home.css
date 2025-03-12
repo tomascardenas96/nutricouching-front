@@ -42,8 +42,6 @@ main {
 
 .header_container {
   width: 100%;
-  left: 0;
-  top: 0;
 }
 
 .sub-menu_container {
@@ -137,8 +135,7 @@ main {
 }
 
 .about-us_container {
-  height: 100svh;
-  min-height: 102.6875rem;
+  min-height: 75rem;
   display: grid;
   place-content: center;
   position: relative;
@@ -182,6 +179,12 @@ main {
   }
 }
 
+@media screen and (max-width: 890px) {
+  .main-screen_container {
+    grid-template-rows: 3.4rem 0.85fr 4fr;
+  }
+}
+
 @media screen and (max-width: 720px) {
   .about-us_container {
     height: 220svh;
@@ -192,6 +195,6 @@ main {
 
   .services_container {
     padding: 0 1rem;
-    margin-top: 1.5rem;
+    margin-top: 0rem;
   }
 }

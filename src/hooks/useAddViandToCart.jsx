@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useActiveCart, useUser } from "../context/UserProvider";
+import { useUser } from "../context/UserProvider";
 import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
-function useAddViandToCart(setElementsInCart) {
+function useAddViandToCart(setElementsInCart, activeCart) {
   const { user } = useUser();
-  const { activeCart } = useActiveCart();
 
   // Este metodo llama a la API para agregar una vianda al carrito (solo cuando el usuario está logueado).
   const [viandsCart, setViandsCart] = useState([]);

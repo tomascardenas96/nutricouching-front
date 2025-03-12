@@ -8,6 +8,7 @@ import About from "../../components/About/About";
 import CartModal from "../../components/Cart/CartModal";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import MobileMenu from "../../components/Mobile-menu/MobileMenu";
 import Presentation from "../../components/Presentation/Presentation";
 import Products from "../../components/Products/Products";
 import Carousel from "../../components/Recipes/Carousel";
@@ -16,19 +17,17 @@ import SubMenu from "../../components/Sub-menu/SubMenu";
 import AdminCmsModal from "../../components/admin-cms/AdminCmsModal";
 import NotificationPopUp from "../../components/notifications/NotificationPopUp";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
-import ElementsInCartProvider from "../../context/ElementsInCartProvider";
-import { useActiveCart, useLogin, useUser } from "../../context/UserProvider";
-import useGetElementsByCartId from "../../hooks/useGetElementsByCartId";
+import { useElementsInCart } from "../../context/ElementsInCartProvider";
+import { useLogin, useUser } from "../../context/UserProvider";
 import "./Home.css";
 
 function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
-  // Custom hooks
-  const { user } = useUser();
-  const { activeCart, setActiveCart } = useActiveCart();
+  // Custom hooks para iniciar sesion y obtener el usuario activo
   const {
     loginInput,
     loginLoading,
@@ -38,20 +37,20 @@ function Home() {
     handleLoginModal,
     isLoginModalOpen,
   } = useLogin();
+  const { user } = useUser();
 
   // Productos y viandas agregadas al carrito desde el local storage.
-  const [productsInCart, setProductsInCart] = useState([]);
-  const [viandsInCart, setViandsInCart] = useState([]);
-
-  // Productos y viandas agregadas al carrito desde la DB (usuario logueado)
-  const { elementsInCart, setElementsInCart } = useGetElementsByCartId(
-    user,
+  const {
     activeCart,
     productsInCart,
     viandsInCart,
     setProductsInCart,
-    setViandsInCart
-  );
+    setViandsInCart,
+    elementsInCart,
+    setElementsInCart,
+    setActiveCart,
+    hasSyncedCart,
+  } = useElementsInCart();
 
   // Abrir / cerrar modal ROOT
   const handleCmsModal = () => {
@@ -66,6 +65,10 @@ function Home() {
   // Abrir / cerrar modal carrito
   const handleCartModal = () => {
     setIsCartModalOpen(!isCartModalOpen);
+  };
+
+  const handleChangeBurgerMenu = () => {
+    setIsBurgerMenuOpen(!isBurgerMenuOpen);
   };
 
   // Notificacion cuando la compra es exitosa y creacion de carrito nuevo
@@ -113,59 +116,70 @@ function Home() {
       <div className="blur-background"></div>
 
       <section className="main-background">
-        {/* Contexto elementos en el carrito */}
-        <ElementsInCartProvider
-          elementsInCart={elementsInCart}
-          setElementsInCart={setElementsInCart}
-        >
-          {/* Carrito de compras */}
-          {isCartModalOpen &&
-            createPortal(
-              <CartModal
-                handleCartModal={handleCartModal}
-                productsInCart={productsInCart}
-                setProductsInCart={setProductsInCart}
-                viandsInCart={viandsInCart}
-                setViandsInCart={setViandsInCart}
-                user={user}
-              />,
-              document.body
-            )}
+        {/* Carrito de compras */}
+        {isCartModalOpen &&
+          createPortal(
+            <CartModal
+              handleCartModal={handleCartModal}
+              productsInCart={productsInCart}
+              setProductsInCart={setProductsInCart}
+              viandsInCart={viandsInCart}
+              setViandsInCart={setViandsInCart}
+              user={user}
+              activeCart={activeCart}
+              elementsInCart={elementsInCart}
+              setElementsInCart={setElementsInCart}
+            />,
+            document.body
+          )}
 
-          {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
-          <div className="main-screen_container">
-            <section className="header_container">
-              <Header
-                handleCartModal={handleCartModal}
-                setProductsInCart={setProductsInCart}
-                setViandsInCart={setViandsInCart}
-                user={user}
-                productsInCart={productsInCart}
-                viandsInCart={viandsInCart}
-              />
-            </section>
-
-            <section className="sub-menu_container">
-              <SubMenu />
-            </section>
-
-            <section className="presentation_container">
-              <Presentation />
-            </section>
-
-            <section className="services_container">
-              <Services handleLoginModal={handleLoginModal} />
-            </section>
-          </div>
-
-          <section className="products_container">
-            <Products setProductsInCart={setProductsInCart} />
+        {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
+        <div className="main-screen_container">
+          <section className="header_container">
+            <Header
+              handleCartModal={handleCartModal}
+              user={user}
+              productsInCart={productsInCart}
+              viandsInCart={viandsInCart}
+              handleChangeBurgerMenu={handleChangeBurgerMenu}
+              elementsInCart={elementsInCart}
+              setProductsInCart={setProductsInCart}
+              activeCart={activeCart}
+              setViandsInCart={setViandsInCart}
+              setElementsInCart={setElementsInCart}
+              setActiveCart={setActiveCart}
+              hasSyncedCart={hasSyncedCart}
+            />
           </section>
 
-          <section className="recipes_container">
-            <Carousel setViandsInCart={setViandsInCart} />
+          <section className="sub-menu_container">
+            <SubMenu />
           </section>
-        </ElementsInCartProvider>
+
+          <section className="presentation_container">
+            <Presentation />
+          </section>
+
+          <section className="services_container">
+            <Services handleLoginModal={handleLoginModal} />
+          </section>
+        </div>
+
+        <section className="products_container">
+          <Products
+            setProductsInCart={setProductsInCart}
+            activeCart={activeCart}
+            setElementsInCart={setElementsInCart}
+          />
+        </section>
+
+        <section className="recipes_container">
+          <Carousel
+            setViandsInCart={setViandsInCart}
+            activeCart={activeCart}
+            setElementsInCart={setElementsInCart}
+          />
+        </section>
 
         <section className="about-us_container">
           <About />
@@ -204,6 +218,15 @@ function Home() {
       {user &&
         !user?.professional &&
         createPortal(<NotificationPopUp />, document.body)}
+
+      {isBurgerMenuOpen &&
+        createPortal(
+          <MobileMenu
+            handleChangeBurgerMenu={handleChangeBurgerMenu}
+            handleLoginModal={handleLoginModal}
+          />,
+          document.body
+        )}
     </main>
   );
 }

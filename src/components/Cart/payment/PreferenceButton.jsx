@@ -2,10 +2,10 @@ import { SiMercadopago } from "react-icons/si";
 import useCreatePreferenceMP from "../../../hooks/useCreatePreferenceMP";
 import "./PreferenceButton.css";
 
-function PreferenceButton({ productsInCart, user }) {
+function PreferenceButton({ productsInCart, activeCart, user }) {
   const { handleCreatePreference, preferenceLoading } = useCreatePreferenceMP(
     productsInCart,
-    user
+    activeCart
   );
 
   return (
