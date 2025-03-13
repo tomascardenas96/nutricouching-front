@@ -7,10 +7,7 @@ function useAddProductToCart(setElementsInCart, activeCart) {
   const { user } = useUser();
 
   const [productsCart, setProductsCart] = useState([]);
-  const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn(
-    setElementsInCart,
-    activeCart
-  );
+  const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn();
 
   // Función para agregar un producto al carrito (ya sea en localStorage o en el backend)
   const addProductToCart = async (product) => {
@@ -48,7 +45,7 @@ function useAddProductToCart(setElementsInCart, activeCart) {
       toast.success("Producto agregado al carrito");
     } else {
       // Si hay un usuario logueado guardar directamente el producto en la DB.
-      handleAddOneElementToCart(product);
+      handleAddOneElementToCart(product, activeCart, setElementsInCart);
     }
   };
 

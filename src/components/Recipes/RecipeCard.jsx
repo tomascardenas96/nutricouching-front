@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { HOST } from "../../api/data";
-import { useElementsInCart } from "../../context/ElementsInCartProvider";
 import useAddViandToCart from "../../hooks/useAddViandToCart";
 import TurnPageArrow from "../Common/TurnPageArrow";
 import "./RecipeCard.css";

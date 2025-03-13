@@ -24,8 +24,6 @@ function CartModal({
   elementsInCart,
   setElementsInCart,
 }) {
-  console.log("Elements in cart: ", elementsInCart);
-  // console.log("Products in cart: ", productsInCart);
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
 
@@ -75,7 +73,8 @@ function CartModal({
 
   // Metodo para calcular el total de la compra
   const calculateTotal = () => {
-    if (productsInCart.length > 0 || viandsInCart.length > 0) {
+    // Si no hay usuario logueado calcular el total de los productos del local storage, de lo contrario sumar los totales desde la base de datos
+    if (!user) {
       const subTotalProducts = productsInCart.reduce(
         (acc, product) => acc + product?.price * product.quantity,
         0

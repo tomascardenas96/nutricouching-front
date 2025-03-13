@@ -6,6 +6,7 @@ import MoreInfo from "./MoreInfo";
 import ReservationModal from "./ReservationModal";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
+import LoadingServiceCard from "./loading/LoadingServiceCard";
 
 function Services({ handleLoginModal }) {
   const { services, servicesLoading, servicesError } = useGetServices();
@@ -51,7 +52,7 @@ function Services({ handleLoginModal }) {
         {services?.map((service, idx) => {
           const isEven = idx % 2 === 0;
 
-          return (
+          return !servicesLoading ? (
             <ServiceCard
               key={service?.serviceId}
               image={service?.image}
@@ -64,6 +65,8 @@ function Services({ handleLoginModal }) {
               handleOpenRequestReservation={handleOpenRequestReservation}
               isEven={isEven}
             />
+          ) : (
+            <LoadingServiceCard key={service?.serviceId} />
           );
         })}
       </div>

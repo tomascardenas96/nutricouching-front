@@ -1,19 +1,28 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
 
-function useAddOneElementToCartWhenLoggedIn(
-  setElementsInCart,
-  activeCart,
-) {
+function useAddOneElementToCartWhenLoggedIn() {
   const authToken = localStorage.getItem("authToken");
 
-  const handleAddOneElementToCart = (element) => {
+  const handleAddOneElementToCart = (
+    element,
+    activeCart,
+    setElementsInCart
+  ) => {
     const AddOneElementToCartPromise = () => {
       try {
         if (element.productId) {
-          return handleAddProductWhenLoggedIn(element.productId);
+          return handleAddProductWhenLoggedIn(
+            element.productId,
+            activeCart,
+            setElementsInCart
+          );
         } else if (element.viandId) {
-          return handleAddViandWhenLoggedIn(element.viandId);
+          return handleAddViandWhenLoggedIn(
+            element.viandId,
+            activeCart,
+            setElementsInCart
+          );
         }
       } catch (error) {
         throw new Error("Error adding product to cart");
@@ -27,7 +36,11 @@ function useAddOneElementToCartWhenLoggedIn(
     });
   };
 
-  const handleAddProductWhenLoggedIn = async (productId) => {
+  const handleAddProductWhenLoggedIn = async (
+    productId,
+    activeCart,
+    setElementsInCart
+  ) => {
     try {
       const response = await fetch(
         `${HOST}/cart-item/add-element/${activeCart.cartId}`,
@@ -67,7 +80,11 @@ function useAddOneElementToCartWhenLoggedIn(
     }
   };
 
-  const handleAddViandWhenLoggedIn = async (viandId) => {
+  const handleAddViandWhenLoggedIn = async (
+    viandId,
+    activeCart,
+    setElementsInCart
+  ) => {
     try {
       const response = await fetch(
         `${HOST}/cart-item/add-element/${activeCart.cartId}`,

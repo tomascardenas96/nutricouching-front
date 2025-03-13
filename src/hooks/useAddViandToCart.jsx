@@ -8,11 +8,8 @@ function useAddViandToCart(setElementsInCart, activeCart) {
 
   // Este metodo llama a la API para agregar una vianda al carrito (solo cuando el usuario está logueado).
   const [viandsCart, setViandsCart] = useState([]);
-  const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn(
-    user,
-    setElementsInCart,
-    activeCart
-  );
+  const { handleAddOneElementToCart } =
+    useAddOneElementToCartWhenLoggedIn(user);
 
   // Función para agregar una vianda al carrito
   const addViandToCart = async (viand) => {
@@ -47,7 +44,7 @@ function useAddViandToCart(setElementsInCart, activeCart) {
       toast.success("Vianda agregada al carrito");
     } else {
       // Si hay un usuario logueado enviar la vianda en la DB.
-      handleAddOneElementToCart(viand);
+      handleAddOneElementToCart(viand, activeCart, setElementsInCart);
     }
   };
 

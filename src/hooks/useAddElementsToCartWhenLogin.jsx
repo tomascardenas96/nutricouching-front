@@ -41,8 +41,6 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
       }
 
       setElementsInCart((prev) => {
-        console.log("prev", prev);
-        console.log("data", data);
         const mergedMap = new Map();
 
         // Agregamos los elementos previos al Map
@@ -63,8 +61,6 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
             mergedMap.set(item.cartItemId, item); // Si es nuevo, lo agregamos directamente
           }
         });
-
-        console.log("arrayFrom", Array.from(mergedMap.values()));
 
         // Retornamos el nuevo array actualizado
         return Array.from(mergedMap.values());

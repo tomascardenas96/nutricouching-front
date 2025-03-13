@@ -3,7 +3,7 @@ import { HOST } from "../api/data";
 
 function useGetServices() {
   const [services, setServices] = useState([]);
-  const [servicesLoading, setServicesLoading] = useState(false);
+  const [servicesLoading, setServicesLoading] = useState(true);
   const [servicesError, setServicesError] = useState(false);
   const [isAddServiceModalOpen, setIsAddServiceModalOpen] = useState(false);
   const [isModifyServiceModalOpen, setIsModifyServiceModalOpen] =
@@ -11,7 +11,6 @@ function useGetServices() {
 
   useEffect(() => {
     const getAllServices = async () => {
-      setServicesLoading(true);
       try {
         const response = await fetch(`${HOST}/service`, {
           method: "GET",
@@ -30,7 +29,7 @@ function useGetServices() {
         console.error(error);
         setServicesError(true);
       } finally {
-        setServicesLoading(true);
+        setServicesLoading(false);
       }
     };
 
