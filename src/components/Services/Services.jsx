@@ -2,11 +2,12 @@ import { useState } from "react";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { RiFootprintFill, RiMentalHealthLine } from "react-icons/ri";
 import useGetServices from "../../hooks/useGetServices";
+import LoaderSpinner from "../Common/LoaderSpinner";
+import NetworkError from "../Common/NetworkError";
 import MoreInfo from "./MoreInfo";
 import ReservationModal from "./ReservationModal";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
-import LoadingServiceCard from "./loading/LoadingServiceCard";
 
 function Services({ handleLoginModal }) {
   const { services, servicesLoading, servicesError } = useGetServices();
@@ -49,26 +50,42 @@ function Services({ handleLoginModal }) {
       </div>
 
       <div className="services-list_container">
-        {services?.map((service, idx) => {
-          const isEven = idx % 2 === 0;
+        {servicesLoading &&
+          [...Array(4)].map((_, index) => (
+            <div
+              key={`services-loader_${index}`}
+              className="loader-spinner_services"
+            >
+              <LoaderSpinner />
+            </div>
+          ))}
 
-          return !servicesLoading ? (
-            <ServiceCard
-              key={service?.serviceId}
-              image={service?.image}
-              color={colors[idx]}
-              title={service?.title}
-              description={service?.description}
-              icon={icons[idx]}
-              handleSelectService={() => handleSelectService(service)}
-              handleOpenServiceModal={handleOpenServiceModal}
-              handleOpenRequestReservation={handleOpenRequestReservation}
-              isEven={isEven}
-            />
-          ) : (
-            <LoadingServiceCard key={service?.serviceId} />
-          );
-        })}
+        {!servicesError &&
+          !servicesLoading &&
+          services?.map((service, idx) => {
+            const isEven = idx % 2 === 0;
+
+            return (
+              <ServiceCard
+                key={service?.serviceId}
+                image={service?.image}
+                color={colors[idx]}
+                title={service?.title}
+                description={service?.description}
+                icon={icons[idx]}
+                handleSelectService={() => handleSelectService(service)}
+                handleOpenServiceModal={handleOpenServiceModal}
+                handleOpenRequestReservation={handleOpenRequestReservation}
+                isEven={isEven}
+              />
+            );
+          })}
+
+        {servicesError && (
+          <div className="network-error_services">
+            <NetworkError message="Ocurrio un error al cargar el contenido" />
+          </div>
+        )}
       </div>
 
       {/* Mostrar modal si hay un servicio seleccionado */}

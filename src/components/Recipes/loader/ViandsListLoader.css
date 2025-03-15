@@ -1,0 +1,18 @@
+.loader_carousel {
+  display: flex;
+  overflow-x: hidden;
+  gap: 3.5rem;
+  padding: 2rem 2rem 1.7rem;
+  position: relative;
+  margin-bottom: 1rem;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.057);
+}
+
+.viand-card_loader {
+  min-width: 11rem;
+  height: 7rem;
+  border-radius: 0.5rem;
+  padding: 0.1rem;
+}

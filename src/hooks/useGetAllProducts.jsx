@@ -4,7 +4,7 @@ import { HOST } from "../api/data";
 function useGetAllProducts(itemsPerPage) {
   const [products, setProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(true);
-  const [productsError, setProductsError] = useState(true);
+  const [productsError, setProductsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);

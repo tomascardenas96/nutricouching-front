@@ -12,10 +12,14 @@ import LoginModal from "../Login/LoginModal";
 import RegisterModal from "../Register/RegisterModal";
 import UpdateUserModal from "../Update-user/UpdateUserModal";
 import "./Header.css";
+import LoaderSpinner from "../Common/LoaderSpinner";
+import NetworkError from "../Common/NetworkError";
 
 function Header({
   handleCartModal,
   user,
+  userLoading,
+  userError,
   productsInCart,
   viandsInCart,
   handleChangeBurgerMenu,
@@ -152,33 +156,41 @@ function Header({
         </ul>
       </div>
 
-      {user ? (
-        <div className="header-user">
-          <p onClick={handleOpenUpdateUserModal}>
-            <FaUser className="user-icon" />
-            {user?.name} {user?.lastname}
-          </p>
-          <span>|</span>
-          <p className="log-out" onClick={handleLogOutEmptyCart}>
-            {" "}
-            <RiLogoutBoxRLine className="log-out-icon" />
-            Salir
-          </p>
-        </div>
-      ) : (
-        <div className="header-login">
-          <div>
-            <p onClick={handleRegisterModal} className="register-button">
-              Registrate gratis
+      {!userLoading ? (
+        user ? (
+          <div className="header-user">
+            <p onClick={handleOpenUpdateUserModal}>
+              <FaUser className="user-icon" />
+              {user?.name} {user?.lastname}
             </p>
-            <input
-              type="button"
-              value="Iniciar sesion"
-              onClick={handleLoginModal}
-            />
+            <span>|</span>
+            <p className="log-out" onClick={handleLogOutEmptyCart}>
+              {" "}
+              <RiLogoutBoxRLine className="log-out-icon" />
+              Salir
+            </p>
           </div>
+        ) : (
+          <div className="header-login">
+            <div>
+              <p onClick={handleRegisterModal} className="register-button">
+                Registrate gratis
+              </p>
+              <input
+                type="button"
+                value="Iniciar sesion"
+                onClick={handleLoginModal}
+              />
+            </div>
+          </div>
+        )
+      ) : (
+        <div className="loader-spinner_user">
+          <LoaderSpinner />
         </div>
       )}
+
+      {userError && <NetworkError message="Error de conexion" />}
 
       {/* Modales con renderizado condicional */}
       {isLoginModalOpen && (

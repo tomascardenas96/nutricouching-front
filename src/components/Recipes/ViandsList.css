@@ -1,0 +1,52 @@
+.all-viands_list {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  gap: 3.5rem;
+  padding: 2rem 2rem 1.7rem;
+  position: relative;
+  margin-bottom: 1rem;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.057);
+
+  & .all-viands_item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  & .all-viands_item:hover {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+
+  & img {
+    width: 11rem;
+    height: 7rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.135);
+    padding: 0.1rem;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  & .selected {
+    transform: scale(1.25);
+  }
+
+  /* Estilo de la barra de scroll */
+  &::-webkit-scrollbar {
+    height: 3px; /* Altura de la barra horizontal */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-details-color);
+    border-radius: 4px; /* Esquinas redondeadas */
+    border: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(200, 200, 200, 0.3); /* Color del fondo */
+    border-radius: 4px; /* Esquinas redondeadas */
+  }
+}

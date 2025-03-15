@@ -3,12 +3,17 @@ import { HOST } from "../../api/data";
 import useGetAllViands from "../../hooks/useGetAllViands";
 import "./Carousel.css";
 import RecipeCard from "./RecipeCard";
+import CarouselLoader from "./loader/CarouselLoader";
+import LoaderSpinner from "../Common/LoaderSpinner";
+import ViandsList from "./ViandsList";
+import ViandsListLoader from "./loader/ViandsListLoader";
+import NetworkError from "../Common/NetworkError";
 
 function Carousel({ setViandsInCart, activeCart, setElementsInCart }) {
   const [selectedViand, setSelectedViand] = useState({});
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
-  const { viands } = useGetAllViands();
+  const { viands, viandsLoading, viandsError } = useGetAllViands();
 
   // Dependiendo del indice seleccionado, se muestra la informacion completa de la vianda
   useEffect(() => {
@@ -42,40 +47,42 @@ function Carousel({ setViandsInCart, activeCart, setElementsInCart }) {
       </h1>
 
       <div className="viand-carousel_container">
-        <RecipeCard
-          previous={previous}
-          next={next}
-          viand={selectedViand}
-          setLoaded={setLoaded}
-          loaded={loaded}
-          index={selectedIndex}
-          setViandsInCart={setViandsInCart}
-          allViands={viands}
-          activeCart={activeCart}
-          setElementsInCart={setElementsInCart}
-        />
+        {viandsLoading || viandsError ? (
+          <CarouselLoader />
+        ) : (
+          <RecipeCard
+            previous={previous}
+            next={next}
+            viand={selectedViand}
+            setLoaded={setLoaded}
+            loaded={loaded}
+            index={selectedIndex}
+            setViandsInCart={setViandsInCart}
+            allViands={viands}
+            activeCart={activeCart}
+            setElementsInCart={setElementsInCart}
+          />
+        )}
       </div>
 
       <div className="carousel_all-viands">
-        <div className="all-viands_list">
-          {viands.map((viand, index) => (
-            <div
-              key={`viand-${viand.viandId}`}
-              className={`all-viands_item ${
-                selectedIndex === index ? "selected" : ""
-              }`}
-              onClick={() => {
-                setLoaded(false);
-                setSelectedIndex(index);
-              }}
-            >
-              <img
-                src={`${HOST}/uploads/viands/${viand.image}`}
-                alt="viand-image_carousel"
-              />
-            </div>
+        {!viandsError &&
+          (viandsLoading ? (
+            <ViandsListLoader />
+          ) : (
+            <ViandsList
+              viands={viands}
+              setLoaded={setLoaded}
+              setSelectedIndex={setSelectedIndex}
+              selectedIndex={selectedIndex}
+            />
           ))}
-        </div>
+
+        {viandsError && (
+          <div className="network-error_viands">
+            <NetworkError message="Ocurrio un error al cargar el contenido" />
+          </div>
+        )}
       </div>
 
       <div className="recipes-carousel_footer"></div>

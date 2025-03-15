@@ -1,0 +1,152 @@
+.prue {
+  height: 30rem;
+  width: 100%;
+  display: flex;
+}
+
+.carousel_loader {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  justify-self: center;
+  width: 100%;
+  position: relative;
+
+  & .recipe-card_text_loader {
+    display: grid;
+    grid-template-rows: 4fr 1.5fr max-content 8fr 3fr 4fr;
+    gap: 0.5em;
+    padding-left: 3rem;
+    padding-right: 6rem;
+  }
+
+  & .recipe-card_img_loader {
+    height: 90%;
+    align-self: center;
+  }
+}
+
+.number-recipe_loader {
+  width: 100%;
+}
+
+.author-recipe_loader {
+}
+
+.name-recipe_loader {
+  height: 100%;
+}
+
+.ingredients-recipe_loader {
+  height: 100%;
+}
+
+.price-recipe_loader {
+  height: 100%;
+}
+
+.footer-recipe_loader {
+  height: 100%;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 42%;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.044);
+}
+
+.carousel-btn_left {
+  left: -9%;
+}
+
+.carousel-btn_right {
+  right: -9%;
+}
+
+@media screen and (max-width: 1330px) {
+  .carousel {
+    & .recipe-card_text {
+      padding-right: 3.5rem;
+    }
+  }
+
+  .number-recipe {
+    & h1 {
+      font-size: 1em;
+      width: 2.3em;
+      height: 2.6em;
+    }
+  }
+
+  .author-recipe {
+    & h1 {
+      font-size: 1em;
+    }
+  }
+
+  .name-recipe {
+    & h1 {
+      font-size: 1.3em;
+    }
+  }
+
+  .ingredients-recipe {
+    & p {
+      font-size: 0.75em;
+      line-height: 1.95em;
+    }
+  }
+
+  .price-recipe {
+    > h1 {
+      font-size: 1rem;
+
+      > span {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .footer-recipe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .see-recipe {
+      & p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .carousel {
+    grid-template-columns: minmax(15rem, 40rem);
+    gap: 1rem;
+  }
+
+  .recipe-card_img {
+    grid-row: 1/ 2;
+
+    & img {
+      width: 100% !important;
+    }
+  }
+
+  .carousel-btn {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .carousel {
+    & .recipe-card_text {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}

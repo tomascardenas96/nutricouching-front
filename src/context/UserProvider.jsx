@@ -103,7 +103,7 @@ function UserProvider({ children }) {
         } finally {
           setUserLoading(false);
         }
-      } else {
+      } else if (!user) {
         setUserLoading(false);
       }
     };

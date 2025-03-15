@@ -4,6 +4,8 @@ import Dots from "../Common/Dots";
 import TurnPageArrow from "../Common/TurnPageArrow";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
+import LoaderSpinner from "../Common/LoaderSpinner";
+import NetworkError from "../Common/NetworkError";
 
 function ProductsCarousel({
   setProductsInCart,
@@ -16,6 +18,7 @@ function ProductsCarousel({
   const fourthMeasure = useMediaQuery({ query: "(max-width: 470px)" });
 
   let itemsPerPage = 5;
+
   if (firstMeasure) {
     itemsPerPage = 4;
   }
@@ -52,15 +55,37 @@ function ProductsCarousel({
       </div>
 
       <div className="product-list">
-        {currentProducts?.map((product) => (
-          <ProductCard
-            key={product.productId}
-            product={product}
-            setProductsInCart={setProductsInCart}
-            activeCart={activeCart}
-            setElementsInCart={setElementsInCart}
-          />
-        ))}
+        {/* Loader */}
+        {productsLoading && (
+          <div className="product-list_loader-container">
+            {[...Array(itemsPerPage)].map((_, index) => (
+              <div
+                className="loader-spinner_products"
+                key={`products-loader_${index}`}
+              >
+                <LoaderSpinner />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!productsLoading &&
+          !productsError &&
+          currentProducts?.map((product) => (
+            <ProductCard
+              key={product.productId}
+              product={product}
+              setProductsInCart={setProductsInCart}
+              activeCart={activeCart}
+              setElementsInCart={setElementsInCart}
+            />
+          ))}
+
+        {productsError && (
+          <div className="network-error_products">
+            <NetworkError message="Ocurrio un error al cargar el contenido" />
+          </div>
+        )}
       </div>
 
       <div className="previous-page">

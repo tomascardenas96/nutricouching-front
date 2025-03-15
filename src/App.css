@@ -62,6 +62,15 @@ body {
   box-sizing: border-box;
 }
 
+@keyframes loaderTransition {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 @media screen and (max-width: 1050px) {
   /* Ocultar la barra de scroll en navegadores WebKit (Chrome, Edge, Safari) */
   ::-webkit-scrollbar {

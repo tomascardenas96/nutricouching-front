@@ -54,12 +54,15 @@ function RecipeCard({
           <div className="number-recipe">
             <h1>{pad(index + 1, 0, 2)}</h1>
           </div>
+
           <div className="author-recipe">
             <h1>NATASHA DIRIALDI</h1>
           </div>
+
           <div className="name-recipe">
             <h1>{viand?.name}</h1>
           </div>
+
           <div className="ingredients-recipe">
             <p>
               <span

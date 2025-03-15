@@ -45,12 +45,14 @@
   place-content: center;
   padding-bottom: 2rem;
 
-  & .list-left {
-    background-color: red;
+  & .loader-spinner_services {
+    width: 100%;
+    height: 12rem;
+    border-radius: 0.2rem;
   }
 
-  & .list-right {
-    background-color: green;
+  & .network-error_services {
+    grid-column: 1 / 3;
   }
 }
 

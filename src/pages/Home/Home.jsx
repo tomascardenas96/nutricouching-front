@@ -37,7 +37,7 @@ function Home() {
     handleLoginModal,
     isLoginModalOpen,
   } = useLogin();
-  const { user } = useUser();
+  const { user, userLoading, userError } = useUser();
 
   // Productos y viandas agregadas al carrito desde el local storage.
   const {
@@ -139,6 +139,8 @@ function Home() {
             <Header
               handleCartModal={handleCartModal}
               user={user}
+              userLoading={userLoading}
+              userError={userError}
               productsInCart={productsInCart}
               viandsInCart={viandsInCart}
               handleChangeBurgerMenu={handleChangeBurgerMenu}
