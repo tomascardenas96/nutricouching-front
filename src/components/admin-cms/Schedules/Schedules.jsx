@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { createPortal } from "react-dom";
-import { useUser } from "../../../context/UserProvider";
+import { RiCalendarScheduleLine } from "react-icons/ri";
+import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
 import useGetAvailabilitiesByProfessional from "../../../hooks/useGetAvailabilitiesByProfessional";
 import AddScheduleModal from "./AddScheduleModal/AddScheduleModal";
 import "./Schedules.css";
 import SchedulesCard from "./SchedulesCard/SchedulesCard";
 import SchedulesHeader from "./SchedulesHeader/SchedulesHeader";
-import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
-import { useState } from "react";
 
 function Schedules({ user }) {
   const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState(false);
@@ -60,31 +60,36 @@ function Schedules({ user }) {
       }
 
       {/* Recorrer los horarios y mostrarlos en tarjetas. */}
-      {Object.entries(availabilities).map(([day, sched]) => (
-        <div key={`day-${day}`}>
-          {sched.length > 0 && <SchedulesHeader date={getDay(day)} />}
+      {!availabilitiesLoading ? (
+        Object.entries(availabilities).map(([day, sched]) => (
+          <div key={`day-${day}`}>
+            {sched.length > 0 && <SchedulesHeader date={getDay(day)} />}
 
-          <div className="bookings-list">
-            {orderSchedules(sched).map((schedule) => (
-              <SchedulesCard
-                key={`schedule-${schedule.availabilityId}`}
-                from={schedule?.startTime}
-                to={schedule?.endTime}
-                interval={schedule?.interval}
-                schedule={schedule}
-                handleDeleteTimeSlot={handleDeleteTimeSlot}
-                day={day}
-              />
-            ))}
+            <div className="schedules-list">
+              {orderSchedules(sched).map((schedule) => (
+                <SchedulesCard
+                  key={`schedule-${schedule?.availabilityId}`}
+                  from={schedule?.startTime}
+                  to={schedule?.endTime}
+                  interval={schedule?.interval}
+                  handleDeleteTimeSlot={handleDeleteTimeSlot}
+                  day={day}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <h1>Cargando...</h1>
+      )}
 
       <div
         className="add-new-schedule"
         onClick={() => setIsAddScheduleModalOpen(true)}
       >
-        <h1>+ Agregar nuevo horario</h1>
+        <h1>
+          <RiCalendarScheduleLine  className="schedule-icon"/> AGREGAR NUEVO HORARIO
+        </h1>
       </div>
 
       {isAddScheduleModalOpen &&

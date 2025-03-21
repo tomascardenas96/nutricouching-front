@@ -1,18 +1,35 @@
 import { SiMercadopago } from "react-icons/si";
 import useCreatePreferenceMP from "../../../hooks/useCreatePreferenceMP";
 import "./PreferenceButton.css";
+import { toast } from "sonner";
 
-function PreferenceButton({ productsInCart, activeCart, user }) {
+function PreferenceButton({
+  productsInCart,
+  activeCart,
+  user,
+  handleCartModal,
+  handleLoginModal,
+}) {
   const { handleCreatePreference, preferenceLoading } = useCreatePreferenceMP(
     productsInCart,
     activeCart
   );
 
+  const handleVerifyUserBeforePurchase = () => {
+    if (user) {
+      handleCreatePreference(productsInCart);
+    } else {
+      toast.warning("Necesitas iniciar sesion antes de realizar la compra");
+      handleCartModal();
+      handleLoginModal();
+    }
+  };
+
   return (
     <>
       {user ? (
         <button
-          onClick={() => handleCreatePreference(productsInCart)}
+          onClick={handleVerifyUserBeforePurchase}
           disabled={preferenceLoading}
           className={
             preferenceLoading ? "loading-purchase" : "confirm-purchase"
@@ -23,7 +40,7 @@ function PreferenceButton({ productsInCart, activeCart, user }) {
         </button>
       ) : (
         <button
-          onClick={() => handleCreatePreference(productsInCart)}
+          onClick={handleVerifyUserBeforePurchase}
           disabled={preferenceLoading}
           className={
             preferenceLoading ? "loading-purchase" : "confirm-purchase"

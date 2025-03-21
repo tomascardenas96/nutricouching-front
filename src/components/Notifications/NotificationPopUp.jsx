@@ -4,13 +4,13 @@ import useGetNotifications from "../../hooks/useGetNotifications";
 import "./NotificationPopUp.css";
 import NotificationsModal from "./NotificationsModal";
 
-function NotificationPopUp() {
+function NotificationPopUp({
+  isNotificationsModalOpen,
+  setIsNotificationsModalOpen,
+}) {
   const [unreadNotifications, setUnreadNotifications] = useState(0);
 
   const { notifications, setNotifications } = useGetNotifications();
-
-  const [isNotificationsModalOpen, setIsNotificationsModalOpen] =
-    useState(false);
 
   const handleCloseModal = () => {
     setIsNotificationsModalOpen(false);

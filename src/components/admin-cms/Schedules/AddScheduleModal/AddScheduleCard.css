@@ -1,0 +1,93 @@
+.selected-schedule_card {
+  height: 2.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  margin: 0.5rem 0 0;
+}
+
+.selected-schedule_card > .left-side {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr max-content 1fr;
+
+  > div {
+    display: grid;
+    place-content: center;
+  }
+
+  & .trash-icon {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 0.2rem;
+  }
+
+  > .schedule-start-end-time {
+    font-size: 1.4rem;
+    font-weight: 200;
+  }
+
+  > .between-time {
+    > p {
+      font-size: 0.55rem;
+      display: flex;
+      align-items: end;
+      font-weight: 400;
+
+      > span {
+        color: #a94242;
+      }
+    }
+
+    > p:last-child {
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+      height: 1rem;
+    }
+  }
+}
+
+.selected-schedule_card > .right-side {
+  border-left: 1.5px solid #a94242;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0.4rem 0;
+  padding-left: 0.5rem;
+
+  & p {
+    font-size: 0.45rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+  }
+
+  > .mon {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  > .wed {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  > .fri {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  > .sun {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  > .tue {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  > .thu {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  > .sat {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}

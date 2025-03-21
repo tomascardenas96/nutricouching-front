@@ -13,11 +13,15 @@
 .manage-professional-modal {
   width: 33rem;
   height: 45rem;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.065);
   display: grid;
   grid-template-rows: 5rem 1fr 5rem;
   background-color: rgb(250, 250, 250);
+
+  & ::-webkit-scrollbar {
+    width: 5px;
+  }
 }
 
 .manage-professional_title {
@@ -84,7 +88,6 @@
   row-gap: 0.5rem;
 }
 
-/* A estas 3 clases las comparten distintos componentes (pasar a cada uno de ellos) */
 p.professional-modal_no-selected-data {
   font-family: var(--presentation-banner-font);
   font-size: 0.8rem;

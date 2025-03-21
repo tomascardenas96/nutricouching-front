@@ -23,6 +23,7 @@ function CartModal({
   activeCart,
   elementsInCart,
   setElementsInCart,
+  handleLoginModal
 }) {
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
@@ -252,6 +253,8 @@ function CartModal({
               productsInCart={elementsInCart}
               activeCart={activeCart}
               user={user}
+              handleCartModal={handleCartModal}
+              handleLoginModal={handleLoginModal}
             />
           </div>
         </div>

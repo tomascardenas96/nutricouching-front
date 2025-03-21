@@ -31,9 +31,12 @@ function Header({
   setElementsInCart,
   setActiveCart,
   hasSyncedCart,
+  setIsNotificationsModalOpen,
+  handleOpenUpdateUserModal,
+  isUpdateUserModalOpen,
+  setIsUpdateUserModalOpen,
 }) {
   const [scrolled, setScrolled] = useState(null);
-  const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
 
   const {
     loginInput,
@@ -71,11 +74,6 @@ function Header({
     }, 0);
 
     return productsQuantity + viandsQuantity;
-  };
-
-  // Abrir o cerrar el modal para actualizar un usuario
-  const handleOpenUpdateUserModal = () => {
-    setIsUpdateUserModalOpen(!isUpdateUserModalOpen);
   };
 
   const { handleEmptyLocalStorageCart } = useEmptyCart(
@@ -125,6 +123,7 @@ function Header({
           />
           <IoIosNotifications
             className={scrolled ? "icon icon-scrolled" : "icon"}
+            onClick={() => setIsNotificationsModalOpen(true)}
           />
         </div>
       </div>
@@ -189,8 +188,6 @@ function Header({
           <LoaderSpinner />
         </div>
       )}
-
-      {userError && <NetworkError message="Error de conexion" />}
 
       {/* Modales con renderizado condicional */}
       {isLoginModalOpen && (

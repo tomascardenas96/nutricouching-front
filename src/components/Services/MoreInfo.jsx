@@ -2,6 +2,7 @@ import "./MoreInfo.css";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { reviews } from "./reviews/reviews";
 import { useUser } from "../../context/UserProvider";
+import { toast } from "sonner";
 
 function MoreInfo({
   handleOpenRequestReservation,
@@ -12,6 +13,7 @@ function MoreInfo({
   const { user } = useUser();
 
   const openLoginModal = () => {
+    toast.warning("Necesitas iniciar sesion antes de reservar turnos");
     handleOpenServiceModal();
     handleLoginModal();
   };

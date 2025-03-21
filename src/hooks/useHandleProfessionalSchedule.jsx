@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 function useHandleProfessionalSchedule() {
   const [selectedSchedules, setSelectedSchedules] = useState([]);
@@ -10,6 +11,16 @@ function useHandleProfessionalSchedule() {
   });
 
   const addNewSchedule = (schedule) => {
+    if (
+      !schedule.day.length ||
+      !schedule.startTime ||
+      !schedule.endTime ||
+      !schedule.interval
+    ) {
+      toast.warning("Debe elegir dias y horarios");
+      return;
+    }
+
     setSelectedSchedules((prevSchedules) => [...prevSchedules, schedule]);
     setCurrentSchedule({
       startTime: "",

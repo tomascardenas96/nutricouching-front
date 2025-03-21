@@ -2,16 +2,15 @@
   display: flex;
   align-items: start;
   justify-content: space-between;
-  color: #603dc193;
-  font-family: var(--services-modal-header);
-  border-bottom: 1.5px solid #603dc193;
-  height: 2rem;
-  margin: 0 0.5rem;
+  color: var(--selected-option-text);
+  border-bottom: 1.5px solid var(--selected-option-text);
+  height: 1.3rem;
+  margin: 0 0.5rem 0.5rem;
 
   & p {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: 1.07rem;
+    font-size: 0.82rem;
   }
 }

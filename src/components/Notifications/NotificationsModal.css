@@ -1,6 +1,6 @@
 .user-notifications-modal_container {
   width: 100%;
-  height: 100svh;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -62,5 +62,37 @@
     gap: 0.5rem;
     color: rgba(0, 0, 0, 0.652);
     height: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1490px) {
+  .user-notifications-modal {
+    right: 7rem;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .user-notifications-modal {
+    right: 4rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .user-notifications-modal_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-notifications-modal {
+    position: static;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .user-notifications-modal {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
   }
 }

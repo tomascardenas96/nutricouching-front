@@ -37,10 +37,14 @@ function RootCmsModal({ handleCmsModal }) {
           isRootModalAnimating ? "fade-out" : "fade-in"
         }`}
       >
-        <IoMdClose className="close-cms-icon" onClick={closeModal} />
-        <h1 className="root-panel_info">
-          Panel de administracion <CiBoxList className="panel-icon" />
-        </h1>
+        <div className="cms-modal-root_title">
+          <h1 className="root-panel_info">
+            Panel de administracion <CiBoxList className="panel-icon" />
+          </h1>
+
+          <IoMdClose className="close-cms-icon" onClick={closeModal} />
+        </div>
+
         <div>
           <div className="root-cms_list">
             <ul>

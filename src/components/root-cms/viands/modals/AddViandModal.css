@@ -14,7 +14,7 @@
   min-height: 40rem;
   max-height: 45rem;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: .3rem;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.065);
   display: grid;
   grid-template-rows: 5rem 1fr 7rem;

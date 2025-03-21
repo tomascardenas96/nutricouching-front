@@ -49,6 +49,14 @@
       color: var(--primary-font-color);
     }
   }
+
+  > .mobile-menu_logo {
+    > img {
+      width: 3rem;
+      position: absolute;
+      bottom: 2rem;
+    }
+  }
 }
 
 /* Media queries */

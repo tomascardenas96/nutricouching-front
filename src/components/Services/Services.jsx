@@ -38,7 +38,7 @@ function Services({ handleLoginModal }) {
     <RiFootprintFill />,
   ];
 
-  const colors = ["#DCB8CB", "#8499B1", "#93C0A4", "#DECDF5"];
+  const colors = ["#BB4430", "#19647E", "#2F0147", "#FC9F5B"];
 
   return (
     <div className="services-menu">

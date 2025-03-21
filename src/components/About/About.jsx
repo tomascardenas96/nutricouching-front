@@ -20,7 +20,7 @@ function About() {
             !professionalsLoading ? (
               professionals?.map((professional) => (
                 <AboutCard
-                  key={professional.professionalId}
+                  key={`professional-${professional.professionalId}`}
                   image={professional.image}
                   name={professional.fullname}
                   role={professional.specialty}
@@ -28,7 +28,7 @@ function About() {
               ))
             ) : (
               [...Array(4)].map((_, index) => (
-                <div className="about-card_loader">
+                <div key={`professional-loader_${index}`} className="about-card_loader">
                   <LoaderSpinner />
                 </div>
               ))

@@ -1,6 +1,6 @@
 .services_more-info_container {
   width: 100%;
-  height: 100svh;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -43,7 +43,7 @@
         max-height: 4.5rem;
         color: var(--primary-font-color);
         line-height: 1.5rem;
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
       }
 
       & p {
@@ -85,14 +85,47 @@
       display: flex;
       gap: 0.7rem;
       align-items: center;
-      background-color: #336699;
-      color: white;
+      background-color: #f6f6f6;
+      cursor: pointer;
+      text-decoration: underline;
       cursor: pointer;
       box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.244);
+      border: 1px solid #cc3f0c9a;
+      color: #cc3f0c9a;
     }
 
     & .schedule-icon {
       font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .services_more-info {
+    width: 100%;
+    border-radius: 0;
+
+    & .service-modal_header {
+      & div {
+        & h1 {
+          font-size: 1.3rem;
+        }
+
+        & p {
+          font-size: 0.8rem;
+        }
+      }
+
+      & img {
+        width: 8rem;
+        height: 8rem;
+      }
+    }
+
+    & .service-modal_body {
+      & p {
+        font-size: 0.8rem;
+      }
     }
   }
 }

@@ -1,21 +1,23 @@
 .cms-modal_container {
   position: fixed;
   width: 100%;
-  height: 100svh;
-  background-color: rgba(0, 0, 0, 0.119);
+  height: 100vh;
+  background-color: var(--background-shadow-color);
   z-index: 3000;
   display: flex;
   justify-content: end;
+  color: var(--primary-font-color);
 
   & .root-panel_info {
-    font-family: var(--services-modal-header);
-    font-weight: 400;
-    font-size: 1.15rem;
-    display: flex;
-    align-items: center;
     gap: 0.5rem;
-    margin-left: 1rem;
-    color: rgba(0, 0, 0, 0.725);
+    font-family: var(--primary-font);
+    color: var(--primary-font-color);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    padding-left: 1rem;
+    align-items: center;
+    font-size: 0.936rem;
 
     & .panel-icon {
       font-size: 0.95rem;
@@ -25,26 +27,30 @@
 
   & aside {
     position: relative;
-    width: 25rem;
-    margin-top: 0.5rem;
-    height: 98svh;
+    width: 28rem;
+    height: 100vh;
     background-color: #f2f2f2;
     box-shadow: -1px 0px 10px 5px rgba(0, 0, 0, 0.055);
     display: flex;
     flex-direction: column;
-    padding: 1rem 0 0.5rem 1rem;
     border-radius: 0.2rem;
     animation-duration: 0.4s;
+    padding: 1.2rem 1rem 0.5rem 1rem;
+    gap: 1.2rem;
+
+    > .cms-modal-root_title {
+      display: flex;
+      justify-content: space-between;
+    }
 
     & .close-cms-icon {
       box-sizing: content-box;
-      position: absolute;
-      right: 1rem;
-      top: 1.6rem;
       cursor: pointer;
       color: rgba(0, 0, 0, 0.708);
       padding: 0.2rem;
       border-radius: 50%;
+      width: 1.0994rem;
+      height: 1.0994rem;
     }
   }
 }
@@ -92,32 +98,31 @@
 
 .root-cms_list {
   background-color: white;
-  border-radius: 0.5rem 0 0 0.5rem;
+  width: 100%;
+  border-radius: 0.3rem;
   border: 1px solid rgba(0, 0, 0, 0.108);
   display: grid;
-  grid-template-rows: 2.8rem 1fr;
+  grid-template-rows: 2.6rem 1fr;
+  padding: 0.3rem 0.9rem 0;
+  min-height: 12rem;
 
   & ul {
     display: flex;
     list-style: none;
     gap: 0.5rem;
-    padding-left: 1.4rem;
-    align-items: end;
+    align-items: center;
     user-select: none;
 
     & li {
-      cursor: pointer;
-      font-family: var(--services-modal-header);
-      font-size: 0.93rem;
-      font-weight: 500;
-      height: 2rem;
+      font-family: var(--primary-font);
+      font-size: 0.7rem;
+      padding: 0.45rem 0.8rem;
       border-radius: 0.2rem;
-      padding: 0 0.5rem;
-      color: rgba(0, 0, 0, 0.695);
+      cursor: pointer;
     }
 
     & .selected-option {
-      background-color: #603dc11a;
+      background-color: #603dc123;
       color: #613dc1;
     }
   }

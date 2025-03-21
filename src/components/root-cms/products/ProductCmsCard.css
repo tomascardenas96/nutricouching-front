@@ -3,7 +3,6 @@
   grid-template-rows: repeat(2, 1.8rem);
   grid-template-columns: 3.36rem 1fr;
   font-family: var(--primary-font);
-  font-size: 0.75rem;
   margin-top: 0.3rem;
   row-gap: 0.05rem;
 
@@ -29,7 +28,7 @@
     max-width: 20ch;
     text-transform: capitalize;
     font-weight: 500;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -37,9 +36,12 @@
   }
 
   & .product-other {
-    color: rgba(0, 0, 0, 0.679);
     font-size: 0.78rem;
   }
+}
+
+.cms-product_price {
+  font-weight: 500;
 }
 
 .cms-product_price,
@@ -47,10 +49,10 @@
   & p {
     display: flex;
     justify-content: end;
-    gap: 0.3rem;
     font-size: 0.8rem;
     font-family: var(--primary-font);
     cursor: pointer;
+    gap: 0.3rem;
   }
 
   & .cms-product_options-icon {

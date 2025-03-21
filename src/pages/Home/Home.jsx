@@ -26,6 +26,9 @@ function Home() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isNotificationsModalOpen, setIsNotificationsModalOpen] =
+    useState(false);
+  const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
 
   // Custom hooks para iniciar sesion y obtener el usuario activo
   const {
@@ -69,6 +72,11 @@ function Home() {
 
   const handleChangeBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
+  };
+
+  // Abrir o cerrar el modal para actualizar un usuario
+  const handleOpenUpdateUserModal = () => {
+    setIsUpdateUserModalOpen(!isUpdateUserModalOpen);
   };
 
   // Notificacion cuando la compra es exitosa y creacion de carrito nuevo
@@ -129,6 +137,7 @@ function Home() {
               activeCart={activeCart}
               elementsInCart={elementsInCart}
               setElementsInCart={setElementsInCart}
+              handleLoginModal={handleLoginModal}
             />,
             document.body
           )}
@@ -151,6 +160,10 @@ function Home() {
               setElementsInCart={setElementsInCart}
               setActiveCart={setActiveCart}
               hasSyncedCart={hasSyncedCart}
+              setIsNotificationsModalOpen={setIsNotificationsModalOpen}
+              handleOpenUpdateUserModal={handleOpenUpdateUserModal}
+              isUpdateUserModalOpen={isUpdateUserModalOpen}
+              setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
             />
           </section>
 
@@ -219,13 +232,22 @@ function Home() {
 
       {user &&
         !user?.professional &&
-        createPortal(<NotificationPopUp />, document.body)}
+        createPortal(
+          <NotificationPopUp
+            isNotificationsModalOpen={isNotificationsModalOpen}
+            setIsNotificationsModalOpen={setIsNotificationsModalOpen}
+          />,
+          document.body
+        )}
 
       {isBurgerMenuOpen &&
         createPortal(
           <MobileMenu
             handleChangeBurgerMenu={handleChangeBurgerMenu}
             handleLoginModal={handleLoginModal}
+            setActiveCart={setActiveCart}
+            setElementsInCart={setElementsInCart}
+            handleOpenUpdateUserModal={handleOpenUpdateUserModal}
           />,
           document.body
         )}

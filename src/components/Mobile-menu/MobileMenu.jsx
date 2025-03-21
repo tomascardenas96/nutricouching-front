@@ -4,12 +4,31 @@ import { IoMdSettings } from "react-icons/io";
 
 import React from "react";
 
-function MobileMenu({ handleChangeBurgerMenu, handleLoginModal }) {
+function MobileMenu({
+  handleChangeBurgerMenu,
+  handleLoginModal,
+  setActiveCart,
+  setElementsInCart,
+  handleOpenUpdateUserModal,
+}) {
   const { user, handleLogOut } = useUser();
 
   const openLoginModal = () => {
     handleChangeBurgerMenu();
     handleLoginModal();
+  };
+
+  const handleLogOutAndClear = () => {
+    setActiveCart(null);
+    setElementsInCart([]);
+    localStorage.removeItem("products-cart");
+    localStorage.removeItem("viands-cart");
+    handleLogOut();
+  };
+
+  const handleOpenSettings = () => {
+    handleChangeBurgerMenu();
+    handleOpenUpdateUserModal();
   };
 
   return (
@@ -24,7 +43,10 @@ function MobileMenu({ handleChangeBurgerMenu, handleLoginModal }) {
               <span>{user?.email}</span>
             </div>
 
-            <IoMdSettings className="settings-icon" />
+            <IoMdSettings
+              className="settings-icon"
+              onClick={handleOpenSettings}
+            />
           </div>
         )}
 
@@ -35,8 +57,15 @@ function MobileMenu({ handleChangeBurgerMenu, handleLoginModal }) {
           <li>PRODUCTOS</li>
           <li>VIANDAS</li>
           <li>CONOCENOS</li>
-          {user && <li onClick={handleLogOut}>SALIR</li>}
+          {user && <li onClick={handleLogOutAndClear}>SALIR</li>}
         </ul>
+
+        <div className="mobile-menu_logo">
+          <img
+            src="/src/public/assets/nutricouching-logo.jpg"
+            alt="Logo de nutricoaching integral"
+          />
+        </div>
       </div>
     </div>
   );

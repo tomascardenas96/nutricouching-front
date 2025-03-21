@@ -1,7 +1,6 @@
 import { toast } from "sonner";
 import { HOST } from "../api/data";
 import { useUser } from "../context/UserProvider";
-import { useState } from "react";
 
 function useAddNewScheduleToProfessional() {
   const { user } = useUser();
@@ -11,6 +10,10 @@ function useAddNewScheduleToProfessional() {
     e.preventDefault();
 
     const addNewSchedule = async () => {
+      if (!!!schedule.length) {
+        throw new Error("Debe seleccionar al menos un horario");
+      }
+
       const response = await fetch(
         `${HOST}/availability/${user?.professional?.professionalId}`,
         {
@@ -25,6 +28,10 @@ function useAddNewScheduleToProfessional() {
 
       const data = await response.json();
 
+      if (data.statusCode === 400) {
+        throw new Error("El horario no puede ser repetido");
+      }
+
       if (!response.ok) {
         throw new Error(data.message);
       }
@@ -38,7 +45,7 @@ function useAddNewScheduleToProfessional() {
         // Cerrar modal
         return "Horário adicionado com sucesso!";
       },
-      error: "Erro ao adicionar novo horário!",
+      error: (err) => err.message,
     });
   };
 

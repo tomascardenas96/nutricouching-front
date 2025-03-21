@@ -15,7 +15,7 @@
   height: 31rem;
   background-color: white;
   box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.123);
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   display: grid;
   grid-template-rows: 5rem 1fr;
 }

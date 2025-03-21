@@ -2,6 +2,8 @@ import { IoMdClose } from "react-icons/io";
 import useAddNewScheduleToProfessional from "../../../../hooks/useAddNewScheduleToProfessional";
 import useHandleProfessionalSchedule from "../../../../hooks/useHandleProfessionalSchedule";
 import "./AddScheduleModal.css";
+import { ImCheckmark, ImCross } from "react-icons/im";
+import AddScheduleCard from "./AddScheduleCard";
 
 function AddScheduleModal({ setIsAddScheduleModalOpen }) {
   const {
@@ -17,90 +19,123 @@ function AddScheduleModal({ setIsAddScheduleModalOpen }) {
 
   return (
     <dialog className="add-schedule-modal_container">
-      <div className="add-schedule-modal">
-        <div className="">
+      <form
+        className="add-schedule-modal"
+        onSubmit={(e) => handleSubmitAddNewSchedule(e, selectedSchedules)}
+      >
+        <div className="add-schedule_title">
           <h1>Agregar nuevo horario</h1>
           <IoMdClose
-            className=""
+            className="close-icon"
             onClick={() => setIsAddScheduleModalOpen(false)}
           />
         </div>
 
-        <form
-          onSubmit={(e) => handleSubmitAddNewSchedule(e, selectedSchedules)}
-        >
-          <fieldset>
+        <div className="add-schedule_body">
+          <fieldset className="days-list">
             <legend>Elije los dias a agregar</legend>
 
-            {/* Checkboxes con los dias de la semana */}
-            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-              (day, idx) => (
-                <label key={day} className="">
-                  <input
-                    type="checkbox"
-                    value={day}
-                    checked={currentSchedule?.day?.includes(day)}
-                    onChange={handleChangeDaysSchedule}
-                  />
-                  {spanishDays[idx].charAt(0).toUpperCase() +
-                    spanishDays[idx].slice(1)}
-                </label>
-              )
-            )}
+            <div className="days-label">
+              {/* Checkboxes con los dias de la semana */}
+              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+                (day, idx) => (
+                  <label key={day}>
+                    <input
+                      type="checkbox"
+                      value={day}
+                      checked={currentSchedule?.day?.includes(day)}
+                      onChange={handleChangeDaysSchedule}
+                    />
+                    <span>
+                      {spanishDays[idx].charAt(0).toUpperCase() +
+                        spanishDays[idx].slice(1)}
+                    </span>
+                  </label>
+                )
+              )}
+            </div>
           </fieldset>
 
           {/* Horario de inicio y de fin del turno */}
-          <fieldset>
+          <fieldset className="schedules-select">
             <legend>Seleccione los horarios</legend>
-            <label htmlFor="">
-              Inicio
-              <input
-                type="time"
-                name="startTime"
-                value={currentSchedule.startTime || ""}
-                onChange={handleChangeTimeRange}
-              />
-            </label>
 
-            <label htmlFor="">
-              Fin
-              <input
-                type="time"
-                name="endTime"
-                value={currentSchedule.endTime || ""}
-                onChange={handleChangeTimeRange}
-              />
-            </label>
+            <div className="select-fields">
+              <label htmlFor="" className="start-label">
+                Inicio
+                <input
+                  type="time"
+                  name="startTime"
+                  value={currentSchedule.startTime || ""}
+                  onChange={handleChangeTimeRange}
+                />
+              </label>
 
-            {/* Intervalo entre cada uno de los turnos */}
-            <label htmlFor="">
-              Intervalo
-              <select
-                name="interval"
-                onChange={handleChangeTimeRange}
-                value={currentSchedule.interval || ""}
+              <label htmlFor="" className="end-label">
+                Fin
+                <input
+                  type="time"
+                  name="endTime"
+                  value={currentSchedule.endTime || ""}
+                  onChange={handleChangeTimeRange}
+                />
+              </label>
+
+              {/* Intervalo entre cada uno de los turnos */}
+              <label htmlFor="" className="interval-label">
+                Int.
+                <select
+                  name="interval"
+                  onChange={handleChangeTimeRange}
+                  value={currentSchedule.interval || ""}
+                >
+                  <option value="">-</option>
+                  {[15, 30, 45, 60].map((numb) => (
+                    <option key={numb} value={numb}>
+                      {numb} minutos
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <div className="add-schedule-gap_btn">
+              {/* Boton para agregar una nueva franja horaria */}
+              <button
+                type="button"
+                onClick={() => addNewSchedule(currentSchedule)}
               >
-                <option value="">-</option>
-                {[15, 30, 45, 60].map((numb) => (
-                  <option key={numb} value={numb}>
-                    {numb} minutos
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            {/* Boton para agregar una nueva franja horaria */}
-            <button
-              type="button"
-              onClick={() => addNewSchedule(currentSchedule)}
-            >
-              Agregar horario
-            </button>
+                Agregar horario
+              </button>
+            </div>
           </fieldset>
 
-          <input type="submit" value="Agregar" />
-        </form>
-      </div>
+          <div className="schedules-selected_list">
+            {selectedSchedules &&
+              selectedSchedules.map((schedule, index) => (
+                <AddScheduleCard
+                  key={`schedule-card_${index}`}
+                  schedule={schedule}
+                  spanishDays={spanishDays}
+                />
+              ))}
+
+            {!!!selectedSchedules.length && (
+              <p>No hay horarios seleccionados.</p>
+            )}
+          </div>
+        </div>
+
+        <div className="submit-add-schedule_options">
+          <ImCross className="add-cancel-schedule add-cancel-schedule_close" />
+          <div>
+            <label htmlFor="add-schedule_submit">
+              <input type="submit" id="add-schedule_submit" />
+              <ImCheckmark className="add-cancel-schedule add-cancel-schedule_done" />
+            </label>
+          </div>
+        </div>
+      </form>
     </dialog>
   );
 }

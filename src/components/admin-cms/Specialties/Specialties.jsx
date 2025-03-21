@@ -5,9 +5,13 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import AddSpecialtyModal from "./modal/AddSpecialtyModal";
 import useUnlinkSpecialtyOfProfessional from "../../../hooks/useUnlinkSpecialtyOfProfessional";
+import { RiApps2AddLine } from "react-icons/ri";
+import ConfirmationModal from "../../Common/ConfirmationModal";
 
 function Specialties({ user }) {
   const [isAddSpecialtyModalOpen, setIsAddSpecialtyModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [selectedSpecialty, setSelectedSpecialty] = useState(null);
 
   const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
     useGetAllSpecialtiesByProfessional(user.professional.professionalId);
@@ -19,40 +23,69 @@ function Specialties({ user }) {
     setIsAddSpecialtyModalOpen(!isAddSpecialtyModalOpen);
   };
 
+  const handleConfirmationDeleteModal = (specialty) => {
+    if (!!specialty) {
+      setSelectedSpecialty(specialty);
+    }
+    setIsConfirmationModalOpen(!isConfirmationModalOpen);
+  };
+
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Servicio</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead>
+    <div className="admin-specialties_container">
+      {!!!specialties.length ? (
+        <div className="no-specialties">
+          <h1>No hay especialidades asociadas.</h1>
+        </div>
+      ) : (
+        <>
+          <table className="admin-specialties_table">
+            <thead>
+              <tr>
+                <th className="name">Nombre</th>
+                <th className="service">Servicio</th>
+                <th></th>
+              </tr>
+            </thead>
 
-        <tbody>
-          {specialties?.map((specialty) => (
-            <tr key={`specialty-${specialty.specialtyId}`}>
-              <td>{specialty.name}</td>
-              <td>{specialty.service.title}</td>
-              <td>
-                <FaRegTrashAlt
-                  onClick={() =>
-                    handleUnlinkSpecialtyOfProfessional(
-                      specialty.specialtyId,
-                      user.professional.professionalId
-                    )
-                  }
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            <tbody>
+              {specialties?.map((specialty) => (
+                <tr key={`specialty-${specialty.specialtyId}`}>
+                  <td>{specialty.name}</td>
+                  <td className="title">{specialty.service.title}</td>
+                  <td>
+                    <FaRegTrashAlt
+                      className="remove-icon"
+                      onClick={() => handleConfirmationDeleteModal(specialty)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
 
-      <div onClick={handleOpenCloseModal}>
-        <h1>Agregar Especialidad</h1>
+      <div onClick={handleOpenCloseModal} className="admin-specialties_add">
+        <h1>
+          <RiApps2AddLine className="add-icon" /> AGREGAR ESPECIALIDAD
+        </h1>
       </div>
+
+      {isConfirmationModalOpen &&
+        createPortal(
+          <ConfirmationModal
+            onClose={handleConfirmationDeleteModal}
+            onConfirm={() => {
+              handleConfirmationDeleteModal();
+              handleUnlinkSpecialtyOfProfessional(
+                selectedSpecialty.specialtyId,
+                user.professional.professionalId
+              );
+            }}
+            message="¿Desea eliminar esta especialidad?"
+          />,
+          document.body
+        )}
 
       {isAddSpecialtyModalOpen &&
         createPortal(

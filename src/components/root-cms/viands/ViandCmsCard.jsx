@@ -20,7 +20,7 @@ function ViandCmsCard({
       <td className="cms-viand-card_name">
         <img src={`${HOST}/uploads/viands/${viand.image}`} alt="viand-image" />
         <h1>{viand.name}</h1>
-        <p>Unidades en stock: {viand.stock}</p>
+        <p className="stock-amount">Unidades en stock: {viand.stock}</p>
       </td>
       <td className="cms-viand-card_price">${viand.price}</td>
       <td className="cms-viand-card_options">

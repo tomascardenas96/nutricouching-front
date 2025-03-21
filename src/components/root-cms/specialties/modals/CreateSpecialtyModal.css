@@ -11,7 +11,83 @@
 
   & > form.specialties-modal {
     background-color: white;
-    width: 30rem;
-    height: 30rem;
+    width: 32rem;
+    height: 19rem;
+    border-radius: 0.3rem;
+    display: grid;
+    grid-template-rows: 5rem 1fr 7rem;
+
+    > .specialties-modal_header {
+      display: grid;
+      place-content: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.208);
+
+      > h1 {
+        font-weight: 400;
+        font-size: 1.2rem;
+      }
+    }
+
+    > .specialties-modal_body {
+      padding: 2rem;
+
+      > div {
+        display: flex;
+
+        > label {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+
+          > input {
+            border: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.124);
+            padding-left: 0.3rem;
+            font-family: var(--presentation-banner-font);
+            outline: none;
+          }
+
+          > select {
+            border: 1px solid rgba(0, 0, 0, 0.124);
+            border-radius: 0.2rem;
+          }
+
+          > input,
+          select {
+            height: 2.5rem;
+            width: 90%;
+          }
+        }
+      }
+    }
   }
+}
+
+.add-specialty_buttons {
+  display: flex;
+  align-items: start;
+  justify-content: space-around;
+  padding-top: 1.5rem;
+
+  & .add-cancel-specialty {
+    font-size: 1.6rem;
+    cursor: pointer;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.648));
+  }
+
+  & .add-cancel-specialty_close {
+    color: #cc3f0c;
+  }
+
+  & .add-cancel-specialty_done {
+    color: #72b01d;
+  }
+
+  & .add-cancel-specialty:active {
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.648));
+  }
+}
+
+#create-specialty {
+  display: none;
 }

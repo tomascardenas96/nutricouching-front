@@ -1,14 +1,13 @@
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import "./ProductsCmsList.css";
-import useGetAllProducts from "../../../hooks/useGetAllProducts";
-import ProductCmsCard from "./ProductCmsCard";
-import { ImPlus } from "react-icons/im";
 import { LiaAddressCard } from "react-icons/lia";
+import useDeleteProduct from "../../../hooks/useDeleteProduct";
+import useGetAllProducts from "../../../hooks/useGetAllProducts";
+import ConfirmationModal from "../../Common/ConfirmationModal";
+import ProductCmsCard from "./ProductCmsCard";
+import "./ProductsCmsList.css";
 import AddProductModal from "./modals/AddProductModal";
 import ModifyProductModal from "./modals/ModifyProductModal";
-import { useState } from "react";
-import useDeleteProduct from "../../../hooks/useDeleteProduct";
-import ConfirmationModal from "../../Common/ConfirmationModal";
 
 function ProductsCmsList() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -35,6 +34,7 @@ function ProductsCmsList() {
             <CiSearch className="products_search-filter_icon" />
           </form>
         </div>
+
         <div className="cms-product_body">
           <table>
             <thead className="header_table">
@@ -59,6 +59,7 @@ function ProductsCmsList() {
             </tbody>
           </table>
         </div>
+        
         <div onClick={handleAddProductModal} className="cms-product-add">
           <LiaAddressCard className="add-product_icon" />
           <h1>CREAR NUEVO PRODUCTO</h1>

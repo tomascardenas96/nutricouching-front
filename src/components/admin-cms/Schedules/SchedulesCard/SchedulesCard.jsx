@@ -9,7 +9,6 @@ function SchedulesCard({
   to,
   interval,
   handleDeleteTimeSlot,
-  schedule,
   day,
 }) {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);

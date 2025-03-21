@@ -1,16 +1,29 @@
 .professional-schedules_container {
   & .add-new-schedule {
-    height: 4rem;
-    margin-top: 1.5rem;
-    display: grid;
-    place-content: center;
-    border-top: 1.5px solid #00000022;
-    color: #603dc193;
-    font-family: var(--primary-font);
+    height: 3.8rem;
+    color: var(--selected-option-text);
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.175);
     cursor: pointer;
+    user-select: none;
+    margin: 0rem 0.9rem 0;
+    margin-top: 1.8rem;
 
     & h1 {
-      font-weight: 400;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--selected-option-text);
+      padding-bottom: 0.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      > .schedule-icon {
+        font-size: .9rem;
+      }
     }
   }
   & .no-schedules,
@@ -20,5 +33,12 @@
     margin: 1.5rem 0 0.5rem;
     font-family: var(--primary-font);
     font-size: 0.85rem;
+  }
+
+  & .schedules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 0.9rem;
   }
 }

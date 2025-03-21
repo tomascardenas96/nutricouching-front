@@ -1,3 +1,4 @@
+import { ImCheckmark, ImCross } from "react-icons/im";
 import useCreateSpecialty from "../../../../hooks/useCreateSpecialty";
 import useGetServices from "../../../../hooks/useGetServices";
 import "./CreateSpecialtyModal.css";
@@ -18,26 +19,25 @@ function CreateSpecialtyModal({ closeModal, setSpecialties }) {
         </div>
 
         <div className="specialties-modal_body">
-          <div className="">
+          <div>
             <label htmlFor="name">
               {" "}
-              Especialidad
               <input
                 type="text"
                 name="name"
                 onChange={handleChangeCreateSpecialty}
+                placeholder="Nombre de la especialidad"
               />
             </label>
 
             <label htmlFor="serviceId">
               {" "}
-              Servicio asociado
               <select
                 name="serviceId"
                 onChange={handleChangeCreateSpecialty}
                 value={newSpecialtyInput.serviceId}
               >
-                <option value="">Seleccione un servicio</option>
+                <option value="">Servicio asociado</option>
                 {services.map((service) => (
                   <option
                     key={`service-${service.serviceId}`}
@@ -51,8 +51,20 @@ function CreateSpecialtyModal({ closeModal, setSpecialties }) {
           </div>
         </div>
 
-        <div className="specialties-modal_submit">
-          <input type="submit" value="Crear" />
+        <div className="add-specialty_buttons">
+          <ImCross
+            className="add-cancel-specialty add-cancel-specialty_close"
+            onClick={closeModal}
+          />
+          <div>
+            <label
+              className="specialties-modal_submit"
+              htmlFor="create-specialty"
+            >
+              <input type="submit" id="create-specialty" />
+              <ImCheckmark className="add-cancel-specialty add-cancel-specialty_done" />
+            </label>
+          </div>
         </div>
       </form>
     </div>

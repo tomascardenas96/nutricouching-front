@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useUser } from "../../../context/UserProvider";
+import { createPortal } from "react-dom";
 import useCancelBooking from "../../../hooks/useCancelBooking";
 import useGetBookingsByProfessional from "../../../hooks/useGetBookingsByProfessional";
+import ConfirmationModal from "../../Common/ConfirmationModal";
 import "./Bookings.css";
 import BookingsCard from "./BookingsCard/BookingsCard";
 import BookingsHeader from "./BookingsHeader/BookingsHeader";
-import { createPortal } from "react-dom";
-import ConfirmationModal from "../../Common/ConfirmationModal";
-
 function Bookings({ user }) {
   const [isConfirmationDeleteBookingOpen, setIsConfirmationDeleteBookingOpen] =
     useState(false);
@@ -58,7 +56,7 @@ function Bookings({ user }) {
   return (
     <section className="professional-bookings_container">
       {Object.entries(bookings).length === 0 ? (
-        <p className="no-bookings-paragraph">No hay turnos realizados.</p>
+        <p className="no-bookings-paragraph">No hay turnos pendientes.</p>
       ) : hasFutureBookings() ? (
         Object.entries(bookings).map(([date, events], idx) => (
           <div key={date + idx}>
@@ -90,7 +88,7 @@ function Bookings({ user }) {
           </div>
         ))
       ) : (
-        <p className="no-bookings-paragraph">No hay turnos disponibles.</p>
+        <p className="no-bookings-paragraph">No hay turnos pendientes.</p>
       )}
 
       {isConfirmationDeleteBookingOpen &&

@@ -38,11 +38,12 @@
   max-width: 20ch;
   text-transform: capitalize;
   font-weight: 500;
-  font-size: 0.82rem;
+  font-size: .77rem;
 }
 
 .professional-email {
   color: rgba(0, 0, 0, 0.679);
+  font-size: .78rem;
 }
 
 .cms-professional_specialty {
