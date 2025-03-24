@@ -2,7 +2,11 @@ import { toast } from "sonner";
 import { HOST } from "../api/data";
 import { useUser } from "../context/UserProvider";
 
-function useAddNewScheduleToProfessional() {
+function useAddNewScheduleToProfessional(
+  setAvailabilities,
+  selectedSchedules,
+  setIsAddScheduleModalOpen
+) {
   const { user } = useUser();
   const authToken = localStorage.getItem("authToken");
 
@@ -40,14 +44,53 @@ function useAddNewScheduleToProfessional() {
     };
 
     toast.promise(addNewSchedule(), {
-      loading: "Adicionando novo horário...",
+      loading: "Creando horarios...",
       success: (data) => {
-        // Cerrar modal
-        return "Horário adicionado com sucesso!";
+        setAvailabilities((prev) => {
+          const newAvailabilities = { ...prev };
+
+          selectedSchedules.forEach((schedule) => {
+            const newSchedule = {
+              scheduleId: schedule.scheduleId,
+              startTime: schedule.startTime,
+              endTime: schedule.endTime,
+              interval: schedule.interval,
+            };
+
+            for (const day of schedule.day) {
+              newAvailabilities[day] = [
+                ...(newAvailabilities[day] || []),
+                newSchedule,
+              ];
+            }
+          });
+
+          return sortSchedulesByTime(newAvailabilities);
+        });
+
+        setIsAddScheduleModalOpen(false);
+
+        return "Horario añadido exitosamente!";
       },
       error: (err) => err.message,
     });
   };
+
+  // Metodo que ordena los horarios por dia y hora de inicio
+  function sortSchedulesByTime(availability) {
+    const daysOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const sortedAvailability = {};
+
+    daysOrder.forEach((day) => {
+      if (availability[day]) {
+        sortedAvailability[day] = [...availability[day]].sort((a, b) =>
+          a.startTime.localeCompare(b.startTime)
+        );
+      }
+    });
+
+    return sortedAvailability;
+  }
 
   return { handleSubmitAddNewSchedule };
 }

@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -29,6 +30,7 @@
   --light-font-color: white;
   --loading-primary-color: rgba(0, 0, 0, 0.068);
   --loading-secondary-color: rgba(0, 0, 0, 0.01);
+  --header-mobile-font-color: #81041b;
 }
 
 ::-webkit-scrollbar {

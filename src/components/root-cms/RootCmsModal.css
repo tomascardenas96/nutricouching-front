@@ -104,7 +104,6 @@
   display: grid;
   grid-template-rows: 2.6rem 1fr;
   padding: 0.3rem 0.9rem 0;
-  min-height: 12rem;
 
   & ul {
     display: flex;
@@ -112,6 +111,8 @@
     gap: 0.5rem;
     align-items: center;
     user-select: none;
+    overflow-y: auto;
+    min-width: 19.4375rem;
 
     & li {
       font-family: var(--primary-font);
@@ -121,9 +122,67 @@
       cursor: pointer;
     }
 
+    > li.root-modal_see-more {
+      display: none;
+      font-size: 1.2rem;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0.2rem;
+    }
+
+    > .root_more-options_modal {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    > .root_more-options_modal > div {
+      position: absolute;
+      right: 2rem;
+      top: 0.2rem;
+      background-color: white;
+      box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.102);
+      padding: 0.2rem 0.5rem;
+
+      > p {
+        font-family: var(--primary-font);
+        font-size: 0.7rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 0.2rem;
+        cursor: pointer;
+      }
+    }
+
     & .selected-option {
       background-color: #603dc123;
       color: #613dc1;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cms-modal_container {
+    & aside {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .root-cms_list {
+    & ul {
+      position: relative;
+
+      & .root_professionals-section {
+        display: none;
+      }
+
+      > li.root-modal_see-more {
+        display: flex;
+      }
     }
   }
 }

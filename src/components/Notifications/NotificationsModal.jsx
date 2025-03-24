@@ -9,6 +9,7 @@ function NotificationsModal({
   notifications,
   setUnreadNotifications,
   setNotifications,
+  user,
 }) {
   const [selectedSection, setSelectedSection] = useState("notifications");
 
@@ -40,16 +41,18 @@ function NotificationsModal({
               Notificaciones
             </p>
 
-            <p
-              onClick={() => setSelectedSection("bookings")}
-              className={
-                selectedSection === "bookings"
-                  ? "selected-section_notifications-modal"
-                  : ""
-              }
-            >
-              Turnos
-            </p>
+            {user?.professional?.role !== "root" && (
+              <p
+                onClick={() => setSelectedSection("bookings")}
+                className={
+                  selectedSection === "bookings"
+                    ? "selected-section_notifications-modal"
+                    : ""
+                }
+              >
+                Turnos
+              </p>
+            )}
           </div>
 
           <IoMdClose className="close-icon" onClick={closeModal} />

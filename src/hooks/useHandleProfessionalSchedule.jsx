@@ -4,6 +4,7 @@ import { toast } from "sonner";
 function useHandleProfessionalSchedule() {
   const [selectedSchedules, setSelectedSchedules] = useState([]);
   const [currentSchedule, setCurrentSchedule] = useState({
+    scheduleId: crypto.randomUUID(),
     startTime: "",
     endTime: "",
     interval: "",
@@ -23,6 +24,7 @@ function useHandleProfessionalSchedule() {
 
     setSelectedSchedules((prevSchedules) => [...prevSchedules, schedule]);
     setCurrentSchedule({
+      scheduleId: crypto.randomUUID(),
       startTime: "",
       endTime: "",
       interval: "",
@@ -59,6 +61,12 @@ function useHandleProfessionalSchedule() {
     "domingo",
   ];
 
+  const unselectDay = (schedule) => {
+    setSelectedSchedules((prev) => {
+      return prev.filter((s) => s.scheduleId !== schedule.scheduleId);
+    });
+  };
+
   return {
     selectedSchedules,
     currentSchedule,
@@ -66,6 +74,7 @@ function useHandleProfessionalSchedule() {
     handleChangeTimeRange,
     handleChangeDaysSchedule,
     spanishDays,
+    unselectDay,
   };
 }
 

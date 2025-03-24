@@ -41,7 +41,7 @@ function Carousel({ setViandsInCart, activeCart, setElementsInCart }) {
   };
 
   return (
-    <section className="carousel_container">
+    <section className="carousel_container" id="viands">
       <h1 className="carousel-recipes_header">
         Proba nuestro menu de viandas semanales...
       </h1>

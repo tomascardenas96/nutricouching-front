@@ -81,7 +81,7 @@
         object-fit: cover;
         object-position: center;
         border-radius: 50%;
-        padding: .2rem;
+        padding: 0.2rem;
       }
     }
 
@@ -123,4 +123,16 @@
 
 #modify-product_submit {
   display: none;
+}
+
+@media screen and (max-width: 520px) {
+  .modal-cms_modify-product_container {
+    display: flex;
+    align-items: center;
+  }
+
+  .modify-product-modal_form {
+    width: 100%;
+    border-radius: 0;
+  }
 }

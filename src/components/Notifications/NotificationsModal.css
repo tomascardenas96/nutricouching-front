@@ -6,6 +6,10 @@
   left: 0;
   z-index: 1500;
   background-color: var(--background-shadow-color);
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
 }
 
 .user-notifications-modal {

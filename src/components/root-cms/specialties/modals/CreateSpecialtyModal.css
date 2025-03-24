@@ -12,7 +12,7 @@
   & > form.specialties-modal {
     background-color: white;
     width: 32rem;
-    height: 19rem;
+    min-height: 19rem;
     border-radius: 0.3rem;
     display: grid;
     grid-template-rows: 5rem 1fr 7rem;
@@ -90,4 +90,26 @@
 
 #create-specialty {
   display: none;
+}
+
+@media screen and (max-width: 540px) {
+  .create-specialties_modal {
+    display: flex;
+    align-items: center;
+
+    & > form.specialties-modal {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .specialties-modal_body {
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
 }

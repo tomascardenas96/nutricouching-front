@@ -5,9 +5,8 @@
 }
 
 .admin-specialties_table {
-  /* min-height: 15rem; */
   grid-template-rows: 1.8rem 1fr 4rem;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 0 1rem 0.5rem;
   width: 100%;
   position: relative;
 }

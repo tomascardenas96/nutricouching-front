@@ -1,7 +1,7 @@
 import "./AddScheduleCard.css";
 import { LuTrash } from "react-icons/lu";
 
-function AddScheduleCard({ schedule, spanishDays }) {
+function AddScheduleCard({ schedule, spanishDays, unselectDay }) {
   /**
    * schedule:
    *   {
@@ -15,7 +15,7 @@ function AddScheduleCard({ schedule, spanishDays }) {
   return (
     <div className="selected-schedule_card">
       <div className="left-side">
-        <div className="trash-icon">
+        <div className="trash-icon" onClick={() => unselectDay(schedule)}>
           <LuTrash />
         </div>
 
@@ -33,14 +33,17 @@ function AddScheduleCard({ schedule, spanishDays }) {
       </div>
 
       <div className="right-side">
-        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-          (day, idx) =>
-            schedule?.day?.some((d) => d === day) && (
-              <p key={day} className={`${day.toLowerCase()}`}>
-                <span>{spanishDays[idx].toUpperCase()}</span>
-              </p>
-            )
-        )}
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, idx) => (
+          <p key={day} className={`${day.toLowerCase()}`}>
+            <span
+              className={`${
+                !schedule?.day?.some((d) => d === day) && "no-selected"
+              }`}
+            >
+              {spanishDays[idx].toUpperCase()}
+            </span>
+          </p>
+        ))}
       </div>
     </div>
   );

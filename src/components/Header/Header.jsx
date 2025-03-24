@@ -5,15 +5,15 @@ import { FaUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosNotifications } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { TbUserPentagon, TbUserStar } from "react-icons/tb";
 import { useLogin } from "../../context/UserProvider";
 import useEmptyCart from "../../hooks/useEmptyCart";
 import useRegister from "../../hooks/useRegister";
+import LoaderSpinner from "../Common/LoaderSpinner";
 import LoginModal from "../Login/LoginModal";
 import RegisterModal from "../Register/RegisterModal";
 import UpdateUserModal from "../Update-user/UpdateUserModal";
 import "./Header.css";
-import LoaderSpinner from "../Common/LoaderSpinner";
-import NetworkError from "../Common/NetworkError";
 
 function Header({
   handleCartModal,
@@ -35,6 +35,8 @@ function Header({
   handleOpenUpdateUserModal,
   isUpdateUserModalOpen,
   setIsUpdateUserModalOpen,
+  handleCmsModal,
+  handleAdminCmsModal,
 }) {
   const [scrolled, setScrolled] = useState(null);
 
@@ -109,7 +111,10 @@ function Header({
   }, []);
 
   return (
-    <div className={scrolled ? "header header-scrolled" : "header"}>
+    <div
+      className={scrolled ? "header header-scrolled" : "header"}
+      id="main-page"
+    >
       <div className="responsive-menu_mobile">
         <GiHamburgerMenu
           onClick={handleChangeBurgerMenu}
@@ -125,6 +130,34 @@ function Header({
             className={scrolled ? "icon icon-scrolled" : "icon"}
             onClick={() => setIsNotificationsModalOpen(true)}
           />
+
+          {(user?.professional?.role === "admin" ||
+            user?.professional?.role === "root") && (
+            <div className="admin-menu_burger-header">
+              {(user?.professional?.role === "admin" ||
+                user?.professional?.role === "root") && (
+                <TbUserStar
+                  className={
+                    scrolled
+                      ? "professional_menu icon-scrolled"
+                      : "professional_menu"
+                  }
+                  onClick={handleAdminCmsModal}
+                />
+              )}
+
+              {user?.professional?.role === "root" && (
+                <TbUserPentagon
+                  className={
+                    scrolled
+                      ? "root-user_menu icon-scrolled root-extended"
+                      : "root-user_menu"
+                  }
+                  onClick={handleCmsModal}
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -141,11 +174,23 @@ function Header({
 
       <div className="header-menu">
         <ul>
-          <li>INICIO</li>
-          <li>SERVICIOS</li>
-          <li>PRODUCTOS</li>
-          <li>VIANDAS</li>
-          <li>CONOCENOS</li>
+          <li>
+            <a href="/#main-page">INICIO</a>
+          </li>
+          <li>
+            <a href="/#services">SERVICIOS</a>
+          </li>
+          <li>
+            <li>
+              <a href="/#products">PRODUCTOS</a>
+            </li>
+          </li>
+          <li>
+            <a href="/#viands">VIANDAS</a>
+          </li>
+          <li>
+            <a href="/#about">CONOCENOS</a>
+          </li>
           <li className="header-cart_container" onClick={handleCartModal}>
             <BsCart4 className="header-cart" />
             <div className="cart-amount">

@@ -144,8 +144,6 @@ p.professional-modal_no-selected-data {
   border-radius: 1rem;
 }
 
-/* Hasta aca <--------- */
-
 .manage-professional_schedules {
   display: grid;
   padding: 0rem 1rem;
@@ -156,6 +154,10 @@ p.professional-modal_no-selected-data {
   align-items: center;
   justify-content: space-evenly;
   border-top: 1px solid rgba(0, 0, 0, 0.208);
+
+  & button[type="submit"] {
+    border: none;
+  }
 
   & .add-cancel-professional {
     font-size: 1.3rem;
@@ -169,5 +171,17 @@ p.professional-modal_no-selected-data {
 
   & .add-cancel-professional_done {
     color: #72b01d;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .manage-professional-modal_container {
+    display: flex;
+    align-items: center;
+  }
+
+  .manage-professional-modal {
+    width: 100%;
+    border-radius: 0;
   }
 }

@@ -18,6 +18,8 @@ function Schedules({ user }) {
     setAvailabilities,
   } = useGetAvailabilitiesByProfessional(user.professional.professionalId);
 
+  console.log(availabilities);
+
   const { handleDeleteTimeSlot } = useDeleteTimeSlot(setAvailabilities);
 
   // Obtener el dia de la semana en Español.
@@ -88,7 +90,8 @@ function Schedules({ user }) {
         onClick={() => setIsAddScheduleModalOpen(true)}
       >
         <h1>
-          <RiCalendarScheduleLine  className="schedule-icon"/> AGREGAR NUEVO HORARIO
+          <RiCalendarScheduleLine className="schedule-icon" /> AGREGAR NUEVO
+          HORARIO
         </h1>
       </div>
 
@@ -96,6 +99,7 @@ function Schedules({ user }) {
         createPortal(
           <AddScheduleModal
             setIsAddScheduleModalOpen={setIsAddScheduleModalOpen}
+            setAvailabilities={setAvailabilities}
           />,
           document.body
         )}

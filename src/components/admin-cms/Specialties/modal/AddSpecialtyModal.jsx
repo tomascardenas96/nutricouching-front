@@ -1,6 +1,8 @@
 import useAssignSpecialtyToProfessional from "../../../../hooks/useAssignSpecialtyToProfessional";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
+import { IoMdClose } from "react-icons/io";
 import "./AddSpecialtyModal.css";
+import { ImCheckmark, ImCross } from "react-icons/im";
 
 function AddSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
   const { errorSpecialties, loadingSpecialties, specialties } =
@@ -24,10 +26,15 @@ function AddSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
           )
         }
       >
-        {/* Eliminar este parrafo luego */}
-        <p onClick={handleOpenCloseModal}>Cerrar modal</p>
+        <div className="add-specialty_title">
+          <h1>Agregar Especialidad</h1>
+          <IoMdClose
+            onClick={handleOpenCloseModal}
+            className="close-modal_icon"
+          />
+        </div>
 
-        <div>
+        <div className="add-specialty_body">
           <select onChange={handleChangeSelectSpecialty}>
             <option value="">Seleccione una especialidad</option>
             {specialties.map((specialty) => (
@@ -41,8 +48,14 @@ function AddSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
           </select>
         </div>
 
-        <div>
-          <input type="submit" value="Agregar" />
+        <div className="submit-add-specialty_options">
+          <ImCross className="add-cancel-specialty add-cancel-specialty_close" />
+          <div>
+            <label htmlFor="add-specialty_submit">
+              <input type="submit" id="add-specialty_submit" />
+              <ImCheckmark className="add-cancel-specialty add-cancel-specialty_done" />
+            </label>
+          </div>
         </div>
       </form>
     </div>

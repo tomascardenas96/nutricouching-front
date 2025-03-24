@@ -7,6 +7,7 @@ import NotificationsModal from "./NotificationsModal";
 function NotificationPopUp({
   isNotificationsModalOpen,
   setIsNotificationsModalOpen,
+  user
 }) {
   const [unreadNotifications, setUnreadNotifications] = useState(0);
 
@@ -53,6 +54,7 @@ function NotificationPopUp({
           notifications={notifications}
           setUnreadNotifications={setUnreadNotifications}
           setNotifications={setNotifications}
+          user={user}
         />
       )}
     </>

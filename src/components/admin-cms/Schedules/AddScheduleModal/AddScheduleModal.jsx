@@ -1,11 +1,11 @@
+import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
 import useAddNewScheduleToProfessional from "../../../../hooks/useAddNewScheduleToProfessional";
 import useHandleProfessionalSchedule from "../../../../hooks/useHandleProfessionalSchedule";
-import "./AddScheduleModal.css";
-import { ImCheckmark, ImCross } from "react-icons/im";
 import AddScheduleCard from "./AddScheduleCard";
+import "./AddScheduleModal.css";
 
-function AddScheduleModal({ setIsAddScheduleModalOpen }) {
+function AddScheduleModal({ setIsAddScheduleModalOpen, setAvailabilities }) {
   const {
     addNewSchedule,
     currentSchedule,
@@ -13,9 +13,14 @@ function AddScheduleModal({ setIsAddScheduleModalOpen }) {
     handleChangeTimeRange,
     selectedSchedules,
     spanishDays,
+    unselectDay,
   } = useHandleProfessionalSchedule();
 
-  const { handleSubmitAddNewSchedule } = useAddNewScheduleToProfessional();
+  const { handleSubmitAddNewSchedule } = useAddNewScheduleToProfessional(
+    setAvailabilities,
+    selectedSchedules,
+    setIsAddScheduleModalOpen
+  );
 
   return (
     <dialog className="add-schedule-modal_container">
@@ -117,17 +122,21 @@ function AddScheduleModal({ setIsAddScheduleModalOpen }) {
                   key={`schedule-card_${index}`}
                   schedule={schedule}
                   spanishDays={spanishDays}
+                  unselectDay={unselectDay}
                 />
               ))}
 
-            {!!!selectedSchedules.length && (
+            {selectedSchedules?.length === 0 && (
               <p>No hay horarios seleccionados.</p>
             )}
           </div>
         </div>
 
         <div className="submit-add-schedule_options">
-          <ImCross className="add-cancel-schedule add-cancel-schedule_close" />
+          <ImCross
+            className="add-cancel-schedule add-cancel-schedule_close"
+            onClick={() => setIsAddScheduleModalOpen(false)}
+          />
           <div>
             <label htmlFor="add-schedule_submit">
               <input type="submit" id="add-schedule_submit" />

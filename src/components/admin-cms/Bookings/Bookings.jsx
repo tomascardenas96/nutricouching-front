@@ -6,6 +6,7 @@ import ConfirmationModal from "../../Common/ConfirmationModal";
 import "./Bookings.css";
 import BookingsCard from "./BookingsCard/BookingsCard";
 import BookingsHeader from "./BookingsHeader/BookingsHeader";
+
 function Bookings({ user }) {
   const [isConfirmationDeleteBookingOpen, setIsConfirmationDeleteBookingOpen] =
     useState(false);
@@ -20,7 +21,7 @@ function Bookings({ user }) {
 
   // Reservaciones del profesional logueado.
   const { bookings, setBookings, errorBookings, loadingBookings } =
-    useGetBookingsByProfessional(user.professional.professionalId);
+    useGetBookingsByProfessional(user?.professional?.professionalId);
 
   const { handleCancelBooking } = useCancelBooking(setBookings);
 

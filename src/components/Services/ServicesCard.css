@@ -193,10 +193,10 @@
 
 @media screen and (max-width: 540px) {
   .services-card_container {
-    min-width: 75%;
     grid-template-columns: 8rem 1fr;
-    border-left: none;
-    border-right: none;
+    border-radius: 0.1rem;
+    border: none;
+    padding: 0 1rem;
   }
 
   .right-service-cards {

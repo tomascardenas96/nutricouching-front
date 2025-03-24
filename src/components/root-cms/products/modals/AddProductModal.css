@@ -1,6 +1,6 @@
 .modal-cms_add-product_container {
   position: fixed;
-  height: 100svh;
+  height: 100vh;
   width: 100%;
   top: 0;
   left: 0;
@@ -128,4 +128,16 @@
 
 #add-product_submit {
   display: none;
+}
+
+@media screen and (max-width: 520px) {
+  .modal-cms_add-product_container {
+    display: flex;
+    align-items: center;
+  }
+
+  .add-product-modal_form {
+    width: 100%;
+    border-radius: 0;
+  }
 }

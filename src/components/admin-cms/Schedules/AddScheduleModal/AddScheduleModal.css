@@ -8,6 +8,10 @@
   display: grid;
   place-content: center;
   z-index: 3000;
+
+  & ::-webkit-scrollbar {
+    width: 4px;
+  }
 }
 
 .add-schedule-modal {
@@ -146,6 +150,9 @@
 }
 
 .add-schedule_body > .schedules-selected_list {
+  max-height: 9.5rem;
+  overflow-y: auto;
+
   > p {
     height: 6rem;
     display: grid;
@@ -182,4 +189,23 @@
 
 #add-schedule_submit {
   display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .add-schedule-modal_container {
+    display: flex;
+    align-items: center;
+  }
+
+  .add-schedule-modal {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .add-schedule-modal > .add-schedule_body {
+    grid-template-rows: 8.5rem 8rem max-content;
+    gap: 0.8rem;
+  }
 }

@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
 import { CiBoxList } from "react-icons/ci";
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose, IoMdMore } from "react-icons/io";
 import "./RootCmsModal.css";
 import ProductsCmsList from "./products/ProductsCmsList";
 import ProfessionalsList from "./professionals/ProfessionalsList";
-import ServicesList from "./services/ServicesList";
-import ViandsList from "./viands/ViandsList";
 import SpecialtiesList from "./specialties/SpecialtiesList";
+import ViandsList from "./viands/ViandsList";
+import { useMediaQuery } from "react-responsive";
 
 function RootCmsModal({ handleCmsModal }) {
   const [selectedOption, setSelectedOption] = useState("products");
   const [isRootModalAnimating, setIsRootModalAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
+
+  // Medida minima para cerrar el modal de opciones
+  const closeMoreOptionsModalWhenResize = useMediaQuery({
+    query: "(min-width: 440px)",
+  });
 
   const closeModal = () => {
     setIsRootModalAnimating(true);
+  };
+
+  // Modal para ver secciones que no se muestran en la lista principal (responsive design)
+  const handleMoreModal = () => {
+    setIsMoreModalOpen(!isMoreModalOpen);
   };
 
   useEffect(() => {
@@ -26,6 +37,13 @@ function RootCmsModal({ handleCmsModal }) {
       return () => clearTimeout(timeout);
     }
   }, [isRootModalAnimating, handleCmsModal]);
+
+  // Cuando se redimensiona la pantalla, se cierra el modal de opciones
+  useEffect(() => {
+    if (closeMoreOptionsModalWhenResize) {
+      setIsMoreModalOpen(false);
+    }
+  }, [closeMoreOptionsModalWhenResize]);
 
   if (!isVisible) return null;
 
@@ -75,11 +93,29 @@ function RootCmsModal({ handleCmsModal }) {
               <li
                 onClick={() => setSelectedOption("professionals")}
                 className={
-                  selectedOption === "professionals" ? "selected-option" : null
+                  selectedOption === "professionals"
+                    ? "selected-option root_professionals-section"
+                    : "root_professionals-section"
                 }
               >
                 Profesionales
               </li>
+              {/* Solo se muestra en responsive */}
+              <li className="root-modal_see-more" onClick={handleMoreModal}>
+                <IoMdMore className="more-icon" />
+              </li>
+              {isMoreModalOpen && (
+                <div
+                  className="root_more-options_modal"
+                  onClick={handleMoreModal}
+                >
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <p onClick={() => setSelectedOption("professionals")}>
+                      Profesionales
+                    </p>
+                  </div>
+                </div>
+              )}
             </ul>
 
             {/* Dependiendo de la opcion seleccionada, sera el modal que se abrirá  */}

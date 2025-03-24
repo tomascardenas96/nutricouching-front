@@ -3,6 +3,10 @@
   grid-template-rows: 1.8rem 1fr 2.5rem;
   padding: 0.8rem 1rem 1rem 1rem;
   gap: 0.8rem;
+
+  & ::-webkit-scrollbar {
+    width: 5px;
+  }
 }
 
 .specialties-list_container > .cms-specialties_filter {
@@ -32,6 +36,10 @@
 }
 
 .specialties-list_container > .cms-specialties_body {
+  max-height: 31rem;
+  overflow-y: auto;
+  padding-right: 1.5rem;
+
   > .no-specialties {
     height: 5rem;
     width: 100%;

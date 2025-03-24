@@ -176,6 +176,11 @@
 }
 
 @media screen and (max-width: 815px) {
+  .products-carousel_container {
+    border: none;
+    box-shadow: none;
+  }
+
   .products-carousel_container .product-list {
     > .product-list_loader-container {
       > .loader-spinner_products {
@@ -201,6 +206,14 @@
 
   .carousel-header {
     display: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .products-carousel_container {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 5.5rem 2.5rem;
   }
 }
 

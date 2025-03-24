@@ -1,11 +1,11 @@
 import { useMediaQuery } from "react-responsive";
 import useGetAllProducts from "../../hooks/useGetAllProducts";
 import Dots from "../Common/Dots";
+import LoaderSpinner from "../Common/LoaderSpinner";
+import NetworkError from "../Common/NetworkError";
 import TurnPageArrow from "../Common/TurnPageArrow";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
-import LoaderSpinner from "../Common/LoaderSpinner";
-import NetworkError from "../Common/NetworkError";
 
 function ProductsCarousel({
   setProductsInCart,

@@ -1,6 +1,6 @@
 .modal-cms_add-viand_container {
   position: fixed;
-  height: 100svh;
+  height: 100vh;
   width: 100%;
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@
   min-height: 40rem;
   max-height: 45rem;
   background-color: white;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.065);
   display: grid;
   grid-template-rows: 5rem 1fr 7rem;
@@ -232,4 +232,16 @@
 
 #add-viand_submit {
   display: none;
+}
+
+@media screen and (max-width: 520px) {
+  .modal-cms_add-viand_container {
+    display: flex;
+    align-items: center;
+  }
+
+  .add-viand-modal_form {
+    width: 100%;
+    border-radius: 0;
+  }
 }

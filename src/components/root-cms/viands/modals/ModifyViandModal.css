@@ -124,3 +124,15 @@
 #modify-viand_submit {
   display: none;
 }
+
+@media screen and (max-width: 520px) {
+  .modal-cms_modify-viand_container {
+    display: flex;
+    align-items: center;
+  }
+
+  .modify-viand-modal_form {
+    width: 100%;
+    border-radius: 0;
+  }
+}

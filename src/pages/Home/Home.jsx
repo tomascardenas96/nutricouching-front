@@ -164,6 +164,8 @@ function Home() {
               handleOpenUpdateUserModal={handleOpenUpdateUserModal}
               isUpdateUserModalOpen={isUpdateUserModalOpen}
               setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
+              handleCmsModal={handleCmsModal}
+              handleAdminCmsModal={handleAdminCmsModal}
             />
           </section>
 
@@ -175,12 +177,12 @@ function Home() {
             <Presentation />
           </section>
 
-          <section className="services_container">
+          <section className="services_container" id="services">
             <Services handleLoginModal={handleLoginModal} />
           </section>
         </div>
 
-        <section className="products_container">
+        <section className="products_container" id="products">
           <Products
             setProductsInCart={setProductsInCart}
             activeCart={activeCart}
@@ -196,7 +198,7 @@ function Home() {
           />
         </section>
 
-        <section className="about-us_container">
+        <section className="about-us_container" id="about">
           <About />
         </section>
 
@@ -231,11 +233,11 @@ function Home() {
         )}
 
       {user &&
-        !user?.professional &&
         createPortal(
           <NotificationPopUp
             isNotificationsModalOpen={isNotificationsModalOpen}
             setIsNotificationsModalOpen={setIsNotificationsModalOpen}
+            user={user}
           />,
           document.body
         )}
