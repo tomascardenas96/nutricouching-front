@@ -89,7 +89,11 @@ function ProductsCarousel({
       </div>
 
       <div className="previous-page">
-        <TurnPageArrow color="#296eb4" direction="left" turnPage={nextPage} />
+        <TurnPageArrow
+          color="#296eb4"
+          direction="left"
+          turnPage={previousPage}
+        />
       </div>
 
       <div className="next-page">

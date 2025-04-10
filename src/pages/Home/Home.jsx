@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { io } from "socket.io-client";
 import { toast } from "sonner";
-import { HOST } from "../../api/data";
+import { HOST, WEBSOCKET_HOST } from "../../api/data";
 import About from "../../components/About/About";
 import CartModal from "../../components/Cart/CartModal";
 import Footer from "../../components/Footer/Footer";
@@ -25,7 +25,6 @@ function Home() {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isNotificationsModalOpen, setIsNotificationsModalOpen] =
     useState(false);
   const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
@@ -70,10 +69,6 @@ function Home() {
     setIsCartModalOpen(!isCartModalOpen);
   };
 
-  const handleChangeBurgerMenu = () => {
-    setIsBurgerMenuOpen(!isBurgerMenuOpen);
-  };
-
   // Abrir o cerrar el modal para actualizar un usuario
   const handleOpenUpdateUserModal = () => {
     setIsUpdateUserModalOpen(!isUpdateUserModalOpen);
@@ -85,7 +80,7 @@ function Home() {
       return;
     }
 
-    const socket = io(`${HOST}`, {
+    const socket = io(`${WEBSOCKET_HOST}`, {
       query: { userId: user.userId },
     });
 
@@ -152,20 +147,20 @@ function Home() {
               userError={userError}
               productsInCart={productsInCart}
               viandsInCart={viandsInCart}
-              handleChangeBurgerMenu={handleChangeBurgerMenu}
               elementsInCart={elementsInCart}
               setProductsInCart={setProductsInCart}
               activeCart={activeCart}
               setViandsInCart={setViandsInCart}
-              setElementsInCart={setElementsInCart}
-              setActiveCart={setActiveCart}
               hasSyncedCart={hasSyncedCart}
               setIsNotificationsModalOpen={setIsNotificationsModalOpen}
-              handleOpenUpdateUserModal={handleOpenUpdateUserModal}
               isUpdateUserModalOpen={isUpdateUserModalOpen}
               setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
               handleCmsModal={handleCmsModal}
               handleAdminCmsModal={handleAdminCmsModal}
+              handleLoginModal={handleLoginModal}
+              setActiveCart={setActiveCart}
+              setElementsInCart={setElementsInCart}
+              handleOpenUpdateUserModal={handleOpenUpdateUserModal}
             />
           </section>
 
@@ -238,18 +233,6 @@ function Home() {
             isNotificationsModalOpen={isNotificationsModalOpen}
             setIsNotificationsModalOpen={setIsNotificationsModalOpen}
             user={user}
-          />,
-          document.body
-        )}
-
-      {isBurgerMenuOpen &&
-        createPortal(
-          <MobileMenu
-            handleChangeBurgerMenu={handleChangeBurgerMenu}
-            handleLoginModal={handleLoginModal}
-            setActiveCart={setActiveCart}
-            setElementsInCart={setElementsInCart}
-            handleOpenUpdateUserModal={handleOpenUpdateUserModal}
           />,
           document.body
         )}

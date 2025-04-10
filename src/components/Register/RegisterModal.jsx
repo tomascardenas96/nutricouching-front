@@ -14,13 +14,20 @@ function RegisterModal({ handleRegisterModal }) {
 
   return (
     <div className="register-modal_background" onClick={handleRegisterModal}>
-      <div className="register_container" onClick={(e) => e.stopPropagation()}>
-        <IoMdClose
-          className="close-register-modal"
-          onClick={handleRegisterModal}
-        />
-        <h1 className="register-title">Registrar un nuevo usuario</h1>
-        <form onSubmit={handleSubmitRegister}>
+      <form
+        onSubmit={handleSubmitRegister}
+        className="register_container"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="register-title">
+          <IoMdClose
+            className="close-register-modal"
+            onClick={handleRegisterModal}
+          />
+          <h1>Registrar un nuevo usuario</h1>
+        </div>
+
+        <div className="register-body">
           <div className="register-form_layout">
             <label htmlFor="name" className="name">
               <input
@@ -57,7 +64,7 @@ function RegisterModal({ handleRegisterModal }) {
 
             <label htmlFor="password" className="password">
               <input
-                type="text"
+                type="password"
                 placeholder="Contraseña"
                 name="password"
                 onChange={handleChangeRegister}
@@ -68,7 +75,7 @@ function RegisterModal({ handleRegisterModal }) {
 
             <label htmlFor="repeatPassword" className="password">
               <input
-                type="text"
+                type="password"
                 placeholder="Repita la contraseña"
                 name="repeatPassword"
                 onChange={handleChangeRegister}
@@ -78,13 +85,16 @@ function RegisterModal({ handleRegisterModal }) {
               <FaEye className="show-hide" />
             </label>
           </div>
+        </div>
+
+        <div className="register-button">
           <input
             type="submit"
             value="Crear cuenta"
             className="create-account_btn"
           />
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

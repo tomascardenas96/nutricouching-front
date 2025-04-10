@@ -37,6 +37,10 @@
   justify-content: center;
   position: relative;
   transition: opacity 0.3s ease; /* Añadido para transición suave si se necesita en el contenedor */
+
+  > img {
+    border-radius: 0.2rem;
+  }
 }
 
 .product-card_container:hover img,

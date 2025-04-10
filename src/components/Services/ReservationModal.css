@@ -13,7 +13,7 @@
 .request-reservation {
   width: 29rem;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: .3rem;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.171);
   display: grid;
   grid-template-rows: 5rem 1fr;

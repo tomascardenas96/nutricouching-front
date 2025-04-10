@@ -18,8 +18,6 @@ function Schedules({ user }) {
     setAvailabilities,
   } = useGetAvailabilitiesByProfessional(user.professional.professionalId);
 
-  console.log(availabilities);
-
   const { handleDeleteTimeSlot } = useDeleteTimeSlot(setAvailabilities);
 
   // Obtener el dia de la semana en Español.

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
+import { v4 as uuidv4 } from "uuid";
 
 function useHandleProfessionalSchedule() {
   const [selectedSchedules, setSelectedSchedules] = useState([]);
   const [currentSchedule, setCurrentSchedule] = useState({
-    scheduleId: crypto.randomUUID(),
+    scheduleId: uuidv4(),
     startTime: "",
     endTime: "",
     interval: "",
@@ -24,7 +25,7 @@ function useHandleProfessionalSchedule() {
 
     setSelectedSchedules((prevSchedules) => [...prevSchedules, schedule]);
     setCurrentSchedule({
-      scheduleId: crypto.randomUUID(),
+      scheduleId: uuidv4(),
       startTime: "",
       endTime: "",
       interval: "",

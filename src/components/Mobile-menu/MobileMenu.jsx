@@ -10,12 +10,19 @@ function MobileMenu({
   setActiveCart,
   setElementsInCart,
   handleOpenUpdateUserModal,
+  handleRegisterModal,
+  scrolled,
 }) {
   const { user, handleLogOut } = useUser();
 
   const openLoginModal = () => {
     handleChangeBurgerMenu();
     handleLoginModal();
+  };
+
+  const openRegisterModal = () => {
+    handleChangeBurgerMenu();
+    handleRegisterModal();
   };
 
   const handleLogOutAndClear = () => {
@@ -33,7 +40,12 @@ function MobileMenu({
 
   return (
     <div className="mobile-menu_container" onClick={handleChangeBurgerMenu}>
-      <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={
+          scrolled ? "mobile-menu mobile-menu_scrolled" : "mobile-menu"
+        }
+        onClick={(e) => e.stopPropagation()}
+      >
         {user && (
           <div className="user-info">
             <div>
@@ -52,11 +64,22 @@ function MobileMenu({
 
         <ul>
           {!user && <li onClick={openLoginModal}>INICIAR SESION</li>}
-          <li>INICIO</li>
-          <li>SERVICIOS</li>
-          <li>PRODUCTOS</li>
-          <li>VIANDAS</li>
-          <li>CONOCENOS</li>
+          {!user && <li onClick={openRegisterModal}>REGISTRARSE</li>}
+          <li onClick={handleChangeBurgerMenu}>
+            <a href="/#main-page">INICIO</a>
+          </li>
+          <li onClick={handleChangeBurgerMenu}>
+            <a href="/#services">SERVICIOS</a>
+          </li>
+          <li onClick={handleChangeBurgerMenu}>
+            <a href="/#products">PRODUCTOS</a>
+          </li>
+          <li onClick={handleChangeBurgerMenu}>
+            <a href="/#viands">VIANDAS</a>
+          </li>
+          <li onClick={handleChangeBurgerMenu}>
+            <a href="/#about">CONOCENOS</a>
+          </li>
           {user && <li onClick={handleLogOutAndClear}>SALIR</li>}
         </ul>
 

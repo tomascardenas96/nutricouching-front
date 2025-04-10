@@ -50,7 +50,7 @@ function ProductCard({
       </div>
       <div className="product-card_body">
         <div>
-          <p className="product-title">{product.name}</p>
+          <p className="product-title">{product.name.toUpperCase()}</p>
         </div>
         <div>
           <p className="product-description">Stock: {product.stock} unidades</p>

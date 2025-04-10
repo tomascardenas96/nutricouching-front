@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { GiWeightLiftingUp } from "react-icons/gi";
-import { RiFootprintFill, RiMentalHealthLine } from "react-icons/ri";
+import { createPortal } from "react-dom";
 import useGetServices from "../../hooks/useGetServices";
 import LoaderSpinner from "../Common/LoaderSpinner";
 import NetworkError from "../Common/NetworkError";
 import MoreInfo from "./MoreInfo";
-import ReservationModal from "./ReservationModal";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
+import PlansModal from "./plans/PlansModal";
 
 function Services({ handleLoginModal }) {
   const { services, servicesLoading, servicesError } = useGetServices();
@@ -16,6 +15,7 @@ function Services({ handleLoginModal }) {
   const [isRequestReservationOpen, setIsRequestReservationOpen] =
     useState(false);
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
+  const [isSmartPlanModalOpen, setIsSmartPlanModalOpen] = useState(false);
 
   const handleSelectService = (service) => {
     setSelectedService(service);
@@ -26,18 +26,14 @@ function Services({ handleLoginModal }) {
   };
 
   const handleOpenRequestReservation = () => {
-    setIsMoreInfoModalOpen(false);
     setIsRequestReservationOpen(!isRequestReservationOpen);
   };
 
-  // Colors and icons to iterate
-  const icons = [
-    <GiWeightLiftingUp />,
-    <GiWeightLiftingUp />,
-    <RiMentalHealthLine />,
-    <RiFootprintFill />,
-  ];
+  const handleOpenSmartPlanModal = () => {
+    setIsSmartPlanModalOpen(!isSmartPlanModalOpen);
+  };
 
+  // Colors to iterate
   const colors = ["#BB4430", "#19647E", "#2F0147", "#FC9F5B"];
 
   return (
@@ -48,7 +44,6 @@ function Services({ handleLoginModal }) {
           completo.
         </h1>
       </div>
-
       <div className="services-list_container">
         {servicesLoading &&
           [...Array(4)].map((_, index) => (
@@ -72,11 +67,12 @@ function Services({ handleLoginModal }) {
                 color={colors[idx]}
                 title={service?.title}
                 description={service?.description}
-                icon={icons[idx]}
                 handleSelectService={() => handleSelectService(service)}
                 handleOpenServiceModal={handleOpenServiceModal}
                 handleOpenRequestReservation={handleOpenRequestReservation}
                 isEven={isEven}
+                type={service?.type}
+                handleOpenSmartPlanModal={handleOpenSmartPlanModal}
               />
             );
           })}
@@ -89,25 +85,29 @@ function Services({ handleLoginModal }) {
       </div>
 
       {/* Mostrar modal si hay un servicio seleccionado */}
-      {isMoreInfoModalOpen && (
-        <MoreInfo
-          handleOpenRequestReservation={handleOpenRequestReservation}
-          title={selectedService?.title}
-          description={selectedService?.description}
-          image={selectedService?.image}
-          handleOpenServiceModal={handleOpenServiceModal}
-          handleLoginModal={handleLoginModal}
-        />
-      )}
+      {selectedService?.type === "schedule" &&
+        isMoreInfoModalOpen &&
+        createPortal(
+          <MoreInfo
+            handleOpenRequestReservation={handleOpenRequestReservation}
+            title={selectedService?.title}
+            description={selectedService?.description}
+            image={selectedService?.image}
+            handleOpenServiceModal={handleOpenServiceModal}
+            handleLoginModal={handleLoginModal}
+            selectedService={selectedService}
+            setIsRequestReservationOpen={setIsRequestReservationOpen}
+            isRequestReservationOpen={isRequestReservationOpen}
+          />,
+          document.body
+        )}
 
-      {/* Modal para seleccionar un turno */}
-      {isRequestReservationOpen && (
-        <ReservationModal
-          handleOpenRequestReservation={handleOpenRequestReservation}
-          selectedService={selectedService}
-          setIsRequestReservationOpen={setIsRequestReservationOpen}
-        />
-      )}
+      {selectedService?.type === "plan_download" &&
+        isSmartPlanModalOpen &&
+        createPortal(
+          <PlansModal handleOpenSmartPlanModal={handleOpenSmartPlanModal} />,
+          document.body
+        )}
     </div>
   );
 }

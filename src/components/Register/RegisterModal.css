@@ -12,41 +12,44 @@
 
 .register_container {
   width: 32rem;
-  height: 34rem;
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.123);
-  padding: 3.1rem 3.3rem;
-  display: grid;
-  grid-template-rows: 3rem 1fr;
   position: relative;
+  background-color: white;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.065);
+  display: grid;
+  grid-template-rows: 5rem 1fr 7rem;
 
   & .close-register-modal {
     position: absolute;
-    right: 3rem;
-    top: 3.25rem;
+    right: 2rem;
+    top: 2.1rem;
     cursor: pointer;
   }
 }
 
 .register-title {
-  font-family: var(--presentation-banner-font);
-  font-weight: 400;
-  font-size: 1.3rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.208);
+  display: grid;
+  place-content: center;
+  position: relative;
+
+  > h1 {
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
 }
 
-.register_container > form {
+.register_container .register-body {
   display: grid;
-  grid-template-rows: 1fr 3rem;
+  padding: 2rem 3rem 1rem;
 }
 
 .register-form_layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   column-gap: 2.4rem;
-  padding-top: 1rem;
-  height: 20rem;
+  height: 15rem;
 
   & label {
     width: 100%;
@@ -92,21 +95,41 @@
   }
 }
 
-.create-account_btn {
-  width: 100%;
-  border: none;
-  border-radius: 1.5rem;
-  height: 2.8rem;
-  color: white;
-  border: 1px solid #cc3f0c9a;
-  color: #cc3f0c9a;
-  background-color: white;
-  transition: all 0.3s ease;
-  cursor: pointer;
+.register_container .register-button {
+  display: grid;
+  padding: 1rem 2.5rem 0;
+
+  > .create-account_btn {
+    width: 100%;
+    border: none;
+    border-radius: 1.5rem;
+    height: 2.8rem;
+    color: white;
+    border: 1px solid #cc3f0c9a;
+    color: #cc3f0c9a;
+    background-color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  > .create-account_btn:hover {
+    background-color: #cc3f0c9a;
+    color: white;
+    border: 1px solid white;
+  }
 }
 
-.create-account_btn:hover {
-  background-color: #cc3f0c9a;
-  color: white;
-  border: 1px solid white;
+@media screen and (max-width: 530px) {
+  .register-modal_background {
+    display: flex;
+    align-items: center;
+  }
+
+  .register_container {
+    width: 100%;
+  }
+
+  .register_container .register-body {
+    padding: 2rem 1rem 1rem;
+  }
 }

@@ -157,8 +157,14 @@
 
 .carousel-btn {
   position: absolute;
-  top: 42%;
   transition: all 0.3s ease;
+  border-radius: 50%;
+  margin-top: 0.9rem;
+
+  & .turn-page {
+    background: none;
+    box-shadow: none;
+  }
 }
 
 .carousel-btn:hover {
@@ -249,11 +255,10 @@
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 750px) {
   .carousel {
     & .recipe-card_text {
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding: 0 1rem;
     }
   }
 }

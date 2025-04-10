@@ -1,0 +1,28 @@
+.plan-header {
+  width: 85%;
+  height: 1.75rem;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+
+  > .title {
+    background-color: #f6f6f6;
+    z-index: 2;
+    padding: 0 1.3rem;
+    font-size: 0.65rem;
+
+    > h2 {
+      font-weight: 600;
+      color: #656565;
+    }
+  }
+
+  & hr {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    border: 1px solid #c2c2c29d;
+  }
+}

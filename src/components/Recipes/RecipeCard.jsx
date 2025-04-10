@@ -106,11 +106,11 @@ function RecipeCard({
         </div>
 
         <div className="carousel-btn carousel-btn_left">
-          <TurnPageArrow color="#00a650" direction="left" turnPage={previous} />
+          <TurnPageArrow color="#FFFFFF" direction="left" turnPage={previous} />
         </div>
 
         <div className="carousel-btn carousel-btn_right">
-          <TurnPageArrow color="#00a650" direction="right" turnPage={next} />
+          <TurnPageArrow color="#FFFFFF" direction="right" turnPage={next} />
         </div>
       </div>
     </section>

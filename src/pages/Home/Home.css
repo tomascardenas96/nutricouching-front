@@ -49,9 +49,14 @@ main {
   border-bottom: 1px solid white;
 }
 
+.presentation_container {
+  min-height: 16.5625rem;
+}
+
 .services_container {
   padding: 0 14rem;
   margin-top: 1.5rem;
+  min-height: 36.875rem;
 }
 
 .cms-flap_container {
@@ -216,7 +221,6 @@ main {
 }
 
 @media screen and (max-width: 640px) {
- 
 }
 
 @media screen and (max-width: 540px) {

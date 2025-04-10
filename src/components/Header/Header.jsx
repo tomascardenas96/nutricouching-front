@@ -11,6 +11,7 @@ import useEmptyCart from "../../hooks/useEmptyCart";
 import useRegister from "../../hooks/useRegister";
 import LoaderSpinner from "../Common/LoaderSpinner";
 import LoginModal from "../Login/LoginModal";
+import MobileMenu from "../Mobile-menu/MobileMenu";
 import RegisterModal from "../Register/RegisterModal";
 import UpdateUserModal from "../Update-user/UpdateUserModal";
 import "./Header.css";
@@ -22,7 +23,6 @@ function Header({
   userError,
   productsInCart,
   viandsInCart,
-  handleChangeBurgerMenu,
   elementsInCart,
   handleEmptyCartModal,
   setProductsInCart,
@@ -39,6 +39,7 @@ function Header({
   handleAdminCmsModal,
 }) {
   const [scrolled, setScrolled] = useState(null);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const {
     loginInput,
@@ -92,6 +93,10 @@ function Header({
     hasSyncedCart.current = false;
   };
 
+  const handleChangeBurgerMenu = () => {
+    setIsBurgerMenuOpen(!isBurgerMenuOpen);
+  };
+
   // Cambiamos de color el header al hacer scroll
   useEffect(() => {
     const mainElement = document.querySelector("main");
@@ -126,10 +131,12 @@ function Header({
             className={scrolled ? "icon icon-scrolled" : "icon"}
             onClick={handleCartModal}
           />
-          <IoIosNotifications
-            className={scrolled ? "icon icon-scrolled" : "icon"}
-            onClick={() => setIsNotificationsModalOpen(true)}
-          />
+          {user && (
+            <IoIosNotifications
+              className={scrolled ? "icon icon-scrolled" : "icon"}
+              onClick={() => setIsNotificationsModalOpen(true)}
+            />
+          )}
 
           {(user?.professional?.role === "admin" ||
             user?.professional?.role === "root") && (
@@ -181,9 +188,7 @@ function Header({
             <a href="/#services">SERVICIOS</a>
           </li>
           <li>
-            <li>
-              <a href="/#products">PRODUCTOS</a>
-            </li>
+            <a href="/#products">PRODUCTOS</a>
           </li>
           <li>
             <a href="/#viands">VIANDAS</a>
@@ -244,8 +249,23 @@ function Header({
           handleSubmitLogin={handleSubmitLogin}
           handleChangeLogin={handleChangeLogin}
           isLoginModalOpen={isLoginModalOpen}
+          handleRegisterModal={handleRegisterModal}
         />
       )}
+
+      {isBurgerMenuOpen &&
+        createPortal(
+          <MobileMenu
+            handleChangeBurgerMenu={handleChangeBurgerMenu}
+            handleLoginModal={handleLoginModal}
+            setActiveCart={setActiveCart}
+            setElementsInCart={setElementsInCart}
+            handleOpenUpdateUserModal={handleOpenUpdateUserModal}
+            handleRegisterModal={handleRegisterModal}
+            scrolled={scrolled}
+          />,
+          document.body
+        )}
 
       {isRegisterModalOpen && (
         <RegisterModal handleRegisterModal={handleRegisterModal} />

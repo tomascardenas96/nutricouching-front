@@ -1,27 +1,26 @@
 import { HOST } from "../../api/data";
-import MoreInfo from "./MoreInfo";
 import "./ServicesCard.css";
-import { FaArrowRight } from "react-icons/fa6";
 
 function ServiceCard({
   image,
   color,
   description,
   title,
-  icon,
   handleSelectService,
   handleOpenServiceModal,
   isEven,
+  type,
+  handleOpenSmartPlanModal,
 }) {
   const handleSelectServiceAndOpenModal = () => {
     handleSelectService();
-    handleOpenServiceModal();
+    if (type === "schedule") handleOpenServiceModal();
+    if (type === "plan_download") handleOpenSmartPlanModal();
   };
   return (
     <div
-    // services-card_container
+      // services-card_container
       className={`services-card_container ${!isEven && "right-service-cards"}`}
-
     >
       <div
         className="color-line"

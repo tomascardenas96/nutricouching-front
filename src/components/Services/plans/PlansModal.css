@@ -1,0 +1,59 @@
+.plans-modal_container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background-shadow-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+  }
+}
+
+.plans-modal_container > section {
+  width: 58.5rem;
+  min-height: 54rem;
+  max-height: 95vh;
+  background-color: #f6f6f6;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.171);
+  padding: 3rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+
+  > .close-icon {
+    position: absolute;
+    right: 3rem;
+    top: 3.35rem;
+    cursor: pointer;
+  }
+}
+
+.plans-modal_container .plans-section {
+  justify-self: center;
+  width: 100%;
+  margin: 0.8rem 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 12.2rem);
+  gap: 17px;
+
+  > .no-plans {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    grid-column: 1 / -1;
+    margin: 1.5rem 0;
+    color: #656565;
+    font-size: 0.9rem;
+  }
+}

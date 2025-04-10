@@ -1,7 +1,7 @@
 .sub-menu {
   position: relative;
   width: 100%;
-  height: 100%; /* Ajusta la altura según necesites */
+  height: 100%;
   overflow: hidden;
   background-color: #2f4858;
   display: flex;
@@ -14,7 +14,7 @@
 .sub-menu p {
   position: absolute;
   white-space: nowrap;
-  animation: translateLeft 30s linear infinite;
+  animation: translateLeft 60s linear infinite;
 
   > span {
     margin: 0 100px;

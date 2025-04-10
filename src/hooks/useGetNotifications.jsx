@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { HOST } from "../api/data";
+import { WEBSOCKET_HOST, HOST } from "../api/data";
 import { useUser } from "../context/UserProvider";
 
 function useGetNotifications() {
@@ -37,7 +37,7 @@ function useGetNotifications() {
       return;
     }
 
-    const socket = io(`${HOST}`, {
+    const socket = io(`${WEBSOCKET_HOST}`, {
       query: { userId: user.userId },
     });
 

@@ -11,7 +11,6 @@ function ProductInCartCard({
   subtract,
   elementsInCart,
 }) {
-  
   return (
     <div className="cart-product-card">
       <IoMdClose
@@ -30,7 +29,7 @@ function ProductInCartCard({
       </div>
 
       <div className="cart-product_description">
-        <p>{product?.name?.toLowerCase() || viand?.name?.toLowerCase()}</p>
+        <p>{product?.name?.toUpperCase() || viand?.name?.toUpperCase()}</p>
       </div>
 
       <div className="cart-product_unit-price">

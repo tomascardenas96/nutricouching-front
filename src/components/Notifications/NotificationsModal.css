@@ -18,9 +18,8 @@
   position: fixed;
   right: 12rem;
   bottom: 3rem;
-  border-radius: 0.8rem;
+  border-radius: 0.3rem;
   box-shadow: -1px 1px 5px 5px rgba(0, 0, 0, 0.052);
-  font-family: var(--services-modal-header);
   padding: 0.7rem 1rem 3rem 1rem;
 
   & .close-icon {

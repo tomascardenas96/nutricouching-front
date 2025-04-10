@@ -3,12 +3,17 @@ import { RiCalendarScheduleFill } from "react-icons/ri";
 import { reviews } from "./reviews/reviews";
 import { useUser } from "../../context/UserProvider";
 import { toast } from "sonner";
+import { createPortal } from "react-dom";
+import ReservationModal from "./ReservationModal";
 
 function MoreInfo({
-  handleOpenRequestReservation,
   title,
   handleOpenServiceModal,
   handleLoginModal,
+  handleOpenRequestReservation,
+  selectedService,
+  setIsRequestReservationOpen,
+  isRequestReservationOpen,
 }) {
   const { user } = useUser();
 
@@ -70,6 +75,17 @@ function MoreInfo({
           </button>
         </div>
       </div>
+
+      {/* Modal para seleccionar un turno */}
+      {isRequestReservationOpen &&
+        createPortal(
+          <ReservationModal
+            handleOpenRequestReservation={handleOpenRequestReservation}
+            selectedService={selectedService}
+            setIsRequestReservationOpen={setIsRequestReservationOpen}
+          />,
+          document.body
+        )}
     </div>
   );
 }
