@@ -3,9 +3,49 @@ import PlanCard from "./PlanCard";
 import PlanHeader from "./PlanHeader";
 import { IoMdClose } from "react-icons/io";
 import "./PlansModal.css";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
+import { WEBSOCKET_HOST } from "../../../api/data";
+import { toast } from "sonner";
 
-function PlansModal({ handleOpenSmartPlanModal }) {
-  const { plans, plansError, plansLoading } = useGetAllPlans();
+function PlansModal({ handleOpenSmartPlanModal, user }) {
+  const { plans, setPlans, plansError, plansLoading } = useGetAllPlans();
+
+  useEffect(() => {
+    if (!user || plans.length === 0) {
+      return;
+    }
+
+    const socket = io(`${WEBSOCKET_HOST}`, {
+      query: { userId: user.userId },
+    });
+
+    socket.on("purchasedPlan", (planId) => {
+      toast.success("El plán ha sido agregado a tu colección");
+
+      setPlans((prev) => {
+        const justPurchasedPlan = prev.notPurchasedPlans.find(
+          (plan) => plan.planId === planId
+        );
+        prev.purchasedPlans.push(justPurchasedPlan);
+
+        const notPurchasedPlans = prev.notPurchasedPlans.filter(
+          (plan) => plan.planId !== planId
+        );
+
+        return {
+          freePlans: prev.freePlans,
+          purchasedPlans: prev.purchasedPlans,
+          notPurchasedPlans,
+        };
+      });
+    });
+
+    return () => {
+      socket.off("purchasedPlan");
+      socket.disconnect();
+    };
+  }, [user, plans]);
 
   return (
     <div className="plans-modal_container">

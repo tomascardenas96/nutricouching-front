@@ -8,7 +8,7 @@ import "./Services.css";
 import ServiceCard from "./ServicesCard";
 import PlansModal from "./plans/PlansModal";
 
-function Services({ handleLoginModal }) {
+function Services({ handleLoginModal, user }) {
   const { services, servicesLoading, servicesError } = useGetServices();
   const [selectedService, setSelectedService] = useState(null);
 
@@ -105,7 +105,10 @@ function Services({ handleLoginModal }) {
       {selectedService?.type === "plan_download" &&
         isSmartPlanModalOpen &&
         createPortal(
-          <PlansModal handleOpenSmartPlanModal={handleOpenSmartPlanModal} />,
+          <PlansModal
+            handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+            user={user}
+          />,
           document.body
         )}
     </div>

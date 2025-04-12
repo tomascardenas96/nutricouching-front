@@ -3,12 +3,11 @@ import { createPortal } from "react-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { io } from "socket.io-client";
 import { toast } from "sonner";
-import { HOST, WEBSOCKET_HOST } from "../../api/data";
+import { WEBSOCKET_HOST } from "../../api/data";
 import About from "../../components/About/About";
 import CartModal from "../../components/Cart/CartModal";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import MobileMenu from "../../components/Mobile-menu/MobileMenu";
 import Presentation from "../../components/Presentation/Presentation";
 import Products from "../../components/Products/Products";
 import Carousel from "../../components/Recipes/Carousel";
@@ -89,21 +88,22 @@ function Home() {
     });
 
     socket.on("afterPurchaseNotify", (data) => {
-      if (data.message === "Tu compra ha sido exitosa!") {
-        handleCartModal();
-        toast.success(data.message);
-        setElementsInCart([]);
-      } else if (
-        data.message === "Tu compra ha sido rechazada, intente nuevamente"
-      ) {
-        handleCartModal();
-        toast.error(data.message);
-      } else if (
-        data.message ===
-        "Tu pago está en proceso, te notificaremos cuando se confirme."
-      ) {
-        handleCartModal();
-        toast.info(data.message);
+      if (data.service === "cart") {
+        setIsCartModalOpen(false);
+        switch (data.status) {
+          case "rejected":
+            toast.error(data.message);
+            break;
+
+          case "approved":
+            toast.success(data.message);
+            setElementsInCart([]);
+            break;
+
+          case "pending":
+            toast.info(data.message);
+            break;
+        }
       }
     });
 
@@ -173,7 +173,7 @@ function Home() {
           </section>
 
           <section className="services_container" id="services">
-            <Services handleLoginModal={handleLoginModal} />
+            <Services handleLoginModal={handleLoginModal} user={user} />
           </section>
         </div>
 

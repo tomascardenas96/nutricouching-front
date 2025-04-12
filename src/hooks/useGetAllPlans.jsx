@@ -36,7 +36,7 @@ function useGetAllPlans() {
     getPlans();
   }, []);
 
-  return { plans, plansLoading, plansError };
+  return { plans, setPlans, plansLoading, plansError };
 }
 
 export default useGetAllPlans;

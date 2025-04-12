@@ -3,11 +3,13 @@ import { IoIosNotifications } from "react-icons/io";
 import useGetNotifications from "../../hooks/useGetNotifications";
 import "./NotificationPopUp.css";
 import NotificationsModal from "./NotificationsModal";
+import { io } from "socket.io-client";
+import { WEBSOCKET_HOST } from "../../api/data";
 
 function NotificationPopUp({
   isNotificationsModalOpen,
   setIsNotificationsModalOpen,
-  user
+  user,
 }) {
   const [unreadNotifications, setUnreadNotifications] = useState(0);
 
@@ -17,7 +19,10 @@ function NotificationPopUp({
     setIsNotificationsModalOpen(false);
   };
 
+  // Alerta notificaciones no leidas
   useEffect(() => {
+    if (notifications.length === 0) return;
+
     const filterUnread = notifications.filter(
       (notification) => !notification.isRead
     );
@@ -31,6 +36,34 @@ function NotificationPopUp({
     }
   }, [notifications]);
 
+  // Actualizar notificaciones en tiempo real
+  useEffect(() => {
+    if (!user || notifications.length === 0) return;
+
+    const socket = io(`${WEBSOCKET_HOST}`, {
+      query: { userId: user.userId },
+    });
+
+    socket.on("afterPurchaseNotify", (data) => {
+      if (data.service === "plan_download") {
+        switch (data.status) {
+          case "approved":
+            setNotifications((prev) => [data, ...prev]);
+            break;
+
+          case "rejected":
+            toast.error(data.message);
+            break;
+        }
+      }
+    });
+
+    return () => {
+      socket.off("afterPurchaseNotify");
+      socket.disconnect();
+    };
+  }, [user, notifications]);
+
   return (
     <>
       <div
@@ -40,7 +73,7 @@ function NotificationPopUp({
         <div>
           <h2 className="notifications-title">NOTIFICACIONES</h2>
           <IoIosNotifications className="bell-icon" />
-          {unreadNotifications !== 0 && (
+          {true && (
             <div className="red-circle">
               <p>{unreadNotifications}</p>
             </div>

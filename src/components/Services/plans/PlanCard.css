@@ -76,6 +76,7 @@
 
     > .buy-btn.buy-btn-loading {
       background-color: #cececedb;
+      cursor: pointer;
     }
 
     > .more-btn {
