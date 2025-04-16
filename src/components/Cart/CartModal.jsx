@@ -11,7 +11,7 @@ import useRemoveProductFromCart from "../../hooks/useRemoveProductFromCart";
 import useRemoveViandFromCart from "../../hooks/useRemoveViandFromCart";
 import "./CartModal.css";
 import ProductInCartCard from "./ProductInCartCard";
-import PreferenceButton from "./payment/preferenceButton";
+import PreferenceButton from "./payment/PreferenceButton";
 
 function CartModal({
   handleCartModal,
