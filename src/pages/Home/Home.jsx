@@ -14,7 +14,7 @@ import Carousel from "../../components/Recipes/Carousel";
 import Services from "../../components/Services/Services";
 import SubMenu from "../../components/Sub-menu/SubMenu";
 import AdminCmsModal from "../../components/admin-cms/AdminCmsModal";
-import NotificationPopUp from "../../components/notifications/NotificationPopUp";
+import NotificationPopUp from "../../components/Notifications/NotificationPopUp";
 import RootCmsModal from "../../components/root-cms/RootCmsModal";
 import { useElementsInCart } from "../../context/ElementsInCartProvider";
 import { useLogin, useUser } from "../../context/UserProvider";
