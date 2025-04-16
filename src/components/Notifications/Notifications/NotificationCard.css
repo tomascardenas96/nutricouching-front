@@ -3,6 +3,7 @@ div.notification-card_container {
   grid-template-columns: 3.7rem 1fr;
   border-radius: 0.2rem;
   padding: 0.2rem;
+  height: 4rem;
 
   & .notification-delete-icon {
     display: grid;
@@ -15,6 +16,7 @@ div.notification-card_container {
   & .notification-body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
     & .notification-description {
       font-size: 0.7rem;
