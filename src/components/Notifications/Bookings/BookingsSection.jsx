@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { GrSchedule } from "react-icons/gr";
-import { IoMdClose } from "react-icons/io";
 import { MdHistory } from "react-icons/md";
 import useCancelBooking from "../../../hooks/useCancelBooking";
 import useGetBookingsByUser from "../../../hooks/useGetBookingsByUser";
-import BookingsCard from "../../admin-cms/Bookings/BookingsCard/BookingsCard";
-import PreviousShiftUserCard from "./PreviousShiftUserCard";
-import "./BookingsSection.css";
-import BookingsHeader from "../../admin-cms/Bookings/BookingsHeader/BookingsHeader";
 import ConfirmationModal from "../../Common/ConfirmationModal";
+import BookingsCard from "../../admin-cms/Bookings/BookingsCard/BookingsCard";
+import BookingsHeader from "../../admin-cms/Bookings/BookingsHeader/BookingsHeader";
+import "./BookingsSection.css";
+import PreviousShiftUserCard from "./PreviousShiftUserCard";
 
 function BookingsSection({ closeModal }) {
   const [selectedBookingId, setSelectedBookingId] = useState(null);

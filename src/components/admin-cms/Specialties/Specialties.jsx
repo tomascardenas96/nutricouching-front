@@ -1,12 +1,12 @@
-import useGetAllSpecialtiesByProfessional from "../../../hooks/useGetAllSpecialtiesByProfessional";
-import { FaRegTrashAlt } from "react-icons/fa";
-import "./Specialties.css";
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import AddSpecialtyModal from "./modal/AddSpecialtyModal";
-import useUnlinkSpecialtyOfProfessional from "../../../hooks/useUnlinkSpecialtyOfProfessional";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { RiApps2AddLine } from "react-icons/ri";
+import useGetAllSpecialtiesByProfessional from "../../../hooks/useGetAllSpecialtiesByProfessional";
+import useUnlinkSpecialtyOfProfessional from "../../../hooks/useUnlinkSpecialtyOfProfessional";
 import ConfirmationModal from "../../Common/ConfirmationModal";
+import "./Specialties.css";
+import AddSpecialtyModal from "./modal/AddSpecialtyModal";
 
 function Specialties({ user }) {
   const [isAddSpecialtyModalOpen, setIsAddSpecialtyModalOpen] = useState(false);

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { IoIosNotifications } from "react-icons/io";
+import { io } from "socket.io-client";
+import { WEBSOCKET_HOST } from "../../api/data";
 import useGetNotifications from "../../hooks/useGetNotifications";
 import "./NotificationPopUp.css";
 import NotificationsModal from "./NotificationsModal";
-import { io } from "socket.io-client";
-import { WEBSOCKET_HOST } from "../../api/data";
 
 function NotificationPopUp({
   isNotificationsModalOpen,

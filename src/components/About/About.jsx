@@ -28,7 +28,10 @@ function About() {
               ))
             ) : (
               [...Array(4)].map((_, index) => (
-                <div key={`professional-loader_${index}`} className="about-card_loader">
+                <div
+                  key={`professional-loader_${index}`}
+                  className="about-card_loader"
+                >
                   <LoaderSpinner />
                 </div>
               ))

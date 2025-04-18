@@ -1,7 +1,7 @@
-import "./RegisterModal.css";
 import { FaEye } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import useRegister from "../../hooks/useRegister";
+import "./RegisterModal.css";
 
 function RegisterModal({ handleRegisterModal }) {
   const {

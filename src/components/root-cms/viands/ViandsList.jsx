@@ -3,11 +3,11 @@ import { CiSearch } from "react-icons/ci";
 import { LiaAddressCard } from "react-icons/lia";
 import useDeleteViand from "../../../hooks/useDeleteViand";
 import useGetAllViands from "../../../hooks/useGetAllViands";
+import ConfirmationModal from "../../Common/ConfirmationModal";
 import ViandCmsCard from "./ViandCmsCard";
 import "./ViandsList.css";
 import AddViandModal from "./modals/AddViandModal";
 import ModifyViandModal from "./modals/ModifyViandModal";
-import ConfirmationModal from "../../Common/ConfirmationModal";
 
 function ViandsList() {
   const [selectedViand, setSelectedViand] = useState(null);

@@ -1,7 +1,6 @@
-import "./ServicesCmsCard.css";
-import { FaRegEdit } from "react-icons/fa";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { HOST } from "../../../api/data";
+import "./ServicesCmsCard.css";
 
 function ServicesCmsCard({
   service,

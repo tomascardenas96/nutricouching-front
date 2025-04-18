@@ -1,14 +1,29 @@
-import CardPrice from "./CardPrice";
-import { MdOutlineFileDownload } from "react-icons/md";
 import { BsCart4 } from "react-icons/bs";
-import "./PlanCard.css";
+import { MdOutlineFileDownload } from "react-icons/md";
 import { HOST } from "../../../api/data";
-import useDownloadPlan from "../../../hooks/useDownloadPlan";
-import usePurchasePlan from "../../../hooks/usePurchasePlan";
+import CardPrice from "./CardPrice";
+import "./PlanCard.css";
 
-function PlanCard({ title, type, image, price, isOffer, id }) {
-  const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
-  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
+function PlanCard({
+  title,
+  type,
+  image,
+  price,
+  isOffer,
+  id,
+  handleOpenMoreInfoModal,
+  setSelectedPlan,
+  plan,
+  status,
+  handleDownloadPlan,
+  downloadLoading,
+  handlePurchasePlan,
+  paymentLoading,
+}) {
+  const openModal = () => {
+    setSelectedPlan({ ...plan, status });
+    handleOpenMoreInfoModal();
+  };
 
   return (
     <div className="plan-card">
@@ -46,7 +61,9 @@ function PlanCard({ title, type, image, price, isOffer, id }) {
               Descargar <MdOutlineFileDownload className="download-icon" />
             </button>
           )}
-          <button className="more-btn">Mas Info</button>
+          <button className="more-btn" onClick={openModal}>
+            Mas Info
+          </button>
         </form>
       </div>
     </div>

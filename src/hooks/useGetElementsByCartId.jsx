@@ -26,31 +26,6 @@ function useGetElementsByCartId(setElementsInCart) {
         throw new Error(data.message);
       }
 
-      // Construir elementos del carrito
-      // const combinedElements = [...data];
-
-      // if (productsInCart.length > 0) {
-      //   combinedElements.push(
-      //     ...productsInCart.map((product) => ({
-      //       cart: activeCart,
-      //       product,
-      //       viand: null,
-      //       quantity: product.quantity,
-      //     }))
-      //   );
-      // }
-
-      // if (viandsInCart.length > 0) {
-      //   combinedElements.push(
-      //     ...viandsInCart.map((viand) => ({
-      //       cart: activeCart,
-      //       product: null,
-      //       viand,
-      //       quantity: viand.quantity,
-      //     }))
-      //   );
-      // }
-
       setElementsInCart(data);
     } catch (error) {
       console.error("Error al obtener los elementos del carrito:", error);

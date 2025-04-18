@@ -1,10 +1,8 @@
-import "./AboutCard.css";
-import { FaFacebookF } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
+import React from "react";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { HOST } from "../../api/data";
-import React from "react";
+import "./AboutCard.css";
 
 function AboutCard({ image, name, role }) {
   return (

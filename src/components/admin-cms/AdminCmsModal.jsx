@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { MdSupervisedUserCircle } from "react-icons/md";
+import { useUser } from "../../context/UserProvider";
 import "./AdminCmsModal.css";
 import Bookings from "./Bookings/Bookings";
 import Schedules from "./Schedules/Schedules";
 import Specialties from "./Specialties/Specialties";
-import { useUser } from "../../context/UserProvider";
 
 function AdminCmsModal({ handleAdminCmsModal }) {
   const [selectedOption, setSelectedOption] = useState("bookings");

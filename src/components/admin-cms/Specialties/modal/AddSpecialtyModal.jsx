@@ -1,8 +1,8 @@
+import { ImCheckmark, ImCross } from "react-icons/im";
+import { IoMdClose } from "react-icons/io";
 import useAssignSpecialtyToProfessional from "../../../../hooks/useAssignSpecialtyToProfessional";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
-import { IoMdClose } from "react-icons/io";
 import "./AddSpecialtyModal.css";
-import { ImCheckmark, ImCross } from "react-icons/im";
 
 function AddSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
   const { errorSpecialties, loadingSpecialties, specialties } =

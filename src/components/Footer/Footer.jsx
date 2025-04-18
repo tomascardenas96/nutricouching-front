@@ -1,12 +1,6 @@
-import "./Footer.css";
-import { FaLocationDot } from "react-icons/fa6";
-import { IoIosPhonePortrait } from "react-icons/io";
-import { FaEnvelope } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedin, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa";
+import "./Footer.css";
 
 function Footer() {
   return (

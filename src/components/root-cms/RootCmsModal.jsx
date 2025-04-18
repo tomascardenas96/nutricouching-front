@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { CiBoxList } from "react-icons/ci";
 import { IoMdClose, IoMdMore } from "react-icons/io";
+import { useMediaQuery } from "react-responsive";
 import "./RootCmsModal.css";
 import ProductsCmsList from "./products/ProductsCmsList";
 import ProfessionalsList from "./professionals/ProfessionalsList";
 import SpecialtiesList from "./specialties/SpecialtiesList";
 import ViandsList from "./viands/ViandsList";
-import { useMediaQuery } from "react-responsive";
 
 function RootCmsModal({ handleCmsModal }) {
   const [selectedOption, setSelectedOption] = useState("products");

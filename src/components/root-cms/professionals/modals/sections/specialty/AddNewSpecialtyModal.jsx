@@ -1,6 +1,6 @@
-import "./AddNewSpecialty.css";
-import useGetServices from "../../../../../../hooks/useGetServices";
 import { ImCheckmark, ImCross } from "react-icons/im";
+import useGetServices from "../../../../../../hooks/useGetServices";
+import "./AddNewSpecialty.css";
 
 function AddNewSpecialtyModal({
   handleCloseAddSpecialtyModal,

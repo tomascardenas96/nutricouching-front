@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { IoMdClose } from "react-icons/io";
 import BookingsSection from "./Bookings/BookingsSection";
 import NotificationsSection from "./Notifications/NotificationsSection";
 import "./NotificationsModal.css";
-import { IoMdClose } from "react-icons/io";
 
 function NotificationsModal({
   closeModal,

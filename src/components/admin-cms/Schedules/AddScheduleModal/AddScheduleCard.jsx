@@ -1,17 +1,7 @@
-import "./AddScheduleCard.css";
 import { LuTrash } from "react-icons/lu";
+import "./AddScheduleCard.css";
 
 function AddScheduleCard({ schedule, spanishDays, unselectDay }) {
-  /**
-   * schedule:
-   *   {
-    startTime: '09:00',
-    endTime: '17:00',
-    interval: '60',
-    day: ['Mon, 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ']
-    }
-   */
-
   return (
     <div className="selected-schedule_card">
       <div className="left-side">

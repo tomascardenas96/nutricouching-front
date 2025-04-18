@@ -1,15 +1,31 @@
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { IoMdClose } from "react-icons/io";
+import { io } from "socket.io-client";
+import { toast } from "sonner";
+import { WEBSOCKET_HOST } from "../../../api/data";
 import useGetAllPlans from "../../../hooks/useGetAllPlans";
 import PlanCard from "./PlanCard";
 import PlanHeader from "./PlanHeader";
-import { IoMdClose } from "react-icons/io";
 import "./PlansModal.css";
-import { useEffect } from "react";
-import { io } from "socket.io-client";
-import { WEBSOCKET_HOST } from "../../../api/data";
-import { toast } from "sonner";
+import MoreInfoPlan from "./more-info/MoreInfoPlan";
 
-function PlansModal({ handleOpenSmartPlanModal, user }) {
+function PlansModal({
+  handleOpenSmartPlanModal,
+  user,
+  handleDownloadPlan,
+  downloadLoading,
+  handlePurchasePlan,
+  paymentLoading,
+}) {
+  const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
   const { plans, setPlans, plansError, plansLoading } = useGetAllPlans();
+
+  const handleOpenMoreInfoModal = () => {
+    setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
+  };
 
   useEffect(() => {
     if (!user || plans.length === 0) {
@@ -62,6 +78,19 @@ function PlansModal({ handleOpenSmartPlanModal, user }) {
                   title={plan.title}
                   image={plan.image}
                   id={plan.planId}
+                  handleOpenMoreInfoModal={handleOpenMoreInfoModal}
+                  isMoreInfoModalOpen={isMoreInfoModalOpen}
+                  shortDescription={plan.shortDescription}
+                  description={plan.description}
+                  weight={plan.weight}
+                  date={plan.createdAt}
+                  plan={plan}
+                  setSelectedPlan={setSelectedPlan}
+                  status="adquired"
+                  handleDownloadPlan={handleDownloadPlan}
+                  downloadLoading={downloadLoading}
+                  handlePurchasePlan={handlePurchasePlan}
+                  paymentLoading={paymentLoading}
                 />
               ))}
             </div>
@@ -79,6 +108,19 @@ function PlansModal({ handleOpenSmartPlanModal, user }) {
                   title={plan.title}
                   image={plan.image}
                   id={plan.planId}
+                  handleOpenMoreInfoModal={handleOpenMoreInfoModal}
+                  isMoreInfoModalOpen={isMoreInfoModalOpen}
+                  shortDescription={plan.shortDescription}
+                  description={plan.description}
+                  weight={plan.weight}
+                  date={plan.createdAt}
+                  plan={plan}
+                  setSelectedPlan={setSelectedPlan}
+                  status="adquired"
+                  handleDownloadPlan={handleDownloadPlan}
+                  downloadLoading={downloadLoading}
+                  handlePurchasePlan={handlePurchasePlan}
+                  paymentLoading={paymentLoading}
                 />
               ))}
             </div>
@@ -98,12 +140,47 @@ function PlansModal({ handleOpenSmartPlanModal, user }) {
                   price={plan.price}
                   isOffer={plan.isOffer}
                   id={plan.planId}
+                  handleOpenMoreInfoModal={handleOpenMoreInfoModal}
+                  isMoreInfoModalOpen={isMoreInfoModalOpen}
+                  shortDescription={plan.shortDescription}
+                  description={plan.description}
+                  weight={plan.weight}
+                  date={plan.createdAt}
+                  plan={plan}
+                  setSelectedPlan={setSelectedPlan}
+                  status="not-purchased"
+                  handleDownloadPlan={handleDownloadPlan}
+                  downloadLoading={downloadLoading}
+                  handlePurchasePlan={handlePurchasePlan}
+                  paymentLoading={paymentLoading}
                 />
               ))}
             </div>
           </>
         )}
       </section>
+
+      {isMoreInfoModalOpen &&
+        createPortal(
+          <MoreInfoPlan
+            image={selectedPlan.image}
+            title={selectedPlan.title}
+            shortDescription={selectedPlan.shortDescription}
+            description={selectedPlan.description}
+            price={selectedPlan.price}
+            weight={selectedPlan.weight}
+            date={selectedPlan.date}
+            handleOpenMoreInfoModal={handleOpenMoreInfoModal}
+            setSelectedPlan={setSelectedPlan}
+            status={selectedPlan.status}
+            handleDownloadPlan={handleDownloadPlan}
+            downloadLoading={downloadLoading}
+            handlePurchasePlan={handlePurchasePlan}
+            paymentLoading={paymentLoading}
+            id={selectedPlan.planId}
+          />,
+          document.body
+        )}
     </div>
   );
 }

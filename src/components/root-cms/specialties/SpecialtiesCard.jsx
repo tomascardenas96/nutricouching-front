@@ -1,8 +1,8 @@
-import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import "./SpecialtiesCard.css";
-import ConfirmationModal from "../../Common/ConfirmationModal";
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { FaRegTrashAlt } from "react-icons/fa";
+import ConfirmationModal from "../../Common/ConfirmationModal";
+import "./SpecialtiesCard.css";
 
 function SpecialtyCard({ specialty, handleDeleteSpecialty }) {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);

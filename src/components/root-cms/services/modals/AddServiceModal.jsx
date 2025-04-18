@@ -1,7 +1,7 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import "./AddServiceModal.css";
 import useCreateService from "../../../../hooks/useCreateService";
+import "./AddServiceModal.css";
 
 function AddServiceModal({ handleAddServiceModal, setServices }) {
   const {

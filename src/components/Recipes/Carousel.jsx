@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../api/data";
 import useGetAllViands from "../../hooks/useGetAllViands";
+import NetworkError from "../Common/NetworkError";
 import "./Carousel.css";
 import RecipeCard from "./RecipeCard";
-import CarouselLoader from "./loader/CarouselLoader";
-import LoaderSpinner from "../Common/LoaderSpinner";
 import ViandsList from "./ViandsList";
+import CarouselLoader from "./loader/CarouselLoader";
 import ViandsListLoader from "./loader/ViandsListLoader";
-import NetworkError from "../Common/NetworkError";
 
 function Carousel({ setViandsInCart, activeCart, setElementsInCart }) {
   const [selectedViand, setSelectedViand] = useState({});

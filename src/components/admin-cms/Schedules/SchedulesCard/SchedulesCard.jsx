@@ -1,6 +1,5 @@
 import { createPortal } from "react-dom";
 import "./SchedulesCard.css";
-
 import React, { useState } from "react";
 import ConfirmationModal from "../../../Common/ConfirmationModal";
 

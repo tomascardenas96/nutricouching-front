@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import useDownloadPlan from "../../hooks/useDownloadPlan";
 import useGetServices from "../../hooks/useGetServices";
+import usePurchasePlan from "../../hooks/usePurchasePlan";
 import LoaderSpinner from "../Common/LoaderSpinner";
 import NetworkError from "../Common/NetworkError";
 import MoreInfo from "./MoreInfo";
@@ -11,6 +13,9 @@ import PlansModal from "./plans/PlansModal";
 function Services({ handleLoginModal, user }) {
   const { services, servicesLoading, servicesError } = useGetServices();
   const [selectedService, setSelectedService] = useState(null);
+
+  const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
+  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
 
   const [isRequestReservationOpen, setIsRequestReservationOpen] =
     useState(false);
@@ -108,6 +113,10 @@ function Services({ handleLoginModal, user }) {
           <PlansModal
             handleOpenSmartPlanModal={handleOpenSmartPlanModal}
             user={user}
+            handleDownloadPlan={handleDownloadPlan}
+            downloadLoading={downloadLoading}
+            handlePurchasePlan={handlePurchasePlan}
+            paymentLoading={paymentLoading}
           />,
           document.body
         )}

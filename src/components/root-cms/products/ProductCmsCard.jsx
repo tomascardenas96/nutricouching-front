@@ -1,8 +1,6 @@
-import "./ProductCmsCard.css";
-import { FaRegEdit } from "react-icons/fa";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { HOST } from "../../../api/data";
-import { useState } from "react";
+import "./ProductCmsCard.css";
 
 function ProductCmsCard({
   product,

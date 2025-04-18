@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { CiSearch } from "react-icons/ci";
 import { LiaAddressCard } from "react-icons/lia";
 import useDeleteSpecialty from "../../../hooks/useDeleteSpecialty";
 import useGetAllSpecialties from "../../../hooks/useGetAllSpecialties";

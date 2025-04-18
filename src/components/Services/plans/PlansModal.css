@@ -19,13 +19,13 @@
 }
 
 .plans-modal_container > section {
-  width: 58.5rem;
-  min-height: 54rem;
+  width: 53.3rem;
+  min-height: 53rem;
   max-height: 95vh;
   background-color: #f6f6f6;
   border-radius: 0.3rem;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.171);
-  padding: 3rem;
+  padding: 1.7rem 2.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
@@ -33,7 +33,7 @@
   > .close-icon {
     position: absolute;
     right: 3rem;
-    top: 3.35rem;
+    top: 1.9rem;
     cursor: pointer;
   }
 }
@@ -43,7 +43,7 @@
   width: 100%;
   margin: 0.8rem 0 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 12.2rem);
+  grid-template-columns: repeat(auto-fit, 11.2rem);
   gap: 17px;
 
   > .no-plans {

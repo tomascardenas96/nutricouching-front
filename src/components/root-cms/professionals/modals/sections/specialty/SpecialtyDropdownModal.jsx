@@ -1,8 +1,4 @@
-import { useState } from "react";
 import "./SpecialtyDropdownModal.css";
-import { createPortal } from "react-dom";
-import AddNewSpecialtyModal from "./AddNewSpecialtyModal";
-import useAddNewSpecialty from "../../../../../../hooks/useAddNewSpecialty";
 
 function SpecialtyDropdownModal({
   specialties,
