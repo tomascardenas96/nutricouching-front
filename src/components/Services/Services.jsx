@@ -11,21 +11,28 @@ import ServiceCard from "./ServicesCard";
 import PlansModal from "./plans/PlansModal";
 
 function Services({ handleLoginModal, user }) {
-  const { services, servicesLoading, servicesError } = useGetServices();
+  // Selected service state
   const [selectedService, setSelectedService] = useState(null);
 
-  const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
-  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
-
+  // Modal states
   const [isRequestReservationOpen, setIsRequestReservationOpen] =
     useState(false);
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
   const [isSmartPlanModalOpen, setIsSmartPlanModalOpen] = useState(false);
 
+  // Get services
+  const { services, servicesLoading, servicesError } = useGetServices();
+
+  // Download and purchase plans
+  const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
+  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
+
+  // Handle select service
   const handleSelectService = (service) => {
     setSelectedService(service);
   };
 
+  // Handle open modals
   const handleOpenServiceModal = () => {
     setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
   };
@@ -117,6 +124,8 @@ function Services({ handleLoginModal, user }) {
             downloadLoading={downloadLoading}
             handlePurchasePlan={handlePurchasePlan}
             paymentLoading={paymentLoading}
+            handleLoginModal={handleLoginModal}
+            setSelectedService={setSelectedService}
           />,
           document.body
         )}

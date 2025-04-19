@@ -3,6 +3,7 @@ import { MdOutlineFileDownload } from "react-icons/md";
 import { HOST } from "../../../api/data";
 import CardPrice from "./CardPrice";
 import "./PlanCard.css";
+import { toast } from "sonner";
 
 function PlanCard({
   title,
@@ -19,10 +20,26 @@ function PlanCard({
   downloadLoading,
   handlePurchasePlan,
   paymentLoading,
+  user,
+  handleLoginModal,
+  setSelectedService,
+  handleOpenSmartPlanModal,
 }) {
   const openModal = () => {
     setSelectedPlan({ ...plan, status });
     handleOpenMoreInfoModal();
+  };
+
+  // Verify if there is a user, if not, open login modal and toast error
+  const verifyUserAndPurchasePlan = () => {
+    if (user) {
+      handlePurchasePlan(id);
+    } else {
+      handleLoginModal();
+      setSelectedService(null);
+      handleOpenSmartPlanModal();
+      toast.error("Inicia sesión para comprar un plan");
+    }
   };
 
   return (
@@ -42,10 +59,7 @@ function PlanCard({
         <form onSubmit={(e) => e.preventDefault()}>
           {type === "premium" || type === "off" ? (
             !paymentLoading ? (
-              <button
-                className="buy-btn"
-                onClick={() => handlePurchasePlan(id)}
-              >
+              <button className="buy-btn" onClick={verifyUserAndPurchasePlan}>
                 Comprar <BsCart4 className="cart-icon" />
               </button>
             ) : (

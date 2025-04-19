@@ -17,11 +17,13 @@ function PlansModal({
   downloadLoading,
   handlePurchasePlan,
   paymentLoading,
+  handleLoginModal,
+  setSelectedService,
 }) {
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
 
-  const { plans, setPlans, plansError, plansLoading } = useGetAllPlans();
+  const { plans, setPlans, plansError, plansLoading } = useGetAllPlans(user);
 
   const handleOpenMoreInfoModal = () => {
     setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
@@ -69,7 +71,7 @@ function PlansModal({
         <IoMdClose className="close-icon" onClick={handleOpenSmartPlanModal} />
         {plans?.purchasedPlans?.length > 0 && (
           <>
-            <PlanHeader title="Mis Planes" />
+            <PlanHeader title="Tu Colección" />
             <div className="purchased-plans plans-section">
               {plans?.purchasedPlans?.map((plan) => (
                 <PlanCard
@@ -91,6 +93,10 @@ function PlansModal({
                   downloadLoading={downloadLoading}
                   handlePurchasePlan={handlePurchasePlan}
                   paymentLoading={paymentLoading}
+                  user={user}
+                  handleLoginModal={handleLoginModal}
+                  setSelectedService={setSelectedService}
+                  handleOpenSmartPlanModal={handleOpenSmartPlanModal}
                 />
               ))}
             </div>
@@ -99,7 +105,7 @@ function PlansModal({
 
         {plans?.freePlans?.length > 0 && (
           <>
-            <PlanHeader title="Gratis" />
+            <PlanHeader title="Gratuitos" />
             <div className="free-plans plans-section">
               {plans?.freePlans?.map((plan) => (
                 <PlanCard
@@ -121,6 +127,10 @@ function PlansModal({
                   downloadLoading={downloadLoading}
                   handlePurchasePlan={handlePurchasePlan}
                   paymentLoading={paymentLoading}
+                  user={user}
+                  handleLoginModal={handleLoginModal}
+                  setSelectedService={setSelectedService}
+                  handleOpenSmartPlanModal={handleOpenSmartPlanModal}
                 />
               ))}
             </div>
@@ -129,7 +139,7 @@ function PlansModal({
 
         {plans?.notPurchasedPlans?.length > 0 && (
           <>
-            <PlanHeader title="Planes Premium" />
+            <PlanHeader title="Más Planes" />
             <div className="premium-plans plans-section">
               {plans?.notPurchasedPlans?.map((plan) => (
                 <PlanCard
@@ -153,6 +163,10 @@ function PlansModal({
                   downloadLoading={downloadLoading}
                   handlePurchasePlan={handlePurchasePlan}
                   paymentLoading={paymentLoading}
+                  user={user}
+                  handleLoginModal={handleLoginModal}
+                  setSelectedService={setSelectedService}
+                  handleOpenSmartPlanModal={handleOpenSmartPlanModal}
                 />
               ))}
             </div>
