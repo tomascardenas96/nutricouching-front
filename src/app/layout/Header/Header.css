@@ -1,0 +1,368 @@
+.header {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(3, max-content);
+  border-radius: 0 0 0.2rem 0.2rem;
+  padding: 0 5rem;
+  background-color: #f6f6f6;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+
+  > .loader-spinner_user {
+    width: 12rem;
+    height: 45%;
+  }
+}
+
+
+.responsive-menu_mobile {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+
+  > .burger-menu {
+    display: flex;
+    gap: 1rem;
+    color: var(--header-mobile-font-color);
+
+    > .admin-menu_burger-header {
+      display: flex;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      font-size: 1.6rem;
+      margin-left: 0.5rem;
+      padding-left: 1.5rem;
+      border-left: 1px solid rgba(126, 126, 126, 0.387);
+
+      > .professional_menu {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      > .root-user_menu {
+        color: #d6b10e;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+    }
+  }
+
+  & .icon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.45rem;
+    color: var(--header-mobile-font-color);
+  }
+
+}
+
+.header-logo {
+  display: grid;
+  padding-left: 2rem;
+}
+
+.header-logo > div {
+  display: grid;
+  grid-template-columns: 3rem max-content;
+  grid-template-rows: 1fr 1fr;
+}
+
+.header-logo img {
+  width: 3rem;
+  justify-self: center;
+  align-self: center;
+  grid-row: 1 / 3;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.172));
+}
+
+.header-logo p {
+  font-family: var(--primary-font);
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding-left: 0.5rem;
+  color: var(--header-font-color);
+}
+
+.header-logo p:nth-child(2) {
+  align-self: end;
+}
+
+.header-menu {
+  display: grid;
+  place-content: center;
+}
+
+.header-menu > ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.header-menu > ul li,
+.header-menu > ul li a {
+  font-family: var(--primary-font);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: var(--header-font-color);
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header-cart_container {
+  display: flex;
+  gap: 0.3em;
+
+  .header-cart {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+  }
+
+  & .cart-amount {
+    margin-top: 5%;
+    background-color: var(--primary-details-color);
+    width: 0.9rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    font-size: 0.6rem;
+    color: white;
+  }
+}
+
+.header-menu ul li:hover {
+  margin-bottom: -2px;
+  border-bottom: 2px solid #a18276;
+}
+
+.header-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+
+  & p,
+  span {
+    display: flex;
+    align-items: center;
+    font-family: var(--primary-font);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--header-font-color);
+  }
+
+  & p {
+    cursor: pointer;
+  }
+
+  & .user-icon,
+  .log-out-icon {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+
+  & .log-out {
+    color: var(--primary-details-color);
+    cursor: pointer;
+  }
+}
+
+.header-login {
+  display: grid;
+  place-content: center;
+}
+
+.header-login > div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.header-login > div > input {
+  width: 9rem;
+  height: 1.9rem;
+  border-radius: 1rem;
+  font-family: "Quicksand", sans-serif;
+  color: #a18276;
+  border: 1px solid #a18276;
+  cursor: pointer;
+}
+
+.header-login .register-button {
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.7rem;
+  padding-left: 0.2rem;
+  display: flex;
+  justify-content: center;
+  color: #a18276;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Media queries */
+@media screen and (max-width: 1550px) {
+  .header-logo img {
+    width: 2.5rem;
+  }
+
+  .header-logo p {
+    font-size: 0.65rem;
+  }
+
+  .header-menu > ul {
+    gap: 2rem;
+  }
+
+  .header-menu > ul li {
+    font-size: 0.7em;
+  }
+
+  .header-login > div > p {
+    font-size: 0.65rem;
+  }
+
+  .header-login > div > input {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .header-menu > ul li {
+    font-size: 0.65em;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    padding: 0 1rem;
+    justify-content: center;
+    gap: 5rem;
+  }
+
+  .header-logo img {
+    width: 2rem;
+  }
+
+  .header-logo p {
+    font-size: 0.6rem;
+  }
+  .header-menu > ul {
+    gap: 1.5rem;
+  }
+
+  .header-menu > ul li {
+    font-size: 0.6rem;
+  }
+
+  .header-cart_container {
+    display: flex;
+    gap: 0.3em;
+
+    .header-cart {
+      font-size: 0.9rem;
+    }
+  }
+
+  .header-user {
+    gap: 0.5rem;
+
+    & p,
+    span {
+      font-size: 0.65rem;
+    }
+
+    & .user-icon,
+    .log-out-icon {
+      font-size: 0.7rem;
+    }
+  }
+
+  .header-login > div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .header-login > div > input {
+    width: 7.5rem;
+    height: 1.6rem;
+  }
+
+  .header-login .register-button {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .header {
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 3rem;
+    position: fixed;
+    top: 0rem;
+    height: 3.4rem;
+    z-index: 2500;
+    box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.138);
+  }
+
+  .responsive-menu_mobile {
+    display: flex;
+  }
+
+  .header-logo {
+    display: none;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .header-user {
+    display: none;
+  }
+
+  .header-login {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header {
+    padding: 0 5%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .responsive-menu_mobile {
+    > .burger-menu {
+      gap: 1rem;
+
+      > .admin-menu_burger-header {
+        gap: 1rem;
+        font-size: 1.25rem;
+        margin-left: 0.5rem;
+        padding-left: 1rem;
+        border-left: 1px solid rgba(126, 126, 126, 0.387);
+
+        > .root-user_menu {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    & .icon {
+      font-size: 1.2rem;
+    }
+  }
+}
