@@ -14,13 +14,13 @@ import { useAuthUser } from "../../../features/auth/hooks/useAuthUser";
 import { useLoginModal } from "../../../features/auth/hooks/useLoginModal";
 import useRegister from "../../../features/auth/hooks/useRegister";
 import { useCartItems } from "../../../features/cart/hooks/useCartItems";
+import { useCartSyncStatus } from "../../../features/cart/hooks/useCartSyncStatus";
 import useEmptyCart from "../../../features/cart/hooks/useEmptyCart";
 import { useProductCart } from "../../../features/cart/hooks/useProductsCart";
 import { useViandsCart } from "../../../features/cart/hooks/useViandsCart";
 import UpdateUserModal from "../../../features/user/components/UpdateUserModal";
-import MobileMenu from "../Mobile-menu/MobileMenu";
+import MobileMenu from "../mobileMenu/MobileMenu";
 import "./Header.css";
-import { useCartSyncStatus } from "../../../features/cart/hooks/useCartSyncStatus";
 
 function Header({
   handleCartModal,
@@ -177,9 +177,6 @@ function Header({
             <a href="/#main-page">INICIO</a>
           </li>
           <li>
-            <a href="/#services">SERVICIOS</a>
-          </li>
-          <li>
             <a href="/#products">PRODUCTOS</a>
           </li>
           <li>
@@ -188,6 +185,20 @@ function Header({
           <li>
             <a href="/#about">CONOCENOS</a>
           </li>
+          {(user?.professional?.role === "admin" ||
+            user?.professional?.role === "root") && (
+            <li>
+              <a
+                href={`${
+                  user?.professional?.role === "admin"
+                    ? "/professional"
+                    : "/root"
+                }`}
+              >
+                DASHBOARD
+              </a>
+            </li>
+          )}
           <li className="header-cart_container" onClick={handleCartModal}>
             <BsCart4 className="header-cart" />
             <div className="cart-amount">

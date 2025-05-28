@@ -41,24 +41,22 @@ function useRegister() {
         throw new Error(data.message);
       }
 
+      setRegisterLoading(false);
+
       return data;
     };
 
     // Usamos toast.promise para manejar los mensajes de feedback
-    toast
-      .promise(registerUser(), {
-        loading: "Creando usuario...",
-        success: (data) => {
-          return `Registro completado exitosamente!`;
-        },
-        error: (error) => {
-          setRegisterError(true);
-          return `Error: complete los campos requeridos`;
-        },
-      })
-      .finally(() => {
-        setRegisterLoading(false);
-      });
+    toast.promise(registerUser(), {
+      loading: "Creando usuario...",
+      success: (data) => {
+        return `Registro completado exitosamente!`;
+      },
+      error: (error) => {
+        setRegisterError(true);
+        return `Error: complete los campos requeridos`;
+      },
+    });
   };
 
   const handleChangeRegister = (e) => {

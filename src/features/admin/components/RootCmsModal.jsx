@@ -6,7 +6,7 @@ import "./RootCmsModal.css";
 import ProductsCmsList from "../../products/components/dashboard/ProductsCmsList";
 import ProfessionalsList from "../../professional/components/dashboard/ProfessionalsList";
 import SpecialtiesList from "../../specialties/components/dashboard/SpecialtiesList";
-import ViandsList from "../../viands/components/ViandsList";
+import ViandsList from "../../viands/components/dashboard/ViandsList";
 
 function RootCmsModal({ handleCmsModal }) {
   const [selectedOption, setSelectedOption] = useState("products");

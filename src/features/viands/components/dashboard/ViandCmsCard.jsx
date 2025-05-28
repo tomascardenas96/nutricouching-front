@@ -1,8 +1,6 @@
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./ViandCmsCard.css";
-
-import React from "react";
-import { HOST } from "../../../api/data";
+import { HOST } from "../../../../api/data";
 
 function ViandCmsCard({
   viand,
@@ -14,6 +12,8 @@ function ViandCmsCard({
     handleModifyViandModal();
     setSelectedViand(viand);
   };
+
+  console.log(viand)
 
   return (
     <>

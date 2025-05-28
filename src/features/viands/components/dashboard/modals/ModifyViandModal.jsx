@@ -1,6 +1,6 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import { HOST } from "../../../../api/data";
+import { HOST } from "../../../../../api/data";
 import useModifyViand from "../../../hooks/useModifyViand";
 import "./ModifyViandModal.css";
 

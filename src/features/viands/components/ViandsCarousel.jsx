@@ -1,10 +1,10 @@
 import { HOST } from "../../../api/data";
-import "./ViandsList.css";
+import "./ViandsCarousel.css";
 
-function ViandsList({ viands, setLoaded, setSelectedIndex, selectedIndex }) {
+function ViandCarousel({ viands, setLoaded, setSelectedIndex, selectedIndex }) {
   return (
     <div className="all-viands_list">
-      {viands.map((viand, index) => (
+      {viands?.map((viand, index) => (
         <div
           key={`viand-${viand.viandId}`}
           className={`all-viands_item ${
@@ -25,4 +25,4 @@ function ViandsList({ viands, setLoaded, setSelectedIndex, selectedIndex }) {
   );
 }
 
-export default ViandsList;
+export default ViandCarousel;

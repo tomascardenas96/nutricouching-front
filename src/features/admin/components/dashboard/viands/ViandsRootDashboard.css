@@ -1,0 +1,103 @@
+.viands-root-dashboard_table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-y: auto;
+
+  > thead {
+    height: 2rem;
+    border-bottom: 1px solid rgb(204, 204, 204);
+  }
+
+  & th {
+    text-align: start;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding-right: 2rem;
+  }
+
+  & .image-column {
+    width: 6rem;
+  }
+
+  & .stock-column,
+  .price-column {
+    text-align: center;
+  }
+
+  & .options-column {
+    width: 7rem;
+    text-align: end;
+    padding-right: 1.8rem;
+  }
+}
+
+.viands-root-dashboard_table .dashboard_viand-item {
+  height: 4rem;
+  position: relative;
+
+  > .divider-line_container {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+
+    > .divider-line {
+      width: 93%;
+      justify-self: center;
+      border-color: rgba(204, 204, 204, 0.167);
+    }
+  }
+
+  > td {
+    font-size: 0.85rem;
+    padding-right: 2rem;
+  }
+
+  > .image-row {
+    padding-right: 0;
+  }
+
+  > .image-row > div {
+    width: 2.5rem;
+    height: 2.5rem;
+    justify-self: center;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  > .stock-row,
+  .price-row {
+    text-align: center;
+  }
+
+  > .options-row {
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-align: end;
+    padding-right: 1.8rem;
+
+    > .edit,
+    .delete {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    > .edit:hover,
+    .delete:hover {
+      transform: scale(1.05);
+    }
+
+    > .edit {
+      color: rgb(18, 114, 18);
+      margin-bottom: 0.15rem;
+    }
+
+    > .delete {
+      color: rgb(215, 59, 59);
+    }
+  }
+}

@@ -5,7 +5,7 @@ import Services from "../../services/components/Services";
 import Viands from "../../viands/components/Viands";
 import "./Home.css";
 
-function Home({}) {
+function Home() {
   return (
     <div className="home-container">
       <section className="presentation_container">

@@ -26,7 +26,6 @@ function useGetAllViands() {
 
         setViands(data);
       } catch (error) {
-        console.error(error);
         setViandsError(true);
       } finally {
         setViandsLoading(false);

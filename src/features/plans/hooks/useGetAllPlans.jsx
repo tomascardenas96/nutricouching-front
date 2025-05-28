@@ -62,7 +62,12 @@ function useGetAllPlans(user) {
     }
   };
 
-  return { plans, setPlans, plansLoading, plansError };
+  const flattedPlans = [
+    ...(plans?.freePlans || []),
+    ...(plans?.notPurchasedPlans || []),
+  ];
+
+  return { plans, setPlans, plansLoading, plansError, flattedPlans };
 }
 
 export default useGetAllPlans;

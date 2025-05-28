@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { LoginContext } from "./LoginContext";
+import { toast } from "sonner";
+import { HOST } from "../../../api/data";
+import { useAuthToken } from "../hooks/useAuthToken";
 
 function LoginProvider({ children }) {
   const [loginInput, setLoginInput] = useState({
@@ -7,6 +10,8 @@ function LoginProvider({ children }) {
     password: "",
   });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const { setAuthToken } = useAuthToken();
 
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
@@ -34,7 +39,9 @@ function LoginProvider({ children }) {
         setAuthToken(data.token); // Actualizamos el token en el estado
         return "Login exitoso!";
       },
-      error: "Email o contraseña incorrectos",
+      error: (error) => {
+        return "Email o contraseña incorrectos";
+      },
     });
   };
 

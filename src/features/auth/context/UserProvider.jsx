@@ -6,7 +6,9 @@ function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
   const [userError, setUserError] = useState(false);
-  const [authToken, setAuthToken] = useState("");
+  const [authToken, setAuthToken] = useState(() =>
+    localStorage.getItem("authToken")
+  );
 
   // Cuando se monta el componente, se inicializa el token de autenticación si existe en localStorage y se setea en el estado
   useEffect(() => {
@@ -56,7 +58,14 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, userLoading, userError, handleLogOut }}
+      value={{
+        user,
+        userLoading,
+        userError,
+        handleLogOut,
+        authToken,
+        setAuthToken,
+      }}
     >
       {children}
     </UserContext.Provider>

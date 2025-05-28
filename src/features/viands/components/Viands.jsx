@@ -3,9 +3,9 @@ import useGetAllViands from "../hooks/useGetAllViands";
 import NetworkError from "../../../common/components/NetworkError";
 import ViandCard from "./ViandCard";
 import "./Viands.css";
-import ViandsList from "./ViandsList";
 import CarouselLoader from "./loader/CarouselLoader";
 import ViandsListLoader from "./loader/ViandsListLoader";
+import ViandCarousel from "./ViandsCarousel";
 
 function Viands() {
   const [selectedViand, setSelectedViand] = useState({});
@@ -65,7 +65,7 @@ function Viands() {
           (viandsLoading ? (
             <ViandsListLoader />
           ) : (
-            <ViandsList
+            <ViandCarousel
               viands={viands}
               setLoaded={setLoaded}
               setSelectedIndex={setSelectedIndex}

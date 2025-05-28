@@ -4,17 +4,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import ForgotPasswordModal from "../ForgotPassword/ForgotPasswordModal";
 import "./LoginModal.css";
+import { useLoginForm } from "../../hooks/useLoginForm";
 
-function LoginModal({
-  handleLoginModal,
-  loginInput,
-  handleSubmitLogin,
-  handleChangeLogin,
-  handleRegisterModal,
-}) {
+function LoginModal({ handleLoginModal, handleRegisterModal }) {
   const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] =
     useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const { loginInput, handleSubmitLogin, handleChangeLogin } = useLoginForm();
 
   const login = (e) => {
     handleLoginModal();

@@ -1,0 +1,32 @@
+.item-menu-dashboard {
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.83rem;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  cursor: pointer;
+
+  > div {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  & .icon {
+    font-size: 1.1rem;
+  }
+
+  & .icon-user {
+    font-size: 0.85rem;
+  }
+
+  > .arrow-icon {
+    font-size: 0.8rem;
+  }
+}
+
+.selected-dashboard-item {
+  background-color: #db5a42;
+  color: white;
+}

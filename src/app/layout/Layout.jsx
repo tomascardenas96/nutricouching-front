@@ -10,11 +10,11 @@ import CartModal from "../../features/cart/components/CartModal";
 import { useActiveCart } from "../../features/cart/hooks/useActiveCart";
 import { useCartItems } from "../../features/cart/hooks/useCartItems";
 import AdminCmsModal from "../../features/professional/components/AdminCmsModal";
-import Footer from "./Footer/Footer";
-import Header from "./Header/Header";
+import Footer from "./footer/Footer";
+import Header from "./header/Header";
 import "./Layout.css";
 import NotificationPopUp from "./Notifications/NotificationPopUp";
-import SubMenu from "./Sub-menu/SubMenu";
+import SubMenu from "./subMenu/SubMenu";
 
 function Layout({ children }) {
   const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
@@ -127,9 +127,8 @@ function Layout({ children }) {
             <SubMenu />
           </section>
 
-          {children}
-
           <Toaster />
+          {children}
 
           <section className="footer_container">
             <Footer />
