@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { HOST } from "../../../../../api/data";
-import useGetAllPlans from "../../../../plans/hooks/useGetAllPlans";
+import { HOST } from "../../../../../../api/data";
+import useGetAllPlans from "../../../../../plans/hooks/useGetAllPlans";
 import "./PlansRootDashboard.css";
 
 function PlansRootDashboard() {
@@ -33,7 +32,9 @@ function PlansRootDashboard() {
             <td>{plan.title}</td>
             <td className="description-row">{plan.description}</td>
             <td className="short-row">{plan.shortDescription}</td>
-            <td className="price-row">$ {plan.price}</td>
+            <td className="price-row">
+              {plan.price === 0 ? "FREE" : `$ ${plan.price}`}
+            </td>
             <td className="options-row">
               <p className="edit">Editar</p>
               <p className="delete">Eliminar</p>

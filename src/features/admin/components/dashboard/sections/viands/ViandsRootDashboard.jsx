@@ -1,12 +1,12 @@
-import { HOST } from "../../../../../api/data";
-import useGetAllProducts from "../../../../products/hooks/useGetAllProducts";
-import "./ProductsRootDashboard.css";
+import { HOST } from "../../../../../../api/data";
+import useGetAllViands from "../../../../../viands/hooks/useGetAllViands";
+import "./ViandsRootDashboard.css";
 
-function ProductsRootDashboard() {
-  const { products } = useGetAllProducts();
+function ViandsRootDashboard() {
+  const { viands } = useGetAllViands();
 
   return (
-    <table className="products-root-dashboard_table">
+    <table className="viands-root-dashboard_table">
       <thead>
         <tr>
           <th className="image-column"></th>
@@ -18,22 +18,19 @@ function ProductsRootDashboard() {
       </thead>
 
       <tbody>
-        {products.map((product) => (
-          <tr
-            className="dashboard_product-item"
-            key={`product-${product.productId}`}
-          >
+        {viands.map((viand) => (
+          <tr className="dashboard_viand-item" key={`viand-${viand.viandId}`}>
             <td className="image-row">
               <div>
                 <img
-                  src={`${HOST}/uploads/products/${product.image}`}
-                  alt="imagen de productos dashboard root"
+                  src={`${HOST}/uploads/viands/${viand.image}`}
+                  alt="imagen de vianda dashboard root"
                 />
               </div>
             </td>
-            <td>{product.name}</td>
-            <td className="stock-row">{product.stock} u</td>
-            <td className="price-row">$ {product.price}</td>
+            <td>{viand.name}</td>
+            <td className="stock-row">{viand.stock} u</td>
+            <td className="price-row">$ {viand.price}</td>
             <td className="options-row">
               <p className="edit">Editar</p>
               <p className="delete">Eliminar</p>
@@ -48,4 +45,4 @@ function ProductsRootDashboard() {
   );
 }
 
-export default ProductsRootDashboard;
+export default ViandsRootDashboard;

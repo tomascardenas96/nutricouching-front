@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { HOST } from "../../../api/data";
+import { useAuthUser } from "../../auth/hooks/useAuthUser";
 
-function useGetBookingsByProfessional(professionalId) {
+function useGetBookingsByProfessional() {
+  const { user } = useAuthUser();
   const authToken = localStorage.getItem("authToken");
+  const professionalId = user?.professional?.professionalId;
 
   const [bookings, setBookings] = useState([]);
   const [loadingBookings, setLoadingBookings] = useState(false);

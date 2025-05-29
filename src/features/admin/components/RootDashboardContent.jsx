@@ -1,10 +1,10 @@
 import { useSelectMenuOption } from "../../dashboard/hooks/useSelectMenuOption";
-import PlansRootDashboard from "./dashboard/plans/PlansRootDashboard";
-import ProductsRootDashboard from "./dashboard/products/ProductsRootDashboard";
-import ProfessionalsRootDashboard from "./dashboard/professionals/ProfessionalsRootDashboard";
-import SpecialtiesRootDashboard from "./dashboard/specialties/SpecialtiesRootDashboard";
-import UsersRootDashboard from "./dashboard/users/UsersRootDashboard";
-import ViandsRootDashboard from "./dashboard/viands/ViandsRootDashboard";
+import PlansRootDashboard from "./dashboard/sections/plans/PlansRootDashboard";
+import ProductsRootDashboard from "./dashboard/sections/products/ProductsRootDashboard";
+import ProfessionalsRootDashboard from "./dashboard/sections/professionals/ProfessionalsRootDashboard";
+import SpecialtiesRootDashboard from "./dashboard/sections/specialties/SpecialtiesRootDashboard";
+import UsersRootDashboard from "./dashboard/sections/users/UsersRootDashboard";
+import ViandsRootDashboard from "./dashboard/sections/viands/ViandsRootDashboard";
 import "./RootDashboardContent.css";
 
 function RootDashboardContent() {

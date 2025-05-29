@@ -194,6 +194,7 @@ function Header({
                     ? "/professional"
                     : "/root"
                 }`}
+                target="_blank"
               >
                 DASHBOARD
               </a>

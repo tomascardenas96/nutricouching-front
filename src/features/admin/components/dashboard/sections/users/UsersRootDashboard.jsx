@@ -1,4 +1,4 @@
-import useGetAllUsers from "../../../../user/hooks/useGetAllUsers";
+import useGetAllUsers from "../../../../../user/hooks/useGetAllUsers";
 import "./UsersRootDashboard.css";
 
 function UsersRootDashboard() {

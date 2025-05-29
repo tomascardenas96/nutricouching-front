@@ -4,6 +4,8 @@ import RootDashboardContent from "../components/RootDashboardContent";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
+  document.title = "Dashboard usuario root - Cohesiva";
+
   return (
     <DashboardLayout>
       <DashboardContentLayout>

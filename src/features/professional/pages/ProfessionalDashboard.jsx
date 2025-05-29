@@ -3,6 +3,8 @@ import DashboardLayout from "../../dashboard/components/layout/DashboardLayout";
 import ProfessionalDashboardContent from "../components/dashboard/ProfessionalDashboardContent";
 
 function ProfessionalDashboard() {
+  document.title = "Dashboard usuario profesional - Cohesiva";
+
   return (
     <DashboardLayout>
       <DashboardContentLayout>

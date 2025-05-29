@@ -1,27 +1,27 @@
-import useGetAllSpecialties from "../../../../specialties/hooks/useGetAllSpecialties";
-import "./SpecialtiesRootDashboard.css";
+import useGetAllSpecialties from "../../../../../specialties/hooks/useGetAllSpecialties";
+import "./SpecialtiesProfessionalDashboard.css";
 
-function SpecialtiesRootDashboard() {
+function SpecialtiesProfessionalDashboard() {
   const { specialties } = useGetAllSpecialties();
 
   return (
-    <table className="specialties-root-dashboard_table">
+    <table className="users-root-dashboard_table">
       <thead>
         <tr>
-          <th>Descripcion</th>
-          <th className="service-column">Servicio</th>
+          <th>Especialidad</th>
+          <th className="lastname-column">Servicio</th>
           <th className="options-column">Opciones</th>
         </tr>
       </thead>
 
       <tbody>
-        {specialties?.map((specialty) => (
+        {specialties.map((specialty) => (
           <tr
-            className="dashboard_specialty-item"
+            className="dashboard_users-item"
             key={`specialty-${specialty.specialtyId}`}
           >
             <td>{specialty.name}</td>
-            <td className="service-row">{specialty.service.title}</td>
+            <td className="lastname-row">{specialty.service.title}</td>
             <td className="options-row">
               <p className="edit">Editar</p>
               <p className="delete">Eliminar</p>
@@ -36,4 +36,4 @@ function SpecialtiesRootDashboard() {
   );
 }
 
-export default SpecialtiesRootDashboard;
+export default SpecialtiesProfessionalDashboard;

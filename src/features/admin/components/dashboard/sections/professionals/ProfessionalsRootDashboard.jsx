@@ -1,5 +1,5 @@
-import { HOST } from "../../../../../api/data";
-import useGetProfessionals from "../../../../professional/hooks/useGetProfessionals";
+import { HOST } from "../../../../../../api/data";
+import useGetProfessionals from "../../../../../professional/hooks/useGetProfessionals";
 import "./ProfessionalsRootDashboard.css";
 
 function ProfessionalsRootDashboard() {
