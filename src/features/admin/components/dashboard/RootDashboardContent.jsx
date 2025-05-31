@@ -1,7 +1,7 @@
 import { useSelectMenuOption } from "../../../dashboard/hooks/useSelectMenuOption";
 import PlansRootDashboard from "../../../plans/components/dashboard/admin/PlansRootDashboard";
 import ProductsRootDashboard from "../../../products/components/dashboard/admin/ProductsRootDashboard";
-import ProfessionalsRootDashboard from "../../../products/components/dashboard/admin/ProductsRootDashboard";
+import ProfessionalsRootDashboard from "../../../professional/components/dashboard/admin/ProfessionalsRootDashboard";
 import SpecialtiesRootDashboard from "../../../specialties/components/dashboard/admin/SpecialtiesRootDashboard";
 import UsersRootDashboard from "../../../user/components/dashboard/admin/UsersRootDashboard";
 import ViandsRootDashboard from "../../../viands/components/dashboard/admin/ViandsRootDashboard";
