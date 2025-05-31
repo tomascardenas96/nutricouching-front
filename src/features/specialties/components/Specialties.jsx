@@ -1,41 +1,41 @@
-import { useState } from "react";
-import { createPortal } from "react-dom";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { RiApps2AddLine } from "react-icons/ri";
-import ConfirmationModal from "../../../common/components/ConfirmationModal";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
-import useUnlinkSpecialtyOfProfessional from "../../professional/hooks/useUnlinkSpecialtyOfProfessional";
-import useGetAllSpecialtiesByProfessional from "../../specialties/hooks/useGetAllSpecialtiesByProfessional";
-import "./Specialties.css";
-import AddSpecialtyModal from "./modal/AddSpecialtyModal";
+// import { useState } from "react";
+// import { createPortal } from "react-dom";
+// import { FaRegTrashAlt } from "react-icons/fa";
+// import { RiApps2AddLine } from "react-icons/ri";
+// import ConfirmationModal from "../../../common/components/ConfirmationModal";
+// import { useAuthUser } from "../../auth/hooks/useAuthUser";
+// import useUnlinkSpecialtyOfProfessional from "../../professional/hooks/useUnlinkSpecialtyOfProfessional";
+// import useGetAllSpecialtiesByProfessional from "../../specialties/hooks/useGetAllSpecialtiesByProfessional";
+// import "./Specialties.css";
+// import AddSpecialtyModal from "./modal/AddSpecialtyModal";
 
 function Specialties() {
-  const { user } = useAuthUser();
+  // const { user } = useAuthUser();
 
-  const [isAddSpecialtyModalOpen, setIsAddSpecialtyModalOpen] = useState(false);
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [selectedSpecialty, setSelectedSpecialty] = useState(null);
+  // const [isAddSpecialtyModalOpen, setIsAddSpecialtyModalOpen] = useState(false);
+  // const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  // const [selectedSpecialty, setSelectedSpecialty] = useState(null);
 
-  const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
-    useGetAllSpecialtiesByProfessional(user.professional.professionalId);
+  // const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
+  //   useGetAllSpecialtiesByProfessional(user.professional.professionalId);
 
-  const { handleUnlinkSpecialtyOfProfessional } =
-    useUnlinkSpecialtyOfProfessional(setSpecialties);
+  // const { handleUnlinkSpecialtyOfProfessional } =
+  //   useUnlinkSpecialtyOfProfessional(setSpecialties);
 
-  const handleOpenCloseModal = () => {
-    setIsAddSpecialtyModalOpen(!isAddSpecialtyModalOpen);
-  };
+  // const handleOpenCloseModal = () => {
+  //   setIsAddSpecialtyModalOpen(!isAddSpecialtyModalOpen);
+  // };
 
-  const handleConfirmationDeleteModal = (specialty) => {
-    if (!!specialty) {
-      setSelectedSpecialty(specialty);
-    }
-    setIsConfirmationModalOpen(!isConfirmationModalOpen);
-  };
+  // const handleConfirmationDeleteModal = (specialty) => {
+  //   if (!!specialty) {
+  //     setSelectedSpecialty(specialty);
+  //   }
+  //   setIsConfirmationModalOpen(!isConfirmationModalOpen);
+  // };
 
   return (
     <div className="admin-specialties_container">
-      {!!!specialties.length ? (
+      {/* {!!!specialties.length ? (
         <div className="no-specialties">
           <h1>No hay especialidades asociadas.</h1>
         </div>
@@ -98,7 +98,7 @@ function Specialties() {
             setSpecialties={setSpecialties}
           />,
           document.body
-        )}
+        )} */}
     </div>
   );
 }

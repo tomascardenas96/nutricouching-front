@@ -1,6 +1,6 @@
-import DashboardContentLayout from "../../dashboard/components/layout/DashboardContentLayout";
-import DashboardLayout from "../../dashboard/components/layout/DashboardLayout";
-import ProfessionalDashboardContent from "../components/dashboard/ProfessionalDashboardContent";
+import DashboardContentLayout from "../../dashboard/layout/DashboardContentLayout";
+import DashboardLayout from "../../dashboard/layout/DashboardLayout";
+import ProfessionalDashboardContent from "../../professional/components/dashboard/admin/ProfessionalDashboardContent";
 
 function ProfessionalDashboard() {
   document.title = "Dashboard usuario profesional - Cohesiva";

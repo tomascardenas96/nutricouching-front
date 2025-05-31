@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HOST } from "../../../api/data";
 
-function useGetAllProducts(itemsPerPage) {
+function useGetAllProducts(itemsPerPage, setSelectedProduct) {
   const [products, setProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(true);
   const [productsError, setProductsError] = useState(false);
@@ -58,8 +58,9 @@ function useGetAllProducts(itemsPerPage) {
     setIsAddProductModalOpen(!isAddProductModalOpen);
   };
 
-  const handleModifyProductModal = () => {
+  const handleModifyProductModal = (product) => {
     setIsModifyProductModalOpen(!isModifyProductModalOpen);
+    setSelectedProduct(product);
   };
 
   return {

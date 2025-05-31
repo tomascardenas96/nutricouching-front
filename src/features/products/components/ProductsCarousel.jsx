@@ -68,10 +68,7 @@ function ProductsCarousel() {
         {!productsLoading &&
           !productsError &&
           currentProducts?.map((product) => (
-            <ProductCard
-              key={product.productId}
-              product={product}
-            />
+            <ProductCard key={product.productId} product={product} />
           ))}
 
         {productsError && (

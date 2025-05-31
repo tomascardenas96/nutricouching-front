@@ -1,6 +1,6 @@
-import DashboardContentLayout from "../../dashboard/components/layout/DashboardContentLayout";
-import DashboardLayout from "../../dashboard/components/layout/DashboardLayout";
-import RootDashboardContent from "../components/RootDashboardContent";
+import DashboardContentLayout from "../../dashboard/layout/DashboardContentLayout";
+import DashboardLayout from "../../dashboard/layout/DashboardLayout";
+import RootDashboardContent from "../components/dashboard/RootDashboardContent";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {

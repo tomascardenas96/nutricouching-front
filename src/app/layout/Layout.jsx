@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { IoIosArrowBack } from "react-icons/io";
 import { io } from "socket.io-client";
 import { toast, Toaster } from "sonner";
 import { WEBSOCKET_HOST } from "../../api/data";
-import RootCmsModal from "../../features/admin/components/RootCmsModal";
 import { useAuthUser } from "../../features/auth/hooks/useAuthUser";
 import CartModal from "../../features/cart/components/CartModal";
 import { useActiveCart } from "../../features/cart/hooks/useActiveCart";
@@ -98,14 +96,12 @@ function Layout({ children }) {
 
       <section className="main-background">
         {/* Carrito de compras */}
-        {isCartModalOpen &&
-          createPortal(
-            <CartModal
-              handleCartModal={handleCartModal}
-              activeCart={activeCart}
-            />,
-            document.body
-          )}
+        {isCartModalOpen && (
+          <CartModal
+            handleCartModal={handleCartModal}
+            activeCart={activeCart}
+          />
+        )}
 
         {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
         <div className="main-screen_container">
@@ -127,47 +123,30 @@ function Layout({ children }) {
             <SubMenu />
           </section>
 
-          <Toaster />
           {children}
+          <Toaster
+            toastOptions={{
+              style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
+            }}
+          />
 
           <section className="footer_container">
             <Footer />
           </section>
         </div>
-      </section>
 
-      {(user?.professional?.role === "root" ||
-        user?.professional?.role === "admin") && (
-        <section className="admin-cms-flap_container">
-          <p onClick={handleAdminCmsModal}>ADMIN</p>
-        </section>
-      )}
-
-      {user?.professional?.role === "root" && (
-        <>
-          {!isCmsModalOpen && (
-            <section className="cms-flap_container" onClick={handleCmsModal}>
-              <IoIosArrowBack />
-            </section>
-          )}
-
-          {isCmsModalOpen && <RootCmsModal handleCmsModal={handleCmsModal} />}
-        </>
-      )}
-
-      {isAdminCmsOpen &&
-        createPortal(
-          <AdminCmsModal handleAdminCmsModal={handleAdminCmsModal} />,
-          document.body
-        )}
-
-      {user &&
-        createPortal(
+        {user && (
           <NotificationPopUp
             isNotificationsModalOpen={isNotificationsModalOpen}
             setIsNotificationsModalOpen={setIsNotificationsModalOpen}
             user={user}
-          />,
+          />
+        )}
+      </section>
+
+      {isAdminCmsOpen &&
+        createPortal(
+          <AdminCmsModal handleAdminCmsModal={handleAdminCmsModal} />,
           document.body
         )}
     </main>

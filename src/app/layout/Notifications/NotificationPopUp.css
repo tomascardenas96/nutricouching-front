@@ -39,8 +39,7 @@
       right: 1rem;
       display: grid;
       place-content: center;
-      padding-bottom: .05rem;
-
+      padding-bottom: 0.05rem;
 
       & p {
         font-size: 0.7rem;
