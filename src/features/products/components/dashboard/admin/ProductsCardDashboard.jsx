@@ -1,7 +1,17 @@
+import { createPortal } from "react-dom";
 import { HOST } from "../../../../../api/data";
+import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
+import useDeleteProduct from "../../../hooks/useDeleteProduct";
 import "./ProductsCardDashboard.css";
 
-function ProductsCardDashboard({ product, handleModifyProductModal }) {
+function ProductsCardDashboard({
+  product,
+  setProducts,
+  handleModifyProductModal,
+}) {
+  const { deleteProduct, closeModal, openModal, isModalOpen } =
+    useDeleteProduct(setProducts);
+
   return (
     <>
       <tr
@@ -23,12 +33,24 @@ function ProductsCardDashboard({ product, handleModifyProductModal }) {
           <p className="edit" onClick={() => handleModifyProductModal(product)}>
             Editar
           </p>
-          <p className="delete">Eliminar</p>
+          <p className="delete" onClick={() => openModal(product.productId)}>
+            Eliminar
+          </p>
         </td>
         <div className="divider-line_container">
           <hr className="divider-line" />
         </div>
       </tr>
+
+      {isModalOpen &&
+        createPortal(
+          <ConfirmationModal
+            onConfirm={deleteProduct}
+            onClose={closeModal}
+            message="¿Desea eliminar este producto?"
+          />,
+          document.getElementById("root")
+        )}
     </>
   );
 }

@@ -30,6 +30,7 @@ function ProductsRootDashboard() {
         <tbody>
           <ProductsListDashboard
             products={products}
+            setProducts={setProducts}
             handleModifyProductModal={handleModifyProductModal}
           />
         </tbody>

@@ -1,0 +1,27 @@
+.modal-window_background {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--background-shadow-color);
+}
+
+.modal-window_background .modal-window {
+  display: grid;
+  grid-template-rows: 4rem 1fr;
+  min-width: 20rem;
+  min-height: 30rem;
+  background-color: var(--modal-background);
+  border-radius: var(--modal-radius);
+}
+
+.modal-window .modal-window_header {
+  display: grid;
+  grid-template-columns: 1fr 4rem;
+  justify-items: center;
+  align-items: center;
+}

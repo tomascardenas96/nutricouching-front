@@ -32,8 +32,9 @@ function useDeleteProduct(setProducts) {
       );
 
       if (!response.ok) {
+        console.log("aca1")
         const errorData = await response.json();
-        throw new Error(errorData.message || "Error creating product");
+        throw new Error(errorData.message || "Error deleting product"); 
       }
 
       return await response.json();
@@ -42,13 +43,17 @@ function useDeleteProduct(setProducts) {
     toast.promise(deleteProductPromise(), {
       loading: "Cargando...",
       success: () => {
+        console.log("aca2")
         setProducts((prev) =>
           prev.filter((product) => product.productId !== selectedProductId)
         );
         setIsModalOpen(false);
         return "Producto eliminado";
       },
-      error: "Error eliminando el producto",
+      error: () => {
+        console.log("aca");
+        return "Error eliminando el producto";
+      },
     });
   };
 

@@ -28,7 +28,7 @@ function useDeleteViand(setViands) {
         },
       });
 
-      const data = response.json();
+      const data = await response.json();
 
       return data;
     };
@@ -45,6 +45,7 @@ function useDeleteViand(setViands) {
       error: "Error al eliminar vianda",
     });
   };
+  
   return {
     isDeleteViandModalOpen,
     openDeleteViandModal,

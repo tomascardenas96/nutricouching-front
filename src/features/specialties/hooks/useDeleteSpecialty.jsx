@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 
-function useDeleteSpecialty(setSpecialties) {
+function useDeleteSpecialty(setSpecialties, handleCloseDeleteModal) {
   const authToken = localStorage.getItem("authToken");
 
   const handleDeleteSpecialty = async (specialtyId) => {
@@ -23,6 +23,7 @@ function useDeleteSpecialty(setSpecialties) {
 
     toast.promise(deleteSpecialtyPromise(), {
       success: (data) => {
+        handleCloseDeleteModal();
         setSpecialties((prev) =>
           prev.filter((specialty) => specialty.specialtyId !== data.id)
         );
