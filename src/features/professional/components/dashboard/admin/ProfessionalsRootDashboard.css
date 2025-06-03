@@ -35,10 +35,11 @@
     width: 100%;
     bottom: 0;
     left: 0;
+    display: flex;
+    justify-content: center;
 
     > .divider-line {
-      width: 93%;
-      justify-self: center;
+      width: 100%;
       border-color: rgba(204, 204, 204, 0.167);
     }
   }

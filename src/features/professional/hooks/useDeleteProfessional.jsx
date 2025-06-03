@@ -1,28 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 
-function useDeleteProfessional(setProfessionals) {
-  const authToken = localStorage.getItem("authToken");
-
-  const [selectedProfessionalId, setSelectedProductId] = useState(null);
-  const [isDeleteProfessionalModalOpen, setIsDeleteProfessionalModalOpen] =
-    useState(false);
-
-  const openDeleteProfessionalModal = (professionalId) => {
-    setSelectedProductId(professionalId);
-    setIsDeleteProfessionalModalOpen(true);
-  };
-
-  const closeDeleteProfessionalModal = () => {
-    setSelectedProductId(null);
-    setIsDeleteProfessionalModalOpen(false);
-  };
-
+function useDeleteProfessional(
+  setProfessionals,
+  selectedProfessional,
+  handleCloseDeleteModal
+) {
   const handleDeleteProfessional = () => {
+    const authToken = localStorage.getItem("authToken");
     const deleteProfessional = async () => {
       const response = await fetch(
-        `${HOST}/professional/delete/${selectedProfessionalId}`,
+        `${HOST}/professional/delete/${selectedProfessional.professionalId}`,
         {
           method: "DELETE",
           headers: {
@@ -32,20 +21,21 @@ function useDeleteProfessional(setProfessionals) {
         }
       );
 
-      const data = await response.json();
-
       if (!response.ok) {
-        console.error(data);
-        throw new Error(data.message);
+        throw new Error();
       }
 
-      return data;
+      return await response.json();
     };
 
     toast.promise(deleteProfessional(), {
       success: () => {
+        handleCloseDeleteModal();
         setProfessionals((prev) =>
-          prev.filter((prof) => prof.professionalId !== selectedProfessionalId)
+          prev.filter(
+            (prof) =>
+              prof.professionalId !== selectedProfessional.professionalId
+          )
         );
         setIsDeleteProfessionalModalOpen(false);
         return "Profesional eliminado";
@@ -56,10 +46,7 @@ function useDeleteProfessional(setProfessionals) {
   };
 
   return {
-    openDeleteProfessionalModal,
-    closeDeleteProfessionalModal,
     handleDeleteProfessional,
-    isDeleteProfessionalModalOpen,
   };
 }
 
