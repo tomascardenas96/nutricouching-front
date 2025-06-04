@@ -42,7 +42,7 @@ function Products() {
           </h1>
         </div>
       </div>
-      
+
       <div className="products-container">
         <ProductsCarousel />
       </div>

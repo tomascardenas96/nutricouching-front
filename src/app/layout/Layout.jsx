@@ -104,36 +104,34 @@ function Layout({ children }) {
         )}
 
         {/* Este div contiene la pantalla principal para que su height sea del 100svh */}
-        <div className="main-screen_container">
-          <section className="header_container">
-            <Header
-              handleCartModal={handleCartModal}
-              activeCart={activeCart}
-              setActiveCart={setActiveCart}
-              setIsNotificationsModalOpen={setIsNotificationsModalOpen}
-              isUpdateUserModalOpen={isUpdateUserModalOpen}
-              setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
-              handleCmsModal={handleCmsModal}
-              handleAdminCmsModal={handleAdminCmsModal}
-              handleOpenUpdateUserModal={handleOpenUpdateUserModal}
-            />
-          </section>
-
-          <section className="sub-menu_container">
-            <SubMenu />
-          </section>
-
-          {children}
-          <Toaster
-            toastOptions={{
-              style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
-            }}
+        <section className="header_container">
+          <Header
+            handleCartModal={handleCartModal}
+            activeCart={activeCart}
+            setActiveCart={setActiveCart}
+            setIsNotificationsModalOpen={setIsNotificationsModalOpen}
+            isUpdateUserModalOpen={isUpdateUserModalOpen}
+            setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
+            handleCmsModal={handleCmsModal}
+            handleAdminCmsModal={handleAdminCmsModal}
+            handleOpenUpdateUserModal={handleOpenUpdateUserModal}
           />
+        </section>
 
-          <section className="footer_container">
-            <Footer />
-          </section>
-        </div>
+        <section className="sub-menu_container">
+          <SubMenu />
+        </section>
+
+        {children}
+        <Toaster
+          toastOptions={{
+            style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
+          }}
+        />
+
+        <section className="footer_container">
+          <Footer />
+        </section>
 
         {user && (
           <NotificationPopUp

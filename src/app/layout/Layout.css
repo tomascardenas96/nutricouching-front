@@ -1,14 +1,3 @@
-main {
-  position: fixed;
-  overflow-x: hidden;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100svh;
-  display: grid;
-  justify-content: center;
-}
-
 /* Fondo con blur */
 .blur-background {
   position: fixed;
@@ -34,74 +23,9 @@ main {
   z-index: 1;
 }
 
-.main-screen_container {
-  /* position: relative; */
-    
-}
-
-.header_container {
-  width: 100%;
-}
-
 .sub-menu_container {
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-}
-
-.cms-flap_container {
-  position: fixed;
-  top: 13rem;
-  right: 12px;
-  width: 2rem;
-  height: 4rem;
-  z-index: 2000;
-  border-radius: 0.5rem 0 0 0.5rem;
-  background-color: #fbfbfb;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.055);
-  cursor: pointer;
-  display: grid;
-  place-content: center;
-  font-size: 1rem;
-  color: var(--primary-details-color);
-  transition: all 0.3s ease;
-}
-
-.cms-flap_container:hover {
-  font-size: 1.2rem;
-  background-color: #fbfbfb;
-  transform: scale(1.1);
-}
-
-.admin-cms-flap_container {
-  width: 2rem;
-  height: 8rem;
-  position: fixed;
-  right: 12px;
-  top: 4.8rem;
-  cursor: pointer;
-  border-radius: 0.5rem 0 0 0.5rem;
-  background-color: #fbfbfb;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.055);
-  z-index: 2000;
-
-  & p {
-    position: fixed;
-    right: 12px;
-    top: 4.8rem;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    width: 1.7rem;
-    height: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--primary-font);
-    font-size: 0.7rem;
-    letter-spacing: 0.15rem;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.641);
-    padding-right: 0.15rem;
-  }
 }
 
 /* Media queries */
@@ -112,29 +36,19 @@ main {
 }
 
 @media screen and (max-width: 1200px) {
-  .main-screen_container {
+  /* .main-screen_container {
     height: max-content;
     display: grid;
     grid-template-rows: 3.4rem 0.95fr 4fr;
-  }
+  } */
 
   .sub-menu_container {
     display: none;
   }
 }
 
-@media screen and (max-width: 1050px) {
-  .cms-flap_container {
-    display: none;
-  }
-
-  .admin-cms-flap_container {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 890px) {
-  .main-screen_container {
+  /* .main-screen_container {
     grid-template-rows: 3.4rem 0.85fr 4fr;
-  }
+  } */
 }

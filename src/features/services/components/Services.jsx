@@ -50,13 +50,6 @@ function Services() {
 
   return (
     <div className="services-menu">
-      <div className="title">
-        <h1>
-          Nuestros servicios disponibles, donde podrás obtener un asesoramiento
-          completo.
-        </h1>
-      </div>
-      
       <div className="services-list_container">
         {servicesLoading &&
           [...Array(4)].map((_, index) => (
