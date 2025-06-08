@@ -1,0 +1,45 @@
+.cover-photo {
+  height: 17rem;
+  border-radius: 0 0 0.1rem 0.1rem;
+  position: relative;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 0.1rem 0.1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  > .upload-cover-photo {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.08),
+      1px 1px 5px 2px rgba(0, 0, 0, 0.185);
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+    height: 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.105);
+    display: flex;
+    align-items: center;
+    padding: 0 0.8rem;
+    gap: 0.3rem;
+    cursor: pointer;
+
+    > .camera-icon {
+      font-size: 1.2rem;
+    }
+
+    > p {
+      font-size: 0.83rem;
+      font-weight: 500;
+    }
+
+    > input {
+      display: none;
+    }
+  }
+}

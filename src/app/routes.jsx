@@ -5,6 +5,7 @@ import Home from "../features/home/pages/Home";
 import ProfessionalDashboard from "../features/professional/pages/ProfessionalDashboard";
 import Layout from "./layout/Layout";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Profile from "../features/profile/pages/Profile";
 
 function LayoutWrapper() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Routes>
         <Route element={<LayoutWrapper />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile/:slug" element={<Profile />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 

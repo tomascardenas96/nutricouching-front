@@ -1,0 +1,50 @@
+.professional-profile > .professional-profile_info {
+  padding-left: 18.7rem;
+  height: 7.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  > h1 {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: -0.2px;
+
+    > span {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-content: center;
+      font-size: 1rem;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.112);
+      cursor: pointer;
+    }
+  }
+
+  > p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  > div {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    color: rgb(130, 130, 130);
+
+    > span {
+      font-size: 0.75rem;
+      display: flex;
+      gap: 0.2rem;
+      align-items: center;
+    }
+  }
+}
