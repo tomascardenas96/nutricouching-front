@@ -75,6 +75,20 @@
 
     > div.filter {
       position: relative;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      & .add-icon {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: rgb(3, 148, 3);
+        transition: transform .3s ease;
+      }
+
+      & .add-icon:hover {
+        transform: rotate(90deg);
+      }
 
       > input {
         height: 2.1rem;
@@ -89,7 +103,7 @@
       > .search-icon {
         position: absolute;
         height: 100%;
-        left: 0.7rem;
+        left: 2.5rem;
         padding-bottom: 0.1rem;
         color: rgba(0, 0, 0, 0.658);
       }

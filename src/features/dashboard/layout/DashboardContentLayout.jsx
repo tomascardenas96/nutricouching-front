@@ -3,6 +3,7 @@ import { HOST } from "../../../api/data";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 import { useSelectMenuOption } from "../hooks/useSelectMenuOption";
 import "./DashboardContentLayout.css";
+import { GoPlusCircle } from "react-icons/go";
 
 function DashboardContentLayout({ children }) {
   const { user } = useAuthUser();
@@ -33,6 +34,9 @@ function DashboardContentLayout({ children }) {
 
             <div className="filter-section">
               <div className="filter">
+                <div>
+                  <GoPlusCircle className="add-icon" />
+                </div>
                 <input type="search" placeholder="Filtrar por nombre" />
                 <IoSearchOutline className="search-icon" />
               </div>

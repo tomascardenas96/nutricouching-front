@@ -18,7 +18,10 @@ function SpecialtiesRootDashboard() {
     handleCloseDeleteModal,
     isDeleteSpecialtyModalOpen,
   } = useSpecialtyModals(selectSpecialty);
-  const { handleDeleteSpecialty } = useDeleteSpecialty(setSpecialties, handleCloseDeleteModal);
+  const { handleDeleteSpecialty } = useDeleteSpecialty(
+    setSpecialties,
+    handleCloseDeleteModal
+  );
 
   return (
     <>

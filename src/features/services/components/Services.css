@@ -2,7 +2,7 @@
 
 .services-menu {
   display: grid;
-  grid-template-rows: max-content 1fr;
+  /* grid-template-rows: max-content 1fr; */
   margin-top: 1.5rem;
   height: 100%;
   gap: 2rem;
@@ -41,8 +41,8 @@
   justify-content: center;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.3rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
   place-content: center;
   padding-bottom: 2rem;
 

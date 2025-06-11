@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   color: var(--primary-font-color);
+  z-index: 1;
 }
 
 .more-info-plan_background > .more-info-plan_modal {

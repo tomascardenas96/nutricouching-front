@@ -104,7 +104,7 @@ function Services() {
             setIsRequestReservationOpen={setIsRequestReservationOpen}
             isRequestReservationOpen={isRequestReservationOpen}
           />,
-          document.body
+          document.getElementById("root")
         )}
 
       {selectedService?.type === "plan_download" &&
@@ -118,7 +118,7 @@ function Services() {
             paymentLoading={paymentLoading}
             setSelectedService={setSelectedService}
           />,
-          document.body
+          document.getElementById("root")
         )}
     </div>
   );

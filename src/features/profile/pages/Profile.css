@@ -1,3 +1,9 @@
+.no-user-profile {
+  height: calc(100vh - 4.8rem);
+  display: grid;
+  place-content: center;
+}
+
 .profile-container {
   min-height: 100vh;
 }

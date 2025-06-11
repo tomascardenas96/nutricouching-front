@@ -11,11 +11,12 @@
 }
 
 .services_container {
-  padding: 0 14rem;
+  padding: 0 17.5rem;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin: 2rem 0;
 }
 
 .presentation_container .decoration-line {

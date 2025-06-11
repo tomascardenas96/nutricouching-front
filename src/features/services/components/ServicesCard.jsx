@@ -17,9 +17,9 @@ function ServiceCard({
     if (type === "schedule") handleOpenServiceModal();
     if (type === "plan_download") handleOpenSmartPlanModal();
   };
+
   return (
     <div
-      // services-card_container
       className={`services-card_container ${!isEven && "right-service-cards"}`}
     >
       <div
@@ -34,17 +34,8 @@ function ServiceCard({
         />
       </div>
 
-      <div
-        className="card-description"
-        style={{
-          gridColumn: !isEven && "1 / 2",
-          gridRow: !isEven && "1 / 2",
-          paddingLeft: !isEven && ".5rem",
-          paddingRight: isEven && ".5rem",
-        }}
-      >
+      <div className="card-description">
         <h1>{title?.toUpperCase()}</h1>
-        <p>{description}</p>
         <div className="know-more">
           <div
             onClick={handleSelectServiceAndOpenModal}
