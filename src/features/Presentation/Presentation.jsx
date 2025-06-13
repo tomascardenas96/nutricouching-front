@@ -1,12 +1,14 @@
-import "./Presentation.css";
-import { CiSearch } from "react-icons/ci";
 import { CiApple } from "react-icons/ci";
-import { PiBrainLight } from "react-icons/pi";
 import { GiStrongMan } from "react-icons/gi";
-import { TbMessage2Heart } from "react-icons/tb";
-import { TbBrandCouchdb } from "react-icons/tb";
+import { PiBrainLight } from "react-icons/pi";
+import { TbBrandCouchdb, TbMessage2Heart } from "react-icons/tb";
+import SearchInput from "../presentation/SearchInput";
+import "./Presentation.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function Presentation() {
+  const queryClient = new QueryClient();
+
   return (
     <section className="presentation">
       <div className="background-image">
@@ -16,12 +18,11 @@ function Presentation() {
             Conecta con expertos en salud y bienestar para mejorar tu calidad de
             vida
           </p>
-          <div className="search-input">
-            <input type="text" placeholder="¿Que estás buscando?" />
-            <div className="search-icon">
-              <CiSearch />
-            </div>
-          </div>
+          <form className="search-input">
+            <QueryClientProvider client={queryClient}>
+              <SearchInput />
+            </QueryClientProvider>
+          </form>
           <div className="professional-items">
             <p>
               <CiApple />

@@ -1,0 +1,35 @@
+.result-card {
+  list-style: none;
+  height: 3rem;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr max-content;
+  cursor: pointer;
+}
+
+.result-card .result-card_image {
+  display: grid;
+  place-content: center;
+  > img {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 0.2rem;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.result-card .result-card_info {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  > div {
+    display: flex;
+
+    > span {
+      font-size: 0.72rem;
+      color: rgb(104, 104, 104);
+    }
+  }
+}
