@@ -1,7 +1,7 @@
-import DisciplineCard from "./DisciplineCard";
-import "./Disciplines.css";
+import CategoryCard from "./CategoryCard";
+import "./Categories.css";
 
-function Disciplines() {
+function Categories() {
   const disciplines = [
     { name: "Nutricion", icon: "nutricion" },
     { name: "Mindfulness", icon: "mindfulness" },
@@ -14,7 +14,7 @@ function Disciplines() {
     <section className="disciplines-home">
       <div>
         {disciplines?.map((discipline) => (
-          <DisciplineCard
+          <CategoryCard
             name={discipline.name}
             key={`discipline-${discipline.name}`}
           />
@@ -24,4 +24,4 @@ function Disciplines() {
   );
 }
 
-export default Disciplines;
+export default Categories;

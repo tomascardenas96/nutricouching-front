@@ -1,0 +1,124 @@
+.professionals-filter-page {
+  min-height: calc(100vh - 4.9rem);
+  display: grid;
+  grid-template-columns: 22rem 1fr;
+  padding: 1.9rem 2rem 1.9rem 0.5rem;
+}
+
+.professionals-filter-page > .filter-page_left {
+  display: flex;
+  justify-content: center;
+
+  > form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}
+
+.path-info {
+  font-size: 0.8rem;
+  color: rgb(104, 104, 104);
+
+  > span {
+    font-weight: 500;
+    color: black;
+  }
+}
+
+.filter-page_left .title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+
+  > h1 {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  > span {
+    font-size: 0.7rem;
+    color: rgb(104, 104, 104);
+  }
+}
+
+.filter-page_left span.disabled-delete-btn {
+  color: rgb(116, 116, 116);
+  cursor: default;
+}
+
+.filter-page_left .block-container {
+  padding: 0 1rem;
+}
+
+.filter-page_left h2 {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  > span {
+    font-size: 0.6rem;
+    font-weight: lighter;
+    color: rgb(170, 32, 32);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.filter-page_left h3 {
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.filter-page_left label {
+  font-size: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  > span {
+    font-size: 0.6rem;
+    color: rgb(75, 75, 75);
+  }
+}
+
+.filter-page_left .name-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+  padding-bottom: 0.4rem;
+
+  > input {
+    height: 1.6rem;
+    width: 90%;
+    font-size: 0.8rem;
+    padding-left: 1.8rem;
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 0.2rem;
+  }
+
+  > .search-icon {
+    position: absolute;
+    left: 1.6rem;
+    bottom: 0.47rem;
+    color: rgb(95, 95, 95);
+  }
+}
+
+.filter-page_left .option-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+
+  > .input-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

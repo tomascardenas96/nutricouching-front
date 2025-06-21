@@ -5,6 +5,14 @@ import "./Profile.css";
 function Profile() {
   const { professionalProfile, profileLoading, profileError } = useGetProfile();
 
+  if (profileLoading) {
+    return (
+      <div className="no-user-profile">
+        <h1>Cargando...</h1>
+      </div>
+    );
+  }
+
   if (Object.keys(professionalProfile).length === 0)
     return (
       <div className="no-user-profile">

@@ -1,0 +1,5 @@
+.modify-specialty_modal {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}

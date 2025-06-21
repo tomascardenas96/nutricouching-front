@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { HOST } from "../../../api/data";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function useFilterProfessionals() {
-  const [searchTerm, setSearchTerm] = useState("");
+function useFilterProfessionals(searchTerm, setSearchTerm) {
   const [debouncedTerm, setDebouncedTerm] = useState("");
+  const navigate = useNavigate();
 
   const searchProfessionals = async (searchTerm) => {
     const res = await fetch(
@@ -32,12 +33,23 @@ function useFilterProfessionals() {
     setSearchTerm(value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.type === "click") {
+      event.preventDefault();
+      if (searchTerm.trim()) {
+        navigate(
+          `/filter/professionals?name=${encodeURIComponent(searchTerm)}`
+        );
+      }
+    }
+  };
+
   return {
     data,
     isFetching,
     isError,
     handleChangeFilterProfessionals,
-    searchTerm,
+    handleKeyDown,
   };
 }
 

@@ -7,7 +7,7 @@ import "./DashboardContentLayout.css";
 
 function DashboardContentLayout({ children }) {
   const { user } = useAuthUser();
-  const { selectedOption, selectOptionDashboardMenu } = useSelectMenuOption();
+  const { selectedOption } = useSelectMenuOption();
 
   return (
     <div className="admin-dashboard">
@@ -18,7 +18,7 @@ function DashboardContentLayout({ children }) {
             {user?.name} {user?.lastname}
           </span>
           <img
-            src={`${HOST}/uploads/professionals/${user?.professional?.image}`}
+            src={`${HOST}/uploads/professionals/profile/${user?.professional?.profile?.picture}`}
             alt="Foto de perfil de google en el dashboard de Cohesiva"
           />
         </div>

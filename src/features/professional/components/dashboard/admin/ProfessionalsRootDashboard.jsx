@@ -13,6 +13,7 @@ function ProfessionalsRootDashboard() {
   const { professionals, setProfessionals } = useGetProfessionals();
   const { selectedProfessional, handleSelectProfessional } =
     useSelectProfessional();
+
   const {
     isModifyProfessionalModalOpen,
     handleOpenModifyModal,
@@ -21,18 +22,22 @@ function ProfessionalsRootDashboard() {
     handleOpenDeleteModal,
     handleCloseDeleteModal,
   } = useProfessionalModals(handleSelectProfessional);
+
   const { handleDeleteProfessional } = useDeleteProfessional(
     setProfessionals,
     selectedProfessional,
     handleCloseDeleteModal
   );
+
   const {
     handleChangeModifyProfessional,
     handleSubmitModifyProfessional,
     modifyProfessionalInputs,
-    handleChangeSelectedPicture,
-    imageSrc,
-  } = useModifyProfessional(selectedProfessional, setProfessionals, handleCloseModifyModal);
+  } = useModifyProfessional(
+    selectedProfessional,
+    setProfessionals,
+    handleCloseModifyModal
+  );
 
   return (
     <>
@@ -57,7 +62,7 @@ function ProfessionalsRootDashboard() {
               <td className="image-row">
                 <div>
                   <img
-                    src={`${HOST}/uploads/professionals/${professional.image}`}
+                    src={`${HOST}/uploads/professionals/profile/${professional.profile.picture}`}
                     alt="fotos de los profesionales en el dashboard root"
                   />
                 </div>
@@ -95,8 +100,6 @@ function ProfessionalsRootDashboard() {
             handleSubmitModifyProfessional={handleSubmitModifyProfessional}
             modifyProfessionalInputs={modifyProfessionalInputs}
             handleCloseModifyModal={handleCloseModifyModal}
-            handleChangeSelectedPicture={handleChangeSelectedPicture}
-            imageSrc={imageSrc}
           />,
           document.getElementById("root")
         )}

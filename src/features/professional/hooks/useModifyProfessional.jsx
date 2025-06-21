@@ -11,8 +11,6 @@ function useModifyProfessional(
     phone: "",
     role: "",
   });
-  const [file, setFile] = useState(null);
-  const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
     if (selectedProfessional) {
@@ -21,9 +19,6 @@ function useModifyProfessional(
         phone: selectedProfessional.phone || "",
         role: selectedProfessional.role || "",
       });
-      setImageSrc(
-        `${HOST}/uploads/professionals/${selectedProfessional.image}`
-      );
     }
   }, [selectedProfessional]);
 
@@ -36,9 +31,6 @@ function useModifyProfessional(
 
       formData.append("phone", modifyProfessionalInputs.phone);
       formData.append("role", modifyProfessionalInputs.role);
-      if (file) {
-        formData.append("file", file);
-      }
 
       const response = await fetch(
         `${HOST}/professional/update/${selectedProfessional.professionalId}`,
@@ -85,32 +77,10 @@ function useModifyProfessional(
     setModifyProfessionalInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleChangeSelectedPicture = (e) => {
-    const file = e.target.files?.[0];
-
-    if (!file) {
-      setFile(null);
-      setImageSrc(
-        `${HOST}/uploads/professionals/${selectedProfessional.image}`
-      );
-      return;
-    }
-
-    setFile(file);
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageSrc(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
-
   return {
     modifyProfessionalInputs,
     handleSubmitModifyProfessional,
     handleChangeModifyProfessional,
-    handleChangeSelectedPicture,
-    imageSrc,
   };
 }
 

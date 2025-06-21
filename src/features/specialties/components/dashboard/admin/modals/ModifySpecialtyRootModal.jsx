@@ -1,5 +1,5 @@
 import ModalWindow from "../../../../../../common/components/dashboard/ModalWindow";
-import useGetServices from "../../../../../services/hooks/useGetServices";
+import useGetCategories from "../../../../../category/hooks/useGetCategories";
 import useModifySpecialty from "../../../../hooks/useModifySpecialty";
 import "./ModifySpecialtyRootModal.css";
 
@@ -18,11 +18,8 @@ function ModifySpecialtyRootModal({
     handleCloseModifyModal
   );
 
-  const { services } = useGetServices();
-
-  const filterServiceFromSelectedSpecialty = services?.find(
-    (service) => service.serviceId === selectedSpecialty.service.serviceId
-  );
+  const { categories, areCategoriesLoading, categoriesError } =
+    useGetCategories();
 
   return (
     <ModalWindow
@@ -30,47 +27,48 @@ function ModifySpecialtyRootModal({
       onSubmit={handleSubmitModifySpecialty}
       title="Modificar Especialidad"
     >
-      <label htmlFor="name">
-        Nombre de especialidad
-        <input
-          type="text"
-          name="name"
-          onChange={handleChangeModifySpecialty}
-          value={modifySpecialtyInput.name}
-        />
-      </label>
-      <label htmlFor="serviceId">
-        Servicio
-        <select
-          name="serviceId"
-          onChange={handleChangeModifySpecialty}
-          value={modifySpecialtyInput.serviceId}
-        >
-          <option value={filterServiceFromSelectedSpecialty?.serviceId}>
-            {filterServiceFromSelectedSpecialty?.title}
-          </option>
-          {services?.map(
-            (service) =>
-              selectedSpecialty?.service.serviceId !== service.serviceId && (
-                <option
-                  key={`service-${service.serviceId}`}
-                  value={service.serviceId}
-                >
-                  {service.title}
-                </option>
-              )
-          )}
-        </select>
-      </label>
+      <div className="modify-specialty_modal">
+        <label htmlFor="name">
+          Nombre de especialidad
+          <input
+            type="text"
+            name="name"
+            onChange={handleChangeModifySpecialty}
+            value={modifySpecialtyInput.name}
+          />
+        </label>
 
-      <button
-        disabled={
-          selectedSpecialty.name === modifySpecialtyInput.name &&
-          selectedSpecialty.service.serviceId === modifySpecialtyInput.serviceId
-        }
-      >
-        Enviar
-      </button>
+        <label htmlFor="categoryId">
+          Categoria
+          <select name="categoryId" onChange={handleChangeModifySpecialty}>
+            <option value={selectedSpecialty.categorycategoryId}>
+              {selectedSpecialty.category.name}
+            </option>
+            {categories?.map(
+              (category) =>
+                selectedSpecialty.category.categoryId !==
+                  category.categoryId && (
+                  <option
+                    key={`category-${category.categoryId}`}
+                    value={category.categoryId}
+                  >
+                    {category.name}
+                  </option>
+                )
+            )}
+          </select>
+        </label>
+
+        <button
+          disabled={
+            selectedSpecialty.name === modifySpecialtyInput.name &&
+            selectedSpecialty.category.categoryId ===
+              modifySpecialtyInput.categoryId
+          }
+        >
+          Enviar
+        </button>
+      </div>
     </ModalWindow>
   );
 }

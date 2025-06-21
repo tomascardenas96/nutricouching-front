@@ -7,9 +7,17 @@
   justify-content: space-between;
   cursor: pointer;
 
-  > p {
+  > a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  & p {
     margin-bottom: 0.9rem;
     font-size: 0.85rem;
+    display: flex;
+    justify-content: center;
+    margin-top: .5rem;
   }
 }
 

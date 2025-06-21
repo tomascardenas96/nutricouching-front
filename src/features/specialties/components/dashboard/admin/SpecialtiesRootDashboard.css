@@ -65,6 +65,10 @@
     }
   }
 
+  > .specialty-row {
+    width: 15rem;
+  }
+
   > .options-row {
     font-weight: 500;
     font-size: 0.8rem;

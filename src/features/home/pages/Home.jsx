@@ -1,5 +1,5 @@
 import About from "../../About/components/About";
-import Disciplines from "../../disciplines/components/Disciplines";
+import Categories from "../../category/components/Categories";
 import Presentation from "../../Presentation/Presentation";
 import Products from "../../products/components/Products";
 import Services from "../../services/components/Services";
@@ -16,7 +16,7 @@ function Home() {
 
       <section className="disciplines_container">
         <SectionTitle title="Nuestras areas destacadas" />
-        <Disciplines />
+        <Categories />
       </section>
 
       <section className="services_container" id="services">

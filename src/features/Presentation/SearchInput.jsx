@@ -1,16 +1,16 @@
 import { CiSearch } from "react-icons/ci";
 import useFilterProfessionals from "../professional/hooks/useFilterProfessionals";
-import "./SearchInput.css";
 import ResultCard from "./ResultCard";
+import "./SearchInput.css";
 
-function SearchInput() {
+function SearchInput({ searchTerm, setSearchTerm }) {
   const {
     data,
     isError,
     isFetching,
     handleChangeFilterProfessionals,
-    searchTerm,
-  } = useFilterProfessionals();
+    handleKeyDown,
+  } = useFilterProfessionals(searchTerm, setSearchTerm);
 
   return (
     <>
@@ -20,8 +20,9 @@ function SearchInput() {
         className="filter-professionals_input"
         onChange={handleChangeFilterProfessionals}
         value={searchTerm}
+        onKeyDown={handleKeyDown}
       />
-      <div className="search-icon">
+      <div className="search-icon" onClick={handleKeyDown}>
         <CiSearch />
       </div>
       {searchTerm.length > 0 && (
@@ -35,6 +36,7 @@ function SearchInput() {
                 image={pro.profile.picture}
                 fullname={pro.fullname}
                 specialties={pro.specialty}
+                profilename={pro.profile.profileName}
               />
             ))
           ) : (

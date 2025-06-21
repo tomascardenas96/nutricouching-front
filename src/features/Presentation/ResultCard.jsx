@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { HOST } from "../../api/data";
 import "./ResultCard.css";
 
-function ResultCard({ image, fullname, specialties }) {
+function ResultCard({ image, fullname, specialties, profilename }) {
+  const navigate = useNavigate();
+
   const professionalSpecialties = () => {
     if (!specialties.length) return `Sin especialidad`;
     if (specialties.length === 1) return `${specialties[0]?.name}`;
@@ -12,7 +15,10 @@ function ResultCard({ image, fullname, specialties }) {
   };
 
   return (
-    <li className="result-card">
+    <li
+      className="result-card"
+      onClick={() => navigate(`/profile/${profilename}`)}
+    >
       <div className="result-card_image">
         <img
           src={`${HOST}/uploads/professionals/profile/${image}`}

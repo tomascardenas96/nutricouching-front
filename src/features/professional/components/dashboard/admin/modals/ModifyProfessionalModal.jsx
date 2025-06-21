@@ -6,8 +6,6 @@ function ModifyProfessionalModal({
   handleSubmitModifyProfessional,
   handleCloseModifyModal,
   modifyProfessionalInputs,
-  handleChangeSelectedPicture,
-  imageSrc,
 }) {
   return (
     <ModalWindow
@@ -15,13 +13,6 @@ function ModifyProfessionalModal({
       onSubmit={handleSubmitModifyProfessional}
       title="Modificar Profesional"
     >
-      <label htmlFor="file">
-        <div className="modify-professional-dashboard_selected-image">
-          <img src={imageSrc} alt="Imagen seleccionada por el usuario" />
-        </div>
-        <input type="file" name="file" onChange={handleChangeSelectedPicture} />
-      </label>
-
       <label htmlFor="phone">
         Telefono
         <input

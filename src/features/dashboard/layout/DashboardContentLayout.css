@@ -83,7 +83,7 @@
         font-size: 1.5rem;
         cursor: pointer;
         color: rgb(3, 148, 3);
-        transition: transform .3s ease;
+        transition: transform 0.3s ease;
       }
 
       & .add-icon:hover {
@@ -103,15 +103,12 @@
       > .search-icon {
         position: absolute;
         height: 100%;
-        left: 2.5rem;
+        left: 3.2rem;
         padding-bottom: 0.1rem;
         color: rgba(0, 0, 0, 0.658);
       }
     }
   }
-}
-
-.content-window .content-window_body {
 }
 
 .admin-dashboard .admin-dashboard_home {

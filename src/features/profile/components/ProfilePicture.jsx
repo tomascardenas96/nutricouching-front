@@ -3,6 +3,7 @@ import { HOST } from "../../../api/data";
 import "./ProfilePicture.css";
 
 function ProfilePicture({ image }) {
+  console.log(image)
   return (
     <div className="profile-picture">
       {!image ? (

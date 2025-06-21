@@ -29,7 +29,7 @@ function SpecialtiesRootDashboard() {
         <thead>
           <tr>
             <th>Descripcion</th>
-            <th className="service-column">Servicio</th>
+            <th>Categoria</th>
             <th className="options-column">Opciones</th>
           </tr>
         </thead>
@@ -41,7 +41,7 @@ function SpecialtiesRootDashboard() {
               key={`specialty-${specialty.specialtyId}`}
             >
               <td>{specialty.name}</td>
-              <td className="service-row">{specialty.service.title}</td>
+              <td className="specialty-row">{specialty.category.name}</td>
               <td className="options-row">
                 <p
                   className="edit"

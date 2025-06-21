@@ -6,6 +6,7 @@ import ProfessionalDashboard from "../features/professional/pages/ProfessionalDa
 import Layout from "./layout/Layout";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Profile from "../features/profile/pages/Profile";
+import ProfessionalsFilterPage from "../features/professional/pages/ProfessionalsFilterPage";
 
 function LayoutWrapper() {
   return (
@@ -22,6 +23,10 @@ export default function AppRoutes() {
         <Route element={<LayoutWrapper />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile/:slug" element={<Profile />} />
+          <Route
+            path="/filter/professionals"
+            element={<ProfessionalsFilterPage />}
+          />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 

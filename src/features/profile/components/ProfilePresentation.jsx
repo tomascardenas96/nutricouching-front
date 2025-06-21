@@ -10,7 +10,7 @@ function ProfilePresentation({ professionalProfile }) {
   return (
     <div className="professional-profile">
       <CoverPhoto>
-        <ProfilePicture image={professionalProfile?.image} />
+        <ProfilePicture image={professionalProfile?.profile?.picture} />
       </CoverPhoto>
 
       <div className="professional-profile_info">

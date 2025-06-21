@@ -9,6 +9,7 @@
 .result-card .result-card_image {
   display: grid;
   place-content: center;
+
   > img {
     width: 2.2rem;
     height: 2.2rem;

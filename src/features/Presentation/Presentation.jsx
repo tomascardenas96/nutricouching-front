@@ -1,12 +1,14 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 import { CiApple } from "react-icons/ci";
 import { GiStrongMan } from "react-icons/gi";
 import { PiBrainLight } from "react-icons/pi";
 import { TbBrandCouchdb, TbMessage2Heart } from "react-icons/tb";
 import SearchInput from "../presentation/SearchInput";
 import "./Presentation.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function Presentation() {
+  const [searchTerm, setSearchTerm] = useState("");
   const queryClient = new QueryClient();
 
   return (
@@ -20,27 +22,30 @@ function Presentation() {
           </p>
           <form className="search-input">
             <QueryClientProvider client={queryClient}>
-              <SearchInput />
+              <SearchInput
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
             </QueryClientProvider>
           </form>
           <div className="professional-items">
-            <p>
+            <p onClick={() => setSearchTerm("Nutricion")}>
               <CiApple />
               Nutricion
             </p>
-            <p>
+            <p onClick={() => setSearchTerm("Mindfulness")}>
               <PiBrainLight />
               Mindfulness
             </p>
-            <p>
+            <p onClick={() => setSearchTerm("Fitness")}>
               <GiStrongMan />
               Fitness
             </p>
-            <p>
+            <p onClick={() => setSearchTerm("Coaching")}>
               <TbMessage2Heart />
               Coaching
             </p>
-            <p>
+            <p onClick={() => setSearchTerm("Psicologia")}>
               <TbBrandCouchdb />
               Psicologia
             </p>

@@ -9,14 +9,14 @@ function useModifySpecialty(
 ) {
   const [modifySpecialtyInput, setModifySpecialtyInput] = useState({
     name: "",
-    serviceId: "",
+    categoryId: "",
   });
 
   useEffect(() => {
     if (selectedSpecialty) {
       setModifySpecialtyInput({
         name: selectedSpecialty.name || "",
-        serviceId: selectedSpecialty.service?.serviceId || "",
+        categoryId: selectedSpecialty.category?.categoryId || "",
       });
     }
   }, [selectedSpecialty]);
@@ -54,7 +54,7 @@ function useModifySpecialty(
               ? {
                   ...specialty,
                   name: data.name || specialty.name,
-                  service: data.service || specialty.service,
+                  category: data.category || specialty.category,
                 }
               : specialty;
           })
