@@ -23,7 +23,7 @@ function ProfessionalsFilterPage() {
     <div className="professionals-filter-page">
       <QueryClientProvider client={queryClient}>
         <div className="filter-page_left">
-          <form className="container">
+          <form className="container" onSubmit={(e) => e.preventDefault()}>
             <div className="block-container">
               <p className="path-info">
                 Inicio / Filtrar / <span>Profesionales</span>

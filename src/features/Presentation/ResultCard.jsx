@@ -1,18 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { HOST } from "../../api/data";
 import "./ResultCard.css";
+import { professionalSpecialties } from "../../lib/professional";
 
 function ResultCard({ image, fullname, specialties, profilename }) {
   const navigate = useNavigate();
-
-  const professionalSpecialties = () => {
-    if (!specialties.length) return `Sin especialidad`;
-    if (specialties.length === 1) return `${specialties[0]?.name}`;
-    if (specialties.length <= 2)
-      return `${specialties[0]?.name} y ${specialties[1]?.name}`;
-
-    return `${specialties[0]?.name} y ${specialties?.length - 1} más`;
-  };
 
   return (
     <li
@@ -29,7 +21,7 @@ function ResultCard({ image, fullname, specialties, profilename }) {
       <div className="result-card_info">
         <p>{fullname}</p>
         <div>
-          <span>{professionalSpecialties()}</span>
+          <span>{professionalSpecialties(specialties)}</span>
         </div>
       </div>
 

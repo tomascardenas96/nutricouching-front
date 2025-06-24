@@ -2,13 +2,11 @@
 .blur-background {
   position: fixed;
   inset: 0;
-  background: url("/src/public/assets/banner17.jpg"), rgba(0, 0, 0, 0.571);
-  background-blend-mode: darken;
+  background: url("/src/public/assets/bg9.jpg"), rgba(0, 0, 0, 0.571);
   background-size: cover;
-  filter: blur(3px); /* Aplica el blur */
+  background-blend-mode: darken;
   z-index: 0;
   opacity: 0.9;
-  width: calc(100% - 14px);
 }
 
 /* Contenedor principal */
@@ -17,10 +15,11 @@
   height: 100%;
   justify-self: center;
   background-color: #f6f6f6;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.093),
-    0 0 10px 10px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.04),
+    0 0 10px 10px rgba(0, 0, 0, 0.023);
   position: relative; /* Asegura que esté por encima del fondo */
   z-index: 1;
+  border: 1px solid #d1cbc7;
 }
 
 .sub-menu_container {
