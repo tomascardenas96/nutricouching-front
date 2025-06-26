@@ -25,11 +25,11 @@ function SearchInput({ searchTerm, setSearchTerm }) {
       <div className="search-icon" onClick={handleKeyDown}>
         <CiSearch />
       </div>
-      {searchTerm.length > 0 && (
+      {data?.length > 0 && searchTerm?.length > 0 && (
         <ul className="professionals-filter_results-modal">
           {isFetching ? (
             <p className="results-modal">Buscando profesionales...</p>
-          ) : data?.length > 0 ? (
+          ) : searchTerm?.length > 0 ? (
             data?.map((pro) => (
               <ResultCard
                 key={`professional-filtered-${pro.professionalId}`}

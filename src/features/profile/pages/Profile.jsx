@@ -1,3 +1,6 @@
+import CreatePost from "../../posts/components/CreatePost";
+import PostsList from "../../posts/components/PostsList";
+import PostsSection from "../../posts/components/PostsSection";
 import ProfilePresentation from "../components/ProfilePresentation";
 import useGetProfile from "../hooks/useGetProfile";
 import "./Profile.css";
@@ -21,9 +24,13 @@ function Profile() {
     );
 
   return (
-    <div className="profile-container">
+    <div className="profile-container" id="profile">
       <div className="presentation-section">
         <ProfilePresentation professionalProfile={professionalProfile} />
+      </div>
+
+      <div className="profile-content">
+        <PostsSection profileId={professionalProfile?.profile.profileId} />
       </div>
     </div>
   );
