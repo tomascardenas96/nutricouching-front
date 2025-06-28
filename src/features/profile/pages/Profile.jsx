@@ -30,7 +30,11 @@ function Profile() {
       </div>
 
       <div className="profile-content">
-        <PostsSection profileId={professionalProfile?.profile.profileId} />
+        <PostsSection
+          profileId={professionalProfile?.profile.profileId}
+          profilePicture={professionalProfile?.profile.picture}
+          name={professionalProfile?.fullname}
+        />
       </div>
     </div>
   );

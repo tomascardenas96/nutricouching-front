@@ -1,19 +1,48 @@
 import { useContext } from "react";
-import "./CreatePost.css";
+import { FaCamera } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
+import { HOST } from "../../../api/data";
 import { PostContext } from "../context/PostContext";
+import "./CreatePost.css";
 
-function CreatePost() {
-  const { createPost, postInput, handleChangePostInput } =
+function CreatePost({ profilePicture }) {
+  const { createPost, postInput, handleChangePostInput, handleEnterKeyDown } =
     useContext(PostContext);
 
   return (
     <form className="create-post_form" onSubmit={createPost}>
-      <textarea value={postInput} onChange={handleChangePostInput}></textarea>
-      <input
-        type="submit"
-        value="Publicar"
-        disabled={postInput.trim() === ""}
-      />
+      <div className="title">
+        <h1>Crear Publicacion</h1>
+      </div>
+
+      <div className="new-post">
+        <div className="new-post_picture-photo">
+          {/* Cambiar por img */}
+          <img
+            src={`${HOST}/uploads/professionals/profile/${profilePicture}`}
+            alt="Foto de perfil del usuario al crear una publicacion"
+          />
+        </div>
+
+        <div className="new-post_text-area">
+          <textarea
+            value={postInput}
+            onChange={handleChangePostInput}
+            onKeyDown={handleEnterKeyDown}
+            placeholder="¿Qué estás pensando?"
+          ></textarea>
+          <hr />
+          <div className="new-post_buttons">
+            <button>
+              <FaCamera /> Foto
+            </button>
+
+            <button type="submit" disabled={postInput.trim() === ""}>
+              <IoSend /> Publicar
+            </button>
+          </div>
+        </div>
+      </div>
     </form>
   );
 }

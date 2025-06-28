@@ -5,10 +5,8 @@ import { PostContext } from "./PostContext";
 function PostProvider({ children, profileId }) {
   const { posts, setPosts, postsError, arePostsLoading } =
     useGetPostsByProfile(profileId);
-  const { createPost, postInput, handleChangePostInput } = useCreatePost(
-    profileId,
-    setPosts
-  );
+  const { createPost, postInput, handleChangePostInput, handleEnterKeyDown } =
+    useCreatePost(profileId, setPosts);
 
   return (
     <PostContext.Provider
@@ -16,6 +14,7 @@ function PostProvider({ children, profileId }) {
         createPost,
         postInput,
         handleChangePostInput,
+        handleEnterKeyDown,
         posts,
         postsError,
         arePostsLoading,

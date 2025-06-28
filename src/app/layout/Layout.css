@@ -2,7 +2,7 @@
 .blur-background {
   position: fixed;
   inset: 0;
-  background: url("/src/public/assets/bg9.jpg"), rgba(0, 0, 0, 0.571);
+  background: url("/src/public/assets/bg46.jpg"), rgba(0, 0, 0, 0.571);
   background-size: cover;
   background-blend-mode: darken;
   z-index: 0;
@@ -19,7 +19,6 @@
     0 0 10px 10px rgba(0, 0, 0, 0.023);
   position: relative; /* Asegura que esté por encima del fondo */
   z-index: 1;
-  border: 1px solid #d1cbc7;
 }
 
 .sub-menu_container {

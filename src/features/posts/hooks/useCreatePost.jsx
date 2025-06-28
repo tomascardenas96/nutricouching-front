@@ -8,6 +8,12 @@ function useCreatePost(profileId, setPosts) {
   const createPost = async (e) => {
     e.preventDefault();
 
+    if (postInput.trim() === "") {
+      return;
+    }
+
+    setPostInput("");
+
     async function createPostPromise() {
       const token = localStorage.getItem("authToken");
       const response = await fetch(`${HOST}/post`, {
@@ -27,7 +33,6 @@ function useCreatePost(profileId, setPosts) {
     toast.promise(createPostPromise(), {
       loading: "Creando publicacion...",
       success: (data) => {
-        setPostInput("");
         setPosts((prev) => [{ ...data }, ...prev]);
         return "Publicacion creado exitosamente!";
       },
@@ -40,7 +45,15 @@ function useCreatePost(profileId, setPosts) {
     setPostInput(value);
   };
 
-  return { createPost, postInput, handleChangePostInput };
+  const handleEnterKeyDown = (e) => {
+    //Permitir salto de linea presionando SHIFT + ENTER
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      createPost(e);
+    }
+  };
+
+  return { createPost, postInput, handleChangePostInput, handleEnterKeyDown };
 }
 
 export default useCreatePost;

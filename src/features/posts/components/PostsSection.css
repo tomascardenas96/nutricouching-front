@@ -1,0 +1,22 @@
+.posts-section_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+
+  > div {
+    width: 35rem;
+  }
+}
+
+.new-post_section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    > hr {
+        border-color: rgba(0, 0, 0, 0.169);
+    }
+}

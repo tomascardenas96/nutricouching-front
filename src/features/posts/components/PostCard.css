@@ -1,0 +1,86 @@
+.post-card {
+  background-color: white;
+  border-radius: 0.3rem;
+  border: 1px solid #e4e4e4;
+  padding: 1.5rem;
+  padding-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-card .post-card_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-card .post-card_body {
+  > p {
+    font-size: 0.85rem;
+  }
+}
+
+.post-card .post-card_quantity-likes {
+  font-size: 0.7rem;
+  margin: 0.5rem 0 0.2rem;
+  color: rgb(49, 49, 49);
+}
+
+.post-card .post-card_divider-line {
+  border-color: rgba(0, 0, 0, 0.11);
+}
+
+.post-card .post-card_like {
+  > div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: 7rem;
+    height: 2rem;
+    justify-content: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+
+    > p {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.post-card_header .description {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.post-card_header .options {
+  display: flex;
+  align-items: center;
+
+  > .dots-icon {
+    cursor: pointer;
+  }
+}
+
+.post-card_header .description .header_image {
+  > img {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.post-card_header .description .name_hour {
+  > p {
+    font-size: 0.85rem;
+    font-weight: 500;
+    height: 0.85rem;
+    cursor: pointer;
+  }
+
+  > span {
+    font-size: 0.7rem;
+    color: rgb(78, 78, 78);
+  }
+}
