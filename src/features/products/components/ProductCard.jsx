@@ -1,25 +1,15 @@
 import { useEffect } from "react";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { HOST } from "../../../api/data";
-import { useActiveCart } from "../../cart/hooks/useActiveCart";
-import { useCartItems } from "../../cart/hooks/useCartItems";
-import { useProductCart } from "../../cart/hooks/useProductsCart";
-import useAddProductToCart from "../../cart/hooks/useAddProductToCart";
-import useGetAllProducts from "../../products/hooks/useGetAllProducts";
 import "./ProductCard.css";
 
-function ProductCard({ product }) {
-  const { activeCart } = useActiveCart();
-  const { setProductsInCart } = useProductCart();
-  const { setElementsInCart } = useCartItems();
-
-  const { addProductToCart, productsCart } = useAddProductToCart(
-    setElementsInCart,
-    activeCart
-  );
-
-  const { products } = useGetAllProducts();
-
+function ProductCard({
+  product,
+  products,
+  setProductsInCart,
+  addProductToCart,
+  productsCart,
+}) {
   // Tomamos los Id's de los productos del carrito y obtenemos los datos completos de cada uno.
   // Esto es para que el carrito muestre los productos con todos sus detalles.
   useEffect(() => {
@@ -29,27 +19,53 @@ function ProductCard({ product }) {
         const productInCart = productsCart?.products?.find((prodInCart) => {
           return prodInCart.productId === product.productId;
         });
+
         return productInCart
           ? { ...product, quantity: productInCart.quantity } // Agregar detalles del carrito al producto
           : null; // Ignorar productos no encontrados
       })
       .filter((prod) => prod !== null); // Eliminar nulls del resultado
 
-    setProductsInCart(productsInCartToShow);
+    const viandsInCartToShow = products
+      .map((viand) => {
+        const viandsInCart = productsCart?.viands?.find((prodInCart) => {
+          return prodInCart.viandId === viand.viandId;
+        });
+
+        return viandsInCart
+          ? { ...viand, quantity: viandsInCart.quantity } // Agregar detalles del carrito al producto
+          : null; // Ignorar productos no encontrados
+      })
+      .filter((prod) => prod !== null); // Eliminar nulls del resultado
+
+    if (productsInCartToShow.length > 0) {
+      setProductsInCart(productsInCartToShow);
+    }
+
+    if (viandsInCartToShow.length > 0) {
+      setProductsInCart(viandsInCartToShow);
+    }
   }, [productsCart, products]);
 
   return (
     <div
       className="product-card_container"
-      onClick={() => addProductToCart(product)}
+      onClick={() => {
+        addProductToCart(product);
+      }}
     >
       <div className="product-card_image">
         <img
-          src={`${HOST}/uploads/products/${product.image}`}
+          src={
+            product.productId
+              ? `${HOST}/uploads/products/${product.image}`
+              : `${HOST}/uploads/viands/${product.image}`
+          }
           alt="product-picture"
         />
         <TbShoppingCartPlus className="add-to-cart_icon" />
       </div>
+      
       <div className="product-card_body">
         <div>
           <p className="product-title">{product.name.toUpperCase()}</p>

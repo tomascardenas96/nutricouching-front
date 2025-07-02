@@ -1,4 +1,4 @@
-import { HOST } from "../../../api/data";
+import { HOST } from "../../../../api/data";
 import "./ServicesCard.css";
 
 function ServiceCard({

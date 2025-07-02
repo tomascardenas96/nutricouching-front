@@ -4,7 +4,6 @@
   grid-template-rows: max-content 1fr;
   z-index: 10;
   gap: 1.7rem;
-  padding: 0 10rem;
 }
 
 .products-section {

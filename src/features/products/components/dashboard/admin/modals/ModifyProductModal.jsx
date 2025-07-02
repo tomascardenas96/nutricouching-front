@@ -5,8 +5,9 @@ import useModifyProduct from "../../../../hooks/useModifyProduct";
 import "./ModifyProductModal.css";
 
 function ModifyProductModal({
-  handleModifyProductModal,
   selectedProduct,
+  setSelectedProduct,
+  handleModifyProductModal,
   setProducts,
 }) {
   const {
@@ -16,7 +17,12 @@ function ModifyProductModal({
     handleChangeSelectedFile,
     fileModifyProduct,
     imagePreviewModifyProduct,
-  } = useModifyProduct(selectedProduct, handleModifyProductModal, setProducts);
+  } = useModifyProduct(
+    selectedProduct,
+    setSelectedProduct,
+    handleModifyProductModal,
+    setProducts
+  );
 
   return (
     <section

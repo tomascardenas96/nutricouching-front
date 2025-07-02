@@ -2,10 +2,9 @@
 
 .services-menu {
   display: grid;
-  /* grid-template-rows: max-content 1fr; */
-  margin-top: 1.5rem;
   height: 100%;
-  gap: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .services-menu > .title {
@@ -37,7 +36,7 @@
 }
 
 .services-list_container {
-  width: 100%;
+  width: 53.5rem;
   justify-content: center;
   position: relative;
   display: grid;
@@ -45,12 +44,6 @@
   gap: 2rem;
   place-content: center;
   padding-bottom: 2rem;
-
-  & .loader-spinner_services {
-    width: 100%;
-    height: 12rem;
-    border-radius: 0.2rem;
-  }
 
   & .network-error_services {
     grid-column: 1 / 3;

@@ -13,25 +13,25 @@
   }
 
   & p {
-    margin-bottom: 0.9rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     display: flex;
     justify-content: center;
-    margin-top: .5rem;
+    margin-top: 0.8rem;
+    color: #2b1a0cb9;
   }
 }
 
 .discipline-card .icon-container {
-  padding: 0.3rem;
+  padding: 0.1rem;
   border-radius: 50%;
-  width: 7.65rem;
-  height: 7.65rem;
-  border: 1.5px solid #d9c5b2;
+  width: 7rem;
+  height: 7rem;
+  border: 1.5px solid #d9c5b27e;
   display: flex;
-  color: #a87f58;
+  color: #2b1a0c75;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
 
   > div {
     width: 100%;
@@ -40,6 +40,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(#ece4dd, #e2d8cf);
+    background: radial-gradient(#ece4dd, #e2d8cf72);
   }
 }

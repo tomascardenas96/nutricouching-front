@@ -3,12 +3,11 @@
   height: 93%;
   border-radius: 0.1rem;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1.6fr 1fr;
   background-color: white;
   z-index: 10;
   cursor: pointer;
   transition: all 0.3s ease;
-  align-items: center;
 }
 
 .product-card_header {
@@ -32,15 +31,11 @@
 }
 
 .product-card_image {
-  height: 100%;
   display: grid;
   justify-content: center;
   position: relative;
   transition: opacity 0.3s ease; /* Añadido para transición suave si se necesita en el contenedor */
-
-  > img {
-    border-radius: 0.2rem;
-  }
+  margin-bottom: 0.2rem;
 }
 
 .product-card_container:hover img,
@@ -51,10 +46,11 @@
 
 .product-card_container img {
   width: 8rem;
-  height: 8.5rem;
+  height: 8rem;
   object-fit: cover;
   object-position: center;
   transition: opacity 0.3s ease; /* Transición suave para la imagen */
+  border-radius: 0.2rem;
 }
 
 .add-to-cart_icon {

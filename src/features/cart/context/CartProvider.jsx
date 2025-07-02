@@ -32,8 +32,6 @@ function CartProvider({ children }) {
 
   // Metodo para obtener el carrito activo
   const handleGetActiveCart = async (userId) => {
-    const authToken = localStorage.getItem("authToken");
-
     try {
       const response = await fetch(`${HOST}/cart/active/${userId}`, {
         method: "GET",

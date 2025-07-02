@@ -1,13 +1,20 @@
 import { useMediaQuery } from "react-responsive";
-import useGetAllProducts from "../hooks/useGetAllProducts";
 import Dots from "../../../common/components/Dots";
 import LoaderSpinner from "../../../common/components/LoaderSpinner";
 import NetworkError from "../../../common/components/NetworkError";
 import TurnPageArrow from "../../../common/components/TurnPageArrow";
+import useHandleCarouselPages from "../hooks/useHandleCarouselPages";
 import ProductCard from "./ProductCard";
 import "./ProductsCarousel.css";
 
-function ProductsCarousel() {
+function ProductsCarousel({
+  products,
+  productsError,
+  productsLoading,
+  addProductToCart,
+  productsCart,
+  setProductsInCart,
+}) {
   const firstMeasure = useMediaQuery({ query: "(max-width: 1260px)" });
   const secondMeasure = useMediaQuery({ query: "(max-width: 970px)" });
   const thirdMeasure = useMediaQuery({ query: "(max-width: 815px)" });
@@ -31,15 +38,8 @@ function ProductsCarousel() {
     itemsPerPage = 1;
   }
 
-  const {
-    products,
-    productsError,
-    productsLoading,
-    currentPage,
-    currentProducts,
-    nextPage,
-    previousPage,
-  } = useGetAllProducts(itemsPerPage);
+  const { currentPage, currentProducts, nextPage, previousPage, totalPages } =
+    useHandleCarouselPages(products, itemsPerPage);
 
   return (
     <div className="products-carousel_container">
@@ -68,7 +68,14 @@ function ProductsCarousel() {
         {!productsLoading &&
           !productsError &&
           currentProducts?.map((product) => (
-            <ProductCard key={product.productId} product={product} />
+            <ProductCard
+              key={product.productId || product.viandId}
+              product={product}
+              products={products}
+              setProductsInCart={setProductsInCart}
+              addProductToCart={addProductToCart}
+              productsCart={productsCart}
+            />
           ))}
 
         {productsError && (

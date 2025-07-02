@@ -2,9 +2,8 @@ import About from "../../About/components/About";
 import Categories from "../../category/components/Categories";
 import Presentation from "../../Presentation/Presentation";
 import Products from "../../products/components/Products";
-import Services from "../../services/components/Services";
+import Services from "../../services/components/home/Services";
 import Viands from "../../viands/components/Viands";
-import SectionTitle from "../components/SectionTitle";
 import "./Home.css";
 
 function Home() {
@@ -14,26 +13,33 @@ function Home() {
         <Presentation />
       </section>
 
-      <section className="disciplines_container">
-        <SectionTitle title="Nuestras areas destacadas" />
+      <section className="home-section disciplines_container">
         <Categories />
       </section>
 
-      <section className="services_container" id="services">
-        <SectionTitle title="Servicios disponibles" />
+      <section className="home-section services_container" id="services">
+        <div className="section-title">
+          <h1 className="special-font">Servicios Disponibles</h1>
+          <hr />
+        </div>
         <Services />
       </section>
 
-      <section className="products_container" id="products">
+      <section className="home-section products_container" id="products">
+        <div className="section-title">
+          <h1 className="special-font">Nuestros Productos y Viandas</h1>
+          <hr />
+        </div>
         <Products />
       </section>
 
-      <section className="recipes_container">
+      <section className="home-section recipes_container">
+        {/* <Viands /> */}
         <Viands />
       </section>
 
-      <section className="about-us_container" id="about">
-        <About />
+      <section className="home-section about-us_container" id="about">
+        {/* <About /> */}
       </section>
     </div>
   );

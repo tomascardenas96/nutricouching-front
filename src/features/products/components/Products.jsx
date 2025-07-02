@@ -1,50 +1,35 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import { useActiveCart } from "../../cart/hooks/useActiveCart";
+import useAddProductToCart from "../../cart/hooks/useAddProductToCart";
+import { useCartItems } from "../../cart/hooks/useCartItems";
+import { useProductCart } from "../../cart/hooks/useProductsCart";
+import useGetAllProducts from "../hooks/useGetAllProducts";
 import "./Products.css";
 import ProductsCarousel from "./ProductsCarousel";
 
 function Products() {
-  const h1Ref = useRef(null);
+  const { products, productsError, productsLoading } = useGetAllProducts();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.5,
-      }
-    );
+  const { activeCart } = useActiveCart();
+  const { setProductsInCart } = useProductCart();
+  const { setElementsInCart } = useCartItems();
 
-    const h1Element = h1Ref.current;
-    if (h1Element) {
-      observer.observe(h1Element);
-    }
-
-    return () => {
-      if (h1Element) {
-        observer.unobserve(h1Element);
-      }
-    };
-  }, []);
+  const { addProductToCart, productsCart } = useAddProductToCart(
+    setElementsInCart,
+    activeCart
+  );
 
   return (
     <div className="products-section_container">
-      <div className="products-section">
-        <div>
-          <h1 ref={h1Ref} className="products-section_title">
-            Echa un vistazo a algunos de nuestros productos, agrega al carrito
-            el que mas te guste.
-          </h1>
-        </div>
-      </div>
-
       <div className="products-container">
-        <ProductsCarousel />
+        <ProductsCarousel
+          products={products}
+          productsError={productsError}
+          productsLoading={productsLoading}
+          addProductToCart={addProductToCart}
+          productsCart={productsCart}
+          setProductsInCart={setProductsInCart}
+        />
       </div>
     </div>
   );

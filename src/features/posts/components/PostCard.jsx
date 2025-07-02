@@ -3,6 +3,7 @@ import { publishedAgo } from "../../../lib/date";
 import "./PostCard.css";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart } from "react-icons/io";
 
 function PostCard({ body, profilePicture, name, createdAt }) {
   return (
@@ -37,7 +38,7 @@ function PostCard({ body, profilePicture, name, createdAt }) {
 
       <div className="post-card_like">
         <div>
-          <IoIosHeartEmpty />
+          {true ? <IoIosHeartEmpty /> : <IoIosHeart />}
           <p>Me gusta</p>
         </div>
       </div>

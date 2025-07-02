@@ -4,7 +4,7 @@ import { HOST } from "../../../api/data";
 
 function useModifyProduct(
   selectedProduct,
-  handleModifyProductModal,
+  setSelectedProduct,
   setProducts
 ) {
   const authToken = localStorage.getItem("authToken");
@@ -84,9 +84,15 @@ function useModifyProduct(
     }
   };
 
+  const handleModifyProductModal = (product) => {
+    setIsModifyProductModalOpen(!isModifyProductModalOpen);
+    setSelectedProduct(product);
+  };
+
   return {
     handleSubmitModifyProduct,
     handleChangeModifyProduct,
+    handleModifyProductModal,
     modifyProductInput,
     imagePreviewModifyProduct,
     handleChangeSelectedFile,

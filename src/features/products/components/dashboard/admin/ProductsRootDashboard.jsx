@@ -40,6 +40,7 @@ function ProductsRootDashboard() {
         createPortal(
           <ModifyProductModal
             selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
             setProducts={setProducts}
             handleModifyProductModal={handleModifyProductModal}
           />,

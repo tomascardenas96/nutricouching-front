@@ -174,7 +174,7 @@ function Header({
       <div className="header-menu">
         <ul>
           <li>
-            <a href="/#main-page">INICIO</a>
+            <a href="/#">INICIO</a>
           </li>
           <li>
             <a href="/#products">PRODUCTOS</a>

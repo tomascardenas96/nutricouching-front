@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import useDownloadPlan from "../../plans/hooks/useDownloadPlan";
-import useGetServices from "../hooks/useGetServices";
-import usePurchasePlan from "../../plans/hooks/usePurchasePlan";
-import LoaderSpinner from "../../../common/components/LoaderSpinner";
-import NetworkError from "../../../common/components/NetworkError";
-import MoreInfo from "../../Bookings/components/modals/MoreInfo";
+import useDownloadPlan from "../../../plans/hooks/useDownloadPlan";
+import useGetServices from "../../hooks/useGetServices";
+import usePurchasePlan from "../../../plans/hooks/usePurchasePlan";
+import NetworkError from "../../../../common/components/NetworkError";
+import MoreInfo from "../../../Bookings/components/modals/MoreInfo";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
-import PlansModal from "../../plans/components/PlansModal";
+import PlansModal from "../../../plans/components/PlansModal";
+import ServicesLoading from "./loader/ServicesLoading";
 
 function Services() {
   // Selected service state
@@ -51,37 +51,24 @@ function Services() {
   return (
     <div className="services-menu">
       <div className="services-list_container">
-        {servicesLoading &&
-          [...Array(4)].map((_, index) => (
-            <div
-              key={`services-loader_${index}`}
-              className="loader-spinner_services"
-            >
-              <LoaderSpinner />
-            </div>
-          ))}
+        {servicesLoading && <ServicesLoading />}
 
         {!servicesError &&
           !servicesLoading &&
-          services?.map((service, idx) => {
-            const isEven = idx % 2 === 0;
-
-            return (
-              <ServiceCard
-                key={service?.serviceId}
-                image={service?.image}
-                color={colors[idx]}
-                title={service?.title}
-                description={service?.description}
-                handleSelectService={() => handleSelectService(service)}
-                handleOpenServiceModal={handleOpenServiceModal}
-                handleOpenRequestReservation={handleOpenRequestReservation}
-                isEven={isEven}
-                type={service?.type}
-                handleOpenSmartPlanModal={handleOpenSmartPlanModal}
-              />
-            );
-          })}
+          services?.map((service, idx) => (
+            <ServiceCard
+              key={service?.serviceId}
+              image={service?.image}
+              color={colors[idx]}
+              title={service?.title}
+              description={service?.description}
+              handleSelectService={() => handleSelectService(service)}
+              handleOpenServiceModal={handleOpenServiceModal}
+              handleOpenRequestReservation={handleOpenRequestReservation}
+              type={service?.type}
+              handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+            />
+          ))}
 
         {servicesError && (
           <div className="network-error_services">
