@@ -133,13 +133,13 @@ function Layout({ children }) {
           <Footer />
         </section>
 
-        {user && (
+        {/* {user && (
           <NotificationPopUp
             isNotificationsModalOpen={isNotificationsModalOpen}
             setIsNotificationsModalOpen={setIsNotificationsModalOpen}
             user={user}
           />
-        )}
+        )} */}
       </section>
 
       {isAdminCmsOpen &&

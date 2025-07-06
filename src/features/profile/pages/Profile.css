@@ -18,7 +18,7 @@
   display: grid;
   grid-template-columns: 17rem 1fr 17rem;
   gap: 1rem;
-}
+} 
 
 .profile-content .content_left-container {
   padding-top: 1.2rem;

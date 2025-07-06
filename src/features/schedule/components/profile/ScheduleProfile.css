@@ -48,7 +48,7 @@
 .professional-profile_schedule-section .body .schedules-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.7rem;
+  gap: 0.5rem;
 }
 
 .professional-profile_schedule-section .body .get-booking {
