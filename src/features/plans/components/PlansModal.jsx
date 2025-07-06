@@ -52,6 +52,9 @@ function PlansModal({
           (plan) => plan.planId !== planId
         );
 
+        setSelectedPlan(null);
+        setIsMoreInfoModalOpen(false);
+
         return {
           freePlans: prev.freePlans,
           purchasedPlans: prev.purchasedPlans,

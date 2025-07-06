@@ -51,6 +51,7 @@
   background-color: #2f4858;
   height: 1.8rem;
   align-self: end;
+  margin: 0.7rem;
 
   > .arrow-icon {
     font-size: 0.7rem;

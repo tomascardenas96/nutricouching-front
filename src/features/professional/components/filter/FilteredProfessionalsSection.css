@@ -20,6 +20,5 @@
   > .search-icon {
     display: flex;
     font-size: 1.1rem;
-    color: var(--primary-details-color);
   }
 }

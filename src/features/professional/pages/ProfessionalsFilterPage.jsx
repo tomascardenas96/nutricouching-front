@@ -1,10 +1,8 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CiSearch } from "react-icons/ci";
+import FilteredProfessionalsSection from "../components/filter/FilteredProfessionalsSection";
 import useFilterQueries from "../hooks/useFilterQueries";
 import "./ProfessionalsFilterPage.css";
-import { FilterProfessionalsQueryBuilder } from "../utils/queryBuilders";
-import useFilterProfessionalsByQuery from "../hooks/useFilterProfessionalsByQuery";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import FilteredProfessionalsSection from "../components/filter/FilteredProfessionalsSection";
 
 const categories = [
   "Nutricion",

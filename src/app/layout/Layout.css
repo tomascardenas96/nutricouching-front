@@ -2,7 +2,7 @@
 .blur-background {
   position: fixed;
   inset: 0;
-  background: url("/src/public/assets/bg13.jpg"), rgba(0, 0, 0, 0.571);
+  background: url("/src/public/assets/bg9.jpg"), rgba(0, 0, 0, 0.571);
   background-size: cover;
   background-blend-mode: darken;
   z-index: 0;

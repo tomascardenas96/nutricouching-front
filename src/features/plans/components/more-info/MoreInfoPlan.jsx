@@ -24,7 +24,7 @@ function MoreInfoPlan({
   const [purchaseLoading, setPurchaseLoading] = useState(false);
 
   const closeModal = () => {
-    setSelectedPlan();
+    setSelectedPlan(null);
     handleOpenMoreInfoModal();
   };
 

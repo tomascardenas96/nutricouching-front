@@ -1,7 +1,7 @@
-import CreatePost from "../../posts/components/CreatePost";
-import PostsList from "../../posts/components/PostsList";
 import PostsSection from "../../posts/components/PostsSection";
+import LeftContainer from "../components/LeftContainer";
 import ProfilePresentation from "../components/ProfilePresentation";
+import RightContainer from "../components/RightContainer";
 import useGetProfile from "../hooks/useGetProfile";
 import "./Profile.css";
 
@@ -30,11 +30,21 @@ function Profile() {
       </div>
 
       <div className="profile-content">
-        <PostsSection
-          profileId={professionalProfile?.profile.profileId}
-          profilePicture={professionalProfile?.profile.picture}
-          name={professionalProfile?.fullname}
-        />
+        <div className="content_left-container">
+          <RightContainer />
+        </div>
+
+        <div className="content_center-container">
+          <PostsSection
+            profileId={professionalProfile?.profile.profileId}
+            profilePicture={professionalProfile?.profile.picture}
+            name={professionalProfile?.fullname}
+          />
+        </div>
+
+        <div className="content_right-container">
+          <LeftContainer />
+        </div>
       </div>
     </div>
   );

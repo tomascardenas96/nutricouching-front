@@ -166,8 +166,8 @@ function Header({
             src="../src/public/assets/nutricouching-logo.jpg"
             alt="nutricoaching-logo"
           />
-          <p>Nutri-coaching</p>
-          <p>Integral</p>
+          <p>Cohesiva</p>
+          <p>Salud</p>
         </div>
       </div>
 
@@ -178,9 +178,6 @@ function Header({
           </li>
           <li>
             <a href="/#products">PRODUCTOS</a>
-          </li>
-          <li>
-            <a href="/#viands">VIANDAS</a>
           </li>
           <li>
             <a href="/#about">CONOCENOS</a>
