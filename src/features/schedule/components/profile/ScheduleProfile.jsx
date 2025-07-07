@@ -1,50 +1,19 @@
+import { AiOutlineSchedule } from "react-icons/ai";
+import { FaRegClock } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+import useGetAvailabilitiesByProfessional from "../../hooks/useGetAvailabilitiesByProfessional";
 import ScheduleCard from "./ScheduleCard";
 import "./ScheduleProfile.css";
-import { FaRegClock } from "react-icons/fa";
-import { AiOutlineSchedule } from "react-icons/ai";
-import { IoIosArrowForward } from "react-icons/io";
+import { createPortal } from "react-dom";
+import GetBooking from "../../../bookings/components/profile/GetBooking";
 
-function ScheduleProfile() {
-  const schedules = {
-    Mon: [
-      {
-        availabilityId: "4ab7478d-8365-4f15-9733-c43bf6f86411",
-        startTime: "13:00",
-        endTime: "21:00",
-        interval: 60,
-      },
-      {
-        availabilityId: "9ab7478d-8365-4f15-9733-c43bf6f86411",
-        startTime: "21:00",
-        endTime: "23:00",
-        interval: 60,
-      },
-    ],
-    Tue: [
-      {
-        availabilityId: "47f91740-2271-4ea7-9699-3244ee9a562d",
-        startTime: "13:00",
-        endTime: "21:00",
-        interval: 60,
-      },
-    ],
-    Wed: [
-      {
-        availabilityId: "019279e2-2a42-4e75-a388-60f91069fdad",
-        startTime: "13:00",
-        endTime: "21:00",
-        interval: 60,
-      },
-    ],
-    Thu: [
-      {
-        availabilityId: "02977aef-a963-4e7c-8e5e-18e1dc190b27",
-        startTime: "13:00",
-        endTime: "21:00",
-        interval: 60,
-      },
-    ],
-  };
+function ScheduleProfile({ professionalId }) {
+  const {
+    availabilities,
+    availabilitiesLoading,
+    availabilitiesError,
+    setAvailabilities,
+  } = useGetAvailabilitiesByProfessional(professionalId);
 
   return (
     <div className="professional-profile_schedule-section">
@@ -65,7 +34,7 @@ function ScheduleProfile() {
             <ScheduleCard
               key={weekDay}
               day={weekDay}
-              schedules={schedules[`${weekDay}`]}
+              schedules={availabilities[`${weekDay}`]}
             />
           ))}
         </div>
@@ -78,6 +47,9 @@ function ScheduleProfile() {
           </button>
         </div>
       </div>
+
+      {true &&
+        createPortal(<GetBooking professionalId={professionalId} />, document.getElementById("root-portal"))}
     </div>
   );
 }

@@ -40,6 +40,11 @@
   --header-mobile-font-color: #81041b;
 }
 
+.rdp-root {
+  --rdp-day-height: "50px";
+  --rdp-day-width: "50px";
+}
+
 ::-webkit-scrollbar {
   width: 9px;
 }
@@ -63,6 +68,11 @@ html {
 
 body {
   font-family: var(--primary-font);
+}
+
+#root-portal {
+  position: fixed;
+  z-index: 99999999999999999999999999999999999;
 }
 
 * {

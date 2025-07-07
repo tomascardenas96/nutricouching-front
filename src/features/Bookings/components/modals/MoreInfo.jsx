@@ -3,7 +3,7 @@ import { RiCalendarScheduleFill } from "react-icons/ri";
 import { toast } from "sonner";
 import { useAuthUser } from "../../../auth/hooks/useAuthUser";
 import { useLoginModal } from "../../../auth/hooks/useLoginModal";
-import { reviews } from "../../../services/components/reviews/reviews";
+// import { reviews } from "../../../services/components/reviews/reviews";
 import "./MoreInfo.css";
 import ReservationModal from "./ReservationModal";
 
@@ -36,36 +36,6 @@ function MoreInfo({
             <p>Con LORENA ARLAN y NATASHA DIRIALDI</p>
           </div>
           <img src="/src/public/assets/tree-logo.png" alt="logo-service" />
-        </div>
-
-        <div className="service-modal_body">
-          {title === "Coaching" ? (
-            <>
-              <p>{reviews[0]}</p>
-              <br />
-              <p>{reviews[1]}</p>
-            </>
-          ) : title === "Plan Inteligente" ? (
-            <>
-              <p>{reviews[2]}</p>
-              <br />
-              <p>{reviews[3]}</p>
-            </>
-          ) : title === "Guia alimentaria personalizada" ? (
-            <>
-              <p>{reviews[4]}</p>
-              <br />
-              <p>{reviews[5]}</p>
-            </>
-          ) : title === "Asesoramiento continuo" ? (
-            <>
-              <p>{reviews[6]}</p>
-              <br />
-              <p>{reviews[7]}</p>
-            </>
-          ) : (
-            <p>No hay descripcion para mostrar.</p>
-          )}
         </div>
 
         <div className="service-modal_footer">

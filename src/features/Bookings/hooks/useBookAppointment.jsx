@@ -3,10 +3,9 @@ import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 
 function useBookAppointment(
-  setIsRequestReservationOpen,
+  onClose,
   date,
   time,
-  serviceId,
   userId,
   professionalId,
   specialtyId,
@@ -37,10 +36,9 @@ function useBookAppointment(
           startTime: time,
           endTime: filteredDate.endTime,
           interval: filteredDate.interval,
-          serviceId,
-          userId,
           professionalId,
         };
+
         try {
           const response = await fetch(`${HOST}/booking/create`, {
             method: "POST",
@@ -71,7 +69,7 @@ function useBookAppointment(
       loading: "Procesando turno...",
       success: (data) => {
         setTimeout(() => {
-          setIsRequestReservationOpen(false);
+          onClose(false);
         }, 1000);
 
         return "Turno reservado exitosamente!";

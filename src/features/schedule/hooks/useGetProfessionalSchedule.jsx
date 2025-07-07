@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { HOST } from "../../../api/data";
 
-function useGetProfessionalSchedule(selectedProfessional) {
+function useGetProfessionalSchedule(professionalId) {
   const authToken = localStorage.getItem("authToken");
 
   const [selectedTime, setSelectedTime] = useState(null);
@@ -13,9 +13,15 @@ function useGetProfessionalSchedule(selectedProfessional) {
   useEffect(() => {
     const getProfessionalSchedule = async () => {
       try {
-        if (selectedProfessional && selectedDate) {
+        if (professionalId && selectedDate) {
+          const year = selectedDate.getUTCFullYear();
+          const month = String(selectedDate.getUTCMonth() + 1).padStart(2, "0");
+          const day = String(selectedDate.getUTCDate()).padStart(2, "0");
+
+          const formattedDate = `${year}-${month}-${day}`;
+
           const response = await fetch(
-            `${HOST}/availability?professional=${selectedProfessional}&date=${selectedDate}`,
+            `${HOST}/availability?professional=${professionalId}&date=${formattedDate}`,
             {
               method: "GET",
               headers: {
@@ -37,10 +43,10 @@ function useGetProfessionalSchedule(selectedProfessional) {
       }
     };
 
-    if (selectedDate !== null && selectedProfessional) {
+    if (selectedDate !== null && professionalId) {
       getProfessionalSchedule();
     }
-  }, [selectedDate, selectedProfessional]);
+  }, [selectedDate, professionalId]);
 
   return {
     professionalSchedule,

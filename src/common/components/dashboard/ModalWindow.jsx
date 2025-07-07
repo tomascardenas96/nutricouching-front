@@ -1,12 +1,14 @@
 import "./ModalWindow.css";
 import { IoMdClose } from "react-icons/io";
 
-function ModalWindow({ children, title, onSubmit, onClose }) {
+function ModalWindow({ children, title, onSubmit, onClose, icon }) {
   return (
     <div className="modal-window_background" onClick={onClose}>
       <div className="modal-window" onClick={(e) => e.stopPropagation()}>
         <div className="modal-window_header">
-          <h1>{title}</h1>
+          <h1>
+            {icon} {title}
+          </h1>
           <IoMdClose className="close-icon" onClick={onClose} />
         </div>
 

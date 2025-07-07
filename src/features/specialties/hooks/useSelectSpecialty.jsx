@@ -4,7 +4,7 @@ function useSelectSpecialty() {
   const [selectedSpecialty, setSelectedSpecialty] = useState(null);
 
   const selectSpecialty = (specialty) => {
-    setSelectedSpecialty(specialty);
+    setSelectedSpecialty(specialty.specialtyId);
   };
 
   return { selectSpecialty, selectedSpecialty };

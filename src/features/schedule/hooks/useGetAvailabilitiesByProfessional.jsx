@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
 
-function useGetAvailabilitiesByProfessional() {
+function useGetAvailabilitiesByProfessional(professionalId) {
   const authToken = localStorage.getItem("authToken");
-  const { user } = useAuthUser();
-  const professionalId = user?.professional?.professionalId;
 
   const [availabilities, setAvailabilities] = useState([]);
   const [availabilitiesLoading, setAvailabilitiesLoading] = useState(false);

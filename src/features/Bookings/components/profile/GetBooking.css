@@ -1,0 +1,196 @@
+.get-booking_modal {
+  width: 35rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0 2rem;
+  transition: all 0.3s ease;
+
+  & input {
+    display: none;
+  }
+
+  & label {
+    transition: all 0.3s ease;
+  }
+
+  .radio-input:checked + label {
+    background-color: rgba(0, 0, 0, 0.756);
+    color: white;
+    font-weight: 500;
+  }
+
+  .radio-input:checked + label:hover {
+    transform: none;
+    background-color: rgba(0, 0, 0, 0.756);
+  }
+
+  .radio-input + label:hover {
+    transform: scale(1.01);
+    background-color: rgba(128, 128, 128, 0.121);
+  }
+
+  & h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.get-booking_modal .specialties-by-professional_list {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  & label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    height: 3rem;
+    align-items: center;
+    border-radius: 0.3rem;
+    border: 1px solid rgba(0, 0, 0, 0.148);
+    cursor: pointer;
+    justify-content: center;
+  }
+}
+
+.get-booking_modal .date-picker {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.132);
+  margin: 1rem 0;
+
+  > .myCalendar {
+    margin-top: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.174);
+    padding: 1rem;
+    border-radius: 0.3rem;
+
+    & .rdp-caption_label {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    & .rdp-chevron {
+      font-weight: 500;
+      fill: rgb(46, 46, 46);
+    }
+
+    & .rdp-selected .rdp-day_button {
+      border-radius: 0.4rem;
+      background-color: rgba(0, 0, 0, 0.756);
+      color: white;
+      border: none;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    & .rdp-day_button {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.get-booking_modal hr {
+  width: 85%;
+  border-top: 1px solid rgba(0, 0, 0, 0.132);
+}
+
+.get-booking_modal .available-times {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  border: 1px dashed rgba(0, 0, 0, 0.233);
+  border-radius: 0.5rem;
+  padding: 1.5rem 1.5rem 2.5rem;
+  animation: show-up 0.3s ease-out;
+
+  > p {
+    font-size: 0.8rem;
+  }
+
+  > h2,
+  p {
+    text-align: center;
+  }
+
+  /* & input {
+    display: none;
+  } */
+
+  > .times-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    & label {
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      height: 3rem;
+      border-radius: 0.4rem;
+      border: 1px solid rgba(0, 0, 0, 0.148);
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.7rem;
+      transition: all 1s ease;
+    }
+  }
+}
+
+@keyframes show-up {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.get-booking_modal .summary-booking {
+  border-top: 1px solid rgba(0, 0, 0, 0.132);
+  width: 85%;
+  padding: 1.5rem 0;
+
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 1.5rem;
+    border-radius: 0.8rem;
+    background-color: rgba(129, 222, 129, 0.121);
+    margin-top: 1rem;
+    border: 1px solid rgba(129, 222, 129, 0.212);
+
+    > .summary-details {
+      font-size: 0.85rem;
+      padding: 0.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    > .right {
+      text-align: end;
+    }
+  }
+}

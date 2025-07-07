@@ -1,10 +1,10 @@
 import ScheduleProfile from "../../schedule/components/profile/ScheduleProfile";
 import "./LeftContainer.css";
 
-function LeftContainer() {
+function LeftContainer({ professionalId }) {
   return (
     <div className="profile-posts_left-container">
-      <ScheduleProfile />
+      <ScheduleProfile professionalId={professionalId} />
     </div>
   );
 }

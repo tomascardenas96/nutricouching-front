@@ -1,10 +1,14 @@
 import { getSpanishDay } from "../../../../../lib/date";
+import { useAuthUser } from "../../../../auth/hooks/useAuthUser";
 import useGetAvailabilitiesByProfessional from "../../../../schedule/hooks/useGetAvailabilitiesByProfessional";
 import { orderSchedules } from "../../../lib/scheduleLibrary";
 import "./SchedulesProfessionalDashboard.css";
 
 function SchedulesProfessionalDashboard() {
-  const { availabilities } = useGetAvailabilitiesByProfessional();
+  const { user } = useAuthUser();
+  const professionalId = user?.professional?.professionalId;
+
+  const { availabilities } = useGetAvailabilitiesByProfessional(professionalId);
 
   return (
     <table className="schedules-professional-dashboard_table">

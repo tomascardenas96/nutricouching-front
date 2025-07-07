@@ -6,7 +6,6 @@
 .professional-profile_schedule-section .title {
   border-radius: 0.3rem 0.3rem 0 0;
   height: 4.6rem;
-  /* background: linear-gradient(to right, #4c8764, #5dac85); */
   display: flex;
   align-items: center;
   padding: 0 1rem;
@@ -25,8 +24,6 @@
   }
 
   > .text {
-    /* color: white; */
-
     > h1 {
       font-size: 0.9rem;
       font-weight: 500;
@@ -52,7 +49,6 @@
 }
 
 .professional-profile_schedule-section .body .get-booking {
-  /* background-color: #e9fff2; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +56,7 @@
 
   > button {
     height: 2.2rem;
-    width: 85%;
+    width: 100%;
     margin-bottom: 0.7rem;
     background: linear-gradient(to right, #4c8764, #5dac85);
     border: none;

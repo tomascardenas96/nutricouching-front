@@ -43,7 +43,7 @@ function Profile() {
         </div>
 
         <div className="content_right-container">
-          <LeftContainer />
+          <LeftContainer professionalId={professionalProfile?.professionalId} />
         </div>
       </div>
     </div>
