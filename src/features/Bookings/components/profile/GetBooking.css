@@ -32,7 +32,7 @@
   }
 
   & h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     display: flex;
     justify-content: center;
@@ -193,4 +193,38 @@
       text-align: end;
     }
   }
+}
+
+.get-booking_modal .booking-buttons {
+  width: 85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-top: 0.4rem;
+
+  > button {
+    height: 2.3rem;
+    border: 1px solid rgba(0, 0, 0, 0.098);
+    border-radius: 0.2rem;
+    background-color: #f6f6f6;
+    cursor: pointer;
+  }
+
+  > button[type="submit"] {
+    background-color: rgba(0, 0, 0, 0.756);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  > .enabled-button {
+    background-color: green;
+  }
+}
+
+button[type="submit"] .enabled-button {
+  background-color: red;
+  color: green;
 }

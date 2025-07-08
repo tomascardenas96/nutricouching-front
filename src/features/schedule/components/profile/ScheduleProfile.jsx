@@ -6,6 +6,7 @@ import ScheduleCard from "./ScheduleCard";
 import "./ScheduleProfile.css";
 import { createPortal } from "react-dom";
 import GetBooking from "../../../bookings/components/profile/GetBooking";
+import { useState } from "react";
 
 function ScheduleProfile({ professionalId }) {
   const {
@@ -14,6 +15,8 @@ function ScheduleProfile({ professionalId }) {
     availabilitiesError,
     setAvailabilities,
   } = useGetAvailabilitiesByProfessional(professionalId);
+
+  const [isGetBookingModalOpen, setIsGetBookingModalOpen] = useState(false);
 
   return (
     <div className="professional-profile_schedule-section">
@@ -40,7 +43,7 @@ function ScheduleProfile({ professionalId }) {
         </div>
 
         <div className="get-booking">
-          <button>
+          <button onClick={() => setIsGetBookingModalOpen(true)}>
             <AiOutlineSchedule className="icon" />
             Solicitar Turno
             <IoIosArrowForward className="icon" />
@@ -48,8 +51,14 @@ function ScheduleProfile({ professionalId }) {
         </div>
       </div>
 
-      {true &&
-        createPortal(<GetBooking professionalId={professionalId} />, document.getElementById("root-portal"))}
+      {isGetBookingModalOpen &&
+        createPortal(
+          <GetBooking
+            professionalId={professionalId}
+            onClose={() => setIsGetBookingModalOpen(false)}
+          />,
+          document.getElementById("root-portal")
+        )}
     </div>
   );
 }

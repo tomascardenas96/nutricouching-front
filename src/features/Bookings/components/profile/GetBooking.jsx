@@ -1,16 +1,17 @@
 import { useEffect, useRef } from "react";
 import { DayPicker } from "react-day-picker";
+import { FaCalendar } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
-import { MdOutlineSchedule } from "react-icons/md";
+import { MdEditNote, MdOutlineSchedule } from "react-icons/md";
 import { TbHandFingerRight } from "react-icons/tb";
 import ModalWindow from "../../../../common/components/dashboard/ModalWindow";
 import useGetProfessionalSchedule from "../../../schedule/hooks/useGetProfessionalSchedule";
 import useGetAllSpecialtiesByProfessional from "../../../specialties/hooks/useGetAllSpecialtiesByProfessional";
 import useSelectSpecialty from "../../../specialties/hooks/useSelectSpecialty";
-import "./GetBooking.css";
 import useBookAppointment from "../../hooks/useBookAppointment";
+import "./GetBooking.css";
 
-function GetBooking({ professionalId }) {
+function GetBooking({ professionalId, onClose }) {
   const {
     professionalSchedule,
     setSelectedDate,
@@ -26,7 +27,10 @@ function GetBooking({ professionalId }) {
 
   const { selectSpecialty, selectedSpecialty } = useSelectSpecialty();
 
-  const { handleSubmitBookAppointment } = useBookAppointment();
+  const { handleSubmitBookAppointment } = useBookAppointment(
+    onClose,
+    professionalSchedule
+  );
 
   // Hoy
   const today = new Date();
@@ -52,7 +56,15 @@ function GetBooking({ professionalId }) {
     <ModalWindow
       title="Solicitar Turno"
       icon={<FiUser />}
-      onSubmit={() => alert("Alerta")}
+      onSubmit={(e) =>
+        handleSubmitBookAppointment(
+          e,
+          selectedDate,
+          selectedTime,
+          professionalId,
+          selectedSpecialty
+        )
+      }
     >
       <div className="get-booking_modal" ref={modalElement}>
         <div className="specialties-by-professional_list">
@@ -128,7 +140,9 @@ function GetBooking({ professionalId }) {
 
         {selectedTime && (
           <div className="summary-booking">
-            <h2>Resumen del Turno</h2>
+            <h2>
+              <MdEditNote /> Resumen del Turno
+            </h2>
 
             <div>
               <div className="summary-details left">
@@ -145,6 +159,26 @@ function GetBooking({ professionalId }) {
               </div>
             </div>
           </div>
+        )}
+
+        {selectedSpecialty && (
+          <>
+            <hr />
+            <div className="booking-buttons">
+              <button>Cancelar</button>
+              <button
+                className={`${
+                  !!selectedSpecialty &&
+                  !!selectedDate &&
+                  !!selectedTime &&
+                  "enabled-button"
+                }`}
+                type="submit"
+              >
+                <FaCalendar /> Confirmar Turno
+              </button>
+            </div>
+          </>
         )}
       </div>
     </ModalWindow>
