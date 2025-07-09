@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { HOST } from "../../../api/data";
 import { useParams } from "react-router-dom";
 
-function useGetProfile() {
-  const [professionalProfile, setProfessionalProfile] = useState({});
+function useGetProfileByName() {
+  const [profile, setProfile] = useState({});
   const [profileLoading, setProfileLoading] = useState(true);
   const [profileError, setProfileError] = useState(null);
   const { slug } = useParams();
@@ -15,13 +15,13 @@ function useGetProfile() {
 
   const getProfileInformation = async () => {
     try {
-      const response = await fetch(`${HOST}/professional/${slug}`);
+      const response = await fetch(`${HOST}/profile/name/${slug}`);
 
       if (!response.ok) throw new Error();
 
       const data = await response.json();
 
-      setProfessionalProfile(data);
+      setProfile(data);
     } catch (error) {
       setProfileError(true);
     } finally {
@@ -29,7 +29,7 @@ function useGetProfile() {
     }
   };
 
-  return { professionalProfile, profileLoading, profileError };
+  return { profile, setProfile, profileLoading, profileError };
 }
 
-export default useGetProfile;
+export default useGetProfileByName;

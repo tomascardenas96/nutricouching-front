@@ -1,21 +1,33 @@
+import { AiFillSchedule } from "react-icons/ai";
+import { BsThreeDots } from "react-icons/bs";
+import { FaLocationDot } from "react-icons/fa6";
+import { GrFacebookOption } from "react-icons/gr";
 import CoverPhoto from "./CoverPhoto";
 import ProfilePicture from "./ProfilePicture";
 import "./ProfilePresentation.css";
-import { FaLocationDot } from "react-icons/fa6";
-import { AiFillSchedule } from "react-icons/ai";
-import { GrFacebookOption } from "react-icons/gr";
-import { BsThreeDots } from "react-icons/bs";
 
-function ProfilePresentation({ professionalProfile }) {
+function ProfilePresentation({
+  professional,
+  professionalProfile,
+  setProfessionalProfile,
+}) {
   return (
     <div className="professional-profile">
-      <CoverPhoto>
-        <ProfilePicture image={professionalProfile?.profile?.picture} />
+      <CoverPhoto
+        image={professionalProfile?.coverPhoto}
+        setProfessionalProfile={setProfessionalProfile}
+        profileId={professionalProfile?.profileId}
+      >
+        <ProfilePicture
+          image={professionalProfile?.picture}
+          profileId={professionalProfile?.profileId}
+          setProfessionalProfile={setProfessionalProfile}
+        />
       </CoverPhoto>
 
       <div className="professional-profile_info">
         <h1>
-          {professionalProfile?.fullname}.{" "}
+          {professional?.fullname}.{" "}
           <span>
             <BsThreeDots />
           </span>

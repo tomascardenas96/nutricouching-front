@@ -48,3 +48,47 @@
     right: 2.3rem;
   }
 }
+
+.submit-button {
+  width: 85%;
+  gap: 1rem;
+  justify-self: center;
+  height: 5rem;
+
+  & hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.132);
+  }
+
+  > .booking-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 0.9rem;
+    gap: 1rem;
+
+    > button {
+      height: 3.03rem;
+      border: 1px solid rgba(0, 0, 0, 0.098);
+      border-radius: 0.2rem;
+      background-color: #f6f6f6;
+      cursor: pointer;
+    }
+
+    > .enabled-button,
+    .disabled-button {
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    > .enabled-button {
+      background-color: rgba(0, 0, 0, 0.756);
+    }
+
+    > .disabled-button {
+      background-color: rgba(0, 0, 0, 0.247);
+      cursor: default;
+    }
+  }
+}

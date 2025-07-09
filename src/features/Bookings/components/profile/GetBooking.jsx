@@ -65,6 +65,9 @@ function GetBooking({ professionalId, onClose }) {
           selectedSpecialty
         )
       }
+      onClose={onClose}
+      buttonText="Confirmar Turno"
+      isButtonEnabled={selectedDate && selectedTime && selectedSpecialty}
     >
       <div className="get-booking_modal" ref={modalElement}>
         <div className="specialties-by-professional_list">
@@ -159,26 +162,6 @@ function GetBooking({ professionalId, onClose }) {
               </div>
             </div>
           </div>
-        )}
-
-        {selectedSpecialty && (
-          <>
-            <hr />
-            <div className="booking-buttons">
-              <button>Cancelar</button>
-              <button
-                className={`${
-                  !!selectedSpecialty &&
-                  !!selectedDate &&
-                  !!selectedTime &&
-                  "enabled-button"
-                }`}
-                type="submit"
-              >
-                <FaCalendar /> Confirmar Turno
-              </button>
-            </div>
-          </>
         )}
       </div>
     </ModalWindow>

@@ -2,11 +2,21 @@ import PostsSection from "../../posts/components/PostsSection";
 import LeftContainer from "../components/LeftContainer";
 import ProfilePresentation from "../components/ProfilePresentation";
 import RightContainer from "../components/RightContainer";
-import useGetProfile from "../hooks/useGetProfile";
+import useGetProfile from "../../professional/hooks/useGetProfessionalByProfilename";
 import "./Profile.css";
+import useGetProfessionalByProfilename from "../../professional/hooks/useGetProfessionalByProfilename";
+import useGetProfileByName from "../hooks/useGetProfileByName";
 
 function Profile() {
-  const { professionalProfile, profileLoading, profileError } = useGetProfile();
+  const {
+    professional,
+    setProfessional,
+    professionalLoading,
+    professionalError,
+  } = useGetProfessionalByProfilename();
+
+  const { profile, setProfile, profileLoading, profileError } =
+    useGetProfileByName();
 
   if (profileLoading) {
     return (
@@ -16,7 +26,7 @@ function Profile() {
     );
   }
 
-  if (Object.keys(professionalProfile).length === 0)
+  if (Object.keys(professional).length === 0)
     return (
       <div className="no-user-profile">
         <h1>Perfil no existente</h1>
@@ -26,7 +36,11 @@ function Profile() {
   return (
     <div className="profile-container" id="profile">
       <div className="presentation-section">
-        <ProfilePresentation professionalProfile={professionalProfile} />
+        <ProfilePresentation
+          professional={professional}
+          professionalProfile={profile}
+          setProfessionalProfile={setProfile}
+        />
       </div>
 
       <div className="profile-content">
@@ -36,14 +50,14 @@ function Profile() {
 
         <div className="content_center-container">
           <PostsSection
-            profileId={professionalProfile?.profile.profileId}
-            profilePicture={professionalProfile?.profile.picture}
-            name={professionalProfile?.fullname}
+            profileId={profile?.profileId}
+            profilePicture={profile?.picture}
+            name={professional?.fullname}
           />
         </div>
 
         <div className="content_right-container">
-          <LeftContainer professionalId={professionalProfile?.professionalId} />
+          <LeftContainer professionalId={professional?.professionalId} />
         </div>
       </div>
     </div>
