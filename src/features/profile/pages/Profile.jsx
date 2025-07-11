@@ -45,7 +45,11 @@ function Profile() {
 
       <div className="profile-content">
         <div className="content_left-container">
-          <RightContainer />
+          <LeftContainer
+            profile={profile}
+            email={professional?.email}
+            professionalId={professional?.professionalId}
+          />
         </div>
 
         <div className="content_center-container">
@@ -57,7 +61,7 @@ function Profile() {
         </div>
 
         <div className="content_right-container">
-          <LeftContainer professionalId={professional?.professionalId} />
+          <RightContainer professionalId={professional?.professionalId} />
         </div>
       </div>
     </div>

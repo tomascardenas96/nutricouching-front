@@ -13,9 +13,8 @@
     align-items: center;
     justify-content: space-between;
     padding-right: 1rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     letter-spacing: -0.2px;
-    font-family: var(--fourthy-font);
 
     > span {
       width: 2rem;
@@ -26,11 +25,12 @@
       border-radius: 50%;
       border: 1px solid rgba(0, 0, 0, 0.112);
       cursor: pointer;
+      position: relative;
     }
   }
 
   > p {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
   }
@@ -44,7 +44,7 @@
     > span {
       font-size: 0.75rem;
       display: flex;
-      gap: 0.2rem;
+      gap: 0.4rem;
       align-items: center;
     }
   }

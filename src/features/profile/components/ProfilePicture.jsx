@@ -4,9 +4,14 @@ import "./ProfilePicture.css";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { IoMdClose } from "react-icons/io";
-import UploadPhotoModal from "./UploadPhotoModal";
+import UploadPhotoModal from "./modals/UploadPhotoModal";
 
-function ProfilePicture({ image, profileId, setProfessionalProfile }) {
+function ProfilePicture({
+  image,
+  profileId,
+  setProfessionalProfile,
+  isProfileOwner,
+}) {
   const [isFullPhotoSelected, setIsFullPhotoSelected] = useState(false);
   const [isUploadProfilePictureOpen, setIsUploadProfilePictureOpen] =
     useState(false);
@@ -25,13 +30,15 @@ function ProfilePicture({ image, profileId, setProfessionalProfile }) {
           onClick={() => setIsFullPhotoSelected(true)}
         />
       )}
-      <label
-        className="upload-icon"
-        htmlFor="upload-professional-file"
-        onClick={() => setIsUploadProfilePictureOpen(true)}
-      >
-        <FaCamera />
-      </label>
+      {isProfileOwner && (
+        <label
+          className="upload-icon"
+          htmlFor="upload-professional-file"
+          onClick={() => setIsUploadProfilePictureOpen(true)}
+        >
+          <FaCamera />
+        </label>
+      )}
 
       {isFullPhotoSelected &&
         createPortal(

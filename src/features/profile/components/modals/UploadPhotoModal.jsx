@@ -1,7 +1,7 @@
 import { FaCamera } from "react-icons/fa";
-import ModalWindow from "../../../common/components/dashboard/ModalWindow";
+import ModalWindow from "../../../../common/components/dashboard/ModalWindow";
 import "./UploadPhotoModal.css";
-import useUpdateProfilePhoto from "../hooks/useUpdateProfilePhoto";
+import useUpdateProfilePhoto from "../../hooks/useUpdateProfilePhoto";
 
 function UploadPhotoModal({ profileId, onClose, setProfessionalProfile }) {
   const {

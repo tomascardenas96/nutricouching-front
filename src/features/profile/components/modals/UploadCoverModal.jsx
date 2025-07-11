@@ -1,6 +1,6 @@
 import { FaCamera } from "react-icons/fa";
-import ModalWindow from "../../../common/components/dashboard/ModalWindow";
-import useUpdateProfileCover from "../hooks/useUpdateProfileCover";
+import ModalWindow from "../../../../common/components/dashboard/ModalWindow";
+import useUpdateProfileCover from "../../hooks/useUpdateProfileCover";
 import "./UploadCoverModal.css";
 
 function UploadCoverModal({ profileId, onClose, setProfessionalProfile }) {

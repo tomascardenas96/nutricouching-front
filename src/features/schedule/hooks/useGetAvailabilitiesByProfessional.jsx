@@ -31,7 +31,6 @@ function useGetAvailabilitiesByProfessional(professionalId) {
 
         setAvailabilities(data);
       } catch (error) {
-        console.error(error);
         setAvailabilitiesError(error);
       } finally {
         setAvailabilitiesLoading(false);
