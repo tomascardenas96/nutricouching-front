@@ -4,6 +4,7 @@ import FilteredProfessionalsSection from "../components/filter/FilteredProfessio
 import useFilterQueries from "../hooks/useFilterQueries";
 import "./ProfessionalsFilterPage.css";
 import useGetSpecialtiesByCategory from "../../specialties/hooks/useGetSpecialtiesByCategory";
+import useSelectCategoryFilter from "../../specialties/hooks/useSelectCategoryFilter";
 
 const categories = [
   {
@@ -29,14 +30,20 @@ const categories = [
 ];
 
 function ProfessionalsFilterPage() {
-  const { filters, handleChange, clearQueries, selectedCategory } =
-    useFilterQueries();
   const queryClient = new QueryClient();
 
-  const { specialties, specialtiesLoading, specialtiesError } =
-    useGetSpecialtiesByCategory(selectedCategory);
+  const { selectedCategory, setSelectedCategory, handleSelectCategory } =
+    useSelectCategoryFilter();
 
-  console.log(specialties);
+  const { filters, handleChange, clearQueries } = useFilterQueries();
+
+  const { specialties, specialtiesLoading, specialtiesError } =
+    useGetSpecialtiesByCategory(
+      selectedCategory,
+      setSelectedCategory,
+      categories,
+      filters
+    );
 
   return (
     <div className="professionals-filter-page">
@@ -99,13 +106,10 @@ function ProfessionalsFilterPage() {
                           filters.category.toLowerCase() ===
                           category.name.toLowerCase()
                         }
-                        onChange={(e) =>
-                          handleChange(
-                            "category",
-                            category.name,
-                            category.categoryId
-                          )
-                        }
+                        onChange={(e) => {
+                          handleChange("category", category.name);
+                          handleSelectCategory(e.target.value);
+                        }}
                       />
                       {category.name}
                       <span>N items</span>
@@ -120,26 +124,30 @@ function ProfessionalsFilterPage() {
             <div className="block-container option-fields">
               <h3>ESPECIALIDAD</h3>
               <div className="input-items-container">
-                {specialties?.map((specialty) => (
-                  <div key={specialty.specialtyId}>
-                    <label>
-                      <input
-                        type="radio"
-                        name="specialty"
-                        value={filters.specialty}
-                        checked={
-                          filters.specialty.toLowerCase() ===
-                          specialty.name.toLowerCase()
-                        }
-                        onChange={(e) =>
-                          handleChange("specialty", specialty.name)
-                        }
-                      />
-                      {specialty.name}
-                      <span>N items</span>
-                    </label>
-                  </div>
-                ))}
+                {specialties.length === 0 ? (
+                  <p>Seleccione una categoria</p>
+                ) : (
+                  specialties?.map((specialty) => (
+                    <div key={specialty.specialtyId}>
+                      <label>
+                        <input
+                          type="radio"
+                          name="specialty"
+                          value={filters.specialty}
+                          checked={
+                            filters.specialty.toLowerCase() ===
+                            specialty.name.toLowerCase()
+                          }
+                          onChange={(e) =>
+                            handleChange("specialty", specialty.name)
+                          }
+                        />
+                        {specialty.name}
+                        <span>N items</span>
+                      </label>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </form>

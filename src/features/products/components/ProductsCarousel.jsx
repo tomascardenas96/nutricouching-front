@@ -43,12 +43,7 @@ function ProductsCarousel({
 
   return (
     <div className="products-carousel_container">
-      <div className="carousel-header">
-        <p>
-          Mirá los ultimos productos que ingresaron{" "}
-          <span className="carousel-more">Ver más</span>
-        </p>
-      </div>
+      <div className="carousel-header"></div>
 
       <div className="product-list">
         {/* Loader */}
