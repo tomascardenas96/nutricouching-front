@@ -3,19 +3,40 @@ import { CiSearch } from "react-icons/ci";
 import FilteredProfessionalsSection from "../components/filter/FilteredProfessionalsSection";
 import useFilterQueries from "../hooks/useFilterQueries";
 import "./ProfessionalsFilterPage.css";
+import useGetSpecialtiesByCategory from "../../specialties/hooks/useGetSpecialtiesByCategory";
 
 const categories = [
-  "Nutricion",
-  "Fitness",
-  "Mindfulness",
-  "Psicologia",
-  "Coaching",
+  {
+    categoryId: "0b39debd-b730-4d94-a3c1-3f2363f2c35b",
+    name: "Nutricion",
+  },
+  {
+    categoryId: "38e3814f-f168-4712-adb1-5a7ada84103e",
+    name: "Fitness",
+  },
+  {
+    categoryId: "8131bced-58b1-4848-8912-a4a234ce8ce3",
+    name: "Mindfulness",
+  },
+  {
+    categoryId: "a75f928d-60e7-4d57-9cae-dd24f149b57b",
+    name: "Psicologia",
+  },
+  {
+    categoryId: "6c3dd98e-797f-452d-b626-d990c1560adb",
+    name: "Coaching",
+  },
 ];
-const specialties = ["Coach Deportivo", "Coach Ontologico"];
 
 function ProfessionalsFilterPage() {
-  const { filters, handleChange, clearQueries } = useFilterQueries();
+  const { filters, handleChange, clearQueries, selectedCategory } =
+    useFilterQueries();
   const queryClient = new QueryClient();
+
+  const { specialties, specialtiesLoading, specialtiesError } =
+    useGetSpecialtiesByCategory(selectedCategory);
+
+  console.log(specialties);
 
   return (
     <div className="professionals-filter-page">
@@ -67,20 +88,26 @@ function ProfessionalsFilterPage() {
             <div className="block-container option-fields">
               <h3>CATEGORIA</h3>
               <div className="input-items-container">
-                {categories.map((category) => (
-                  <div key={category}>
+                {categories?.map((category) => (
+                  <div key={category.categoryId}>
                     <label>
                       <input
                         type="radio"
                         name="category"
-                        value={filters.category}
+                        value={category.categoryId}
                         checked={
                           filters.category.toLowerCase() ===
-                          category.toLowerCase()
+                          category.name.toLowerCase()
                         }
-                        onChange={(e) => handleChange("category", category)}
+                        onChange={(e) =>
+                          handleChange(
+                            "category",
+                            category.name,
+                            category.categoryId
+                          )
+                        }
                       />
-                      {category}
+                      {category.name}
                       <span>N items</span>
                     </label>
                   </div>
@@ -94,7 +121,7 @@ function ProfessionalsFilterPage() {
               <h3>ESPECIALIDAD</h3>
               <div className="input-items-container">
                 {specialties?.map((specialty) => (
-                  <div key={specialty}>
+                  <div key={specialty.specialtyId}>
                     <label>
                       <input
                         type="radio"
@@ -102,11 +129,13 @@ function ProfessionalsFilterPage() {
                         value={filters.specialty}
                         checked={
                           filters.specialty.toLowerCase() ===
-                          specialty.toLowerCase()
+                          specialty.name.toLowerCase()
                         }
-                        onChange={(e) => handleChange("specialty", specialty)}
+                        onChange={(e) =>
+                          handleChange("specialty", specialty.name)
+                        }
                       />
-                      {specialty}
+                      {specialty.name}
                       <span>N items</span>
                     </label>
                   </div>

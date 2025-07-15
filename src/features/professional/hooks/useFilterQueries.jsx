@@ -11,6 +11,8 @@ function useFilterQueries() {
     specialty: "",
   });
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
 
@@ -33,11 +35,15 @@ function useFilterQueries() {
     navigate(`/filter/professionals?${params.toString()}`, { replace: true });
   }, [filters]);
 
-  const handleChange = (key, value) => {
+  const handleChange = (key, value, id) => {
     setFilters((prev) => ({
       ...prev,
       [key]: value,
     }));
+
+    if (key === "category") {
+      setSelectedCategory(id);
+    }
   };
 
   const clearQueries = () => {
@@ -48,7 +54,7 @@ function useFilterQueries() {
     });
   };
 
-  return { handleChange, filters, clearQueries };
+  return { handleChange, filters, clearQueries, selectedCategory };
 }
 
 export default useFilterQueries;
