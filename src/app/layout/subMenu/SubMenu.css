@@ -3,14 +3,21 @@
   width: 100%;
   height: 1.6rem;
   overflow: hidden;
-  background: linear-gradient(#414d6d, #283f7b);
+  /* background: linear-gradient(to right, #30c5d2, #471069); */
+  /* background: linear-gradient(90deg, hsla(35, 79%, 68%, 1) 0%, hsla(286, 44%, 49%, 1) 100%); */
+/* background: linear-gradient(90deg, hsla(208, 33%, 21%, 1) 0%, hsla(211, 36%, 46%, 1) 100%); */
+background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+
+
+
+
   display: flex;
   align-items: center;
   color: white;
   font-family: var(--primary-font);
   font-size: 0.8rem;
   padding-bottom: 0.2rem;
-  border-radius: 0.1rem;
+  /* border-radius: 0.1rem; */
   margin-bottom: 0.3rem;
 }
 

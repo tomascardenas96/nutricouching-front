@@ -45,12 +45,12 @@
 }
 
 .product-card_container img {
-  width: 9.5375rem;
+  width: 8.9rem;
   height: 8.5rem;
   object-fit: cover;
   object-position: center;
   transition: opacity 0.3s ease; /* Transición suave para la imagen */
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
 }
 
 .add-to-cart_icon {

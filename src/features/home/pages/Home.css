@@ -17,16 +17,16 @@
       font-size: 1rem;
       display: flex;
       justify-content: center;
-      color: #9c6a3fb9;
+      color: #4d4d4d;
       background-color: #f6f6f6;
-      padding: 0 1.6rem;
+      padding: 0 2rem;
       font-weight: 500;
     }
 
     > hr {
       position: absolute;
       width: 32rem;
-      border-color: #9c6a3f27;
+      border-color: #4d4d4d1d;
       z-index: -1;
       justify-self: center;
       top: 50%;
@@ -66,19 +66,23 @@
 }
 
 .recipes_container {
-  display: flex;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
-.about-us_container {
-  min-height: 75rem;
-  display: grid;
-  place-content: center;
-  position: relative;
+.faq_container {
+  min-height: 45rem;
+  margin-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.home-container .home-section .quotes_container {
+  display: flex;
+  justify-content: center;
+  height: 27rem;
 }
 
 .footer_container {
-  height: 29rem;
+  height: 26rem;
   width: 100%;
 }
 

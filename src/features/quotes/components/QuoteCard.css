@@ -1,0 +1,63 @@
+.quote-card {
+  background-color: white;
+  height: 16rem;
+  width: 100%;
+  position: relative;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+}
+
+.quote-card .quote-icon {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  top: -2.5rem;
+
+  > div {
+    background-color: white;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.quote-card .body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+
+  > p {
+    font-size: 0.75rem;
+    height: 5.4169rem;
+    line-height: 1.2rem;
+  }
+
+  > .name {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    > h1 {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.quote-card .body .stars-icon-list {
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
+  font-size: 1.2rem;
+  color: #f4cc3a;
+}

@@ -1,0 +1,11 @@
+.quotes_container {
+  display: flex;
+}
+
+.quotes_container .list {
+  width: 60rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}

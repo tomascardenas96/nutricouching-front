@@ -1,7 +1,9 @@
 import About from "../../About/components/About";
 import Categories from "../../category/components/Categories";
+import Faq from "../../faq/components/Faq";
 import Presentation from "../../Presentation/Presentation";
 import Products from "../../products/components/Products";
+import Quotes from "../../quotes/components/Quotes";
 import Services from "../../services/components/home/Services";
 import Viands from "../../viands/components/Viands";
 import "./Home.css";
@@ -38,8 +40,22 @@ function Home() {
         <Viands />
       </section>
 
-      <section className="home-section about-us_container" id="about">
-        {/* <About /> */}
+      <section className="home-section faq_container" id="faq">
+        <div className="section-title">
+          <h1 className="special-font">Preguntas Frecuentes (FAQ)</h1>
+          <hr />
+        </div>
+
+        <Faq />
+      </section>
+
+      <section className="home-section quotes_container" id="quotes">
+        <div className="section-title">
+          <h1 className="special-font">Testimonios de nuestros clientes...</h1>
+          <hr />
+        </div>
+
+        <Quotes />
       </section>
     </div>
   );

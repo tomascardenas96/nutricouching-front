@@ -43,7 +43,6 @@ function ProductsCarousel({
 
   return (
     <div className="products-carousel_container">
-      <div className="carousel-header"></div>
 
       <div className="product-list">
         {/* Loader */}
@@ -92,9 +91,6 @@ function ProductsCarousel({
         <TurnPageArrow color="#296eb4" direction="right" turnPage={nextPage} />
       </div>
 
-      <div className="products-carousel_dots">
-        <Dots />
-      </div>
     </div>
   );
 }

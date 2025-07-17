@@ -8,7 +8,7 @@ function Footer() {
       <div className="top-container">
         <div className="footer_links">
           <div className="footer_logo">
-            <h1>NUTRICOACHING INTEGRAL</h1>
+            <h1>COHESIVA SALUD</h1>
             <img src="/src/public/assets/nutricouching-logo.jpg"></img>
           </div>
 
