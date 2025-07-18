@@ -94,6 +94,11 @@ footer {
       color: white;
       font-size: 0.7rem;
       text-align: center;
+
+      > a {
+        color: inherit;
+        font-size: 0.8rem;
+      }
     }
   }
 }

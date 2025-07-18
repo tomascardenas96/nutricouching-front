@@ -162,10 +162,7 @@ function Header({
 
       <div className="header-logo">
         <div>
-          <img
-            src="../src/public/assets/nutricouching-logo.jpg"
-            alt="nutricoaching-logo"
-          />
+          <img src="/assets/nutricouching-logo.jpg" alt="nutricoaching-logo" />
           <p>Cohesiva</p>
           <p>Salud</p>
         </div>

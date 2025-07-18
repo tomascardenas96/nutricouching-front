@@ -102,7 +102,7 @@ function CartModal({ handleCartModal, activeCart }) {
       <div className={`cart-modal`} onClick={(e) => e.stopPropagation()}>
         <div className="cart-modal_header">
           <img
-            src="/src/public/assets/nutricouching-logo.jpg"
+            src="/assets/nutricouching-logo.jpg"
             alt="nutricoaching-logo"
           />
           <div>

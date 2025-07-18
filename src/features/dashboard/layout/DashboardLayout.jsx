@@ -17,7 +17,7 @@ function DashboardLayout({ children }) {
               <a href="/">
                 <div className="logo-container">
                   <img
-                    src="/src/public/assets/nutricouching-logo.jpg"
+                    src="/assets/nutricouching-logo.jpg"
                     alt="Nutricoaching dashboard logo"
                   />
                   <span>Cohesiva</span>

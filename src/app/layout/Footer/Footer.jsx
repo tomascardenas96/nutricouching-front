@@ -9,7 +9,7 @@ function Footer() {
         <div className="footer_links">
           <div className="footer_logo">
             <h1>COHESIVA SALUD</h1>
-            <img src="/src/public/assets/nutricouching-logo.jpg"></img>
+            <img src="/assets/nutricouching-logo.jpg"></img>
           </div>
 
           <div>
@@ -76,7 +76,10 @@ function Footer() {
             </li>
           </ul>
 
-          <p>Creado por Tomas Cardenas - http://www.tomascardenas.com</p>
+          <p>
+            Creado por Tomas Cardenas -{" "}
+            <a href="http://www.tomascardenas.me" target="_blank">tomascardenas.me</a>
+          </p>
         </div>
       </div>
     </footer>

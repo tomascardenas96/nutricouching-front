@@ -6,7 +6,7 @@ function Faq() {
   return (
     <div className="faq-container">
       <div className="image-faq">
-        <img src="/src/public/assets/FAQ.png" alt="faq image" />
+        <img src="/assets/FAQ.png" alt="faq image" />
       </div>
 
       <div className="faq-questions">
