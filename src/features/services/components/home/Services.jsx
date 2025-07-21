@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import useDownloadPlan from "../../../plans/hooks/useDownloadPlan";
-import useGetServices from "../../hooks/useGetServices";
-import usePurchasePlan from "../../../plans/hooks/usePurchasePlan";
-import NetworkError from "../../../../common/components/NetworkError";
 import MoreInfo from "../../../Bookings/components/modals/MoreInfo";
+import PlansModal from "../../../plans/components/PlansModal";
+import useDownloadPlan from "../../../plans/hooks/useDownloadPlan";
+import usePurchasePlan from "../../../plans/hooks/usePurchasePlan";
+import { services } from "../../data/services";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
-import PlansModal from "../../../plans/components/PlansModal";
-import ServicesLoading from "./loader/ServicesLoading";
 
 function Services() {
   // Selected service state
@@ -21,7 +19,6 @@ function Services() {
   const [isSmartPlanModalOpen, setIsSmartPlanModalOpen] = useState(false);
 
   // Get services
-  const { services, servicesLoading, servicesError } = useGetServices();
 
   // Download and purchase plans
   const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
@@ -46,35 +43,25 @@ function Services() {
   };
 
   // Colors to iterate
-  const colors = ["#BB4430", "#19647E", "#2F0147", "#FC9F5B"];
+  const colors = ["#BB4430", "#19647E", "#2F0147"];
 
   return (
     <div className="services-menu">
       <div className="services-list_container">
-        {servicesLoading && <ServicesLoading />}
-
-        {!servicesError &&
-          !servicesLoading &&
-          services?.map((service, idx) => (
-            <ServiceCard
-              key={service?.serviceId}
-              image={service?.image}
-              color={colors[idx]}
-              title={service?.title}
-              description={service?.description}
-              handleSelectService={() => handleSelectService(service)}
-              handleOpenServiceModal={handleOpenServiceModal}
-              handleOpenRequestReservation={handleOpenRequestReservation}
-              type={service?.type}
-              handleOpenSmartPlanModal={handleOpenSmartPlanModal}
-            />
-          ))}
-
-        {servicesError && (
-          <div className="network-error_services">
-            <NetworkError message="Ocurrio un error al cargar el contenido" />
-          </div>
-        )}
+        {services?.map((service, idx) => (
+          <ServiceCard
+            key={service?.serviceId}
+            image={service?.image}
+            color={colors[idx]}
+            title={service?.title}
+            description={service?.description}
+            handleSelectService={() => handleSelectService(service)}
+            handleOpenServiceModal={handleOpenServiceModal}
+            handleOpenRequestReservation={handleOpenRequestReservation}
+            type={service?.type}
+            handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+          />
+        ))}
       </div>
 
       {/* Mostrar modal si hay un servicio seleccionado */}
