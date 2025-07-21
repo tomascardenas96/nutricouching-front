@@ -1,6 +1,5 @@
 .discipline-card {
-  width: 7.65rem;
-  height: 100%;
+  width: 6.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,8 +22,8 @@
 
 .discipline-card .icon-container {
   border-radius: 50%;
-  width: 7rem;
-  height: 7rem;
+  width: 6rem;
+  height: 6rem;
   border: 1.5px solid #d9c5b27e;
   display: flex;
   color: #2b1a0c75;

@@ -1,13 +1,11 @@
 .disciplines-home {
-  height: 10.3rem;
+  height: 9rem;
   display: flex;
   justify-content: center;
-  width: 41.5rem;
-
 
   > div {
     width: 100%;
-    gap: 1.5rem;
+    gap: .8rem;
     overflow-x: auto;
     display: flex;
     scroll-snap-type: x mandatory;

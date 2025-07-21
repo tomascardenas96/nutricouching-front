@@ -19,7 +19,7 @@ function CoverPhoto({
       <div className="cover-photo">
         {!image ? (
           <img
-            src="/src/public/assets/no-pic.jpg"
+            src="/assets/no-pic.jpg"
             alt="Foto de perfil de profesional sin URL seleccionada"
           />
         ) : (

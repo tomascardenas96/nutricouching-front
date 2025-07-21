@@ -33,6 +33,8 @@ function Profile() {
       </div>
     );
 
+    console.log(profile)
+
   return (
     <div className="profile-container" id="profile">
       <div className="presentation-section">

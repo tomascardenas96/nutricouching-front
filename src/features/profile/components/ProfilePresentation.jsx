@@ -25,6 +25,8 @@ function ProfilePresentation({
     isUpdateProfileModalOpen,
   } = useUpdateProfileModals();
 
+  console.log(professionalProfile)
+
   const { user } = useAuthUser();
 
   const isProfileOwner =

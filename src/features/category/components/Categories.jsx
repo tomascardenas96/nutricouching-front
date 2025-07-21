@@ -2,7 +2,7 @@ import CategoryCard from "./CategoryCard";
 import "./Categories.css";
 
 function Categories() {
-  const disciplines = [
+  const categories = [
     { name: "Nutricion", icon: "nutricion" },
     { name: "Mindfulness", icon: "mindfulness" },
     { name: "Fitness", icon: "fitness" },
@@ -13,7 +13,7 @@ function Categories() {
   return (
     <section className="disciplines-home">
       <div>
-        {disciplines?.map((discipline) => (
+        {categories?.map((discipline) => (
           <CategoryCard
             name={discipline.name}
             key={`discipline-${discipline.name}`}
