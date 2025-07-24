@@ -1,5 +1,5 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
-import useGetServices from "../../../../../../../services/hooks/useGetServices";
+import useGetServices from "../../../../../../services/hooks/useGetServices";
 import "./AddSpecialtyNewProfessional.css";
 
 function AddSpecialtyNewProfessional({

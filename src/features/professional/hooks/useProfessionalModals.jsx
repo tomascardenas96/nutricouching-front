@@ -1,10 +1,16 @@
 import { useState } from "react";
 
 function useProfessionalModals(handleSelectProfessional) {
+  const [isAddProfessionalModalOpen, setIsAddProfessionalModalOpen] =
+    useState(false);
   const [isModifyProfessionalModalOpen, setIsModifyProfessionalModalOpen] =
     useState(false);
   const [isDeleteProfessionalModalOpen, setIsDeleteProfessionalModalOpen] =
     useState(false);
+
+  const handleAddProfessionalModal = () => {
+    setIsAddProfessionalModalOpen(!isAddProfessionalModalOpen);
+  };
 
   const handleOpenModifyModal = (professional) => {
     handleSelectProfessional(professional);
@@ -31,6 +37,8 @@ function useProfessionalModals(handleSelectProfessional) {
     handleCloseModifyModal,
     handleOpenDeleteModal,
     handleCloseDeleteModal,
+    isAddProfessionalModalOpen,
+    handleAddProfessionalModal,
   };
 }
 

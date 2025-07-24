@@ -82,7 +82,7 @@ function ModifyViandModal({
                 />
               ) : (
                 <img
-                  src={`${HOST}/uploads/viands/${selectedViand.image}`}
+                  src={selectedViand.image}
                   alt="viand-picture"
                 />
               )}

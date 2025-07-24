@@ -55,6 +55,7 @@ function useUpdateProfilePhoto(onClose, setProfessionalProfile) {
       loading: "Actualizando foto de perfil...",
       error: (error) => error.message,
       success: (data) => {
+        console.log(data)
         setProfessionalProfile((prev) => {
           return { ...prev, picture: data.filename };
         });

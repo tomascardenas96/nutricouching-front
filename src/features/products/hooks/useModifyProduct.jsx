@@ -4,8 +4,8 @@ import { HOST } from "../../../api/data";
 
 function useModifyProduct(
   selectedProduct,
-  setSelectedProduct,
-  setProducts
+  setProducts,
+  handleModifyProductModalClose
 ) {
   const authToken = localStorage.getItem("authToken");
 
@@ -41,8 +41,7 @@ function useModifyProduct(
       );
 
       if (!response.ok) {
-        const responseError = await response.json();
-        throw new Error(responseError.message);
+        throw new Error();
       }
 
       return await response.json();
@@ -60,12 +59,14 @@ function useModifyProduct(
                 }
               : product
           )
-        ); //Como puedo hacer para que se muestre el objeto modificado y quede en el mismo orden
-        handleModifyProductModal();
+        );
+        handleModifyProductModalClose();
         return "Producto modificado exitosamente";
       },
       loading: "Cargando...",
-      error: "Error modificando el producto",
+      error: (error) => {
+        return "Error modificando el producto";
+      },
     });
   };
 
@@ -84,15 +85,9 @@ function useModifyProduct(
     }
   };
 
-  const handleModifyProductModal = (product) => {
-    setIsModifyProductModalOpen(!isModifyProductModalOpen);
-    setSelectedProduct(product);
-  };
-
   return {
     handleSubmitModifyProduct,
     handleChangeModifyProduct,
-    handleModifyProductModal,
     modifyProductInput,
     imagePreviewModifyProduct,
     handleChangeSelectedFile,

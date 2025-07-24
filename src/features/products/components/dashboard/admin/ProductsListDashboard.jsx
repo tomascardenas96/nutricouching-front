@@ -4,12 +4,12 @@ import "./ProductsListDashboard.css";
 function ProductsListDashboard({
   products,
   setProducts,
-  handleModifyProductModal,
+  handleModifyProductModalOpen,
 }) {
   return products.map((product) => (
     <ProductsCardDashboard
       product={product}
-      handleModifyProductModal={handleModifyProductModal}
+      handleModifyProductModalOpen={handleModifyProductModalOpen}
       setProducts={setProducts}
     />
   ));

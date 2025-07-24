@@ -1,6 +1,5 @@
 import { GoPlusCircle } from "react-icons/go";
 import { IoReturnUpBack, IoSearchOutline } from "react-icons/io5";
-import { HOST } from "../../../api/data";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 import { useSelectMenuOption } from "../hooks/useSelectMenuOption";
 import "./DashboardContentLayout.css";
@@ -18,7 +17,7 @@ function DashboardContentLayout({ children }) {
             {user?.name} {user?.lastname}
           </span>
           <img
-            src={`${HOST}/uploads/professionals/profile/${user?.professional?.profile?.picture}`}
+            src={user?.professional?.profile?.picture}
             alt="Foto de perfil de google en el dashboard de Cohesiva"
           />
         </div>
@@ -34,9 +33,6 @@ function DashboardContentLayout({ children }) {
 
             <div className="filter-section">
               <div className="filter">
-                <div>
-                  <GoPlusCircle className="add-icon" />
-                </div>
                 <input type="search" placeholder="Filtrar por nombre" />
                 <IoSearchOutline className="search-icon" />
               </div>

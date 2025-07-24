@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import { GrClose } from "react-icons/gr";
-import useDeleteProfessional from "../../../../../../hooks/useDeleteProfessional";
-import ConfirmationModal from "../../../../../../../../common/components/ConfirmationModal";
+import useDeleteProfessional from "../../../../../hooks/useDeleteProfessional";
+import ConfirmationModal from "../../../../../../../common/components/ConfirmationModal";
 import NewProfessionalAbmCard from "./NewProfessionalAbmCard";
 import SelectedUserToMakeProfessional from "./SelectedUserToMakeProfessional";
 import "./UserToProfessionalForm.css";

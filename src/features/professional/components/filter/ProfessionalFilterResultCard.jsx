@@ -8,7 +8,7 @@ function ProfessionalFilterResultCard({ fullname, image, specialties }) {
     <div className="professional-filter-result-card">
       <div className="result-professional_image">
         <img
-          src={`${HOST}/uploads/professionals/profile/${image}`}
+          src={image}
           alt="Foto de perfil de usuario dentro del filtro"
         />
       </div>

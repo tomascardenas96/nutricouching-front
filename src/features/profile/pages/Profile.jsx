@@ -1,11 +1,10 @@
 import PostsSection from "../../posts/components/PostsSection";
+import useGetProfessionalByProfilename from "../../professional/hooks/useGetProfessionalByProfilename";
 import LeftContainer from "../components/LeftContainer";
 import ProfilePresentation from "../components/ProfilePresentation";
 import RightContainer from "../components/RightContainer";
-import useGetProfile from "../../professional/hooks/useGetProfessionalByProfilename";
-import "./Profile.css";
-import useGetProfessionalByProfilename from "../../professional/hooks/useGetProfessionalByProfilename";
 import useGetProfileByName from "../hooks/useGetProfileByName";
+import "./Profile.css";
 
 function Profile() {
   const {
@@ -32,8 +31,6 @@ function Profile() {
         <h1>Perfil no existente</h1>
       </div>
     );
-
-    console.log(profile)
 
   return (
     <div className="profile-container" id="profile">

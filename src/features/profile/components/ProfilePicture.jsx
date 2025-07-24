@@ -25,7 +25,7 @@ function ProfilePicture({
         />
       ) : (
         <img
-          src={`${HOST}/uploads/professionals/profile/${image}`}
+          src={image}
           alt="Foto de perfil del profesional en Cohesiva Salud"
           onClick={() => setIsFullPhotoSelected(true)}
         />
@@ -45,7 +45,7 @@ function ProfilePicture({
           <div className="full-size-image_container">
             <div>
               <img
-                src={`${HOST}/uploads/professionals/profile/${image}`}
+                src={image}
                 alt="Foto de perfil del profesional en Cohesiva Salud"
                 onClick={() => setIsFullPhotoSelected(true)}
               />

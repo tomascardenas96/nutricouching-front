@@ -76,12 +76,12 @@ function ScheduleNewProfessionalForm({
         </button>
       </div>
 
-      {selectedSchedules.length === 0 ? (
+      {selectedSchedules?.length === 0 ? (
         <p className="professional-modal_no-selected-data">
           No hay días seleccionados.
         </p>
       ) : (
-        selectedSchedules.map((schedule, idx) => (
+        selectedSchedules?.map((schedule, idx) => (
           <div key={idx} className="schedule-item">
             <h2>Turno {idx + 1}</h2>
             <div className="schedule_selected-days">

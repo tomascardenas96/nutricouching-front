@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { FaCamera } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
-import { HOST } from "../../../api/data";
 import { PostContext } from "../context/PostContext";
 import "./CreatePost.css";
 
@@ -17,11 +16,17 @@ function CreatePost({ profilePicture }) {
 
       <div className="new-post">
         <div className="new-post_picture-photo">
-          {/* Cambiar por img */}
-          <img
-            src={`${HOST}/uploads/professionals/profile/${profilePicture}`}
-            alt="Foto de perfil del usuario al crear una publicacion"
-          />
+          {profilePicture ? (
+            <img
+              src={profilePicture}
+              alt="Foto de perfil del usuario al crear una publicacion"
+            />
+          ) : (
+            <img
+              src="/assets/no-pic.jpg"
+              alt="Foto de perfil del usuario al crear una publicacion"
+            />
+          )}
         </div>
 
         <div className="new-post_text-area">

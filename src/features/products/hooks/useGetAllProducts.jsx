@@ -6,10 +6,6 @@ function useGetAllProducts() {
   const [productsLoading, setProductsLoading] = useState(true);
   const [productsError, setProductsError] = useState(false);
 
-  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
-  const [isModifyProductModalOpen, setIsModifyProductModalOpen] =
-    useState(false);
-
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -38,17 +34,10 @@ function useGetAllProducts() {
     getProducts();
   }, [setProducts]);
 
-  const handleAddProductModal = () => {
-    setIsAddProductModalOpen(!isAddProductModalOpen);
-  };
-
   return {
     products,
     productsLoading,
     productsError,
-    isAddProductModalOpen,
-    isModifyProductModalOpen,
-    handleAddProductModal,
     setProducts,
   };
 }

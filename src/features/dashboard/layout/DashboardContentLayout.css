@@ -21,6 +21,7 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    cursor: pointer;
 
     > span {
       font-size: 0.8rem;
@@ -73,22 +74,20 @@
     display: flex;
     align-items: center;
 
+    > .add-icon_container {
+      margin-left: 1rem;
+      cursor: pointer;
+
+      > .add-icon {
+        font-size: 1.2rem;
+      }
+    }
+
     > div.filter {
       position: relative;
       display: flex;
       gap: 1rem;
       align-items: center;
-
-      & .add-icon {
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: rgb(3, 148, 3);
-        transition: transform 0.3s ease;
-      }
-
-      & .add-icon:hover {
-        transform: rotate(90deg);
-      }
 
       > input {
         height: 2.1rem;
@@ -103,7 +102,7 @@
       > .search-icon {
         position: absolute;
         height: 100%;
-        left: 3.2rem;
+        left: 0.5rem;
         padding-bottom: 0.1rem;
         color: rgba(0, 0, 0, 0.658);
       }

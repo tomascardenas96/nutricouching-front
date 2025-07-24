@@ -6,6 +6,7 @@ import useSelectSpecialty from "../../../hooks/useSelectSpecialty";
 import useSpecialtyModals from "../../../hooks/useSpecialtyModals";
 import "./SpecialtiesRootDashboard.css";
 import ModifySpecialtyRootModal from "./modals/ModifySpecialtyRootModal";
+import CreateSpecialtyModal from "./modals/CreateSpecialtyModal";
 
 function SpecialtiesRootDashboard() {
   const { specialties, setSpecialties } = useGetAllSpecialties();
@@ -17,7 +18,10 @@ function SpecialtiesRootDashboard() {
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     isDeleteSpecialtyModalOpen,
+    handleAddSpecialtyModal,
+    isAddSpecialtyModalOpen,
   } = useSpecialtyModals(selectSpecialty);
+
   const { handleDeleteSpecialty } = useDeleteSpecialty(
     setSpecialties,
     handleCloseDeleteModal
@@ -35,34 +39,59 @@ function SpecialtiesRootDashboard() {
         </thead>
 
         <tbody>
-          {specialties?.map((specialty) => (
-            <tr
-              className="dashboard_specialty-item"
-              key={`specialty-${specialty.specialtyId}`}
-            >
-              <td>{specialty.name}</td>
-              <td className="specialty-row">{specialty.category.name}</td>
-              <td className="options-row">
-                <p
-                  className="edit"
-                  onClick={() => handleOpenModifyModal(specialty)}
-                >
-                  Editar
-                </p>
-                <p
-                  className="delete"
-                  onClick={() => handleOpenDeleteModal(specialty)}
-                >
-                  Eliminar
-                </p>
-              </td>
-              <div className="divider-line_container">
-                <hr className="divider-line" />
-              </div>
+          {specialties?.length ? (
+            specialties.map((specialty) => (
+              <tr
+                className="dashboard_specialty-item"
+                key={`specialty-${specialty.specialtyId}`}
+              >
+                <td>{specialty.name}</td>
+                <td className="specialty-row">{specialty.category.name}</td>
+                <td className="options-row">
+                  <p
+                    className="edit"
+                    onClick={() => handleOpenModifyModal(specialty)}
+                  >
+                    Editar
+                  </p>
+                  <p
+                    className="delete"
+                    onClick={() => handleOpenDeleteModal(specialty)}
+                  >
+                    Eliminar
+                  </p>
+                </td>
+                <div className="divider-line_container">
+                  <hr className="divider-line" />
+                </div>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <th
+                colSpan={6}
+                style={{ textAlign: "center" }}
+                className="no-specialties"
+              >
+                No hay especialidades aún.
+              </th>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
+
+      <div className="add-specialty_btn" onClick={handleAddSpecialtyModal}>
+        <button>Agregar especialidad</button>
+      </div>
+
+      {isAddSpecialtyModalOpen &&
+        createPortal(
+          <CreateSpecialtyModal
+            closeModal={handleAddSpecialtyModal}
+            setSpecialties={setSpecialties}
+          />,
+          document.getElementById("root")
+        )}
 
       {isModifySpecialtyModalOpen &&
         createPortal(

@@ -1,7 +1,7 @@
 import { Plus, X } from "lucide-react";
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import useCreateViand from "../../../hooks/useCreateViand";
+import useCreateViand from "../../../../hooks/useCreateViand";
 import "./AddViandModal.css";
 
 function AddViandModal({ handleAddViandModal, setViands }) {
@@ -113,10 +113,7 @@ function AddViandModal({ handleAddViandModal, setViands }) {
                   className="add-viand_selected-image-preview"
                 />
               ) : (
-                <img
-                  src="/src/public/assets/no-picture.png"
-                  alt="no-picture-selected"
-                />
+                <img src="/assets/no-picture.png" alt="no-picture-selected" />
               )}
             </div>
             <p>Selecciona una foto</p>

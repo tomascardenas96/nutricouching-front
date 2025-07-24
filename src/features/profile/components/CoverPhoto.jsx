@@ -24,7 +24,7 @@ function CoverPhoto({
           />
         ) : (
           <img
-            src={`${HOST}/uploads/professionals/cover/${image}`}
+            src={image}
             alt="Foto de portada del profesional en Cohesiva Salud"
           />
         )}

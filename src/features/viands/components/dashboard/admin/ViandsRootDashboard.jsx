@@ -7,12 +7,18 @@ import ViandsListDashboard from "./ViandsListDashboard";
 import useDeleteViand from "../../../hooks/useDeleteViand";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import "./ViandsRootDashboard.css";
+import AddViandModal from "./modals/AddViandModal";
 
 function ViandsRootDashboard() {
   const { viands, setViands } = useGetAllViands();
   const { selectedViand, selectViand } = useSelectViand();
-  const { openEditViandModal, closeEditViandModal, isEditViandModalOpen } =
-    useViandModals(selectViand);
+  const {
+    openEditViandModal,
+    closeEditViandModal,
+    isEditViandModalOpen,
+    handleAddViandModal,
+    isAddViandModalOpen,
+  } = useViandModals(selectViand);
 
   const {
     handleDeleteViand,
@@ -35,13 +41,29 @@ function ViandsRootDashboard() {
         </thead>
 
         <tbody>
-          <ViandsListDashboard
-            viands={viands}
-            openEditViandModal={openEditViandModal}
-            openDeleteViandModal={openDeleteViandModal}
-          />
+          {viands?.length > 0 ? (
+            <ViandsListDashboard
+              viands={viands}
+              openEditViandModal={openEditViandModal}
+              openDeleteViandModal={openDeleteViandModal}
+            />
+          ) : (
+            <tr>
+              <th
+                colSpan={5}
+                style={{ textAlign: "center" }}
+                className="no-viands"
+              >
+                No hay viandas aún.
+              </th>
+            </tr>
+          )}
         </tbody>
       </table>
+
+      <div className="add-viand_btn" onClick={handleAddViandModal}>
+        <button>Agregar vianda</button>
+      </div>
 
       {isEditViandModalOpen &&
         createPortal(
@@ -49,6 +71,15 @@ function ViandsRootDashboard() {
             selectedViand={selectedViand}
             setViands={setViands}
             handleModifyViandModal={closeEditViandModal}
+          />,
+          document.getElementById("root")
+        )}
+
+      {isAddViandModalOpen &&
+        createPortal(
+          <AddViandModal
+            handleAddViandModal={handleAddViandModal}
+            setViands={setViands}
           />,
           document.getElementById("root")
         )}

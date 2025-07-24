@@ -13,7 +13,7 @@ function ResultCard({ image, fullname, specialties, profilename }) {
     >
       <div className="result-card_image">
         <img
-          src={`${HOST}/uploads/professionals/profile/${image}`}
+          src={image}
           alt="Foto del profesional en la busqueda por filtro de Cohesiva Salud"
         />
       </div>

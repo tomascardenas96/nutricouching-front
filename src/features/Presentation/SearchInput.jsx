@@ -25,11 +25,10 @@ function SearchInput({ searchTerm, setSearchTerm }) {
       <div className="search-icon" onClick={handleKeyDown}>
         <CiSearch />
       </div>
-      {data?.length > 0 && searchTerm?.length > 0 && (
+      {searchTerm?.length > 0 && (
         <ul className="professionals-filter_results-modal">
-          {isFetching ? (
-            <p className="results-modal">Buscando profesionales...</p>
-          ) : searchTerm?.length > 0 ? (
+          {data?.length > 0 &&
+            !isFetching &&
             data?.map((pro) => (
               <ResultCard
                 key={`professional-filtered-${pro.professionalId}`}
@@ -38,11 +37,14 @@ function SearchInput({ searchTerm, setSearchTerm }) {
                 specialties={pro.specialty}
                 profilename={pro.profile.profileName}
               />
-            ))
-          ) : (
+            ))}
+
+          {isFetching && (
+            <p className="results-modal">Buscando profesionales...</p>
+          )}
+          {data?.length === 0 && (
             <li className="results-modal">No hay resultados</li>
           )}
-
           {isError && <li className="results-modal">Ha ocurrido un error.</li>}
         </ul>
       )}

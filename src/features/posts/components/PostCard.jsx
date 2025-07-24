@@ -12,7 +12,7 @@ function PostCard({ body, profilePicture, name, createdAt }) {
         <div className="description">
           <div className="header_image">
             <img
-              src={`${HOST}/uploads/professionals/profile/${profilePicture}`}
+              src={profilePicture}
               alt="Foto de perfil de profesional en tarjeta de publicacion"
             />
           </div>

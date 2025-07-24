@@ -55,17 +55,10 @@ function ProductCard({
       }}
     >
       <div className="product-card_image">
-        <img
-          src={
-            product.productId
-              ? `${HOST}/uploads/products/${product.image}`
-              : `${HOST}/uploads/viands/${product.image}`
-          }
-          alt="product-picture"
-        />
+        <img src={product.image} alt="product-picture" />
         <TbShoppingCartPlus className="add-to-cart_icon" />
       </div>
-      
+
       <div className="product-card_body">
         <div>
           <p className="product-title">{product.name.toUpperCase()}</p>

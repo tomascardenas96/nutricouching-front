@@ -11,10 +11,7 @@ function ViandsCardDashboard({
       <tr className="dashboard_viand-item" key={`viand-${viand.viandId}`}>
         <td className="image-row">
           <div>
-            <img
-              src={`${HOST}/uploads/viands/${viand.image}`}
-              alt="imagen de vianda dashboard root"
-            />
+            <img src={viand.image} alt="imagen de vianda dashboard root" />
           </div>
         </td>
         <td>{viand.name}</td>

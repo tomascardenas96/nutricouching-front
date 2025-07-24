@@ -4,15 +4,20 @@ import ModifyProductModal from "./modals/ModifyProductModal";
 import useGetAllProducts from "../../../hooks/useGetAllProducts";
 import ProductsListDashboard from "./ProductsListDashboard";
 import "./ProductsRootDashboard.css";
+import useHandleProductsModals from "../../../hooks/useHandleProductsModals";
+import AddProductModal from "./modals/AddProductModal";
 
 function ProductsRootDashboard() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { products, setProducts } = useGetAllProducts(null, setSelectedProduct);
+
   const {
-    products,
-    handleModifyProductModal,
+    handleAddProductModal,
+    handleModifyProductModalOpen,
+    handleModifyProductModalClose,
+    isAddProductModalOpen,
     isModifyProductModalOpen,
-    setProducts,
-  } = useGetAllProducts(null, setSelectedProduct);
+  } = useHandleProductsModals(setSelectedProduct);
 
   return (
     <>
@@ -28,21 +33,45 @@ function ProductsRootDashboard() {
         </thead>
 
         <tbody>
-          <ProductsListDashboard
-            products={products}
-            setProducts={setProducts}
-            handleModifyProductModal={handleModifyProductModal}
-          />
+          {products?.length > 0 ? (
+            <ProductsListDashboard
+              products={products}
+              setProducts={setProducts}
+              handleModifyProductModalOpen={handleModifyProductModalOpen}
+            />
+          ) : (
+            <tr>
+              <th
+                colSpan={5}
+                style={{ textAlign: "center" }}
+                className="no-products"
+              >
+                No hay productos aún.
+              </th>
+            </tr>
+          )}
         </tbody>
       </table>
+
+      <div className="add-product_btn" onClick={handleAddProductModal}>
+        <button>Agregar producto</button>
+      </div>
 
       {isModifyProductModalOpen &&
         createPortal(
           <ModifyProductModal
             selectedProduct={selectedProduct}
-            setSelectedProduct={setSelectedProduct}
             setProducts={setProducts}
-            handleModifyProductModal={handleModifyProductModal}
+            handleModifyProductModalClose={handleModifyProductModalClose}
+          />,
+          document.body
+        )}
+
+      {isAddProductModalOpen &&
+        createPortal(
+          <AddProductModal
+            handleAddProductModal={handleAddProductModal}
+            setProducts={setProducts}
           />,
           document.body
         )}

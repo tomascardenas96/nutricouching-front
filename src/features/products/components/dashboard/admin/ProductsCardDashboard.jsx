@@ -7,7 +7,7 @@ import "./ProductsCardDashboard.css";
 function ProductsCardDashboard({
   product,
   setProducts,
-  handleModifyProductModal,
+  handleModifyProductModalOpen,
 }) {
   const { deleteProduct, closeModal, openModal, isModalOpen } =
     useDeleteProduct(setProducts);
@@ -21,7 +21,7 @@ function ProductsCardDashboard({
         <td className="image-row">
           <div>
             <img
-              src={`${HOST}/uploads/products/${product.image}`}
+              src={product.image}
               alt="imagen de productos dashboard root"
             />
           </div>
@@ -30,7 +30,7 @@ function ProductsCardDashboard({
         <td className="stock-row">{product.stock} u</td>
         <td className="price-row">$ {product.price}</td>
         <td className="options-row">
-          <p className="edit" onClick={() => handleModifyProductModal(product)}>
+          <p className="edit" onClick={() => handleModifyProductModalOpen(product)}>
             Editar
           </p>
           <p className="delete" onClick={() => openModal(product.productId)}>

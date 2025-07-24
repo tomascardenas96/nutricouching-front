@@ -52,7 +52,7 @@ function useCreateViand(setViands, handleAddViandModal) {
   const handleSubmitCreateViand = async (e) => {
     e.preventDefault();
 
-    try {
+    const createViand = async () => {
       const formData = new FormData();
       formData.append("name", createViandInput.name);
       formData.append("description", createViandInput.description);
@@ -70,18 +70,25 @@ function useCreateViand(setViands, handleAddViandModal) {
         body: formData,
       });
 
-      const newViand = await res.json();
       if (!res.ok) {
-        console.error(newViand);
-        throw new Error(newViand.message || "Error al crear la vianda");
+        throw new Error();
       }
 
-      setViands((prev) => [...prev, newViand]);
-      toast.success("Vianda creada con éxito");
-      handleAddViandModal();
-    } catch (error) {
-      toast.error(error.message);
-    }
+      return await res.json();
+    };
+
+    toast.promise(createViand(), {
+      loading: "Creando vianda...",
+      error: (error) => {
+        console.log(error);
+        return "Error al crear una vianda";
+      },
+      success: (data) => {
+        setViands((prev) => [data, ...prev]);
+        handleAddViandModal();
+        return "Vianda creada exitosamente!";
+      },
+    });
   };
 
   return {

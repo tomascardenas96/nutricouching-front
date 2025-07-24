@@ -7,7 +7,7 @@ function SelectedUserToMakeProfessional({ user, onClose }) {
       onClick={() => (onClose ? onClose(user) : null)}
     >
       <img
-        src="/src/public/assets/default-avatar.webp"
+        src="/assets/default-avatar.webp"
         alt="professional-form_user-picture"
       />
       <p>

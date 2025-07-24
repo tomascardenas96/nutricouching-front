@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function useSpecialtyModals(selectSpecialty) {
+  const [isAddSpecialtyModalOpen, setIsAddSpecialtyModalOpen] = useState(false);
   const [isModifySpecialtyModalOpen, setIsModifySpecialtyModalOpen] =
     useState(false);
   const [isDeleteSpecialtyModalOpen, setIsDeleteSpecialtyModalOpen] =
     useState(false);
+
+  const handleAddSpecialtyModal = () => {
+    setIsAddSpecialtyModalOpen(!isAddSpecialtyModalOpen);
+  };
 
   const handleOpenModifyModal = (specialty) => {
     selectSpecialty(specialty);
@@ -31,6 +36,8 @@ function useSpecialtyModals(selectSpecialty) {
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     isDeleteSpecialtyModalOpen,
+    handleAddSpecialtyModal,
+    isAddSpecialtyModalOpen,
   };
 }
 

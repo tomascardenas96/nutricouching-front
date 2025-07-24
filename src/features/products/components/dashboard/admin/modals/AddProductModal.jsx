@@ -1,6 +1,6 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import useCreateProduct from "../../../../products/hooks/useCreateProduct";
+import useCreateProduct from "../../../../hooks/useCreateProduct";
 import "./AddProductModal.css";
 
 function AddProductModal({ handleAddProductModal, setProducts }) {
@@ -79,10 +79,7 @@ function AddProductModal({ handleAddProductModal, setProducts }) {
                   className="add-product_selected-image-preview"
                 />
               ) : (
-                <img
-                  src="/src/public/assets/no-picture.png"
-                  alt="no-picture-selected"
-                />
+                <img src="/assets/no-picture.png" alt="no-picture-selected" />
               )}
             </div>
             <p>Selecciona una foto</p>

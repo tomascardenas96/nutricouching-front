@@ -6,28 +6,26 @@ import "./ModifyProductModal.css";
 
 function ModifyProductModal({
   selectedProduct,
-  setSelectedProduct,
-  handleModifyProductModal,
+  handleModifyProductModalClose,
   setProducts,
 }) {
   const {
     handleSubmitModifyProduct,
     handleChangeModifyProduct,
     modifyProductInput,
+    imagePreviewModifyProduct,
     handleChangeSelectedFile,
     fileModifyProduct,
-    imagePreviewModifyProduct,
   } = useModifyProduct(
     selectedProduct,
-    setSelectedProduct,
-    handleModifyProductModal,
-    setProducts
+    setProducts,
+    handleModifyProductModalClose
   );
 
   return (
     <section
       className="modal-cms_modify-product_container"
-      onClick={handleModifyProductModal}
+      onClick={handleModifyProductModalClose}
     >
       <form
         className="modify-product-modal_form"
@@ -38,7 +36,7 @@ function ModifyProductModal({
           <h1>Modificar producto</h1>
           <IoMdClose
             className="modify-product-modal-close"
-            onClick={handleModifyProductModal}
+            onClick={handleModifyProductModalClose}
           />
         </div>
 
@@ -89,7 +87,7 @@ function ModifyProductModal({
                 />
               ) : (
                 <img
-                  src={`${HOST}/uploads/products/${modifyProductInput.image}`}
+                  src={modifyProductInput.image}
                   alt="selected-product-picture"
                 />
               )}
@@ -102,7 +100,7 @@ function ModifyProductModal({
         <div className="modify-product_buttons">
           <ImCross
             className="modify-cancel-product modify-cancel-product_close"
-            onClick={handleModifyProductModal}
+            onClick={handleModifyProductModalClose}
           />
           <div>
             <label htmlFor="modify-product_submit">
