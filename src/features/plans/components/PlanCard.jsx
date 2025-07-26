@@ -47,10 +47,7 @@ function PlanCard({
       <CardPrice type={type} price={price} isOffer={isOffer} />
 
       <div className="card_image-container">
-        <img
-          src={`${HOST}/uploads/plans/images/${image}`}
-          alt="plan inteligente nutricoaching"
-        />
+        <img src={image} alt="plan inteligente nutricoaching" />
       </div>
 
       <div className="card_name-options-container">
@@ -72,7 +69,7 @@ function PlanCard({
               className="download-btn"
               onClick={() => handleDownloadPlan(id)}
             >
-              Descargar <MdOutlineFileDownload className="download-icon" />
+              Abrir <MdOutlineFileDownload className="download-icon" />
             </button>
           )}
           <button className="more-btn" onClick={openModal}>

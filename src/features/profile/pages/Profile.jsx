@@ -35,32 +35,36 @@ function Profile() {
   return (
     <div className="profile-container" id="profile">
       <div className="presentation-section">
-        <ProfilePresentation
-          professional={professional}
-          professionalProfile={profile}
-          setProfessionalProfile={setProfile}
-        />
+        <div>
+          <ProfilePresentation
+            professional={professional}
+            professionalProfile={profile}
+            setProfessionalProfile={setProfile}
+          />
+        </div>
       </div>
 
       <div className="profile-content">
-        <div className="content_left-container">
-          <LeftContainer
-            profile={profile}
-            email={professional?.email}
-            professionalId={professional?.professionalId}
-          />
-        </div>
+        <div>
+          <div className="content_left-container">
+            <LeftContainer
+              profile={profile}
+              email={professional?.email}
+              professionalId={professional?.professionalId}
+            />
+          </div>
 
-        <div className="content_center-container">
-          <PostsSection
-            profileId={profile?.profileId}
-            profilePicture={profile?.picture}
-            name={professional?.fullname}
-          />
-        </div>
+          <div className="content_center-container">
+            <PostsSection
+              profileId={profile?.profileId}
+              profilePicture={profile?.picture}
+              name={professional?.fullname}
+            />
+          </div>
 
-        <div className="content_right-container">
-          <RightContainer professionalId={professional?.professionalId} />
+          <div className="content_right-container">
+            <RightContainer professionalId={professional?.professionalId} />
+          </div>
         </div>
       </div>
     </div>

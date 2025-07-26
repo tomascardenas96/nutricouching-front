@@ -2,39 +2,18 @@
 .blur-background {
   position: fixed;
   inset: 0;
-
-  /* background: hsla(208, 33%, 21%, 1);
-
-  background: linear-gradient(90deg, hsla(208, 33%, 21%, 1) 0%, hsla(211, 36%, 46%, 1) 100%);
-  
-  background: -moz-linear-gradient(90deg, hsla(208, 33%, 21%, 1) 0%, hsla(211, 36%, 46%, 1) 100%);
-  
-  background: -webkit-linear-gradient(90deg, hsla(208, 33%, 21%, 1) 0%, hsla(211, 36%, 46%, 1) 100%);
-  
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#243748", endColorstr="#4B749F", GradientType=1 ); */
-  background: hsla(160, 50%, 51%, 1);
-
-  background: linear-gradient(90deg, hsla(160, 50%, 51%, 1) 0%, hsla(247, 60%, 21%, 1) 100%);
-  
-  background: -moz-linear-gradient(90deg, hsla(160, 50%, 51%, 1) 0%, hsla(247, 60%, 21%, 1) 100%);
-  
-  background: -webkit-linear-gradient(90deg, hsla(160, 50%, 51%, 1) 0%, hsla(247, 60%, 21%, 1) 100%);
-  
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#43C197", endColorstr="#1C1554", GradientType=1 );
-
+  background-color: #f6f6f6;
   z-index: 0;
   opacity: 0.9;
 }
 
 /* Contenedor principal */
 .main-background {
-  width: 88.5rem;
+  width: 100%;
   height: 100%;
   justify-self: center;
   background-color: #f6f6f6;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.04),
-    0 0 10px 10px rgba(0, 0, 0, 0.023);
-  position: relative; /* Asegura que esté por encima del fondo */
+  position: relative;
   z-index: 1;
 }
 

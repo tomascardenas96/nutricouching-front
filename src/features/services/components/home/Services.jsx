@@ -2,8 +2,6 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import MoreInfo from "../../../Bookings/components/modals/MoreInfo";
 import PlansModal from "../../../plans/components/PlansModal";
-import useDownloadPlan from "../../../plans/hooks/useDownloadPlan";
-import usePurchasePlan from "../../../plans/hooks/usePurchasePlan";
 import { services } from "../../data/services";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
@@ -17,12 +15,6 @@ function Services() {
     useState(false);
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
   const [isSmartPlanModalOpen, setIsSmartPlanModalOpen] = useState(false);
-
-  // Get services
-
-  // Download and purchase plans
-  const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
-  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
 
   // Handle select service
   const handleSelectService = (service) => {
@@ -86,10 +78,6 @@ function Services() {
         createPortal(
           <PlansModal
             handleOpenSmartPlanModal={handleOpenSmartPlanModal}
-            handleDownloadPlan={handleDownloadPlan}
-            downloadLoading={downloadLoading}
-            handlePurchasePlan={handlePurchasePlan}
-            paymentLoading={paymentLoading}
             setSelectedService={setSelectedService}
           />,
           document.getElementById("root")

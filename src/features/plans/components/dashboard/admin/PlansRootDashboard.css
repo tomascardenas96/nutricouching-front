@@ -8,6 +8,15 @@
     border-bottom: 1px solid rgb(204, 204, 204);
   }
 
+  > tbody {
+    .no-plans {
+      height: 8rem;
+      align-self: center;
+      padding-top: 1rem;
+      font-weight: 400;
+    }
+  }
+
   & th {
     text-align: start;
     font-weight: 500;
@@ -115,5 +124,28 @@
     > .delete {
       color: rgb(215, 59, 59);
     }
+  }
+}
+
+.add-plan_btn {
+  display: flex;
+  justify-content: end;
+  padding: 0 1.8rem;
+
+  > button {
+    padding: 0.6rem 0.6rem;
+    border: none;
+    background-color: #db5a42;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 0.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  > button:hover {
+    background-color: #db5942cb;
   }
 }

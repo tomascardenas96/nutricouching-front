@@ -40,6 +40,15 @@ function Home() {
         <Viands />
       </section>
 
+      <section className="home-section quotes-section_container" id="quotes">
+        <div className="section-title">
+          <h1 className="special-font">Testimonios de nuestros clientes...</h1>
+          <hr />
+        </div>
+
+        <Quotes />
+      </section>
+
       <section className="home-section faq_container" id="faq">
         <div className="section-title">
           <h1 className="special-font">Preguntas Frecuentes (FAQ)</h1>
@@ -47,15 +56,6 @@ function Home() {
         </div>
 
         <Faq />
-      </section>
-
-      <section className="home-section quotes_container" id="quotes">
-        <div className="section-title">
-          <h1 className="special-font">Testimonios de nuestros clientes...</h1>
-          <hr />
-        </div>
-
-        <Quotes />
       </section>
     </div>
   );

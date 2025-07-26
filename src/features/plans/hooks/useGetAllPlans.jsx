@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import { HOST, WEBSOCKET_HOST } from "../../../api/data";
+import { io } from "socket.io-client";
+import { toast } from "sonner";
 
-function useGetAllPlans(user) {
+function useGetAllPlans(user, selectedPlan, setSelectedPlan, setIsMoreInfoModalOpen) {
   const [plans, setPlans] = useState([]);
   const [plansLoading, setPlansLoading] = useState(true);
   const [plansError, setPlansError] = useState(null);
@@ -18,6 +20,45 @@ function useGetAllPlans(user) {
 
     getPlans();
   }, [user]);
+
+  useEffect(() => {
+    if (!user || plans.length === 0) {
+      return;
+    }
+
+    const socket = io(`${WEBSOCKET_HOST}`, {
+      query: { userId: user.userId },
+    });
+
+    socket.on("purchasedPlan", (planId) => {
+      toast.success("El plán ha sido agregado a tu colección");
+
+      setPlans((prev) => {
+        const justPurchasedPlan = prev.notPurchasedPlans.find(
+          (plan) => plan.planId === planId
+        );
+        prev.purchasedPlans.push(justPurchasedPlan);
+
+        const notPurchasedPlans = prev.notPurchasedPlans.filter(
+          (plan) => plan.planId !== planId
+        );
+
+        setSelectedPlan(null);
+        setIsMoreInfoModalOpen(false);
+
+        return {
+          freePlans: prev.freePlans,
+          purchasedPlans: prev.purchasedPlans,
+          notPurchasedPlans,
+        };
+      });
+    });
+
+    return () => {
+      socket.off("purchasedPlan");
+      socket.disconnect();
+    };
+  }, [user, plans]);
 
   const getPlansWhenLoggedIn = async (token) => {
     try {

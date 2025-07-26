@@ -21,18 +21,15 @@ function useDownloadPlan() {
       }
 
       // Convertir la respuesta a un Blob (archivo binario)
-      const blob = await response.blob();
+      const { downloadUrl } = await response.json();
 
       // Crear un enlace temporal para descargar el archivo
-      const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
+      a.href = downloadUrl;
       a.download = `plan-${planId}.pdf`; // Nombre del archivo
+      a.target = "_blank";
       document.body.appendChild(a);
       a.click();
-
-      // Limpiar
-      window.URL.revokeObjectURL(url);
       a.remove();
     } catch (error) {
       toast.error("Ocurrio un error al descargar el plan");

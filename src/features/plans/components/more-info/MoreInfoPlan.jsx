@@ -34,7 +34,7 @@ function MoreInfoPlan({
         <div className="plan-purchase_header">
           <div className="plan-image">
             <img
-              src={`${HOST}/uploads/plans/images/${image}`}
+              src={image}
               alt={`Imagen representativa del plan ${title}, ${shortDescription}`}
             />
           </div>

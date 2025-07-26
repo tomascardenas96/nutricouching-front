@@ -8,7 +8,6 @@
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
-
   > .loader-spinner_user {
     width: 12rem;
     height: 45%;

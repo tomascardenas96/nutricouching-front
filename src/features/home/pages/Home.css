@@ -71,14 +71,15 @@
 
 .faq_container {
   min-height: 46rem;
-  margin-top: 6rem;
   padding-bottom: 6rem;
 }
 
-.home-container .home-section .quotes_container {
+.home-container .quotes-section_container {
   display: flex;
   justify-content: center;
   height: 27rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
 }
 
 .footer_container {

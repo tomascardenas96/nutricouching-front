@@ -10,64 +10,32 @@ import PlanCard from "./PlanCard";
 import PlanHeader from "./PlanHeader";
 import "./PlansModal.css";
 import MoreInfoPlan from "./more-info/MoreInfoPlan";
+import useDownloadPlan from "../hooks/useDownloadPlan";
+import usePurchasePlan from "../hooks/usePurchasePlan";
+import { useLoginModal } from "../../auth/hooks/useLoginModal";
 
-function PlansModal({
-  handleOpenSmartPlanModal,
-  handleDownloadPlan,
-  downloadLoading,
-  handlePurchasePlan,
-  paymentLoading,
-  handleLoginModal,
-  setSelectedService,
-}) {
+function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
   const { user } = useAuthUser();
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const { handleLoginModal } = useLoginModal();
 
-  const { plans, setPlans, plansError, plansLoading } = useGetAllPlans(user);
+  const { plans, setPlans, plansError, plansLoading } = useGetAllPlans(
+    user,
+    selectedPlan,
+    setSelectedPlan,
+    setIsMoreInfoModalOpen
+  );
+
+  console.log(plans);
+
+  // Download and purchase plans
+  const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
+  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
 
   const handleOpenMoreInfoModal = () => {
     setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
   };
-
-  useEffect(() => {
-    if (!user || plans.length === 0) {
-      return;
-    }
-
-    const socket = io(`${WEBSOCKET_HOST}`, {
-      query: { userId: user.userId },
-    });
-
-    socket.on("purchasedPlan", (planId) => {
-      toast.success("El plán ha sido agregado a tu colección");
-
-      setPlans((prev) => {
-        const justPurchasedPlan = prev.notPurchasedPlans.find(
-          (plan) => plan.planId === planId
-        );
-        prev.purchasedPlans.push(justPurchasedPlan);
-
-        const notPurchasedPlans = prev.notPurchasedPlans.filter(
-          (plan) => plan.planId !== planId
-        );
-
-        setSelectedPlan(null);
-        setIsMoreInfoModalOpen(false);
-
-        return {
-          freePlans: prev.freePlans,
-          purchasedPlans: prev.purchasedPlans,
-          notPurchasedPlans,
-        };
-      });
-    });
-
-    return () => {
-      socket.off("purchasedPlan");
-      socket.disconnect();
-    };
-  }, [user, plans]);
 
   return (
     <div className="plans-modal_container">
