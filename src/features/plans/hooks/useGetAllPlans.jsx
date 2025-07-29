@@ -3,7 +3,12 @@ import { HOST, WEBSOCKET_HOST } from "../../../api/data";
 import { io } from "socket.io-client";
 import { toast } from "sonner";
 
-function useGetAllPlans(user, selectedPlan, setSelectedPlan, setIsMoreInfoModalOpen) {
+function useGetAllPlans(
+  user,
+  selectedPlan,
+  setSelectedPlan,
+  setIsMoreInfoModalOpen
+) {
   const [plans, setPlans] = useState([]);
   const [plansLoading, setPlansLoading] = useState(true);
   const [plansError, setPlansError] = useState(null);

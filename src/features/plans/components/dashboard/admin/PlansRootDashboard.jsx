@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { createPortal } from "react-dom";
-import { HOST } from "../../../../../api/data";
+import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
+import useDeletePlan from "../../../hooks/useDeletePlan";
 import useGetAllPlans from "../../../hooks/useGetAllPlans";
 import useHandlePlanModals from "../../../hooks/useHandlePlanModals";
 import "./PlansRootDashboard.css";
 import NewPlanModal from "./modals/NewPlanModal";
+import UpdatePlanModal from "./modals/UpdatePlanModal";
 
 function PlansRootDashboard() {
-  const { flattedPlans } = useGetAllPlans();
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const { flattedPlans, setPlans } = useGetAllPlans();
 
   const {
     isAddPlanModalOpen,
@@ -17,7 +21,13 @@ function PlansRootDashboard() {
     closeModifyPlanModal,
     openDeletePlanModal,
     closeDeletePlanModal,
-  } = useHandlePlanModals();
+  } = useHandlePlanModals(setSelectedPlan);
+
+  const { handleDeletePlan } = useDeletePlan(
+    setPlans,
+    selectedPlan,
+    closeDeletePlanModal
+  );
 
   return (
     <>
@@ -40,7 +50,7 @@ function PlansRootDashboard() {
                 <td className="image-row">
                   <div>
                     <img
-                      src={`${HOST}/uploads/plans/images/${plan.image}`}
+                      src={plan.image}
                       alt="imagen de planes dashboard root"
                     />
                   </div>
@@ -52,8 +62,15 @@ function PlansRootDashboard() {
                   {plan.price === 0 ? "FREE" : `$ ${plan.price}`}
                 </td>
                 <td className="options-row">
-                  <p className="edit">Editar</p>
-                  <p className="delete">Eliminar</p>
+                  <p className="edit" onClick={() => openModifyPlanModal(plan)}>
+                    Editar
+                  </p>
+                  <p
+                    className="delete"
+                    onClick={() => openDeletePlanModal(plan.planId)}
+                  >
+                    Eliminar
+                  </p>
                 </td>
                 <div className="divider-line_container">
                   <hr className="divider-line" />
@@ -79,7 +96,33 @@ function PlansRootDashboard() {
       </div>
 
       {isAddPlanModalOpen &&
-        createPortal(<NewPlanModal />, document.getElementById("root"))}
+        createPortal(
+          <NewPlanModal
+            setPlans={setPlans}
+            handleAddPlanModal={handleAddPlanModal}
+          />,
+          document.getElementById("root")
+        )}
+
+      {isModifyPlanModalOpen &&
+        createPortal(
+          <UpdatePlanModal
+            selectedPlan={selectedPlan}
+            setPlans={setPlans}
+            closeModifyPlanModal={closeModifyPlanModal}
+          />,
+          document.getElementById("root")
+        )}
+
+      {isDeletePlanModalOpen &&
+        createPortal(
+          <ConfirmationModal
+            message="¿Eliminar plan?"
+            onConfirm={handleDeletePlan}
+            onClose={closeDeletePlanModal}
+          />,
+          document.getElementById("root")
+        )}
     </>
   );
 }

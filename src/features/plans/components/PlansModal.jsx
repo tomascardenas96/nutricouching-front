@@ -27,8 +27,6 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
     setIsMoreInfoModalOpen
   );
 
-  console.log(plans);
-
   // Download and purchase plans
   const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
   const { handlePurchasePlan, paymentLoading } = usePurchasePlan();

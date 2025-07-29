@@ -1,26 +1,25 @@
-import useCreatePlan from "../../../../hooks/useCreatePlan";
-import "./NewPlanModal.css";
+import useModifyPlan from "../../../../hooks/useModifyPlan";
+import "./UpdatePlanModal.css";
 
-function NewPlanModal({ setPlans, handleAddPlanModal }) {
+function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
   const {
-    handleCreatePlan,
+    handleModifyPlan,
+    modifyPlanInput,
     handleChangeInput,
-    handleChangePdf,
     handleChangeImage,
     imagePreview,
-    createPlanInput,
-  } = useCreatePlan(setPlans, handleAddPlanModal);
+  } = useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans);
 
   return (
-    <div className="new-plan-modal_bg">
-      <form onSubmit={handleCreatePlan}>
+    <div className="modify-plan-modal_bg">
+      <form onSubmit={handleModifyPlan}>
         <label htmlFor="title">
           Titulo
           <input
             type="text"
             name="title"
             onChange={handleChangeInput}
-            value={createPlanInput.title}
+            value={modifyPlanInput.title}
           />
         </label>
 
@@ -30,17 +29,17 @@ function NewPlanModal({ setPlans, handleAddPlanModal }) {
             type="text"
             name="description"
             onChange={handleChangeInput}
-            value={createPlanInput.description}
+            value={modifyPlanInput.description}
           />
         </label>
 
         <label htmlFor="shortDescription">
-          Descripcion corta
+          Resumen
           <input
             type="text"
             name="shortDescription"
             onChange={handleChangeInput}
-            value={createPlanInput.shortDescription}
+            value={modifyPlanInput.shortDescription}
           />
         </label>
 
@@ -50,13 +49,21 @@ function NewPlanModal({ setPlans, handleAddPlanModal }) {
             type="text"
             name="price"
             onChange={handleChangeInput}
-            value={createPlanInput.price}
+            value={modifyPlanInput.price}
           />
         </label>
 
-        <label htmlFor="pdf">
-          Subir archivo (PDF)
-          <input type="file" name="pdf" onChange={handleChangePdf} />
+        <label htmlFor="price">
+          ¿Esta en oferta?
+          <select
+            name="isOffer"
+            onChange={handleChangeInput}
+            value={modifyPlanInput.isOffer}
+          >
+            <option value="">Seleccione una opcion</option>
+            <option value="false">No</option>
+            <option value="true">Si</option>
+          </select>
         </label>
 
         <label htmlFor="image">
@@ -64,10 +71,10 @@ function NewPlanModal({ setPlans, handleAddPlanModal }) {
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
 
-        <button>Crear</button>
+        <button>Modificar</button>
       </form>
     </div>
   );
 }
 
-export default NewPlanModal;
+export default UpdatePlanModal;

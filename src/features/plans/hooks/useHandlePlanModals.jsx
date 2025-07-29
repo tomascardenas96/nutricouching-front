@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function useHandlePlanModals() {
+function useHandlePlanModals(setSelectedPlan) {
   const [isAddPlanModalOpen, setIsAddPlanModalOpen] = useState(false);
   const [isModifyPlanModalOpen, setIsModifyPlanModalOpen] = useState(false);
   const [isDeletePlanModalOpen, setIsDeletePlanModalOpen] = useState(false);
@@ -9,13 +9,25 @@ function useHandlePlanModals() {
     setIsAddPlanModalOpen(!isAddPlanModalOpen);
   };
 
-  const openModifyPlanModal = () => {};
+  const openModifyPlanModal = (plan) => {
+    setSelectedPlan(plan);
+    setIsModifyPlanModalOpen(true);
+  };
 
-  const closeModifyPlanModal = () => {};
+  const closeModifyPlanModal = () => {
+    setSelectedPlan(null);
+    setIsModifyPlanModalOpen(false);
+  };
 
-  const openDeletePlanModal = () => {};
+  const openDeletePlanModal = (planId) => {
+    setSelectedPlan(planId);
+    setIsDeletePlanModalOpen(true);
+  };
 
-  const closeDeletePlanModal = () => {};
+  const closeDeletePlanModal = () => {
+    setSelectedPlan(null);
+    setIsDeletePlanModalOpen(false);
+  };
 
   return {
     isAddPlanModalOpen,
