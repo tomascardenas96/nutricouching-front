@@ -1,63 +1,23 @@
 .header {
+  height: 4.3rem;
   display: grid;
-  height: 3.8rem;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: 1fr 1fr 1fr;
   border-radius: 0 0 0.2rem 0.2rem;
-  padding: 0 15rem;
   background-color: #f6f6f6;
-  justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
+  width: 83.6rem;
+  justify-self: center;
+  padding: 0 2.5rem;
+
   > .loader-spinner_user {
     width: 12rem;
     height: 45%;
   }
 }
 
-.responsive-menu_mobile {
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-
-  > .burger-menu {
-    display: flex;
-    gap: 1rem;
-    color: var(--header-mobile-font-color);
-
-    > .admin-menu_burger-header {
-      display: flex;
-      gap: 1rem;
-      transition: all 0.3s ease;
-      font-size: 1.6rem;
-      margin-left: 0.5rem;
-      padding-left: 1.5rem;
-      border-left: 1px solid rgba(126, 126, 126, 0.387);
-
-      > .professional_menu {
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-
-      > .root-user_menu {
-        color: #d6b10e;
-        font-size: 1.6rem;
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-    }
-  }
-
-  & .icon {
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.45rem;
-    color: var(--header-mobile-font-color);
-  }
-}
-
 .header-logo {
   display: grid;
-  padding-left: 2rem;
 }
 
 .header-logo > div {
@@ -88,7 +48,6 @@
 
 .header-menu {
   display: grid;
-  place-content: center;
 }
 
 .header-menu > ul {
@@ -111,8 +70,7 @@
 }
 
 .header-cart_container {
-  display: flex;
-  gap: 0.3em;
+  position: relative;
 
   .header-cart {
     height: 100%;
@@ -121,16 +79,24 @@
     font-size: 0.95rem;
   }
 
+  .mobile_burger-menu .cart-icon_container {
+    position: relative;
+  }
+
   & .cart-amount {
-    margin-top: 5%;
+    margin-top: 0;
     background-color: var(--primary-details-color);
-    width: 0.9rem;
-    height: 1rem;
+    width: 1rem;
+    height: 0.93rem;
     border-radius: 50%;
     display: grid;
     place-content: center;
     font-size: 0.6rem;
     color: white;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.2rem;
+    font-weight: 600;
   }
 }
 
@@ -173,23 +139,13 @@
 
 .header-login {
   display: grid;
-  place-content: center;
 }
 
 .header-login > div {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-}
-
-.header-login > div > input {
-  width: 9rem;
-  height: 1.9rem;
-  border-radius: 1rem;
-  font-family: "Quicksand", sans-serif;
-  color: #a18276;
-  border: 1px solid #a18276;
-  cursor: pointer;
+  justify-self: end;
 }
 
 .header-login .register-button {
@@ -204,162 +160,88 @@
   cursor: pointer;
 }
 
-/* Media queries */
-@media screen and (max-width: 1550px) {
-  .header-logo img {
-    width: 2.5rem;
-  }
+.header-login > div > input {
+  width: 9rem;
+  height: 1.9rem;
+  border-radius: 1rem;
+  font-family: "Quicksand", sans-serif;
+  color: #a18276;
+  border: 1px solid #a18276;
+  cursor: pointer;
+}
 
-  .header-logo p {
-    font-size: 0.65rem;
-  }
+.header .mobile_burger-menu {
+  width: 100%;
+  justify-content: end;
+  gap: 1.5rem;
+  display: none;
+}
 
-  .header-menu > ul {
-    gap: 2rem;
-  }
+.mobile_burger-menu .mobile_header-cart_container .header-cart {
+  font-size: 1.4rem;
+}
 
-  .header-menu > ul li {
-    font-size: 0.7em;
-  }
-
-  .header-login > div > p {
-    font-size: 0.65rem;
-  }
-
-  .header-login > div > input {
-    font-size: 0.7rem;
-  }
+.mobile_burger-menu .burger-menu_icon {
+  font-size: 1.9rem;
 }
 
 @media screen and (max-width: 1400px) {
-  .header-menu > ul li {
-    font-size: 0.65em;
+  .header {
+    width: 75rem;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .header {
-    padding: 0 1rem;
-    justify-content: center;
-    gap: 5rem;
-  }
-
-  .header-logo img {
-    width: 2rem;
+    width: 65rem;
   }
 
   .header-logo p {
-    font-size: 0.6rem;
-  }
-  .header-menu > ul {
-    gap: 1.5rem;
+    font-size: 0.7rem;
   }
 
-  .header-menu > ul li {
-    font-size: 0.6rem;
-  }
-
-  .header-cart_container {
-    display: flex;
-    gap: 0.3em;
-
-    .header-cart {
-      font-size: 0.9rem;
-    }
-  }
-
-  .header-user {
-    gap: 0.5rem;
-
-    & p,
-    span {
-      font-size: 0.65rem;
-    }
-
-    & .user-icon,
-    .log-out-icon {
-      font-size: 0.7rem;
-    }
-  }
-
-  .header-login > div {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .header-login > div > input {
-    width: 7.5rem;
-    height: 1.6rem;
+  .header-menu > ul li,
+  .header-menu > ul li a {
+    font-family: var(--primary-font);
+    font-size: 0.63rem;
   }
 
   .header-login .register-button {
-    font-size: 0.6rem;
+    font-size: 0.63rem;
   }
 }
 
 @media screen and (max-width: 1050px) {
   .header {
-    grid-template-columns: 1fr;
-    justify-content: space-between;
+    width: 57rem;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .header {
     width: 100%;
-    padding: 0 3rem;
-    position: fixed;
-    top: 0rem;
-    height: 3.4rem;
-    z-index: 2500;
-    box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 0;
-    border: 1px solid rgba(0, 0, 0, 0.138);
-  }
-
-  .responsive-menu_mobile {
     display: flex;
-  }
-
-  .header-logo {
-    display: none;
   }
 
   .header-menu {
     display: none;
   }
 
+  .header-login > div {
+    display: none;
+  }
+
+  .header .mobile_burger-menu {
+    display: flex;
+  }
+
   .header-user {
     display: none;
   }
-
-  .header-login {
-    display: none;
-  }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 480px) {
   .header {
-    padding: 0 5%;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .responsive-menu_mobile {
-    > .burger-menu {
-      gap: 1rem;
-
-      > .admin-menu_burger-header {
-        gap: 1rem;
-        font-size: 1.25rem;
-        margin-left: 0.5rem;
-        padding-left: 1rem;
-        border-left: 1px solid rgba(126, 126, 126, 0.387);
-
-        > .root-user_menu {
-          font-size: 1.25rem;
-        }
-      }
-    }
-
-    & .icon {
-      font-size: 1.2rem;
-    }
+    padding: 0 1rem;
   }
 }

@@ -5,19 +5,24 @@
   gap: 1rem;
   width: 100%;
 
-
   > .posts-title {
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
 
-    > hr.divider-line {
+    > div {
+      display: flex;
+      justify-content: center;
       position: absolute;
       top: 45%;
       left: 0;
-      width: 100%;
       z-index: -1;
+      width: 100%;
+    }
+
+    & hr.divider-line {
+      width: 80%;
       border-color: rgba(75, 75, 75, 0.148);
     }
   }

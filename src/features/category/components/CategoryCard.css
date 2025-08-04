@@ -17,6 +17,7 @@
     justify-content: center;
     margin-top: 0.8rem;
     color: #2b1a0cb9;
+    font-weight: 600;
   }
 }
 
@@ -24,7 +25,7 @@
   border-radius: 50%;
   width: 6rem;
   height: 6rem;
-  border: 1.5px solid #d9c5b27e;
+  border: 1.5px solid #f4ebdb;
   display: flex;
   color: #2b1a0c75;
   justify-content: center;
@@ -38,6 +39,69 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(#ece4dd, #e2d8cf72);
+    background: #f4ebdb8e;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .discipline-card {
+    width: 6rem;
+
+    & p {
+      font-size: 0.65rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .discipline-card .icon-container {
+    width: 5.3rem;
+    height: 5.3rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .discipline-card {
+    width: 6.5rem;
+
+    & p {
+      font-size: 0.65rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .discipline-card .icon-container {
+    width: 5.6rem;
+    height: 5.6rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .discipline-card {
+    width: 4.6rem;
+
+    & p {
+      font-size: 0.62rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .discipline-card .icon-container {
+    width: 4.6rem;
+    height: 4.6rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .discipline-card {
+    width: 4.2rem;
+  }
+
+  .discipline-card .icon-container {
+    width: 4.2rem;
+    height: 4.2rem;
+    font-size: 1.5rem;
   }
 }

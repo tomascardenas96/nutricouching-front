@@ -1,0 +1,16 @@
+.profile_section-switch {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #737373;
+
+  > span {
+    cursor: pointer;
+  }
+
+  .selected-option {
+    font-weight: 600;
+    color: #484848;
+  }
+}

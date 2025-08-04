@@ -4,11 +4,7 @@ import CreatePost from "./CreatePost";
 import PostsList from "./PostsList";
 import "./PostsSection.css";
 
-function PostsSection({
-  profileId,
-  profilePicture,
-  name,
-}) {
+function PostsSection({ profileId, profilePicture, name }) {
   const { user } = useAuthUser();
 
   return (

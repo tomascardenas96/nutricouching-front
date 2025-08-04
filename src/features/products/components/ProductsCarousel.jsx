@@ -18,7 +18,7 @@ function ProductsCarousel({
   const firstMeasure = useMediaQuery({ query: "(max-width: 1260px)" });
   const secondMeasure = useMediaQuery({ query: "(max-width: 970px)" });
   const thirdMeasure = useMediaQuery({ query: "(max-width: 815px)" });
-  const fourthMeasure = useMediaQuery({ query: "(max-width: 470px)" });
+  const fourthMeasure = useMediaQuery({ query: "(max-width: 525px)" });
 
   let itemsPerPage = 5;
 
@@ -43,7 +43,6 @@ function ProductsCarousel({
 
   return (
     <div className="products-carousel_container">
-
       <div className="product-list">
         {/* Loader */}
         {productsLoading && (
@@ -90,7 +89,6 @@ function ProductsCarousel({
       <div className="next-page">
         <TurnPageArrow color="#296eb4" direction="right" turnPage={nextPage} />
       </div>
-
     </div>
   );
 }

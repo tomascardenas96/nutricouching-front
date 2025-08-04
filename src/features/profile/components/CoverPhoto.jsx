@@ -34,7 +34,8 @@ function CoverPhoto({
             onClick={() => setIsUploadCoverModalOpen(true)}
           >
             <FaCamera className="camera-icon" />
-            <p>Cambiar foto de portada</p>
+            <p className="desktop_cover-btn">Cambiar foto de portada</p>
+            <p className="mobile_cover-btn">Portada</p>
           </label>
         )}
         {children}

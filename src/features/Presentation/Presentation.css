@@ -1,6 +1,5 @@
 .presentation {
-  width: 100%;
-  padding: 0 10rem;
+  width: 83.6rem;
 }
 
 .background-image {
@@ -8,7 +7,7 @@
   min-height: 19.5rem;
   position: relative;
   display: inline-block;
-  background-color: rgba(228, 219, 195, 0.292);
+  background-color: #fff1d8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,5 +77,65 @@
     border: 1px solid rgba(43, 41, 34, 0.21);
     background-color: var(--modal-background);
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .presentation {
+    width: 75rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .presentation {
+    width: 65rem;
+  }
+
+  .content > h1 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .presentation {
+    width: 57rem;
+  }
+
+  .background-image {
+    min-height: 18rem;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .presentation {
+    width: 100%;
+  }
+
+  .background-image {
+    min-height: 18rem;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .background-image {
+    min-height: 14rem;
+  }
+
+  .presentation .content {
+    width: 16.75rem;
+  }
+
+  .content > .professional-items {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content > h1 {
+    font-size: 1rem;
+  }
+
+  .content > p {
+    font-size: 0.72rem;
   }
 }

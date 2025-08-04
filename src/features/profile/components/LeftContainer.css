@@ -102,3 +102,33 @@
     }
   }
 }
+
+@media screen and (max-width: 890px) {
+  .profile-posts_right-container .professional-section {
+    padding: 1rem 0 1.2rem;
+
+    > h1 {
+      text-align: center;
+      margin-bottom: 0.7rem;
+    }
+  }
+
+  .profile-posts_right-container .professional-information {
+    > div {
+      align-items: center;
+    }
+  }
+
+  .profile-posts_right-container .professional-specialties {
+    > div {
+      align-items: center;
+    }
+  }
+
+  .profile-posts_right-container .social-networks_container {
+    > .social-networks {
+      justify-content: center;
+      gap: 0.6rem;
+    }
+  }
+}

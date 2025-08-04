@@ -5,7 +5,7 @@
 
   > div {
     width: 100%;
-    gap: .8rem;
+    gap: 0.8rem;
     overflow-x: auto;
     display: flex;
     scroll-snap-type: x mandatory;
@@ -16,6 +16,55 @@
     height: 0;
   }
 
-  > div::-webkit-scrollbar-thumb {
+  /* > div::-webkit-scrollbar-thumb {
+  } */
+}
+
+@media screen and (max-width: 1050px) {
+  .disciplines-home {
+    height: 6.7rem;
+
+    > div {
+      gap: 0.4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .disciplines-home {
+    display: flex;
+    justify-content: start;
+    width: 24.5rem;
+    height: 7rem;
+
+    > div {
+      gap: 0.7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .disciplines-home {
+    display: flex;
+    justify-content: start;
+    width: 20.3rem;
+    height: 6rem;
+
+    > div {
+      gap: 0.6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .disciplines-home {
+    display: flex;
+    justify-content: start;
+    width: 18.6rem;
+    height: 6rem;
+
+    > div {
+      gap: 0.6rem;
+    }
   }
 }

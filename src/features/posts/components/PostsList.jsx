@@ -10,7 +10,9 @@ function PostsList({ profilePicture, name }) {
     <div className="post-list_container">
       <div className="posts-title">
         <h1>Publicaciones</h1>
-        <hr className="divider-line" />
+        <div>
+          <hr className="divider-line" />
+        </div>
       </div>
 
       <div className="posts-list">

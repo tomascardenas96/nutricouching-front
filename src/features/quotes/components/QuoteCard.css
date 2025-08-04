@@ -33,13 +33,18 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  gap: 0.5rem;
   padding: 0 1.5rem;
 
   > p {
     font-size: 0.75rem;
-    height: 5.4169rem;
+    height: 4.5rem;
     line-height: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Limita a 3 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1rem;
   }
 
   > .name {
@@ -60,4 +65,41 @@
   gap: 0.2rem;
   font-size: 1.2rem;
   color: #f4cc3a;
+}
+
+@media screen and (max-width: 1200px) {
+  .quote-card {
+    height: 13rem;
+  }
+
+  .quote-card .quote-icon {
+    > div {
+      width: 4rem;
+      height: 4rem;
+      font-size: 1.3rem;
+    }
+  }
+
+  .quote-card .body {
+    gap: 0;
+    > p {
+      font-size: 0.65rem;
+      line-height: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    > .name {
+      > h1 {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .quote-card {
+    height: 16rem;
+    width: 16rem;
+    box-shadow: none;
+  }
 }

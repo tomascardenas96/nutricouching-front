@@ -10,11 +10,7 @@ function FaqCard({ question, answer }) {
     <div className="faq-card" onClick={() => setIsOpen(!isOpen)}>
       <div className="question-container">
         <p>{question}</p>
-        {isOpen ? (
-          <FaMinus className="plus-icon" />
-        ) : (
-          <FaPlus className="plus-icon" />
-        )}
+        {isOpen ? <FaMinus className="icon" /> : <FaPlus className="icon" />}
       </div>
 
       {isOpen && (

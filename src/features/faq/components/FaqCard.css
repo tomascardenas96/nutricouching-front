@@ -42,3 +42,59 @@
     transform: translateY(0);
   }
 }
+
+@media screen and (max-width: 1050px) {
+  .faq-card {
+    width: 31rem;
+
+    > .question-container {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .faq-card {
+    width: 26rem;
+
+    > .question-container {
+      font-size: 0.65rem;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .faq-card {
+    width: 22rem;
+
+    > .question-container {
+      font-size: 0.6rem;
+    }
+
+    & .icon {
+      font-size: 0.45rem;
+    }
+
+    > .answer-container {
+      font-size: 0.65rem;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .faq-card {
+    width: 19rem;
+
+    > .question-container {
+      font-size: 0.6rem;
+    }
+
+    & .icon {
+      font-size: 0.45rem;
+    }
+
+    > .answer-container {
+      font-size: 0.65rem;
+    }
+  }
+}

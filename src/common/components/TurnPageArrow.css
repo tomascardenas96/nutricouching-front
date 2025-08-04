@@ -9,3 +9,9 @@
   box-shadow: 2px 0px 4px 2px rgba(0, 0, 0, 0.034);
   cursor: pointer;
 }
+
+@media screen and (max-width: 480px) {
+  .turn-page {
+    box-shadow: none;
+  }
+}

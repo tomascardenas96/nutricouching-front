@@ -1,6 +1,5 @@
 .sub-menu {
   position: relative;
-  justify-self: center;
   width: 83.6rem;
   height: 1.6rem;
   overflow: hidden;
@@ -31,5 +30,35 @@
   }
   to {
     transform: translateX(-100%);
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .sub-menu {
+    width: 75rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .sub-menu {
+    width: 65rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .sub-menu {
+    width: 57rem;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .sub-menu {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .sub-menu {
+    height: 2rem;
   }
 }

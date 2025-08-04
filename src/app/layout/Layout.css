@@ -17,9 +17,15 @@
   z-index: 1;
 }
 
+.header_container {
+  width: 100%;
+}
+
 .sub-menu_container {
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+  display: flex;
+  justify-content: center;
 }
 
 /* Media queries */
@@ -27,22 +33,4 @@
   .main-background {
     width: 100%;
   }
-}
-
-@media screen and (max-width: 1200px) {
-  /* .main-screen_container {
-    height: max-content;
-    display: grid;
-    grid-template-rows: 3.4rem 0.95fr 4fr;
-  } */
-
-  .sub-menu_container {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 890px) {
-  /* .main-screen_container {
-    grid-template-rows: 3.4rem 0.85fr 4fr;
-  } */
 }

@@ -41,5 +41,61 @@
     > input {
       display: none;
     }
+
+    > .mobile_cover-btn {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .cover-photo {
+    > .upload-cover-photo {
+      padding: 0 0.8rem;
+
+      > .camera-icon {
+        font-size: 0.9rem;
+      }
+
+      > p {
+        font-size: 0.72rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .cover-photo {
+    height: 14rem;
+
+    > .upload-cover-photo {
+      padding: 0 0.8rem;
+      bottom: 0.5rem;
+      right: 0.5rem;
+
+      > .camera-icon {
+        font-size: 0.9rem;
+      }
+
+      > p {
+        font-size: 0.72rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .cover-photo {
+    > .upload-cover-photo {
+      > .desktop_cover-btn {
+        display: none;
+      }
+
+      > .mobile_cover-btn {
+        display: block;
+      }
+    }
   }
 }

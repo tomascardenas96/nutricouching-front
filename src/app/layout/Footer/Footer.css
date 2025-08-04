@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap");
+
 footer {
-  height: 100%;
   background: #1c1c1c;
-  padding: 5rem 15rem 0;
-  display: grid;
-  grid-template-rows: 3.5fr 6fr;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    display: grid;
+    grid-template-rows: 3.5fr 6fr;
+    width: 83.6rem;
+  }
 }
 
 .top-container {
@@ -103,63 +110,34 @@ footer {
   }
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1400px) {
   footer {
-    grid-template-rows: 8fr 6fr;
+    > div {
+      width: 70rem;
+    }
   }
+}
 
-  .top-container {
-    border-bottom: 1px solid white;
-    display: grid;
-    padding-bottom: 2rem;
-
-    > .footer_links {
-      grid-template-columns: 1fr;
-      grid-template-rows: 2fr repeat(4, max-content);
-      gap: 1rem;
-
-      > .footer_logo {
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
-        justify-content: start;
-        margin-bottom: 1rem;
-
-        > img {
-          width: 3rem;
-          height: 3rem;
-        }
-
-        > h1 {
-          font-weight: 600;
-          font-size: 0.9rem;
-        }
-      }
-
-      > div {
-        justify-content: start;
-
-        > ul {
-          font-weight: 500;
-
-          > li {
-            font-size: 0.75rem;
-            text-align: start;
-          }
-        }
-      }
+@media screen and (max-width: 1240px) {
+  footer {
+    > div {
+      width: 60rem;
     }
   }
 }
 
 @media screen and (max-width: 1050px) {
   footer {
-    padding: 5rem 7.5rem 0 7.5rem;
+    > div {
+      width: 52rem;
+    }
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1050px) {
   footer {
-    padding: 5rem 3rem 0 3rem;
+    > div {
+      width: 80%;
+    }
   }
 }

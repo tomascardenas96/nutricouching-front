@@ -86,10 +86,9 @@
       width: 12.5rem;
       height: 1.8rem;
       justify-content: center;
-      border-radius: 0.5rem;
+      border-radius: 0.3rem;
       box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.113),
         0 0 5px 10px rgba(0, 0, 0, 0.052);
-      height: 87%;
 
       & p {
         margin: 0;
@@ -105,113 +104,34 @@
   grid-template-rows: 7rem 1fr 2.4rem;
 }
 
-/* Media queries */
-
-@media screen and (max-width: 1390px) {
+@media screen and (max-width: 480px) {
   .services-card_container {
-    height: 12rem;
-    grid-template-columns: 10rem 1fr;
-  }
-
-  .right-service-cards {
-    grid-template-columns: 1fr 10rem;
+    width: 10rem;
+    gap: 0.5rem;
+    padding: 1rem 0;
   }
 
   .service-image {
-    width: 8.5rem;
-    height: 8.5rem;
+    width: 9rem;
+    height: 6rem;
   }
 
   .services-card_container .card-description {
+    grid-template-rows: 2.3rem 2.3rem;
+
     & h1 {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
+      line-height: 0.8rem;
     }
 
-    & p {
-      font-size: 0.65rem;
-    }
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  .service-image {
-    width: 7.5rem;
-    height: 7.5rem;
-  }
-}
-
-@media screen and (max-width: 1230px) {
-  .services-card_container {
-    height: 11rem;
-    grid-template-columns: 10rem 1fr;
-  }
-
-  .right-service-cards {
-    grid-template-columns: 1fr 10rem;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .services-card_container {
-    max-width: 30.5rem;
-    justify-self: center;
-    height: 14rem;
-    grid-template-columns: 12rem 1fr;
-  }
-
-  .right-service-cards {
-    grid-template-columns: 1fr 12rem;
-  }
-
-  .service-image {
-    width: 9.5rem;
-    height: 9.5rem;
-  }
-
-  .services-card_container .card-description {
-    & h1 {
-      font-size: 0.85rem;
-    }
-
-    & p {
-      font-size: 0.8rem;
-    }
     & div.know-more {
       & div {
-        width: 13rem;
-      }
-    }
-  }
-}
+        width: 9rem;
+        height: 1.5rem;
 
-@media screen and (max-width: 540px) {
-  .services-card_container {
-    grid-template-columns: 8rem 1fr;
-    border-radius: 0.1rem;
-    border: none;
-    padding: 0 1rem;
-  }
-
-  .right-service-cards {
-    grid-template-columns: 1fr 8rem;
-  }
-
-  .service-image {
-    width: 7rem;
-    height: 7rem;
-  }
-
-  .services-card_container .card-description {
-    & h1 {
-      font-size: 0.75rem;
-    }
-
-    & p {
-      font-size: 0.7rem;
-    }
-    & div.know-more {
-      & div {
-        width: 10rem;
+        & p {
+          font-size: 0.6rem;
+        }
       }
     }
   }

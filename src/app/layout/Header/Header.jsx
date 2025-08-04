@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { BsCart4 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { IoIosNotifications } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { TbUserPentagon, TbUserStar } from "react-icons/tb";
@@ -108,58 +108,7 @@ function Header({
   }, []);
 
   return (
-    <div
-      className={scrolled ? "header header-scrolled" : "header"}
-      id="main-page"
-    >
-      <div className="responsive-menu_mobile">
-        <GiHamburgerMenu
-          onClick={handleChangeBurgerMenu}
-          className={scrolled ? "icon icon-scrolled" : "icon"}
-        />
-
-        <div className="burger-menu">
-          <BsCart4
-            className={scrolled ? "icon icon-scrolled" : "icon"}
-            onClick={handleCartModal}
-          />
-          {user && (
-            <IoIosNotifications
-              className={scrolled ? "icon icon-scrolled" : "icon"}
-              onClick={() => setIsNotificationsModalOpen(true)}
-            />
-          )}
-
-          {(user?.professional?.role === "admin" ||
-            user?.professional?.role === "root") && (
-            <div className="admin-menu_burger-header">
-              {(user?.professional?.role === "admin" ||
-                user?.professional?.role === "root") && (
-                <TbUserStar
-                  className={
-                    scrolled
-                      ? "professional_menu icon-scrolled"
-                      : "professional_menu"
-                  }
-                  onClick={handleAdminCmsModal}
-                />
-              )}
-
-              {user?.professional?.role === "root" && (
-                <TbUserPentagon
-                  className={
-                    scrolled
-                      ? "root-user_menu icon-scrolled root-extended"
-                      : "root-user_menu"
-                  }
-                  onClick={handleCmsModal}
-                />
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-
+    <div className="header" id="main-page">
       <div className="header-logo">
         <div>
           <img src="/assets/nutricouching-logo.jpg" alt="nutricoaching-logo" />
@@ -201,6 +150,19 @@ function Header({
             </div>
           </li>
         </ul>
+      </div>
+
+      <div className="mobile_burger-menu">
+        <div
+          className="header-cart_container mobile_header-cart_container"
+          onClick={handleCartModal}
+        >
+          <BsCart4 className="header-cart" />
+          <div className="cart-amount">
+            <p>{quantityOfProductsInCart().toString()}</p>
+          </div>
+        </div>
+        <RxHamburgerMenu className="burger-menu_icon" />
       </div>
 
       {!userLoading ? (

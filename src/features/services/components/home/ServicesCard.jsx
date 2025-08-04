@@ -41,7 +41,7 @@ function ServiceCard({
             onClick={handleSelectServiceAndOpenModal}
             style={{ backgroundColor: color }}
           >
-            <p>Saber más</p>
+            <p>Ver más</p>
           </div>
         </div>
       </div>

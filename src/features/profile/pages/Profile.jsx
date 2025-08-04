@@ -1,9 +1,11 @@
 import PostsSection from "../../posts/components/PostsSection";
 import useGetProfessionalByProfilename from "../../professional/hooks/useGetProfessionalByProfilename";
 import LeftContainer from "../components/LeftContainer";
+import SectionSwitch from "../components/mobile/SectionSwitch";
 import ProfilePresentation from "../components/ProfilePresentation";
 import RightContainer from "../components/RightContainer";
 import useGetProfileByName from "../hooks/useGetProfileByName";
+import useSwitchSectionProfile from "../hooks/useSwitchSectionProfile";
 import "./Profile.css";
 
 function Profile() {
@@ -16,6 +18,8 @@ function Profile() {
 
   const { profile, setProfile, profileLoading, profileError } =
     useGetProfileByName();
+
+  const { selectedOption, handleSelectOption } = useSwitchSectionProfile();
 
   if (profileLoading) {
     return (
@@ -46,6 +50,13 @@ function Profile() {
 
       <div className="profile-content">
         <div>
+          <div className="section-switch_container">
+            <SectionSwitch
+              selectedOption={selectedOption}
+              handleSelectOption={handleSelectOption}
+            />
+          </div>
+
           <div className="content_left-container">
             <LeftContainer
               profile={profile}

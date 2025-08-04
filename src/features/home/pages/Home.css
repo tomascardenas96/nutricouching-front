@@ -34,6 +34,11 @@
   }
 }
 
+.presentation_container {
+  display: flex;
+  justify-content: center;
+}
+
 .disciplines_container {
   display: flex;
   flex-direction: column;
@@ -69,11 +74,6 @@
   margin-top: 2.5rem;
 }
 
-.faq_container {
-  min-height: 46rem;
-  padding-bottom: 6rem;
-}
-
 .home-container .quotes-section_container {
   display: flex;
   justify-content: center;
@@ -82,47 +82,44 @@
   margin-bottom: 5rem;
 }
 
+.faq_container {
+  min-height: 46rem;
+  padding-bottom: 6rem;
+}
+
 .footer_container {
   height: 26rem;
   width: 100%;
 }
 
-@media screen and (max-width: 1350px) {
-  .about-us_container {
-    height: 120svh;
-  }
-}
-
-@media screen and (max-width: 1250px) {
-  .footer_container {
-    height: 50rem;
-  }
-}
-
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1050px) {
   .services_container {
-    padding: 0 6rem;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .home-container {
+    & hr {
+      display: none;
+    }
+  }
+
+  .home-container .home-section {
+    gap: 2rem;
+  }
+
+  .services_container {
+    margin-top: 1.9rem;
+  }
+
+  .home-container .quotes-section_container {
+    height: 27rem;
     margin-top: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .about-us_container {
-    height: 220svh;
-    display: grid;
-    place-content: center;
-    position: relative;
+    margin-bottom: 2.5rem;
   }
 
-  .services_container {
-    padding: 0 1rem;
-    margin-top: 0rem;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .services_container {
-    padding: 0;
+  .recipes_container {
     margin-top: 1.5rem;
   }
 }

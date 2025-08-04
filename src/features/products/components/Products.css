@@ -58,10 +58,6 @@
 /* Media queries */
 
 @media screen and (max-width: 1050px) {
-  .products-section_container {
-    padding: 0 5rem;
-  }
-
   .products-section {
     display: grid;
     align-items: end;
