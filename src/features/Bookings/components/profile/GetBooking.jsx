@@ -32,6 +32,8 @@ function GetBooking({ professionalId, onClose }) {
     professionalSchedule
   );
 
+  console.log(professionalSchedule)
+
   // Hoy
   const today = new Date();
 
@@ -75,21 +77,27 @@ function GetBooking({ professionalId, onClose }) {
             <TbHandFingerRight /> Elije una especialidad
           </h2>
           <div>
-            {specialties?.map((specialty) => (
-              <div key={specialty.specialtyId}>
-                <input
-                  type="radio"
-                  name="select-specialty"
-                  id={`specialty-${specialty.specialtyId}`}
-                  value={specialty.specialtyId}
-                  onClick={() => selectSpecialty(specialty)}
-                  className="radio-input"
-                />
-                <label htmlFor={`specialty-${specialty.specialtyId}`}>
-                  {specialty.name}
-                </label>
-              </div>
-            ))}
+            {specialties.length > 0 ? (
+              specialties?.map((specialty) => (
+                <div key={specialty.specialtyId}>
+                  <input
+                    type="radio"
+                    name="select-specialty"
+                    id={`specialty-${specialty.specialtyId}`}
+                    value={specialty.specialtyId}
+                    onClick={() => selectSpecialty(specialty)}
+                    className="radio-input"
+                  />
+                  <label htmlFor={`specialty-${specialty.specialtyId}`}>
+                    {specialty.name}
+                  </label>
+                </div>
+              ))
+            ) : (
+              <p className="get-booking_no-options">
+                El profesional no designo especialidades
+              </p>
+            )}
           </div>
         </div>
 
@@ -109,7 +117,7 @@ function GetBooking({ professionalId, onClose }) {
           </div>
         )}
 
-        {professionalSchedule?.length > 0 && (
+        {professionalSchedule?.length > 0 ? (
           <>
             <hr />
 
@@ -139,6 +147,12 @@ function GetBooking({ professionalId, onClose }) {
               </div>
             </div>
           </>
+        ) : (
+          !!selectedDate && (
+            <p className="get-booking_no-options">
+              No hay horarios disponibles
+            </p>
+          )
         )}
 
         {selectedTime && (

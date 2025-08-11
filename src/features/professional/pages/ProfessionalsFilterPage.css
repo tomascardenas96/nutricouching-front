@@ -3,6 +3,8 @@
   display: grid;
   grid-template-columns: 22rem 1fr;
   padding: 1.9rem 2rem 1.9rem 0.5rem;
+  width: 83.5994rem;
+  justify-self: center;
 }
 
 .professionals-filter-page > .filter-page_left {

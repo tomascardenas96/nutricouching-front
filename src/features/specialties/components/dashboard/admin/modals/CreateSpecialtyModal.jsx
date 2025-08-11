@@ -2,9 +2,12 @@ import { ImCheckmark, ImCross } from "react-icons/im";
 import useCreateSpecialty from "../../../../hooks/useCreateSpecialty";
 import useGetServices from "../../../../../services/hooks/useGetServices";
 import "./CreateSpecialtyModal.css";
+import useGetCategories from "../../../../../category/hooks/useGetCategories";
 
 function CreateSpecialtyModal({ closeModal, setSpecialties }) {
-  const { services, servicesError, servicesLoading } = useGetServices();
+  const { categories, areCategoriesLoading, categoriesError } =
+    useGetCategories();
+    
   const {
     handleChangeCreateSpecialty,
     handleCreateSpecialty,
@@ -30,20 +33,20 @@ function CreateSpecialtyModal({ closeModal, setSpecialties }) {
               />
             </label>
 
-            <label htmlFor="serviceId">
+            <label htmlFor="categoryId">
               {" "}
               <select
-                name="serviceId"
+                name="categoryId"
                 onChange={handleChangeCreateSpecialty}
-                value={newSpecialtyInput.serviceId}
+                value={newSpecialtyInput.categoryId}
               >
-                <option value="">Servicio asociado</option>
-                {services.map((service) => (
+                <option value="">Seleccione una categoria</option>
+                {categories.map((category) => (
                   <option
-                    key={`service-${service.serviceId}`}
-                    value={service.serviceId}
+                    key={`service-${category.categoryId}`}
+                    value={category.categoryId}
                   >
-                    {service.title}
+                    {category.name}
                   </option>
                 ))}
               </select>

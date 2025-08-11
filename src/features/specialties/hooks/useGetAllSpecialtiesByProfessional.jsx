@@ -31,9 +31,10 @@ function useGetAllSpecialtiesByProfessional(professionalId) {
           throw new Error(data.message);
         }
 
+        console.log(data);
+
         setSpecialties(data);
       } catch (error) {
-        console.error(error);
         setSpecialtiesError(error);
       } finally {
         setSpecialtiesLoading(false);

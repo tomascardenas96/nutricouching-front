@@ -21,8 +21,8 @@ function ProductInCartCard({
         <img
           src={
             product
-              ? `${HOST}/uploads/products/${product?.image}`
-              : `${HOST}/uploads/viands/${viand?.image}`
+              ? `${product?.image}`
+              : `${viand?.image}`
           }
           alt="product-added-cart"
         />

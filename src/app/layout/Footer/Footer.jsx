@@ -9,43 +9,19 @@ function Footer() {
         <div className="top-container">
           <div className="footer_links">
             <div className="footer_logo">
-              <h1>COHESIVA SALUD</h1>
               <img src="/assets/nutricouching-logo.jpg"></img>
+              <h1>
+                Cohesiva <br /> Salud
+              </h1>
             </div>
-
-            {/* <div>
-              <ul>
-                <li>WEEBLY THEMES</li>
-                <li>PRE-SALE FAQS</li>
-                <li>SUBMIT A TICKET</li>
-              </ul>
-            </div>
-
-            <div>
-              <ul>
-                <li>SERVICES</li>
-                <li>THEME TWEAK</li>
-              </ul>
-            </div>
-
-            <div>
-              <ul>
-                <li>SHOWCASE</li>
-                <li>WIDGETKIT</li>
-                <li>SUPPORT</li>
-              </ul>
-            </div>
-
-            <div>
-              <ul>
-                <li>ABOUT US</li>
-                <li>CONTACT US</li>
-                <li>AFFILIATES</li>
-                <li>RESOURCES</li>
-              </ul>
-            </div> */}
           </div>
         </div>
+
+        <hr />
+
+        <div className="mid-container"></div>
+
+        <hr />
 
         <div className="bottom-container">
           <div className="footer">

@@ -1,14 +1,10 @@
-import CategoryCard from "./CategoryCard";
+import useGetCategories from "../hooks/useGetCategories";
 import "./Categories.css";
+import CategoryCard from "./CategoryCard";
 
 function Categories() {
-  const categories = [
-    { name: "Nutricion", icon: "nutricion" },
-    { name: "Mindfulness", icon: "mindfulness" },
-    { name: "Fitness", icon: "fitness" },
-    { name: "Coaching", icon: "coaching" },
-    { name: "Psicologia", icon: "psicologia" },
-  ];
+  const { categories, areCategoriesLoading, categoriesError } =
+    useGetCategories();
 
   return (
     <section className="disciplines-home">

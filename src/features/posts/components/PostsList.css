@@ -49,6 +49,10 @@
   }
 }
 
+.post-list_no-user {
+  margin-top: 1rem;
+}
+
 .posts-list {
   display: flex;
   flex-direction: column;

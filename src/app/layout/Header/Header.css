@@ -1,18 +1,20 @@
 .header {
   height: 4.3rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr max-content 1fr;
   border-radius: 0 0 0.2rem 0.2rem;
   background-color: #f6f6f6;
   align-items: center;
   transition: all 0.3s ease;
   width: 83.6rem;
   justify-self: center;
-  padding: 0 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 1rem;
 
   > .loader-spinner_user {
     width: 12rem;
     height: 45%;
+    justify-self: end;
   }
 }
 
@@ -72,11 +74,11 @@
 .header-cart_container {
   position: relative;
 
-  .header-cart {
+  > .header-cart {
     height: 100%;
     display: flex;
     align-items: center;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
 
   .mobile_burger-menu .cart-icon_container {
@@ -95,7 +97,7 @@
     color: white;
     position: absolute;
     top: -0.5rem;
-    right: -0.2rem;
+    right: -0.4rem;
     font-weight: 600;
   }
 }
@@ -107,7 +109,7 @@
 
 .header-user {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   gap: 0.7rem;
 
@@ -177,8 +179,11 @@
   display: none;
 }
 
-.mobile_burger-menu .mobile_header-cart_container .header-cart {
+.mobile_burger-menu .mobile_header-cart_container .header-cart_mobile {
   font-size: 1.4rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .mobile_burger-menu .burger-menu_icon {

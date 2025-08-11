@@ -16,6 +16,7 @@ function ScheduleProfile({ professionalId }) {
     setAvailabilities,
   } = useGetAvailabilitiesByProfessional(professionalId);
 
+
   const [isGetBookingModalOpen, setIsGetBookingModalOpen] = useState(false);
 
   return (

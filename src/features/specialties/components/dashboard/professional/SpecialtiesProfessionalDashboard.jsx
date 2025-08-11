@@ -1,8 +1,10 @@
 import useGetAllSpecialties from "../../../../specialties/hooks/useGetAllSpecialties";
+import useGetAllSpecialtiesByProfessional from "../../../hooks/useGetAllSpecialtiesByProfessional";
 import "./SpecialtiesProfessionalDashboard.css";
 
 function SpecialtiesProfessionalDashboard() {
-  const { specialties } = useGetAllSpecialties();
+  const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
+    useGetAllSpecialtiesByProfessional();
 
   return (
     <table className="users-root-dashboard_table">
@@ -21,7 +23,7 @@ function SpecialtiesProfessionalDashboard() {
             key={`specialty-${specialty.specialtyId}`}
           >
             <td>{specialty.name}</td>
-            <td className="lastname-row">{specialty.service.title}</td>
+            <td className="lastname-row">{/* {specialty.service.title} */}</td>
             <td className="options-row">
               <p className="edit">Editar</p>
               <p className="delete">Eliminar</p>

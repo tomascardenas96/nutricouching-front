@@ -15,6 +15,11 @@
     transition: all 0.3s ease;
   }
 
+  & .get-booking_no-options {
+    font-size: .8rem;
+    text-align: center;
+  }
+
   .radio-input:checked + label {
     background-color: rgba(0, 0, 0, 0.756);
     color: white;
@@ -49,7 +54,6 @@
 
   > div {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
 

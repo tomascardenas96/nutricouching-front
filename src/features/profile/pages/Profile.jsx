@@ -1,3 +1,4 @@
+import { useMediaQuery } from "react-responsive";
 import PostsSection from "../../posts/components/PostsSection";
 import useGetProfessionalByProfilename from "../../professional/hooks/useGetProfessionalByProfilename";
 import LeftContainer from "../components/LeftContainer";
@@ -9,6 +10,10 @@ import useSwitchSectionProfile from "../hooks/useSwitchSectionProfile";
 import "./Profile.css";
 
 function Profile() {
+  const isMobile = useMediaQuery({ query: "(max-width: 890px)" });
+
+  console.log(isMobile);
+
   const {
     professional,
     setProfessional,
@@ -57,25 +62,31 @@ function Profile() {
             />
           </div>
 
-          <div className="content_left-container">
-            <LeftContainer
-              profile={profile}
-              email={professional?.email}
-              professionalId={professional?.professionalId}
-            />
-          </div>
+          {(selectedOption === "information" || !isMobile) && (
+            <div className="content_left-container">
+              <LeftContainer
+                profile={profile}
+                email={professional?.email}
+                professionalId={professional?.professionalId}
+              />
+            </div>
+          )}
 
-          <div className="content_center-container">
-            <PostsSection
-              profileId={profile?.profileId}
-              profilePicture={profile?.picture}
-              name={professional?.fullname}
-            />
-          </div>
+          {(selectedOption === "posts" || !isMobile) && (
+            <div className="content_center-container">
+              <PostsSection
+                profileId={profile?.profileId}
+                profilePicture={profile?.picture}
+                name={professional?.fullname}
+              />
+            </div>
+          )}
 
-          <div className="content_right-container">
-            <RightContainer professionalId={professional?.professionalId} />
-          </div>
+          {(selectedOption === "schedules" || !isMobile) && (
+            <div className="content_right-container">
+              <RightContainer professionalId={professional?.professionalId} />
+            </div>
+          )}
         </div>
       </div>
     </div>

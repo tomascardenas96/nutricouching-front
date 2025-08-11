@@ -7,7 +7,7 @@ function useCreateSpecialty(setSpecialties, closeModal) {
 
   const [newSpecialtyInput, setNewSpecialtyInput] = useState({
     name: "",
-    serviceId: "",
+    categoryId: "",
   });
 
   const handleCreateSpecialty = async (e) => {

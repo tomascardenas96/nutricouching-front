@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { BsCart4 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoIosNotifications } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import { TbUserPentagon, TbUserStar } from "react-icons/tb";
+import { RxHamburgerMenu } from "react-icons/rx";
 import LoaderSpinner from "../../../common/components/LoaderSpinner";
 import LoginModal from "../../../features/auth/components/Login/LoginModal";
 import RegisterModal from "../../../features/auth/components/Register/RegisterModal";
@@ -152,16 +150,18 @@ function Header({
         </ul>
       </div>
 
+      {/* Mobile menu */}
       <div className="mobile_burger-menu">
         <div
           className="header-cart_container mobile_header-cart_container"
           onClick={handleCartModal}
         >
-          <BsCart4 className="header-cart" />
+          <BsCart4 className="header-cart_mobile" />
           <div className="cart-amount">
             <p>{quantityOfProductsInCart().toString()}</p>
           </div>
         </div>
+
         <RxHamburgerMenu className="burger-menu_icon" />
       </div>
 

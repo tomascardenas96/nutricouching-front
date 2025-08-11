@@ -12,7 +12,7 @@
   }
 
   & p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     display: flex;
     justify-content: center;
     margin-top: 0.8rem;
@@ -23,14 +23,14 @@
 
 .discipline-card .icon-container {
   border-radius: 50%;
-  width: 6rem;
-  height: 6rem;
-  border: 1.5px solid #f4ebdb;
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 1.5px solid #d8d8d8;
   display: flex;
   color: #2b1a0c75;
   justify-content: center;
   align-items: center;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 
   > div {
     width: 100%;
@@ -39,7 +39,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f4ebdb8e;
   }
 }
 

@@ -116,6 +116,7 @@
 @media screen and (max-width: 480px) {
   .professional-profile > .professional-profile_info {
     > h1 {
+      font-size: 1.6rem;
       margin-top: .2rem;
     }
   }
