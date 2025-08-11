@@ -30,21 +30,7 @@ function MoreInfo({
       onClick={handleOpenServiceModal}
     >
       <div className="services_more-info" onClick={(e) => e.stopPropagation()}>
-        <div className="service-modal_header">
-          <div>
-            <h1>{title?.toUpperCase()}</h1>
-            <p>Con LORENA ARLAN y NATASHA DIRIALDI</p>
-          </div>
-          <img src="/src/public/assets/tree-logo.png" alt="logo-service" />
-        </div>
-
-        <div className="service-modal_footer">
-          <button
-            onClick={user ? handleOpenRequestReservation : openLoginModal}
-          >
-            SOLICITAR TURNO <RiCalendarScheduleFill className="schedule-icon" />
-          </button>
-        </div>
+        
       </div>
 
       {/* Modal para seleccionar un turno */}

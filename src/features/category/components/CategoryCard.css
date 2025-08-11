@@ -15,7 +15,7 @@
     font-size: 0.7rem;
     display: flex;
     justify-content: center;
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
     color: #2b1a0cb9;
     font-weight: 600;
   }
@@ -27,7 +27,7 @@
   height: 5.5rem;
   border: 1.5px solid #d8d8d8;
   display: flex;
-  color: #2b1a0c75;
+  color: #898989;
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
@@ -39,6 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.553);
   }
 }
 

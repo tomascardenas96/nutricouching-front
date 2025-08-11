@@ -4,6 +4,7 @@ import { BsCart4 } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router-dom";
 import LoaderSpinner from "../../../common/components/LoaderSpinner";
 import LoginModal from "../../../features/auth/components/Login/LoginModal";
 import RegisterModal from "../../../features/auth/components/Register/RegisterModal";
@@ -17,7 +18,7 @@ import useEmptyCart from "../../../features/cart/hooks/useEmptyCart";
 import { useProductCart } from "../../../features/cart/hooks/useProductsCart";
 import { useViandsCart } from "../../../features/cart/hooks/useViandsCart";
 import UpdateUserModal from "../../../features/user/components/UpdateUserModal";
-import MobileMenu from "../mobileMenu/MobileMenu";
+import BurgerMenu from "./BurgerMenu";
 import "./Header.css";
 
 function Header({
@@ -109,9 +110,14 @@ function Header({
     <div className="header" id="main-page">
       <div className="header-logo">
         <div>
-          <img src="/assets/nutricouching-logo.jpg" alt="nutricoaching-logo" />
-          <p>Cohesiva</p>
-          <p>Salud</p>
+          <Link to="/" className="logo-container">
+            <img
+              src="/assets/nutricouching-logo.jpg"
+              alt="nutricoaching-logo"
+            />
+            <p>Cohesiva</p>
+            <p>Salud</p>
+          </Link>
         </div>
       </div>
 
@@ -162,7 +168,10 @@ function Header({
           </div>
         </div>
 
-        <RxHamburgerMenu className="burger-menu_icon" />
+        <RxHamburgerMenu
+          className="burger-menu_icon"
+          onClick={handleChangeBurgerMenu}
+        />
       </div>
 
       {!userLoading ? (
@@ -209,14 +218,15 @@ function Header({
 
       {isBurgerMenuOpen &&
         createPortal(
-          <MobileMenu
+          <BurgerMenu
             handleChangeBurgerMenu={handleChangeBurgerMenu}
             handleLoginModal={handleLoginModal}
             setActiveCart={setActiveCart}
             setElementsInCart={setElementsInCart}
             handleOpenUpdateUserModal={handleOpenUpdateUserModal}
             handleRegisterModal={handleRegisterModal}
-            scrolled={scrolled}
+            user={user}
+            handleLogOut={handleLogOut}
           />,
           document.body
         )}

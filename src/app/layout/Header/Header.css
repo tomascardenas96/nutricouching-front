@@ -23,9 +23,15 @@
 }
 
 .header-logo > div {
-  display: grid;
-  grid-template-columns: 3rem max-content;
-  grid-template-rows: 1fr 1fr;
+  width: max-content;
+
+  > .logo-container {
+    display: grid;
+    grid-template-columns: 3rem max-content;
+    grid-template-rows: 1fr 1fr;
+    cursor: pointer;
+    text-decoration: none;
+  }
 }
 
 .header-logo img {
@@ -226,6 +232,10 @@
   .header {
     width: 100%;
     display: flex;
+
+    > .loader-spinner_user {
+      display: none;
+    }
   }
 
   .header-menu {
