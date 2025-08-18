@@ -5,6 +5,8 @@ import useFilterQueries from "../hooks/useFilterQueries";
 import "./ProfessionalsFilterPage.css";
 import useGetSpecialtiesByCategory from "../../specialties/hooks/useGetSpecialtiesByCategory";
 import useSelectCategoryFilter from "../../specialties/hooks/useSelectCategoryFilter";
+import Filters from "../components/filter/Filters";
+import FiltersMobile from "../components/filter/mobile/FiltersMobile";
 
 const categories = [
   {
@@ -49,108 +51,23 @@ function ProfessionalsFilterPage() {
     <div className="professionals-filter-page">
       <QueryClientProvider client={queryClient}>
         <div className="filter-page_left">
-          <form className="container" onSubmit={(e) => e.preventDefault()}>
-            <div className="block-container">
-              <p className="path-info">
-                Inicio / Filtrar / <span>Profesionales</span>
-              </p>
-              <div className="title">
-                <h1>Profesionales </h1> <span>20 resultados</span>
-              </div>
+          <Filters
+            clearQueries={clearQueries}
+            filters={filters}
+            handleChange={handleChange}
+            categories={categories}
+            handleSelectCategory={handleSelectCategory}
+            specialties={specialties}
+          />
 
-              <h2>
-                Filtros{" "}
-                <span
-                  onClick={clearQueries}
-                  className={`${
-                    filters.name === "" &&
-                    filters.category === "" &&
-                    filters.specialty === "" &&
-                    "disabled-delete-btn"
-                  }`}
-                >
-                  Eliminar filtros
-                </span>
-              </h2>
-            </div>
-
-            <hr />
-
-            <div className="block-container name-field">
-              <h3>NOMBRE</h3>
-              <input
-                type="text"
-                placeholder="Ingrese un nombre"
-                name="name"
-                onChange={(e) => handleChange("name", e.target.value)}
-                value={filters.name}
-              />
-              <div className="search-icon">
-                <CiSearch />
-              </div>
-            </div>
-
-            <hr />
-
-            <div className="block-container option-fields">
-              <h3>CATEGORIA</h3>
-              <div className="input-items-container">
-                {categories?.map((category) => (
-                  <div key={category.categoryId}>
-                    <label>
-                      <input
-                        type="radio"
-                        name="category"
-                        value={category.categoryId}
-                        checked={
-                          filters.category.toLowerCase() ===
-                          category.name.toLowerCase()
-                        }
-                        onChange={(e) => {
-                          handleChange("category", category.name);
-                          handleSelectCategory(e.target.value);
-                        }}
-                      />
-                      {category.name}
-                      <span>N items</span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <hr />
-
-            <div className="block-container option-fields">
-              <h3>ESPECIALIDAD</h3>
-              <div className="input-items-container">
-                {specialties.length === 0 ? (
-                  <p>Seleccione una categoria</p>
-                ) : (
-                  specialties?.map((specialty) => (
-                    <div key={specialty.specialtyId}>
-                      <label>
-                        <input
-                          type="radio"
-                          name="specialty"
-                          value={filters.specialty}
-                          checked={
-                            filters.specialty.toLowerCase() ===
-                            specialty.name.toLowerCase()
-                          }
-                          onChange={(e) =>
-                            handleChange("specialty", specialty.name)
-                          }
-                        />
-                        {specialty.name}
-                        <span>N items</span>
-                      </label>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          </form>
+          <FiltersMobile
+            clearQueries={clearQueries}
+            filters={filters}
+            handleChange={handleChange}
+            categories={categories}
+            handleSelectCategory={handleSelectCategory}
+            specialties={specialties}
+          />
         </div>
 
         <div className="filter-page-results">

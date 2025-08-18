@@ -47,15 +47,17 @@
     flex-direction: column;
     gap: 2.3rem;
 
-    > li {
+    > li, a {
       font-size: 0.9rem;
       font-weight: 500;
+      text-decoration: none;
+      color: rgb(69, 69, 69);
     }
   }
 }
 
 .burger-menu .log-out {
-  color: rgb(210, 109, 109);
+  color: rgb(189, 72, 72);
 }
 
 @media screen and (max-width: 370px) {

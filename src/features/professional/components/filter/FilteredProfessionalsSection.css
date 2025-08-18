@@ -22,3 +22,25 @@
     font-size: 1.1rem;
   }
 }
+
+@media screen and (max-width: 810px) {
+  .filtered-professionals_results {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, 4.7rem);
+    max-width: 25rem;
+    justify-self: center;
+    gap: 0.5rem;
+    padding: 0;
+  }
+
+  .filtered-professionals_results .no-filters-selected,
+  .filtered-professionals_results .no-results {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .filtered-professionals_results {
+    max-width: 100%;
+  }
+}

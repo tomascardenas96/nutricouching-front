@@ -74,3 +74,16 @@
     }
   }
 }
+
+@media screen and (max-width: 920px) {
+  .users-root-dashboard_table {
+    > thead {
+      display: none;
+    }
+  }
+
+  .users-root-dashboard_table .dashboard_users-item {
+    height: 3rem !important;
+    position: relative;
+  }
+}

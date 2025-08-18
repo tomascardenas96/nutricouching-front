@@ -1,0 +1,20 @@
+.filter-page_left .block-container {
+    padding: 0 1rem;
+  }
+
+  .filter-page_left .option-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  
+    > .input-items-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+  
+      > p {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }

@@ -57,3 +57,54 @@
     font-size: 0.7rem;
   }
 }
+
+@media screen and (max-width: 810px) {
+  .professional-filter-result-card {
+    display: flex;
+    border: 1px solid #e4e4e4;
+    border-radius: 0.2rem;
+  }
+
+  .result-professional_image {
+    display: grid;
+    padding-top: 0;
+    border-radius: 0;
+    width: 4.3rem;
+    padding-left: 0.5rem;
+
+    > img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  .result-professional_user-information {
+    margin-top: 0.2rem;
+    height: 3rem;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0;
+
+    > h1 {
+      font-size: 0.75rem;
+      text-align: start;
+      font-weight: 500;
+    }
+
+    > p {
+      font-size: 0.65rem;
+      display: flex;
+      justify-content: start;
+      padding: 0;
+      text-align: center;
+      margin-top: 0.2rem;
+      color: rgb(129, 129, 129);
+    }
+  }
+
+  .result-professional_navigate-profile {
+    display: none;
+  }
+}

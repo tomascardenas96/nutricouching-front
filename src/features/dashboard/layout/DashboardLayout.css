@@ -59,3 +59,13 @@
   display: flex;
   justify-content: center;
 }
+
+@media screen and (max-width: 1320px) {
+  .dashboard-layout_container > .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-layout_container > .dashboard > .left-menu {
+    display: none;
+  }
+}

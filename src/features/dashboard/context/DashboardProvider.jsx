@@ -8,6 +8,7 @@ function DashboardProvider({ children }) {
     setSelectedOption(option);
   };
 
+  // Definimos la opcion por defecto dependiendo si se abre el menu de root o professional.
   useEffect(() => {
     const pathname = window.location.pathname;
     if (pathname === "/root") {

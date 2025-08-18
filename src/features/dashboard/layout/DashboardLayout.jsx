@@ -3,6 +3,7 @@ import RootMenuDashboard from "../../admin/components/dashboard/RootMenuDashboar
 import ProfessionalMenuDashboard from "../../professional/components/dashboard/admin/ProfessionalMenuDashboard";
 import DashboardProvider from "../context/DashboardProvider";
 import "./DashboardLayout.css";
+import DashboardMobileMenu from "../components/mobile/DashboardMobileMenu";
 
 function DashboardLayout({ children }) {
   const pathname = window.location.pathname;
@@ -11,6 +12,8 @@ function DashboardLayout({ children }) {
     <section className="dashboard-layout_container">
       {/* Contexto de los dashboards, para seleccionar una opcion del menu */}
       <DashboardProvider>
+        <DashboardMobileMenu />
+
         <div className="dashboard">
           <div className="left-menu">
             <div className="dashboard-logo">

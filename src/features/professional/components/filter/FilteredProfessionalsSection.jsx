@@ -18,7 +18,7 @@ function FilteredProfessionalsSection({ filters }) {
   return (
     <div className="filtered-professionals_results">
       {isLoading ? (
-        new Array(12)
+        new Array(4)
           .fill(null)
           .map((_loader, idx) => (
             <ProfessionalCardLoading key={`loader-${idx}`} />

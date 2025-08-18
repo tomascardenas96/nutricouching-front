@@ -25,7 +25,7 @@ function ItemMenuDashboard({ option, isSelected, selectOptionDashboardMenu }) {
         {option === "Planes" && <PiTagThin />}
         {option === "Turnos" && <GoBook />}
         {option === "Horarios de Atencion" && <LuTimer />}
-        {option}
+        <span>{option}</span>
       </div>
       <IoIosArrowForward className="arrow-icon" />
     </li>
