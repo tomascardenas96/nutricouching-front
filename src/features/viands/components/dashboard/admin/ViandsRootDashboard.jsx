@@ -29,40 +29,42 @@ function ViandsRootDashboard() {
 
   return (
     <>
-      <table className="viands-root-dashboard_table">
-        <thead>
-          <tr>
-            <th className="image-column"></th>
-            <th>Descripcion</th>
-            <th className="stock-column">Stock</th>
-            <th className="price-column">Precio</th>
-            <th className="options-column">Opciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {viands?.length > 0 ? (
-            <ViandsListDashboard
-              viands={viands}
-              openEditViandModal={openEditViandModal}
-              openDeleteViandModal={openDeleteViandModal}
-            />
-          ) : (
+      <div className="viands-desktop-dashboard">
+        <table className="viands-root-dashboard_table">
+          <thead>
             <tr>
-              <th
-                colSpan={5}
-                style={{ textAlign: "center" }}
-                className="no-viands"
-              >
-                No hay viandas aún.
-              </th>
+              <th className="image-column"></th>
+              <th>Descripcion</th>
+              <th className="stock-column">Stock</th>
+              <th className="price-column">Precio</th>
+              <th className="options-column">Opciones</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
 
-      <div className="add-viand_btn" onClick={handleAddViandModal}>
-        <button>Agregar vianda</button>
+          <tbody>
+            {viands?.length > 0 ? (
+              <ViandsListDashboard
+                viands={viands}
+                openEditViandModal={openEditViandModal}
+                openDeleteViandModal={openDeleteViandModal}
+              />
+            ) : (
+              <tr>
+                <th
+                  colSpan={5}
+                  style={{ textAlign: "center" }}
+                  className="no-viands"
+                >
+                  No hay viandas aún.
+                </th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <div className="add-viand_btn" onClick={handleAddViandModal}>
+          <button>Agregar vianda</button>
+        </div>
       </div>
 
       {isEditViandModalOpen &&

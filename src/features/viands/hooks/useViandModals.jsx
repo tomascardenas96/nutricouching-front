@@ -14,6 +14,7 @@ function useViandModals(selectViand) {
   };
 
   const closeEditViandModal = () => {
+    selectViand(null);
     setIsEditViandModalOpen(false);
   };
 

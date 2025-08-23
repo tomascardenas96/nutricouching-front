@@ -1,12 +1,22 @@
 import ModalWindow from "../../../../../../common/components/dashboard/ModalWindow";
+import useModifyProfessional from "../../../../hooks/useModifyProfessional";
 import "./ModifyProfessionalModal.css";
 
 function ModifyProfessionalModal({
-  handleChangeModifyProfessional,
-  handleSubmitModifyProfessional,
+  selectedProfessional,
+  setProfessionals,
   handleCloseModifyModal,
-  modifyProfessionalInputs,
 }) {
+  const {
+    handleChangeModifyProfessional,
+    handleSubmitModifyProfessional,
+    modifyProfessionalInputs,
+  } = useModifyProfessional(
+    selectedProfessional,
+    setProfessionals,
+    handleCloseModifyModal
+  );
+
   return (
     <ModalWindow
       onClose={handleCloseModifyModal}

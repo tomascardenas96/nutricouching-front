@@ -42,7 +42,6 @@
 .disciplines_container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5rem;
 }
 
 .services_container {
@@ -110,7 +109,7 @@
   }
 
   .services_container {
-    margin-top: 1.9rem;
+    margin-top: 1.6rem;
   }
 
   .home-container .quotes-section_container {

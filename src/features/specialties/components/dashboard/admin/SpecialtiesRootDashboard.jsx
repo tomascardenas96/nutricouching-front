@@ -29,59 +29,61 @@ function SpecialtiesRootDashboard() {
 
   return (
     <>
-      <table className="specialties-root-dashboard_table">
-        <thead>
-          <tr>
-            <th>Descripcion</th>
-            <th>Categoria</th>
-            <th className="options-column">Opciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {specialties?.length ? (
-            specialties.map((specialty) => (
-              <tr
-                className="dashboard_specialty-item"
-                key={`specialty-${specialty.specialtyId}`}
-              >
-                <td>{specialty.name}</td>
-                <td className="specialty-row">{specialty.category.name}</td>
-                <td className="options-row">
-                  <p
-                    className="edit"
-                    onClick={() => handleOpenModifyModal(specialty)}
-                  >
-                    Editar
-                  </p>
-                  <p
-                    className="delete"
-                    onClick={() => handleOpenDeleteModal(specialty)}
-                  >
-                    Eliminar
-                  </p>
-                </td>
-                <div className="divider-line_container">
-                  <hr className="divider-line" />
-                </div>
-              </tr>
-            ))
-          ) : (
+      <div className="specialties-desktop-dashboard">
+        <table className="specialties-root-dashboard_table">
+          <thead>
             <tr>
-              <th
-                colSpan={6}
-                style={{ textAlign: "center" }}
-                className="no-specialties"
-              >
-                No hay especialidades aún.
-              </th>
+              <th>Descripcion</th>
+              <th>Categoria</th>
+              <th className="options-column">Opciones</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
 
-      <div className="add-specialty_btn" onClick={handleAddSpecialtyModal}>
-        <button>Agregar especialidad</button>
+          <tbody>
+            {specialties?.length ? (
+              specialties.map((specialty) => (
+                <tr
+                  className="dashboard_specialty-item"
+                  key={`specialty-${specialty.specialtyId}`}
+                >
+                  <td>{specialty.name}</td>
+                  <td className="specialty-row">{specialty.category.name}</td>
+                  <td className="options-row">
+                    <p
+                      className="edit"
+                      onClick={() => handleOpenModifyModal(specialty)}
+                    >
+                      Editar
+                    </p>
+                    <p
+                      className="delete"
+                      onClick={() => handleOpenDeleteModal(specialty)}
+                    >
+                      Eliminar
+                    </p>
+                  </td>
+                  <div className="divider-line_container">
+                    <hr className="divider-line" />
+                  </div>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <th
+                  colSpan={6}
+                  style={{ textAlign: "center" }}
+                  className="no-specialties"
+                >
+                  No hay especialidades aún.
+                </th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <div className="add-specialty_btn" onClick={handleAddSpecialtyModal}>
+          <button>Agregar especialidad</button>
+        </div>
       </div>
 
       {isAddSpecialtyModalOpen &&

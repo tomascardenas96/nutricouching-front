@@ -1,0 +1,72 @@
+.user-card-dashboard-container {
+  margin: 0 1.5rem;
+  display: flex;
+  gap: 0.8rem;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  padding-bottom: 1.5rem;
+  color: #666666;
+}
+
+.user-card-dashboard-container .image-container {
+  border-radius: 50%;
+
+  > img {
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0.3rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 1px solid rgb(209, 209, 209);
+  }
+}
+
+.user-card-dashboard-container .info-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr max-content;
+  justify-content: space-between;
+  gap: 0.2rem;
+
+  > .name {
+    font-size: 0.8rem;
+  }
+}
+
+.user-card-dashboard-container .info-container .stock-price {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  padding-bottom: 0.1rem;
+
+  > p {
+    display: flex;
+    gap: 0.2rem;
+  }
+}
+
+.user-card-dashboard-container .buttons-container {
+  gap: 0.6rem;
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+
+  > button {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: white;
+    border-radius: 0.2rem;
+    font-weight: 400;
+  }
+
+  > .delete-btn {
+    border: 1.3px solid #ca6969;
+    color: #ca6969;
+  }
+}
+
+@media screen and (max-width: 1320px) {
+}

@@ -36,7 +36,7 @@ function useGetAllUsers() {
     getUsers();
   }, []);
 
-  return { users, usersLoading, usersError };
+  return { users, setUsers, usersLoading, usersError };
 }
 
 export default useGetAllUsers;

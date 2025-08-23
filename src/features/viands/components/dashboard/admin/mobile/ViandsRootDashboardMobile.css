@@ -1,0 +1,19 @@
+.viands-root-dashboard_mobile-container {
+  display: none;
+  flex-direction: column;
+  margin-top: 1.3rem;
+}
+
+.viands-root-dashboard_mobile-container .viands-root-dashboard-mobile {
+  > .split-viands-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .viands-root-dashboard_mobile-container {
+    display: flex;
+  }
+}

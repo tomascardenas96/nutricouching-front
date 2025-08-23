@@ -133,3 +133,9 @@
     background-color: #db5942cb;
   }
 }
+
+@media screen and (max-width: 920px) {
+  .viands-desktop-dashboard {
+    display: none;
+  }
+}

@@ -49,82 +49,84 @@ function ProfessionalsRootDashboard() {
 
   return (
     <>
-      <table className="professionals-root-dashboard_table">
-        <thead>
-          <tr>
-            <th className="image-column"></th>
-            <th>Nombre Completo</th>
-            <th className="email-column">E-mail</th>
-            <th className="phone-column">Telefono</th>
-            <th className="role-column">Rol</th>
-            <th className="options-column">Opciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {professionals?.length > 0 ? (
-            professionals.map((professional) => (
-              <tr
-                className="dashboard_professional-item"
-                key={`professional-${professional.professionalId}`}
-              >
-                <td className="image-row">
-                  <div>
-                    {professional?.profile?.picture ? (
-                      <img
-                        src={professional.profile.picture}
-                        alt="fotos de los profesionales en el dashboard root"
-                      />
-                    ) : (
-                      <img
-                        src="/assets/no-pic.jpg"
-                        alt="Profesional sin foto de perfil"
-                      />
-                    )}
-                  </div>
-                </td>
-                <td>{professional.fullname}</td>
-                <td className="email-row">{professional.email}</td>
-                <td className="phone-row">{professional.phone}</td>
-                <td className="role-row">{professional.role}</td>
-                <td className="options-row">
-                  <p
-                    className="edit"
-                    onClick={() => handleOpenModifyModal(professional)}
-                  >
-                    Editar
-                  </p>
-                  <p
-                    className="delete"
-                    onClick={() => handleOpenDeleteModal(professional)}
-                  >
-                    Eliminar
-                  </p>
-                </td>
-                <td className="divider-line_container">
-                  <hr className="divider-line" />
-                </td>
-              </tr>
-            ))
-          ) : (
+      <div className="products-desktop-dashboard">
+        <table className="professionals-root-dashboard_table">
+          <thead>
             <tr>
-              <th
-                colSpan={6}
-                style={{ textAlign: "center" }}
-                className="no-professionals"
-              >
-                No hay profesionales aún.
-              </th>
+              <th className="image-column"></th>
+              <th>Nombre Completo</th>
+              <th className="email-column">E-mail</th>
+              <th className="phone-column">Telefono</th>
+              <th className="role-column">Rol</th>
+              <th className="options-column">Opciones</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
 
-      <div
-        className="add-professional_btn"
-        onClick={handleAddProfessionalModal}
-      >
-        <button>Agregar profesional</button>
+          <tbody>
+            {professionals?.length > 0 ? (
+              professionals.map((professional) => (
+                <tr
+                  className="dashboard_professional-item"
+                  key={`professional-${professional.professionalId}`}
+                >
+                  <td className="image-row">
+                    <div>
+                      {professional?.profile?.picture ? (
+                        <img
+                          src={professional.profile.picture}
+                          alt="fotos de los profesionales en el dashboard root"
+                        />
+                      ) : (
+                        <img
+                          src="/assets/no-pic.jpg"
+                          alt="Profesional sin foto de perfil"
+                        />
+                      )}
+                    </div>
+                  </td>
+                  <td>{professional.fullname}</td>
+                  <td className="email-row">{professional.email}</td>
+                  <td className="phone-row">{professional.phone}</td>
+                  <td className="role-row">{professional.role}</td>
+                  <td className="options-row">
+                    <p
+                      className="edit"
+                      onClick={() => handleOpenModifyModal(professional)}
+                    >
+                      Editar
+                    </p>
+                    <p
+                      className="delete"
+                      onClick={() => handleOpenDeleteModal(professional)}
+                    >
+                      Eliminar
+                    </p>
+                  </td>
+                  <td className="divider-line_container">
+                    <hr className="divider-line" />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <th
+                  colSpan={6}
+                  style={{ textAlign: "center" }}
+                  className="no-professionals"
+                >
+                  No hay profesionales aún.
+                </th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <div
+          className="add-professional_btn"
+          onClick={handleAddProfessionalModal}
+        >
+          <button>Agregar profesional</button>
+        </div>
       </div>
 
       {isAddProfessionalModalOpen && (

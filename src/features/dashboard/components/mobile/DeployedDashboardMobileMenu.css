@@ -5,6 +5,7 @@
   width: 100%;
   height: 100vh;
   background-color: var(--background-shadow-color);
+  display: none;
 }
 
 .deployed-dashboard-mobile-menu .menu {
@@ -19,11 +20,14 @@
   padding-bottom: 8rem;
 }
 
-.deployed-dashboard-mobile-menu .options-modal {
-}
-
 .deployed-dashboard-mobile-menu .close-modal {
   display: flex;
   justify-content: end;
   padding-right: 1rem;
+}
+
+@media screen and (max-width: 1320px) {
+  .deployed-dashboard-mobile-menu {
+    display: flex;
+  }
 }

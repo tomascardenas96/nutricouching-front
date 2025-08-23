@@ -1,6 +1,5 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import { HOST } from "../../../../../../api/data";
 import useModifyViand from "../../../../hooks/useModifyViand";
 import "./ModifyViandModal.css";
 
@@ -81,10 +80,7 @@ function ModifyViandModal({
                   alt="selected-image-modify-viand"
                 />
               ) : (
-                <img
-                  src={selectedViand.image}
-                  alt="viand-picture"
-                />
+                <img src={selectedViand.image} alt="viand-picture" />
               )}
             </div>
             <p>Selecciona una foto</p>

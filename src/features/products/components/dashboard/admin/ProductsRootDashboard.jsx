@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import ModifyProductModal from "./modals/ModifyProductModal";
 import useGetAllProducts from "../../../hooks/useGetAllProducts";
-import ProductsListDashboard from "./ProductsListDashboard";
-import "./ProductsRootDashboard.css";
 import useHandleProductsModals from "../../../hooks/useHandleProductsModals";
 import AddProductModal from "./modals/AddProductModal";
+import ModifyProductModal from "./modals/ModifyProductModal";
+import ProductsListDashboard from "./ProductsListDashboard";
+import "./ProductsRootDashboard.css";
 
 function ProductsRootDashboard() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -21,40 +21,42 @@ function ProductsRootDashboard() {
 
   return (
     <>
-      <table className="products-root-dashboard_table">
-        <thead>
-          <tr>
-            <th className="image-column"></th>
-            <th>Descripcion</th>
-            <th className="stock-column">Stock</th>
-            <th className="price-column">Precio</th>
-            <th className="options-column">Opciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {products?.length > 0 ? (
-            <ProductsListDashboard
-              products={products}
-              setProducts={setProducts}
-              handleModifyProductModalOpen={handleModifyProductModalOpen}
-            />
-          ) : (
+      <div className="products-desktop-dashboard">
+        <table className="products-root-dashboard_table">
+          <thead>
             <tr>
-              <th
-                colSpan={5}
-                style={{ textAlign: "center" }}
-                className="no-products"
-              >
-                No hay productos aún.
-              </th>
+              <th className="image-column"></th>
+              <th>Descripcion</th>
+              <th className="stock-column">Stock</th>
+              <th className="price-column">Precio</th>
+              <th className="options-column">Opciones</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
 
-      <div className="add-product_btn" onClick={handleAddProductModal}>
-        <button>Agregar producto</button>
+          <tbody>
+            {products?.length > 0 ? (
+              <ProductsListDashboard
+                products={products}
+                setProducts={setProducts}
+                handleModifyProductModalOpen={handleModifyProductModalOpen}
+              />
+            ) : (
+              <tr>
+                <th
+                  colSpan={5}
+                  style={{ textAlign: "center" }}
+                  className="no-products"
+                >
+                  No hay productos aún.
+                </th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <div className="add-product_btn" onClick={handleAddProductModal}>
+          <button>Agregar producto</button>
+        </div>
       </div>
 
       {isModifyProductModalOpen &&

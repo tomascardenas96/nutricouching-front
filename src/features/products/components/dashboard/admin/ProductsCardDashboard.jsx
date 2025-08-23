@@ -1,5 +1,4 @@
 import { createPortal } from "react-dom";
-import { HOST } from "../../../../../api/data";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import useDeleteProduct from "../../../hooks/useDeleteProduct";
 import "./ProductsCardDashboard.css";
@@ -20,17 +19,17 @@ function ProductsCardDashboard({
       >
         <td className="image-row">
           <div>
-            <img
-              src={product.image}
-              alt="imagen de productos dashboard root"
-            />
+            <img src={product.image} alt="imagen de productos dashboard root" />
           </div>
         </td>
         <td>{product.name}</td>
         <td className="stock-row">{product.stock} u</td>
         <td className="price-row">$ {product.price}</td>
         <td className="options-row">
-          <p className="edit" onClick={() => handleModifyProductModalOpen(product)}>
+          <p
+            className="edit"
+            onClick={() => handleModifyProductModalOpen(product)}
+          >
             Editar
           </p>
           <p className="delete" onClick={() => openModal(product.productId)}>

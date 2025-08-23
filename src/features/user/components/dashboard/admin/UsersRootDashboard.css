@@ -77,9 +77,7 @@
 
 @media screen and (max-width: 920px) {
   .users-root-dashboard_table {
-    > thead {
-      display: none;
-    }
+    display: none;
   }
 
   .users-root-dashboard_table .dashboard_users-item {

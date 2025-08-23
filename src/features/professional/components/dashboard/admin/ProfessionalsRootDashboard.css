@@ -124,3 +124,9 @@
     background-color: #db5942cb;
   }
 }
+
+@media screen and (max-width: 920px) {
+  .products-desktop-dashboard {
+    display: none;
+  }
+}

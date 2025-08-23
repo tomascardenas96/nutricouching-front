@@ -1,12 +1,13 @@
 .dashboard-mobile-menu {
-  height: 4.7rem;
-  background-color: #f6f6f6;
+  height: 4rem;
+  background-color: white;
   font-size: 2rem;
   align-items: center;
   padding-left: 4%;
-  border-bottom: 1px solid #c9c9c9;
+  border-bottom: 1px solid #e8e8e8;
   display: none;
   color: #595959;
+  padding-top: 0.5rem;
 }
 
 @media screen and (max-width: 1320px) {

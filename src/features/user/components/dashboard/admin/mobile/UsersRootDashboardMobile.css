@@ -1,0 +1,19 @@
+.user-root-dashboard_mobile-container {
+  display: none;
+  flex-direction: column;
+  margin-top: 1.3rem;
+}
+
+.user-root-dashboard_mobile-container .user-root-dashboard-mobile {
+    > .split-user-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 920px) {
+  .user-root-dashboard_mobile-container {
+    display: flex;
+  }
+}

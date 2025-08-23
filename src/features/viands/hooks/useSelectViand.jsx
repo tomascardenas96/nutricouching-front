@@ -7,7 +7,7 @@ function useSelectViand() {
     setSelectedViand(viand);
   };
 
-  return { selectViand, selectedViand };
+  return { selectViand, selectedViand, setSelectedViand };
 }
 
 export default useSelectViand;

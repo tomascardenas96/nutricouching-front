@@ -3,6 +3,7 @@ import { IoReturnUpBack, IoSearchOutline } from "react-icons/io5";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 import { useSelectMenuOption } from "../hooks/useSelectMenuOption";
 import "./DashboardContentLayout.css";
+import { Link } from "react-router-dom";
 
 function DashboardContentLayout({ children }) {
   const { user } = useAuthUser();
@@ -45,8 +46,10 @@ function DashboardContentLayout({ children }) {
 
       <div className="admin-dashboard_home">
         <p>
-          <IoReturnUpBack />
-          Volver a home
+          <Link to="/">
+            <IoReturnUpBack />
+            Volver a home
+          </Link>
         </p>
       </div>
     </div>

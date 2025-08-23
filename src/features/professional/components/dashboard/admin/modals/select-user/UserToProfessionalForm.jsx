@@ -30,7 +30,7 @@ function UserToProfessionalForm({
   return (
     <>
       <div className="professionals-list_modal">
-        {professionals.map((professional) => (
+        {professionals?.map((professional) => (
           <NewProfessionalAbmCard
             key={`professional-${professional.professionalId}`}
             professional={professional}

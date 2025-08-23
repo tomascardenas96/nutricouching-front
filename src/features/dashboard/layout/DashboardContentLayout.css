@@ -137,7 +137,9 @@
 
 @media screen and (max-width: 920px) {
   .admin-dashboard {
-    grid-template-rows: 5rem 1fr 4rem;
+    grid-template-rows: 4.5rem 1fr 4rem;
+    width: 100%;
+    padding: 0 0.5rem;
   }
 
   .admin-dashboard .admin-dashboard_header {
@@ -177,6 +179,7 @@
       > div.filter {
         width: 100%;
         > input {
+          height: 2.5rem;
           width: 100%;
         }
       }
