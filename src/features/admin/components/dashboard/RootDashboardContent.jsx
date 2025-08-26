@@ -1,4 +1,5 @@
 import { useSelectMenuOption } from "../../../dashboard/hooks/useSelectMenuOption";
+import PlansRootDashboardMobile from "../../../plans/components/dashboard/admin/mobile/PlansRootDashboardMobile";
 import PlansRootDashboard from "../../../plans/components/dashboard/admin/PlansRootDashboard";
 import ProductsRootDashboardMobile from "../../../products/components/dashboard/admin/mobile/ProductsRootDashboardMobile";
 import ProductsRootDashboard from "../../../products/components/dashboard/admin/ProductsRootDashboard";
@@ -63,6 +64,7 @@ function RootDashboardContent() {
     return (
       <>
         <PlansRootDashboard />
+        <PlansRootDashboardMobile />
       </>
     );
   }

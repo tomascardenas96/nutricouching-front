@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import { HOST, WEBSOCKET_HOST } from "../../../api/data";
 import { io } from "socket.io-client";
 import { toast } from "sonner";
+import { useAuthUser } from "../../auth/hooks/useAuthUser";
 
-function useGetAllPlans(
-  user,
-  selectedPlan,
-  setSelectedPlan,
-  setIsMoreInfoModalOpen
-) {
+function useGetAllPlans(setSelectedPlan, setIsMoreInfoModalOpen) {
   const [plans, setPlans] = useState([]);
   const [plansLoading, setPlansLoading] = useState(true);
   const [plansError, setPlansError] = useState(null);
+
+  const { user } = useAuthUser();
 
   useEffect(() => {
     const getPlans = async () => {
@@ -111,6 +109,7 @@ function useGetAllPlans(
   const flattedPlans = [
     ...(plans?.freePlans || []),
     ...(plans?.notPurchasedPlans || []),
+    ...(plans?.purchasedPlans || []),
   ];
 
   return { plans, setPlans, plansLoading, plansError, flattedPlans };

@@ -21,8 +21,6 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
   const { handleLoginModal } = useLoginModal();
 
   const { plans, setPlans, plansError, plansLoading } = useGetAllPlans(
-    user,
-    selectedPlan,
     setSelectedPlan,
     setIsMoreInfoModalOpen
   );

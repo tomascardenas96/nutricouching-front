@@ -70,6 +70,9 @@ function useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans) {
             notPurchasedPlans: prev.notPurchasedPlans.map((plan) =>
               plan.planId !== data.planId ? plan : data
             ),
+            purchasedPlans: prev.purchasedPlans.map((plan) =>
+              plan.planId !== data.planId ? plan : data
+            ),
           };
         });
         closeModifyPlanModal();

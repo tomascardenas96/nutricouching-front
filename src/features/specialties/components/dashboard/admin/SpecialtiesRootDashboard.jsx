@@ -98,7 +98,6 @@ function SpecialtiesRootDashboard() {
       {isModifySpecialtyModalOpen &&
         createPortal(
           <ModifySpecialtyRootModal
-            selectSpecialty={selectSpecialty}
             selectedSpecialty={selectedSpecialty}
             setSpecialties={setSpecialties}
             handleCloseModifyModal={handleCloseModifyModal}

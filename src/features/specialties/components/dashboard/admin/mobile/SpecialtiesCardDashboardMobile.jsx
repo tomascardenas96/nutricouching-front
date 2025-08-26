@@ -18,13 +18,13 @@ function SpecialtiesCardDashboardMobile({
       <div className="product-card-dashboard-container">
         <div className="info-container">
           <p className="name">
-            <b>Nombre:</b> {specialty.name}
+            <b>Nombre:</b> {specialty?.name}
           </p>
 
           <div className="category">
             <p>
               <b>Categoria:</b>
-              {specialty.category.name}
+              {specialty?.category?.name}
             </p>
           </div>
 
@@ -34,7 +34,7 @@ function SpecialtiesCardDashboardMobile({
             </button>
             <button
               className="delete-btn"
-              onClick={() => openModal(specialty.specialtyId)}
+              onClick={() => openModal(specialty?.specialtyId)}
             >
               <MdDelete />
               Eliminar

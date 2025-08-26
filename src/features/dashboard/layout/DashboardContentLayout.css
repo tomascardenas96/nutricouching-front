@@ -139,7 +139,7 @@
   .admin-dashboard {
     grid-template-rows: 4.5rem 1fr 4rem;
     width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 0.8rem;
   }
 
   .admin-dashboard .admin-dashboard_header {

@@ -1,0 +1,75 @@
+.plan-card-dashboard-container {
+  margin: 0 1.5rem;
+  display: flex;
+  gap: 0.8rem;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  padding-bottom: 1.5rem;
+  color: #666666;
+}
+
+.plan-card-dashboard-container .image-container {
+  border-radius: 50%;
+
+  > img {
+    width: 2.8rem;
+    height: 2.8rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 1px solid rgb(209, 209, 209);
+  }
+}
+
+.plan-card-dashboard-container .info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  > p {
+    font-size: 0.8rem;
+    display: flex;
+    gap: .4rem;
+  }
+}
+
+.plan-card-dashboard-container .info-container .description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  padding-bottom: 0.1rem;
+
+  > p {
+    display: flex;
+    gap: 0.2rem;
+  }
+}
+
+.plan-card-dashboard-container .buttons-container {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: .3rem;
+
+  > button {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: white;
+    border-radius: 0.2rem;
+    font-weight: 400;
+  }
+
+  > .edit-btn {
+    border: 1.3px solid #0f7a0f;
+    color: #0f7a0f;
+  }
+
+  > .delete-btn {
+    border: 1.3px solid #ca6969;
+    color: #ca6969;
+  }
+}

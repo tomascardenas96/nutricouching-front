@@ -41,18 +41,18 @@ function ModifySpecialtyRootModal({
         <label htmlFor="categoryId">
           Categoria
           <select name="categoryId" onChange={handleChangeModifySpecialty}>
-            <option value={selectedSpecialty.categorycategoryId}>
-              {selectedSpecialty.category.name}
+            <option value={selectedSpecialty?.categorycategoryId}>
+              {selectedSpecialty?.category?.name}
             </option>
             {categories?.map(
               (category) =>
-                selectedSpecialty.category.categoryId !==
-                  category.categoryId && (
+                selectedSpecialty?.category?.categoryId !==
+                  category?.categoryId && (
                   <option
-                    key={`category-${category.categoryId}`}
-                    value={category.categoryId}
+                    key={`category-${category?.categoryId}`}
+                    value={category?.categoryId}
                   >
-                    {category.name}
+                    {category?.name}
                   </option>
                 )
             )}
