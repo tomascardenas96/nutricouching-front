@@ -5,6 +5,7 @@ import PlansModal from "../../../plans/components/PlansModal";
 import { services } from "../../data/services";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
+import ResourcesModal from "../../../resources/components/ResourcesModal";
 
 function Services() {
   // Selected service state
@@ -57,26 +58,20 @@ function Services() {
       </div>
 
       {/* Mostrar modal si hay un servicio seleccionado */}
-      {selectedService?.type === "schedule" &&
-        isMoreInfoModalOpen &&
-        createPortal(
-          <MoreInfo
-            handleOpenRequestReservation={handleOpenRequestReservation}
-            title={selectedService?.title}
-            description={selectedService?.description}
-            image={selectedService?.image}
-            handleOpenServiceModal={handleOpenServiceModal}
-            selectedService={selectedService}
-            setIsRequestReservationOpen={setIsRequestReservationOpen}
-            isRequestReservationOpen={isRequestReservationOpen}
-          />,
-          document.getElementById("root")
-        )}
-
       {selectedService?.type === "plan_download" &&
         isSmartPlanModalOpen &&
         createPortal(
           <PlansModal
+            handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+            setSelectedService={setSelectedService}
+          />,
+          document.getElementById("root")
+        )}
+
+      {selectedService?.type === "resource_download" &&
+        isSmartPlanModalOpen &&
+        createPortal(
+          <ResourcesModal
             handleOpenSmartPlanModal={handleOpenSmartPlanModal}
             setSelectedService={setSelectedService}
           />,

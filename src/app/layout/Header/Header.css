@@ -6,10 +6,9 @@
   background-color: #f6f6f6;
   align-items: center;
   transition: all 0.3s ease;
-  width: 83.6rem;
+  width: 100%;
   justify-self: center;
-  padding-left: 2.5rem;
-  padding-right: 1rem;
+  padding: 0 5rem;
 
   > .loader-spinner_user {
     width: 12rem;
@@ -196,11 +195,7 @@
   font-size: 1.9rem;
 }
 
-@media screen and (max-width: 1400px) {
-  .header {
-    width: 75rem;
-  }
-}
+
 
 @media screen and (max-width: 1200px) {
   .header {
@@ -222,16 +217,11 @@
   }
 }
 
-@media screen and (max-width: 1050px) {
-  .header {
-    width: 57rem;
-  }
-}
-
 @media screen and (max-width: 970px) {
   .header {
     width: 100%;
     display: flex;
+    padding: 0 2rem;
 
     > .loader-spinner_user {
       display: none;

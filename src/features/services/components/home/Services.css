@@ -36,12 +36,12 @@
 }
 
 .services-list_container {
-  width: 50rem;
+  /* width: 50rem; */
   justify-content: center;
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 5rem;
   place-content: center;
   padding-bottom: 2rem;
 

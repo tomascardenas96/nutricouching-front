@@ -14,8 +14,8 @@ function ServiceCard({
 }) {
   const handleSelectServiceAndOpenModal = () => {
     handleSelectService();
-    if (type === "schedule") handleOpenServiceModal();
     if (type === "plan_download") handleOpenSmartPlanModal();
+    if (type === "resource_download") handleOpenSmartPlanModal();
   };
 
   return (

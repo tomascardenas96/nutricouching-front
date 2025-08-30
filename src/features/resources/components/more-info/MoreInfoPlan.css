@@ -1,0 +1,165 @@
+.more-info-plan_background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background-shadow-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-font-color);
+  z-index: 1;
+}
+
+.more-info-plan_background > .more-info-plan_modal {
+  width: 31rem;
+  min-height: 25rem;
+  background-color: #f6f6f6;
+  border-radius: 0.2rem;
+  display: grid;
+  grid-template-rows: 9.5rem 1fr;
+  padding: 2rem;
+  gap: 1.5rem;
+
+  > .plan-purchase_header {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 0.9rem;
+  }
+}
+
+.plan-purchase_header {
+  > .plan-image {
+    width: 8.5rem;
+    height: 8.5rem;
+    background-color: rgba(0, 0, 0, 0.071);
+    border-radius: 50%;
+    justify-self: center;
+    align-self: center;
+    border: 1.5px solid white;
+    box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.184),
+      0 3px 10px 2px rgba(0, 0, 0, 0.085);
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+    }
+  }
+}
+
+.plan-purchase_header > .plan-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  > h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    > .close-icon {
+      cursor: pointer;
+    }
+  }
+
+  > p {
+    font-size: 0.67rem;
+    padding-bottom: 0.8rem;
+  }
+
+  > .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    > button {
+      width: 100%;
+      height: 2rem;
+
+      border: none;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    > .download-plan {
+      border: 2px solid var(--secondary-details-color);
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      color: #a0a0a0;
+
+      > .download-icon {
+        color: var(--secondary-details-color);
+        transition: all 0.3s ease;
+      }
+    }
+
+    > .download-plan:hover {
+      background-color: #00a650;
+      color: white;
+    }
+
+    > .download-plan:hover .download-icon {
+      color: white;
+    }
+
+    > .download-plan:active .download-icon {
+      color: #00a650;
+    }
+
+    > .download-plan:active {
+      background-color: rgb(255, 255, 255);
+      color: var(--secondary-details-color);
+    }
+
+    > .purchase-plan {
+      background-color: var(--tertiary-details-color);
+      color: white;
+    }
+
+    > .purchase-plan:hover {
+      background-color: #26547ca0;
+    }
+
+    > .purchase-plan:active {
+      background-color: #26547c;
+    }
+
+    > .purchase-plan_disabled {
+      background-color: #cececedb;
+      cursor: pointer;
+    }
+
+    > .button-container_file-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.8rem;
+
+      > p {
+        font-size: 0.6rem;
+        display: flex;
+        align-items: center;
+        gap: 0.15rem;
+      }
+    }
+  }
+}
+
+.more-info-plan_background > .more-info-plan_modal {
+  > .plan-description {
+    > p {
+      font-size: 0.8rem;
+      color: rgb(72, 72, 72);
+      line-height: 1.3rem;
+    }
+  }
+}

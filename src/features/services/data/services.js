@@ -5,7 +5,7 @@ export const services = [
     description:
       "Mejora tu desarrollo personal y profesional con sesiones de coaching personalizadas.",
     image: "file-1732499421361-393465468.jpg",
-    type: "plan_download",
+    type: "resource_download",
   },
   {
     serviceId: "21f7c43d-95a0-40ef-a0ce-ffdd6881c2a0",
