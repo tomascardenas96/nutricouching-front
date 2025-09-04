@@ -8,7 +8,7 @@
   transition: all 0.3s ease;
   width: 100%;
   justify-self: center;
-  padding: 0 5rem;
+  padding: 0 6rem;
 
   > .loader-spinner_user {
     width: 12rem;

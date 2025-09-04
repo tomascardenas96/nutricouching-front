@@ -29,8 +29,6 @@ function Header({
   handleOpenUpdateUserModal,
   isUpdateUserModalOpen,
   setIsUpdateUserModalOpen,
-  handleCmsModal,
-  handleAdminCmsModal,
 }) {
   const [scrolled, setScrolled] = useState(null);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);

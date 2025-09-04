@@ -5,7 +5,7 @@ import { useAuthUser } from "../../auth/hooks/useAuthUser";
 function useAddNewScheduleToProfessional(
   setAvailabilities,
   selectedSchedules,
-  setIsAddScheduleModalOpen
+  onClose
 ) {
   const { user } = useAuthUser();
   const authToken = localStorage.getItem("authToken");
@@ -68,7 +68,7 @@ function useAddNewScheduleToProfessional(
           return sortSchedulesByTime(newAvailabilities);
         });
 
-        setIsAddScheduleModalOpen(false);
+        onClose();
 
         return "Horario añadido exitosamente!";
       },

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { io } from "socket.io-client";
 import { toast, Toaster } from "sonner";
 import { WEBSOCKET_HOST } from "../../api/data";
@@ -7,17 +6,13 @@ import { useAuthUser } from "../../features/auth/hooks/useAuthUser";
 import CartModal from "../../features/cart/components/CartModal";
 import { useActiveCart } from "../../features/cart/hooks/useActiveCart";
 import { useCartItems } from "../../features/cart/hooks/useCartItems";
-import AdminCmsModal from "../../features/professional/components/AdminCmsModal";
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
 import "./Layout.css";
-import NotificationPopUp from "./Notifications/NotificationPopUp";
 import SubMenu from "./subMenu/SubMenu";
 
 function Layout({ children }) {
-  const [isCmsModalOpen, setIsCmsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-  const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
   const [isNotificationsModalOpen, setIsNotificationsModalOpen] =
     useState(false);
   const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
@@ -28,16 +23,6 @@ function Layout({ children }) {
   // Productos y viandas agregadas al carrito desde el local storage.
   const { setElementsInCart } = useCartItems();
   const { activeCart, setActiveCart } = useActiveCart();
-
-  // Abrir / cerrar modal ROOT
-  const handleCmsModal = () => {
-    setIsCmsModalOpen(!isCmsModalOpen);
-  };
-
-  // Abrir / cerrar modal ADMIN
-  const handleAdminCmsModal = () => {
-    setIsAdminCmsOpen(!isAdminCmsOpen);
-  };
 
   // Abrir / cerrar modal carrito
   const handleCartModal = () => {
@@ -112,8 +97,6 @@ function Layout({ children }) {
             setIsNotificationsModalOpen={setIsNotificationsModalOpen}
             isUpdateUserModalOpen={isUpdateUserModalOpen}
             setIsUpdateUserModalOpen={setIsUpdateUserModalOpen}
-            handleCmsModal={handleCmsModal}
-            handleAdminCmsModal={handleAdminCmsModal}
             handleOpenUpdateUserModal={handleOpenUpdateUserModal}
           />
         </section>
@@ -141,12 +124,6 @@ function Layout({ children }) {
           />
         )} */}
       </section>
-
-      {isAdminCmsOpen &&
-        createPortal(
-          <AdminCmsModal handleAdminCmsModal={handleAdminCmsModal} />,
-          document.body
-        )}
     </main>
   );
 }

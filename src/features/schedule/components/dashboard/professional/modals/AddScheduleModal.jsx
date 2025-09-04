@@ -1,11 +1,11 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import useAddNewScheduleToProfessional from "../../../professional/hooks/useAddNewScheduleToProfessional";
-import useHandleProfessionalSchedule from "../../../professional/hooks/useHandleProfessionalSchedule";
+import useAddNewScheduleToProfessional from "../../../../../professional/hooks/useAddNewScheduleToProfessional";
+import useHandleProfessionalSchedule from "../../../../../professional/hooks/useHandleProfessionalSchedule";
 import AddScheduleCard from "./AddScheduleCard";
 import "./AddScheduleModal.css";
 
-function AddScheduleModal({ setIsAddScheduleModalOpen, setAvailabilities }) {
+function AddScheduleModal({ onClose, setAvailabilities }) {
   const {
     addNewSchedule,
     currentSchedule,
@@ -19,7 +19,7 @@ function AddScheduleModal({ setIsAddScheduleModalOpen, setAvailabilities }) {
   const { handleSubmitAddNewSchedule } = useAddNewScheduleToProfessional(
     setAvailabilities,
     selectedSchedules,
-    setIsAddScheduleModalOpen
+    onClose
   );
 
   return (
@@ -30,10 +30,7 @@ function AddScheduleModal({ setIsAddScheduleModalOpen, setAvailabilities }) {
       >
         <div className="add-schedule_title">
           <h1>Agregar nuevo horario</h1>
-          <IoMdClose
-            className="close-icon"
-            onClick={() => setIsAddScheduleModalOpen(false)}
-          />
+          <IoMdClose className="close-icon" onClick={onClose} />
         </div>
 
         <div className="add-schedule_body">
@@ -135,7 +132,7 @@ function AddScheduleModal({ setIsAddScheduleModalOpen, setAvailabilities }) {
         <div className="submit-add-schedule_options">
           <ImCross
             className="add-cancel-schedule add-cancel-schedule_close"
-            onClick={() => setIsAddScheduleModalOpen(false)}
+            onClick={onClose}
           />
           <div>
             <label htmlFor="add-schedule_submit">

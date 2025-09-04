@@ -1,3 +1,12 @@
+.schedules-container .no-schedules-defined {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  margin: 0 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .schedules-professional-dashboard_table {
   width: 100%;
   border-collapse: collapse;
@@ -47,6 +56,8 @@
   .day-row {
     vertical-align: top;
     padding-top: 1rem;
+    width: 9rem;
+    padding: 1rem 0 0 1rem;
   }
 
   > .options-row {
@@ -73,5 +84,28 @@
     > .delete {
       color: rgb(215, 59, 59);
     }
+  }
+}
+
+.schedules-container .add-schedule_btn {
+  display: flex;
+  justify-content: end;
+  padding: 0 1.8rem;
+
+  > button {
+    padding: 0.6rem 0.6rem;
+    border: none;
+    background-color: #db5a42;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 0.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  > button:hover {
+    background-color: #db5942cb;
   }
 }
