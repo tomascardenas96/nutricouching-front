@@ -2,14 +2,11 @@ import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 import { useState } from "react";
 
-function useAssignSpecialtyToProfessional(
-  setSpecialties,
-  handleOpenCloseModal
-) {
+function useAssignSpecialtyToProfessional(setSpecialties, onClose) {
   const authToken = localStorage.getItem("authToken");
 
   const [selectedSpecialtyId, setSelectedSpecialtyId] = useState("");
-  
+
   const assignSpecialtyToProfessional = async (
     e,
     specialtyId,
@@ -28,7 +25,9 @@ function useAssignSpecialtyToProfessional(
         }
       );
 
-      const data = response.json();
+      const data = await response.json();
+
+      console.log(data)
 
       if (!response.ok) {
         throw new Error();
@@ -40,7 +39,7 @@ function useAssignSpecialtyToProfessional(
     toast.promise(assignSpecialtyPromise(), {
       success: (data) => {
         setSpecialties(data.specialty);
-        handleOpenCloseModal();
+        onClose();
         return "Especialidad asignada correctamente!";
       },
       loading: "Asignando especialidad...",

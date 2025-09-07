@@ -1,3 +1,21 @@
+.specialties-container .error {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: rgb(53, 53, 53);
+  margin: 2rem 0;
+}
+
+.specialties-container .no-schedules-defined {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  margin: 0 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+
 .users-root-dashboard_table {
   width: 100%;
   border-collapse: collapse;
@@ -72,5 +90,29 @@
     > .delete {
       color: rgb(215, 59, 59);
     }
+  }
+}
+
+
+.specialties-container .add-specialty_btn {
+  display: flex;
+  justify-content: end;
+  padding: 0 1.8rem;
+
+  > button {
+    padding: 0.6rem 0.6rem;
+    border: none;
+    background-color: #db5a42;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 0.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  > button:hover {
+    background-color: #db5942cb;
   }
 }

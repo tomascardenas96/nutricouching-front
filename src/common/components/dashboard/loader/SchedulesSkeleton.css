@@ -1,0 +1,15 @@
+.schedules-skeleton-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 0 2rem;
+  margin: 1rem 0 2rem;
+}
+
+.schedules-skeleton-container .rows-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  gap: 0.7rem;
+  height: 2.1rem;
+}

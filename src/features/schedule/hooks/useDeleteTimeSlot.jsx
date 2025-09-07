@@ -2,7 +2,7 @@ import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 
-function useDeleteTimeSlot(setAvailabilities) {
+function useDeleteTimeSlot(setAvailabilities, handleCloseDeleteModal) {
   const { user } = useAuthUser();
   const authToken = localStorage.getItem("authToken");
 
@@ -19,13 +19,11 @@ function useDeleteTimeSlot(setAvailabilities) {
         }
       );
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message);
+        throw new Error();
       }
 
-      return data;
+      return await response.json();
     };
 
     toast.promise(deleteTimeSlot(), {
@@ -38,9 +36,12 @@ function useDeleteTimeSlot(setAvailabilities) {
               prev[day]?.filter((slot) => slot.startTime !== startTime) || [],
           };
         });
+        handleCloseDeleteModal();
         return "Horario eliminado con éxito!";
       },
-      error: "Error al eliminar horario!",
+      error: (error) => {
+        return "Error al eliminar horario";
+      },
     });
   };
 

@@ -3,8 +3,10 @@ import { IoMdClose } from "react-icons/io";
 import useAssignSpecialtyToProfessional from "../../../../hooks/useAssignSpecialtyToProfessional";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import "./AssignSpecialtyModal.css";
+import { useAuthUser } from "../../../../../auth/hooks/useAuthUser";
 
-function AssignSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
+function AssignSpecialtyModal({ onClose, setSpecialties }) {
+  const { user } = useAuthUser();
   const { errorSpecialties, loadingSpecialties, specialties } =
     useGetAllSpecialties();
 
@@ -12,7 +14,7 @@ function AssignSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
     assignSpecialtyToProfessional,
     handleChangeSelectSpecialty,
     selectedSpecialtyId,
-  } = useAssignSpecialtyToProfessional(setSpecialties, handleOpenCloseModal);
+  } = useAssignSpecialtyToProfessional(setSpecialties, onClose);
 
   return (
     <div className="add-specialty-modal_container">
@@ -28,10 +30,7 @@ function AssignSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
       >
         <div className="add-specialty_title">
           <h1>Agregar Especialidad</h1>
-          <IoMdClose
-            onClick={handleOpenCloseModal}
-            className="close-modal_icon"
-          />
+          <IoMdClose onClick={onClose} className="close-modal_icon" />
         </div>
 
         <div className="add-specialty_body">
@@ -49,7 +48,10 @@ function AssignSpecialtyModal({ handleOpenCloseModal, user, setSpecialties }) {
         </div>
 
         <div className="submit-add-specialty_options">
-          <ImCross className="add-cancel-specialty add-cancel-specialty_close" />
+          <ImCross
+            className="add-cancel-specialty add-cancel-specialty_close"
+            onClick={onClose}
+          />
           <div>
             <label htmlFor="add-specialty_submit">
               <input type="submit" id="add-specialty_submit" />

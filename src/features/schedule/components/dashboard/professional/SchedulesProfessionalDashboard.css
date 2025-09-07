@@ -1,3 +1,11 @@
+.schedules-container .error {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: rgb(53, 53, 53);
+  margin: 2rem 0;
+}
+
 .schedules-container .no-schedules-defined {
   display: flex;
   justify-content: center;
@@ -57,7 +65,8 @@
     vertical-align: top;
     padding-top: 1rem;
     width: 9rem;
-    padding: 1rem 0 0 1rem;
+    padding: 1rem 0 0 2rem;
+    font-weight: 500;
   }
 
   > .options-row {

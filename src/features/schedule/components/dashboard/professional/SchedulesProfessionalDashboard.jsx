@@ -7,13 +7,14 @@ import useSelectAvailability from "../../../hooks/useSelectAvailability";
 import { orderSchedules } from "../../../lib/scheduleLibrary";
 import "./SchedulesProfessionalDashboard.css";
 import AddScheduleModal from "./modals/AddScheduleModal";
+import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
+import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
+import SchedulesSkeleton from "../../../../../common/components/dashboard/loader/SchedulesSkeleton";
 
 function SchedulesProfessionalDashboard() {
   const { user } = useAuthUser();
   const professionalId = user?.professional?.professionalId;
 
-  const { availabilities, setAvailabilities } =
-    useGetAvailabilitiesByProfessional(professionalId);
   const { selectedAvailability, setSelectedAvailability } =
     useSelectAvailability();
 
@@ -29,10 +30,26 @@ function SchedulesProfessionalDashboard() {
     handleCloseDeleteModal,
   } = useAvailabilityModals(setSelectedAvailability);
 
+  const {
+    availabilities,
+    availabilitiesLoading,
+    availabilitiesError,
+    setAvailabilities,
+  } = useGetAvailabilitiesByProfessional(professionalId);
+
+  const { handleDeleteTimeSlot } = useDeleteTimeSlot(
+    setAvailabilities,
+    handleCloseDeleteModal
+  );
+
   return (
     <>
       <div className="schedules-container">
-        {Object.entries(availabilities).length > 0 ? (
+        {availabilitiesError ? (
+          <p className="error">Ha ocurrido un error</p>
+        ) : availabilitiesLoading ? (
+          <SchedulesSkeleton />
+        ) : Object.values(availabilities).flat().length > 0 ? (
           <table className="schedules-professional-dashboard_table">
             <thead>
               <tr>
@@ -50,15 +67,24 @@ function SchedulesProfessionalDashboard() {
                   <tr className="dashboard_professional-item">
                     {idx === 0 && (
                       <td rowSpan={schedule.length} className="day-row">
-                        <strong>{getSpanishDay(day)}</strong>
+                        {getSpanishDay(day)}
                       </td>
                     )}
                     <td className="from-row">{sched.startTime}hs</td>
                     <td className="to-row">{sched.endTime}hs</td>
                     <td>{sched.interval} min.</td>
                     <td className="options-row">
-                      <p className="edit">Editar</p>
-                      <p className="delete">Eliminar</p>
+                      <p
+                        className="delete"
+                        onClick={() =>
+                          handleOpenDeleteModal({
+                            day,
+                            startTime: sched.startTime,
+                          })
+                        }
+                      >
+                        Eliminar
+                      </p>
                     </td>
                   </tr>
                 ))
@@ -78,6 +104,21 @@ function SchedulesProfessionalDashboard() {
             <AddScheduleModal
               onClose={handleCloseAddModal}
               setAvailabilities={setAvailabilities}
+            />,
+            document.getElementById("root-portal")
+          )}
+
+        {isDeleteModalOpen &&
+          createPortal(
+            <ConfirmationModal
+              message="¿Seguro que desea eliminar horario?"
+              onClose={handleCloseDeleteModal}
+              onConfirm={() =>
+                handleDeleteTimeSlot(
+                  selectedAvailability.startTime,
+                  selectedAvailability.day
+                )
+              }
             />,
             document.getElementById("root-portal")
           )}
