@@ -9,7 +9,7 @@ import "./SchedulesProfessionalDashboard.css";
 import AddScheduleModal from "./modals/AddScheduleModal";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
-import SchedulesSkeleton from "../../../../../common/components/dashboard/loader/SchedulesSkeleton";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function SchedulesProfessionalDashboard() {
   const { user } = useAuthUser();
@@ -48,7 +48,7 @@ function SchedulesProfessionalDashboard() {
         {availabilitiesError ? (
           <p className="error">Ha ocurrido un error</p>
         ) : availabilitiesLoading ? (
-          <SchedulesSkeleton />
+          <DashboardListSkeleton />
         ) : Object.values(availabilities).flat().length > 0 ? (
           <table className="schedules-professional-dashboard_table">
             <thead>

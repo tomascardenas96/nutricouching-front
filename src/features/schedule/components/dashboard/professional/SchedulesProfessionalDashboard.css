@@ -118,3 +118,9 @@
     background-color: #db5942cb;
   }
 }
+
+@media screen and (max-width: 920px) {
+  .schedules-container {
+    display: none;
+  }
+}

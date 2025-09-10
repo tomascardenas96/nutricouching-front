@@ -45,9 +45,7 @@ function useBookAppointment(onClose, professionalSchedule) {
         throw new Error("Error al reservar un turno");
       }
 
-      const data = await response.json();
-
-      return data;
+      return await response.json();
     };
 
     toast.promise(bookAppointment(), {

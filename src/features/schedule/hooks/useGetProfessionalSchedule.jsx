@@ -36,8 +36,6 @@ function useGetProfessionalSchedule(professionalId) {
             throw new Error(data.message);
           }
 
-          console.log(data)
-
           setProfessionalSchedule(data);
         }
       } catch (error) {

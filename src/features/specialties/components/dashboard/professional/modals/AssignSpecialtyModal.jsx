@@ -5,10 +5,20 @@ import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import "./AssignSpecialtyModal.css";
 import { useAuthUser } from "../../../../../auth/hooks/useAuthUser";
 
-function AssignSpecialtyModal({ onClose, setSpecialties }) {
+function AssignSpecialtyModal({
+  professionalSpecialties,
+  onClose,
+  setSpecialties,
+}) {
   const { user } = useAuthUser();
   const { errorSpecialties, loadingSpecialties, specialties } =
     useGetAllSpecialties();
+
+  const isSpecialtyExistent = (specialtyId) => {
+    return professionalSpecialties?.some(
+      (sp) => sp.specialtyId === specialtyId
+    );
+  };
 
   const {
     assignSpecialtyToProfessional,
@@ -36,14 +46,18 @@ function AssignSpecialtyModal({ onClose, setSpecialties }) {
         <div className="add-specialty_body">
           <select onChange={handleChangeSelectSpecialty}>
             <option value="">Seleccione una especialidad</option>
-            {specialties.map((specialty) => (
-              <option
-                key={`specialty-${specialty.specialtyId}`}
-                value={specialty.specialtyId}
-              >
-                {specialty.name}
-              </option>
-            ))}
+            {specialties.map((specialty) => {
+              if (isSpecialtyExistent(specialty.specialtyId)) return;
+
+              return (
+                <option
+                  key={`specialty-${specialty.specialtyId}`}
+                  value={specialty.specialtyId}
+                >
+                  {specialty.name}
+                </option>
+              );
+            })}
           </select>
         </div>
 

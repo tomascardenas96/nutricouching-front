@@ -9,7 +9,7 @@
 .schedules-skeleton-container .rows-list {
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
   gap: 0.7rem;
   height: 2.1rem;
 }

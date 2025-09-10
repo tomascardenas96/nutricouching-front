@@ -1,16 +1,32 @@
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import { isPreviousDate, parseDate, shortDate } from "../../../../../lib/date";
-import useGetBookingsByProfessional from "../../../hooks/useGetBookingsByProfessional";
 import { sortBookings } from "../../../../bookings/lib/bookingFunctions";
 import useGetAllSpecialties from "../../../../specialties/hooks/useGetAllSpecialties";
 import { getSpecialtyById } from "../../../../specialties/lib/specialtyFunctions";
+import useBookingModals from "../../../hooks/useBookingModals";
+import useCancelBooking from "../../../hooks/useCancelBooking";
+import useGetBookingsByProfessional from "../../../hooks/useGetBookingsByProfessional";
 import "./BookingsProfessionalDashboard.css";
-import SchedulesSkeleton from "../../../../../common/components/dashboard/loader/SchedulesSkeleton";
 
 function BookingsProfessionalDashboard() {
-  const { bookings, loadingBookings, errorBookings } =
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
+  const { bookings, loadingBookings, errorBookings, setBookings } =
     useGetBookingsByProfessional();
   const { specialties } = useGetAllSpecialties();
   const listedBookings = Object.entries(bookings);
+  const {
+    isDeleteBookingModalOpen,
+    handleOpenDeleteBookingModal,
+    handleCloseDeleteBookingModal,
+  } = useBookingModals(setSelectedBookingId);
+  const { handleCancelBooking } = useCancelBooking(
+    setBookings,
+    handleCloseDeleteBookingModal
+  );
 
   return (
     <>
@@ -18,7 +34,7 @@ function BookingsProfessionalDashboard() {
         {errorBookings ? (
           <p className="error">Ha ocurrido un error</p>
         ) : loadingBookings || !specialties ? (
-          <SchedulesSkeleton />
+          <DashboardListSkeleton />
         ) : Object.values(bookings).flat().length > 0 ? (
           <table className="bookings-professional-dashboard_table">
             <thead>
@@ -51,7 +67,14 @@ function BookingsProfessionalDashboard() {
                         <td className="from-row">{shortDate(e.startTime)}hs</td>
                         <td className="to-row">{shortDate(e.endTime)}hs</td>
                         <td className="options-row">
-                          <p className="delete">Cancelar</p>
+                          <p
+                            className="delete"
+                            onClick={() =>
+                              handleOpenDeleteBookingModal(e.bookingId)
+                            }
+                          >
+                            Cancelar
+                          </p>
                         </td>
                         <div className="divider-line_container">
                           <hr className="divider-line" />
@@ -66,6 +89,16 @@ function BookingsProfessionalDashboard() {
           <p className="no-schedules-defined">No hay turnos reservados aún</p>
         )}
       </div>
+
+      {isDeleteBookingModalOpen &&
+        createPortal(
+          <ConfirmationModal
+            message="¿Estás seguro que querés cancelar el turno?"
+            onClose={handleCloseDeleteBookingModal}
+            onConfirm={() => handleCancelBooking(selectedBookingId)}
+          />,
+          document.getElementById("root-portal")
+        )}
     </>
   );
 }

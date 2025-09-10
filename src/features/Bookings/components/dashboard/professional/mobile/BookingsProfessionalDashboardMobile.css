@@ -1,0 +1,18 @@
+/* Contenedor raíz solo visible en mobile */
+.bookings-dashboard-mobile_container {
+  display: none;
+  flex-direction: column;
+  margin-top: 1.3rem;
+}
+
+.bookings-dashboard-mobile_container .bookings-dashboard-mobile_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+@media screen and (max-width: 920px) {
+  .bookings-dashboard-mobile_container {
+    display: flex;
+  }
+}

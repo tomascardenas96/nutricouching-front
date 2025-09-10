@@ -2,7 +2,7 @@ import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 
-function useCancelBooking(setBookings) {
+function useCancelBooking(setBookings, onClose) {
   const { user } = useAuthUser();
   const authToken = localStorage.getItem("authToken");
 
@@ -44,6 +44,8 @@ function useCancelBooking(setBookings) {
               updatedBookings[date] = filteredBookings;
             }
           });
+
+          onClose();
 
           return updatedBookings;
         });

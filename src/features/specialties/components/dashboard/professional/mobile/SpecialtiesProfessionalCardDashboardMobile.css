@@ -1,0 +1,64 @@
+.specialty-card-dashboard-container {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(220, 220, 220);
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.specialty-card-dashboard-container .specialty-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.specialty-card-dashboard-container .specialty-info-container .user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.specialty-card-dashboard-container
+  .specialty-info-container
+  .specialty-details {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.specialty-card-dashboard-container
+  .specialty-info-container
+  .specialty-details
+  span {
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+
+.specialty-card-dashboard-container .buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.specialty-card-dashboard-container
+  .specialty-info-container
+  .buttons-container
+  .delete-btn {
+  border: 1.3px solid #ca6969;
+  color: #ca6969;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.specialty-card-dashboard-container
+  .specialty-info-container
+  .buttons-container
+  .delete-btn:hover {
+  background-color: #ca6969;
+  color: #fff;
+}

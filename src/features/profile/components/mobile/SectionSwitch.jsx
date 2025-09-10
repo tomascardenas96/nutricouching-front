@@ -6,21 +6,25 @@ function SectionSwitch({ selectedOption, handleSelectOption }) {
     <div className="profile_section-switch">
       <span
         onClick={() => handleSelectOption("posts")}
-        className={selectedOption === "posts" && "selected-option"}
+        className={selectedOption === "posts" ? "selected-option" : undefined}
       >
         Publicaciones
       </span>{" "}
       |{" "}
       <span
         onClick={() => handleSelectOption("information")}
-        className={selectedOption === "information" && "selected-option"}
+        className={
+          selectedOption === "information" ? "selected-option" : undefined
+        }
       >
         Informacion de contacto
       </span>{" "}
       |{" "}
       <span
         onClick={() => handleSelectOption("schedules")}
-        className={selectedOption === "schedules" && "selected-option"}
+        className={
+          selectedOption === "schedules" ? "selected-option" : undefined
+        }
       >
         Turnos
       </span>

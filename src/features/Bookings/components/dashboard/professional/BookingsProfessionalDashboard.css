@@ -87,3 +87,9 @@
     }
   }
 }
+
+@media screen and (max-width: 920px) {
+  .bookings-container {
+    display: none;
+  }
+}

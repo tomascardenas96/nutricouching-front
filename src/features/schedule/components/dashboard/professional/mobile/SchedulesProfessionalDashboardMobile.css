@@ -1,0 +1,41 @@
+/* Contenedor raíz solo visible en mobile */
+.schedules-dashboard-mobile_container {
+  display: none;
+  flex-direction: column;
+  margin-top: 1.3rem;
+}
+
+.schedules-dashboard-mobile_container .schedules-dashboard-mobile_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.schedules-dashboard-mobile_container .add-schedule_btn {
+  display: flex;
+  justify-content: end;
+  padding: 0 1.8rem;
+
+  > button {
+    padding: 0.6rem 0.6rem;
+    border: none;
+    background-color: #db5a42;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 0.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  > button:hover {
+    background-color: #db5942cb;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .schedules-dashboard-mobile_container {
+    display: flex;
+  }
+}

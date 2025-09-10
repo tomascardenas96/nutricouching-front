@@ -1,6 +1,6 @@
 export const getSpecialtyById = (specialties, specialtyId) => {
   const specialty = specialties?.find(
-    (specialty) => specialty?.specialtyId === specialtyId
+    (sp) => sp?.specialtyId === specialtyId
   );
   return specialty?.name;
 };

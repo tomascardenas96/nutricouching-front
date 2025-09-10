@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { HOST } from "../../../api/data";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 
-function useGetAllSpecialtiesByProfessional() {
-  const { user } = useAuthUser();
+function useGetAllSpecialtiesByProfessional(professionalId) {
   const authToken = localStorage.getItem("authToken");
 
   const [specialties, setSpecialties] = useState([]);
@@ -13,12 +12,12 @@ function useGetAllSpecialtiesByProfessional() {
   useEffect(() => {
     const getAllSpecialtiesByProfessional = async () => {
       try {
-        if (!user.professional.professionalId) {
+        if (!professionalId) {
           return;
         }
 
         const response = await fetch(
-          `${HOST}/specialty/professional/${user.professional.professionalId}`,
+          `${HOST}/specialty/professional/${professionalId}`,
           {
             method: "GET",
             headers: {
@@ -33,8 +32,6 @@ function useGetAllSpecialtiesByProfessional() {
           throw new Error(data.message);
         }
 
-        console.log(data);
-
         setSpecialties(data);
       } catch (error) {
         setSpecialtiesError(error);
@@ -44,7 +41,7 @@ function useGetAllSpecialtiesByProfessional() {
     };
 
     getAllSpecialtiesByProfessional();
-  }, [user.professional.professionalId]);
+  }, [professionalId]);
 
   return { specialties, specialtiesError, specialtiesLoading, setSpecialties };
 }

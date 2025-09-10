@@ -1,12 +1,12 @@
 import LoaderSpinner from "../../LoaderSpinner";
-import "./SchedulesSkeleton.css";
+import "./DashboardListSkeleton.css";
 
-function SchedulesSkeleton() {
+function DashboardListSkeleton() {
   return (
     <div className="schedules-skeleton-container">
       {new Array(4).fill(null).map((_, rowIndex) => (
         <div className="rows-list" key={`row-${rowIndex}`}>
-          {new Array(5).fill(null).map((_, columnIndex) => (
+          {new Array(4).fill(null).map((_, columnIndex) => (
             <LoaderSpinner key={`column-${columnIndex}`} />
           ))}
         </div>
@@ -15,4 +15,4 @@ function SchedulesSkeleton() {
   );
 }
 
-export default SchedulesSkeleton;
+export default DashboardListSkeleton;

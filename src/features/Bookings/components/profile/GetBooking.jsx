@@ -32,8 +32,6 @@ function GetBooking({ professionalId, onClose }) {
     professionalSchedule
   );
 
-  console.log(professionalSchedule)
-
   // Hoy
   const today = new Date();
 
@@ -64,7 +62,7 @@ function GetBooking({ professionalId, onClose }) {
           selectedDate,
           selectedTime,
           professionalId,
-          selectedSpecialty
+          selectedSpecialty.specialtyId
         )
       }
       onClose={onClose}

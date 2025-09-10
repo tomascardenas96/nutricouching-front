@@ -12,8 +12,6 @@ import "./Profile.css";
 function Profile() {
   const isMobile = useMediaQuery({ query: "(max-width: 890px)" });
 
-  console.log(isMobile);
-
   const {
     professional,
     setProfessional,

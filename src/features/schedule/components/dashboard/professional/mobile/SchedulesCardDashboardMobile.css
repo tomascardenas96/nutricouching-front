@@ -1,0 +1,55 @@
+.schedule-card-dashboard-container {
+  margin: 0 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(220, 220, 220);
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.schedule-card-dashboard-container .info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.schedule-card-dashboard-container .info-container .user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.schedule-card-dashboard-container .info-container .schedule-details {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.schedule-card-dashboard-container .info-container .schedule-details span {
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+
+.schedule-card-dashboard-container .buttons-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.schedule-card-dashboard-container .buttons-container .cancel-btn {
+  border: 1.3px solid #ca6969;
+  color: #ca6969;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.schedule-card-dashboard-container .buttons-container .cancel-btn:hover {
+  background-color: #ca6969;
+  color: #fff;
+}
