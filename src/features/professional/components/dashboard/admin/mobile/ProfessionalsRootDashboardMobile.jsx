@@ -6,6 +6,7 @@ import ManageProfessionalModal from "../modals/ManageProfessionalModal";
 import ModifyProfessionalModal from "../modals/ModifyProfessionalModal";
 import ProfessionalsCardDashboardMobile from "./ProfessionalsCardDashboardMobile";
 import "./ProfessionalsRootDashboardMobile.css";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function ProfessionalsRootDashboardMobile() {
   const [selectedProfessional, setSelectedProfessional] = useState(null);
@@ -27,45 +28,48 @@ function ProfessionalsRootDashboardMobile() {
     isDeleteProfessionalModalOpen,
   } = useHandleDashboardProfessionalsModals(setSelectedProfessional);
 
-  console.log(professionals);
-
   return (
     <>
-      <div className="products-root-dashboard_mobile-container">
-        <div className="products-root-dashboard-mobile">
-          {professionals?.length > 0 ? (
-            <div className="split-products-card">
-              {professionals?.map((professional) => (
-                <ProfessionalsCardDashboardMobile
-                  key={`professional-${professional.professionalId}`}
-                  professional={professional}
-                  setProfessionals={setProfessionals}
-                  handleModifyProfessionalModalOpen={
-                    handleModifyProfessionalModalOpen
-                  }
-                  handleDeleteProfessionalModalOpen={
-                    handleDeleteProfessionalModalOpen
-                  }
-                  isDeleteProfessionalModalOpen={isDeleteProfessionalModalOpen}
-                  closeModal={handleDeleteProfessionalModalClose}
-                />
-              ))}
-            </div>
+      <div className="professionals-root-dashboard_mobile-container">
+        <div className="professionals-root-dashboard-mobile">
+          {professionalsError ? (
+            <p className="error">Ha ocurrido un error</p>
+          ) : professionalsLoading ? (
+            <DashboardListSkeleton />
+          ) : professionals?.length > 0 ? (
+            <>
+              <div className="split-professionals-card">
+                {professionals?.map((professional) => (
+                  <ProfessionalsCardDashboardMobile
+                    key={`professional-${professional.professionalId}`}
+                    professional={professional}
+                    setProfessionals={setProfessionals}
+                    handleModifyProfessionalModalOpen={
+                      handleModifyProfessionalModalOpen
+                    }
+                    handleDeleteProfessionalModalOpen={
+                      handleDeleteProfessionalModalOpen
+                    }
+                    isDeleteProfessionalModalOpen={
+                      isDeleteProfessionalModalOpen
+                    }
+                    closeModal={handleDeleteProfessionalModalClose}
+                  />
+                ))}
+              </div>
+            </>
           ) : (
-            <tr>
-              <th
-                colSpan={5}
-                style={{ textAlign: "center" }}
-                className="no-products"
-              >
-                No hay profesionales aún.
-              </th>
-            </tr>
+            <p className="no-professionals">No hay profesionales aún</p>
           )}
-        </div>
 
-        <div className="add-product_btn" onClick={handleAddProfessionalModal}>
-          <button>Agregar profesional</button>
+          {!professionalsError && !professionalsLoading && (
+            <div
+              className="add-professional_btn"
+              onClick={handleAddProfessionalModal}
+            >
+              <button>Agregar profesional</button>
+            </div>
+          )}
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import { createPortal } from "react-dom";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import useDeleteSpecialty from "../../../../hooks/useDeleteSpecialty";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import useSelectSpecialty from "../../../../hooks/useSelectSpecialty";
@@ -9,7 +10,8 @@ import SpecialtiesCardDashboardMobile from "./SpecialtiesCardDashboardMobile";
 import "./SpecialtiesRootDashboardMobile.css";
 
 function SpecialtiesRootDashboardMobile() {
-  const { specialties, setSpecialties } = useGetAllSpecialties();
+  const { specialties, setSpecialties, errorSpecialties, loadingSpecialties } =
+    useGetAllSpecialties();
   const { selectSpecialty, selectedSpecialty } = useSelectSpecialty();
 
   const {
@@ -23,15 +25,15 @@ function SpecialtiesRootDashboardMobile() {
     isAddSpecialtyModalOpen,
   } = useSpecialtyModals(selectSpecialty);
 
-  const { handleDeleteSpecialty } = useDeleteSpecialty(
-    setSpecialties,
-    handleCloseDeleteModal
-  );
   return (
     <>
       <div className="products-root-dashboard_mobile-container">
         <div className="products-root-dashboard-mobile">
-          {specialties?.length > 0 ? (
+          {errorSpecialties ? (
+            <p className="error">Ha ocurrido un error</p>
+          ) : loadingSpecialties ? (
+            <DashboardListSkeleton />
+          ) : specialties?.length > 0 ? (
             <div className="split-products-card">
               {specialties.map((specialty) => (
                 <SpecialtiesCardDashboardMobile
@@ -39,25 +41,23 @@ function SpecialtiesRootDashboardMobile() {
                   specialty={specialty}
                   setSpecialties={setSpecialties}
                   handleOpen={handleOpenModifyModal}
+                  handleOpenDeleteModal={handleOpenDeleteModal}
+                  handleCloseDeleteModal={handleCloseDeleteModal}
+                  isDeleteSpecialtyModalOpen={isDeleteSpecialtyModalOpen}
+                  selectedSpecialty={selectedSpecialty}
                 />
               ))}
             </div>
           ) : (
-            <tr>
-              <th
-                colSpan={5}
-                style={{ textAlign: "center" }}
-                className="no-specialties"
-              >
-                No hay especialidades aún.
-              </th>
-            </tr>
+            <p className="no-specialties">No hay especialidades aún</p>
           )}
         </div>
 
-        <div className="add-product_btn" onClick={handleAddSpecialtyModal}>
-          <button>Agregar especialidad</button>
-        </div>
+        {!errorSpecialties && !loadingSpecialties && (
+          <div className="add-specialty_btn" onClick={handleAddSpecialtyModal}>
+            <button>Agregar especialidad</button>
+          </div>
+        )}
       </div>
 
       {isModifySpecialtyModalOpen &&
@@ -73,7 +73,7 @@ function SpecialtiesRootDashboardMobile() {
       {isAddSpecialtyModalOpen &&
         createPortal(
           <CreateSpecialtyModal
-            handleAddProductModal={handleAddSpecialtyModal}
+            closeModal={handleAddSpecialtyModal}
             setSpecialties={setSpecialties}
           />,
           document.body

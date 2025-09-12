@@ -7,10 +7,11 @@ import useHandlePlanModals from "../../../hooks/useHandlePlanModals";
 import "./PlansRootDashboard.css";
 import NewPlanModal from "./modals/NewPlanModal";
 import UpdatePlanModal from "./modals/UpdatePlanModal";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function PlansRootDashboard() {
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const { flattedPlans, setPlans } = useGetAllPlans();
+  const { flattedPlans, setPlans, plansLoading, plansError } = useGetAllPlans();
 
   const {
     isAddPlanModalOpen,
@@ -31,22 +32,26 @@ function PlansRootDashboard() {
 
   return (
     <>
-      <div className="plans-desktop-dashboard">
-        <table className="plans-root-dashboard_table">
-          <thead>
-            <tr>
-              <th className="image-column"></th>
-              <th>Titulo</th>
-              <th className="description-column">Descripcion</th>
-              <th className="short-column">Resumen</th>
-              <th className="price-column">Precio</th>
-              <th className="options-column">Opciones</th>
-            </tr>
-          </thead>
+      <div className="plans-dashboard-container">
+        {plansError ? (
+          <p className="error">Ha ocurrido un error</p>
+        ) : plansLoading ? (
+          <DashboardListSkeleton />
+        ) : flattedPlans?.length > 0 ? (
+          <table className="plans-root-dashboard_table">
+            <thead>
+              <tr>
+                <th className="image-column"></th>
+                <th>Titulo</th>
+                <th className="description-column">Descripcion</th>
+                <th className="short-column">Resumen</th>
+                <th className="price-column">Precio</th>
+                <th className="options-column">Opciones</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {flattedPlans?.length > 0 ? (
-              flattedPlans?.map((plan) => (
+            <tbody>
+              {flattedPlans?.map((plan) => (
                 <tr className="dashboard_plan-item" key={`plan-${plan.planId}`}>
                   <td className="image-row">
                     <div>
@@ -80,24 +85,18 @@ function PlansRootDashboard() {
                     <hr className="divider-line" />
                   </div>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <th
-                  colSpan={6}
-                  style={{ textAlign: "center" }}
-                  className="no-plans"
-                >
-                  No hay planes aún.
-                </th>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="no-plans">No hay planes aún</p>
+        )}
 
-        <div className="add-plan_btn">
-          <button onClick={handleAddPlanModal}>Agregar plan</button>
-        </div>
+        {!plansLoading && !plansError && (
+          <div className="add-plan_btn">
+            <button onClick={handleAddPlanModal}>Agregar plan</button>
+          </div>
+        )}
       </div>
 
       {isAddPlanModalOpen &&
@@ -106,7 +105,7 @@ function PlansRootDashboard() {
             setPlans={setPlans}
             handleAddPlanModal={handleAddPlanModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
 
       {isModifyPlanModalOpen &&
@@ -116,7 +115,7 @@ function PlansRootDashboard() {
             setPlans={setPlans}
             closeModifyPlanModal={closeModifyPlanModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
 
       {isDeletePlanModalOpen &&
@@ -126,7 +125,7 @@ function PlansRootDashboard() {
             onConfirm={handleDeletePlan}
             onClose={closeDeletePlanModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );

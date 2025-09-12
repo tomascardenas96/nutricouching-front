@@ -6,10 +6,12 @@ import AddProductModal from "./modals/AddProductModal";
 import ModifyProductModal from "./modals/ModifyProductModal";
 import ProductsListDashboard from "./ProductsListDashboard";
 import "./ProductsRootDashboard.css";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function ProductsRootDashboard() {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const { products, setProducts } = useGetAllProducts(null, setSelectedProduct);
+  const { products, setProducts, productsLoading, productsError } =
+    useGetAllProducts(null, setSelectedProduct);
 
   const {
     handleAddProductModal,
@@ -21,42 +23,42 @@ function ProductsRootDashboard() {
 
   return (
     <>
-      <div className="products-desktop-dashboard">
-        <table className="products-root-dashboard_table">
-          <thead>
-            <tr>
-              <th className="image-column"></th>
-              <th>Descripcion</th>
-              <th className="stock-column">Stock</th>
-              <th className="price-column">Precio</th>
-              <th className="options-column">Opciones</th>
-            </tr>
-          </thead>
+      <div className="products-dashboard-container">
+        {productsError ? (
+          <p className="error">Ha ocurrido un error</p>
+        ) : productsLoading ? (
+          <DashboardListSkeleton />
+        ) : products?.length > 0 ? (
+          <>
+            <table className="products-root-dashboard_table">
+              <thead>
+                <tr>
+                  <th className="image-column"></th>
+                  <th>Descripcion</th>
+                  <th className="stock-column">Stock</th>
+                  <th className="price-column">Precio</th>
+                  <th className="options-column">Opciones</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {products?.length > 0 ? (
-              <ProductsListDashboard
-                products={products}
-                setProducts={setProducts}
-                handleModifyProductModalOpen={handleModifyProductModalOpen}
-              />
-            ) : (
-              <tr>
-                <th
-                  colSpan={5}
-                  style={{ textAlign: "center" }}
-                  className="no-products"
-                >
-                  No hay productos aún.
-                </th>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              <tbody>
+                <ProductsListDashboard
+                  products={products}
+                  setProducts={setProducts}
+                  handleModifyProductModalOpen={handleModifyProductModalOpen}
+                />
+              </tbody>
+            </table>
+          </>
+        ) : (
+          <p className="no-products">No hay productos aún</p>
+        )}
 
-        <div className="add-product_btn" onClick={handleAddProductModal}>
-          <button>Agregar producto</button>
-        </div>
+        {!productsError && !productsLoading && (
+          <div className="add-product_btn" onClick={handleAddProductModal}>
+            <button>Agregar producto</button>
+          </div>
+        )}
       </div>
 
       {isModifyProductModalOpen &&

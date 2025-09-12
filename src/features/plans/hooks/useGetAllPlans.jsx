@@ -82,6 +82,8 @@ function useGetAllPlans(setSelectedPlan, setIsMoreInfoModalOpen) {
       setPlans(data);
     } catch (error) {
       setPlansError(true);
+    } finally {
+      setPlansLoading(false);
     }
   };
 
@@ -103,6 +105,8 @@ function useGetAllPlans(setSelectedPlan, setIsMoreInfoModalOpen) {
       setPlans(data);
     } catch (error) {
       setPlansError(true);
+    } finally {
+      setPlansLoading(false);
     }
   };
 

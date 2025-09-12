@@ -71,6 +71,7 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
 
+        <button onClick={closeModifyPlanModal}>Cerrar</button>
         <button>Modificar</button>
       </form>
     </div>

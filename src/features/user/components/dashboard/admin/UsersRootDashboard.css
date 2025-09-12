@@ -1,3 +1,20 @@
+.users-dashboard-container .error {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: rgb(53, 53, 53);
+  margin: 2rem 0;
+}
+
+.users-dashboard-container .no-users {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  margin: 0 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .users-root-dashboard_table {
   width: 100%;
   border-collapse: collapse;
@@ -76,7 +93,7 @@
 }
 
 @media screen and (max-width: 920px) {
-  .users-root-dashboard_table {
+  .users-dashboard-container {
     display: none;
   }
 

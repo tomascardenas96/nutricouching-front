@@ -8,9 +8,10 @@ import useDeleteViand from "../../../hooks/useDeleteViand";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import "./ViandsRootDashboard.css";
 import AddViandModal from "./modals/AddViandModal";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function ViandsRootDashboard() {
-  const { viands, setViands } = useGetAllViands();
+  const { viands, setViands, viandsLoading, viandsError } = useGetAllViands();
   const { selectedViand, selectViand } = useSelectViand();
   const {
     openEditViandModal,
@@ -29,42 +30,42 @@ function ViandsRootDashboard() {
 
   return (
     <>
-      <div className="viands-desktop-dashboard">
-        <table className="viands-root-dashboard_table">
-          <thead>
-            <tr>
-              <th className="image-column"></th>
-              <th>Descripcion</th>
-              <th className="stock-column">Stock</th>
-              <th className="price-column">Precio</th>
-              <th className="options-column">Opciones</th>
-            </tr>
-          </thead>
+      <div className="viands-dashboard-container">
+        {viandsError ? (
+          <p className="error">Ha ocurrido un error</p>
+        ) : viandsLoading ? (
+          <DashboardListSkeleton />
+        ) : viands?.length > 0 ? (
+          <>
+            <table className="viands-root-dashboard_table">
+              <thead>
+                <tr>
+                  <th className="image-column"></th>
+                  <th>Descripcion</th>
+                  <th className="stock-column">Stock</th>
+                  <th className="price-column">Precio</th>
+                  <th className="options-column">Opciones</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {viands?.length > 0 ? (
-              <ViandsListDashboard
-                viands={viands}
-                openEditViandModal={openEditViandModal}
-                openDeleteViandModal={openDeleteViandModal}
-              />
-            ) : (
-              <tr>
-                <th
-                  colSpan={5}
-                  style={{ textAlign: "center" }}
-                  className="no-viands"
-                >
-                  No hay viandas aún.
-                </th>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              <tbody>
+                <ViandsListDashboard
+                  viands={viands}
+                  openEditViandModal={openEditViandModal}
+                  openDeleteViandModal={openDeleteViandModal}
+                />
+              </tbody>
+            </table>
+          </>
+        ) : (
+          <p className="no-viands">No hay viandas aún</p>
+        )}
 
-        <div className="add-viand_btn" onClick={handleAddViandModal}>
-          <button>Agregar vianda</button>
-        </div>
+        {!viandsError && !viandsLoading && (
+          <div className="add-viand_btn" onClick={handleAddViandModal}>
+            <button>Agregar vianda</button>
+          </div>
+        )}
       </div>
 
       {isEditViandModalOpen &&

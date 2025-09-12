@@ -5,11 +5,28 @@
 }
 
 .user-root-dashboard_mobile-container .user-root-dashboard-mobile {
-    > .split-user-card {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
+  > .split-user-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.user-root-dashboard_mobile-container .user-root-dashboard-mobile .error {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: rgb(53, 53, 53);
+  margin: 2rem 0;
+}
+
+.user-root-dashboard_mobile-container .user-root-dashboard-mobile .no-users {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  margin: 0 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 920px) {

@@ -1,3 +1,20 @@
+.viands-dashboard-container .error {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: rgb(53, 53, 53);
+  margin: 2rem 0;
+}
+
+.viands-dashboard-container .no-viands {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  margin: 0 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .viands-root-dashboard_table {
   width: 100%;
   border-collapse: collapse;
@@ -135,7 +152,7 @@
 }
 
 @media screen and (max-width: 920px) {
-  .viands-desktop-dashboard {
+  .viands-dashboard-container {
     display: none;
   }
 }

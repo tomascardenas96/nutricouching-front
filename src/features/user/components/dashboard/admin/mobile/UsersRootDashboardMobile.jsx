@@ -1,3 +1,4 @@
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import useGetAllUsers from "../../../../hooks/useGetAllUsers";
 import UsersCardDashboardMobile from "./UsersCardDashboardMobile";
 import "./UsersRootDashboardMobile.css";
@@ -9,7 +10,11 @@ function UsersRootDashboardMobile() {
     <>
       <div className="user-root-dashboard_mobile-container">
         <div className="user-root-dashboard-mobile">
-          {users?.length > 0 ? (
+          {usersError ? (
+            <p className="error">Ha ocurrido un error</p>
+          ) : usersLoading ? (
+            <DashboardListSkeleton />
+          ) : users?.length > 0 ? (
             <div className="split-user-card">
               {users.map((user) => (
                 <UsersCardDashboardMobile
@@ -20,15 +25,7 @@ function UsersRootDashboardMobile() {
               ))}
             </div>
           ) : (
-            <tr>
-              <th
-                colSpan={5}
-                style={{ textAlign: "center" }}
-                className="no-user"
-              >
-                No hay usuarios aún.
-              </th>
-            </tr>
+            <p className="no-users">No hay usuarios aún</p>
           )}
         </div>
       </div>

@@ -4,14 +4,21 @@ import { MdDelete } from "react-icons/md";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import useDeleteProduct from "../../../../../products/hooks/useDeleteProduct";
 import "./SpecialtiesCardDashboardMobile.css";
+import useDeleteSpecialty from "../../../../hooks/useDeleteSpecialty";
 
 function SpecialtiesCardDashboardMobile({
   specialty,
   setSpecialties,
   handleOpen,
+  handleOpenDeleteModal,
+  handleCloseDeleteModal,
+  isDeleteSpecialtyModalOpen,
+  selectedSpecialty,
 }) {
-  const { deleteProduct, closeModal, openModal, isModalOpen } =
-    useDeleteProduct(setSpecialties);
+  const { handleDeleteSpecialty } = useDeleteSpecialty(
+    setSpecialties,
+    handleCloseDeleteModal
+  );
 
   return (
     <>
@@ -34,7 +41,7 @@ function SpecialtiesCardDashboardMobile({
             </button>
             <button
               className="delete-btn"
-              onClick={() => openModal(specialty?.specialtyId)}
+              onClick={() => handleOpenDeleteModal(specialty?.specialtyId)}
             >
               <MdDelete />
               Eliminar
@@ -43,14 +50,14 @@ function SpecialtiesCardDashboardMobile({
         </div>
       </div>
 
-      {isModalOpen &&
+      {isDeleteSpecialtyModalOpen &&
         createPortal(
           <ConfirmationModal
-            onConfirm={deleteProduct}
-            onClose={closeModal}
-            message="¿Desea eliminar este producto?"
+            onConfirm={() => handleDeleteSpecialty(selectedSpecialty)}
+            onClose={handleCloseDeleteModal}
+            message="¿Desea eliminar esta especialidad?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );

@@ -6,6 +6,7 @@ import NewPlanModal from "../modals/NewPlanModal";
 import UpdatePlanModal from "../modals/UpdatePlanModal";
 import PlansCardDashboardMobile from "./PlansCardDashboardMobile";
 import "./PlansRootDashboardMobile.css";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function PlansRootDashboardMobile() {
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -18,14 +19,20 @@ function PlansRootDashboardMobile() {
     closeModifyPlanModal,
   } = useHandlePlanModals(setSelectedPlan);
 
-  const { plans, setPlans, flattedPlans, plansError, plansLoading } =
-    useGetAllPlans(setSelectedPlan, null);
+  const { setPlans, flattedPlans, plansError, plansLoading } = useGetAllPlans(
+    setSelectedPlan,
+    null
+  );
 
   return (
     <>
       <div className="plans-root-dashboard_mobile-container">
         <div className="plans-root-dashboard-mobile">
-          {flattedPlans?.length > 0 ? (
+          {plansError ? (
+            <p className="error">Ha ocurrido un error</p>
+          ) : plansLoading ? (
+            <DashboardListSkeleton />
+          ) : flattedPlans?.length > 0 ? (
             <div className="split-plans-card">
               {flattedPlans.map((plan) => (
                 <PlansCardDashboardMobile
@@ -38,21 +45,15 @@ function PlansRootDashboardMobile() {
               ))}
             </div>
           ) : (
-            <tr>
-              <th
-                colSpan={5}
-                style={{ textAlign: "center" }}
-                className="no-plans"
-              >
-                No hay planes aún.
-              </th>
-            </tr>
+            <p className="no-plans">No hay planes aún</p>
           )}
         </div>
 
-        <div className="add-product_btn" onClick={handleAddPlanModal}>
-          <button>Agregar plan</button>
-        </div>
+        {!plansError && !plansLoading && (
+          <div className="add-product_btn" onClick={handleAddPlanModal}>
+            <button>Agregar plan</button>
+          </div>
+        )}
       </div>
 
       {isModifyPlanModalOpen &&
