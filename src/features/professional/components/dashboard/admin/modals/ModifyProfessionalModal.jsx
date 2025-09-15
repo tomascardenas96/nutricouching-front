@@ -22,6 +22,8 @@ function ModifyProfessionalModal({
       onClose={handleCloseModifyModal}
       onSubmit={handleSubmitModifyProfessional}
       title="Modificar Profesional"
+      buttonText="Modificar"
+      isButtonEnabled={true}
     >
       <label htmlFor="phone">
         Telefono
@@ -46,7 +48,7 @@ function ModifyProfessionalModal({
         </select>
       </label>
 
-      <button>Enviar</button>
+      {/* <button>Enviar</button> */}
     </ModalWindow>
   );
 }

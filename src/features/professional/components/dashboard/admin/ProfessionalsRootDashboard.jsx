@@ -18,7 +18,7 @@ function ProfessionalsRootDashboard() {
     professionalsError,
   } = useGetProfessionals();
 
-  const { selectedProfessional, handleSelectProfessional } =
+  const { selectedProfessional, setSelectedProfessional } =
     useSelectProfessional();
 
   const {
@@ -30,7 +30,7 @@ function ProfessionalsRootDashboard() {
     handleCloseDeleteModal,
     isAddProfessionalModalOpen,
     handleAddProfessionalModal,
-  } = useProfessionalModals(handleSelectProfessional);
+  } = useProfessionalModals(setSelectedProfessional);
 
   const { handleDeleteProfessional } = useDeleteProfessional(
     setProfessionals,
@@ -143,9 +143,8 @@ function ProfessionalsRootDashboard() {
       {isModifyProfessionalModalOpen &&
         createPortal(
           <ModifyProfessionalModal
-            handleChangeModifyProfessional={handleChangeModifyProfessional}
-            handleSubmitModifyProfessional={handleSubmitModifyProfessional}
-            modifyProfessionalInputs={modifyProfessionalInputs}
+            selectedProfessional={selectedProfessional}
+            setProfessionals={setProfessionals}
             handleCloseModifyModal={handleCloseModifyModal}
           />,
           document.getElementById("root")

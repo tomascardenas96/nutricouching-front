@@ -5,7 +5,7 @@
   background-color: white;
   gap: 1.2rem;
   padding: 0 3rem;
-  width: 65.375rem;
+  width: 60rem;
   height: 20rem;
   display: flex;
   align-items: center;
@@ -37,6 +37,8 @@
   align-items: center;
   width: 100%;
   min-height: 14rem;
+  justify-content: center;
+  gap: 0.5rem;
 
   > .product-list_loader-container {
     display: flex;

@@ -15,9 +15,8 @@ function useModifyProfessional(
   useEffect(() => {
     if (selectedProfessional) {
       setModifyProfessionalInputs({
-        file: selectedProfessional.file || "",
-        phone: selectedProfessional.phone || "",
-        role: selectedProfessional.role || "",
+        phone: selectedProfessional.phone || null,
+        role: selectedProfessional.role || null,
       });
     }
   }, [selectedProfessional]);
@@ -27,19 +26,15 @@ function useModifyProfessional(
     const token = localStorage.getItem("authToken");
 
     const submit = async () => {
-      const formData = new FormData();
-
-      formData.append("phone", modifyProfessionalInputs.phone);
-      formData.append("role", modifyProfessionalInputs.role);
-
       const response = await fetch(
         `${HOST}/professional/update/${selectedProfessional.professionalId}`,
         {
           method: "PATCH",
           headers: {
-            authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          body: formData,
+          body: JSON.stringify(modifyProfessionalInputs),
         }
       );
 
@@ -60,7 +55,6 @@ function useModifyProfessional(
                   ...professional,
                   phone: modifyProfessionalInputs.phone || professional.phone,
                   role: modifyProfessionalInputs.role || professional.role,
-                  image: data.image || professional.image,
                 }
               : professional
           )
@@ -68,7 +62,9 @@ function useModifyProfessional(
         handleCloseModifyModal();
         return "Profesional actualizado con exito!";
       },
-      error: "Error al modificar el profesional",
+      error: (error) => {
+        return "Error al modificar el profesional";
+      },
     });
   };
 

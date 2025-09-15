@@ -7,6 +7,6 @@ export function useActiveCart() {
     throw new Error(
       "useActiveCart must be within ElementsInCartProvider context"
     );
-  const { activeCart, setActiveCart, activeCartError } = context;
-  return { activeCart, setActiveCart, activeCartError };
+  const { activeCart, setActiveCart } = context;
+  return { activeCart, setActiveCart };
 }

@@ -9,6 +9,7 @@ function CartProvider({ children }) {
   // Carrito del usuario activo
   const [activeCart, setActiveCart] = useState(null);
   const [activeCartError, setActiveCartError] = useState(null);
+  const [activeCartLoading, setActiveCartLoading] = useState(true);
   const [elementsInCart, setElementsInCart] = useState([]);
   const [productsInCart, setProductsInCart] = useState([]);
   const [viandsInCart, setViandsInCart] = useState([]);
@@ -46,6 +47,8 @@ function CartProvider({ children }) {
       setActiveCart(data);
     } catch (error) {
       setActiveCartError(error);
+    } finally {
+      setActiveCartLoading(false);
     }
   };
 
@@ -79,6 +82,7 @@ function CartProvider({ children }) {
         setViandsInCart,
         activeCart,
         activeCartError,
+        activeCartLoading,
         setActiveCart,
         hasSyncedCart,
       }}

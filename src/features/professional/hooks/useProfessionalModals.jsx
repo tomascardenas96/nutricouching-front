@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function useProfessionalModals(handleSelectProfessional) {
+function useProfessionalModals(setSelectedProfessional) {
   const [isAddProfessionalModalOpen, setIsAddProfessionalModalOpen] =
     useState(false);
   const [isModifyProfessionalModalOpen, setIsModifyProfessionalModalOpen] =
@@ -13,20 +13,22 @@ function useProfessionalModals(handleSelectProfessional) {
   };
 
   const handleOpenModifyModal = (professional) => {
-    handleSelectProfessional(professional);
+    setSelectedProfessional(professional);
     setIsModifyProfessionalModalOpen(true);
   };
 
   const handleCloseModifyModal = () => {
+    setSelectedProfessional(null);
     setIsModifyProfessionalModalOpen(false);
   };
 
   const handleOpenDeleteModal = (professional) => {
-    handleSelectProfessional(professional);
+    setSelectedProfessional(professional);
     setIsDeleteProfessionalModalOpen(true);
   };
 
   const handleCloseDeleteModal = () => {
+    setSelectedProfessional(null);
     setIsDeleteProfessionalModalOpen(false);
   };
 

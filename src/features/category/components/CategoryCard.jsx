@@ -3,6 +3,7 @@ import { GiStrongMan } from "react-icons/gi";
 import { PiBrainLight } from "react-icons/pi";
 import { TbBrandCouchdb, TbMessage2Heart } from "react-icons/tb";
 import "./CategoryCard.css";
+import LoaderSpinner from "../../../common/components/LoaderSpinner";
 
 function CategoryCard({ name }) {
   return (

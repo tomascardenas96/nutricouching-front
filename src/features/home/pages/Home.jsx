@@ -1,4 +1,3 @@
-import About from "../../About/components/About";
 import Categories from "../../category/components/Categories";
 import Faq from "../../faq/components/Faq";
 import Presentation from "../../Presentation/Presentation";

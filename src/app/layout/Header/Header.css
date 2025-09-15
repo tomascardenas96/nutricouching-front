@@ -195,8 +195,6 @@
   font-size: 1.9rem;
 }
 
-
-
 @media screen and (max-width: 1200px) {
   .header {
     width: 65rem;
@@ -214,6 +212,16 @@
 
   .header-login .register-button {
     font-size: 0.63rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .header {
+    width: 100%;
+    padding: 0;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: center;
+    gap: 6rem;
   }
 }
 

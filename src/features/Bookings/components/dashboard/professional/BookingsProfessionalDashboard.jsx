@@ -28,6 +28,8 @@ function BookingsProfessionalDashboard() {
     handleCloseDeleteBookingModal
   );
 
+  console.log(bookings)
+
   return (
     <>
       <div className="bookings-container">

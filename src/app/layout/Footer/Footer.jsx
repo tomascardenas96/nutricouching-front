@@ -9,58 +9,56 @@ function Footer() {
         <div className="top-container">
           <div className="footer_links">
             <div className="footer_logo">
-              <img src="/assets/nutricouching-logo.jpg"></img>
-              <h1>
-                Cohesiva <br /> Salud
-              </h1>
+              <img src="/assets/nutricouching-logo.jpg" />
+              <h1>Cohesiva.com</h1>
             </div>
           </div>
         </div>
 
-        <hr />
+        <ul className="sections">
+          <li>INICIO</li>
+          <li>PRODUCTOS</li>
+          <li>CONOCENOS</li>
+          <li>CARRITO</li>
+          <li>CONTACTO</li>
+        </ul>
 
-        <div className="mid-container"></div>
-
-        <hr />
-
-        <div className="bottom-container">
-          <div className="footer">
-            <ul>
-              <li>
-                <a>
-                  <FaFacebookF />
-                </a>
-              </li>
-              <li>
-                <a>
-                  <FaXTwitter />
-                </a>
-              </li>
-              <li>
-                <a>
-                  <FaInstagram />
-                </a>
-              </li>
-              <li>
-                <a>
-                  <FaLinkedin />
-                </a>
-              </li>
-              <li>
-                <a>
-                  <FaTiktok />
-                </a>
-              </li>
-            </ul>
-
-            <p>
-              Creado por Tomas Cardenas -{" "}
-              <a href="http://www.tomascardenas.me" target="_blank">
-                tomascardenas.me
+        <div className="social">
+          <ul>
+            <li>
+              <a>
+                <FaFacebookF />
               </a>
-            </p>
-          </div>
+            </li>
+            <li>
+              <a>
+                <FaXTwitter />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaInstagram />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaLinkedin />
+              </a>
+            </li>
+            <li>
+              <a>
+                <FaTiktok />
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <p>
+          Copyright © 2025 Todos los derechos reservados | Creado por{" "}
+          {/* <a href="http://www.tomascardenas.me" target="_blank"> */}
+          tomascardenas.me
+          {/* </a> */}
+        </p>
       </div>
     </footer>
   );

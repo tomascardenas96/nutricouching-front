@@ -20,7 +20,7 @@ function ProductsCarousel({
   const thirdMeasure = useMediaQuery({ query: "(max-width: 815px)" });
   const fourthMeasure = useMediaQuery({ query: "(max-width: 525px)" });
 
-  let itemsPerPage = 5;
+  let itemsPerPage = 4;
 
   if (firstMeasure) {
     itemsPerPage = 4;

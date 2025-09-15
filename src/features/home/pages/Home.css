@@ -87,7 +87,7 @@
 }
 
 .footer_container {
-  height: 29rem;
+  height: 22rem;
   width: 100%;
 }
 
@@ -120,5 +120,9 @@
 
   .recipes_container {
     margin-top: 1.5rem;
+  }
+
+  .footer_container {
+    height: 24rem;
   }
 }

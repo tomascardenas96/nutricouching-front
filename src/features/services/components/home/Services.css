@@ -36,7 +36,6 @@
 }
 
 .services-list_container {
-  /* width: 50rem; */
   justify-content: center;
   position: relative;
   display: grid;
@@ -103,6 +102,10 @@
     justify-content: start;
     width: 27rem;
     overflow-x: auto;
+  }
+
+  .services-list_container {
+    gap: 2rem;
   }
 }
 
