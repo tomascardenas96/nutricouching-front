@@ -44,8 +44,11 @@ function ProductsCarousel({
   return (
     <div className="products-carousel_container">
       <div className="product-list">
-        {/* Loader */}
-        {productsLoading && (
+        {productsError ? (
+          <div className="network-error_products">
+            <NetworkError message="Ocurrio un error al cargar el contenido" />
+          </div>
+        ) : productsLoading ? (
           <div className="product-list_loader-container">
             {[...Array(itemsPerPage)].map((_, index) => (
               <div
@@ -56,10 +59,7 @@ function ProductsCarousel({
               </div>
             ))}
           </div>
-        )}
-
-        {!productsLoading &&
-          !productsError &&
+        ) : (
           currentProducts?.map((product) => (
             <ProductCard
               key={product.productId || product.viandId}
@@ -69,26 +69,29 @@ function ProductsCarousel({
               addProductToCart={addProductToCart}
               productsCart={productsCart}
             />
-          ))}
-
-        {productsError && (
-          <div className="network-error_products">
-            <NetworkError message="Ocurrio un error al cargar el contenido" />
-          </div>
+          ))
         )}
       </div>
 
-      <div className="previous-page">
-        <TurnPageArrow
-          color="#296eb4"
-          direction="left"
-          turnPage={previousPage}
-        />
-      </div>
+      {!productsError && !productsLoading && (
+        <>
+          <div className="previous-page">
+            <TurnPageArrow
+              color="#296eb4"
+              direction="left"
+              turnPage={previousPage}
+            />
+          </div>
 
-      <div className="next-page">
-        <TurnPageArrow color="#296eb4" direction="right" turnPage={nextPage} />
-      </div>
+          <div className="next-page">
+            <TurnPageArrow
+              color="#296eb4"
+              direction="right"
+              turnPage={nextPage}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

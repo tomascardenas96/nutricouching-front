@@ -1,7 +1,9 @@
 import { CiSearch } from "react-icons/ci";
 import useFilterProfessionals from "../professional/hooks/useFilterProfessionals";
 import ResultCard from "./ResultCard";
+import { IoIosArrowForward } from "react-icons/io";
 import "./SearchInput.css";
+import { Link } from "react-router-dom";
 
 function SearchInput({ searchTerm, setSearchTerm }) {
   const {
@@ -22,13 +24,20 @@ function SearchInput({ searchTerm, setSearchTerm }) {
         value={searchTerm}
         onKeyDown={handleKeyDown}
       />
+
       <div className="search-icon" onClick={handleKeyDown}>
         <CiSearch />
       </div>
+
       {searchTerm?.length > 0 && (
         <ul className="professionals-filter_results-modal">
-          {data?.length > 0 &&
-            !isFetching &&
+          {isError ? (
+            <li className="results-modal">Ha ocurrido un error.</li>
+          ) : isFetching ? (
+            <li className="results-modal">Buscando profesionales...</li>
+          ) : data?.length === 0 ? (
+            <li className="results-modal">No hay resultados</li>
+          ) : (
             data?.map((pro) => (
               <ResultCard
                 key={`professional-filtered-${pro.professionalId}`}
@@ -37,15 +46,15 @@ function SearchInput({ searchTerm, setSearchTerm }) {
                 specialties={pro.specialty}
                 profilename={pro.profile.profileName}
               />
-            ))}
+            ))
+          )}
 
-          {isFetching && (
-            <p className="results-modal">Buscando profesionales...</p>
-          )}
-          {data?.length === 0 && (
-            <li className="results-modal">No hay resultados</li>
-          )}
-          {isError && <li className="results-modal">Ha ocurrido un error.</li>}
+          <p className="see-all">
+            <Link to="/filter/professionals">
+              Ver todos los profesionales{" "}
+              <IoIosArrowForward className="arrow" />
+            </Link>
+          </p>
         </ul>
       )}
     </>

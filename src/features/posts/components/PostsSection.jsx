@@ -11,7 +11,7 @@ function PostsSection({ profileId, profilePicture, name }) {
     <PostProvider profileId={profileId}>
       <div className="posts-section_container">
         <div>
-          {profileId === user?.professional.profile.profileId && (
+          {profileId === user?.professional?.profile?.profileId && (
             <div className="new-post_section-container">
               <CreatePost profilePicture={profilePicture} />
             </div>

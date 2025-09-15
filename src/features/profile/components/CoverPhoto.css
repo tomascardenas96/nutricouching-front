@@ -99,3 +99,13 @@
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+  .cover-photo {
+    > .upload-cover-photo {
+      > .mobile_cover-btn {
+        display: none;
+      }
+    }
+  }
+}

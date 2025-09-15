@@ -20,6 +20,7 @@ import { useViandsCart } from "../../../features/cart/hooks/useViandsCart";
 import UpdateUserModal from "../../../features/user/components/UpdateUserModal";
 import BurgerMenu from "./BurgerMenu";
 import "./Header.css";
+import OptionsModal from "./modals/OptionsModal";
 
 function Header({
   handleCartModal,
@@ -32,6 +33,7 @@ function Header({
 }) {
   const [scrolled, setScrolled] = useState(null);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isOptionsModalDeployed, setIsOptionsModalDeployed] = useState(false);
 
   const { user, handleLogOut } = useAuthUser();
   const { userError, userLoading } = useAuthRequest();
@@ -175,7 +177,10 @@ function Header({
       {!userLoading ? (
         user ? (
           <div className="header-user">
-            <p onClick={handleOpenUpdateUserModal}>
+            <p
+              //  onClick={handleOpenUpdateUserModal}
+              onClick={() => setIsOptionsModalDeployed(!isOptionsModalDeployed)}
+            >
               <FaUser className="user-icon" />
               {user?.name} {user?.lastname}
             </p>
@@ -185,6 +190,15 @@ function Header({
               <RiLogoutBoxRLine className="log-out-icon" />
               Salir
             </p>
+
+            {isOptionsModalDeployed && (
+              <OptionsModal
+                onClose={() =>
+                  setIsOptionsModalDeployed(!isOptionsModalDeployed)
+                }
+                handleOpenUpdateUserModal={handleOpenUpdateUserModal}
+              />
+            )}
           </div>
         ) : (
           <div className="header-login">

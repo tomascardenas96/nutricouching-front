@@ -7,6 +7,7 @@ function FiltersList({
   specialties,
   filters,
 }) {
+
   return (
     <>
       <div className="block-container option-fields">

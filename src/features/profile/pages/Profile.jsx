@@ -8,6 +8,9 @@ import RightContainer from "../components/RightContainer";
 import useGetProfileByName from "../hooks/useGetProfileByName";
 import useSwitchSectionProfile from "../hooks/useSwitchSectionProfile";
 import "./Profile.css";
+import FullSpinner from "../../../common/components/FullSpinner";
+import { IoIosArrowForward } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 function Profile() {
   const isMobile = useMediaQuery({ query: "(max-width: 890px)" });
@@ -24,10 +27,10 @@ function Profile() {
 
   const { selectedOption, handleSelectOption } = useSwitchSectionProfile();
 
-  if (profileLoading) {
+  if (profileLoading || professionalLoading) {
     return (
-      <div className="no-user-profile">
-        <h1>Cargando...</h1>
+      <div className="profile_full-spinner">
+        <FullSpinner />
       </div>
     );
   }
@@ -36,6 +39,11 @@ function Profile() {
     return (
       <div className="no-user-profile">
         <h1>Perfil no existente</h1>
+        <p>
+          <Link to="/">
+            Ir al inicio <IoIosArrowForward className="arrow" />
+          </Link>
+        </p>
       </div>
     );
 

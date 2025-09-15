@@ -5,10 +5,17 @@ import useFilterProfessionalsByQuery from "../../hooks/useFilterProfessionalsByQ
 import "./FilteredProfessionalsSection.css";
 import ProfessionalCardLoading from "./loading/ProfessionalCardLoading";
 import ProfessionalFilterResultCard from "./ProfessionalFilterResultCard";
+import useGetProfessionals from "../../hooks/useGetProfessionals";
 
 function FilteredProfessionalsSection({ filters }) {
   const { professionals, isError, isLoading, error } =
     useFilterProfessionalsByQuery(filters);
+
+  const {
+    professionals: allProfessionals,
+    professionalsLoading: allProfessionalsLoading,
+    professionalsError: allProfessionalsError,
+  } = useGetProfessionals();
 
   const navigate = useNavigate();
   const noFilterSelected = Object.values(filters).every(
@@ -39,10 +46,20 @@ function FilteredProfessionalsSection({ filters }) {
           </div>
         ))
       ) : noFilterSelected ? (
-        <p className="no-filters-selected">
-          <MdOutlineSearchOff className="search-icon" /> Ingrese un filtro para
-          buscar profesionales
-        </p>
+        allProfessionals?.map((professional) => (
+          <div
+            key={`professional-${professional.professionalId}`}
+            onClick={() =>
+              navigate(`/profile/${professional.profile.profileName}`)
+            }
+          >
+            <ProfessionalFilterResultCard
+              fullname={professional.fullname}
+              image={professional.profile.picture}
+              specialties={professional.specialty}
+            />
+          </div>
+        ))
       ) : (
         <p className="no-results">
           <MdOutlineSearchOff className="search-icon" /> No hay coincidencias.
