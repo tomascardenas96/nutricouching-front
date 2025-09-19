@@ -5,6 +5,7 @@
   gap: 0.5rem;
   font-size: 0.9rem;
   color: var(--primary-font-color);
+  height: 7rem;
 
   & .network-icon {
     color: var(--primary-details-color);

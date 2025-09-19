@@ -22,6 +22,8 @@ function Profile() {
     professionalError,
   } = useGetProfessionalByProfilename();
 
+  console.log(professional);
+
   const { profile, setProfile, profileLoading, profileError } =
     useGetProfileByName();
 
@@ -90,7 +92,10 @@ function Profile() {
 
           {(selectedOption === "schedules" || !isMobile) && (
             <div className="content_right-container">
-              <RightContainer professionalId={professional?.professionalId} />
+              <RightContainer
+                professionalId={professional?.professionalId}
+                professionalName={professional.fullname}
+              />
             </div>
           )}
         </div>

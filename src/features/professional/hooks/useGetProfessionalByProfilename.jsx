@@ -21,8 +21,6 @@ function useGetProfessionalByProfilename() {
 
       const data = await response.json();
 
-      console.log(data)
-
       setProfessional(data);
     } catch (error) {
       setProfessionalError(true);

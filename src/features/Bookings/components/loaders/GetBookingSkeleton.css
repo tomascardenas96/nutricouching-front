@@ -1,0 +1,20 @@
+.get-booking-skeleton_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.get-booking-skeleton_container div {
+  height: 3.03rem;
+  width: 30.0475rem;
+  border-radius: 0.3rem;
+}
+
+@media screen and (max-width: 580px) {
+  .get-booking-skeleton_container div {
+    width: 90%;
+    justify-self: center;
+  }
+}

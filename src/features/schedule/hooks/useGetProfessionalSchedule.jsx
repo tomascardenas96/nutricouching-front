@@ -8,10 +8,16 @@ function useGetProfessionalSchedule(professionalId) {
   const [selectedTime, setSelectedTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [professionalSchedule, setProfessionalSchedule] = useState([]);
+  const [scheduleLoading, setScheduleLoading] = useState(true);
+  const [scheduleError, setScheduleError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+
 
   useEffect(() => {
     const getProfessionalSchedule = async () => {
+      setScheduleError(null);
+      setScheduleLoading(true);
+
       try {
         if (professionalId && selectedDate) {
           const year = selectedDate.getUTCFullYear();
@@ -30,16 +36,20 @@ function useGetProfessionalSchedule(professionalId) {
               },
             }
           );
-          const data = await response.json();
 
-          if (data.error) {
-            throw new Error(data.message);
+          if (!response.ok) {
+            throw new Error();
           }
+
+          const data = await response.json();
 
           setProfessionalSchedule(data);
         }
       } catch (error) {
         console.error(error);
+        setScheduleError(true);
+      } finally {
+        setScheduleLoading(false);
       }
     };
 
@@ -56,6 +66,8 @@ function useGetProfessionalSchedule(professionalId) {
     selectedTime,
     endTime,
     setEndTime,
+    scheduleLoading,
+    scheduleError,
   };
 }
 

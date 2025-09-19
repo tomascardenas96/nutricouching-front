@@ -92,3 +92,9 @@
     }
   }
 }
+
+@media screen and (max-width: 580px) {
+  .modal-window_background .modal-window {
+    min-width: 100%;
+  }
+}

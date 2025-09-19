@@ -16,7 +16,7 @@
   }
 
   & .get-booking_no-options {
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-align: center;
   }
 
@@ -43,6 +43,10 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  & h2.select-date {
+    margin-bottom: 0.8rem;
   }
 }
 
@@ -71,19 +75,23 @@
 }
 
 .get-booking_modal .date-picker {
-  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.132);
   margin: 1rem 0;
+  width: 100% !important;
 
   > .myCalendar {
     margin-top: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.174);
     padding: 1rem;
     border-radius: 0.3rem;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
 
     & .rdp-caption_label {
       font-weight: 500;
@@ -112,8 +120,9 @@
 }
 
 .get-booking_modal hr {
-  width: 85%;
+  width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.132);
+  margin-bottom: 0.8rem;
 }
 
 .get-booking_modal .available-times {
@@ -191,6 +200,28 @@
 
     > .right {
       text-align: end;
+    }
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .get-booking_modal {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .get-booking_modal .available-times {
+    > .times-list {
+      gap: 0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .get-booking_modal .available-times {
+    > .times-list {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

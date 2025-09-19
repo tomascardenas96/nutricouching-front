@@ -79,6 +79,10 @@ body {
   box-sizing: border-box;
 }
 
+.date-picker .rdp-root .myCalendar {
+  width: 100% !important;
+}
+
 @keyframes loaderTransition {
   0% {
     background-position: 200% 0;
