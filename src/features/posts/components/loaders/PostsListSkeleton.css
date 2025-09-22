@@ -1,0 +1,10 @@
+.posts-list-skeleton {
+  display: grid;
+  gap: 0.5rem;
+
+  > div {
+    width: 100%;
+    height: 11.875rem;
+    border-radius: 0.3rem;
+  }
+}

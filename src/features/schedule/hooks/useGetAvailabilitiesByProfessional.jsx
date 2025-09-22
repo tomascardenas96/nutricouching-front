@@ -40,11 +40,14 @@ function useGetAvailabilitiesByProfessional(professionalId) {
     getAvailabilities();
   }, [professionalId]);
 
+  const isAvailabilitiesListEmpty = Object.keys(availabilities).length === 0;
+
   return {
     availabilities,
     availabilitiesLoading,
     availabilitiesError,
     setAvailabilities,
+    isAvailabilitiesListEmpty,
   };
 }
 

@@ -3,6 +3,8 @@ import { PostContext } from "../context/PostContext";
 import "./PostsList.css";
 import PostCard from "./PostCard";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import PostsListSkeleton from "./loaders/PostsListSkeleton";
+import NetworkError from "../../../common/components/NetworkError";
 
 function PostsList({ profilePicture, name }) {
   const { posts, postsError, arePostsLoading } = useContext(PostContext);
@@ -18,18 +20,24 @@ function PostsList({ profilePicture, name }) {
       </div>
 
       <div className="posts-list">
-        {posts?.map((post) => (
-          <PostCard
-            key={`post-${post.postId}`}
-            body={post.body}
-            profilePicture={profilePicture}
-            name={name}
-            createdAt={post.createdAt}
-          />
-        ))}
+        {postsError ? (
+          <NetworkError message="Error al cargar las publicaciones" />
+        ) : arePostsLoading ? (
+          <PostsListSkeleton />
+        ) : (
+          posts?.map((post) => (
+            <PostCard
+              key={`post-${post.postId}`}
+              body={post.body}
+              profilePicture={profilePicture}
+              name={name}
+              createdAt={post.createdAt}
+            />
+          ))
+        )}
       </div>
 
-      <p>No hay mas publicaciones que mostrar...</p>
+      <p>No hay mas publicaciones para mostrar...</p>
     </div>
   );
 }

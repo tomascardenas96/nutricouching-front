@@ -40,6 +40,12 @@
   display: grid;
   grid-template-rows: 1fr max-content;
   gap: 0.5rem;
+
+  > .error {
+    height: 17.5rem;
+    display: grid;
+    place-content: center;
+  }
 }
 
 .professional-profile_schedule-section .body .schedules-list {
@@ -72,5 +78,10 @@
     > .icon {
       font-size: 1.1rem;
     }
+  }
+
+  > button.disabled-btn {
+    background: rgb(201, 201, 201);
+    cursor: not-allowed;
   }
 }

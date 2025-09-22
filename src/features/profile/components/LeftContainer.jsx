@@ -9,6 +9,8 @@ import { GrLocation } from "react-icons/gr";
 import { MdOutlinePhone } from "react-icons/md";
 import "./LeftContainer.css";
 import useGetAllSpecialtiesByProfessional from "../../specialties/hooks/useGetAllSpecialtiesByProfessional";
+import LoaderSpinner from "../../../common/components/LoaderSpinner";
+import NetworkError from "../../../common/components/NetworkError";
 
 function LeftContainer({ profile, email, professionalId }) {
   const { specialties, specialtiesError, specialtiesLoading } =
@@ -36,10 +38,24 @@ function LeftContainer({ profile, email, professionalId }) {
       <div className="professional-section professional-specialties">
         <h1>Especialidades</h1>
         <div>
-          {specialties.length > 0 ?
+          {specialtiesError ? (
+            <NetworkError message="Ha ocurrido un error" />
+          ) : specialtiesLoading ? (
+            <div className="loader">
+              <LoaderSpinner />
+            </div>
+          ) : specialties.length > 0 ? (
             specialties?.map((specialty) => (
-              <p key={`specialty-${specialty.specialtyId}`}>{specialty.name}</p>
-            )) : <span>No hay especialidades</span>}
+              <p
+                key={`specialty-${specialty.specialtyId}`}
+                className="specialty-card"
+              >
+                {specialty.name}
+              </p>
+            ))
+          ) : (
+            <span>No hay especialidades</span>
+          )}
         </div>
       </div>
 

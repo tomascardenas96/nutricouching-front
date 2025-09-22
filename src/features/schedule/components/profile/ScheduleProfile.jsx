@@ -9,6 +9,8 @@ import GetBooking from "../../../bookings/components/profile/GetBooking";
 import { useState } from "react";
 import { useAuthUser } from "../../../auth/hooks/useAuthUser";
 import { useLoginModal } from "../../../auth/hooks/useLoginModal";
+import WeekDaysSkeleton from "../loader/WeekDaysSkeleton";
+import NetworkError from "../../../../common/components/NetworkError";
 
 function ScheduleProfile({ professionalId, professionalName }) {
   const { user } = useAuthUser();
@@ -18,7 +20,10 @@ function ScheduleProfile({ professionalId, professionalName }) {
     availabilitiesLoading,
     availabilitiesError,
     setAvailabilities,
+    isAvailabilitiesListEmpty,
   } = useGetAvailabilitiesByProfessional(professionalId);
+
+  console.log(Object.keys(availabilities).length);
 
   const [isGetBookingModalOpen, setIsGetBookingModalOpen] = useState(false);
 
@@ -36,15 +41,25 @@ function ScheduleProfile({ professionalId, professionalName }) {
       </div>
 
       <div className="body">
-        <div className="schedules-list">
-          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((weekDay) => (
-            <ScheduleCard
-              key={weekDay}
-              day={weekDay}
-              schedules={availabilities[`${weekDay}`]}
-            />
-          ))}
-        </div>
+        {availabilitiesError ? (
+          <div className="error">
+            <NetworkError message="Error" />
+          </div>
+        ) : availabilitiesLoading ? (
+          <WeekDaysSkeleton />
+        ) : (
+          <div className="schedules-list">
+            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+              (weekDay) => (
+                <ScheduleCard
+                  key={weekDay}
+                  day={weekDay}
+                  schedules={availabilities[`${weekDay}`]}
+                />
+              )
+            )}
+          </div>
+        )}
 
         <div className="get-booking">
           <button
@@ -55,6 +70,18 @@ function ScheduleProfile({ professionalId, professionalName }) {
                 setIsGetBookingModalOpen(true);
               }
             }}
+            disabled={
+              availabilitiesLoading ||
+              availabilitiesError ||
+              isAvailabilitiesListEmpty
+            }
+            className={`${
+              availabilitiesLoading ||
+              availabilitiesError ||
+              isAvailabilitiesListEmpty
+                ? "disabled-btn"
+                : undefined
+            }`}
           >
             <AiOutlineSchedule className="icon" />
             Solicitar Turno
