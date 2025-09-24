@@ -6,11 +6,10 @@ import { useLoginModal } from "../../auth/hooks/useLoginModal";
 import useDownloadResource from "../hooks/useDownloadResource";
 import useGetAllResources from "../hooks/useGetAllResources";
 import usePurchaseResource from "../hooks/usePurchaseResource";
-import PlanCard from "./ResourceCard";
-import PlanHeader from "./ResourceHeader";
-import "./ResourcesModal.css";
 import MoreInfoPlan from "./more-info/MoreInfoPlan";
 import ResourceCard from "./ResourceCard";
+import PlanHeader from "./ResourceHeader";
+import "./ResourcesModal.css";
 
 function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
   const { user } = useAuthUser();

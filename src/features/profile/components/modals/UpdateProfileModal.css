@@ -71,3 +71,9 @@
     gap: 0.5rem;
   }
 }
+
+@media screen and (max-width: 580px) {
+  .update-profile-modal {
+    width: 100%;
+  }
+}

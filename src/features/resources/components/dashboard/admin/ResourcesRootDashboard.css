@@ -1,4 +1,4 @@
-.plans-root-dashboard_table {
+.resources-root-dashboard_table {
   width: 100%;
   border-collapse: collapse;
   overflow-y: auto;
@@ -9,7 +9,7 @@
   }
 
   > tbody {
-    .no-plans {
+    .no-resources {
       height: 8rem;
       align-self: center;
       padding-top: 1rem;
@@ -48,7 +48,7 @@
   }
 }
 
-.plans-root-dashboard_table .dashboard_plan-item {
+.resources-root-dashboard_table .dashboard_resource-item {
   height: 4rem;
   position: relative;
 
@@ -127,7 +127,7 @@
   }
 }
 
-.add-plan_btn {
+.add-resource_btn {
   display: flex;
   justify-content: end;
   padding: 0 1.8rem;
@@ -151,7 +151,7 @@
 }
 
 @media screen and (max-width: 920px) {
-  .plans-desktop-dashboard {
+  .resources-dashboard-container {
     display: none;
   }
 }

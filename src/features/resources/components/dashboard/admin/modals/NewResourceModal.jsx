@@ -1,25 +1,26 @@
-import useModifyPlan from "../../../../hooks/useModifyPlan";
-import "./UpdatePlanModal.css";
+import useCreateResource from "../../../../hooks/useCreateResource";
+import "./NewResourceModal.css";
 
-function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
+function NewResourceModal({ setResources, handleAddResourceModal }) {
   const {
-    handleModifyPlan,
-    modifyPlanInput,
+    handleCreateResource,
     handleChangeInput,
+    handleChangePdf,
     handleChangeImage,
     imagePreview,
-  } = useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans);
+    createResourceInput,
+  } = useCreateResource(setResources, handleAddResourceModal);
 
   return (
-    <div className="modify-plan-modal_bg">
-      <form onSubmit={handleModifyPlan}>
+    <div className="new-resource-modal_bg">
+      <form onSubmit={handleCreateResource}>
         <label htmlFor="title">
           Titulo
           <input
             type="text"
             name="title"
             onChange={handleChangeInput}
-            value={modifyPlanInput.title}
+            value={createResourceInput.title}
           />
         </label>
 
@@ -29,17 +30,17 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
             type="text"
             name="description"
             onChange={handleChangeInput}
-            value={modifyPlanInput.description}
+            value={createResourceInput.description}
           />
         </label>
 
         <label htmlFor="shortDescription">
-          Resumen
+          Descripcion corta
           <input
             type="text"
             name="shortDescription"
             onChange={handleChangeInput}
-            value={modifyPlanInput.shortDescription}
+            value={createResourceInput.shortDescription}
           />
         </label>
 
@@ -49,21 +50,13 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
             type="text"
             name="price"
             onChange={handleChangeInput}
-            value={modifyPlanInput.price}
+            value={createResourceInput.price}
           />
         </label>
 
-        <label htmlFor="price">
-          ¿Esta en oferta?
-          <select
-            name="isOffer"
-            onChange={handleChangeInput}
-            value={modifyPlanInput.isOffer}
-          >
-            <option value="">Seleccione una opcion</option>
-            <option value="false">No</option>
-            <option value="true">Si</option>
-          </select>
+        <label htmlFor="pdf">
+          Subir archivo (PDF)
+          <input type="file" name="pdf" onChange={handleChangePdf} />
         </label>
 
         <label htmlFor="image">
@@ -71,10 +64,16 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
 
-        <button>Modificar</button>
+        <span
+          className="btn"
+          onClick={handleAddResourceModal}
+        >
+          Cerrar
+        </span>
+        <button className="btn">Crear</button>
       </form>
     </div>
   );
 }
 
-export default UpdatePlanModal;
+export default NewResourceModal;

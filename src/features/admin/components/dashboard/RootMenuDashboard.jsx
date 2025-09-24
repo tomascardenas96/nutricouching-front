@@ -12,6 +12,7 @@ function RootMenuDashboard() {
     "Viandas",
     "Especialidades",
     "Planes",
+    "Recursos"
   ];
 
   return (

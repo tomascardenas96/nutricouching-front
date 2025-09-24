@@ -13,7 +13,7 @@ export const services = [
     description:
       "Recibe una guía adaptada a tus necesidades. Nuestra asesoría profesional te ayudará a crear hábitos saludables y alcanzar el bienestar.",
     image: "slice-brain-food-dec8.png",
-    type: "schedule",
+    type: "guide",
   },
   {
     serviceId: "dacdee42-6214-4128-9e5c-eb1d3a482922",

@@ -1,11 +1,11 @@
-.plans-root-dashboard_mobile-container {
+.resources-root-dashboard_mobile-container {
   display: none;
   flex-direction: column;
   margin-top: 1.3rem;
 }
 
-.plans-root-dashboard_mobile-container .plans-root-dashboard-mobile {
-    > .split-plans-card {
+.resources-root-dashboard_mobile-container .resources-root-dashboard-mobile {
+    > .split-resources-card {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 920px) {
-  .plans-root-dashboard_mobile-container {
+  .resources-root-dashboard_mobile-container {
     display: flex;
   }
 }

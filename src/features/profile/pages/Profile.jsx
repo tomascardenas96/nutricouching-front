@@ -11,6 +11,7 @@ import "./Profile.css";
 import FullSpinner from "../../../common/components/FullSpinner";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Profile() {
   const isMobile = useMediaQuery({ query: "(max-width: 890px)" });
@@ -21,8 +22,6 @@ function Profile() {
     professionalLoading,
     professionalError,
   } = useGetProfessionalByProfilename();
-
-  console.log(professional);
 
   const { profile, setProfile, profileLoading, profileError } =
     useGetProfileByName();
@@ -51,6 +50,10 @@ function Profile() {
 
   return (
     <div className="profile-container" id="profile">
+      <Helmet>
+        <title>{professional?.fullname} | Cohesiva Salud</title>
+      </Helmet>
+
       <div className="presentation-section">
         <div>
           <ProfilePresentation

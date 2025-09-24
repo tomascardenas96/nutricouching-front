@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 
-function useCreateResourse(setResources, handleAddResourceModal) {
+function useCreateResource(setResources, handleAddResourceModal) {
   const [createResourceInput, setCreateResourceInput] = useState({
     title: "",
     description: "",
@@ -48,7 +48,7 @@ function useCreateResourse(setResources, handleAddResourceModal) {
     toast.promise(createResource(), {
       loading: "Creando recurso descargable...",
       error: (error) => {
-        return "Error al crean un nuevo recurso";
+        return "Error al crear un nuevo recurso";
       },
       success: (data) => {
         setResources((prev) => {
@@ -93,4 +93,4 @@ function useCreateResourse(setResources, handleAddResourceModal) {
   };
 }
 
-export default useCreateResourse;
+export default useCreateResource;

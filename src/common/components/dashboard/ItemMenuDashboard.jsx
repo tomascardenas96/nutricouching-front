@@ -5,6 +5,7 @@ import { GoBook } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
 import { LuTimer } from "react-icons/lu";
 import { PiStudentLight, PiTagThin } from "react-icons/pi";
+import { BiListUl } from "react-icons/bi";
 import { TbHealthRecognition } from "react-icons/tb";
 import "./ItemMenuDashboard.css";
 
@@ -24,7 +25,7 @@ function ItemMenuDashboard({ option, isSelected, selectOptionDashboardMenu }) {
         {option === "Especialidades" && <PiStudentLight className="icon" />}
         {option === "Planes" && <PiTagThin />}
         {option === "Turnos" && <GoBook />}
-        {option === "Horarios de Atencion" && <LuTimer />}
+        {option === "Recursos" && <BiListUl />}
         <span>{option}</span>
       </div>
       <IoIosArrowForward className="arrow-icon" />

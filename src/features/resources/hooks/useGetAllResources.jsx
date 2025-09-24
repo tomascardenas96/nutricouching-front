@@ -82,6 +82,8 @@ function useGetAllResources(setSelectedResource, setIsMoreInfoModalOpen) {
       setResources(data);
     } catch (error) {
       setResourcesError(true);
+    } finally {
+      setResourcesLoading(false);
     }
   };
 

@@ -64,7 +64,7 @@ function NewPlanModal({ setPlans, handleAddPlanModal }) {
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
 
-        <button onClick={handleAddPlanModal}>Cerrar</button>
+        <span onClick={handleAddPlanModal}>Cerrar</span>
         <button>Crear</button>
       </form>
     </div>

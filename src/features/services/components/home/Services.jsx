@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import MoreInfo from "../../../Bookings/components/modals/MoreInfo";
 import PlansModal from "../../../plans/components/PlansModal";
+import ResourcesModal from "../../../resources/components/ResourcesModal";
 import { services } from "../../data/services";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
-import ResourcesModal from "../../../resources/components/ResourcesModal";
+import GuideModal from "../../../custom-guide/components/home/GuideModal";
 
 function Services() {
   // Selected service state
@@ -75,6 +75,13 @@ function Services() {
             handleOpenSmartPlanModal={handleOpenSmartPlanModal}
             setSelectedService={setSelectedService}
           />,
+          document.getElementById("root")
+        )}
+
+      {selectedService?.type === "guide" &&
+        isSmartPlanModalOpen &&
+        createPortal(
+          <GuideModal setOpen={setIsSmartPlanModalOpen} />,
           document.getElementById("root")
         )}
     </div>

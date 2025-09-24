@@ -4,6 +4,7 @@ import Filters from "../components/filter/Filters";
 import FiltersMobile from "../components/filter/mobile/FiltersMobile";
 import useFilterQueries from "../hooks/useFilterQueries";
 import "./ProfessionalsFilterPage.css";
+import { Helmet } from "react-helmet-async";
 
 function ProfessionalsFilterPage() {
   const queryClient = new QueryClient();
@@ -12,6 +13,10 @@ function ProfessionalsFilterPage() {
 
   return (
     <div className="professionals-filter-page">
+      <Helmet>
+        <title>Filtrar profesionales | Cohesiva Salud</title>
+      </Helmet>
+
       <QueryClientProvider client={queryClient}>
         <div className="filter-page_left">
           <Filters

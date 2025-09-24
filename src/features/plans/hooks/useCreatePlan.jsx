@@ -48,7 +48,7 @@ function useCreatePlan(setPlans, handleAddPlanModal) {
     toast.promise(createPlan(), {
       loading: "Creando plan...",
       error: (error) => {
-        return "Error al crean un nuevo plan";
+        return "Error al crear un nuevo plan";
       },
       success: (data) => {
         setPlans((prev) => {

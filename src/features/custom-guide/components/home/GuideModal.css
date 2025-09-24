@@ -1,0 +1,262 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--background-shadow-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+/* Contenedor del modal */
+.modal-container {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: modalFadeIn 0.2s ease-out;
+  background-color: red;
+}
+
+/* Botón de cierre */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+/* Títulos y textos */
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-subtitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-text {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.modal-list {
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Animación de entrada */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ejemplo de botón de la tarjeta */
+.service-card-btn {
+  background-color: #006d77;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.service-card-btn:hover {
+  background-color: #004f55;
+}
+
+/* Fondo oscuro semitransparente */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+/* Contenedor del modal */
+.modal-container {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+/* Botón de cierre */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-link {
+  border-bottom: 1px solid rgb(180, 180, 180);
+  padding-bottom: 1.8rem;
+
+  > span {
+    padding-right: 0.3rem;
+    color: rgb(47, 47, 175);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  > span:hover {
+    color: rgb(111, 111, 228);
+  }
+}
+
+/* Títulos y textos */
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: .3rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal-subtitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-text {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.modal-list {
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Animación de entrada */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ejemplo de botón de la tarjeta */
+.service-card-btn {
+  background-color: #006d77;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.service-card-btn:hover {
+  background-color: #004f55;
+}
+
+/* -------------------- */
+/* 📱 MEDIA QUERIES */
+/* -------------------- */
+
+/* Tablets (<= 768px) */
+@media (max-width: 768px) {
+  .modal-container {
+    max-width: 90%;
+    padding: 1.5rem;
+    max-height: 85vh;
+  }
+
+  .modal-title {
+    font-size: 1.6rem;
+  }
+
+  .modal-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .modal-text,
+  .modal-list {
+    font-size: 0.95rem;
+  }
+}
+
+/* Móviles (<= 480px) */
+@media (max-width: 480px) {
+  .modal-container {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0; /* ocupa toda la pantalla */
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .modal-text,
+  .modal-list {
+    font-size: 0.9rem;
+  }
+
+  .modal-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.3rem;
+  }
+}

@@ -4,16 +4,19 @@ import UserProvider from "../features/auth/context/UserProvider.jsx";
 import CartProvider from "../features/cart/context/CartProvider.jsx";
 import "../styles/App.css";
 import AppRoutes from "./routes.jsx";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
-    <UserProvider>
-      <LoginProvider>
-        <CartProvider>
-          <AppRoutes />
-        </CartProvider>
-      </LoginProvider>
-    </UserProvider>
+    <HelmetProvider>
+      <UserProvider>
+        <LoginProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </LoginProvider>
+      </UserProvider>
+    </HelmetProvider>
   );
 }
 

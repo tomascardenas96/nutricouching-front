@@ -5,6 +5,8 @@ import ProductsRootDashboardMobile from "../../../products/components/dashboard/
 import ProductsRootDashboard from "../../../products/components/dashboard/admin/ProductsRootDashboard";
 import ProfessionalsRootDashboardMobile from "../../../professional/components/dashboard/admin/mobile/ProfessionalsRootDashboardMobile";
 import ProfessionalsRootDashboard from "../../../professional/components/dashboard/admin/ProfessionalsRootDashboard";
+import ResourcesRootDashboardMobile from "../../../resources/components/dashboard/admin/mobile/ResourcesRootDashboardMobile";
+import ResourcesRootDashboard from "../../../resources/components/dashboard/admin/ResourcesRootDashboard";
 import SpecialtiesRootDashboardMobile from "../../../specialties/components/dashboard/admin/mobile/SpecialtiesRootDashboardMobile";
 import SpecialtiesRootDashboard from "../../../specialties/components/dashboard/admin/SpecialtiesRootDashboard";
 import UsersRootDashboardMobile from "../../../user/components/dashboard/admin/mobile/UsersRootDashboardMobile";
@@ -65,6 +67,15 @@ function RootDashboardContent() {
       <>
         <PlansRootDashboard />
         <PlansRootDashboardMobile />
+      </>
+    );
+  }
+
+  if (selectedOption === "Recursos") {
+    return (
+      <>
+        <ResourcesRootDashboard />
+        <ResourcesRootDashboardMobile />
       </>
     );
   }

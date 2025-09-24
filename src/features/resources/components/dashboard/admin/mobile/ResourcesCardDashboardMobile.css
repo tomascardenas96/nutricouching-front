@@ -1,4 +1,4 @@
-.plan-card-dashboard-container {
+.resource-card-dashboard-container {
   margin: 0 1.5rem;
   display: flex;
   gap: 0.8rem;
@@ -7,7 +7,7 @@
   color: #666666;
 }
 
-.plan-card-dashboard-container .image-container {
+.resource-card-dashboard-container .image-container {
   border-radius: 50%;
 
   > img {
@@ -20,7 +20,7 @@
   }
 }
 
-.plan-card-dashboard-container .info-container {
+.resource-card-dashboard-container .info-container {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -28,11 +28,11 @@
   > p {
     font-size: 0.8rem;
     display: flex;
-    gap: .4rem;
+    gap: 0.4rem;
   }
 }
 
-.plan-card-dashboard-container .info-container .description {
+.resource-card-dashboard-container .info-container .description {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -45,10 +45,11 @@
   }
 }
 
-.plan-card-dashboard-container .buttons-container {
+.resource-card-dashboard-container .buttons-container {
   display: flex;
   gap: 0.6rem;
-  align-items: center;  margin-top: .3rem;
+  align-items: center;
+  margin-top: 0.3rem;
 
   > button {
     padding: 0.5rem 0.7rem;
