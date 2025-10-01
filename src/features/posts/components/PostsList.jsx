@@ -7,7 +7,8 @@ import PostsListSkeleton from "./loaders/PostsListSkeleton";
 import NetworkError from "../../../common/components/NetworkError";
 
 function PostsList({ profilePicture, name }) {
-  const { posts, postsError, arePostsLoading } = useContext(PostContext);
+  const { posts, setPosts, postsError, arePostsLoading } =
+    useContext(PostContext);
   const { user } = useAuthUser();
 
   return (
@@ -32,6 +33,9 @@ function PostsList({ profilePicture, name }) {
               profilePicture={profilePicture}
               name={name}
               createdAt={post.createdAt}
+              image={post.image}
+              id={post.postId}
+              setPosts={setPosts}
             />
           ))
         )}

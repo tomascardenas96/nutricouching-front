@@ -23,8 +23,6 @@ function ScheduleProfile({ professionalId, professionalName }) {
     isAvailabilitiesListEmpty,
   } = useGetAvailabilitiesByProfessional(professionalId);
 
-  console.log(Object.keys(availabilities).length);
-
   const [isGetBookingModalOpen, setIsGetBookingModalOpen] = useState(false);
 
   return (

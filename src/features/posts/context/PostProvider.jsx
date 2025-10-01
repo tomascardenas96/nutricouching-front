@@ -5,19 +5,34 @@ import { PostContext } from "./PostContext";
 function PostProvider({ children, profileId }) {
   const { posts, setPosts, postsError, arePostsLoading } =
     useGetPostsByProfile(profileId);
-  const { createPost, postInput, handleChangePostInput, handleEnterKeyDown } =
-    useCreatePost(profileId, setPosts);
+  const {
+    createPost,
+    postInput,
+    handleChangePostInput,
+    handleEnterKeyDown,
+    handleSelectImage,
+    postSelectedImage,
+    imagePreview,
+    handleUnselectImage,
+    fileInputRef,
+  } = useCreatePost(profileId, setPosts);
 
   return (
     <PostContext.Provider
       value={{
         createPost,
+        setPosts,
         postInput,
         handleChangePostInput,
         handleEnterKeyDown,
         posts,
         postsError,
         arePostsLoading,
+        handleSelectImage,
+        postSelectedImage,
+        imagePreview,
+        handleUnselectImage,
+        fileInputRef,
       }}
     >
       {children}

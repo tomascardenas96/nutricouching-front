@@ -1,11 +1,33 @@
-import { HOST } from "../../../api/data";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { IoIosHeart, IoIosHeartEmpty, IoMdClose } from "react-icons/io";
 import { publishedAgo } from "../../../lib/date";
 import "./PostCard.css";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { IoIosHeartEmpty } from "react-icons/io";
-import { IoIosHeart } from "react-icons/io";
+import { useState } from "react";
+import { MdDelete } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
+import useHandlePostsModals from "../hooks/useHandlePostsModals";
+import { createPortal } from "react-dom";
+import ConfirmationModal from "../../../common/components/ConfirmationModal";
+import useDeletePost from "../hooks/useDeletePost";
 
-function PostCard({ body, profilePicture, name, createdAt }) {
+function PostCard({
+  body,
+  profilePicture,
+  name,
+  createdAt,
+  image,
+  id,
+  setPosts,
+}) {
+  const [isFullImageOpen, setIsFullImageOpen] = useState(false);
+  const [isOptionsModalDeployed, setIsOptionsModalDeployed] = useState(false);
+  const {
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    isDeletePostModalOpen,
+  } = useHandlePostsModals();
+  const { handleDeletePost } = useDeletePost(setPosts, handleCloseDeleteModal);
+
   return (
     <div className="post-card">
       <div className="post-card_header">
@@ -23,13 +45,34 @@ function PostCard({ body, profilePicture, name, createdAt }) {
           </div>
         </div>
 
-        <div className="options">
+        <div
+          className="options"
+          onClick={() => setIsOptionsModalDeployed(!isOptionsModalDeployed)}
+        >
           <HiOutlineDotsHorizontal className="dots-icon" />
+
+          {isOptionsModalDeployed && (
+            <div className="options-modal">
+              <p onClick={handleOpenDeleteModal}>
+                <MdDeleteOutline />
+                Eliminar
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
       <div className="post-card_body">
         <p>{body}</p>
+        {image && (
+          <div className="post-card_image">
+            <img
+              src={image}
+              alt="Foto de publicacion"
+              onClick={() => setIsFullImageOpen(true)}
+            />
+          </div>
+        )}
       </div>
 
       <p className="post-card_quantity-likes">A 4 personas le gusta esto</p>
@@ -42,6 +85,28 @@ function PostCard({ body, profilePicture, name, createdAt }) {
           <p>Me gusta</p>
         </div>
       </div>
+
+      {isFullImageOpen && (
+        <div className="full-size-post-image_container">
+          <div>
+            <IoMdClose
+              className="close-icon"
+              onClick={() => setIsFullImageOpen(false)}
+            />
+            <img src={image} alt="Foto de publicacion" />
+          </div>
+        </div>
+      )}
+
+      {isDeletePostModalOpen &&
+        createPortal(
+          <ConfirmationModal
+            onConfirm={() => handleDeletePost(id)}
+            message="¿Seguro que deseas eliminar la publicacion?"
+            onClose={handleCloseDeleteModal}
+          />,
+          document.getElementById("root-portal")
+        )}
     </div>
   );
 }

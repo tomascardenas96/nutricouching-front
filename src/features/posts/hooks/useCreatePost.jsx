@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 
 function useCreatePost(profileId, setPosts) {
+  const fileInputRef = useRef(null);
   const [postInput, setPostInput] = useState("");
+  const [postSelectedImage, setPostSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -12,17 +15,23 @@ function useCreatePost(profileId, setPosts) {
       return;
     }
 
-    setPostInput("");
-
     async function createPostPromise() {
+      const formData = new FormData();
+
+      formData.append("body", postInput);
+      formData.append("profileId", profileId);
+
+      if (postSelectedImage) {
+        formData.append("file", postSelectedImage);
+      }
+
       const token = localStorage.getItem("authToken");
       const response = await fetch(`${HOST}/post`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ body: postInput, profileId }),
+        body: formData,
       });
 
       if (!response.ok) throw new Error();
@@ -33,6 +42,9 @@ function useCreatePost(profileId, setPosts) {
     toast.promise(createPostPromise(), {
       loading: "Creando publicacion...",
       success: (data) => {
+        handleUnselectImage();
+        setPostSelectedImage(null);
+        setPostInput("");
         setPosts((prev) => [{ ...data }, ...prev]);
         return "Publicacion creado exitosamente!";
       },
@@ -45,6 +57,27 @@ function useCreatePost(profileId, setPosts) {
     setPostInput(value);
   };
 
+  const handleSelectImage = (e) => {
+    const file = e.target.files[0];
+    setPostSelectedImage(file);
+
+    if (file) {
+      const fileURL = URL.createObjectURL(file);
+      setImagePreview(fileURL);
+    } else {
+      setPostSelectedImage(null);
+      setImagePreview(null);
+    }
+  };
+
+  const handleUnselectImage = () => {
+    setImagePreview(null);
+    setPostSelectedImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   const handleEnterKeyDown = (e) => {
     //Permitir salto de linea presionando SHIFT + ENTER
     if (e.key === "Enter" && !e.shiftKey) {
@@ -53,7 +86,17 @@ function useCreatePost(profileId, setPosts) {
     }
   };
 
-  return { createPost, postInput, handleChangePostInput, handleEnterKeyDown };
+  return {
+    createPost,
+    postInput,
+    handleChangePostInput,
+    handleEnterKeyDown,
+    handleSelectImage,
+    postSelectedImage,
+    imagePreview,
+    handleUnselectImage,
+    fileInputRef,
+  };
 }
 
 export default useCreatePost;
