@@ -5,8 +5,7 @@ function useEmptyCart(
   setElementsInCart,
   activeCart,
   setProductsInCart,
-  setViandsInCart,
-  
+  setViandsInCart
 ) {
   const authToken = localStorage.getItem("authToken");
 
@@ -29,7 +28,6 @@ function useEmptyCart(
       setElementsInCart([]);
       setProductsInCart([]);
       setViandsInCart([]);
-      toast.success("Carrito vaciado");
     } catch (error) {
       toast.error("Ocurrio un error al limpiar el carrito");
     }
@@ -40,8 +38,7 @@ function useEmptyCart(
     localStorage.removeItem("viands-cart");
     setProductsInCart([]);
     setViandsInCart([]);
-    setElementsInCart([])
-    toast.success("Carrito vaciado");
+    setElementsInCart([]);
   };
 
   return { handleEmptyCart, handleEmptyLocalStorageCart };

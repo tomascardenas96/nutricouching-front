@@ -1,10 +1,8 @@
 import { IoMdClose, IoMdTime } from "react-icons/io";
-import { HOST } from "../../../../api/data";
 import { MdOutlineFileDownload } from "react-icons/md";
-import "./MoreInfoPlan.css";
-import { useState } from "react";
+import "./MoreInfoResource.css";
 
-function MoreInfoPlan({
+function MoreInfoResource({
   image,
   title,
   shortDescription,
@@ -13,18 +11,17 @@ function MoreInfoPlan({
   weight = "15 kb",
   date = "24 de Marzo de 2025",
   handleOpenMoreInfoModal,
-  setSelectedPlan,
+  setSelectedResource,
   status,
   handleDownloadPlan,
   downloadLoading,
-  handlePurchasePlan,
+  handlePurchaseResource,
   paymentLoading,
   id,
+  loadingResourceId,
 }) {
-  const [purchaseLoading, setPurchaseLoading] = useState(false);
-
   const closeModal = () => {
-    setSelectedPlan(null);
+    setSelectedResource(null);
     handleOpenMoreInfoModal();
   };
 
@@ -60,7 +57,7 @@ function MoreInfoPlan({
               )}
 
               {status === "not-purchased" &&
-                (paymentLoading ? (
+                (loadingResourceId === id ? (
                   <button
                     className="purchase-plan_disabled"
                     disabled
@@ -68,7 +65,8 @@ function MoreInfoPlan({
                 ) : (
                   <button
                     className="purchase-plan"
-                    onClick={() => handlePurchasePlan(id)}
+                    onClick={() => handlePurchaseResource(id)}
+                    disabled={paymentLoading}
                   >{`Comprar $${price}`}</button>
                 ))}
 
@@ -90,4 +88,4 @@ function MoreInfoPlan({
   );
 }
 
-export default MoreInfoPlan;
+export default MoreInfoResource;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HOST } from "../../../api/data";
 import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -9,6 +10,7 @@ function UserProvider({ children }) {
   const [authToken, setAuthToken] = useState(() =>
     localStorage.getItem("authToken")
   );
+  const navigate = useNavigate();
 
   // Cuando se monta el componente, se inicializa el token de autenticación si existe en localStorage y se setea en el estado
   useEffect(() => {
@@ -53,6 +55,7 @@ function UserProvider({ children }) {
 
   const handleLogOut = () => {
     localStorage.removeItem("authToken");
+    navigate("/");
     setUser(null);
   };
 

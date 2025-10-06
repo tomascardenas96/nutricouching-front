@@ -18,11 +18,12 @@ function ResourceCard({
   handleDownloadResource,
   downloadLoading,
   handlePurchaseResource,
-  paymentLoading,
+  loadingResourceId,
   user,
   handleLoginModal,
   setSelectedService,
   handleOpenSmartPlanModal,
+  paymentLoading,
 }) {
   const openModal = () => {
     setSelectedResource({ ...resource, status });
@@ -54,10 +55,11 @@ function ResourceCard({
 
         <form onSubmit={(e) => e.preventDefault()}>
           {type === "premium" || type === "off" ? (
-            !paymentLoading ? (
+            loadingResourceId !== id ? (
               <button
                 className="buy-btn"
                 onClick={verifyUserAndPurchaseResource}
+                disabled={paymentLoading}
               >
                 Comprar <BsCart4 className="cart-icon" />
               </button>

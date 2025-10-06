@@ -18,26 +18,24 @@ function LayoutWrapper() {
 
 export default function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<LayoutWrapper />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile/:slug" element={<Profile />} />
-          <Route
-            path="/filter/professionals"
-            element={<ProfessionalsFilterPage />}
-          />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Route>
+    <Routes>
+      <Route element={<LayoutWrapper />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile/:slug" element={<Profile />} />
+        <Route
+          path="/filter/professionals"
+          element={<ProfessionalsFilterPage />}
+        />
+        <Route path="/reset-password" element={<ResetPassword />} />
+      </Route>
 
-        <Route element={<ProtectedRoute allowedRole="root" />}>
-          <Route path="/root" element={<AdminDashboard />} />
-        </Route>
+      <Route element={<ProtectedRoute allowedRole="root" />}>
+        <Route path="/root" element={<AdminDashboard />} />
+      </Route>
 
-        <Route element={<ProtectedRoute allowedRole="admin" />}>
-          <Route path="/professional" element={<ProfessionalDashboard />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <Route element={<ProtectedRoute allowedRole="admin" />}>
+        <Route path="/professional" element={<ProfessionalDashboard />} />
+      </Route>
+    </Routes>
   );
 }

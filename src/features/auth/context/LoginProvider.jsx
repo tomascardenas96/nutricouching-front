@@ -3,6 +3,7 @@ import { LoginContext } from "./LoginContext";
 import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 import { useAuthToken } from "../hooks/useAuthToken";
+import { useNavigate } from "react-router-dom";
 
 function LoginProvider({ children }) {
   const [loginInput, setLoginInput] = useState({
@@ -10,6 +11,7 @@ function LoginProvider({ children }) {
     password: "",
   });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { setAuthToken } = useAuthToken();
 
@@ -37,6 +39,7 @@ function LoginProvider({ children }) {
       success: (data) => {
         localStorage.setItem("authToken", data.token);
         setAuthToken(data.token); // Actualizamos el token en el estado
+        navigate("/");
         return "Login exitoso!";
       },
       error: (error) => {

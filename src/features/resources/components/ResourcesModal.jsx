@@ -6,7 +6,7 @@ import { useLoginModal } from "../../auth/hooks/useLoginModal";
 import useDownloadResource from "../hooks/useDownloadResource";
 import useGetAllResources from "../hooks/useGetAllResources";
 import usePurchaseResource from "../hooks/usePurchaseResource";
-import MoreInfoPlan from "./more-info/MoreInfoPlan";
+import MoreInfoResource from "./more-info/MoreInfoResource";
 import ResourceCard from "./ResourceCard";
 import PlanHeader from "./ResourceHeader";
 import "./ResourcesModal.css";
@@ -14,17 +14,18 @@ import "./ResourcesModal.css";
 function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
   const { user } = useAuthUser();
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
-  const [selectedResource, setSelectedResources] = useState(null);
+  const [selectedResource, setSelectedResource] = useState(null);
   const { handleLoginModal } = useLoginModal();
 
   const { resources } = useGetAllResources(
-    setSelectedResources,
+    setSelectedResource,
     setIsMoreInfoModalOpen
   );
 
   // Download and purchase plans
   const { handleDownloadResource, downloadLoading } = useDownloadResource();
-  const { handlePurchaseResource, paymentLoading } = usePurchaseResource();
+  const { handlePurchaseResource, loadingResourceId, paymentLoading } =
+    usePurchaseResource();
 
   const handleOpenMoreInfoModal = () => {
     setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
@@ -52,16 +53,17 @@ function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   weight={resource.weight}
                   date={resource.createdAt}
                   resource={resource}
-                  setSelectedResources={setSelectedResources}
+                  setSelectedResource={setSelectedResource}
                   status="adquired"
                   handleDownloadResource={handleDownloadResource}
                   downloadLoading={downloadLoading}
                   handlePurchaseResource={handlePurchaseResource}
-                  paymentLoading={paymentLoading}
+                  loadingResourceId={loadingResourceId}
                   user={user}
                   handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+                  paymentLoading={paymentLoading}
                 />
               ))}
             </div>
@@ -86,16 +88,17 @@ function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   weight={resource.weight}
                   date={resource.createdAt}
                   resource={resource}
-                  setSelectedResources={setSelectedResources}
+                  setSelectedResource={setSelectedResource}
                   status="adquired"
                   handleDownloadResource={handleDownloadResource}
                   downloadLoading={downloadLoading}
                   handlePurchaseResource={handlePurchaseResource}
-                  paymentLoading={paymentLoading}
+                  loadingResourceId={loadingResourceId}
                   user={user}
                   handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+                  paymentLoading={paymentLoading}
                 />
               ))}
             </div>
@@ -122,16 +125,17 @@ function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   weight={resource.weight}
                   date={resource.createdAt}
                   resource={resource}
-                  setSelectedResources={setSelectedResources}
+                  setSelectedResource={setSelectedResource}
                   status="not-purchased"
                   handleDownloadResource={handleDownloadResource}
                   downloadLoading={downloadLoading}
                   handlePurchaseResource={handlePurchaseResource}
-                  paymentLoading={paymentLoading}
+                  loadingResourceId={loadingResourceId}
                   user={user}
                   handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+                  paymentLoading={paymentLoading}
                 />
               ))}
             </div>
@@ -141,7 +145,7 @@ function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
 
       {isMoreInfoModalOpen &&
         createPortal(
-          <MoreInfoPlan
+          <MoreInfoResource
             image={selectedResource.image}
             title={selectedResource.title}
             shortDescription={selectedResource.shortDescription}
@@ -150,13 +154,14 @@ function ResourcesModal({ handleOpenSmartPlanModal, setSelectedService }) {
             weight={selectedResource.weight}
             date={selectedResource.date}
             handleOpenMoreInfoModal={handleOpenMoreInfoModal}
-            setSelectedResources={setSelectedResources}
+            setSelectedResource={setSelectedResource}
             status={selectedResource.status}
             handleDownloadResource={handleDownloadResource}
             downloadLoading={downloadLoading}
             handlePurchaseResource={handlePurchaseResource}
-            paymentLoading={paymentLoading}
+            loadingResourceId={loadingResourceId}
             id={selectedResource.resourceId}
+            paymentLoading={paymentLoading}
           />,
           document.body
         )}

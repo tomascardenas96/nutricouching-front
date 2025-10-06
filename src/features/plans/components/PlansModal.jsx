@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { IoMdClose } from "react-icons/io";
-import { io } from "socket.io-client";
-import { toast } from "sonner";
-import { WEBSOCKET_HOST } from "../../../api/data";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useLoginModal } from "../../auth/hooks/useLoginModal";
 import useGetAllPlans from "../../plans/hooks/useGetAllPlans";
+import useDownloadPlan from "../hooks/useDownloadPlan";
+import usePurchasePlan from "../hooks/usePurchasePlan";
 import PlanCard from "./PlanCard";
 import PlanHeader from "./PlanHeader";
 import "./PlansModal.css";
 import MoreInfoPlan from "./more-info/MoreInfoPlan";
-import useDownloadPlan from "../hooks/useDownloadPlan";
-import usePurchasePlan from "../hooks/usePurchasePlan";
-import { useLoginModal } from "../../auth/hooks/useLoginModal";
 
 function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
   const { user } = useAuthUser();
@@ -27,7 +24,8 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
 
   // Download and purchase plans
   const { handleDownloadPlan, downloadLoading } = useDownloadPlan();
-  const { handlePurchasePlan, paymentLoading } = usePurchasePlan();
+  const { handlePurchasePlan, paymentLoading, loadingPlanId } =
+    usePurchasePlan();
 
   const handleOpenMoreInfoModal = () => {
     setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
@@ -65,6 +63,7 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+                  loadingPlanId={loadingPlanId}
                 />
               ))}
             </div>
@@ -99,6 +98,7 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+                  loadingPlanId={loadingPlanId}
                 />
               ))}
             </div>
@@ -135,6 +135,7 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
+                  loadingPlanId={loadingPlanId}
                 />
               ))}
             </div>
@@ -160,6 +161,7 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
             handlePurchasePlan={handlePurchasePlan}
             paymentLoading={paymentLoading}
             id={selectedPlan.planId}
+            loadingPlanId={loadingPlanId}
           />,
           document.body
         )}

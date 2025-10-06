@@ -3,11 +3,14 @@ import { toast } from "sonner";
 import { HOST } from "../../../api/data";
 
 function usePurchaseResource() {
+  const [loadingResourceId, setLoadingResourceId] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   const handlePurchaseResource = async (resourceId) => {
     const token = localStorage.getItem("authToken");
+    setLoadingResourceId(resourceId);
     setPaymentLoading(true);
+
     try {
       const response = await fetch(`${HOST}/resource/${resourceId}/purchase`, {
         method: "POST",
@@ -27,11 +30,12 @@ function usePurchaseResource() {
     } catch (error) {
       toast.error("Ocurrio un error al procesar el pago");
     } finally {
+      setLoadingResourceId(null);
       setPaymentLoading(false);
     }
   };
 
-  return {handlePurchaseResource, paymentLoading};
+  return { handlePurchaseResource, loadingResourceId, paymentLoading };
 }
 
 export default usePurchaseResource;

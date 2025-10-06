@@ -24,6 +24,7 @@ function PlanCard({
   handleLoginModal,
   setSelectedService,
   handleOpenSmartPlanModal,
+  loadingPlanId,
 }) {
   const openModal = () => {
     setSelectedPlan({ ...plan, status });
@@ -55,7 +56,7 @@ function PlanCard({
 
         <form onSubmit={(e) => e.preventDefault()}>
           {type === "premium" || type === "off" ? (
-            !paymentLoading ? (
+            loadingPlanId !== id ? (
               <button className="buy-btn" onClick={verifyUserAndPurchasePlan}>
                 Comprar <BsCart4 className="cart-icon" />
               </button>
@@ -68,6 +69,7 @@ function PlanCard({
             <button
               className="download-btn"
               onClick={() => handleDownloadPlan(id)}
+              disabled={paymentLoading}
             >
               Abrir <MdOutlineFileDownload className="download-icon" />
             </button>
