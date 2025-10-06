@@ -36,6 +36,9 @@ function PostsList({ profilePicture, name }) {
               image={post.image}
               id={post.postId}
               setPosts={setPosts}
+              isLiked={post.isLiked}
+              likeCount={post.likeCount}
+              postId={post.postId}
             />
           ))
         )}

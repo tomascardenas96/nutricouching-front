@@ -9,6 +9,7 @@ import useHandlePostsModals from "../hooks/useHandlePostsModals";
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../common/components/ConfirmationModal";
 import useDeletePost from "../hooks/useDeletePost";
+import useToggleLike from "../hooks/useToggleLike";
 
 function PostCard({
   body,
@@ -18,6 +19,9 @@ function PostCard({
   image,
   id,
   setPosts,
+  isLiked,
+  likeCount,
+  postId,
 }) {
   const [isFullImageOpen, setIsFullImageOpen] = useState(false);
   const [isOptionsModalDeployed, setIsOptionsModalDeployed] = useState(false);
@@ -27,6 +31,12 @@ function PostCard({
     isDeletePostModalOpen,
   } = useHandlePostsModals();
   const { handleDeletePost } = useDeletePost(setPosts, handleCloseDeleteModal);
+
+  const { toggleLike, liked, likeAmount } = useToggleLike(
+    isLiked,
+    likeCount,
+    postId
+  );
 
   return (
     <div className="post-card">
@@ -75,15 +85,17 @@ function PostCard({
         )}
       </div>
 
-      <p className="post-card_quantity-likes">A 4 personas le gusta esto</p>
+      <p className="post-card_quantity-likes">
+        A {likeAmount} personas le gusta esto
+      </p>
 
       <hr className="post-card_divider-line" />
 
       <div className="post-card_like">
-        <div>
-          {true ? <IoIosHeartEmpty /> : <IoIosHeart />}
-          <p>Me gusta</p>
-        </div>
+        <button onClick={toggleLike}>
+          {liked ? <IoIosHeart className="liked" /> : <IoIosHeartEmpty />}
+          <p className={`${liked ? "liked-paragraph" : undefined}`}>Me gusta</p>
+        </button>
       </div>
 
       {isFullImageOpen && (
