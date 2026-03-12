@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   IoIosArrowBack,
   IoMdArrowDropdown,
   IoMdArrowDropup,
 } from "react-icons/io";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
-import { useLoginModal } from "../../auth/hooks/useLoginModal";
+import { useAuth } from "../../auth/hooks/useAuth";
 import useAddOrSubtractViand from "../../cart/hooks/useAddOrSubtractViand";
 import { useCartItems } from "../../cart/hooks/useCartItems";
 import useEmptyCart from "../../cart/hooks/useEmptyCart";
@@ -22,8 +21,7 @@ function CartModal({ handleCartModal, activeCart }) {
   const [isProductsListDeployed, setIsProductsListDeployed] = useState(true);
   const [isViandsListDeployed, setIsViandsListDeployed] = useState(true);
 
-  const { user } = useAuthUser();
-  const { handleLoginModal } = useLoginModal();
+  const { user } = useAuth();
   const { productsInCart, setProductsInCart } = useProductCart();
   const { viandsInCart, setViandsInCart } = useViandsCart();
   const { elementsInCart, setElementsInCart } = useCartItems();
@@ -72,20 +70,27 @@ function CartModal({ handleCartModal, activeCart }) {
     setIsViandsListDeployed(!isViandsListDeployed);
   };
 
-  // Metodo para calcular el total de la compra
-  const calculateTotal = () => {
-    // Si no hay usuario logueado calcular el total de los productos del local storage, de lo contrario sumar los totales desde la base de datos
+  // Elementos del carrito separados por tipo (evita doble iteración en JSX)
+  const productsFromElements = useMemo(
+    () => elementsInCart.filter((e) => e.product),
+    [elementsInCart]
+  );
+  const viandsFromElements = useMemo(
+    () => elementsInCart.filter((e) => e.viand),
+    [elementsInCart]
+  );
+
+  // Total de la compra
+  const calculateTotal = useMemo(() => {
     if (!user) {
       const subTotalProducts = productsInCart.reduce(
         (acc, product) => acc + product?.price * product.quantity,
         0
       );
-
       const subTotalViands = viandsInCart.reduce(
         (acc, viand) => acc + viand?.price * viand.quantity,
         0
       );
-
       return subTotalProducts + subTotalViands;
     }
 
@@ -95,16 +100,13 @@ function CartModal({ handleCartModal, activeCart }) {
         acc + element?.viand?.price * element?.quantity,
       0
     );
-  };
+  }, [user, productsInCart, viandsInCart, elementsInCart]);
 
   return (
     <section className="cart-modal_container" onClick={handleCartModal}>
       <div className={`cart-modal`} onClick={(e) => e.stopPropagation()}>
         <div className="cart-modal_header">
-          <img
-            src="/assets/nutricouching-logo.jpg"
-            alt="nutricoaching-logo"
-          />
+          <img src="/assets/nutricouching-logo.jpg" alt="nutricoaching-logo" />
           <div>
             <h1>Carrito de Compras</h1>
             <p>Este es el carrito de Nutricoaching</p>
@@ -132,8 +134,7 @@ function CartModal({ handleCartModal, activeCart }) {
 
           {!productsInCart.length &&
             isProductsListDeployed &&
-            elementsInCart &&
-            !elementsInCart?.some((element) => element.product) && (
+            !productsFromElements.length && (
               <div className="products-list_modal">
                 <p>No hay productos agregados aun.</p>
               </div>
@@ -155,21 +156,17 @@ function CartModal({ handleCartModal, activeCart }) {
                   ))
                 : null}
 
-              {elementsInCart?.length > 0 &&
-                elementsInCart?.map(
-                  (element) =>
-                    element.product && (
-                      <ProductInCartCard
-                        key={`product-cart-${element.cartItemId}`}
-                        product={element.product}
-                        quantity={element.quantity}
-                        remove={handleRemoveProduct}
-                        add={addUnityOfProduct}
-                        subtract={subtractUnityOfProduct}
-                        elementsInCart={elementsInCart}
-                      />
-                    )
-                )}
+              {productsFromElements.map((element) => (
+                <ProductInCartCard
+                  key={`product-cart-${element.cartItemId}`}
+                  product={element.product}
+                  quantity={element.quantity}
+                  remove={handleRemoveProduct}
+                  add={addUnityOfProduct}
+                  subtract={subtractUnityOfProduct}
+                  elementsInCart={elementsInCart}
+                />
+              ))}
             </div>
           )}
         </div>
@@ -195,8 +192,7 @@ function CartModal({ handleCartModal, activeCart }) {
 
           {!viandsInCart.length &&
             isViandsListDeployed &&
-            elementsInCart &&
-            !elementsInCart?.some((element) => element.viand) && (
+            !viandsFromElements.length && (
               <div className="viands-list_modal">
                 <p>No hay viandas agregadas aun.</p>
               </div>
@@ -217,26 +213,22 @@ function CartModal({ handleCartModal, activeCart }) {
                   ))
                 : null}
 
-              {elementsInCart?.length > 0 &&
-                elementsInCart?.map(
-                  (element) =>
-                    element.viand && (
-                      <ProductInCartCard
-                        key={`viand-cart-${element.cartItemId}`}
-                        viand={element.viand}
-                        quantity={element.quantity}
-                        remove={handleRemoveProduct}
-                        add={addUnityOfProduct}
-                        subtract={subtractUnityOfProduct}
-                      />
-                    )
-                )}
+              {viandsFromElements.map((element) => (
+                <ProductInCartCard
+                  key={`viand-cart-${element.cartItemId}`}
+                  viand={element.viand}
+                  quantity={element.quantity}
+                  remove={handleRemoveProduct}
+                  add={addUnityOfProduct}
+                  subtract={subtractUnityOfProduct}
+                />
+              ))}
             </div>
           )}
         </div>
 
         <div className="cart-modal_total">
-          <h2>TOTAL: ${calculateTotal()}</h2>
+          <h2>TOTAL: ${calculateTotal}</h2>
         </div>
 
         <div className="cart-modal_buttons">
@@ -254,7 +246,6 @@ function CartModal({ handleCartModal, activeCart }) {
               activeCart={activeCart}
               user={user}
               handleCartModal={handleCartModal}
-              handleLoginModal={handleLoginModal}
             />
           </div>
         </div>

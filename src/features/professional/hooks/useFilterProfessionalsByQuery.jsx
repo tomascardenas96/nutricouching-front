@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { FilterProfessionalsQueryBuilder } from "../utils/queryBuilders";
 
@@ -16,10 +16,8 @@ function useFilterProfessionalsByQuery(filters) {
 
   const searchProfessionals = async (filters) => {
     const query = FilterProfessionalsQueryBuilder(filters);
-
-    const response = await fetch(`${HOST}/professional/filter?${query}`);
-    if (!response.ok) throw new Error("Error getting professionals by queries");
-    return response.json();
+    const { data } = await apiClient.get(`/professional/filter?${query}`);
+    return data;
   };
 
   const hasSomeFilter = !!(

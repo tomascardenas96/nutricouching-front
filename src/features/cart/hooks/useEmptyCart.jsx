@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useEmptyCart(
   setElementsInCart,
@@ -7,23 +7,9 @@ function useEmptyCart(
   setProductsInCart,
   setViandsInCart
 ) {
-  const authToken = localStorage.getItem("authToken");
-
   const handleEmptyCart = async () => {
     try {
-      const response = await fetch(`${HOST}/cart-item/${activeCart.cartId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error();
-      }
+      await apiClient.delete(`/cart-item/${activeCart.cartId}`);
 
       setElementsInCart([]);
       setProductsInCart([]);

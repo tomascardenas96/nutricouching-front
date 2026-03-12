@@ -1,27 +1,18 @@
-import React, { useState } from "react";
-import { HOST } from "../../../api/data";
+import { useState } from "react";
 import { toast } from "sonner";
+import apiClient from "../../auth/api/apiClient";
 
 function useDownloadPlan() {
   const [downloadLoading, setDownloadLoading] = useState(false);
 
   const handleDownloadPlan = async (planId) => {
-    const token = localStorage.getItem("authToken");
     setDownloadLoading(true);
 
     try {
-      const response = await fetch(`${HOST}/plan/${planId}/download`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al descargar el archivo");
-      }
+      const { data } = await apiClient.get(`/plan/${planId}/download`);
 
       // Convertir la respuesta a un Blob (archivo binario)
-      const { downloadUrl } = await response.json();
+      const { downloadUrl } = data;
 
       // Crear un enlace temporal para descargar el archivo
       const a = document.createElement("a");

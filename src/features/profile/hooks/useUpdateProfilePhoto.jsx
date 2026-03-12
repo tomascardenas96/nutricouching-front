@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useUpdateProfilePhoto(onClose, setProfessionalProfile) {
   const [file, setFile] = useState(null);
@@ -24,31 +24,21 @@ function useUpdateProfilePhoto(onClose, setProfessionalProfile) {
 
   const handleUpdateProfilePhoto = async (e, profileId) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
 
     const updateProfilePhoto = async () => {
       if (!!noFileSelected) {
         throw new Error("Debe seleccionar una foto");
       }
 
-      if (!token) {
-        throw new Error("Token Invalido");
-      }
-
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch(`${HOST}/profile/photo/${profileId}`, {
-        method: "PATCH",
-        headers: { authorization: `Bearer ${token}` },
-        body: formData,
-      });
+      const { data } = await apiClient.patch(
+        `/profile/photo/${profileId}`,
+        formData
+      );
 
-      if (!response.ok) {
-        throw new Error("Error al actualizar la foto de perfil");
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(updateProfilePhoto(), {

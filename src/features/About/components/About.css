@@ -1,124 +1,211 @@
+/* =====================================================
+   ABOUT SECTION
+   ===================================================== */
+
 .about {
-  width: 100%;
+  width: 90%;
+  max-width: 68rem;
   display: grid;
-  grid-template-rows: max-content 1fr;
-  gap: 3.5rem;
-  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem;
   align-items: center;
+  padding: 1.8rem 0;
 }
 
-.about-header {
-  display: grid;
+/* =====================================================
+   LEFT — imagen
+   ===================================================== */
 
-  & h1 {
-    font-family: var(--primary-font);
-    font-weight: 400;
-    font-size: 1.2rem;
-    text-align: center;
-    color: var(--section-font-color);
-  }
-}
-
-.about-body {
+.about__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  display: grid;
-  padding: 0 3rem;
-  margin-bottom: 5rem;
-  height: max-content;
-
-  & .cards-container {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.057);
-    background-color: white;
-    padding: 0.5rem;
-    height: max-content;
-    display: grid;
-    gap: 4rem;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 19.7rem);
-
-    > .network-error_about {
-      display: grid;
-      place-content: center;
-      grid-row: 1 / 3;
-      grid-column: 1/ 3;
-      min-width: 38.75rem;
-    }
-
-    > .about-card_loader {
-      width: 16.875rem;
-      height: 100%;
-      border-radius: 0.2rem;
-    }
-
-    /* Estilo de la barra de scroll */
-    &::-webkit-scrollbar {
-      height: 3px; /* Altura de la barra horizontal */
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, #00000051, rgba(0, 0, 0, 0.372));
-      border-radius: 4px; /* Esquinas redondeadas */
-      border: none;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: rgba(200, 200, 200, 0.3); /* Color del fondo */
-      border-radius: 4px; /* Esquinas redondeadas */
-    }
-  }
 }
 
-.brand-footer {
-  font-size: 0.8rem;
-  font-family: var(--primary-font);
-  color: white;
+/* Ring behind the photo */
+.about__image::before {
+  content: "";
+  position: absolute;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 50%;
+  border: 2px solid var(--clr-forest-extra-dark);
+  opacity: 0.5;
+}
+
+.about__image img {
+  width: 24.5rem;
+  height: 24.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  position: relative;
+  z-index: 1;
+}
+
+/* =====================================================
+   RIGHT — contenido
+   ===================================================== */
+
+.about__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.about__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--clr-sage);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
+  gap: 0.6rem;
+}
+
+.about__eyebrow::before {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background-color: var(--clr-sage);
+}
+
+.about__title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  max-width: 30ch;
+  font-weight: 500;
+  color: var(--clr-ink);
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+}
+
+.about__description {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--clr-mist);
+  line-height: 1.75;
+  max-width: 42ch;
+}
+
+/* Feature checklist */
+.about__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-body);
+    font-size: 0.83rem;
+    color: var(--clr-ink);
+    font-weight: 500;
+  }
+}
+
+.about__check {
+  font-size: 1.1rem;
+  color: var(--clr-forest);
+  flex-shrink: 0;
+}
+
+/* CTA button */
+.about__cta {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  height: 1.9rem;
-  gap: 0.7rem;
-  background-color: #1c1c1c;
-  position: absolute;
-  bottom: 0.02rem;
-  width: 100%;
-  left: 0;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.8rem 2.5rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--clr-forest);
+  border: 1.5px solid var(--clr-forest);
+  border-radius: 999px;
+  align-self: flex-start;
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
 
-  & img {
-    width: 1.5rem;
+.about__cta::after {
+  content: "→";
+  font-size: 0.9rem;
+  transition: transform 0.22s ease;
+}
+
+.about__cta:hover {
+  background-color: var(--clr-forest);
+  color: var(--clr-white);
+}
+
+.about__cta:hover::after {
+  transform: translateX(4px);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media screen and (max-width: 960px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .about__image img {
+    width: 17rem;
+    height: 17rem;
+  }
+
+  .about__image::before {
+    width: 17.5rem;
+    height: 17.5rem;
+  }
+
+  .about__eyebrow {
+    justify-content: center;
+  }
+
+  .about__description {
+    max-width: none;
+  }
+
+  .about__features li {
+    justify-content: center;
+  }
+
+  .about__cta {
+    align-self: center;
   }
 }
 
-/* Media queries */
-
-@media screen and (max-width: 1050px) {
-  .about-header {
-    display: grid;
-
-    & h1 {
-      font-size: 0.95rem;
-      max-width: 30ch;
-      justify-self: center;
-      margin-bottom: 1rem;
-    }
+@media screen and (max-width: 480px) {
+  .about__image img {
+    width: 13rem;
+    height: 13rem;
   }
-}
 
-@media screen and (max-width: 720px) {
-  .about-body {
-    padding: 0 3rem;
-    margin-bottom: 5rem;
-    height: max-content;
+  .about__image::before {
+    width: 13.5rem;
+    height: 13.5rem;
+  }
 
-    & .cards-container {
-      height: max-content;
-      display: grid;
-      gap: 2.5rem;
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(4, 19.7rem);
-    }
+  .about__title {
+    font-size: 1.85rem;
   }
 }

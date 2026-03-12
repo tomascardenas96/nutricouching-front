@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans) {
   const [modifyPlanInput, setModifyPlanInput] = useState({
@@ -27,7 +27,6 @@ function useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans) {
 
   const handleModifyPlan = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
 
     const formData = new FormData();
     if (modifyPlanInput.title) formData.append("title", modifyPlanInput.title);
@@ -41,19 +40,12 @@ function useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans) {
     if (image) formData.append("file", image);
 
     const modifyPlan = async () => {
-      const response = await fetch(`${HOST}/plan/${selectedPlan.planId}`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const { data } = await apiClient.patch(
+        `/plan/${selectedPlan.planId}`,
+        formData
+      );
 
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(modifyPlan(), {

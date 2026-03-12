@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetAllProducts() {
   const [products, setProducts] = useState([]);
@@ -9,19 +9,7 @@ function useGetAllProducts() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await fetch(`${HOST}/product`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error("Error getting products");
-        }
-
+        const { data } = await apiClient.get("/product");
         setProducts(data);
       } catch (error) {
         console.error(error);

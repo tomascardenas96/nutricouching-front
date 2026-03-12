@@ -1,9 +1,8 @@
 import { createPortal } from "react-dom";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { toast } from "sonner";
-import { useAuthUser } from "../../../auth/hooks/useAuthUser";
-import { useLoginModal } from "../../../auth/hooks/useLoginModal";
-// import { reviews } from "../../../services/components/reviews/reviews";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../auth/hooks/useAuth";
 import "./MoreInfo.css";
 import ReservationModal from "./ReservationModal";
 
@@ -15,13 +14,13 @@ function MoreInfo({
   setIsRequestReservationOpen,
   isRequestReservationOpen,
 }) {
-  const { user } = useAuthUser();
-  const { handleLoginModal } = useLoginModal();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const openLoginModal = () => {
     toast.warning("Necesitas iniciar sesion antes de reservar turnos");
     handleOpenServiceModal();
-    handleLoginModal();
+    navigate("/login");
   };
 
   return (

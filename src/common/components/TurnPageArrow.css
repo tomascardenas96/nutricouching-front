@@ -1,17 +1,36 @@
+/* =====================================================
+   TURN PAGE ARROW BUTTON
+   ===================================================== */
+
 .turn-page {
-  font-size: 1.35rem;
-  width: 4rem;
-  height: 4rem;
+  font-size: 0.9rem;
+  width: 2.8rem;
+  height: 2.8rem;
   border-radius: 50%;
   display: grid;
   place-content: center;
-  background-color: white;
-  box-shadow: 2px 0px 4px 2px rgba(0, 0, 0, 0.034);
+  background-color: var(--clr-white, white);
+  border: 1px solid var(--clr-border, #e5e0d8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.turn-page:hover {
+  background-color: var(--clr-stone, #f5f3ef);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: scale(1.06);
+}
+
+.turn-page:active {
+  transform: scale(0.97);
 }
 
 @media screen and (max-width: 480px) {
   .turn-page {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 0.8rem;
     box-shadow: none;
   }
 }

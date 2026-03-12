@@ -1,7 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
-import { HOST } from "../../../api/data";
 import "./AboutCard.css";
 
 function AboutCard({ image, name, role }) {
@@ -9,7 +8,7 @@ function AboutCard({ image, name, role }) {
     <div className="about-card_container">
       <div className="about-card_image">
         <img
-          src={`${HOST}/uploads/professionals/${image}`}
+          src={image}
           alt="professional-picture"
         />
       </div>

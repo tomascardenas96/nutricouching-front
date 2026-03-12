@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useCreatePlan(setPlans, handleAddPlanModal) {
   const [createPlanInput, setCreatePlanInput] = useState({
@@ -17,7 +17,6 @@ function useCreatePlan(setPlans, handleAddPlanModal) {
     e.preventDefault();
 
     const createPlan = async () => {
-      const token = localStorage.getItem("authToken");
       const formData = new FormData();
 
       formData.append("title", createPlanInput.title);
@@ -32,17 +31,8 @@ function useCreatePlan(setPlans, handleAddPlanModal) {
         formData.append("image", fileImage);
       }
 
-      const response = await fetch(`${HOST}/plan`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      const { data } = await apiClient.post("/plan", formData);
+      return data;
     };
 
     toast.promise(createPlan(), {

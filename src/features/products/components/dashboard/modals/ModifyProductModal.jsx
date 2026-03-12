@@ -1,6 +1,5 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import { HOST } from "../../../../../../api/data";
 import useModifyProduct from "../../../../hooks/useModifyProduct";
 import "./ModifyProductModal.css";
 
@@ -83,7 +82,7 @@ function ModifyProductModal({
                 />
               ) : (
                 <img
-                  src={`${HOST}/uploads/products/${modifyProductInput.image}`}
+                  src={modifyProductInput.image}
                   alt="selected-product-picture"
                 />
               )}

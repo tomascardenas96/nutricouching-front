@@ -1,141 +1,211 @@
-.presentation {
-  width: 92%;
-}
+/* =====================================================
+   HERO — PRESENTATION
+   ===================================================== */
 
-.background-image {
+.hero {
   width: 100%;
-  min-height: 18.5rem;
+  min-height: 21rem;
   position: relative;
-  display: inline-block;
-  background-color: #fff1d8;
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 0.3rem;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0.2rem;
 }
 
-.background-image::after {
+/* Dot-grid background pattern */
+.hero::before {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80%;
-  background: linear-gradient(
-    to top,
-    rgba(246, 246, 246, 1) 0%,
-    rgba(246, 246, 246, 0.8) 30%,
-    rgba(246, 246, 246, 0) 100%
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(45, 90, 69, 0.12) 1px,
+    transparent 1px
   );
+  background-size: 28px 28px;
   pointer-events: none;
+  z-index: 0;
 }
 
-.presentation .content {
-  width: 45%;
+/* Radial white fade — keeps center legible over the dot grid */
+.hero__backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+  margin: 0 0.3rem;
+  border-radius: 0.2rem;
+}
+
+/* Decorative large circle — top-right corner */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: -6rem;
+  right: -6rem;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  border: 1px solid rgba(45, 90, 69, 0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =====================================================
+   CONTENT
+   ===================================================== */
+
+.hero__content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  z-index: 1;
   align-items: center;
-  gap: 0.9rem;
-}
-
-.content > h1 {
-  font-weight: 400;
-  font-size: 1.4rem;
+  gap: 1.2rem;
+  padding: 2.8rem 2rem 4.3rem;
   text-align: center;
-  max-width: 28ch;
-  color: #4d4d4d;
-  font-weight: 500;
+  max-width: 42rem;
+  width: 100%;
+  animation: heroContentReveal 0.8s ease both;
 }
 
-.content > p {
-  text-align: center;
-  max-width: 32ch;
-  font-size: 0.8rem;
-  color: #4d4d4d;
+@keyframes heroContentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.content > .search-input {
-  position: relative;
-  margin: 0.5rem 0;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.075), 0 0 2px 1px rgba(0, 0, 0, 0.066);
-}
-
-.content > .professional-items {
+/* Eyebrow */
+.hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--clr-sage);
   display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: heroContentReveal 0.8s 0.1s ease both;
+}
+
+.hero__eyebrow::before,
+.hero__eyebrow::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background-color: var(--clr-sage);
+  opacity: 0.5;
+}
+
+/* Main title */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: 2.7rem;
+  font-weight: 500;
+  color: var(--clr-ink);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin: 0;
+  animation: heroContentReveal 0.8s 0.2s ease both;
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--clr-forest);
+}
+
+/* Search pill */
+.hero__search {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  animation: heroContentReveal 0.8s 0.35s ease both;
+}
+
+/* "Ver todos" link */
+.hero__see-all {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--clr-mist);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
+  letter-spacing: 0.04em;
+  transition:
+    color 0.2s ease,
+    gap 0.2s ease;
+  animation: heroContentReveal 0.8s 0.45s ease both;
+}
 
-  > p {
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    padding: 0.3rem 0.4rem;
-    border-radius: 0.2rem;
-    border: 1px solid rgba(43, 41, 34, 0.21);
-    background-color: var(--modal-background);
-    cursor: pointer;
+.hero__see-all::after {
+  content: "→";
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.hero__see-all:hover {
+  color: var(--clr-forest);
+}
+
+.hero__see-all:hover::after {
+  transform: translateX(3px);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media screen and (max-width: 900px) {
+  .hero {
+    min-height: 30rem;
+  }
+
+  .hero__title {
+    font-size: 3.2rem;
+  }
+
+  .hero__content {
+    padding: 4rem 2rem;
+  }
+
+  .hero::after {
+    width: 20rem;
+    height: 20rem;
+    top: -4rem;
+    right: -4rem;
   }
 }
 
-@media screen and (max-width: 1400px) {
-  .presentation {
-    width: 75rem;
+@media screen and (max-width: 600px) {
+  .hero {
+    min-height: 26rem;
+  }
+
+  .hero__title {
+    font-size: 2.4rem;
+  }
+
+  .hero__content {
+    gap: 1.1rem;
+    padding: 3rem 1.5rem;
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .presentation {
-    width: 65rem;
-  }
-
-  .content > h1 {
-    font-size: 1.2rem;
-  }
-}
-
-@media screen and (max-width: 1050px) {
-  .presentation {
-    width: 57rem;
-  }
-
-  .background-image {
-    min-height: 18rem;
-  }
-}
-
-@media screen and (max-width: 910px) {
-  .presentation {
-    width: 100%;
-  }
-
-  .background-image {
-    min-height: 18rem;
-  }
-}
-
-@media screen and (max-width: 670px) {
-  .background-image {
-    min-height: 12rem;
-  }
-
-  .presentation .content {
-    width: 16.75rem;
-  }
-
-  .content > .professional-items {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .content > h1 {
-    font-size: 1rem;
-  }
-
-  .content > p {
-    font-size: 0.72rem;
+@media screen and (max-width: 400px) {
+  .hero__title {
+    font-size: 2rem;
   }
 }

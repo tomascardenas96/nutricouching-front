@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifyService(
   selectedService,
   handleModifyServiceModal,
   setServices
 ) {
-  const authToken = localStorage.getItem("authToken");
 
   const [modifyServiceInput, setModifyServiceInput] = useState(selectedService);
   const [fileModifyService, setFileModifyService] = useState(null);
@@ -28,23 +27,11 @@ function useModifyService(
         formData.append("file", fileModifyService);
       }
 
-      const response = await fetch(
-        `${HOST}/service/update/${selectedService.serviceId}`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: formData,
-        }
+      const { data } = await apiClient.patch(
+        `/service/update/${selectedService.serviceId}`,
+        formData
       );
-
-      if (!response.ok) {
-        const responseError = await response.json();
-        throw new Error(responseError.message);
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(modifyService(), {

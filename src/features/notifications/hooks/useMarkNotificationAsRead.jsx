@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useMarkNotificationAsRead(notifications) {
-  const authToken = localStorage.getItem("authToken");
-
   const [markAsReadError, setMarkAsReadError] = useState(null);
 
   useEffect(() => {
@@ -14,20 +12,7 @@ function useMarkNotificationAsRead(notifications) {
 
     const markNotificationAsRead = async () => {
       try {
-        const response = await fetch(`${HOST}/notification`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: JSON.stringify(notificationsId),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.message);
-        }
+        await apiClient.patch("/notification", notificationsId);
       } catch (error) {
         setMarkAsReadError(error);
       }

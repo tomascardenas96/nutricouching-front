@@ -20,7 +20,6 @@ function ResourceCard({
   handlePurchaseResource,
   loadingResourceId,
   user,
-  handleLoginModal,
   setSelectedService,
   handleOpenSmartPlanModal,
   paymentLoading,
@@ -35,7 +34,6 @@ function ResourceCard({
     if (user) {
       handlePurchaseResource(id);
     } else {
-      handleLoginModal();
       setSelectedService(null);
       handleOpenSmartPlanModal();
       toast.error("Inicia sesión para comprar un resource");

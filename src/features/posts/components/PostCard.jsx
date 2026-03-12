@@ -1,10 +1,9 @@
+import { memo, useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { IoIosHeart, IoIosHeartEmpty, IoMdClose } from "react-icons/io";
+import { MdDeleteOutline } from "react-icons/md";
 import { publishedAgo } from "../../../lib/date";
 import "./PostCard.css";
-import { useState } from "react";
-import { MdDelete } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
 import useHandlePostsModals from "../hooks/useHandlePostsModals";
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../common/components/ConfirmationModal";
@@ -123,4 +122,4 @@ function PostCard({
   );
 }
 
-export default PostCard;
+export default memo(PostCard);

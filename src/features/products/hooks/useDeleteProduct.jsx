@@ -1,10 +1,8 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import { useState } from "react";
 
 function useDeleteProduct(setProducts) {
-  const authToken = localStorage.getItem("authToken");
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -20,23 +18,8 @@ function useDeleteProduct(setProducts) {
 
   const deleteProduct = async () => {
     const deleteProductPromise = async () => {
-      const response = await fetch(
-        `${HOST}/product/delete/${selectedProductId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Error deleting product"); 
-      }
-
-      return await response.json();
+      const { data } = await apiClient.delete(`/product/delete/${selectedProductId}`);
+      return data;
     };
 
     toast.promise(deleteProductPromise(), {

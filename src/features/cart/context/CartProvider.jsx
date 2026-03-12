@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
-import { HOST } from "../../../api/data";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import apiClient from "../../auth/api/apiClient";
+import { useAuth } from "../../auth/hooks/useAuth";
 import useAddElementsToCartWhenLogin from "../hooks/useAddElementsToCartWhenLogin";
 import useGetElementsByCartId from "../hooks/useGetElementsByCartId";
-import { CartContext } from "./CartContext";
+import { CartActionsContext, CartStateContext } from "./CartContext";
 
 function CartProvider({ children }) {
-  // Carrito del usuario activo
   const [activeCart, setActiveCart] = useState(null);
   const [activeCartError, setActiveCartError] = useState(null);
   const [activeCartLoading, setActiveCartLoading] = useState(true);
@@ -14,81 +13,65 @@ function CartProvider({ children }) {
   const [productsInCart, setProductsInCart] = useState([]);
   const [viandsInCart, setViandsInCart] = useState([]);
 
-  // Referencia para evitar múltiples ejecuciones
   const hasSyncedCart = useRef(false);
 
-  // Usuario activo
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
-  // Custom hook para obtener todos los elementos guardados en el carrito activo (DB)
-  const {
-    getElementsByCartError,
-    getElementsByCartLoading,
-    getElementsByActiveCart,
-  } = useGetElementsByCartId(setElementsInCart);
-
-  // Custom hook para agregar los productos del local storage a los ya existentes dentro del carrito activo
-  const { addElementsError, addElementsToCartWhenLogin } =
+  const { getElementsByActiveCart } = useGetElementsByCartId(setElementsInCart);
+  const { addElementsToCartWhenLogin } =
     useAddElementsToCartWhenLogin(setElementsInCart);
 
-  // Metodo para obtener el carrito activo
-  const handleGetActiveCart = async (userId) => {
+  const handleGetActiveCart = useCallback(async () => {
     try {
-      const response = await fetch(`${HOST}/cart/active/${userId}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
+      const { data } = await apiClient.get("/cart/active");
       setActiveCart(data);
     } catch (error) {
       setActiveCartError(error);
     } finally {
       setActiveCartLoading(false);
     }
-  };
+  }, []);
 
-  // Cuando el componente se monta y tenemos ya un usuario activo, obtenemos su carrito
   useEffect(() => {
-    if (!user) return;
-
-    // Obtenemos el carrito activo
-    handleGetActiveCart(user.userId);
-  }, [user]);
+    if (!user?.isEmailConfirmed) return;
+    handleGetActiveCart();
+  }, [user, handleGetActiveCart]);
 
   useEffect(() => {
     if (!activeCart) return;
     getElementsByActiveCart(activeCart);
 
-    // Sincronizamos el carrito activo con el local storage
     if (!hasSyncedCart.current) {
       addElementsToCartWhenLogin(activeCart);
-      hasSyncedCart.current = true; // Marca como ejecutado
+      hasSyncedCart.current = true;
     }
   }, [user, activeCart]);
 
+  // State context value — recreated only when data changes
+  const stateValue = useMemo(
+    () => ({
+      elementsInCart,
+      productsInCart,
+      viandsInCart,
+      activeCart,
+      activeCartError,
+      activeCartLoading,
+    }),
+    [elementsInCart, productsInCart, viandsInCart, activeCart, activeCartError, activeCartLoading]
+  );
+
+  // Actions context value — stable references, never triggers re-renders
+  const actionsValue = useMemo(
+    () => ({ setElementsInCart, setProductsInCart, setViandsInCart, setActiveCart, hasSyncedCart }),
+    [] // setState functions and refs are stable
+  );
+
   return (
-    <CartContext.Provider
-      value={{
-        elementsInCart,
-        setElementsInCart,
-        productsInCart,
-        viandsInCart,
-        setProductsInCart,
-        setViandsInCart,
-        activeCart,
-        activeCartError,
-        activeCartLoading,
-        setActiveCart,
-        hasSyncedCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
+    <CartActionsContext.Provider value={actionsValue}>
+      <CartStateContext.Provider value={stateValue}>
+        {children}
+      </CartStateContext.Provider>
+    </CartActionsContext.Provider>
   );
 }
 

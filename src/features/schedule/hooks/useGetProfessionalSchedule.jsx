@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetProfessionalSchedule(professionalId) {
-  const authToken = localStorage.getItem("authToken");
-
   const [selectedTime, setSelectedTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [professionalSchedule, setProfessionalSchedule] = useState([]);
@@ -26,22 +24,9 @@ function useGetProfessionalSchedule(professionalId) {
 
           const formattedDate = `${year}-${month}-${day}`;
 
-          const response = await fetch(
-            `${HOST}/availability?professional=${professionalId}&date=${formattedDate}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${authToken}`,
-              },
-            }
+          const { data } = await apiClient.get(
+            `/availability?professional=${professionalId}&date=${formattedDate}`
           );
-
-          if (!response.ok) {
-            throw new Error();
-          }
-
-          const data = await response.json();
 
           setProfessionalSchedule(data);
         }

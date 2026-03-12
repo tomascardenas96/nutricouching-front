@@ -1,41 +1,91 @@
+/* =====================================================
+   FAQ CARD — ACCORDION
+   =====================================================
+   Uses CSS counter for auto-numbered questions.
+   counter-reset is applied on .questions-body in Faq.css
+   ===================================================== */
+
 .faq-card {
   display: flex;
-  width: 35rem;
-  cursor: pointer;
   flex-direction: column;
-
-  > .question-container {
-    width: 100%;
-    height: 2.3rem;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    justify-content: space-between;
-    padding: 0 0.5rem;
-    border-radius: 0.2rem;
-    transition: all 0.3s ease;
-  }
-
-  > .question-container:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-  }
-
-  > .answer-container {
-    font-size: 0.75rem;
-    padding: 0 0.5rem;
-    font-weight: 300;
-    min-height: 2.5rem;
-    padding-top: 0.5rem;
-    animation: show-in-out 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 1px solid var(--clr-border);
+  counter-increment: faq-counter;
 }
 
-@keyframes show-in-out {
+.faq-card:first-child {
+  border-top: 1px solid var(--clr-border);
+}
+
+/* Question row */
+.faq-card > .question-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 0;
+  transition: color 0.15s ease;
+}
+
+/* Question number + text */
+.faq-card > .question-container > p {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--clr-ink);
+  line-height: 1.4;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  transition: color 0.15s ease;
+  flex: 1;
+}
+
+/* Auto-number via counter */
+.faq-card > .question-container > p::before {
+  content: counter(faq-counter, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-forest);
+  opacity: 0.7;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.faq-card:hover > .question-container > p {
+  color: var(--clr-forest);
+}
+
+/* Plus/minus icon */
+.faq-card > .question-container .icon {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  color: var(--clr-forest);
+  transition: transform 0.2s ease, opacity 0.15s ease;
+  opacity: 0.7;
+}
+
+.faq-card:hover > .question-container .icon {
+  opacity: 1;
+}
+
+/* Answer */
+.faq-card > .answer-container {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--clr-mist);
+  line-height: 1.75;
+  padding: 0 0 1.1rem 1.65rem;
+  animation: faqReveal 0.25s ease-out both;
+}
+
+@keyframes faqReveal {
   from {
     opacity: 0;
-    transform: translateY(-1.5rem);
+    transform: translateY(-0.4rem);
   }
   to {
     opacity: 1;
@@ -43,54 +93,17 @@
   }
 }
 
-@media screen and (max-width: 1050px) {
-  .faq-card {
-    width: 31rem;
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 
-    > .question-container {
-      font-size: 0.7rem;
-    }
+@media screen and (max-width: 570px) {
+  .faq-card > .question-container > p {
+    font-size: 0.79rem;
   }
-}
 
-@media screen and (max-width: 670px) {
-  .faq-card {
-    width: 26rem;
-
-    > .question-container {
-      font-size: 0.7rem;
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .faq-card {
-    width: 22rem;
-
-    & .icon {
-      font-size: 0.45rem;
-    }
-
-    > .answer-container {
-      font-size: 0.65rem;
-    }
-  }
-}
-
-@media screen and (max-width: 390px) {
-  .faq-card {
-    width: 19rem;
-
-    > .question-container {
-      font-size: 0.6rem;
-    }
-
-    & .icon {
-      font-size: 0.45rem;
-    }
-
-    > .answer-container {
-      font-size: 0.65rem;
-    }
+  .faq-card > .answer-container {
+    font-size: 0.75rem;
+    padding-left: 1.3rem;
   }
 }

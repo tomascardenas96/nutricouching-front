@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import { toast } from "sonner";
 
 function useCreateProduct(setProducts, handleAddProductModal) {
-  const authToken = localStorage.getItem("authToken");
-
   const [createProductInput, setCreateProductInput] = useState({
     name: "",
     description: "",
@@ -29,18 +27,8 @@ function useCreateProduct(setProducts, handleAddProductModal) {
         formData.append("file", file);
       }
 
-      const response = await fetch(`${HOST}/product`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${authToken}` },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Error creating product");
-      }
-
-      return await response.json();
+      const { data } = await apiClient.post("/product", formData);
+      return data;
     };
 
     toast.promise(createProduct(), {

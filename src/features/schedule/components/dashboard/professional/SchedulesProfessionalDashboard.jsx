@@ -1,18 +1,18 @@
 import { createPortal } from "react-dom";
+import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import { getSpanishDay } from "../../../../../lib/date";
-import { useAuthUser } from "../../../../auth/hooks/useAuthUser";
+import { useAuth } from "../../../../auth/hooks/useAuth";
 import useGetAvailabilitiesByProfessional from "../../../../schedule/hooks/useGetAvailabilitiesByProfessional";
 import useAvailabilityModals from "../../../hooks/useAvailabilityModals";
+import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
 import useSelectAvailability from "../../../hooks/useSelectAvailability";
 import { orderSchedules } from "../../../lib/scheduleLibrary";
 import "./SchedulesProfessionalDashboard.css";
 import AddScheduleModal from "./modals/AddScheduleModal";
-import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
-import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
-import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function SchedulesProfessionalDashboard() {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const professionalId = user?.professional?.professionalId;
 
   const { selectedAvailability, setSelectedAvailability } =

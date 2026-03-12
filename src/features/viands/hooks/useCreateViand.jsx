@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useCreateViand(setViands, handleAddViandModal) {
-  const authToken = localStorage.getItem("authToken");
-
   const [createViandInput, setCreateViandInput] = useState({
     name: "",
     description: "",
@@ -64,17 +62,8 @@ function useCreateViand(setViands, handleAddViandModal) {
       );
       if (fileCreateViand) formData.append("file", fileCreateViand);
 
-      const res = await fetch(`${HOST}/viand/create`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${authToken}` },
-        body: formData,
-      });
-
-      if (!res.ok) {
-        throw new Error();
-      }
-
-      return await res.json();
+      const { data } = await apiClient.post("/viand/create", formData);
+      return data;
     };
 
     toast.promise(createViand(), {

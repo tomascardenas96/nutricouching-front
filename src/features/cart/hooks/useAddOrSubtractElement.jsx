@@ -1,29 +1,14 @@
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useAddOrSubtractElement(elementsInCart, setElementsInCart) {
-  const authToken = localStorage.getItem("authToken");
-
   const handleAddOrSubtractElement = async (product, cartId, action) => {
     try {
-      const response = await fetch(
-        `${HOST}/cart-item/add-subtract/${cartId}/${
+      const { data } = await apiClient.patch(
+        `/cart-item/add-subtract/${cartId}/${
           product.productId ? product.productId : product.viandId
         }`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: JSON.stringify({ action }),
-        }
+        { action }
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
 
       setElementsInCart((prev) => {
         return prev.map((item) => {

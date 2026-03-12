@@ -1,105 +1,109 @@
+/* =====================================================
+   QUOTE CARD
+   ===================================================== */
+
 .quote-card {
-  background-color: white;
-  height: 16rem;
-  width: 100%;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: 0.75rem;
+  border-left: 3px solid var(--clr-amber);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.8rem 1.6rem 1.6rem;
   position: relative;
-  border-radius: 1rem;
-  box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.05);
-  display: flex;
+  overflow: hidden;
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-.quote-card .quote-icon {
+.quote-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+/* Oversized decorative quotation mark in background */
+.quote-card::before {
+  content: "\201C";
   position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  top: -2.5rem;
-
-  > div {
-    background-color: white;
-    width: 5rem;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.05);
-  }
+  top: -0.5rem;
+  right: 1rem;
+  font-family: var(--font-display);
+  font-size: 7rem;
+  color: var(--clr-forest);
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
 
+/* Quote icon */
+.quote-card .quote-icon {
+  display: flex;
+  align-items: center;
+}
+
+.quote-card .quote-icon > div {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(212, 160, 23, 0.1);
+  font-size: 0.95rem;
+}
+
+/* Body */
 .quote-card .body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 0 1.5rem;
-
-  > p {
-    font-size: 0.75rem;
-    height: 4.5rem;
-    line-height: 1.2rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* Limita a 3 líneas */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 1rem;
-  }
-
-  > .name {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    > h1 {
-      font-size: 1rem;
-      font-weight: 500;
-    }
-  }
+  flex: 1;
+  gap: 1.1rem;
 }
 
+.quote-card .body > p {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--clr-mist);
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  font-style: italic;
+}
+
+.quote-card .body .name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.quote-card .body .name > h1 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-ink);
+  font-style: italic;
+}
+
+/* Stars */
 .quote-card .body .stars-icon-list {
   display: flex;
-  justify-content: center;
-  gap: 0.2rem;
-  font-size: 1.2rem;
-  color: #f4cc3a;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+  color: var(--clr-amber);
 }
 
-@media screen and (max-width: 1200px) {
-  .quote-card {
-    height: 13rem;
-  }
-
-  .quote-card .quote-icon {
-    > div {
-      width: 4rem;
-      height: 4rem;
-      font-size: 1.3rem;
-    }
-  }
-
-  .quote-card .body {
-    gap: 0;
-    > p {
-      font-size: 0.65rem;
-      line-height: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    > .name {
-      > h1 {
-        font-size: 0.9rem;
-      }
-    }
-  }
-}
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 
 @media screen and (max-width: 970px) {
   .quote-card {
-    height: 16rem;
-    width: 16rem;
-    box-shadow: none;
+    min-width: 16rem;
+    max-width: 20rem;
   }
 }

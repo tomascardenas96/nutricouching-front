@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { PostContext } from "../context/PostContext";
 import "./PostsList.css";
 import PostCard from "./PostCard";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
 import PostsListSkeleton from "./loaders/PostsListSkeleton";
 import NetworkError from "../../../common/components/NetworkError";
 
 function PostsList({ profilePicture, name }) {
   const { posts, setPosts, postsError, arePostsLoading } =
     useContext(PostContext);
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   return (
     <div className={`post-list_container ${!user && "post-list_no-user"}`}>

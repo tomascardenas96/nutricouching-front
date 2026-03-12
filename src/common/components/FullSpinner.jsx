@@ -1,12 +1,9 @@
 import "./FullSpinner.css";
 
-function FullSpinner() {
+export default function FullSpinner() {
   return (
-    <div className="full-spinner-container">
-      <span className="loader"></span>
-      <p>Cargando...</p>
+    <div className="full-spinner">
+      <div className="spinner"></div>
     </div>
   );
 }
-
-export default FullSpinner;

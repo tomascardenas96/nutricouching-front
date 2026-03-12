@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetUsersByEmail() {
   const [emailInput, setEmailInput] = useState("");
@@ -9,19 +9,7 @@ function useGetUsersByEmail() {
 
   const handleGetUsersByEmail = async () => {
     try {
-      const response = await fetch(`${HOST}/user/filter?email=${emailInput}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error(data);
-        throw new Error("Error getting users by email");
-      }
-
+      const { data } = await apiClient.get(`/user/filter?email=${emailInput}`);
       setFoundUsers(data);
     } catch (error) {
       setFoundUsersError(true);

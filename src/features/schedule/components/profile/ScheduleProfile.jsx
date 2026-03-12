@@ -1,20 +1,19 @@
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { FaRegClock } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import NetworkError from "../../../../common/components/NetworkError";
+import { useAuth } from "../../../auth/hooks/useAuth";
+import GetBooking from "../../../bookings/components/profile/GetBooking";
 import useGetAvailabilitiesByProfessional from "../../hooks/useGetAvailabilitiesByProfessional";
+import WeekDaysSkeleton from "../loader/WeekDaysSkeleton";
 import ScheduleCard from "./ScheduleCard";
 import "./ScheduleProfile.css";
-import { createPortal } from "react-dom";
-import GetBooking from "../../../bookings/components/profile/GetBooking";
-import { useState } from "react";
-import { useAuthUser } from "../../../auth/hooks/useAuthUser";
-import { useLoginModal } from "../../../auth/hooks/useLoginModal";
-import WeekDaysSkeleton from "../loader/WeekDaysSkeleton";
-import NetworkError from "../../../../common/components/NetworkError";
 
 function ScheduleProfile({ professionalId, professionalName }) {
-  const { user } = useAuthUser();
-  const { handleLoginModal } = useLoginModal();
+  const { user } = useAuth();
+  // const { handleLoginModal } = useLoginModal();
   const {
     availabilities,
     availabilitiesLoading,
@@ -63,7 +62,7 @@ function ScheduleProfile({ professionalId, professionalName }) {
           <button
             onClick={() => {
               if (!user) {
-                handleLoginModal();
+                // handleLoginModal();
               } else {
                 setIsGetBookingModalOpen(true);
               }

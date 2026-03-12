@@ -1,11 +1,11 @@
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
 import PostProvider from "../context/PostProvider";
 import CreatePost from "./CreatePost";
 import PostsList from "./PostsList";
 import "./PostsSection.css";
 
 function PostsSection({ profileId, profilePicture, name }) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   return (
     <PostProvider profileId={profileId}>

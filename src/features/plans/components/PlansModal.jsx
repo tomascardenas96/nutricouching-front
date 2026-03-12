@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { IoMdClose } from "react-icons/io";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
-import { useLoginModal } from "../../auth/hooks/useLoginModal";
+import { useAuth } from "../../auth/hooks/useAuth";
 import useGetAllPlans from "../../plans/hooks/useGetAllPlans";
 import useDownloadPlan from "../hooks/useDownloadPlan";
 import usePurchasePlan from "../hooks/usePurchasePlan";
@@ -12,10 +11,9 @@ import "./PlansModal.css";
 import MoreInfoPlan from "./more-info/MoreInfoPlan";
 
 function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const { handleLoginModal } = useLoginModal();
 
   const { plans, setPlans, plansError, plansLoading } = useGetAllPlans(
     setSelectedPlan,
@@ -60,7 +58,6 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   handlePurchasePlan={handlePurchasePlan}
                   paymentLoading={paymentLoading}
                   user={user}
-                  handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
                   loadingPlanId={loadingPlanId}
@@ -95,7 +92,6 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   handlePurchasePlan={handlePurchasePlan}
                   paymentLoading={paymentLoading}
                   user={user}
-                  handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
                   loadingPlanId={loadingPlanId}
@@ -132,7 +128,6 @@ function PlansModal({ handleOpenSmartPlanModal, setSelectedService }) {
                   handlePurchasePlan={handlePurchasePlan}
                   paymentLoading={paymentLoading}
                   user={user}
-                  handleLoginModal={handleLoginModal}
                   setSelectedService={setSelectedService}
                   handleOpenSmartPlanModal={handleOpenSmartPlanModal}
                   loadingPlanId={loadingPlanId}

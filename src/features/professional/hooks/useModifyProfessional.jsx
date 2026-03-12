@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifyProfessional(
   selectedProfessional,
@@ -23,26 +23,13 @@ function useModifyProfessional(
 
   const handleSubmitModifyProfessional = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
 
     const submit = async () => {
-      const response = await fetch(
-        `${HOST}/professional/update/${selectedProfessional.professionalId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(modifyProfessionalInputs),
-        }
+      const { data } = await apiClient.patch(
+        `/professional/update/${selectedProfessional.professionalId}`,
+        modifyProfessionalInputs
       );
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(submit(), {

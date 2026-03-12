@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifyResource(
   selectedResource,
@@ -31,7 +31,6 @@ function useModifyResource(
 
   const handleModifyResource = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
 
     const formData = new FormData();
     if (modifyResourceInput.title)
@@ -47,22 +46,12 @@ function useModifyResource(
     if (image) formData.append("file", image);
 
     const modifyResource = async () => {
-      const response = await fetch(
-        `${HOST}/resource/${selectedResource.resourceId}`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
+      const { data } = await apiClient.patch(
+        `/resource/${selectedResource.resourceId}`,
+        formData
       );
 
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(modifyResource(), {

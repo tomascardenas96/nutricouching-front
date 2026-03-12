@@ -1,57 +1,53 @@
-import useGetProfessionals from "../../professional/hooks/useGetProfessionals";
-import LoaderSpinner from "../../../common/components/LoaderSpinner";
-import NetworkError from "../../../common/components/NetworkError";
+import { TbCircleCheckFilled } from "react-icons/tb";
+import { Link } from "react-router-dom";
 import "./About.css";
-import AboutCard from "./AboutCard";
+
+const FEATURES = [
+  "Enfoque integral y actualizado",
+  "Acompañamiento profesional continuo",
+  "Guías y recursos complementarios",
+  "Evaluación y seguimiento periódico",
+];
 
 function About() {
-  const { professionals, professionalsLoading, professionalsError } =
-    useGetProfessionals();
-
   return (
-    <div className="about">
-      <div className="about-header">
-        <h1>Nuestro equipo de profesionales... </h1>
-      </div>
-
-      <div className="about-body">
-        <div className="cards-container">
-          {!professionalsError ? (
-            !professionalsLoading ? (
-              professionals?.map((professional) => (
-                <AboutCard
-                  key={`professional-${professional.professionalId}`}
-                  image={professional.image}
-                  name={professional.fullname}
-                  role={professional.specialty}
-                />
-              ))
-            ) : (
-              [...Array(4)].map((_, index) => (
-                <div
-                  key={`professional-loader_${index}`}
-                  className="about-card_loader"
-                >
-                  <LoaderSpinner />
-                </div>
-              ))
-            )
-          ) : (
-            <div className="network-error_about">
-              <NetworkError message="Ocurrio un error al cargar el contenido" />
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="brand-footer">
+    <section className="about" id="about">
+      <div className="about__image">
         <img
-          src="/src/public/assets/nutricouching-logo.jpg"
-          alt="nutricoaching logo"
+          src="/assets/about-img.jpg"
+          alt="Profesional de Cohesiva Salud"
+          onError={(e) => {
+            e.currentTarget.src = "/assets/no-picture.png";
+          }}
         />
-        <p>Nutri-coaching Integral ©</p>
       </div>
-    </div>
+
+      <div className="about__content">
+        <span className="about__eyebrow">¿A qué nos dedicamos?</span>
+
+        <h2 className="about__title">
+          Cohesiva Salud es un Centro Integral de Salud Online
+        </h2>
+
+        <p className="about__description">
+          Conectamos a usuarios con profesionales de la salud alimentaria y
+          ofrecemos turnos online, planes personalizados y más!
+        </p>
+
+        <ul className="about__features">
+          {FEATURES.map((f) => (
+            <li key={f}>
+              <TbCircleCheckFilled className="about__check" />
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        <Link to="/filter/professionals" className="about__cta">
+          Ver más
+        </Link>
+      </div>
+    </section>
   );
 }
 

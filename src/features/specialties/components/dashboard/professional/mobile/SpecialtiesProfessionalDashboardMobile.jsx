@@ -1,17 +1,17 @@
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
-import { useAuthUser } from "../../../../../auth/hooks/useAuthUser";
 import useGetAllSpecialtiesByProfessional from "../../../../hooks/useGetAllSpecialtiesByProfessional";
 import useHandleSpecialtyModals from "../../../../hooks/useHandleSpecialtyModals";
 import useHandleUnassignSpecialty from "../../../../hooks/useHandleUnassignSpecialty";
 import useSelectSpecialty from "../../../../hooks/useSelectSpecialty";
+import AssignSpecialtyModal from "../modals/AssignSpecialtyModal";
 import SpecialtiesProfessionalCardDashboardMobile from "./SpecialtiesProfessionalCardDashboardMobile";
 import "./SpecialtiesProfessionalDashboardMobile.css";
-import AssignSpecialtyModal from "../modals/AssignSpecialtyModal";
+import { useAuth } from "../../../../../auth/hooks/useAuth";
 
 function SpecialtiesProfessionalDashboardMobile() {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
     useGetAllSpecialtiesByProfessional(user?.professional?.professionalId);
 

@@ -1,9 +1,7 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useAddOneElementToCartWhenLoggedIn() {
-  const authToken = localStorage.getItem("authToken");
-
   const handleAddOneElementToCart = (
     element,
     activeCart,
@@ -42,23 +40,10 @@ function useAddOneElementToCartWhenLoggedIn() {
     setElementsInCart
   ) => {
     try {
-      const response = await fetch(
-        `${HOST}/cart-item/add-element/${activeCart.cartId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: JSON.stringify({ productId }),
-        }
+      const { data } = await apiClient.post(
+        `/cart-item/add-element/${activeCart.cartId}`,
+        { productId }
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
 
       // Si el producto ya está en el carrito, se actualiza la cantidad
       setElementsInCart((prev) => {
@@ -86,23 +71,10 @@ function useAddOneElementToCartWhenLoggedIn() {
     setElementsInCart
   ) => {
     try {
-      const response = await fetch(
-        `${HOST}/cart-item/add-element/${activeCart.cartId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: JSON.stringify({ viandId }),
-        }
+      const { data } = await apiClient.post(
+        `/cart-item/add-element/${activeCart.cartId}`,
+        { viandId }
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
 
       // Si el producto ya está en el carrito, se actualiza la cantidad
       setElementsInCart((prev) => {

@@ -1,12 +1,11 @@
-import { GoPlusCircle } from "react-icons/go";
 import { IoReturnUpBack, IoSearchOutline } from "react-icons/io5";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../auth/hooks/useAuth";
 import { useSelectMenuOption } from "../hooks/useSelectMenuOption";
 import "./DashboardContentLayout.css";
-import { Link } from "react-router-dom";
 
 function DashboardContentLayout({ children }) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const { selectedOption } = useSelectMenuOption();
 
   return (

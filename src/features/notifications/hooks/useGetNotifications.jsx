@@ -1,56 +1,34 @@
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
-import { WEBSOCKET_HOST, HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { useSSEEvent } from "../../../services/useSSEEvent";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetNotifications() {
   const [notifications, setNotifications] = useState([]);
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
-  // Obtenemos las notificaciones del usuario activo
   useEffect(() => {
-    if (user) {
-      const getNotifications = async () => {
-        const response = await fetch(`${HOST}/notification/${user.userId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        });
-        const data = await response.json();
+    if (!user?.isEmailConfirmed) return;
 
-        if (!response.ok) {
-          throw new Error(data.message);
-        }
-
+    const getNotifications = async () => {
+      try {
+        const { data } = await apiClient.get("/notification");
         setNotifications(data);
-      };
-
-      getNotifications();
-    }
-  }, [user]);
-
-  // Obtenemos notificaciones en tiempo real
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-
-    const socket = io(`${WEBSOCKET_HOST}`, {
-      query: { userId: user.userId },
-    });
-
-    socket.on("deletedBookingNotify", (data) => {
-      setNotifications((prev) => [data, ...prev]);
-    });
-
-    return () => {
-      socket.off("deletedBookingNotify");
-      socket.off("userNotifications");
-      socket.disconnect();
+      } catch {
+        // silently ignore
+      }
     };
+
+    getNotifications();
   }, [user]);
+
+  useSSEEvent("deletedBookingNotify", (data) => {
+    setNotifications((prev) => [data, ...prev]);
+  });
+
+  useSSEEvent("reservedShift", (data) => {
+    setNotifications((prev) => [data, ...prev]);
+  });
 
   return { notifications, setNotifications };
 }

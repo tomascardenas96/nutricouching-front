@@ -1,77 +1,131 @@
+/* =====================================================
+   SEARCH INPUT — pill shape
+   ===================================================== */
+
+/* The form (.hero__search) already provides position: relative */
+
 .filter-professionals_input {
-  width: 30rem;
-  height: 2.3rem;
-  border-radius: 0.5rem;
+  width: 100%;
+  height: 2.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--clr-border);
   outline: none;
-  border: none;
-  padding-left: 1rem;
+  padding: 0 3.2rem 0 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--clr-ink);
+  background-color: var(--clr-white);
+  box-shadow: 0 2px 12px rgba(30, 41, 32, 0.09);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.filter-professionals_input::placeholder {
+  color: var(--clr-mist);
+  opacity: 0.8;
+}
+
+.filter-professionals_input:focus {
+  border-color: var(--clr-forest);
+  box-shadow: 0 2px 16px rgba(61, 80, 69, 0.15);
+}
+
+/* Search icon button — circular, positioned inside the pill on the right */
 .filter-professionals_input ~ .search-icon {
   position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 2.35rem;
-  background-color: #153f6c;
+  right: 0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: var(--clr-forest);
   display: grid;
-  font-size: 1.1rem;
   place-content: center;
-  border-radius: 0 0.5rem 0.5rem 0;
-  color: white;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  color: var(--clr-white);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
 }
+
+.filter-professionals_input ~ .search-icon:hover {
+  background-color: var(--clr-forest-dark);
+}
+
+/* =====================================================
+   DROPDOWN RESULTS
+   ===================================================== */
 
 .filter-professionals_input ~ .professionals-filter_results-modal {
   position: absolute;
   width: 100%;
   min-height: 3.5rem;
-  background-color: var(--modal-background);
-  border-radius: var(--modal-radius);
-  top: calc(100% + 0.2rem);
-  box-shadow: var(--modal-shadow);
-  padding-top: 0.5rem;
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  top: calc(100% + 0.4rem);
+  box-shadow: var(--shadow-lg);
+  padding: 0.4rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  z-index: 50;
+  list-style: none;
 
   > .results-modal {
     width: 100%;
-    height: 100%;
+    height: 5rem;
     display: grid;
     place-content: center;
-    height: 5rem;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
+    color: var(--clr-mist);
   }
 }
 
-.professionals-filter_results-modal .see-all a {
-  display: flex;
-  justify-content: center;
-  font-size: 0.8rem;
-  height: 2.5rem;
-  align-items: center;
-  cursor: pointer;
-  gap: 0.5rem;
-  padding-bottom: 0.2rem;
-  color: rgb(64, 64, 64);
-  border-top: 1px solid rgb(230, 230, 230);
+.professionals-filter_results-modal .see-all {
+  border-top: 1px solid var(--clr-border);
+  margin-top: 0.3rem;
 
-  > .arrow {
-    padding-top: 0.1rem;
-    color: rgb(48, 48, 165);
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2.5rem;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--clr-forest);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding-bottom: 0.1rem;
+
+    > .arrow {
+      color: var(--clr-forest);
+      margin-top: 1px;
+    }
+  }
+
+  a:hover {
+    color: var(--clr-amber);
+
+    > .arrow {
+      color: var(--clr-amber);
+    }
   }
 }
 
-@media screen and (max-width: 1050px) {
-  .filter-professionals_input {
-    width: 25rem;
-    height: 2.1rem;
-  }
-}
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 
 @media screen and (max-width: 480px) {
   .filter-professionals_input {
-    width: 18.5rem;
+    height: 2.6rem;
+    font-size: 0.75rem;
+  }
+
+  .filter-professionals_input ~ .search-icon {
+    width: 2rem;
     height: 2rem;
+    font-size: 0.95rem;
   }
 }

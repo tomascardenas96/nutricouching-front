@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import apiClient from "../../auth/api/apiClient";
 
 function useUpdateUserInformation(
   setConfirmChangesModal,
   setIsUpdateUserModalOpen
 ) {
-  const authToken = localStorage.getItem("authToken");
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   const [updateUserInput, setUpdateUserInput] = useState({
     name: "",
@@ -51,25 +50,18 @@ function useUpdateUserInformation(
     }
 
     const updateUserInformationPromise = async () => {
-      const response = await fetch(`${HOST}/auth/update/${user.userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(updateUserInput),
-      });
-
-      const data = await response.json();
-
-      if (data.statusCode === 400) {
-        setCurrentPasswordError("Contraseña incorrecta");
-        throw new Error();
+      try {
+        const { data } = await apiClient.patch(
+          `/auth/update/${user.userId}`,
+          updateUserInput
+        );
+        return data;
+      } catch (error) {
+        if (error.response?.status === 400) {
+          setCurrentPasswordError("Contraseña incorrecta");
+        }
+        throw error;
       }
-
-      if (!response.ok) throw new Error();
-
-      return data;
     };
 
     toast.promise(updateUserInformationPromise(), {

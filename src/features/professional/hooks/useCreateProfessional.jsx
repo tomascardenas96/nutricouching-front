@@ -1,9 +1,7 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useCreateProfessional(specialties, setProfessionals, closeModal) {
-  const authToken = localStorage.getItem("authToken");
-
   const handleSubmitCreateProfessional = async (e, userId, schedules) => {
     e.preventDefault();
     e.stopPropagation();
@@ -39,59 +37,20 @@ function useCreateProfessional(specialties, setProfessionals, closeModal) {
   };
 
   const createSpecialtiesNonExistent = async (specialties) => {
-    const response = await fetch(`${HOST}/specialty/list`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(specialties),
-    });
-    const data = await response.json();
-
-    if (data.error) {
-      console.error(data);
-      throw new Error(data.message);
-    }
-
+    const { data } = await apiClient.post("/specialty/list", specialties);
     return data;
   };
 
   const createSchedule = async (schedules, professionalId) => {
-    const response = await fetch(`${HOST}/availability/${professionalId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(schedules),
-    });
-    const data = await response.json();
-
-    if (data.error) {
-      console.error(data);
-      throw new Error(data.message);
-    }
-
+    const { data } = await apiClient.post(
+      `/availability/${professionalId}`,
+      schedules
+    );
     return data;
   };
 
   const createProfessional = async (professional) => {
-    const response = await fetch(`${HOST}/professional/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(professional),
-    });
-    const data = await response.json();
-
-    if (data.error) {
-      console.error(data);
-      throw new Error(data.message);
-    }
-
+    const { data } = await apiClient.post("/professional/create", professional);
     return data;
   };
 

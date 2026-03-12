@@ -1,49 +1,48 @@
+/* =====================================================
+   QUOTES CONTAINER
+   ===================================================== */
+
 .quotes_container {
   display: flex;
+  justify-content: center;
+  width: 90%;
+  max-width: 62rem;
 }
 
 .quotes_container .list {
-  width: 60rem;
+  width: 100%;
   display: grid;
-  justify-content: space-between;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 3.5rem;
-  margin-top: 3.5rem;
+  gap: 1.6rem;
 }
 
-@media screen and (max-width: 1200px) {
-  .quotes_container .list {
-    width: 55rem;
-  }
-}
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 
 @media screen and (max-width: 1050px) {
   .quotes_container .list {
-    width: 50rem;
-    gap: 1rem;
+    gap: 1.2rem;
   }
 }
 
-@media screen and (max-width: 970px) {
-  .quotes_container .list {
-    width: 33rem;
-    gap: 1rem;
-    justify-content: start;
+@media screen and (max-width: 900px) {
+  .quotes_container {
+    width: 100%;
     overflow-x: auto;
-    margin-top: 0;
-    padding-top: 3rem;
-    padding-bottom: 0.5rem;
-  }
-}
+    padding: 0 1.5rem 0.75rem;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
 
-@media screen and (max-width: 600px) {
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-border) transparent;
+  }
+
   .quotes_container .list {
-    width: 16rem;
-    gap: 1rem;
-    justify-content: start;
-    overflow-x: auto;
-    margin-top: 0;
-    padding-top: 3rem;
-    padding-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    gap: 1.1rem;
   }
 }

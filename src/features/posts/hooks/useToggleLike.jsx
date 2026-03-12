@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import apiClient from "../../auth/api/apiClient";
 
 function useToggleLike(isLiked, likeCount, postId) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const [liked, setLiked] = useState(false);
   const [likeAmount, setLikeAmount] = useState(0);
 
@@ -22,22 +22,12 @@ function useToggleLike(isLiked, likeCount, postId) {
   const toggleLike = async () => {
     if (!user) return;
 
-    const token = localStorage.getItem("authToken");
     const newLiked = !liked;
     setLiked(newLiked);
     setLikeAmount((prev) => prev + (newLiked ? 1 : -1));
 
     try {
-      const response = await fetch(`${HOST}/like/${postId}`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) throw new Error("Ha ocurrido un error");
+      await apiClient.post(`/like/${postId}`);
     } catch (error) {
       setLiked(!newLiked);
       setLikeAmount((prev) => prev + (newLiked ? -1 : 1));

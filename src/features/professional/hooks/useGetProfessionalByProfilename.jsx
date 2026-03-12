@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetProfessionalByProfilename() {
   const [professional, setProfessional] = useState({});
@@ -15,12 +15,7 @@ function useGetProfessionalByProfilename() {
 
   const getProfessionalInformation = async () => {
     try {
-      const response = await fetch(`${HOST}/professional/profilename/${slug}`);
-
-      if (!response.ok) throw new Error();
-
-      const data = await response.json();
-
+      const { data } = await apiClient.get(`/professional/profilename/${slug}`);
       setProfessional(data);
     } catch (error) {
       setProfessionalError(true);

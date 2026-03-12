@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useCreatePost(profileId, setPosts) {
   const fileInputRef = useRef(null);
@@ -25,18 +25,8 @@ function useCreatePost(profileId, setPosts) {
         formData.append("file", postSelectedImage);
       }
 
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`${HOST}/post`, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error();
-
-      return await response.json();
+      const { data } = await apiClient.post("/post", formData);
+      return data;
     }
 
     toast.promise(createPostPromise(), {

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifyViand(selectedViand, handleModifyViandModal, setViands) {
-  const authToken = localStorage.getItem("authToken");
 
   const [modifyViandInput, setModifyViandInput] = useState(selectedViand);
   const [fileModifyViand, setFileModifyViand] = useState(null);
@@ -24,22 +23,10 @@ function useModifyViand(selectedViand, handleModifyViandModal, setViands) {
         formData.append("file", fileModifyViand);
       }
 
-      const response = await fetch(
-        `${HOST}/viand/update/${selectedViand.viandId}`,
-        {
-          method: "PATCH",
-          headers: { Authorization: `Bearer ${authToken}` },
-          body: formData,
-        }
+      const { data } = await apiClient.patch(
+        `/viand/update/${selectedViand.viandId}`,
+        formData
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error(data);
-        throw new Error(data.message);
-      }
-
       return data;
     };
 

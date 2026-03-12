@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifySpecialty(
   selectedSpecialty,
@@ -22,26 +22,14 @@ function useModifySpecialty(
   }, [selectedSpecialty]);
 
   const handleSubmitModifySpecialty = async (e) => {
-    const token = localStorage.getItem("authToken");
     e.preventDefault();
     const submit = async () => {
-      const response = await fetch(
-        `${HOST}/specialty/${selectedSpecialty.specialtyId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(modifySpecialtyInput),
-        }
+      const { data } = await apiClient.patch(
+        `/specialty/${selectedSpecialty.specialtyId}`,
+        modifySpecialtyInput
       );
 
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(submit(), {

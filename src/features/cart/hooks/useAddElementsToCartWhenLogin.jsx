@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useAddElementsToCartWhenLogin(setElementsInCart) {
   const [addElementsError, setAddElementsError] = useState(null);
-  const authToken = localStorage.getItem("authToken");
 
   const addElementsToCartWhenLogin = async (activeCart) => {
     try {
@@ -17,28 +16,10 @@ function useAddElementsToCartWhenLogin(setElementsInCart) {
         return;
       }
 
-      const body = JSON.stringify({
+      const { data } = await apiClient.post(`/cart-item/add/${activeCart.cartId}`, {
         products: parsedProducts.products,
         viands: parsedViands.viands,
       });
-
-      const response = await fetch(
-        `${HOST}/cart-item/add/${activeCart.cartId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body,
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
 
       setElementsInCart((prev) => {
         const mergedMap = new Map();

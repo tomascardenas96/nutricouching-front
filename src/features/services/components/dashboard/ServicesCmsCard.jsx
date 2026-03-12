@@ -1,5 +1,4 @@
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import { HOST } from "../../../../api/data";
 import "./ServicesCmsCard.css";
 
 function ServicesCmsCard({
@@ -18,7 +17,7 @@ function ServicesCmsCard({
       <td className="services-cms_name">
         <div className="service-img">
           <img
-            src={`${HOST}/uploads/services/${service.image}`}
+            src={service.image}
             alt="service-image"
           />
         </div>

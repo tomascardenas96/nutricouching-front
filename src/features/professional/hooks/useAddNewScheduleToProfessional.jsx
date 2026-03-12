@@ -1,14 +1,13 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import apiClient from "../../auth/api/apiClient";
 
 function useAddNewScheduleToProfessional(
   setAvailabilities,
   selectedSchedules,
   onClose
 ) {
-  const { user } = useAuthUser();
-  const authToken = localStorage.getItem("authToken");
+  const { user } = useAuth();
 
   const handleSubmitAddNewSchedule = async (e, schedule) => {
     e.preventDefault();
@@ -18,27 +17,10 @@ function useAddNewScheduleToProfessional(
         throw new Error("Debe seleccionar al menos un horario");
       }
 
-      const response = await fetch(
-        `${HOST}/availability/${user?.professional?.professionalId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: JSON.stringify(schedule),
-        }
+      const { data } = await apiClient.post(
+        `/availability/${user?.professional?.professionalId}`,
+        schedule
       );
-
-      const data = await response.json();
-
-      if (data.statusCode === 400) {
-        throw new Error("El horario no puede ser repetido");
-      }
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
 
       return data;
     };

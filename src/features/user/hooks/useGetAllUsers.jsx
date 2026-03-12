@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetAllUsers() {
-  const authToken = localStorage.getItem("authToken");
-
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
   const [usersError, setUsersError] = useState(null);
@@ -11,20 +9,7 @@ function useGetAllUsers() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await fetch(`${HOST}/user`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        const data = await response.json();
-
-        if (!response.ok) {
-          console.error(data);
-          throw new Error("Error al cargar los usuarios");
-        }
-
+        const { data } = await apiClient.get("/user");
         setUsers(data);
       } catch (error) {
         setUsersError(error);

@@ -1,10 +1,8 @@
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useBookAppointment(onClose, professionalSchedule) {
-  const authToken = localStorage.getItem("authToken");
-
   const handleSubmitBookAppointment = async (
     e,
     date,
@@ -32,20 +30,8 @@ function useBookAppointment(onClose, professionalSchedule) {
         professionalId,
       };
 
-      const response = await fetch(`${HOST}/booking/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(createBooking),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al reservar un turno");
-      }
-
-      return await response.json();
+      const { data } = await apiClient.post("/booking/create", createBooking);
+      return data;
     };
 
     toast.promise(bookAppointment(), {

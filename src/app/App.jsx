@@ -1,24 +1,25 @@
 import "react-day-picker/style.css";
-import LoginProvider from "../features/auth/context/LoginProvider.jsx";
-import UserProvider from "../features/auth/context/UserProvider.jsx";
-import CartProvider from "../features/cart/context/CartProvider.jsx";
+import { HelmetProvider } from "react-helmet-async";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import SessionInitializer from "../features/auth/components/Register/SessionInitializer.jsx";
+import store from "./store";
 import "../styles/App.css";
 import AppRoutes from "./routes.jsx";
-import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter } from "react-router-dom";
+import CartProvider from "../features/cart/context/CartProvider";
 
 function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <UserProvider>
-          <LoginProvider>
-            <CartProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <CartProvider>
+            <SessionInitializer>
               <AppRoutes />
-            </CartProvider>
-          </LoginProvider>
-        </UserProvider>
-      </BrowserRouter>
+            </SessionInitializer>
+          </CartProvider>
+        </BrowserRouter>
+      </Provider>
     </HelmetProvider>
   );
 }

@@ -1,24 +1,12 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useDeleteResource(setResources, selectedResource, closeDeleteModal) {
   const handleDeleteResource = async () => {
-    const token = localStorage.getItem("authToken");
-
     const deleteResource = async () => {
-      const response = await fetch(`${HOST}/resource/${selectedResource}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await apiClient.delete(`/resource/${selectedResource}`);
 
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(deleteResource(), {

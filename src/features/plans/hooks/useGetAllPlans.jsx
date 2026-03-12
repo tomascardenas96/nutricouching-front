@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import { HOST, WEBSOCKET_HOST } from "../../../api/data";
-import { io } from "socket.io-client";
 import { toast } from "sonner";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { useSSEEvent } from "../../../services/useSSEEvent";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetAllPlans(setSelectedPlan, setIsMoreInfoModalOpen) {
   const [plans, setPlans] = useState([]);
   const [plansLoading, setPlansLoading] = useState(true);
   const [plansError, setPlansError] = useState(null);
 
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   useEffect(() => {
     const getPlans = async () => {
       if (user) {
-        const token = localStorage.getItem("authToken");
-        getPlansWhenLoggedIn(token);
+        getPlansWhenLoggedIn();
       } else {
         getPlansWhenLoggedOut();
       }
@@ -24,61 +23,28 @@ function useGetAllPlans(setSelectedPlan, setIsMoreInfoModalOpen) {
     getPlans();
   }, [user]);
 
-  useEffect(() => {
-    if (!user || plans.length === 0) {
-      return;
-    }
-
-    const socket = io(`${WEBSOCKET_HOST}`, {
-      query: { userId: user.userId },
+  useSSEEvent("purchasedPlan", (planId) => {
+    toast.success("El plán ha sido agregado a tu colección");
+    setPlans((prev) => {
+      const justPurchasedPlan = prev.notPurchasedPlans?.find(
+        (plan) => plan.planId === planId
+      );
+      const notPurchasedPlans = prev.notPurchasedPlans?.filter(
+        (plan) => plan.planId !== planId
+      ) ?? [];
+      setSelectedPlan(null);
+      setIsMoreInfoModalOpen(false);
+      return {
+        freePlans: prev.freePlans,
+        purchasedPlans: [...(prev.purchasedPlans ?? []), justPurchasedPlan].filter(Boolean),
+        notPurchasedPlans,
+      };
     });
+  });
 
-    socket.on("purchasedPlan", (planId) => {
-      toast.success("El plán ha sido agregado a tu colección");
-
-      setPlans((prev) => {
-        const justPurchasedPlan = prev.notPurchasedPlans.find(
-          (plan) => plan.planId === planId
-        );
-        prev.purchasedPlans.push(justPurchasedPlan);
-
-        const notPurchasedPlans = prev.notPurchasedPlans.filter(
-          (plan) => plan.planId !== planId
-        );
-
-        setSelectedPlan(null);
-        setIsMoreInfoModalOpen(false);
-
-        return {
-          freePlans: prev.freePlans,
-          purchasedPlans: prev.purchasedPlans,
-          notPurchasedPlans,
-        };
-      });
-    });
-
-    return () => {
-      socket.off("purchasedPlan");
-      socket.disconnect();
-    };
-  }, [user, plans]);
-
-  const getPlansWhenLoggedIn = async (token) => {
+  const getPlansWhenLoggedIn = async () => {
     try {
-      const response = await fetch(`${HOST}/plan`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+      const { data } = await apiClient.get("/plan");
       setPlans(data);
     } catch (error) {
       setPlansError(true);
@@ -89,19 +55,7 @@ function useGetAllPlans(setSelectedPlan, setIsMoreInfoModalOpen) {
 
   const getPlansWhenLoggedOut = async () => {
     try {
-      const response = await fetch(`${HOST}/plan/all`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+      const { data } = await apiClient.get("/plan/all");
       setPlans(data);
     } catch (error) {
       setPlansError(true);

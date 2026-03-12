@@ -3,7 +3,7 @@ import { AiFillSchedule } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import { GrFacebookOption } from "react-icons/gr";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
 import useUpdateProfileModals from "../hooks/useUpdateProfileModals";
 import CoverPhoto from "./CoverPhoto";
 import OptionsModal from "./modals/OptionsModal";
@@ -25,7 +25,7 @@ function ProfilePresentation({
     isUpdateProfileModalOpen,
   } = useUpdateProfileModals();
 
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   const isProfileOwner =
     user?.professional?.professionalId === professional?.professionalId;

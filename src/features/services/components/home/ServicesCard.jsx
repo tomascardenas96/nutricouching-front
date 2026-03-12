@@ -1,52 +1,25 @@
-import { HOST } from "../../../../api/data";
+import { IoChevronDown } from "react-icons/io5";
+import { TbApple, TbBrain, TbDownload } from "react-icons/tb";
 import "./ServicesCard.css";
 
-function ServiceCard({
-  image,
-  color,
-  description,
-  title,
-  handleSelectService,
-  handleOpenServiceModal,
-  isEven,
-  type,
-  handleOpenSmartPlanModal,
-}) {
-  const handleSelectServiceAndOpenModal = () => {
-    handleSelectService();
-    handleOpenSmartPlanModal();
-    // if (type === "plan_download") handleOpenSmartPlanModal();
-    // if (type === "resource_download") handleOpenSmartPlanModal();
-  };
+const SERVICE_ICONS = {
+  plan_download: <TbBrain />,
+  resource_download: <TbDownload />,
+  guide: <TbApple />,
+};
 
+function ServiceCard({ title, description, type, handleSelectServiceAndOpenModal }) {
   return (
-    <div
-      className={`services-card_container ${!isEven && "right-service-cards"}`}
-    >
-      <div
-        className="color-line"
-        style={{ borderTop: `1.5px solid ${color}` }}
-      ></div>
-      <div className="card-img" style={{ gridColumn: !isEven && "2 / 3" }}>
-        <img
-          src={`${HOST}/uploads/services/${image}`}
-          className="service-image"
-          alt="services-picture-nutricouching"
-        />
+    <button className="service-strip__cell" onClick={handleSelectServiceAndOpenModal}>
+      <div className="service-strip__icon">
+        {SERVICE_ICONS[type]}
       </div>
-
-      <div className="card-description">
-        <h1>{title?.toUpperCase()}</h1>
-        <div className="know-more">
-          <div
-            onClick={handleSelectServiceAndOpenModal}
-            style={{ backgroundColor: color }}
-          >
-            <p>Ver más</p>
-          </div>
-        </div>
+      <div className="service-strip__info">
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
-    </div>
+      <IoChevronDown className="service-strip__chevron" />
+    </button>
   );
 }
 

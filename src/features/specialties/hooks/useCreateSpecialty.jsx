@@ -1,10 +1,8 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
 import { useState } from "react";
+import apiClient from "../../auth/api/apiClient";
 
 function useCreateSpecialty(setSpecialties, closeModal) {
-  const authToken = localStorage.getItem("authToken");
-
   const [newSpecialtyInput, setNewSpecialtyInput] = useState({
     name: "",
     categoryId: "",
@@ -13,20 +11,7 @@ function useCreateSpecialty(setSpecialties, closeModal) {
   const handleCreateSpecialty = async (e) => {
     e.preventDefault();
     const createSpecialty = async () => {
-      const response = await fetch(`${HOST}/specialty`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(newSpecialtyInput),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error();
-      }
+      const { data } = await apiClient.post("/specialty", newSpecialtyInput);
 
       return data;
     };

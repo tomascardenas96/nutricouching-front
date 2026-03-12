@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import useCreateOrder from "../hooks/useCreateOrder";
 
 function useCreatePreferenceMP(elementsInCart, activeCart) {
   const [preferenceLoading, setPreferenceLoading] = useState(false);
   const [total, setTotal] = useState(0);
-
-  const authToken = localStorage.getItem("authToken");
 
   const { handleCreateOrder, createOrderError } = useCreateOrder();
 
@@ -27,26 +25,16 @@ function useCreatePreferenceMP(elementsInCart, activeCart) {
   const handleCreatePreference = async (elementsInCart) => {
     setPreferenceLoading(true);
     try {
-      const response = await fetch(`${HOST}/mercadopago/preference`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(elementsInCart),
-      });
-
-      const data = await response.json();
+      const { data } = await apiClient.post("/mercadopago/preference", elementsInCart);
 
       handleCreateOrder(activeCart?.cartId, total);
 
-      if (createOrderError || !response.ok) {
+      if (createOrderError) {
         toast.error("Error al crear una orden de compra");
         return;
       }
 
-      // Abrir Mercado Pago en una nueva pestaña
-      window.open(data.init_point, "_blank");
+      window.location.href = data.init_point;
     } catch (error) {
       console.error(error);
     } finally {

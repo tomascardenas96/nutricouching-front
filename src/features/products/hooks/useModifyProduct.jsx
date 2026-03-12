@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useModifyProduct(
   selectedProduct,
   setProducts,
   handleModifyProductModalClose
 ) {
-  const authToken = localStorage.getItem("authToken");
-
   const [modifyProductInput, setModifyProductInput] = useState(selectedProduct);
   const [fileModifyProduct, setFileModifyProduct] = useState(null);
   const [imagePreviewModifyProduct, setImagePreviewModifyProduct] =
@@ -29,22 +27,11 @@ function useModifyProduct(
         formData.append("file", fileModifyProduct);
       }
 
-      const response = await fetch(
-        `${HOST}/product/update/${selectedProduct.productId}`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-          body: formData,
-        }
+      const { data } = await apiClient.patch(
+        `/product/update/${selectedProduct.productId}`,
+        formData
       );
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(modifyProduct(), {

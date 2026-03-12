@@ -1,24 +1,12 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useDeletePlan(setPlans, selectedPlan, closeDeletePlanModal) {
   const handleDeletePlan = async () => {
-    const token = localStorage.getItem("authToken");
-
     const deletePlan = async () => {
-      const response = await fetch(`${HOST}/plan/${selectedPlan}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await apiClient.delete(`/plan/${selectedPlan}`);
 
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(deletePlan(), {

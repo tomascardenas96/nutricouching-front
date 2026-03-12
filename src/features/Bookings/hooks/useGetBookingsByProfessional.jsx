@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetBookingsByProfessional() {
-  const { user } = useAuthUser();
-  const authToken = localStorage.getItem("authToken");
+  const { user } = useAuth();
   const professionalId = user?.professional?.professionalId;
 
   const [bookings, setBookings] = useState([]);
@@ -15,24 +14,9 @@ function useGetBookingsByProfessional() {
     const getBookings = async () => {
       setLoadingBookings(true);
       try {
-        const response = await fetch(
-          `${HOST}/booking/professional?professionalId=${professionalId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
+        const { data } = await apiClient.get(
+          `/booking/professional?professionalId=${professionalId}`
         );
-
-        const data = await response.json();
-
-        console.log(data)
-
-        if (!response.ok) {
-          throw new Error(data.message || "Failed to fetch bookings");
-        }
 
         setBookings(data);
       } catch (error) {

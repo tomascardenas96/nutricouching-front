@@ -2,6 +2,10 @@ import "./Faq.css";
 import { faq } from "../data/faq";
 import FaqCard from "./FaqCard";
 
+const FAQ_ITEMS = faq.map((f) => (
+  <FaqCard key={f.id} question={f.question} answer={f.answer} />
+));
+
 function Faq() {
   return (
     <div className="faq-container">
@@ -16,9 +20,7 @@ function Faq() {
         </div>
 
         <div className="questions-body">
-          {faq.map((f) => (
-            <FaqCard key={f.id} question={f.question} answer={f.answer} />
-          ))}
+          {FAQ_ITEMS}
         </div>
       </div>
     </div>

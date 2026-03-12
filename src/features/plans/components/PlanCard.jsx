@@ -21,7 +21,6 @@ function PlanCard({
   handlePurchasePlan,
   paymentLoading,
   user,
-  handleLoginModal,
   setSelectedService,
   handleOpenSmartPlanModal,
   loadingPlanId,
@@ -36,7 +35,6 @@ function PlanCard({
     if (user) {
       handlePurchasePlan(id);
     } else {
-      handleLoginModal();
       setSelectedService(null);
       handleOpenSmartPlanModal();
       toast.error("Inicia sesión para comprar un plan");

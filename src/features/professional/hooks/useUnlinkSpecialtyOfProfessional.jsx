@@ -1,29 +1,15 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useUnlinkSpecialtyOfProfessional(setSpecialties) {
-  const authToken = localStorage.getItem("authToken");
-
   const handleUnlinkSpecialtyOfProfessional = async (
     specialtyId,
     professionalId
   ) => {
     const unlinkSpecialtyPromise = async () => {
-      const response = await fetch(
-        `${HOST}/specialty/unlink/${specialtyId}/professional/${professionalId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
+      const { data } = await apiClient.patch(
+        `/specialty/unlink/${specialtyId}/professional/${professionalId}`
       );
-
-      const data = await response.json();
-
-      if (!response.ok) throw new Error();
-
       return data;
     };
 

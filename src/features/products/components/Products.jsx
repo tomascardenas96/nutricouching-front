@@ -1,6 +1,5 @@
-import React from "react";
 import { useActiveCart } from "../../cart/hooks/useActiveCart";
-import useAddProductToCart from "../../cart/hooks/useAddProductToCart";
+import useAddItemToCart from "../../cart/hooks/useAddItemToCart";
 import { useCartItems } from "../../cart/hooks/useCartItems";
 import { useProductCart } from "../../cart/hooks/useProductsCart";
 import useGetAllProducts from "../hooks/useGetAllProducts";
@@ -14,7 +13,8 @@ function Products() {
   const { setProductsInCart } = useProductCart();
   const { setElementsInCart } = useCartItems();
 
-  const { addProductToCart, productsCart } = useAddProductToCart(
+  const { addItemToCart: addProductToCart, itemsCart: productsCart } = useAddItemToCart(
+    "product",
     setElementsInCart,
     activeCart
   );

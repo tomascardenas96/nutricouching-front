@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import apiClient from "../../auth/api/apiClient";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 function useGetBookingsByUser() {
-  const authToken = localStorage.getItem("authToken");
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   const [bookingsOfUser, setBookingsOfUser] = useState();
   const [previousBookings, setPreviousBookings] = useState({});
@@ -17,26 +16,9 @@ function useGetBookingsByUser() {
     const getBookingsByUser = async () => {
       setBookingsOfUserLoading(true);
       try {
-        const response = await fetch(
-          `${HOST}/booking/user?userId=${user?.userId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.message);
-        }
-
+        const { data } = await apiClient.get("/booking/user");
         setBookingsOfUser(data);
       } catch (error) {
-        console.error(error);
         setBookingsOfUserError(error);
       } finally {
         setBookingsOfUserLoading(false);
@@ -52,16 +34,17 @@ function useGetBookingsByUser() {
       const prev = {};
       const next = {};
 
-      Object.entries(bookingsOfUser).forEach(([date, bookings]) => {
-        //Convertimos la fecha de hoy y la fecha del turno para comparar si el turno ya paso o esta pendiente.
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+      // today se calcula una vez fuera del loop
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayTime = today.getTime();
 
+      Object.entries(bookingsOfUser).forEach(([date, bookings]) => {
         const [year, month, day] = date.toString().split("-").map(Number);
-        const inputDate = new Date(year, month - 1, day); // Mes en JS es base 0
+        const inputDate = new Date(year, month - 1, day);
         inputDate.setHours(0, 0, 0, 0);
 
-        if (inputDate.getTime() >= today.getTime()) {
+        if (inputDate.getTime() >= todayTime) {
           next[date] = bookings;
         } else {
           prev[date] = bookings;

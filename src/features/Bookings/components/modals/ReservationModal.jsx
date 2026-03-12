@@ -1,5 +1,5 @@
 import { IoIosTime } from "react-icons/io";
-import { useAuthUser } from "../../../auth/hooks/useAuthUser";
+import { useAuth } from "../../../auth/hooks/useAuth";
 import useGetProfessionalSchedule from "../../../schedule/hooks/useGetProfessionalSchedule";
 import useGetProfessionalsByService from "../../../professional/hooks/useGetProfessionalsByService";
 import useGetProfessionalsBySpecialty from "../../../professional/hooks/useGetProfessionalsBySpecialty";
@@ -12,7 +12,7 @@ function ReservationModal({
   selectedService,
   setIsRequestReservationOpen,
 }) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const {
     specialties,
     specialtiesError,

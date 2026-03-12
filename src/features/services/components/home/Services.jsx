@@ -1,65 +1,49 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { PiStarFourLight } from "react-icons/pi";
+import GuideModal from "../../../custom-guide/components/home/GuideModal";
 import PlansModal from "../../../plans/components/PlansModal";
 import ResourcesModal from "../../../resources/components/ResourcesModal";
 import { services } from "../../data/services";
 import "./Services.css";
 import ServiceCard from "./ServicesCard";
-import GuideModal from "../../../custom-guide/components/home/GuideModal";
 
 function Services() {
-  // Selected service state
   const [selectedService, setSelectedService] = useState(null);
-
-  // Modal states
-  const [isRequestReservationOpen, setIsRequestReservationOpen] =
-    useState(false);
-  const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false);
   const [isSmartPlanModalOpen, setIsSmartPlanModalOpen] = useState(false);
 
-  // Handle select service
   const handleSelectService = (service) => {
     setSelectedService(service);
   };
 
-  // Handle open modals
-  const handleOpenServiceModal = () => {
-    setIsMoreInfoModalOpen(!isMoreInfoModalOpen);
-  };
-
-  const handleOpenRequestReservation = () => {
-    setIsRequestReservationOpen(!isRequestReservationOpen);
-  };
-
   const handleOpenSmartPlanModal = () => {
-    setIsSmartPlanModalOpen(!isSmartPlanModalOpen);
+    setIsSmartPlanModalOpen((prev) => !prev);
   };
-
-  // Colors to iterate
-  const colors = ["#BB4430", "#19647E", "#2F0147"];
 
   return (
-    <div className="services-menu">
-      <div className="services-list_container">
-        {services?.map((service, idx) => (
-          <ServiceCard
-            key={service?.serviceId}
-            image={service?.image}
-            color={colors[idx]}
-            title={service?.title}
-            description={service?.description}
-            handleSelectService={() => handleSelectService(service)}
-            handleOpenServiceModal={handleOpenServiceModal}
-            handleOpenRequestReservation={handleOpenRequestReservation}
-            type={service?.type}
-            handleOpenSmartPlanModal={handleOpenSmartPlanModal}
-          />
-        ))}
+    <div className="services-strip">
+      {/* Celda header */}
+      <div className="services-strip__header">
+        <PiStarFourLight className="services-strip__star services-strip__star--sm" />
+        <span>Nuestra Lista de Servicios</span>
+        <PiStarFourLight className="services-strip__star services-strip__star--lg" />
       </div>
 
-      {/* Mostrar modal si hay un servicio seleccionado */}
-      {selectedService?.type === "plan_download" &&
-        isSmartPlanModalOpen &&
+      {/* Celdas de servicios */}
+      {services.map((service) => (
+        <ServiceCard
+          key={service.serviceId}
+          title={service.title}
+          description={service.description}
+          type={service.type}
+          handleSelectServiceAndOpenModal={() => {
+            handleSelectService(service);
+            handleOpenSmartPlanModal();
+          }}
+        />
+      ))}
+
+      {selectedService?.type === "plan_download" && isSmartPlanModalOpen &&
         createPortal(
           <PlansModal
             handleOpenSmartPlanModal={handleOpenSmartPlanModal}
@@ -68,8 +52,7 @@ function Services() {
           document.getElementById("root")
         )}
 
-      {selectedService?.type === "resource_download" &&
-        isSmartPlanModalOpen &&
+      {selectedService?.type === "resource_download" && isSmartPlanModalOpen &&
         createPortal(
           <ResourcesModal
             handleOpenSmartPlanModal={handleOpenSmartPlanModal}
@@ -78,8 +61,7 @@ function Services() {
           document.getElementById("root")
         )}
 
-      {selectedService?.type === "guide" &&
-        isSmartPlanModalOpen &&
+      {selectedService?.type === "guide" && isSmartPlanModalOpen &&
         createPortal(
           <GuideModal setOpen={setIsSmartPlanModalOpen} />,
           document.getElementById("root")

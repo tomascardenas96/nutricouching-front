@@ -3,14 +3,14 @@ import { IoMdClose } from "react-icons/io";
 import useAssignSpecialtyToProfessional from "../../../../hooks/useAssignSpecialtyToProfessional";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import "./AssignSpecialtyModal.css";
-import { useAuthUser } from "../../../../../auth/hooks/useAuthUser";
+import { useAuth } from "../../../../../auth/hooks/useAuth";
 
 function AssignSpecialtyModal({
   professionalSpecialties,
   onClose,
   setSpecialties,
 }) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
   const { errorSpecialties, loadingSpecialties, specialties } =
     useGetAllSpecialties();
 

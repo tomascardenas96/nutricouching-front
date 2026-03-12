@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +8,10 @@ function useFilterProfessionals(searchTerm, setSearchTerm) {
   const navigate = useNavigate();
 
   const searchProfessionals = async (searchTerm) => {
-    const res = await fetch(
-      `${HOST}/professional/filter?every=${encodeURIComponent(searchTerm)}`
+    const { data } = await apiClient.get(
+      `/professional/filter?every=${encodeURIComponent(searchTerm)}`
     );
-    return await res.json();
+    return data;
   };
 
   useEffect(() => {

@@ -1,10 +1,8 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
 import { useState } from "react";
+import apiClient from "../../auth/api/apiClient";
 
 function useAssignSpecialtyToProfessional(setSpecialties, onClose) {
-  const authToken = localStorage.getItem("authToken");
-
   const [selectedSpecialtyId, setSelectedSpecialtyId] = useState("");
 
   const assignSpecialtyToProfessional = async (
@@ -14,22 +12,9 @@ function useAssignSpecialtyToProfessional(setSpecialties, onClose) {
   ) => {
     e.preventDefault();
     const assignSpecialtyPromise = async () => {
-      const response = await fetch(
-        `${HOST}/specialty/${specialtyId}/professional/${professionalId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
+      const { data } = await apiClient.post(
+        `/specialty/${specialtyId}/professional/${professionalId}`
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error();
-      }
 
       return data;
     };

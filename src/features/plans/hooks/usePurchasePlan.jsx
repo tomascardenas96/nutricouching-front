@@ -1,31 +1,17 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function usePurchasePlan() {
   const [loadingPlanId, setLoadingPlanId] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   const handlePurchasePlan = async (planId) => {
-    const token = localStorage.getItem("authToken");
     setLoadingPlanId(planId);
     setPaymentLoading(true);
 
     try {
-      const response = await fetch(`${HOST}/plan/${planId}/purchase`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al procesar la compra");
-      }
-
-      const data = await response.json();
-
+      const { data } = await apiClient.post(`/plan/${planId}/purchase`);
       window.open(data.init_point, "_blank");
     } catch (error) {
       toast.error("Ocurrio un error al procesar el pago");

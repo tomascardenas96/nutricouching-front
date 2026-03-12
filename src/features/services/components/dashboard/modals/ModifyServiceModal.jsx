@@ -1,6 +1,5 @@
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
-import { HOST } from "../../../../../api/data";
 import useModifyService from "../../../hooks/useModifyService";
 import "./ModifyServiceModal.css";
 
@@ -74,7 +73,7 @@ function ModifyServiceModal({
                 />
               ) : (
                 <img
-                  src={`${HOST}/uploads/services/${modifyServiceInput.image}`}
+                  src={modifyServiceInput.image}
                   alt="selected-service-picture"
                 />
               )}

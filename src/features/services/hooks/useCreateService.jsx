@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import { toast } from "sonner";
 
 function useCreateService(handleAddServiceModal, setServices) {
-  const authToken = localStorage.getItem("authToken");
 
   const [createServiceInput, setCreateServiceInput] = useState({
     title: "",
@@ -28,18 +27,7 @@ function useCreateService(handleAddServiceModal, setServices) {
         formData.append("file", fileCreateService);
       }
 
-      const response = await fetch(`${HOST}/service/create`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${authToken}` },
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+      const { data } = await apiClient.post("/service/create", formData);
       return data;
     };
 

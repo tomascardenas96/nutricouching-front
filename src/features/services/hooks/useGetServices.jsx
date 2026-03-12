@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetServices() {
   const [services, setServices] = useState([]);
@@ -12,18 +12,7 @@ function useGetServices() {
   useEffect(() => {
     const getAllServices = async () => {
       try {
-        const response = await fetch(`${HOST}/service`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-
-        if (data.error) {
-          throw new Error(data.message);
-        }
-
+        const { data } = await apiClient.get("/service");
         setServices(data);
       } catch (error) {
         console.error(error);

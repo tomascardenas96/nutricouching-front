@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 import { toast } from "sonner";
-import { HOST, WEBSOCKET_HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { useSSEEvent } from "../../../services/useSSEEvent";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetAllResources(setSelectedResource, setIsMoreInfoModalOpen) {
   const [resources, setResources] = useState([]);
   const [resourcesLoading, setResourcesLoading] = useState(true);
   const [resourcesError, setResourcesError] = useState(null);
 
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   useEffect(() => {
     const getResources = async () => {
       if (user) {
-        const token = localStorage.getItem("authToken");
-        getResourcesWhenLoggedIn(token);
+        getResourcesWhenLoggedIn();
       } else {
         getResourcesWhenLoggedOut();
       }
@@ -24,61 +23,19 @@ function useGetAllResources(setSelectedResource, setIsMoreInfoModalOpen) {
     getResources();
   }, [user]);
 
-  useEffect(() => {
-    if (!user || resources.length === 0) {
-      return;
-    }
+  // El backend emite afterPurchaseNotify con service:"resource_download" al comprar un recurso
+  useSSEEvent("afterPurchaseNotify", (data) => {
+    if (data.service !== "resource_download" || data.status !== "approved") return;
+    toast.success("El recurso ha sido agregado a tu colección");
+    setSelectedResource(null);
+    setIsMoreInfoModalOpen(false);
+    // Refetch para obtener el estado actualizado del servidor
+    if (user) getResourcesWhenLoggedIn();
+  });
 
-    const socket = io(`${WEBSOCKET_HOST}`, {
-      query: { userId: user.userId },
-    });
-
-    socket.on("purchasedResource", (resourceId) => {
-      toast.success("El plán ha sido agregado a tu colección");
-
-      setResources((prev) => {
-        const justPurchasedResource = prev.notPurchasedResources.find(
-          (res) => res.resourceId === resourceId
-        );
-        prev.purchasedResources.push(justPurchasedResource);
-
-        const notPurchasedResources = prev.notPurchasedResources.filter(
-          (res) => res.resourceId !== resourceId
-        );
-
-        setSelectedResource(null);
-        setIsMoreInfoModalOpen(false);
-
-        return {
-          freePlans: prev.freePlans,
-          purchasedResources: prev.purchasedResources,
-          notPurchasedResources,
-        };
-      });
-    });
-
-    return () => {
-      socket.off("purchasedResource");
-      socket.disconnect();
-    };
-  }, [user, resources]);
-
-  const getResourcesWhenLoggedIn = async (token) => {
+  const getResourcesWhenLoggedIn = async () => {
     try {
-      const response = await fetch(`${HOST}/resource`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+      const { data } = await apiClient.get("/resource");
       setResources(data);
     } catch (error) {
       setResourcesError(true);
@@ -89,19 +46,7 @@ function useGetAllResources(setSelectedResource, setIsMoreInfoModalOpen) {
 
   const getResourcesWhenLoggedOut = async () => {
     try {
-      const response = await fetch(`${HOST}/resource/all`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+      const { data } = await apiClient.get("/resource/all");
       setResources(data);
     } catch (error) {
       setResourcesError(true);

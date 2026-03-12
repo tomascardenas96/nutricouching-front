@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useCreateResource(setResources, handleAddResourceModal) {
   const [createResourceInput, setCreateResourceInput] = useState({
@@ -17,7 +17,6 @@ function useCreateResource(setResources, handleAddResourceModal) {
     e.preventDefault();
 
     const createResource = async () => {
-      const token = localStorage.getItem("authToken");
       const formData = new FormData();
 
       formData.append("title", createResourceInput.title);
@@ -32,17 +31,9 @@ function useCreateResource(setResources, handleAddResourceModal) {
         formData.append("image", fileImage);
       }
 
-      const response = await fetch(`${HOST}/resource`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
+      const { data } = await apiClient.post("/resource", formData);
 
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(createResource(), {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetAllViands() {
   const [viands, setViands] = useState([]);
@@ -11,19 +11,7 @@ function useGetAllViands() {
   useEffect(() => {
     const getAllViands = async () => {
       try {
-        const response = await fetch(`${HOST}/viand`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Error getting viands");
-        }
-
-        const data = await response.json();
-
+        const { data } = await apiClient.get("/viand");
         setViands(data);
       } catch (error) {
         setViandsError(true);

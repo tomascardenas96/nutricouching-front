@@ -1,12 +1,13 @@
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { CartActionsContext, CartStateContext } from "../context/CartContext";
 
 export function useCartItems() {
-  const context = useContext(CartContext);
-  if (!context)
-    throw new Error(
-      "useCartItems must be within ElementsInCartProvider context"
-    );
-  const { elementsInCart, setElementsInCart } = context;
-  return { elementsInCart, setElementsInCart };
+  const state = useContext(CartStateContext);
+  const actions = useContext(CartActionsContext);
+  if (!state || !actions)
+    throw new Error("useCartItems must be within CartProvider");
+  return {
+    elementsInCart: state.elementsInCart,
+    setElementsInCart: actions.setElementsInCart,
+  };
 }

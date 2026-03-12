@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
 import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
 function useAddProductToCart(setElementsInCart, activeCart) {
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   const [productsCart, setProductsCart] = useState([]);
   const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn();

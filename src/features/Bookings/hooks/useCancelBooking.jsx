@@ -1,29 +1,15 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
-import { useAuthUser } from "../../auth/hooks/useAuthUser";
+import { useAuth } from "../../auth/hooks/useAuth";
+import apiClient from "../../auth/api/apiClient";
 
 function useCancelBooking(setBookings, onClose) {
-  const { user } = useAuthUser();
-  const authToken = localStorage.getItem("authToken");
+  const { user } = useAuth();
 
   const handleCancelBooking = async (bookingId) => {
     const cancelBooking = async () => {
-      const response = await fetch(
-        `${HOST}/booking/delete/${bookingId}/active-user/${user?.userId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
+      const { data } = await apiClient.delete(
+        `/booking/delete/${bookingId}/active-user/${user?.userId}`
       );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
 
       return data;
     };

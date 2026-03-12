@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
 import { useParams } from "react-router-dom";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetProfileByName() {
   const [profile, setProfile] = useState({});
@@ -15,12 +15,7 @@ function useGetProfileByName() {
 
   const getProfileInformation = async () => {
     try {
-      const response = await fetch(`${HOST}/profile/name/${slug}`);
-
-      if (!response.ok) throw new Error();
-
-      const data = await response.json();
-
+      const { data } = await apiClient.get(`/profile/name/${slug}`);
       setProfile(data);
     } catch (error) {
       setProfileError(true);

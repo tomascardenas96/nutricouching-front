@@ -1,9 +1,8 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 import { useState } from "react";
 
 function useDeleteService(setServices) {
-  const authToken = localStorage.getItem("authToken");
 
   const [isDeleteServiceModalOpen, setIsDeleteServiceModalOpen] =
     useState(false);
@@ -21,22 +20,7 @@ function useDeleteService(setServices) {
 
   const handleDeleteService = () => {
     const deleteService = async () => {
-      const response = await fetch(
-        `${HOST}/service/delete/${selectedServiceId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+      const { data } = await apiClient.delete(`/service/delete/${selectedServiceId}`);
       return data;
     };
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useUpdateProfileInfo(
   professionalProfile,
@@ -35,7 +35,6 @@ function useUpdateProfileInfo(
 
   const handleUpdateProfileInfo = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
     const parsedUpdateProfileInput = Object.fromEntries(
       Object.entries(updateProfileInput).filter(
         ([_, value]) => value != null && value !== ""
@@ -43,21 +42,7 @@ function useUpdateProfileInfo(
     );
 
     const updateProfile = async () => {
-      const response = await fetch(`${HOST}/profile/update`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(parsedUpdateProfileInput),
-      });
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      const data = await response.json();
-
+      const { data } = await apiClient.patch("/profile/update", parsedUpdateProfileInput);
       return data;
     };
 

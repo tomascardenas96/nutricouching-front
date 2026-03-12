@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useDeleteProfessional(
   setProfessionals,
@@ -8,24 +8,11 @@ function useDeleteProfessional(
   handleCloseDeleteModal
 ) {
   const handleDeleteProfessional = () => {
-    const authToken = localStorage.getItem("authToken");
     const deleteProfessional = async () => {
-      const response = await fetch(
-        `${HOST}/professional/delete/${selectedProfessional.professionalId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
+      const { data } = await apiClient.delete(
+        `/professional/delete/${selectedProfessional.professionalId}`
       );
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return await response.json();
+      return data;
     };
 
     toast.promise(deleteProfessional(), {

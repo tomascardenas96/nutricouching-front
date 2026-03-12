@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useGetSpecialtiesByCategory(
   category,
@@ -14,18 +14,7 @@ function useGetSpecialtiesByCategory(
   useEffect(() => {
     const getSpecialties = async () => {
       try {
-        const response = await fetch(`${HOST}/specialty/category/${category}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-
-        if (!response.ok) {
-          throw new Error(
-            "Error al obtener las especialidades por ID de categoria"
-          );
-        }
-
-        const data = await response.json();
+        const { data } = await apiClient.get(`/specialty/category/${category}`);
 
         setSpecialties(data);
       } catch (error) {

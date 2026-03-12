@@ -1,23 +1,10 @@
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
+import apiClient from "../../auth/api/apiClient";
 
 function useDeletePost(setPosts, handleCloseDeleteModal) {
   const handleDeletePost = async (id) => {
-    const token = localStorage.getItem("authToken");
     const deletePostPromise = async () => {
-      const response = await fetch(`${HOST}/post/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return;
+      await apiClient.delete(`/post/${id}`);
     };
 
     toast.promise(deletePostPromise(), {
