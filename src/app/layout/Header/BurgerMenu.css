@@ -4,8 +4,9 @@
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 1;
-  background-color: var(--background-shadow-color);
+  z-index: 200;
+  background-color: rgba(30, 41, 32, 0.35);
+  backdrop-filter: blur(2px);
 }
 
 .burger-menu {
@@ -13,31 +14,44 @@
   right: 0;
   top: 0;
   height: 100vh;
-  width: 23rem;
-  background-color: var(--modal-background);
-  box-shadow: var(--modal-shadow);
+  width: 22rem;
+  background-color: var(--clr-cream);
+  box-shadow: var(--shadow-lg);
   padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
 
   > .logged-user_information {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgb(174, 174, 174);
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid var(--clr-border);
     padding-bottom: 1.5rem;
 
     & p {
+      font-family: var(--font-body);
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
+      color: var(--clr-ink);
     }
 
     & span {
-      font-size: 0.8rem;
-      color: rgb(106, 104, 104);
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--clr-mist);
+      margin-top: 0.15rem;
     }
 
     & .settings-icon {
       font-size: 1.4rem;
+      color: var(--clr-mist);
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    & .settings-icon:hover {
+      color: var(--clr-forest);
     }
   }
 
@@ -45,19 +59,42 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 2.3rem;
+    gap: 0;
 
-    > li, a {
-      font-size: 0.9rem;
+    > li,
+    a {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
       font-weight: 500;
+      letter-spacing: 0.08em;
       text-decoration: none;
-      color: rgb(69, 69, 69);
+      color: var(--clr-ink);
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--clr-border);
+      cursor: pointer;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+      display: block;
+    }
+
+    > li:hover,
+    a:hover {
+      color: var(--clr-amber);
+      padding-left: 0.3rem;
+    }
+
+    > li:last-child,
+    a:last-child {
+      border-bottom: none;
     }
   }
 }
 
 .burger-menu .log-out {
-  color: rgb(189, 72, 72);
+  color: var(--clr-amber) !important;
+}
+
+.burger-menu .log-out:hover {
+  color: var(--clr-amber-light) !important;
 }
 
 @media screen and (max-width: 370px) {

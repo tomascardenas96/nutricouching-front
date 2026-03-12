@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { useAuth } from "../../../features/auth/hooks/useAuth";
 import BookingsSection from "./Bookings/BookingsSection";
 import NotificationsSection from "./Notifications/NotificationsSection";
 import "./NotificationsModal.css";
+import OrdersNotifications from "./Orders/OrdersNotifications";
 
-function NotificationsModal({
-  closeModal,
-  notifications,
-  setUnreadNotifications,
-  setNotifications,
-  user,
-}) {
+function NotificationsModal({ closeModal, notifications, setNotifications }) {
   const [selectedSection, setSelectedSection] = useState("notifications");
+  const { user } = useAuth();
 
   // Cuando se abre el modal, se marcan todas las notificaciones como leidas
   useEffect(() => {
     setNotifications((prev) =>
-      prev.map((notification) => {
-        return { ...notification, isRead: true };
-      })
+      prev.map((notification) => ({ ...notification, isRead: true }))
     );
   }, []);
 
@@ -41,6 +36,19 @@ function NotificationsModal({
               Notificaciones
             </p>
 
+            {user?.professional?.role === "root" && (
+              <p
+                onClick={() => setSelectedSection("orders")}
+                className={
+                  selectedSection === "orders"
+                    ? "selected-section_notifications-modal"
+                    : ""
+                }
+              >
+                Pedidos
+              </p>
+            )}
+
             {user?.professional?.role !== "root" && (
               <p
                 onClick={() => setSelectedSection("bookings")}
@@ -59,14 +67,13 @@ function NotificationsModal({
         </div>
 
         {selectedSection === "notifications" && (
-          <NotificationsSection
-            notifications={notifications}
-            setUnreadNotifications={setUnreadNotifications}
-          />
+          <NotificationsSection notifications={notifications} />
         )}
         {selectedSection === "bookings" && (
           <BookingsSection closeModal={closeModal} />
+          // <p>Turnos</p>
         )}
+        {selectedSection === "orders" && <OrdersNotifications />}
       </section>
     </div>
   );

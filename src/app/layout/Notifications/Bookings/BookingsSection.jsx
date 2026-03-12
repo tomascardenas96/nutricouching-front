@@ -5,10 +5,10 @@ import { MdHistory } from "react-icons/md";
 import useCancelBooking from "../../../../features/Bookings/hooks/useCancelBooking";
 import useGetBookingsByUser from "../../../../features/Bookings/hooks/useGetBookingsByUser";
 import ConfirmationModal from "../../../../common/components/ConfirmationModal";
-import BookingsCard from "../../../../features/Bookings/components/BookingsCard/BookingsCard";
-import BookingsHeader from "../../../../features/Bookings/components/BookingsHeader/BookingsHeader";
 import "./BookingsSection.css";
 import PreviousShiftUserCard from "./PreviousShiftUserCard";
+import BookingsHeader from "./BookingsHeader";
+import BookingsCard from "./BookingsCard";
 
 function BookingsSection({ closeModal }) {
   const [selectedBookingId, setSelectedBookingId] = useState(null);
@@ -23,7 +23,7 @@ function BookingsSection({ closeModal }) {
     nextBookings,
   } = useGetBookingsByUser();
 
-  const { handleCancelBooking } = useCancelBooking(setBookingsOfUser);
+  const { handleCancelBooking } = useCancelBooking(setBookingsOfUser, closeModal);
 
   const handleOpenConfirmationDeleteBooking = () => {
     setIsConfirmationDeleteBookingOpen(!isConfirmationDeleteBookingOpen);

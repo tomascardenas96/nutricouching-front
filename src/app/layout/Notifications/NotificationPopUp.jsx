@@ -1,68 +1,32 @@
-import { useEffect, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { IoIosNotifications } from "react-icons/io";
-import { io } from "socket.io-client";
-import { WEBSOCKET_HOST } from "../../../api/data";
+import { toast } from "sonner";
 import useGetNotifications from "../../../features/notifications/hooks/useGetNotifications";
+import { useSSEEvent } from "../../../services/useSSEEvent";
 import "./NotificationPopUp.css";
 import NotificationsModal from "./NotificationsModal";
 
-function NotificationPopUp({
-  isNotificationsModalOpen,
-  setIsNotificationsModalOpen,
-  user,
-}) {
-  const [unreadNotifications, setUnreadNotifications] = useState(0);
-
+function NotificationPopUp({ isNotificationsModalOpen, setIsNotificationsModalOpen }) {
   const { notifications, setNotifications } = useGetNotifications();
 
-  const handleCloseModal = () => {
+  const unreadNotifications = useMemo(
+    () => notifications.filter((n) => !n.isRead).length,
+    [notifications]
+  );
+
+  const handleCloseModal = useCallback(() => {
     setIsNotificationsModalOpen(false);
-  };
+  }, [setIsNotificationsModalOpen]);
 
-  // Alerta notificaciones no leidas
-  useEffect(() => {
-    if (notifications.length === 0) return;
-
-    const filterUnread = notifications.filter(
-      (notification) => !notification.isRead
-    );
-
-    if (filterUnread) {
-      const quantity = filterUnread.reduce((acc, curr) => {
-        return (acc += 1);
-      }, 0);
-
-      setUnreadNotifications(quantity);
-    }
-  }, [notifications]);
-
-  // Actualizar notificaciones en tiempo real
-  useEffect(() => {
-    if (!user || notifications.length === 0) return;
-
-    const socket = io(`${WEBSOCKET_HOST}`, {
-      query: { userId: user.userId },
-    });
-
-    socket.on("afterPurchaseNotify", (data) => {
-      if (data.service === "plan_download") {
-        switch (data.status) {
-          case "approved":
-            setNotifications((prev) => [data, ...prev]);
-            break;
-
-          case "rejected":
-            toast.error(data.message);
-            break;
-        }
+  useSSEEvent("afterPurchaseNotify", (data) => {
+    if (data.service === "plan_download" || data.service === "resource_download") {
+      if (data.status === "approved") {
+        setNotifications((prev) => [data, ...prev]);
+      } else if (data.status === "rejected") {
+        toast.error(data.message);
       }
-    });
-
-    return () => {
-      socket.off("afterPurchaseNotify");
-      socket.disconnect();
-    };
-  }, [user, notifications]);
+    }
+  });
 
   return (
     <>
@@ -73,7 +37,7 @@ function NotificationPopUp({
         <div>
           <h2 className="notifications-title">NOTIFICACIONES</h2>
           <IoIosNotifications className="bell-icon" />
-          {true && (
+          {unreadNotifications > 0 && (
             <div className="red-circle">
               <p>{unreadNotifications}</p>
             </div>
@@ -85,9 +49,7 @@ function NotificationPopUp({
         <NotificationsModal
           closeModal={handleCloseModal}
           notifications={notifications}
-          setUnreadNotifications={setUnreadNotifications}
           setNotifications={setNotifications}
-          user={user}
         />
       )}
     </>

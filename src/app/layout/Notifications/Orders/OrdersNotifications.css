@@ -1,0 +1,122 @@
+.orders-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1rem;
+  max-height: 45rem;
+  overflow-y: auto;
+}
+
+.orders-section__title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2d2d2d;
+  margin-bottom: 0.5rem;
+}
+
+.orders-loading,
+.orders-error,
+.no-orders {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #777;
+  padding: 1rem;
+}
+
+.order-card {
+  background: #fff;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.07);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.6rem;
+}
+
+.order-user {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.order-email {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  color: #9b9b9b;
+}
+
+.order-items {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 0.6rem 0;
+  margin: 0.5rem 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.order-item-name {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.order-item-quantity {
+  color: #444;
+  font-weight: 500;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+
+  > .already-delivered {
+    background-color: rgb(176, 176, 176);
+  }
+}
+
+.order-total {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+.mark-delivered-btn {
+  background-color: #00b894;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease;
+}
+
+.mark-delivered-btn:hover {
+  background-color: #009874;
+}
+
+.order-footer .already-delivered {
+  background-color: rgb(213, 213, 213);
+  cursor: default;
+}

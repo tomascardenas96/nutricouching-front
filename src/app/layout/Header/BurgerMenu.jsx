@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./BurgerMenu.css";
 import { CiSettings } from "react-icons/ci";
 
 function BurgerMenu({
   handleChangeBurgerMenu,
-  handleLoginModal,
   setActiveCart,
   setElementsInCart,
   handleOpenUpdateUserModal,
-  handleRegisterModal,
   user,
   handleLogOut,
 }) {
+  const navigate = useNavigate();
   return (
     <div className="burger-menu_container" onClick={handleChangeBurgerMenu}>
       <div className="burger-menu" onClick={(e) => e.stopPropagation()}>
@@ -34,15 +33,14 @@ function BurgerMenu({
             <>
               <li
                 onClick={() => {
-                  handleRegisterModal();
                   handleChangeBurgerMenu();
+                  navigate("/register");
                 }}
               >
                 REGISTRARSE
               </li>
               <li
                 onClick={() => {
-                  handleLoginModal();
                   handleChangeBurgerMenu();
                 }}
               >
@@ -52,7 +50,9 @@ function BurgerMenu({
           )}
           <li>INICIO</li>
           {user?.professional && (
-            <Link to={user.professional.role === "root" ? "/root" : "/professional"}>
+            <Link
+              to={user.professional.role === "root" ? "/root" : "/professional"}
+            >
               <li>DASHBOARD</li>
             </Link>
           )}

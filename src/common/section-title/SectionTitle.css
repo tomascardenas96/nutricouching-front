@@ -1,0 +1,27 @@
+.section-title__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.section-title__cherry-icon {
+  width: 1.6rem;
+}
+
+.section-title__click-text {
+  font-size: 0.8rem;
+}
+
+.section-title__title {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.7rem;
+  font-family: var(--font-display);
+  margin-top: -0.5rem;
+
+  .circle-icon {
+    width: 0.5rem;
+  }
+}

@@ -1,64 +1,81 @@
-import { FaFacebookF, FaInstagram, FaLinkedin, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import "./Footer.css";
+
+const NAV_LINKS = [
+  { label: "Inicio", to: "/" },
+  { label: "Servicios", to: "/#services" },
+  { label: "Sobre nosotros", to: "/#about" },
+  { label: "Productos", to: "/#products" },
+  { label: "Viandas", to: "/#viands" },
+  { label: "Testimonios", to: "/#testimonials" },
+];
+
+const SOCIAL_LINKS = [
+  { icon: <FaInstagram />, href: "#", label: "Instagram" },
+  { icon: <FaFacebookF />, href: "#", label: "Facebook" },
+  { icon: <FaTiktok />, href: "#", label: "TikTok" },
+  { icon: <FaXTwitter />, href: "#", label: "X / Twitter" },
+];
 
 function Footer() {
   return (
-    <footer>
-      <div>
-        <div className="top-container">
-          <div className="footer_links">
-            <div className="footer_logo">
-              <img src="/assets/nutricouching-logo.jpg" />
-              <h1>Cohesiva.com</h1>
-            </div>
+    <footer className="footer">
+      <div className="footer__inner">
+
+        {/* Brand */}
+        <div className="footer__brand">
+          <div className="footer__logo">
+            <img src="/assets/nutricouching-logo.jpg" alt="Cohesiva Salud" />
+            <span>Cohesiva Salud</span>
+          </div>
+          <p className="footer__tagline">
+            Nutrición, bienestar y acompañamiento profesional para una vida más saludable.
+          </p>
+          <div className="footer__social">
+            {SOCIAL_LINKS.map(({ icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                className="footer__social-icon"
+              >
+                {icon}
+              </a>
+            ))}
           </div>
         </div>
 
-        <ul className="sections">
-          <li>INICIO</li>
-          <li>PRODUCTOS</li>
-          <li>CONOCENOS</li>
-          <li>CARRITO</li>
-          <li>CONTACTO</li>
-        </ul>
-
-        <div className="social">
-          <ul>
-            <li>
-              <a>
-                <FaFacebookF />
-              </a>
-            </li>
-            <li>
-              <a>
-                <FaXTwitter />
-              </a>
-            </li>
-            <li>
-              <a>
-                <FaInstagram />
-              </a>
-            </li>
-            <li>
-              <a>
-                <FaLinkedin />
-              </a>
-            </li>
-            <li>
-              <a>
-                <FaTiktok />
-              </a>
-            </li>
+        {/* Nav */}
+        <div className="footer__nav">
+          <h4 className="footer__heading">Navegación</h4>
+          <ul className="footer__links">
+            {NAV_LINKS.map(({ label, to }) => (
+              <li key={label}>
+                <Link to={to} className="footer__link">
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        <p>
-          Copyright © 2025 Todos los derechos reservados | Creado por{" "}
-          {/* <a href="http://www.tomascardenas.me" target="_blank"> */}
-          tomascardenas.me
-          {/* </a> */}
-        </p>
+        {/* Contact */}
+        <div className="footer__contact">
+          <h4 className="footer__heading">Contacto</h4>
+          <ul className="footer__contact-list">
+            <li>contacto@cohesivasalud.com</li>
+            <li>+54 11 0000-0000</li>
+            <li>Buenos Aires, Argentina</li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* Bottom bar */}
+      <div className="footer__bottom">
+        <p>© {new Date().getFullYear()} Cohesiva Salud. Todos los derechos reservados.</p>
       </div>
     </footer>
   );

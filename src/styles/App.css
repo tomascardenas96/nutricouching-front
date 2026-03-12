@@ -1,82 +1,123 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sevillana&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 :root {
-  --primary-font: "Montserrat", serif;
-  --secondary-font: "Lora", serif;
-  --terciary-font: "Hind Madurai", serif;
-  --fourthy-font: "Roboto Slab", serif;
-  --background-shadow-color: rgba(0, 0, 0, 0.184);
-  --modal-background: #f6f6f6;
-  --modal-radius: 0.3rem;
-  --modal-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.037),
-    0 0 5px 2px rgba(0, 0, 0, 0.064);
-  --selected-option-background: #603dc118;
-  --selected-option-text: #603dc1d9;
-  --border-radius-modal: 0.7rem;
-  --header-font-color: #8f5d0d;
-  --section-font-color: #9e7682;
-  --primary-color: ;
-  --secondary-color: ;
-  --tertiary-color: ;
-  --primary-details-color: #cc3f0c;
-  --secondary-details-color: #00a650;
+  /* --- Tipografía --- */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+
+  /* Backward compat */
+  --primary-font: var(--font-body);
+  --secondary-font: var(--font-display);
+  --terciary-font: var(--font-body);
+  --fourthy-font: var(--font-serif);
+
+  /* --- Paleta principal --- */
+  --clr-forest: rgba(88, 108, 92, 0.84); /* topbar, botones primarios       */
+  --clr-forest-dark: #2a3830; /* hover del topbar                */
+  --clr-forest-extra-dark: rgba(
+    88,
+    108,
+    92
+  ); /* topbar, botones primarios       */
+  --clr-sage: #6b8070; /* textos secundarios verdes       */
+  --clr-amber: rgba(245, 93, 62, 1); /* acento cálido                   */
+  --clr-amber-light: #e07b50; /* hover del acento                */
+  --clr-cream: #faf8f4; /* fondo cálido general            */
+  --clr-white: #ffffff;
+  --clr-stone: #eeebe4; /* fondo cards                     */
+  --clr-border: #ddd9d0; /* bordes sutiles                  */
+  --clr-ink: #2e3530; /* texto principal                 */
+  --clr-mist: #7a8a7b; /* texto secundario                */
+  --clr-error: #c0392b;
+
+  /* --- Backward compat con variables viejas --- */
+  --primary-details-color: var(--clr-amber);
+  --secondary-details-color: var(--clr-forest);
   --tertiary-details-color: #26547cdf;
-  --primary-font-color: #412908;
-  --secondary-font-color: #41290891;
-  --light-font-color: white;
+  --primary-font-color: var(--clr-ink);
+  --secondary-font-color: var(--clr-mist);
+  --light-font-color: var(--clr-white);
+  --header-font-color: var(--clr-forest);
+  --section-font-color: var(--clr-sage);
+  --header-mobile-font-color: var(--clr-amber);
+
+  /* --- Sombras y radios --- */
+  --shadow-sm: 0 1px 3px rgba(30, 41, 32, 0.08);
+  --shadow-md: 0 4px 16px rgba(30, 41, 32, 0.1);
+  --shadow-lg: 0 8px 32px rgba(30, 41, 32, 0.14);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Backward compat */
+  --background-shadow-color: rgba(0, 0, 0, 0.184);
+  --background-footer-color: rgba(45, 48, 43, 1);
+  --modal-background: var(--clr-stone);
+  --modal-radius: var(--radius-sm);
+  --modal-shadow: var(--shadow-md);
+  --border-radius-modal: var(--radius-md);
+  --selected-option-background: rgba(61, 80, 69, 0.08);
+  --selected-option-text: var(--clr-forest);
+
+  /* --- Loader skeleton --- */
   --loading-primary-color: rgba(0, 0, 0, 0.068);
   --loading-secondary-color: rgba(0, 0, 0, 0.01);
-  --header-mobile-font-color: #81041b;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--clr-cream);
+  color: var(--clr-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--clr-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--clr-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-sage);
+}
+
+@media screen and (max-width: 1050px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html,
+  body {
+    scrollbar-width: none;
+  }
+}
+
+#root-portal {
+  position: fixed;
+  z-index: 9999;
 }
 
 .rdp-root {
   --rdp-day-height: "50px";
   --rdp-day-width: "50px";
-}
-
-::-webkit-scrollbar {
-  width: 9px;
-}
-
-::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4d4d4d;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(90deg, #2f4858b0, #2f48589a);
-}
-
-html {
-  font-size: 100%;
-}
-
-body {
-  font-family: var(--primary-font);
-}
-
-#root-portal {
-  position: fixed;
-  z-index: 99999999999999999999999999999999999;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .date-picker .rdp-root .myCalendar {
@@ -92,15 +133,9 @@ body {
   }
 }
 
-@media screen and (max-width: 1050px) {
-  /* Ocultar la barra de scroll en navegadores WebKit (Chrome, Edge, Safari) */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Ocultar la barra de scroll en Firefox */
-  html,
-  body {
-    scrollbar-width: none;
-  }
+/* Tipografía especial para headings de sección */
+.special-font {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }

@@ -1,12 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import Categories from "../../category/components/Categories";
-import Faq from "../../faq/components/Faq";
+import About from "../../about/components/About";
+import Banner from "../../banner/components/Banner";
 import Presentation from "../../Presentation/Presentation";
-import Products from "../../products/components/Products";
-import Quotes from "../../quotes/components/Quotes";
+import ProductsHome from "../../products/components/ProductsHome";
+import PromoCards from "../../promo-cards/PromoCards";
 import Services from "../../services/components/home/Services";
-import Viands from "../../viands/components/Viands";
 import "./Home.css";
+import ViandsHome from "../../viands/components/ViandsHome";
+import Testimonials from "../../testimonials/components/Testimonials";
 
 function Home() {
   return (
@@ -24,28 +25,39 @@ function Home() {
           <Presentation />
         </section>
 
-        <section className="home-section disciplines_container">
-          <Categories />
-        </section>
-
-        <section className="home-section services_container" id="services">
-          <div className="section-title">
-            <h1 className="special-font">Servicios Disponibles</h1>
-            <hr />
-          </div>
+        <section className="services_container" id="services">
           <Services />
         </section>
 
-        <section className="home-section products_container" id="products">
-          <div className="section-title">
-            <h1 className="special-font">Nuestros Productos y Viandas</h1>
-            <hr />
-          </div>
-          <Products />
+        <section className="about_container" id="about">
+          <About />
         </section>
 
-        <section className="home-section recipes_container">
-          {/* <Viands /> */}
+        <section>
+          <PromoCards />
+        </section>
+
+        <section>
+          <Banner />
+        </section>
+
+        <section className="home-section products_container" id="products">
+          <ProductsHome />
+        </section>
+
+        <section className="home-section viands_container" id="viands">
+          <ViandsHome />
+        </section>
+
+        <section className="testimonials_container" id="testimonials">
+          <Testimonials />
+        </section>
+
+        {/* <section className="home-section recipes_container">
+          <div className="section-title">
+            <h1 className="special-font">Viandas y Recetas</h1>
+            <hr />
+          </div>
           <Viands />
         </section>
 
@@ -60,14 +72,9 @@ function Home() {
           <Quotes />
         </section>
 
-        <section className="home-section faq_container" id="faq">
-          <div className="section-title">
-            <h1 className="special-font">Preguntas Frecuentes (FAQ)</h1>
-            <hr />
-          </div>
-
+        <section className="faq_container" id="faq">
           <Faq />
-        </section>
+        </section> */}
       </div>
     </>
   );

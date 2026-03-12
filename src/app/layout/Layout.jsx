@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { useState } from "react";
 import { toast, Toaster } from "sonner";
-import { WEBSOCKET_HOST } from "../../api/data";
-import { useAuthUser } from "../../features/auth/hooks/useAuthUser";
+import { useAuth } from "../../features/auth/hooks/useAuth";
+import { useSSEEvent } from "../../services/useSSEEvent";
 import CartModal from "../../features/cart/components/CartModal";
 import { useActiveCart } from "../../features/cart/hooks/useActiveCart";
 import { useCartItems } from "../../features/cart/hooks/useCartItems";
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
 import "./Layout.css";
-import SubMenu from "./subMenu/SubMenu";
+import NotificationPopUp from "./notifications/NotificationPopUp";
 
 function Layout({ children }) {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -18,7 +17,7 @@ function Layout({ children }) {
   const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
 
   // Custom hooks para iniciar sesion y obtener el usuario activo
-  const { user } = useAuthUser();
+  const { user } = useAuth();
 
   // Productos y viandas agregadas al carrito desde el local storage.
   const { setElementsInCart } = useCartItems();
@@ -34,46 +33,26 @@ function Layout({ children }) {
     setIsUpdateUserModalOpen(!isUpdateUserModalOpen);
   };
 
-  // Notificacion cuando la compra es exitosa y creacion de carrito nuevo
-  useEffect(() => {
-    if (!user || !activeCart) {
-      return;
+  useSSEEvent("sendNewCart", (data) => {
+    setActiveCart(data);
+  });
+
+  useSSEEvent("afterPurchaseNotify", (data) => {
+    if (data.service !== "cart") return;
+    setIsCartModalOpen(false);
+    switch (data.status) {
+      case "rejected":
+        toast.error(data.message);
+        break;
+      case "approved":
+        toast.success(data.message);
+        setElementsInCart([]);
+        break;
+      case "pending":
+        toast.info(data.message);
+        break;
     }
-
-    const socket = io(`${WEBSOCKET_HOST}`, {
-      query: { userId: user.userId },
-    });
-
-    socket.on("sendNewCart", (data) => {
-      setActiveCart(data);
-    });
-
-    socket.on("afterPurchaseNotify", (data) => {
-      if (data.service === "cart") {
-        setIsCartModalOpen(false);
-        switch (data.status) {
-          case "rejected":
-            toast.error(data.message);
-            break;
-
-          case "approved":
-            toast.success(data.message);
-            setElementsInCart([]);
-            break;
-
-          case "pending":
-            toast.info(data.message);
-            break;
-        }
-      }
-    });
-
-    return () => {
-      socket.off("afterPurchaseNotify");
-      socket.off("sendNewCart");
-      socket.disconnect();
-    };
-  }, [user?.userId, activeCart]);
+  });
 
   return (
     <main>
@@ -101,10 +80,6 @@ function Layout({ children }) {
           />
         </section>
 
-        <section className="sub-menu_container">
-          <SubMenu />
-        </section>
-
         {children}
         <Toaster
           toastOptions={{
@@ -120,7 +95,6 @@ function Layout({ children }) {
           <NotificationPopUp
             isNotificationsModalOpen={isNotificationsModalOpen}
             setIsNotificationsModalOpen={setIsNotificationsModalOpen}
-            user={user}
           />
         )} */}
       </section>
