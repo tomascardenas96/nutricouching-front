@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/tmp/structure.txt:*)",
+      "Read(//tmp/**)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(find:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(rm:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_take_screenshot",
+      "Read(//c/Users/Tomás Cárdenas/.claude/**)",
+      "Bash(grep -r \"LoginContext\\\\|UserContext\\\\|LoginProvider\\\\|UserProvider\" src --include=\"*.jsx\" --include=\"*.js\" 2>/dev/null | grep \"import\\\\|from\" | head -30)",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_install",
+      "Bash(taskkill /F /IM chrome.exe 2>/dev/null; sleep 2; echo \"done\")",
+      "mcp__playwright__browser_console_messages",
+      "Bash(cp -r \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/.claude/.agents/skills/frontend-design\" \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/.claude/skills/frontend-design\" && echo \"done\")"
+    ]
+  }
+}
