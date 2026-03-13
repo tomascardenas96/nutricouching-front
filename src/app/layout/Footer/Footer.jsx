@@ -27,7 +27,7 @@ function Footer() {
         {/* Brand */}
         <div className="footer__brand">
           <div className="footer__logo">
-            <img src="/assets/nutricouching-logo.jpg" alt="Cohesiva Salud" />
+            <img src="/assets/cohesiva-logo.svg" alt="Cohesiva Salud" />
             <span>Cohesiva Salud</span>
           </div>
           <p className="footer__tagline">

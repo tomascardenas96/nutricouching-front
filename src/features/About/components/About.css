@@ -159,7 +159,7 @@
    RESPONSIVE
    ===================================================== */
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1024px) {
   .about {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -194,18 +194,42 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .about__image img {
-    width: 13rem;
-    height: 13rem;
+    width: 14.5rem;
+    height: 14.5rem;
   }
 
   .about__image::before {
-    width: 13.5rem;
-    height: 13.5rem;
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .about {
+    padding: 2.5rem 0;
   }
 
   .about__title {
     font-size: 1.85rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about__image img {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .about__image::before {
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+
+  .about__title {
+    font-size: 1.65rem;
+  }
+
+  .about__description {
+    font-size: 0.83rem;
   }
 }

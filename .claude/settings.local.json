@@ -22,7 +22,8 @@
       "mcp__playwright__browser_install",
       "Bash(taskkill /F /IM chrome.exe 2>/dev/null; sleep 2; echo \"done\")",
       "mcp__playwright__browser_console_messages",
-      "Bash(cp -r \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/.claude/.agents/skills/frontend-design\" \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/.claude/skills/frontend-design\" && echo \"done\")"
+      "Bash(cp -r \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/.claude/.agents/skills/frontend-design\" \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/.claude/skills/frontend-design\" && echo \"done\")",
+      "Bash(find \"C:/Users/Tomás Cárdenas/Desktop/Trabajo/nutricouching/client/src/features\" -path \"*cart*\" -o -path \"*payment*\" | grep -E \"\\\\.\\(js|jsx\\)$\" | sort)"
     ]
   }
 }

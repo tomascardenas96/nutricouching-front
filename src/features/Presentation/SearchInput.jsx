@@ -34,8 +34,18 @@ function SearchInput({ searchTerm, setSearchTerm }) {
           {isError ? (
             <li className="results-modal">Ha ocurrido un error.</li>
           ) : isFetching ? (
-            <li className="results-modal">Buscando profesionales...</li>
-          ) : data?.length === 0 ? (
+            <>
+              {[0, 1, 2].map((i) => (
+                <li key={i} className="search-skeleton-item">
+                  <div className="search-skeleton__avatar" />
+                  <div className="search-skeleton__info">
+                    <div className="search-skeleton__line search-skeleton__line--name" />
+                    <div className="search-skeleton__line search-skeleton__line--specialty" />
+                  </div>
+                </li>
+              ))}
+            </>
+          ) : data?.length === 0 || searchTerm?.length > 0 ? (
             <li className="results-modal">No hay resultados</li>
           ) : (
             data?.map((pro) => (

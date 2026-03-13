@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3.2rem;
+  gap: 2.5rem;
   width: 100%;
   max-width: 1100px;
   padding: 0 2rem;
@@ -80,7 +80,11 @@
 }
 
 /* ── Responsive ───────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+  .products-home__container {
+    gap: 2rem;
+  }
+
   .products-home__skeleton {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -89,7 +93,7 @@
 @media (max-width: 480px) {
   .products-home__container {
     padding: 0 1rem;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .products-home__skeleton {

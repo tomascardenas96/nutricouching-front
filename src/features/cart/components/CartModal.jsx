@@ -1,9 +1,6 @@
 import { useMemo, useState } from "react";
-import {
-  IoIosArrowBack,
-  IoMdArrowDropdown,
-  IoMdArrowDropup,
-} from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
+import { BsCart3 } from "react-icons/bs";
 import { useAuth } from "../../auth/hooks/useAuth";
 import useAddOrSubtractViand from "../../cart/hooks/useAddOrSubtractViand";
 import { useCartItems } from "../../cart/hooks/useCartItems";
@@ -26,7 +23,6 @@ function CartModal({ handleCartModal, activeCart }) {
   const { viandsInCart, setViandsInCart } = useViandsCart();
   const { elementsInCart, setElementsInCart } = useCartItems();
 
-  // Obtenemos todos los elementos dentro del carrito
   const { handleEmptyCart, handleEmptyLocalStorageCart } = useEmptyCart(
     setElementsInCart,
     activeCart,
@@ -34,7 +30,6 @@ function CartModal({ handleCartModal, activeCart }) {
     setViandsInCart
   );
 
-  // Metodos para remover un producto o una vianda del carrito
   const { handleRemoveProduct } = useRemoveProductFromCart(
     setProductsInCart,
     productsInCart
@@ -45,7 +40,6 @@ function CartModal({ handleCartModal, activeCart }) {
     viandsInCart
   );
 
-  // Metodos para agregar o restar una unidad de un producto
   const { addUnityOfProduct, subtractUnityOfProduct } = useAddOrSubtractProduct(
     activeCart,
     setProductsInCart,
@@ -61,16 +55,6 @@ function CartModal({ handleCartModal, activeCart }) {
     setElementsInCart
   );
 
-  // Metodos para abrir o cerrar la lista de productos o viandas
-  const handleOpenCloseProductsList = () => {
-    setIsProductsListDeployed(!isProductsListDeployed);
-  };
-
-  const handleOpenCloseViandsList = () => {
-    setIsViandsListDeployed(!isViandsListDeployed);
-  };
-
-  // Elementos del carrito separados por tipo (evita doble iteración en JSX)
   const productsFromElements = useMemo(
     () => elementsInCart.filter((e) => e.product),
     [elementsInCart]
@@ -80,7 +64,6 @@ function CartModal({ handleCartModal, activeCart }) {
     [elementsInCart]
   );
 
-  // Total de la compra
   const calculateTotal = useMemo(() => {
     if (!user) {
       const subTotalProducts = productsInCart.reduce(
@@ -93,7 +76,6 @@ function CartModal({ handleCartModal, activeCart }) {
       );
       return subTotalProducts + subTotalViands;
     }
-
     return elementsInCart.reduce(
       (acc, element) =>
         acc + element?.product?.price * element?.quantity ||
@@ -102,48 +84,62 @@ function CartModal({ handleCartModal, activeCart }) {
     );
   }, [user, productsInCart, viandsInCart, elementsInCart]);
 
+  const totalProductCount = user
+    ? productsFromElements.reduce((acc, e) => acc + e.quantity, 0)
+    : productsInCart.reduce((acc, p) => acc + p.quantity, 0);
+
+  const totalViandCount = user
+    ? viandsFromElements.reduce((acc, e) => acc + e.quantity, 0)
+    : viandsInCart.reduce((acc, v) => acc + v.quantity, 0);
+
   return (
     <section className="cart-modal_container" onClick={handleCartModal}>
-      <div className={`cart-modal`} onClick={(e) => e.stopPropagation()}>
+      <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
+
+        {/* ── Header ── */}
         <div className="cart-modal_header">
-          <img src="/assets/nutricouching-logo.jpg" alt="nutricoaching-logo" />
-          <div>
-            <h1>Carrito de Compras</h1>
-            <p>Este es el carrito de Nutricoaching</p>
+          <div className="cart-modal_header-icon">
+            <BsCart3 />
           </div>
+          <div className="cart-modal_header-text">
+            <h1>Carrito</h1>
+            <p>Nutricoaching</p>
+          </div>
+          <button
+            className="cart-modal_close-btn"
+            onClick={handleCartModal}
+            aria-label="Cerrar carrito"
+          >
+            <IoIosArrowBack />
+          </button>
         </div>
 
-        {/*  Productos dentro del carrito */}
-        <div className="cart-modal_products-list">
-          <div
-            className="cart-option_dropdown-bar"
-            onClick={handleOpenCloseProductsList}
-          >
-            <p>PRODUCTOS</p>
-            <IoMdArrowDropdown
-              className={`down-arrow ${
-                isProductsListDeployed ? "no-visible-arrow" : null
-              }`}
-            />
-            <IoMdArrowDropup
-              className={`up-arrow ${
-                !isProductsListDeployed ? "no-visible-arrow" : null
-              }`}
-            />
-          </div>
+        {/* ── Scrollable body ── */}
+        <div className="cart-modal_body">
 
-          {!productsInCart.length &&
-            isProductsListDeployed &&
-            !productsFromElements.length && (
-              <div className="products-list_modal">
-                <p>No hay productos agregados aun.</p>
-              </div>
-            )}
+          {/* Productos */}
+          <div className="cart-modal_section">
+            <button
+              className="cart-section_header"
+              onClick={() => setIsProductsListDeployed(!isProductsListDeployed)}
+            >
+              <span className="cart-section_label">Productos</span>
+              {totalProductCount > 0 && (
+                <span className="cart-section_badge">{totalProductCount}</span>
+              )}
+              <span className={`cart-section_chevron ${isProductsListDeployed ? "cart-section_chevron--open" : ""}`}>
+                ▾
+              </span>
+            </button>
 
-          {isProductsListDeployed && (
-            <div className="products-in-cart_list-container">
+            <div className={`cart-section_list ${isProductsListDeployed ? "cart-section_list--open" : ""}`}>
+              {!productsInCart.length && !productsFromElements.length && (
+                <div className="cart-empty-state">
+                  <p>No hay productos aún</p>
+                </div>
+              )}
               {productsInCart.length > 0 && !user
-                ? productsInCart?.map((product) => (
+                ? productsInCart.map((product) => (
                     <ProductInCartCard
                       key={`product-cart-local-${product.productId}`}
                       product={product}
@@ -155,7 +151,6 @@ function CartModal({ handleCartModal, activeCart }) {
                     />
                   ))
                 : null}
-
               {productsFromElements.map((element) => (
                 <ProductInCartCard
                   key={`product-cart-${element.cartItemId}`}
@@ -168,40 +163,31 @@ function CartModal({ handleCartModal, activeCart }) {
                 />
               ))}
             </div>
-          )}
-        </div>
-
-        {/*  Viandas dentro del carrito */}
-        <div className="cart-modal_viands-list">
-          <div
-            className="cart-option_dropdown-bar"
-            onClick={handleOpenCloseViandsList}
-          >
-            <p>VIANDAS</p>
-            <IoMdArrowDropdown
-              className={`down-arrow ${
-                isViandsListDeployed ? "no-visible-arrow" : null
-              }`}
-            />
-            <IoMdArrowDropup
-              className={`up-arrow ${
-                !isViandsListDeployed ? "no-visible-arrow" : null
-              }`}
-            />
           </div>
 
-          {!viandsInCart.length &&
-            isViandsListDeployed &&
-            !viandsFromElements.length && (
-              <div className="viands-list_modal">
-                <p>No hay viandas agregadas aun.</p>
-              </div>
-            )}
+          {/* Viandas */}
+          <div className="cart-modal_section">
+            <button
+              className="cart-section_header"
+              onClick={() => setIsViandsListDeployed(!isViandsListDeployed)}
+            >
+              <span className="cart-section_label">Viandas</span>
+              {totalViandCount > 0 && (
+                <span className="cart-section_badge">{totalViandCount}</span>
+              )}
+              <span className={`cart-section_chevron ${isViandsListDeployed ? "cart-section_chevron--open" : ""}`}>
+                ▾
+              </span>
+            </button>
 
-          {isViandsListDeployed && (
-            <div className="products-in-cart_list-container">
+            <div className={`cart-section_list ${isViandsListDeployed ? "cart-section_list--open" : ""}`}>
+              {!viandsInCart.length && !viandsFromElements.length && (
+                <div className="cart-empty-state">
+                  <p>No hay viandas aún</p>
+                </div>
+              )}
               {viandsInCart.length > 0 && !user
-                ? viandsInCart?.map((viand) => (
+                ? viandsInCart.map((viand) => (
                     <ProductInCartCard
                       key={`viand-cart-local-${viand.viandId}`}
                       viand={viand}
@@ -212,7 +198,6 @@ function CartModal({ handleCartModal, activeCart }) {
                     />
                   ))
                 : null}
-
               {viandsFromElements.map((element) => (
                 <ProductInCartCard
                   key={`viand-cart-${element.cartItemId}`}
@@ -224,23 +209,25 @@ function CartModal({ handleCartModal, activeCart }) {
                 />
               ))}
             </div>
-          )}
+          </div>
         </div>
 
-        <div className="cart-modal_total">
-          <h2>TOTAL: ${calculateTotal}</h2>
-        </div>
+        {/* ── Footer fijo ── */}
+        <div className="cart-modal_footer">
+          <div className="cart-modal_total">
+            <span className="cart-total_label">Total</span>
+            <span className="cart-total_amount">
+              ${calculateTotal.toLocaleString("es-AR")}
+            </span>
+          </div>
 
-        <div className="cart-modal_buttons">
-          <div className="options-buttons">
+          <div className="cart-modal_buttons">
             <button
-              className="clean-cart"
+              className="cart-btn cart-btn--secondary"
               onClick={user ? handleEmptyCart : handleEmptyLocalStorageCart}
             >
-              Vaciar Carrito
+              Vaciar
             </button>
-          </div>
-          <div className="options-buttons">
             <PreferenceButton
               productsInCart={elementsInCart}
               activeCart={activeCart}
@@ -248,16 +235,10 @@ function CartModal({ handleCartModal, activeCart }) {
               handleCartModal={handleCartModal}
             />
           </div>
-        </div>
 
-        <div className="cart-modal_information">
-          <p>Los precios estan sujetos a posibles variaciones</p>
-        </div>
-
-        <div className="close-modal" onClick={handleCartModal}>
-          <div>
-            <IoIosArrowBack className="back-icon" /> <span>Volver</span>
-          </div>
+          <p className="cart-modal_disclaimer">
+            Los precios están sujetos a posibles variaciones
+          </p>
         </div>
       </div>
     </section>

@@ -9,7 +9,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   margin-top: 0.2rem;
 }
 
@@ -62,7 +61,7 @@
 
 .hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 15;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,6 +128,7 @@
 /* Search pill */
 .hero__search {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 32rem;
   animation: heroContentReveal 0.8s 0.35s ease both;
@@ -168,17 +168,17 @@
    RESPONSIVE
    ===================================================== */
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
   .hero {
-    min-height: 30rem;
+    min-height: 28rem;
   }
 
   .hero__title {
-    font-size: 3.2rem;
+    font-size: 2.9rem;
   }
 
   .hero__content {
-    padding: 4rem 2rem;
+    padding: 3.5rem 2rem;
   }
 
   .hero::after {
@@ -189,23 +189,23 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 480px) {
   .hero {
-    min-height: 26rem;
+    min-height: 24rem;
   }
 
   .hero__title {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .hero__content {
     gap: 1.1rem;
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.25rem;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 360px) {
   .hero__title {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 }

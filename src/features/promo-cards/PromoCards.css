@@ -9,7 +9,26 @@
   width: 90%;
   max-width: 60rem;
   display: flex;
-  gap: 2.5rem;
+  gap: 1.5rem;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .section.promo-cards .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section.promo-cards {
+    padding: 1.5rem 0;
+  }
+
+  .section.promo-cards .container {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 }

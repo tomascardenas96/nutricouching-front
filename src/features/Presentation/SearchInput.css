@@ -16,7 +16,9 @@
   color: var(--clr-ink);
   background-color: var(--clr-white);
   box-shadow: 0 2px 12px rgba(30, 41, 32, 0.09);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .filter-professionals_input::placeholder {
@@ -59,26 +61,26 @@
 .filter-professionals_input ~ .professionals-filter_results-modal {
   position: absolute;
   width: 100%;
-  min-height: 3.5rem;
+  /* min-height: 10rem; */
   background-color: var(--clr-white);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   top: calc(100% + 0.4rem);
   box-shadow: var(--shadow-lg);
-  padding: 0.4rem 0;
+  padding-top: 0.4rem;
   display: flex;
   flex-direction: column;
-  z-index: 50;
   list-style: none;
+  z-index: 100;
+}
 
-  > .results-modal {
-    width: 100%;
-    height: 5rem;
-    display: grid;
-    place-content: center;
-    font-size: 0.82rem;
-    color: var(--clr-mist);
-  }
+.professionals-filter_results-modal > .results-modal {
+  width: 100%;
+  height: 5rem;
+  display: grid;
+  place-content: center;
+  font-size: 0.82rem;
+  color: var(--clr-mist);
 }
 
 .professionals-filter_results-modal .see-all {
@@ -111,6 +113,63 @@
       color: var(--clr-amber);
     }
   }
+}
+
+/* =====================================================
+   SEARCH SKELETON
+   ===================================================== */
+
+.search-skeleton-item {
+  list-style: none;
+  height: 3.2rem;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: center;
+  padding: 0 0.9rem;
+}
+
+.search-skeleton__avatar {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    var(--loading-primary-color) 25%,
+    var(--loading-secondary-color) 50%,
+    var(--loading-primary-color) 75%
+  );
+  background-size: 200% 100%;
+  animation: loaderTransition 1.4s ease-in-out infinite;
+}
+
+.search-skeleton__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.search-skeleton__line {
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--loading-primary-color) 25%,
+    var(--loading-secondary-color) 50%,
+    var(--loading-primary-color) 75%
+  );
+  background-size: 200% 100%;
+  animation: loaderTransition 1.4s ease-in-out infinite;
+}
+
+.search-skeleton__line--name {
+  height: 0.65rem;
+  width: 55%;
+  animation-delay: 0.08s;
+}
+
+.search-skeleton__line--specialty {
+  height: 0.5rem;
+  width: 35%;
+  animation-delay: 0.16s;
 }
 
 /* =====================================================

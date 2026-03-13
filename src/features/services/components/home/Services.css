@@ -68,7 +68,7 @@
    RESPONSIVE
    ===================================================== */
 
-@media screen and (max-width: 970px) {
+@media screen and (max-width: 1024px) {
   .services-strip {
     width: 95%;
     margin-top: -2.5rem;
@@ -79,10 +79,17 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
+  .services-strip {
+    width: 92%;
+    margin-top: -2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
   .services-strip {
     flex-direction: column;
-    margin-top: -2rem;
+    margin-top: -1.5rem;
     width: 90%;
     border-radius: 0.6rem;
   }

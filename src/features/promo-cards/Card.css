@@ -5,9 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 11.5rem;
+  min-height: 10rem;
+  height: auto;
   flex-grow: 1;
-  padding: 0 0.5rem;
+  padding: 1.25rem 1rem;
   font-family: "Neucha", cursive;
   font-weight: 200;
   border-radius: 0.5rem;
@@ -28,4 +29,15 @@
 
 .card__container .card__more {
   font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .card__container {
+    min-height: 8rem;
+  }
+
+  .card__container .card__title,
+  .card__container .card__description {
+    font-size: 1.1rem;
+  }
 }

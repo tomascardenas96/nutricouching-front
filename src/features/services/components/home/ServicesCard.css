@@ -123,15 +123,15 @@
    RESPONSIVE
    ===================================================== */
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 768px) {
   .service-strip__cell {
     padding: 0.95rem 0.85rem;
     gap: 0.6rem;
   }
 
   .service-strip__icon {
-    width: 2rem;
-    height: 2rem;
+    width: 2.2rem;
+    height: 2.2rem;
     font-size: 1rem;
   }
 
@@ -141,5 +141,16 @@
 
   .service-strip__info p {
     display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .service-strip__cell {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .service-strip__info h3 {
+    max-width: none;
   }
 }

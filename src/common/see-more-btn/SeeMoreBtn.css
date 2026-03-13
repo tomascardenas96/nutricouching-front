@@ -6,24 +6,24 @@
 
   div {
     display: flex;
-    gap: 3rem;
+    gap: 4.5rem;
     justify-content: center;
     align-items: center;
     width: 100%;
   }
 }
 
-hr {
+.see-more-btn__container hr {
   flex: 1;
   border: none;
   height: 1px;
   background-color: rgb(199, 199, 199);
-  width: 100px;
+  width: 100%;
 }
 
 .see-more-btn__container .see-more-btn__text {
   width: 10rem;
-  height: 2.6rem;
+  height: 2.75rem;
   background-color: inherit;
   border: 1px solid rgb(145, 145, 145);
   font-family: var(--font-display);
@@ -33,4 +33,15 @@ hr {
 
 .see-more-btn__container .see-more-btn__text:hover {
   background-color: rgb(240, 240, 240);
+}
+
+@media (max-width: 480px) {
+  .see-more-btn__container div {
+    gap: 1rem;
+  }
+
+  .see-more-btn__container .see-more-btn__text {
+    width: 8.5rem;
+    font-size: 0.78rem;
+  }
 }

@@ -145,19 +145,49 @@
    RESPONSIVE
    ===================================================== */
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1024px) {
   .services_container {
     margin-top: 1rem;
   }
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 768px) {
   .home-container .home-section {
-    gap: 2.5rem;
+    gap: 2.75rem;
   }
 
   .home-container .home-section > .section-title > .special-font {
-    font-size: 1.75rem;
+    font-size: 2.1rem;
+  }
+
+  .products_container {
+    padding: 2.5rem 0;
+  }
+
+  .viands_container {
+    padding-bottom: 2.5rem;
+  }
+
+  .recipes_container {
+    padding: 4rem 0;
+  }
+
+  .home-container .quotes-section_container {
+    padding: 4rem 0;
+  }
+
+  .faq_container {
+    padding: 4rem 0 6rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-container .home-section {
+    gap: 2rem;
+  }
+
+  .home-container .home-section > .section-title > .special-font {
+    font-size: 1.65rem;
   }
 
   .services_container {
@@ -166,7 +196,11 @@
   }
 
   .products_container {
-    padding: 3.5rem 0;
+    padding: 2rem 0;
+  }
+
+  .viands_container {
+    padding-bottom: 2rem;
   }
 
   .recipes_container {
@@ -182,6 +216,7 @@
   }
 
   .footer_container {
-    height: 24rem;
+    min-height: 22rem;
+    height: auto;
   }
 }
