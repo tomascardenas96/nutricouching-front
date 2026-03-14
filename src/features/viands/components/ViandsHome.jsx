@@ -38,7 +38,7 @@ function ViandsHome() {
 
   return (
     <div className="viands-home__container">
-      <SectionTitle title="Viandas Saludables" />
+      <SectionTitle title="Viandas Saludables" showText={true} />
 
       {latestViandsLoading ? (
         <ViandsHomeSkeleton />

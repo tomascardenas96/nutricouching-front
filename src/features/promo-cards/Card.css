@@ -19,12 +19,14 @@
 .card__container .card__title {
   color: var(--clr-amber);
   font-size: 1.3rem;
+  opacity: 0.9;
 }
 
 .card__container .card__description {
   text-align: center;
   max-width: 20ch;
   font-size: 1.3rem;
+  color: #000000b0;
 }
 
 .card__container .card__more {

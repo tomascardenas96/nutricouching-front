@@ -29,6 +29,7 @@
   font-family: var(--font-display);
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 0.1rem;
 }
 
 .see-more-btn__container .see-more-btn__text:hover {

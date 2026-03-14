@@ -2,7 +2,7 @@ import "./SectionTitle.css";
 import Cherry from "/assets/icons/cherry.svg";
 import Circle from "/assets/icons/circle.svg";
 
-function SectionTitle({ title }) {
+function SectionTitle({ title, showText }) {
   return (
     <div className="section-title__container">
       <img
@@ -11,9 +11,11 @@ function SectionTitle({ title }) {
         alt="Cherry icon"
       />
 
-      <p className="section-title__click-text">
-        Clickeá para agregar al carrito!
-      </p>
+      {showText && (
+        <p className="section-title__click-text">
+          Clickeá para agregar al carrito!
+        </p>
+      )}
 
       <div className="section-title__title">
         <img className="circle-icon" src={Circle} alt="Circle icon" />

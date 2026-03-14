@@ -21,16 +21,17 @@
 /* Gray rounded image box */
 .product-card__image-wrapper {
   width: 100%;
-  aspect-ratio: 1 / 1;
   height: auto;
-  background: #ebebeb;
-  border-radius: 6px;
+  height: 12rem;
+  background: #ebebeb6e;
+  border-radius: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
   overflow: hidden;
   transition: transform 0.22s ease;
+  border: rgba(88, 108, 92, 0.121) 1px solid;
 }
 
 .product-card:hover:not(:disabled) .product-card__image-wrapper {
@@ -72,10 +73,11 @@
 }
 
 .product-card__price {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--clr-ink);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--clr-forest);
+  margin-bottom: 0.8rem;
 }
 
 .product-card__stock {

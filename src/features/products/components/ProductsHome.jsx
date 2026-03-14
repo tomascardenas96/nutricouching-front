@@ -38,7 +38,7 @@ function ProductsHome() {
 
   return (
     <div className="products-home__container">
-      <SectionTitle title="Nuestros Productos" />
+      <SectionTitle title="Nuestros Productos" showText={true} />
 
       {latestProductsLoading ? (
         <ProductsHomeSkeleton />

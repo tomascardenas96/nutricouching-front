@@ -1,7 +1,7 @@
 .products-carousel__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2.5rem;
+  gap: 4rem;
   width: 100%;
 }
 
