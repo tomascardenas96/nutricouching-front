@@ -1,15 +1,10 @@
-function useRemoveViandFromCart(setViandsInCart, viandsInCart) {
+function useRemoveViandFromCart(setViandsInCart) {
   const handleRemoveViand = (viand) => {
-    const filterViands = viandsInCart?.filter(
-      (via) => via.viandId !== viand.viandId
-    );
-
-    setViandsInCart(filterViands);
-
-    localStorage.setItem(
-      "viands-cart",
-      JSON.stringify({ viands: filterViands })
-    );
+    setViandsInCart((prev) => {
+      const updated = prev.filter((v) => v.viandId !== viand.viandId);
+      localStorage.setItem("viands-cart", JSON.stringify({ viands: updated }));
+      return updated;
+    });
   };
 
   return { handleRemoveViand };

@@ -2,13 +2,14 @@ import { useMemo, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { BsCart3 } from "react-icons/bs";
 import { useAuth } from "../../auth/hooks/useAuth";
-import useAddOrSubtractViand from "../../cart/hooks/useAddOrSubtractViand";
-import { useCartItems } from "../../cart/hooks/useCartItems";
-import useEmptyCart from "../../cart/hooks/useEmptyCart";
-import { useProductCart } from "../../cart/hooks/useProductsCart";
-import useRemoveProductFromCart from "../../cart/hooks/useRemoveProductFromCart";
-import useRemoveViandFromCart from "../../cart/hooks/useRemoveViandFromCart";
-import { useViandsCart } from "../../cart/hooks/useViandsCart";
+import useAddOrSubtractElement from "../hooks/useAddOrSubtractElement";
+import useAddOrSubtractViand from "../hooks/useAddOrSubtractViand";
+import { useCartItems } from "../hooks/useCartItems";
+import useEmptyCart from "../hooks/useEmptyCart";
+import { useProductCart } from "../hooks/useProductsCart";
+import useRemoveProductFromCart from "../hooks/useRemoveProductFromCart";
+import useRemoveViandFromCart from "../hooks/useRemoveViandFromCart";
+import { useViandsCart } from "../hooks/useViandsCart";
 import useAddOrSubtractProduct from "../../products/hooks/useAddOrSubtractProduct";
 import "./CartModal.css";
 import ProductInCartCard from "./ProductInCartCard";
@@ -30,30 +31,14 @@ function CartModal({ handleCartModal, activeCart }) {
     setViandsInCart
   );
 
-  const { handleRemoveProduct } = useRemoveProductFromCart(
-    setProductsInCart,
-    productsInCart
-  );
+  // Guest handlers
+  const { handleRemoveProduct } = useRemoveProductFromCart(setProductsInCart);
+  const { handleRemoveViand } = useRemoveViandFromCart(setViandsInCart);
+  const { addUnityOfProduct, subtractUnityOfProduct } = useAddOrSubtractProduct(setProductsInCart);
+  const { addUnityOfViand, subtractUnityOfViand } = useAddOrSubtractViand(setViandsInCart);
 
-  const { handleRemoveViand } = useRemoveViandFromCart(
-    setViandsInCart,
-    viandsInCart
-  );
-
-  const { addUnityOfProduct, subtractUnityOfProduct } = useAddOrSubtractProduct(
-    activeCart,
-    setProductsInCart,
-    user,
-    elementsInCart,
-    setElementsInCart
-  );
-
-  const { addUnityOfViand, subtractUnityOfViand } = useAddOrSubtractViand(
-    setViandsInCart,
-    user,
-    elementsInCart,
-    setElementsInCart
-  );
+  // Logged-in handlers (operate by cartItemId)
+  const { handleAddOrSubtractElement, handleRemoveElement } = useAddOrSubtractElement(setElementsInCart);
 
   const productsFromElements = useMemo(
     () => elementsInCart.filter((e) => e.product),
@@ -67,21 +52,19 @@ function CartModal({ handleCartModal, activeCart }) {
   const calculateTotal = useMemo(() => {
     if (!user) {
       const subTotalProducts = productsInCart.reduce(
-        (acc, product) => acc + product?.price * product.quantity,
+        (acc, p) => acc + (p?.price ?? 0) * p.quantity,
         0
       );
       const subTotalViands = viandsInCart.reduce(
-        (acc, viand) => acc + viand?.price * viand.quantity,
+        (acc, v) => acc + (v?.price ?? 0) * v.quantity,
         0
       );
       return subTotalProducts + subTotalViands;
     }
-    return elementsInCart.reduce(
-      (acc, element) =>
-        acc + element?.product?.price * element?.quantity ||
-        acc + element?.viand?.price * element?.quantity,
-      0
-    );
+    return elementsInCart.reduce((acc, element) => {
+      const price = element?.product?.price ?? element?.viand?.price ?? 0;
+      return acc + price * (element?.quantity ?? 0);
+    }, 0);
   }, [user, productsInCart, viandsInCart, elementsInCart]);
 
   const totalProductCount = user
@@ -138,28 +121,24 @@ function CartModal({ handleCartModal, activeCart }) {
                   <p>No hay productos aún</p>
                 </div>
               )}
-              {productsInCart.length > 0 && !user
-                ? productsInCart.map((product) => (
-                    <ProductInCartCard
-                      key={`product-cart-local-${product.productId}`}
-                      product={product}
-                      quantity={product.quantity}
-                      remove={handleRemoveProduct}
-                      add={addUnityOfProduct}
-                      subtract={subtractUnityOfProduct}
-                      elementsInCart={elementsInCart}
-                    />
-                  ))
-                : null}
+              {!user && productsInCart.map((product) => (
+                <ProductInCartCard
+                  key={`product-cart-local-${product.productId}`}
+                  product={product}
+                  quantity={product.quantity}
+                  remove={handleRemoveProduct}
+                  add={addUnityOfProduct}
+                  subtract={subtractUnityOfProduct}
+                />
+              ))}
               {productsFromElements.map((element) => (
                 <ProductInCartCard
                   key={`product-cart-${element.cartItemId}`}
                   product={element.product}
                   quantity={element.quantity}
-                  remove={handleRemoveProduct}
-                  add={addUnityOfProduct}
-                  subtract={subtractUnityOfProduct}
-                  elementsInCart={elementsInCart}
+                  remove={() => handleRemoveElement(element.cartItemId)}
+                  add={() => handleAddOrSubtractElement(element.cartItemId, "add")}
+                  subtract={() => handleAddOrSubtractElement(element.cartItemId, "subtract")}
                 />
               ))}
             </div>
@@ -186,26 +165,24 @@ function CartModal({ handleCartModal, activeCart }) {
                   <p>No hay viandas aún</p>
                 </div>
               )}
-              {viandsInCart.length > 0 && !user
-                ? viandsInCart.map((viand) => (
-                    <ProductInCartCard
-                      key={`viand-cart-local-${viand.viandId}`}
-                      viand={viand}
-                      quantity={viand.quantity}
-                      remove={handleRemoveViand}
-                      add={addUnityOfViand}
-                      subtract={subtractUnityOfViand}
-                    />
-                  ))
-                : null}
+              {!user && viandsInCart.map((viand) => (
+                <ProductInCartCard
+                  key={`viand-cart-local-${viand.viandId}`}
+                  viand={viand}
+                  quantity={viand.quantity}
+                  remove={handleRemoveViand}
+                  add={addUnityOfViand}
+                  subtract={subtractUnityOfViand}
+                />
+              ))}
               {viandsFromElements.map((element) => (
                 <ProductInCartCard
                   key={`viand-cart-${element.cartItemId}`}
                   viand={element.viand}
                   quantity={element.quantity}
-                  remove={handleRemoveProduct}
-                  add={addUnityOfProduct}
-                  subtract={subtractUnityOfProduct}
+                  remove={() => handleRemoveElement(element.cartItemId)}
+                  add={() => handleAddOrSubtractElement(element.cartItemId, "add")}
+                  subtract={() => handleAddOrSubtractElement(element.cartItemId, "subtract")}
                 />
               ))}
             </div>

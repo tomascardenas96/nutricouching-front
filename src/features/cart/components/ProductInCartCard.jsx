@@ -1,6 +1,8 @@
 import { IoMdClose } from "react-icons/io";
 import "./ProductInCartCard.css";
 
+const fmt = (n) => (n ?? 0).toLocaleString("es-AR");
+
 function ProductInCartCard({
   product,
   viand,
@@ -28,7 +30,7 @@ function ProductInCartCard({
 
       <div className="cart-product_info">
         <p className="cart-product_description">{item?.name}</p>
-        <p className="cart-product_unit-price">${item?.price} c/u</p>
+        <p className="cart-product_unit-price">${fmt(item?.price)} c/u</p>
 
         <div className="cart-product_row">
           <div className="cart-product_amount">
@@ -37,7 +39,7 @@ function ProductInCartCard({
             <span onClick={() => add(item)}>+</span>
           </div>
           <p className="cart-product_sub-total">
-            ${item?.price * quantity}
+            ${fmt((item?.price ?? 0) * quantity)}
           </p>
         </div>
       </div>

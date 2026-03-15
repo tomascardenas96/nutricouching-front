@@ -1,39 +1,39 @@
+import { toast } from "sonner";
 import apiClient from "../../auth/api/apiClient";
 
-function useAddOrSubtractElement(elementsInCart, setElementsInCart) {
-  const handleAddOrSubtractElement = async (product, cartId, action) => {
+function useAddOrSubtractElement(setElementsInCart) {
+  const handleAddOrSubtractElement = async (cartItemId, action) => {
     try {
-      const { data } = await apiClient.patch(
-        `/cart-item/add-subtract/${cartId}/${
-          product.productId ? product.productId : product.viandId
-        }`,
-        { action }
-      );
+      await apiClient.patch(`/cart-item/add-subtract/${cartItemId}`, { action });
 
       setElementsInCart((prev) => {
-        return prev.map((item) => {
-          if (item.product && item.product.productId === product.productId) {
-            return {
-              ...item,
-              quantity: item.quantity + (action === "add" ? 1 : -1),
-            };
-          } else if (item.viand && item.viand.viandId === product.viandId) {
-            return {
-              ...item,
-              quantity: item.quantity + (action === "add" ? 1 : -1),
-            };
+        if (action === "subtract") {
+          const element = prev.find((e) => e.cartItemId === cartItemId);
+          if (element?.quantity === 1) {
+            return prev.filter((e) => e.cartItemId !== cartItemId);
           }
-          return item;
-        });
+        }
+        return prev.map((item) =>
+          item.cartItemId === cartItemId
+            ? { ...item, quantity: item.quantity + (action === "add" ? 1 : -1) }
+            : item
+        );
       });
-
-      return data;
-    } catch (error) {
-      console.error(error);
+    } catch {
+      toast.error("Error al actualizar el carrito");
     }
   };
 
-  return { handleAddOrSubtractElement };
+  const handleRemoveElement = async (cartItemId) => {
+    setElementsInCart((prev) => prev.filter((e) => e.cartItemId !== cartItemId));
+    try {
+      await apiClient.delete(`/cart-item/item/${cartItemId}`);
+    } catch {
+      toast.error("Error al eliminar el item del carrito");
+    }
+  };
+
+  return { handleAddOrSubtractElement, handleRemoveElement };
 }
 
 export default useAddOrSubtractElement;

@@ -1,4 +1,3 @@
-import { useActiveCart } from "../../cart/hooks/useActiveCart";
 import useAddItemToCart from "../../cart/hooks/useAddItemToCart";
 import { useCartItems } from "../../cart/hooks/useCartItems";
 import SectionTitle from "../../../common/section-title/SectionTitle";
@@ -28,13 +27,8 @@ function ProductsHome() {
   const { latestProducts, latestProductsLoading, latestProductsError } =
     useGetLatestProducts();
 
-  const { activeCart } = useActiveCart();
   const { setElementsInCart } = useCartItems();
-  const { addItemToCart } = useAddItemToCart(
-    "product",
-    setElementsInCart,
-    activeCart,
-  );
+  const { addItemToCart } = useAddItemToCart("product", setElementsInCart);
 
   return (
     <div className="products-home__container">

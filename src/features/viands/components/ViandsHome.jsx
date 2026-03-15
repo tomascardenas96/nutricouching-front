@@ -1,4 +1,3 @@
-import { useActiveCart } from "../../cart/hooks/useActiveCart";
 import useAddItemToCart from "../../cart/hooks/useAddItemToCart";
 import { useCartItems } from "../../cart/hooks/useCartItems";
 import SectionTitle from "../../../common/section-title/SectionTitle";
@@ -28,13 +27,8 @@ function ViandsHome() {
   const { latestViands, latestViandsLoading, latestViandsError } =
     useGetLatestViands();
 
-  const { activeCart } = useActiveCart();
   const { setElementsInCart } = useCartItems();
-  const { addItemToCart } = useAddItemToCart(
-    "viand",
-    setElementsInCart,
-    activeCart,
-  );
+  const { addItemToCart } = useAddItemToCart("viand", setElementsInCart);
 
   return (
     <div className="viands-home__container">

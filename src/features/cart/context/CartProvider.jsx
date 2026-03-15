@@ -10,8 +10,22 @@ function CartProvider({ children }) {
   const [activeCartError, setActiveCartError] = useState(null);
   const [activeCartLoading, setActiveCartLoading] = useState(true);
   const [elementsInCart, setElementsInCart] = useState([]);
-  const [productsInCart, setProductsInCart] = useState([]);
-  const [viandsInCart, setViandsInCart] = useState([]);
+  const [productsInCart, setProductsInCart] = useState(() => {
+    try {
+      const stored = localStorage.getItem("products-cart");
+      return stored ? (JSON.parse(stored).products ?? []) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [viandsInCart, setViandsInCart] = useState(() => {
+    try {
+      const stored = localStorage.getItem("viands-cart");
+      return stored ? (JSON.parse(stored).viands ?? []) : [];
+    } catch {
+      return [];
+    }
+  });
 
   const hasSyncedCart = useRef(false);
 
@@ -33,7 +47,7 @@ function CartProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    if (!user?.isEmailConfirmed) return;
+    if (!user) return;
     handleGetActiveCart();
   }, [user, handleGetActiveCart]);
 

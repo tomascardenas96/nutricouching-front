@@ -1,56 +1,58 @@
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { toast } from "sonner";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { useProductCart } from "./useProductsCart";
+import { useViandsCart } from "./useViandsCart";
 import useAddOneElementToCartWhenLoggedIn from "./useAddOneElementToCartWhenLoggedIn";
 
 const CONFIG = {
   product: {
     storageKey: "products-cart",
-    idField: "productId",
     arrayKey: "products",
+    idField: "productId",
     message: "Producto agregado al carrito",
   },
   viand: {
     storageKey: "viands-cart",
-    idField: "viandId",
     arrayKey: "viands",
+    idField: "viandId",
     message: "Vianda agregada al carrito",
   },
 };
 
-function useAddItemToCart(type, setElementsInCart, activeCart) {
-  const { storageKey, idField, arrayKey, message } = CONFIG[type];
+function useAddItemToCart(type, setElementsInCart) {
+  const { storageKey, arrayKey, idField, message } = CONFIG[type];
   const { user } = useAuth();
-  const [itemsCart, setItemsCart] = useState([]);
+  const { setProductsInCart } = useProductCart();
+  const { setViandsInCart } = useViandsCart();
   const { handleAddOneElementToCart } = useAddOneElementToCartWhenLoggedIn();
 
-  const addItemToCart = async (item) => {
-    if (!user) {
-      const stored = localStorage.getItem(storageKey);
-      const parsed = stored ? JSON.parse(stored) : { [arrayKey]: [] };
+  const setGuestCart = type === "product" ? setProductsInCart : setViandsInCart;
 
-      const existing = parsed[arrayKey].find((i) => i[idField] === item[idField]);
-      if (existing) {
-        existing.quantity += 1;
+  const addItemToCart = useCallback(
+    (item) => {
+      if (!user) {
+        setGuestCart((prev) => {
+          const exists = prev.find((i) => i[idField] === item[idField]);
+          const updated = exists
+            ? prev.map((i) =>
+                i[idField] === item[idField]
+                  ? { ...i, quantity: i.quantity + 1 }
+                  : i
+              )
+            : [...prev, { ...item, quantity: 1 }];
+          localStorage.setItem(storageKey, JSON.stringify({ [arrayKey]: updated }));
+          return updated;
+        });
+        toast.success(message);
       } else {
-        parsed[arrayKey].push({ [idField]: item[idField], quantity: 1 });
+        handleAddOneElementToCart(item, setElementsInCart);
       }
+    },
+    [user, setGuestCart, idField, storageKey, arrayKey, message, handleAddOneElementToCart, setElementsInCart]
+  );
 
-      localStorage.setItem(storageKey, JSON.stringify(parsed));
-      setItemsCart([...parsed[arrayKey]]);
-      toast.success(message);
-    } else {
-      handleAddOneElementToCart(item, activeCart, setElementsInCart);
-    }
-  };
-
-  useEffect(() => {
-    const stored = localStorage.getItem(storageKey);
-    const parsed = stored ? JSON.parse(stored) : { [arrayKey]: [] };
-    setItemsCart([...parsed[arrayKey]]);
-  }, [storageKey, arrayKey]);
-
-  return { addItemToCart, itemsCart, setItemsCart };
+  return { addItemToCart };
 }
 
 export default useAddItemToCart;

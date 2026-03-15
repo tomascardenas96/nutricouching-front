@@ -1,15 +1,10 @@
-function useRemoveProductFromCart(setProductsInCart, productsInCart) {
+function useRemoveProductFromCart(setProductsInCart) {
   const handleRemoveProduct = (product) => {
-    const filterProducts = productsInCart?.filter(
-      (prod) => prod.productId !== product.productId
-    );
-
-    setProductsInCart(filterProducts);
-
-    localStorage.setItem(
-      "products-cart",
-      JSON.stringify({ products: filterProducts })
-    );
+    setProductsInCart((prev) => {
+      const updated = prev.filter((p) => p.productId !== product.productId);
+      localStorage.setItem("products-cart", JSON.stringify({ products: updated }));
+      return updated;
+    });
   };
 
   return { handleRemoveProduct };
