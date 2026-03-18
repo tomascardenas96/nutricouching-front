@@ -58,20 +58,15 @@
    DROPDOWN RESULTS
    ===================================================== */
 
-.filter-professionals_input ~ .professionals-filter_results-modal {
-  position: absolute;
-  width: 100%;
-  /* min-height: 10rem; */
+.professionals-filter_results-modal {
   background-color: var(--clr-white);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
-  top: calc(100% + 0.4rem);
   box-shadow: var(--shadow-lg);
   padding-top: 0.4rem;
   display: flex;
   flex-direction: column;
   list-style: none;
-  z-index: 100;
 }
 
 .professionals-filter_results-modal > .results-modal {
