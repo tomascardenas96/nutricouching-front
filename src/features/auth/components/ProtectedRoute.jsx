@@ -7,7 +7,7 @@ function ProtectedRoute({ allowedRole }) {
 
   if (isLoading) return <FullSpinner />;
 
-  if (user?.role === "root" || user?.role === allowedRole) {
+  if (user?.role === "admin" || user?.role === allowedRole) {
     return <Outlet />;
   }
 

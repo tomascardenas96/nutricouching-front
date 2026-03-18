@@ -11,8 +11,12 @@ const RegisterForm = lazy(() => import("../features/auth/components/RegisterForm
 const ResetPassword = lazy(() => import("../features/auth/pages/ResetPassword"));
 const Home = lazy(() => import("../features/home/pages/Home"));
 const ProfessionalDashboard = lazy(() => import("../features/professional/pages/ProfessionalDashboard"));
-const ProfessionalsFilterPage = lazy(() => import("../features/professional/pages/ProfessionalsFilterPage"));
+const ProfessionalsPage = lazy(() => import("../features/professional/pages/ProfessionalsPage"));
 const Profile = lazy(() => import("../features/profile/pages/Profile"));
+const ProductsPage = lazy(() => import("../features/products/pages/ProductsPage"));
+const ViandsPage = lazy(() => import("../features/viands/pages/ViandsPage"));
+const ContactPage = lazy(() => import("../features/contact/pages/ContactPage"));
+const NotFound = lazy(() => import("../features/not-found/NotFound"));
 
 function GuestRoute() {
   const { user, isLoading } = useAuth();
@@ -40,19 +44,23 @@ export default function AppRoutes() {
         <Route element={<LayoutWrapper />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile/:slug" element={<Profile />} />
-          <Route
-            path="/filter/professionals"
-            element={<ProfessionalsFilterPage />}
-          />
+          <Route path="/professionals" element={<ProfessionalsPage />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-        </Route>
-
-        <Route element={<ProtectedRoute allowedRole="root" />}>
-          <Route path="/root" element={<AdminDashboard />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/viands" element={<ViandsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRole="admin" />}>
+          <Route path="/root" element={<AdminDashboard />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRole="professional" />}>
           <Route path="/professional" element={<ProfessionalDashboard />} />
+        </Route>
+
+        <Route element={<LayoutWrapper />}>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Suspense>
