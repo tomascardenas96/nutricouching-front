@@ -1,48 +1,80 @@
+@keyframes modalBgIn {
+  from { background-color: transparent; backdrop-filter: blur(0); }
+  to { background-color: rgba(20, 28, 22, 0.45); backdrop-filter: blur(4px); }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(0.4rem); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 .modal-cms_add-service_container {
   position: fixed;
   height: 100svh;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.606);
+  background-color: rgba(20, 28, 22, 0.45);
+  backdrop-filter: blur(4px);
   display: grid;
   place-content: center;
+  z-index: 3000;
+  animation: modalBgIn 0.2s ease forwards;
 }
 
 .add-service-modal_form {
   width: 30rem;
   height: 35rem;
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.065);
+  background-color: var(--clr-cream);
+  border-radius: 0.75rem;
+  border: 1px solid var(--clr-border);
+  box-shadow: 0 20px 60px rgba(20, 28, 22, 0.18), 0 4px 16px rgba(20, 28, 22, 0.08);
   display: grid;
-  grid-template-rows: 5rem 1fr 7rem;
+  grid-template-rows: 4.5rem 1fr 5rem;
+  animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  overflow: hidden;
 }
 
 .add-service-modal_form > .add-service_title {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.208);
+  border-bottom: 1px solid var(--clr-border);
   display: grid;
   place-content: center;
   position: relative;
+  background-color: var(--clr-white);
+  border-radius: 0.75rem 0.75rem 0 0;
 
   & h1 {
-    font-family: var(--presentation-banner-font);
-    font-weight: 400;
-    font-size: 1.2rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--clr-ink);
+    letter-spacing: -0.01em;
   }
 
   & .add-service-modal-close {
     position: absolute;
-    right: 2.5rem;
-    top: 2.1rem;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
+    color: var(--clr-mist);
+    font-size: 1rem;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: var(--clr-stone);
+      color: var(--clr-ink);
+    }
   }
 }
 
 .add-service-modal_form > .add-service_body {
   display: grid;
-  grid-template-rows: repeat(3, 1fr) 1.5fr;
+  grid-template-rows: repeat(3, 1fr) auto;
   width: 100%;
+  padding: 0.5rem 2rem;
 
   & label {
     display: flex;
@@ -51,13 +83,26 @@
     width: 100%;
 
     & input {
-      width: 81%;
-      height: 2.5rem;
-      border: none;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.124);
-      padding-left: 0.3rem;
-      font-family: var(--presentation-banner-font);
+      width: 100%;
+      height: 2.4rem;
+      border: 1px solid var(--clr-border);
+      border-radius: 0.4rem;
+      padding: 0 0.85rem;
+      font-size: 0.88rem;
+      font-family: var(--font-body);
+      color: var(--clr-ink);
       outline: none;
+      background-color: var(--clr-white);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+      &::placeholder {
+        color: var(--clr-border);
+      }
+
+      &:focus {
+        border-color: var(--clr-forest);
+        box-shadow: 0 0 0 3px rgba(88, 108, 92, 0.12);
+      }
     }
 
     & input[type="file"] {
@@ -68,15 +113,18 @@
   & .add-service_upload-photo {
     display: flex;
     gap: 1.2rem;
+    align-items: center;
 
     & div {
-      width: 4.2rem;
-      height: 4.2rem;
+      width: 3.4rem;
+      height: 3.4rem;
       border-radius: 50%;
-      border: 1px solid black;
+      border: 1px solid var(--clr-border);
+      overflow: hidden;
+      flex-shrink: 0;
 
       & .add-service_selected-image-preview {
-        padding: 0.1rem;
+        padding: 0;
         opacity: 1;
       }
 
@@ -86,45 +134,120 @@
         object-fit: cover;
         object-position: center;
         border-radius: 50%;
-        padding: 0.7rem;
-        opacity: 0.5;
+        padding: 0.6rem;
+        opacity: 0.4;
       }
     }
 
     & p {
-      font-family: var(--presentation-banner-font);
-      font-size: 0.9rem;
-      color: rgba(0, 0, 0, 0.59);
-      background-color: rgba(0, 0, 0, 0.081);
-      padding: 0.5rem 0.8rem;
+      font-size: 0.82rem;
+      font-family: var(--font-body);
+      color: var(--clr-mist);
+      background-color: var(--clr-stone);
+      border: 1px solid var(--clr-border);
+      border-radius: 0.4rem;
+      padding: 0.4rem 0.9rem;
       cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+
+      &:hover {
+        background-color: var(--clr-border);
+        color: var(--clr-ink);
+      }
     }
   }
 }
 
+/* Footer buttons */
 .add-service-modal_form > .add-service_buttons {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0 1.5rem;
+  border-top: 1px solid var(--clr-border);
+  background-color: var(--clr-white);
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.add-service_buttons > div {
+  display: contents;
+}
+
+.add-cancel-service {
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.add-cancel-service_close {
+  width: 100%;
+  height: 2.3rem;
+  padding: 0 0.75rem;
+  background-color: transparent;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 0.5rem;
+  color: var(--clr-mist);
   display: flex;
-  align-items: start;
-  justify-content: space-around;
-  padding-top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  filter: none;
 
-  & .add-cancel-service {
-    font-size: 1.6rem;
-    cursor: pointer;
-    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.648));
+  &::after {
+    content: "Cancelar";
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--clr-mist);
   }
 
-  & .add-cancel-service_close {
-    color: #cc3f0c;
+  &:hover {
+    background-color: var(--clr-stone);
+    color: var(--clr-ink);
+
+    &::after {
+      color: var(--clr-ink);
+    }
+  }
+}
+
+.add-cancel-service_done {
+  width: 100%;
+  height: 2.3rem;
+  padding: 0 0.75rem;
+  background-color: var(--clr-forest);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  filter: none;
+
+  &::after {
+    content: "Confirmar";
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: white;
   }
 
-  & .add-cancel-service_done {
-    color: #72b01d;
+  &:hover {
+    background-color: var(--clr-forest-dark);
   }
+}
 
-  & .add-cancel-service:active {
-    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.648));
-  }
+.add-service_buttons > div > label {
+  display: contents;
 }
 
 #add-service_submit {

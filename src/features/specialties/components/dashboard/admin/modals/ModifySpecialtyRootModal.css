@@ -8,30 +8,31 @@
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    color: #666;
+    color: var(--clr-mist);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
 
     & input,
     & select {
       height: 2.5rem;
-      border: 1px solid #e2e2e2;
-      border-radius: 0.3rem;
+      border: 1px solid var(--clr-border);
+      border-radius: 0.4rem;
       padding: 0 0.85rem;
       font-size: 0.88rem;
-      color: #222;
+      font-family: var(--font-body);
+      color: var(--clr-ink);
       outline: none;
-      background-color: #fafafa;
-      transition: border-color 0.15s ease;
+      background-color: var(--clr-white);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
       font-weight: 400;
       text-transform: none;
       letter-spacing: normal;
 
       &:focus {
-        border-color: #db5a42;
-        background-color: white;
+        border-color: var(--clr-forest);
+        box-shadow: 0 0 0 3px rgba(88, 108, 92, 0.12);
       }
     }
   }

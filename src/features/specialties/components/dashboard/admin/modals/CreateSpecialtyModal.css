@@ -1,32 +1,50 @@
+@keyframes modalBgIn {
+  from { background-color: transparent; backdrop-filter: blur(0); }
+  to { background-color: rgba(20, 28, 22, 0.45); backdrop-filter: blur(4px); }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(0.4rem); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 .create-specialties_modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100svh;
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(20, 28, 22, 0.45);
+  backdrop-filter: blur(4px);
   z-index: 3000;
   display: grid;
   place-content: center;
+  animation: modalBgIn 0.2s ease forwards;
 
   & > form.specialties-modal {
-    background-color: white;
+    background-color: var(--clr-cream);
     width: 32rem;
     min-height: 19rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    border-radius: 0.75rem;
+    border: 1px solid var(--clr-border);
+    box-shadow: 0 20px 60px rgba(20, 28, 22, 0.18), 0 4px 16px rgba(20, 28, 22, 0.08);
     display: grid;
-    grid-template-rows: 5rem 1fr 7rem;
+    grid-template-rows: 4.5rem 1fr 5rem;
+    animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    overflow: hidden;
 
     > .specialties-modal_header {
       display: grid;
       place-content: center;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--clr-border);
+      background-color: var(--clr-white);
+      border-radius: 0.75rem 0.75rem 0 0;
 
       > h1 {
+        font-family: var(--font-body);
         font-weight: 600;
-        font-size: 1.1rem;
-        color: #1a1a1a;
+        font-size: 0.95rem;
+        color: var(--clr-ink);
         letter-spacing: -0.01em;
       }
     }
@@ -43,31 +61,32 @@
           display: flex;
           flex-direction: column;
           gap: 0.35rem;
-          font-size: 0.75rem;
+          font-size: 0.72rem;
           font-weight: 600;
-          color: #666;
+          color: var(--clr-mist);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
 
           > input,
           > select {
             height: 2.5rem;
             width: 100%;
-            border: 1px solid #e2e2e2;
-            border-radius: 0.3rem;
+            border: 1px solid var(--clr-border);
+            border-radius: 0.4rem;
             padding: 0 0.85rem;
             font-size: 0.88rem;
-            color: #222;
+            font-family: var(--font-body);
+            color: var(--clr-ink);
             outline: none;
-            background-color: #fafafa;
-            transition: border-color 0.15s ease;
+            background-color: var(--clr-white);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
             font-weight: 400;
             text-transform: none;
             letter-spacing: normal;
 
             &:focus {
-              border-color: #db5a42;
-              background-color: white;
+              border-color: var(--clr-forest);
+              box-shadow: 0 0 0 3px rgba(88, 108, 92, 0.12);
             }
           }
         }
@@ -76,56 +95,94 @@
   }
 }
 
+/* Footer buttons */
 .add-specialty_buttons {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0 1.5rem;
+  border-top: 1px solid var(--clr-border);
+  background-color: var(--clr-white);
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.add-specialty_buttons > div {
+  display: contents;
+}
+
+.add-cancel-specialty {
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.add-cancel-specialty_close {
+  width: 100%;
+  height: 2.3rem;
+  padding: 0 0.75rem;
+  background-color: transparent;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 0.5rem;
+  color: var(--clr-mist);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  border-top: 1px solid #f0f0f0;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  box-sizing: border-box;
 
-  & .add-cancel-specialty {
-    font-size: 1rem;
-    cursor: pointer;
-    transition: opacity 0.15s ease, transform 0.1s ease;
-
-    &:active {
-      transform: scale(0.93);
-    }
+  &::after {
+    content: "Cancelar";
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--clr-mist);
   }
 
-  & .add-cancel-specialty_close {
-    width: 2.6rem;
-    height: 2.6rem;
-    padding: 0.7rem;
-    background-color: #fff1f0;
-    border: 1px solid #ffd6d2;
-    border-radius: 50%;
-    color: #d63031;
-    display: grid;
-    place-content: center;
-    box-sizing: border-box;
+  &:hover {
+    background-color: var(--clr-stone);
+    color: var(--clr-ink);
 
-    &:hover {
-      background-color: #ffe0dc;
+    &::after {
+      color: var(--clr-ink);
     }
   }
+}
 
-  & .add-cancel-specialty_done {
-    width: 2.6rem;
-    height: 2.6rem;
-    padding: 0.7rem;
-    background-color: #f0faf0;
-    border: 1px solid #c8e6c8;
-    border-radius: 50%;
-    color: #2e7d32;
-    display: grid;
-    place-content: center;
-    box-sizing: border-box;
+.add-cancel-specialty_done {
+  width: 100%;
+  height: 2.3rem;
+  padding: 0 0.75rem;
+  background-color: var(--clr-forest);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  box-sizing: border-box;
 
-    &:hover {
-      background-color: #ddf0dd;
-    }
+  &::after {
+    content: "Confirmar";
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: white;
   }
+
+  &:hover {
+    background-color: var(--clr-forest-dark);
+  }
+}
+
+.add-specialty_buttons > div > label {
+  display: contents;
 }
 
 #create-specialty {
@@ -139,7 +196,7 @@
 
     & > form.specialties-modal {
       width: 100%;
-      border-radius: 0.6rem 0.6rem 0 0;
+      border-radius: 0.75rem 0.75rem 0 0;
     }
   }
 }
