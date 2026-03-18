@@ -1,10 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import apiClient from "../../../../features/auth/api/apiClient";
 import { useAuth } from "../../../../features/auth/hooks/useAuth";
 import "./OptionsModal.css";
 
+const PROFESSIONAL_ROLES = ["root", "admin", "professional"];
+
 function OptionsModal({ onClose, handleOpenUpdateUserModal, handleLogOut }) {
   const { user } = useAuth();
+
+  const isProfessional = PROFESSIONAL_ROLES.includes(user?.role);
+
+  const { data: activeUser } = useQuery({
+    queryKey: ["active-user"],
+    queryFn: () => apiClient.get("/auth/active-user").then((r) => r.data),
+    enabled: isProfessional,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const profileName = activeUser?.professional?.profile?.profileName;
 
   return (
     <div className="options-modal_container">
@@ -15,10 +30,10 @@ function OptionsModal({ onClose, handleOpenUpdateUserModal, handleLogOut }) {
 
       <div className="options-modal__divider" />
 
-      {user?.professional && (
+      {isProfessional && profileName && (
         <p className="options-modal__item" onClick={onClose}>
-          <Link to={`/profile/${user?.professional?.profile?.profileName}`}>
-            Mi perfil
+          <Link to={`/profile/${profileName}`}>
+            Ver perfil
           </Link>
         </p>
       )}
