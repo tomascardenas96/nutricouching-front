@@ -28,8 +28,6 @@ function BookingsProfessionalDashboard() {
     handleCloseDeleteBookingModal
   );
 
-  console.log(bookings)
-
   return (
     <>
       <div className="bookings-container">
@@ -78,9 +76,6 @@ function BookingsProfessionalDashboard() {
                             Cancelar
                           </p>
                         </td>
-                        <div className="divider-line_container">
-                          <hr className="divider-line" />
-                        </div>
                       </tr>
                     )
                 )

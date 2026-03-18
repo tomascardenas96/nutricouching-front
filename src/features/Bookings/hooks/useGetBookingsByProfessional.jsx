@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../auth/hooks/useAuth";
 import apiClient from "../../auth/api/apiClient";
+import useActiveProfessional from "../../professional/hooks/useActiveProfessional";
 
 function useGetBookingsByProfessional() {
-  const { user } = useAuth();
-  const professionalId = user?.professional?.professionalId;
+  const { professionalId } = useActiveProfessional();
 
   const [bookings, setBookings] = useState([]);
   const [loadingBookings, setLoadingBookings] = useState(false);
   const [errorBookings, setErrorBookings] = useState(null);
 
   useEffect(() => {
+    if (!professionalId) return;
+
     const getBookings = async () => {
       setLoadingBookings(true);
       try {
         const { data } = await apiClient.get(
           `/booking/professional?professionalId=${professionalId}`
         );
-
         setBookings(data);
       } catch (error) {
         setErrorBookings(error.message);
@@ -27,7 +27,7 @@ function useGetBookingsByProfessional() {
     };
 
     getBookings();
-  }, []);
+  }, [professionalId]);
 
   return { bookings, setBookings, loadingBookings, errorBookings };
 }

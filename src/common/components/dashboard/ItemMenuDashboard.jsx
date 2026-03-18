@@ -24,7 +24,8 @@ function ItemMenuDashboard({ option, isSelected, selectOptionDashboardMenu }) {
         {option === "Viandas" && <TbHealthRecognition className="icon" />}
         {option === "Especialidades" && <PiStudentLight className="icon" />}
         {option === "Planes" && <PiTagThin />}
-        {option === "Turnos" && <GoBook />}
+        {option === "Turnos" && <GoBook className="icon" />}
+        {option === "Horarios de Atencion" && <LuTimer className="icon" />}
         {option === "Recursos" && <BiListUl />}
         <span>{option}</span>
       </div>

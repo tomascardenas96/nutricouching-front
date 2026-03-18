@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
-import { useAuth } from "../../../../auth/hooks/useAuth";
+import useActiveProfessional from "../../../../professional/hooks/useActiveProfessional";
 import useGetAllSpecialtiesByProfessional from "../../../hooks/useGetAllSpecialtiesByProfessional";
 import useHandleSpecialtyModals from "../../../hooks/useHandleSpecialtyModals";
 import useHandleUnassignSpecialty from "../../../hooks/useHandleUnassignSpecialty";
@@ -10,9 +10,9 @@ import "./SpecialtiesProfessionalDashboard.css";
 import AssignSpecialtyModal from "./modals/AssignSpecialtyModal";
 
 function SpecialtiesProfessionalDashboard() {
-  const { user } = useAuth();
+  const { professionalId } = useActiveProfessional();
   const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
-    useGetAllSpecialtiesByProfessional(user.professional.professionalId);
+    useGetAllSpecialtiesByProfessional(professionalId);
   const { selectedSpecialty, setSelectedSpecialty } = useSelectSpecialty();
 
   const {
@@ -37,11 +37,11 @@ function SpecialtiesProfessionalDashboard() {
         ) : specialtiesLoading ? (
           <DashboardListSkeleton />
         ) : specialties.length > 0 ? (
-          <table className="users-root-dashboard_table">
+          <table className="specialties-professional-dashboard_table">
             <thead>
               <tr>
                 <th>Especialidad</th>
-                <th className="lastname-column">Categoria</th>
+                <th className="category-column">Categoría</th>
                 <th className="options-column">Opciones</th>
               </tr>
             </thead>
@@ -49,11 +49,11 @@ function SpecialtiesProfessionalDashboard() {
             <tbody>
               {specialties.map((specialty) => (
                 <tr
-                  className="dashboard_users-item"
+                  className="dashboard_professional-item"
                   key={`specialty-${specialty.specialtyId}`}
                 >
                   <td>{specialty.name}</td>
-                  <td className="lastname-row">{specialty.category.name}</td>
+                  <td className="category-row">{specialty.category.name}</td>
                   <td className="options-row">
                     <p
                       className="delete"
@@ -64,9 +64,6 @@ function SpecialtiesProfessionalDashboard() {
                       Eliminar
                     </p>
                   </td>
-                  <div className="divider-line_container">
-                    <hr className="divider-line" />
-                  </div>
                 </tr>
               ))}
             </tbody>

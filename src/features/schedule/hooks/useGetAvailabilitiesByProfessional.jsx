@@ -7,13 +7,14 @@ function useGetAvailabilitiesByProfessional(professionalId) {
   const [availabilitiesError, setAvailabilitiesError] = useState(null);
 
   useEffect(() => {
+    if (!professionalId) return;
+
     const getAvailabilities = async () => {
       setAvailabilitiesLoading(true);
       try {
         const { data } = await apiClient.get(
           `/availability/professional/${professionalId}`
         );
-
         setAvailabilities(data);
       } catch (error) {
         setAvailabilitiesError(error);

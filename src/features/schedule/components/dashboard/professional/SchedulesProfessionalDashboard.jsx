@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import { getSpanishDay } from "../../../../../lib/date";
-import { useAuth } from "../../../../auth/hooks/useAuth";
+import useActiveProfessional from "../../../../professional/hooks/useActiveProfessional";
 import useGetAvailabilitiesByProfessional from "../../../../schedule/hooks/useGetAvailabilitiesByProfessional";
 import useAvailabilityModals from "../../../hooks/useAvailabilityModals";
 import useDeleteTimeSlot from "../../../hooks/useDeleteTimeSlot";
@@ -12,8 +12,7 @@ import "./SchedulesProfessionalDashboard.css";
 import AddScheduleModal from "./modals/AddScheduleModal";
 
 function SchedulesProfessionalDashboard() {
-  const { user } = useAuth();
-  const professionalId = user?.professional?.professionalId;
+  const { professionalId } = useActiveProfessional();
 
   const { selectedAvailability, setSelectedAvailability } =
     useSelectAvailability();
@@ -64,7 +63,7 @@ function SchedulesProfessionalDashboard() {
             <tbody>
               {Object.entries(availabilities).map(([day, schedule]) =>
                 orderSchedules(schedule).map((sched, idx) => (
-                  <tr className="dashboard_professional-item">
+                  <tr className="dashboard_professional-item" key={`${day}-${sched.startTime}-${idx}`}>
                     {idx === 0 && (
                       <td rowSpan={schedule.length} className="day-row">
                         {getSpanishDay(day)}
