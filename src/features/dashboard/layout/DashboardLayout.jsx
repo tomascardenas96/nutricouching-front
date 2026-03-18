@@ -4,6 +4,7 @@ import ProfessionalMenuDashboard from "../../professional/components/dashboard/a
 import DashboardProvider from "../context/DashboardProvider";
 import "./DashboardLayout.css";
 import DashboardMobileMenu from "../components/mobile/DashboardMobileMenu";
+import Logo from "../../../common/logo/Logo";
 
 function DashboardLayout({ children }) {
   const pathname = window.location.pathname;
@@ -17,16 +18,7 @@ function DashboardLayout({ children }) {
         <div className="dashboard">
           <div className="left-menu">
             <div className="dashboard-logo">
-              <a href="/">
-                <div className="logo-container">
-                  <img
-                    src="/assets/nutricouching-logo.jpg"
-                    alt="Nutricoaching dashboard logo"
-                  />
-                  <span>Cohesiva</span>
-                </div>
-                <p>Equilibrio que transforma.</p>
-              </a>
+              <Logo />
             </div>
 
             <div className="menu">

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import useDeleteProduct from "../../../../hooks/useDeleteProduct";
@@ -5,7 +6,7 @@ import "./ProductsCardDashboardMobile.css";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-function ProductsCardDashboardMobile({
+const ProductsCardDashboardMobile = memo(function ProductsCardDashboardMobile({
   product,
   setProducts,
   handleModifyProductModalOpen,
@@ -61,10 +62,10 @@ function ProductsCardDashboardMobile({
             onClose={closeModal}
             message="¿Desea eliminar este producto?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );
-}
+});
 
 export default ProductsCardDashboardMobile;

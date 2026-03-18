@@ -1,18 +1,21 @@
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
+import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import { useSelectMenuOption } from "../../../../dashboard/hooks/useSelectMenuOption";
 import useDeleteSpecialty from "../../../hooks/useDeleteSpecialty";
 import useGetAllSpecialties from "../../../hooks/useGetAllSpecialties";
 import useSelectSpecialty from "../../../hooks/useSelectSpecialty";
 import useSpecialtyModals from "../../../hooks/useSpecialtyModals";
-import "./SpecialtiesRootDashboard.css";
-import ModifySpecialtyRootModal from "./modals/ModifySpecialtyRootModal";
 import CreateSpecialtyModal from "./modals/CreateSpecialtyModal";
-import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import ModifySpecialtyRootModal from "./modals/ModifySpecialtyRootModal";
+import "./SpecialtiesRootDashboard.css";
 
 function SpecialtiesRootDashboard() {
   const { specialties, setSpecialties, errorSpecialties, loadingSpecialties } =
     useGetAllSpecialties();
   const { selectSpecialty, selectedSpecialty } = useSelectSpecialty();
+  const { searchTerm } = useSelectMenuOption();
+
   const {
     isModifySpecialtyModalOpen,
     handleCloseModifyModal,
@@ -24,10 +27,17 @@ function SpecialtiesRootDashboard() {
     isAddSpecialtyModalOpen,
   } = useSpecialtyModals(selectSpecialty);
 
-  const { handleDeleteSpecialty } = useDeleteSpecialty(
-    setSpecialties,
-    handleCloseDeleteModal
-  );
+  const { handleDeleteSpecialty } = useDeleteSpecialty(setSpecialties, handleCloseDeleteModal);
+
+  const filtered = searchTerm
+    ? specialties.filter((s) => {
+        const q = searchTerm.toLowerCase();
+        return (
+          s.name?.toLowerCase().includes(q) ||
+          s.category?.name?.toLowerCase().includes(q)
+        );
+      })
+    : specialties;
 
   return (
     <>
@@ -36,49 +46,39 @@ function SpecialtiesRootDashboard() {
           <p className="error">Ha ocurrido un error</p>
         ) : loadingSpecialties ? (
           <DashboardListSkeleton />
-        ) : specialties?.length ? (
-          <>
-            <table className="specialties-root-dashboard_table">
-              <thead>
-                <tr>
-                  <th>Descripcion</th>
-                  <th>Categoria</th>
-                  <th className="options-column">Opciones</th>
+        ) : filtered.length ? (
+          <table className="specialties-root-dashboard_table">
+            <thead>
+              <tr>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th className="options-column">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((specialty) => (
+                <tr
+                  className="dashboard_specialty-item"
+                  key={`specialty-${specialty.specialtyId}`}
+                >
+                  <td>{specialty.name}</td>
+                  <td className="specialty-row">{specialty.category.name}</td>
+                  <td className="options-row">
+                    <p className="edit" onClick={() => handleOpenModifyModal(specialty)}>
+                      Editar
+                    </p>
+                    <p className="delete" onClick={() => handleOpenDeleteModal(specialty)}>
+                      Eliminar
+                    </p>
+                  </td>
                 </tr>
-              </thead>
-
-              <tbody>
-                {specialties.map((specialty) => (
-                  <tr
-                    className="dashboard_specialty-item"
-                    key={`specialty-${specialty.specialtyId}`}
-                  >
-                    <td>{specialty.name}</td>
-                    <td className="specialty-row">{specialty.category.name}</td>
-                    <td className="options-row">
-                      <p
-                        className="edit"
-                        onClick={() => handleOpenModifyModal(specialty)}
-                      >
-                        Editar
-                      </p>
-                      <p
-                        className="delete"
-                        onClick={() => handleOpenDeleteModal(specialty)}
-                      >
-                        Eliminar
-                      </p>
-                    </td>
-                    <div className="divider-line_container">
-                      <hr className="divider-line" />
-                    </div>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
+              ))}
+            </tbody>
+          </table>
         ) : (
-          <p className="no-specialties">No hay especialidades aún</p>
+          <p className="no-specialties">
+            {searchTerm ? "Sin resultados para la búsqueda" : "No hay especialidades aún"}
+          </p>
         )}
 
         {!errorSpecialties && !loadingSpecialties && (
@@ -94,7 +94,7 @@ function SpecialtiesRootDashboard() {
             closeModal={handleAddSpecialtyModal}
             setSpecialties={setSpecialties}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
 
       {isModifySpecialtyModalOpen &&
@@ -104,19 +104,17 @@ function SpecialtiesRootDashboard() {
             setSpecialties={setSpecialties}
             handleCloseModifyModal={handleCloseModifyModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
 
       {isDeleteSpecialtyModalOpen &&
         createPortal(
           <ConfirmationModal
-            onConfirm={() =>
-              handleDeleteSpecialty(selectedSpecialty.specialtyId)
-            }
+            onConfirm={() => handleDeleteSpecialty(selectedSpecialty.specialtyId)}
             onClose={handleCloseDeleteModal}
             message="¿Desea eliminar la especialidad?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );

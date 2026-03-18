@@ -1,80 +1,56 @@
+import { memo, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import useDeleteResource from "../../../../hooks/useDeleteResource";
-import useHandleResourcesModals from "../../../../hooks/useHandleResourceModals";
 import "./ResourcesCardDashboardMobile.css";
 
-function ResourcesCardDashboardMobile({
+const ResourcesCardDashboardMobile = memo(function ResourcesCardDashboardMobile({
   resource,
   setResources,
   openModifyResourceModal,
-  setSelectedResource,
 }) {
-  const { handleDeleteResource } = useDeleteResource(setResources);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const {
-    isDeleteResourceModalOpen,
-    openDeleteResourceModal,
-    closeDeleteResourceModal,
-  } = useHandleResourcesModals(setSelectedResource);
+  const { handleDeleteResource } = useDeleteResource(setResources, resource.resourceId, () =>
+    setIsDeleteModalOpen(false)
+  );
 
   return (
     <>
       <div className="resource-card-dashboard-container">
         <div className="image-container">
-          <img
-            src={resource.image}
-            alt="foto del recurso del dashboard superuser"
-          />
+          <img src={resource.image} alt="foto del recurso del dashboard superuser" />
         </div>
 
         <div className="info-container">
-          <p className="name">
-            {" "}
-            <b>Nombre:</b>
-            {resource.title}
-          </p>
-
-          <p>
-            <b>Descripción:</b>
-            {resource.description}
-          </p>
-
-          <p>
-            <b>Precio:</b>$ {resource.price}
-          </p>
+          <p className="name">{resource.title}</p>
+          <p className="description">{resource.description}</p>
+          <p className="price">{resource.price === 0 ? "FREE" : `$ ${resource.price}`}</p>
 
           <div className="buttons-container">
-            <button
-              className="edit-btn"
-              onClick={() => openModifyResourceModal(resource)}
-            >
+            <button className="edit-btn" onClick={() => openModifyResourceModal(resource)}>
               <FaEdit /> Editar
             </button>
-            <button
-              className="delete-btn"
-              onClick={() => openDeleteResourceModal(resource.resourceId)}
-            >
-              <MdDelete />
-              Eliminar
+            <button className="delete-btn" onClick={() => setIsDeleteModalOpen(true)}>
+              <MdDelete /> Eliminar
             </button>
           </div>
         </div>
       </div>
 
-      {isDeleteResourceModalOpen &&
+      {isDeleteModalOpen &&
         createPortal(
           <ConfirmationModal
             onConfirm={handleDeleteResource}
-            onClose={closeDeleteResourceModal}
+            onClose={() => setIsDeleteModalOpen(false)}
             message="¿Desea eliminar este recurso?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );
-}
+});
 
 export default ResourcesCardDashboardMobile;

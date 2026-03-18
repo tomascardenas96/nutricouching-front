@@ -38,7 +38,7 @@ function useFilterProfessionals(searchTerm, setSearchTerm) {
       event.preventDefault();
       if (searchTerm.trim()) {
         navigate(
-          `/filter/professionals?name=${encodeURIComponent(searchTerm)}`
+          `/professionals?name=${encodeURIComponent(searchTerm)}`
         );
       }
     }

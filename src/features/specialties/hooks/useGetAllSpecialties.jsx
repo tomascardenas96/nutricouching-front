@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../../auth/api/apiClient";
 
 function useGetAllSpecialties() {
-  const [specialties, setSpecialties] = useState([]);
-  const [loadingSpecialties, setLoadingSpecialties] = useState(false);
-  const [errorSpecialties, setErrorSpecialties] = useState(null);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getSpecialties = async () => {
-      setLoadingSpecialties(true);
-      try {
-        const { data } = await apiClient.get(`/specialty`);
+  const {
+    data: specialties = [],
+    isLoading: loadingSpecialties,
+    isError: errorSpecialties,
+  } = useQuery({
+    queryKey: ["specialties"],
+    queryFn: () => apiClient.get("/specialty").then((r) => r.data),
+  });
 
-        setSpecialties(data);
-      } catch (error) {
-        setErrorSpecialties(error.message);
-      } finally {
-        setLoadingSpecialties(false);
-      }
-    };
-
-    getSpecialties();
-  }, []);
+  const setSpecialties = (updater) =>
+    queryClient.setQueryData(["specialties"], updater);
 
   return { specialties, loadingSpecialties, errorSpecialties, setSpecialties };
 }

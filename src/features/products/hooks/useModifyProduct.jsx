@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import apiClient from "../../auth/api/apiClient";
 
@@ -11,6 +11,15 @@ function useModifyProduct(
   const [fileModifyProduct, setFileModifyProduct] = useState(null);
   const [imagePreviewModifyProduct, setImagePreviewModifyProduct] =
     useState(null);
+  const objectUrlRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmitModifyProduct = (e) => {
     e.preventDefault();
@@ -51,9 +60,7 @@ function useModifyProduct(
         return "Producto modificado exitosamente";
       },
       loading: "Cargando...",
-      error: (error) => {
-        return "Error modificando el producto";
-      },
+      error: () => "Error modificando el producto",
     });
   };
 
@@ -67,7 +74,11 @@ function useModifyProduct(
     setFileModifyProduct(selectedModifyProductFile);
 
     if (selectedModifyProductFile) {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
       const fileURL = URL.createObjectURL(selectedModifyProductFile);
+      objectUrlRef.current = fileURL;
       setImagePreviewModifyProduct(fileURL);
     }
   };

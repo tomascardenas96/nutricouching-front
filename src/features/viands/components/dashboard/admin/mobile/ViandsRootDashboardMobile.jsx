@@ -1,4 +1,6 @@
 import { createPortal } from "react-dom";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import { useSelectMenuOption } from "../../../../../dashboard/hooks/useSelectMenuOption";
 import useGetAllViands from "../../../../hooks/useGetAllViands";
 import useSelectViand from "../../../../hooks/useSelectViand";
 import useViandModals from "../../../../hooks/useViandModals";
@@ -6,11 +8,11 @@ import AddViandModal from "../modals/AddViandModal";
 import ModifyViandModal from "../modals/ModifyViandModal";
 import ViandsCardDashboardMobile from "./ViandsCardDashboardMobile";
 import "./ViandsRootDashboardMobile.css";
-import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function ViandsRootDashboardMobile() {
   const { viands, setViands, viandsLoading, viandsError } = useGetAllViands();
   const { selectedViand, selectViand } = useSelectViand();
+  const { searchTerm } = useSelectMenuOption();
 
   const {
     openEditViandModal,
@@ -20,6 +22,10 @@ function ViandsRootDashboardMobile() {
     isAddViandModalOpen,
   } = useViandModals(selectViand);
 
+  const filtered = searchTerm
+    ? viands.filter((v) => v.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    : viands;
+
   return (
     <>
       <div className="viands-root-dashboard_mobile-container">
@@ -28,11 +34,11 @@ function ViandsRootDashboardMobile() {
             <p className="error">Ha ocurrido un error</p>
           ) : viandsLoading ? (
             <DashboardListSkeleton />
-          ) : viands?.length > 0 ? (
+          ) : filtered.length > 0 ? (
             <div className="split-viands-card">
-              {viands.map((viand) => (
+              {filtered.map((viand) => (
                 <ViandsCardDashboardMobile
-                  hey={`viand-${viand.viandId}`}
+                  key={`viand-${viand.viandId}`}
                   viand={viand}
                   setViands={setViands}
                   handleModifyViandModalOpen={openEditViandModal}
@@ -40,12 +46,14 @@ function ViandsRootDashboardMobile() {
               ))}
             </div>
           ) : (
-            <p className="no-viands">No hay viandas aún</p>
+            <p className="no-viands">
+              {searchTerm ? "Sin resultados para la búsqueda" : "No hay viandas aún"}
+            </p>
           )}
         </div>
 
         {!viandsError && !viandsLoading && (
-          <div className="add-product_btn" onClick={handleAddViandModal}>
+          <div className="add-viand_btn" onClick={handleAddViandModal}>
             <button>Agregar vianda</button>
           </div>
         )}
@@ -58,7 +66,7 @@ function ViandsRootDashboardMobile() {
             setViands={setViands}
             handleModifyViandModalClose={closeEditViandModal}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
 
       {isAddViandModalOpen &&
@@ -67,7 +75,7 @@ function ViandsRootDashboardMobile() {
             handleAddViandModal={handleAddViandModal}
             setViands={setViands}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
     </>
   );

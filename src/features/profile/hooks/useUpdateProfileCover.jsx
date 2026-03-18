@@ -9,8 +9,17 @@ function useUpdateProfileCover(onClose, setProfessionalProfile) {
     "No se seleccionó ningún archivo"
   );
 
+  const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+
   const handleFileChange = (event) => {
     const file = event.target.files?.[0];
+
+    if (file && file.size > MAX_SIZE) {
+      toast.error("El archivo no puede superar los 5 MB");
+      event.target.value = "";
+      return;
+    }
+
     setFile(file);
 
     if (file) {
@@ -38,8 +47,11 @@ function useUpdateProfileCover(onClose, setProfessionalProfile) {
     };
 
     toast.promise(updateProfileCoverPhoto(), {
-      loading: "Actualizando foto de perfil...",
-      error: (error) => error.message,
+      loading: "Actualizando foto de portada...",
+      error: (error) => {
+        if (error?.response?.status === 413) return "El archivo es demasiado grande (máx. 5 MB)";
+        return error?.response?.data?.message || error.message || "Error al actualizar la foto";
+      },
       success: (data) => {
         setProfessionalProfile((prev) => {
           return { ...prev, coverPhoto: data.filename };

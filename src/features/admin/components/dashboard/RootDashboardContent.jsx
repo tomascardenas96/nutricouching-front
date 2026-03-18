@@ -1,84 +1,95 @@
+import { lazy, Suspense } from "react";
 import { useSelectMenuOption } from "../../../dashboard/hooks/useSelectMenuOption";
-import PlansRootDashboardMobile from "../../../plans/components/dashboard/admin/mobile/PlansRootDashboardMobile";
-import PlansRootDashboard from "../../../plans/components/dashboard/admin/PlansRootDashboard";
-import ProductsRootDashboardMobile from "../../../products/components/dashboard/admin/mobile/ProductsRootDashboardMobile";
-import ProductsRootDashboard from "../../../products/components/dashboard/admin/ProductsRootDashboard";
-import ProfessionalsRootDashboardMobile from "../../../professional/components/dashboard/admin/mobile/ProfessionalsRootDashboardMobile";
-import ProfessionalsRootDashboard from "../../../professional/components/dashboard/admin/ProfessionalsRootDashboard";
-import ResourcesRootDashboardMobile from "../../../resources/components/dashboard/admin/mobile/ResourcesRootDashboardMobile";
-import ResourcesRootDashboard from "../../../resources/components/dashboard/admin/ResourcesRootDashboard";
-import SpecialtiesRootDashboardMobile from "../../../specialties/components/dashboard/admin/mobile/SpecialtiesRootDashboardMobile";
-import SpecialtiesRootDashboard from "../../../specialties/components/dashboard/admin/SpecialtiesRootDashboard";
-import UsersRootDashboardMobile from "../../../user/components/dashboard/admin/mobile/UsersRootDashboardMobile";
-import UsersRootDashboard from "../../../user/components/dashboard/admin/UsersRootDashboard";
-import ViandsRootDashboardMobile from "../../../viands/components/dashboard/admin/mobile/ViandsRootDashboardMobile";
-import ViandsRootDashboard from "../../../viands/components/dashboard/admin/ViandsRootDashboard";
+import DashboardListSkeleton from "../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import "./RootDashboardContent.css";
+
+const UsersRootDashboard = lazy(() =>
+  import("../../../user/components/dashboard/admin/UsersRootDashboard")
+);
+const UsersRootDashboardMobile = lazy(() =>
+  import(
+    "../../../user/components/dashboard/admin/mobile/UsersRootDashboardMobile"
+  )
+);
+const ProfessionalsRootDashboard = lazy(() =>
+  import(
+    "../../../professional/components/dashboard/admin/ProfessionalsRootDashboard"
+  )
+);
+const ProfessionalsRootDashboardMobile = lazy(() =>
+  import(
+    "../../../professional/components/dashboard/admin/mobile/ProfessionalsRootDashboardMobile"
+  )
+);
+const ProductsRootDashboard = lazy(() =>
+  import(
+    "../../../products/components/dashboard/admin/ProductsRootDashboard"
+  )
+);
+const ProductsRootDashboardMobile = lazy(() =>
+  import(
+    "../../../products/components/dashboard/admin/mobile/ProductsRootDashboardMobile"
+  )
+);
+const ViandsRootDashboard = lazy(() =>
+  import("../../../viands/components/dashboard/admin/ViandsRootDashboard")
+);
+const ViandsRootDashboardMobile = lazy(() =>
+  import(
+    "../../../viands/components/dashboard/admin/mobile/ViandsRootDashboardMobile"
+  )
+);
+const SpecialtiesRootDashboard = lazy(() =>
+  import(
+    "../../../specialties/components/dashboard/admin/SpecialtiesRootDashboard"
+  )
+);
+const SpecialtiesRootDashboardMobile = lazy(() =>
+  import(
+    "../../../specialties/components/dashboard/admin/mobile/SpecialtiesRootDashboardMobile"
+  )
+);
+const PlansRootDashboard = lazy(() =>
+  import("../../../plans/components/dashboard/admin/PlansRootDashboard")
+);
+const PlansRootDashboardMobile = lazy(() =>
+  import(
+    "../../../plans/components/dashboard/admin/mobile/PlansRootDashboardMobile"
+  )
+);
+const ResourcesRootDashboard = lazy(() =>
+  import("../../../resources/components/dashboard/admin/ResourcesRootDashboard")
+);
+const ResourcesRootDashboardMobile = lazy(() =>
+  import(
+    "../../../resources/components/dashboard/admin/mobile/ResourcesRootDashboardMobile"
+  )
+);
+
+const SECTIONS = {
+  Usuarios: [UsersRootDashboard, UsersRootDashboardMobile],
+  Profesionales: [ProfessionalsRootDashboard, ProfessionalsRootDashboardMobile],
+  Productos: [ProductsRootDashboard, ProductsRootDashboardMobile],
+  Viandas: [ViandsRootDashboard, ViandsRootDashboardMobile],
+  Especialidades: [SpecialtiesRootDashboard, SpecialtiesRootDashboardMobile],
+  Planes: [PlansRootDashboard, PlansRootDashboardMobile],
+  Recursos: [ResourcesRootDashboard, ResourcesRootDashboardMobile],
+};
 
 function RootDashboardContent() {
   const { selectedOption } = useSelectMenuOption();
 
-  if (selectedOption === "Usuarios") {
-    return (
-      <>
-        <UsersRootDashboard />
-        <UsersRootDashboardMobile />
-      </>
-    );
-  }
+  const section = SECTIONS[selectedOption];
+  if (!section) return null;
 
-  if (selectedOption === "Profesionales") {
-    return (
-      <>
-        <ProfessionalsRootDashboard />
-        <ProfessionalsRootDashboardMobile />
-      </>
-    );
-  }
+  const [Desktop, Mobile] = section;
 
-  if (selectedOption === "Productos") {
-    return (
-      <>
-        <ProductsRootDashboard />
-        <ProductsRootDashboardMobile />
-      </>
-    );
-  }
-  if (selectedOption === "Viandas") {
-    return (
-      <>
-        <ViandsRootDashboard />
-        <ViandsRootDashboardMobile />
-      </>
-    );
-  }
-
-  if (selectedOption === "Especialidades") {
-    return (
-      <>
-        <SpecialtiesRootDashboard />
-        <SpecialtiesRootDashboardMobile />
-      </>
-    );
-  }
-
-  if (selectedOption === "Planes") {
-    return (
-      <>
-        <PlansRootDashboard />
-        <PlansRootDashboardMobile />
-      </>
-    );
-  }
-
-  if (selectedOption === "Recursos") {
-    return (
-      <>
-        <ResourcesRootDashboard />
-        <ResourcesRootDashboardMobile />
-      </>
-    );
-  }
+  return (
+    <Suspense fallback={<DashboardListSkeleton />}>
+      <Desktop />
+      <Mobile />
+    </Suspense>
+  );
 }
 
 export default RootDashboardContent;

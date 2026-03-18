@@ -1,16 +1,16 @@
 .profile-posts_left-container {
   width: 100%;
-  background-color: white;
-  border-radius: 0.3rem;
-  border: 1px solid #e4e4e4;
+  background-color: var(--clr-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
 }
 
 @media screen and (max-width: 890px) {
   .profile-posts_left-container {
     width: 20rem;
-    background-color: white;
-    border-radius: 0.3rem;
-    border: 1px solid #e4e4e4;
+    background-color: var(--clr-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--clr-border);
     justify-self: center;
     margin-top: 1rem;
   }

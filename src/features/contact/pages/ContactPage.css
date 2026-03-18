@@ -1,0 +1,475 @@
+/* =====================================================
+   CONTACT PAGE — Two-panel editorial layout
+   ===================================================== */
+
+.cp {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  min-height: calc(100svh - 6.2rem);
+  width: 100%;
+}
+
+/* ── LEFT PANEL ──────────────────────────────────────── */
+.cp__panel {
+  background-color: var(--background-footer-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot grid texture */
+.cp__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(250, 248, 244, 0.045) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+/* Large decorative watermark letter */
+.cp__panel::after {
+  content: "C";
+  position: absolute;
+  bottom: -4rem;
+  right: -3rem;
+  font-family: var(--font-display);
+  font-size: 22rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(250, 248, 244, 0.035);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cp__panel-inner {
+  position: relative;
+  z-index: 1;
+  padding: 4.5rem 3.5rem 4.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+}
+
+/* Eyebrow */
+.cp__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--clr-sage);
+  margin-bottom: 2.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  animation: cpReveal 0.7s ease both;
+}
+
+.cp__eyebrow::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background-color: var(--clr-sage);
+  opacity: 0.7;
+}
+
+/* Big title */
+.cp__title {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 6vw, 6.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  color: var(--clr-cream);
+  margin: 0 0 2rem;
+  letter-spacing: -0.01em;
+  animation: cpReveal 0.7s 0.08s ease both;
+}
+
+.cp__title em {
+  font-style: italic;
+  color: var(--clr-sage);
+}
+
+/* Lead */
+.cp__lead {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(250, 248, 244, 0.5);
+  line-height: 1.8;
+  max-width: 32ch;
+  margin-bottom: 3rem;
+  animation: cpReveal 0.7s 0.14s ease both;
+}
+
+/* Numbered info list */
+.cp__info {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: auto;
+  padding-bottom: 3rem;
+  animation: cpReveal 0.7s 0.2s ease both;
+}
+
+.cp__info-item {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  align-items: start;
+  gap: 0.2rem;
+}
+
+.cp__info-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--clr-sage);
+  opacity: 0.7;
+  padding-top: 0.1rem;
+}
+
+.cp__info-label {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 244, 0.35);
+  margin: 0 0 0.2rem;
+}
+
+.cp__info-value {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(250, 248, 244, 0.75);
+  margin: 0;
+}
+
+.cp__info-value--link {
+  text-decoration: none;
+  color: rgba(250, 248, 244, 0.75);
+  transition: color 0.2s ease;
+}
+
+.cp__info-value--link:hover {
+  color: var(--clr-cream);
+}
+
+/* Divider */
+.cp__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(250, 248, 244, 0.1);
+  margin-bottom: 2rem;
+  animation: cpReveal 0.7s 0.26s ease both;
+}
+
+/* Social icons */
+.cp__social {
+  display: flex;
+  gap: 1rem;
+  animation: cpReveal 0.7s 0.3s ease both;
+}
+
+.cp__social-icon {
+  font-size: 0.9rem;
+  color: rgba(250, 248, 244, 0.3);
+  text-decoration: none;
+  transition: color 0.22s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cp__social-icon:hover {
+  color: var(--clr-cream);
+}
+
+/* ── RIGHT PANEL ─────────────────────────────────────── */
+.cp__form-section {
+  background-color: var(--clr-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5rem 5rem 4.5rem 5rem;
+}
+
+.cp__form-inner {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Form header */
+.cp__form-header {
+  margin-bottom: 3rem;
+  animation: cpReveal 0.7s 0.1s ease both;
+}
+
+.cp__form-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-sage);
+  margin: 0 0 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cp__form-eyebrow::before {
+  content: "";
+  display: block;
+  width: 1.4rem;
+  height: 1px;
+  background-color: var(--clr-sage);
+}
+
+.cp__form-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-ink);
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* Form fields */
+.cp__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cp__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.cp__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: cpReveal 0.55s var(--delay, 0s) ease both;
+}
+
+.cp__field label {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-mist);
+  transition: color 0.2s ease;
+}
+
+.cp__field:focus-within label {
+  color: var(--clr-ink);
+}
+
+/* Underline input wrapper with animated focus line */
+.cp__input-wrap {
+  position: relative;
+}
+
+.cp__input-wrap::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--clr-border);
+}
+
+.cp__input-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--clr-forest-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cp__input-wrap:focus-within::after {
+  transform: scaleX(1);
+}
+
+.cp__input-wrap input,
+.cp__input-wrap textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: none;
+  outline: none;
+  padding: 0.6rem 0 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--clr-ink);
+  resize: none;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.cp__input-wrap input::placeholder,
+.cp__input-wrap textarea::placeholder {
+  color: var(--clr-mist);
+  opacity: 0.5;
+}
+
+/* Submit button */
+.cp__submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3.4rem;
+  padding: 0 1.6rem;
+  background-color: var(--clr-forest-dark);
+  color: var(--clr-cream);
+  border: none;
+  border-radius: 0.1rem;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  animation: cpReveal 0.55s var(--delay, 0s) ease both;
+  margin-top: 0.5rem;
+}
+
+/* Hover fill sweep */
+.cp__submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--clr-amber);
+  transform: translateX(-101%);
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cp__submit:hover:not(:disabled)::before {
+  transform: translateX(0);
+}
+
+.cp__submit-text {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.cp__submit-arrow {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.cp__submit:hover:not(:disabled) .cp__submit-arrow {
+  transform: translateX(4px);
+}
+
+.cp__submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.cp__submit:disabled::before {
+  display: none;
+}
+
+/* ── Entrance animation ───────────────────────────────── */
+@keyframes cpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .cp__panel-inner {
+    padding: 3.5rem 2.5rem 3.5rem 3rem;
+  }
+
+  .cp__form-section {
+    padding: 3.5rem 3rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .cp {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .cp__panel {
+    min-height: auto;
+  }
+
+  .cp__panel-inner {
+    padding: 3rem 2rem 3rem 2.5rem;
+  }
+
+  .cp__panel::after {
+    font-size: 14rem;
+    bottom: -2rem;
+    right: -1.5rem;
+  }
+
+  .cp__title {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cp__info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    padding-bottom: 2rem;
+  }
+
+  .cp__form-section {
+    padding: 3rem 2rem;
+    justify-content: flex-start;
+  }
+
+  .cp__form-inner {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 540px) {
+  .cp__title {
+    font-size: 3.2rem;
+  }
+
+  .cp__row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cp__info {
+    grid-template-columns: 1fr;
+  }
+}

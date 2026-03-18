@@ -8,7 +8,7 @@ import LoaderSpinner from "../../../common/components/LoaderSpinner";
 function CategoryCard({ name }) {
   return (
     <div className="discipline-card">
-      <a href={`/filter/professionals?category=${name.toLowerCase()}`}>
+      <a href="/professionals">
         <div className="icon-container">
           <div>
             {name === "Nutricion" && <CiApple />}

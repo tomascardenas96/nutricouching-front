@@ -1,8 +1,6 @@
 import { IoMdClose, IoMdTime } from "react-icons/io";
-import { HOST } from "../../../../api/data";
 import { MdOutlineFileDownload } from "react-icons/md";
 import "./MoreInfoPlan.css";
-import { useState } from "react";
 
 function MoreInfoPlan({
   image,
@@ -21,8 +19,6 @@ function MoreInfoPlan({
   paymentLoading,
   id,
 }) {
-  const [purchaseLoading, setPurchaseLoading] = useState(false);
-
   const closeModal = () => {
     setSelectedPlan(null);
     handleOpenMoreInfoModal();

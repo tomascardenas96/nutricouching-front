@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import apiClient from "../../auth/api/apiClient";
 import { toast } from "sonner";
 
@@ -11,6 +11,15 @@ function useCreateProduct(setProducts, handleAddProductModal) {
   });
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const objectUrlRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmitCreateProduct = async (e) => {
     e.preventDefault();
@@ -52,7 +61,11 @@ function useCreateProduct(setProducts, handleAddProductModal) {
     setFile(selectedFile);
 
     if (selectedFile) {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
       const fileURL = URL.createObjectURL(selectedFile);
+      objectUrlRef.current = fileURL;
       setImagePreview(fileURL);
     }
   };

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { HOST } from "../../api/data";
+import { IoIosArrowForward } from "react-icons/io";
 import "./ResultCard.css";
 import { professionalSpecialties } from "../../lib/professional";
 
@@ -11,21 +11,24 @@ function ResultCard({ image, fullname, specialties, profilename }) {
       className="result-card"
       onClick={() => navigate(`/profile/${profilename}`)}
     >
-      <div className="result-card_image">
-        <img
-          src={image}
-          alt="Foto del profesional en la busqueda por filtro de Cohesiva Salud"
-        />
+      <div className="result-card__avatar">
+        {image ? (
+          <img src={image} alt={`Foto de ${fullname}`} />
+        ) : (
+          <span className="result-card__avatar-fallback">
+            {fullname?.charAt(0).toUpperCase()}
+          </span>
+        )}
       </div>
 
-      <div className="result-card_info">
-        <p>{fullname}</p>
-        <div>
-          <span>{professionalSpecialties(specialties)}</span>
-        </div>
+      <div className="result-card__body">
+        <span className="result-card__name">{fullname}</span>
+        <span className="result-card__specialty">
+          {professionalSpecialties(specialties)}
+        </span>
       </div>
 
-      <p></p>
+      <IoIosArrowForward className="result-card__arrow" />
     </li>
   );
 }

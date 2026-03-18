@@ -4,33 +4,39 @@
 }
 
 .professional-profile_schedule-section .title {
-  border-radius: 0.3rem 0.3rem 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
   height: 4.6rem;
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--clr-border);
 
   > .icon {
-    background-color: #7fb285;
+    background-color: var(--clr-forest, #3a6b50);
     width: 2.2rem;
     height: 2.2rem;
-    color: white;
+    color: var(--clr-white);
     display: grid;
     place-content: center;
-    font-size: 1.3rem;
-    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
   }
 
   > .text {
     > h1 {
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.01em;
+      color: var(--clr-ink);
     }
 
     > p {
       font-size: 0.65rem;
+      color: var(--clr-mist, #888);
     }
   }
 }
@@ -61,27 +67,36 @@
   margin-top: 0.5rem;
 
   > button {
-    height: 2.2rem;
+    height: 2.4rem;
     width: 100%;
     margin-bottom: 0.7rem;
-    background: linear-gradient(to right, #4c8764, #5dac85);
+    background-color: var(--clr-forest, #3a6b50);
     border: none;
-    border-radius: 0.4rem;
-    color: white;
+    border-radius: var(--radius-sm);
+    color: var(--clr-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 0.9rem;
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 
     > .icon {
       font-size: 1.1rem;
     }
   }
 
+  > button:hover:not(.disabled-btn) {
+    background-color: var(--clr-forest-dark, #2f5841);
+  }
+
   > button.disabled-btn {
-    background: rgb(201, 201, 201);
+    background-color: var(--clr-stone);
+    color: var(--clr-mist, #888);
     cursor: not-allowed;
   }
 }

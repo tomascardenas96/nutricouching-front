@@ -1,33 +1,22 @@
-import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../../auth/api/apiClient";
 
 function useGetAllProducts() {
-  const [products, setProducts] = useState([]);
-  const [productsLoading, setProductsLoading] = useState(true);
-  const [productsError, setProductsError] = useState(false);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const { data } = await apiClient.get("/product");
-        setProducts(data);
-      } catch (error) {
-        console.error(error);
-        setProductsError(true);
-      } finally {
-        setProductsLoading(false);
-      }
-    };
+  const {
+    data: products = [],
+    isLoading: productsLoading,
+    isError: productsError,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => apiClient.get("/product").then((r) => r.data),
+  });
 
-    getProducts();
-  }, [setProducts]);
+  const setProducts = (updater) =>
+    queryClient.setQueryData(["products"], updater);
 
-  return {
-    products,
-    productsLoading,
-    productsError,
-    setProducts,
-  };
+  return { products, productsLoading, productsError, setProducts };
 }
 
 export default useGetAllProducts;

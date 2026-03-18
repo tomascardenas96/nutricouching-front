@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
-import useDeleteSpecialty from "../../../../hooks/useDeleteSpecialty";
+import { useSelectMenuOption } from "../../../../../dashboard/hooks/useSelectMenuOption";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import useSelectSpecialty from "../../../../hooks/useSelectSpecialty";
 import useSpecialtyModals from "../../../../hooks/useSpecialtyModals";
@@ -13,43 +13,49 @@ function SpecialtiesRootDashboardMobile() {
   const { specialties, setSpecialties, errorSpecialties, loadingSpecialties } =
     useGetAllSpecialties();
   const { selectSpecialty, selectedSpecialty } = useSelectSpecialty();
+  const { searchTerm } = useSelectMenuOption();
 
   const {
     isModifySpecialtyModalOpen,
     handleCloseModifyModal,
     handleOpenModifyModal,
-    handleOpenDeleteModal,
-    handleCloseDeleteModal,
-    isDeleteSpecialtyModalOpen,
     handleAddSpecialtyModal,
     isAddSpecialtyModalOpen,
   } = useSpecialtyModals(selectSpecialty);
 
+  const filtered = searchTerm
+    ? specialties.filter((s) => {
+        const q = searchTerm.toLowerCase();
+        return (
+          s.name?.toLowerCase().includes(q) ||
+          s.category?.name?.toLowerCase().includes(q)
+        );
+      })
+    : specialties;
+
   return (
     <>
-      <div className="products-root-dashboard_mobile-container">
-        <div className="products-root-dashboard-mobile">
+      <div className="specialties-root-dashboard_mobile-container">
+        <div className="specialties-root-dashboard-mobile">
           {errorSpecialties ? (
             <p className="error">Ha ocurrido un error</p>
           ) : loadingSpecialties ? (
             <DashboardListSkeleton />
-          ) : specialties?.length > 0 ? (
-            <div className="split-products-card">
-              {specialties.map((specialty) => (
+          ) : filtered.length > 0 ? (
+            <div className="split-specialties-card">
+              {filtered.map((specialty) => (
                 <SpecialtiesCardDashboardMobile
                   key={`specialty-${specialty.specialtyId}`}
                   specialty={specialty}
                   setSpecialties={setSpecialties}
-                  handleOpen={handleOpenModifyModal}
-                  handleOpenDeleteModal={handleOpenDeleteModal}
-                  handleCloseDeleteModal={handleCloseDeleteModal}
-                  isDeleteSpecialtyModalOpen={isDeleteSpecialtyModalOpen}
-                  selectedSpecialty={selectedSpecialty}
+                  handleOpenModifyModal={handleOpenModifyModal}
                 />
               ))}
             </div>
           ) : (
-            <p className="no-specialties">No hay especialidades aún</p>
+            <p className="no-specialties">
+              {searchTerm ? "Sin resultados para la búsqueda" : "No hay especialidades aún"}
+            </p>
           )}
         </div>
 
@@ -67,7 +73,7 @@ function SpecialtiesRootDashboardMobile() {
             setSpecialties={setSpecialties}
             handleCloseModifyModal={handleCloseModifyModal}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
 
       {isAddSpecialtyModalOpen &&
@@ -76,7 +82,7 @@ function SpecialtiesRootDashboardMobile() {
             closeModal={handleAddSpecialtyModal}
             setSpecialties={setSpecialties}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
     </>
   );

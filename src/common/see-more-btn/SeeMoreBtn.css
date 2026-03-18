@@ -22,6 +22,9 @@
 }
 
 .see-more-btn__container .see-more-btn__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 10rem;
   height: 2.75rem;
   background-color: inherit;
@@ -30,6 +33,9 @@
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 0.1rem;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
 }
 
 .see-more-btn__container .see-more-btn__text:hover {

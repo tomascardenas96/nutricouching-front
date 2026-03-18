@@ -8,6 +8,7 @@ function ViandsListDashboard({
 }) {
   return viands.map((viand) => (
     <ViandsCardDashboard
+      key={`viand-${viand.viandId}`}
       viand={viand}
       openEditViandModal={openEditViandModal}
       openDeleteViandModal={openDeleteViandModal}

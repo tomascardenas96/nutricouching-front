@@ -27,8 +27,7 @@ function ProfilePresentation({
 
   const { user } = useAuth();
 
-  const isProfileOwner =
-    user?.professional?.professionalId === professional?.professionalId;
+  const isProfileOwner = !!user && user.email === professional?.email;
 
   return (
     <div className="professional-profile">

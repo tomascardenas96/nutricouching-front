@@ -1,12 +1,12 @@
 .create-post_form {
-  background-color: white;
+  background-color: var(--clr-white);
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
   gap: 1rem;
-  border-radius: 0.3rem;
-  border: 1px solid #e4e4e4;
-  margin-top: 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+  margin-top: 0.5rem;
 
   > textarea {
     resize: none;
@@ -18,9 +18,12 @@
   justify-content: center;
 
   > h1 {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: rgb(72, 72, 72);
+    font-size: 0.65rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clr-mist, #888);
   }
 }
 
@@ -49,11 +52,18 @@
     width: 100%;
     resize: none;
     min-height: 5.5rem;
-    border: 1px solid #e4e4e4;
-    border-radius: 0.2rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
     outline: none;
     padding: 0.5rem;
-    font-family: var(--primary-font);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--clr-ink);
+    transition: border-color 0.2s ease;
+  }
+
+  > textarea:focus {
+    border-color: var(--clr-forest, #3a6b50);
   }
 
   > .image-preview {
@@ -76,7 +86,7 @@
         top: 0;
         right: 0;
         font-size: 0.8rem;
-        background-color: white;
+        background-color: var(--clr-white);
         border-radius: 0 0 0 0.1rem;
         cursor: pointer;
       }

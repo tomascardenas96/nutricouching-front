@@ -12,9 +12,11 @@ import FullSpinner from "../../../common/components/FullSpinner";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 function Profile() {
   const isMobile = useMediaQuery({ query: "(max-width: 890px)" });
+  const { user } = useAuth();
 
   const {
     professional,
@@ -27,6 +29,11 @@ function Profile() {
     useGetProfileByName();
 
   const { selectedOption, handleSelectOption } = useSwitchSectionProfile();
+
+  const isOwnProfile =
+    user?.email && professional?.email
+      ? user.email === professional.email
+      : false;
 
   if (profileLoading || professionalLoading) {
     return (
@@ -89,6 +96,7 @@ function Profile() {
                 profileId={profile?.profileId}
                 profilePicture={profile?.picture}
                 name={professional?.fullname}
+                isOwnProfile={isOwnProfile}
               />
             </div>
           )}

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { toast } from "sonner";
 import apiClient from "../../auth/api/apiClient";
 
@@ -24,7 +23,6 @@ function useDeleteProfessional(
               prof.professionalId !== selectedProfessional.professionalId
           )
         );
-        setIsDeleteProfessionalModalOpen(false);
         return "Profesional eliminado";
       },
       loading: "Cargando...",

@@ -1,17 +1,18 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import { useSelectMenuOption } from "../../../../../dashboard/hooks/useSelectMenuOption";
 import useGetAllProducts from "../../../../hooks/useGetAllProducts";
 import useHandleProductsModals from "../../../../hooks/useHandleProductsModals";
 import AddProductModal from "../modals/AddProductModal";
 import ModifyProductModal from "../modals/ModifyProductModal";
-import "./ProductsRootDashboardMobile.css";
 import ProductsCardDashboardMobile from "./ProductsCardDashboardMobile";
-import { createPortal } from "react-dom";
-import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import "./ProductsRootDashboardMobile.css";
 
 function ProductsRootDashboardMobile() {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const { products, setProducts, productsError, productsLoading } =
-    useGetAllProducts(null, setSelectedProduct);
+  const { products, setProducts, productsError, productsLoading } = useGetAllProducts();
+  const { searchTerm } = useSelectMenuOption();
 
   const {
     handleAddProductModal,
@@ -21,6 +22,10 @@ function ProductsRootDashboardMobile() {
     isModifyProductModalOpen,
   } = useHandleProductsModals(setSelectedProduct);
 
+  const filtered = searchTerm
+    ? products.filter((p) => p.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    : products;
+
   return (
     <>
       <div className="products-root-dashboard_mobile-container">
@@ -29,21 +34,21 @@ function ProductsRootDashboardMobile() {
             <p className="error">Ha ocurrido un error</p>
           ) : productsLoading ? (
             <DashboardListSkeleton />
-          ) : products?.length > 0 ? (
-            <>
-              <div className="split-products-card">
-                {products.map((product) => (
-                  <ProductsCardDashboardMobile
-                    key={`product-${product.productId}`}
-                    product={product}
-                    setProducts={setProducts}
-                    handleModifyProductModalOpen={handleModifyProductModalOpen}
-                  />
-                ))}
-              </div>
-            </>
+          ) : filtered.length > 0 ? (
+            <div className="split-products-card">
+              {filtered.map((product) => (
+                <ProductsCardDashboardMobile
+                  key={`product-${product.productId}`}
+                  product={product}
+                  setProducts={setProducts}
+                  handleModifyProductModalOpen={handleModifyProductModalOpen}
+                />
+              ))}
+            </div>
           ) : (
-            <p className="no-products">No hay productos aún</p>
+            <p className="no-products">
+              {searchTerm ? "Sin resultados para la búsqueda" : "No hay productos aún"}
+            </p>
           )}
         </div>
 
@@ -61,7 +66,7 @@ function ProductsRootDashboardMobile() {
             setProducts={setProducts}
             handleModifyProductModalClose={handleModifyProductModalClose}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
 
       {isAddProductModalOpen &&
@@ -70,7 +75,7 @@ function ProductsRootDashboardMobile() {
             handleAddProductModal={handleAddProductModal}
             setProducts={setProducts}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
     </>
   );

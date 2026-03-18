@@ -1,72 +1,83 @@
 .user-card-dashboard-container {
-  margin: 0 1.5rem;
+  margin: 0 1rem;
   display: flex;
-  gap: 0.8rem;
-  border-bottom: 1px solid rgb(209, 209, 209);
-  padding-bottom: 1.5rem;
-  color: #666666;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding-bottom: 1.2rem;
 }
 
-.user-card-dashboard-container .image-container {
+/* ── Avatar ── */
+.user-card__avatar {
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
-
-  > img {
-    width: 2.8rem;
-    height: 2.8rem;
-    padding: 0.3rem;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
-    border: 1px solid rgb(209, 209, 209);
-  }
-}
-
-.user-card-dashboard-container .info-container {
+  background-color: var(--clr-amber, #c9a84c);
+  color: white;
   display: grid;
-  width: 100%;
-  grid-template-columns: 1fr max-content;
-  justify-content: space-between;
-  gap: 0.2rem;
-
-  > .name {
-    font-size: 0.8rem;
-  }
+  place-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
-.user-card-dashboard-container .info-container .stock-price {
+/* ── Info ── */
+.user-card-dashboard-container .info-container {
   display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.user-card__header {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
-  font-size: 0.8rem;
-  padding-bottom: 0.1rem;
-
-  > p {
-    display: flex;
-    gap: 0.2rem;
-  }
+  flex-wrap: wrap;
 }
 
+.user-card-dashboard-container .name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.user-card-dashboard-container .email {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+/* ── Role badge ── */
+.role-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.role-badge--user         { background-color: #f0f0f0; color: #555; }
+.role-badge--admin        { background-color: #e8f0fe; color: #1a56db; }
+.role-badge--professional { background-color: #e6f4ea; color: #1e7e34; }
+
+/* ── Buttons ── */
 .user-card-dashboard-container .buttons-container {
-  gap: 0.6rem;
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;
-
-  > button {
-    padding: 0.5rem 0.7rem;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: white;
-    border-radius: 0.2rem;
-    font-weight: 400;
-  }
-
-  > .delete-btn {
-    border: 1.3px solid #ca6969;
-    color: #ca6969;
-  }
+  margin-top: 0.4rem;
 }
 
-@media screen and (max-width: 1320px) {
+.user-card-dashboard-container .delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: white;
+  border: 1.3px solid #ca6969;
+  color: #ca6969;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 0.75; }
 }

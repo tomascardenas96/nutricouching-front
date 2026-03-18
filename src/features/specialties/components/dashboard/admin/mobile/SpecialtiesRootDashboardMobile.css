@@ -1,20 +1,18 @@
-.products-root-dashboard_mobile-container {
+.specialties-root-dashboard_mobile-container {
   display: none;
   flex-direction: column;
   margin-top: 1.3rem;
 }
 
-.products-root-dashboard_mobile-container .products-root-dashboard-mobile {
-  > .split-products-card {
+.specialties-root-dashboard_mobile-container .specialties-root-dashboard-mobile {
+  > .split-specialties-card {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 }
 
-.products-root-dashboard_mobile-container
-  .products-root-dashboard-mobile
-  .error {
+.specialties-root-dashboard_mobile-container .error {
   display: flex;
   justify-content: center;
   font-size: 0.9rem;
@@ -22,24 +20,22 @@
   margin: 2rem 0;
 }
 
-.products-root-dashboard_mobile-container
-  .products-root-dashboard-mobile
-  .no-specialties {
+.specialties-root-dashboard_mobile-container .no-specialties {
   display: flex;
   justify-content: center;
   padding: 2rem 0;
-  margin: 0 2rem;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  color: #888;
 }
 
-.products-root-dashboard_mobile-container .add-specialty_btn {
+.specialties-root-dashboard_mobile-container .add-specialty_btn {
   display: flex;
   justify-content: end;
   padding: 0 1.8rem;
 
   > button {
-    padding: 0.6rem 0.6rem;
+    margin-top: 1rem;
+    padding: 0.5rem 0.9rem;
     border: none;
     background-color: #db5a42;
     color: white;
@@ -47,17 +43,12 @@
     border-radius: 0.2rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-  }
+    transition: opacity 0.2s ease;
 
-  > button:hover {
-    background-color: #db5942cb;
+    &:hover { opacity: 0.8; }
   }
 }
 
 @media screen and (max-width: 920px) {
-  .products-root-dashboard_mobile-container {
-    display: flex;
-  }
+  .specialties-root-dashboard_mobile-container { display: flex; }
 }

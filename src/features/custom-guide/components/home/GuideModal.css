@@ -1,4 +1,5 @@
-.modal-overlay {
+/* ── Overlay ─────────────────────────────────────────── */
+.guide-overlay {
   position: fixed;
   inset: 0;
   background: var(--background-shadow-color);
@@ -9,254 +10,201 @@
   z-index: 1000;
 }
 
-/* Contenedor del modal */
-.modal-container {
-  background: #fff;
-  border-radius: 12px;
-  max-width: 800px;
+/* ── Modal container ─────────────────────────────────── */
+.guide-modal {
+  background-color: var(--clr-cream);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
   width: 100%;
+  max-width: 42rem;
   max-height: 90vh;
   overflow-y: auto;
-  padding: 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  padding: 2.5rem 2.8rem;
   position: relative;
-  animation: modalFadeIn 0.2s ease-out;
-  background-color: red;
+  animation: guideFadeIn 0.22s ease-out;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
 }
 
-/* Botón de cierre */
-.modal-close {
+@keyframes guideFadeIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)  scale(1);    }
+}
+
+/* ── Close button ────────────────────────────────────── */
+.guide-modal__close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.3rem;
+  right: 1.3rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
-  color: #555;
+  color: var(--clr-mist);
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.2rem;
+  transition: color 0.2s;
 }
 
-.modal-close:hover {
-  color: #000;
+.guide-modal__close:hover {
+  color: var(--clr-ink);
 }
 
-/* Títulos y textos */
-.modal-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
+/* ── Header ──────────────────────────────────────────── */
+.guide-modal__header {
+  padding-right: 2rem;
+  margin-bottom: 0.2rem;
 }
 
-.modal-subtitle {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-top: 1.5rem;
+.guide-modal__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-amber);
   margin-bottom: 0.5rem;
 }
 
-.modal-text {
-  margin-bottom: 1rem;
-  line-height: 1.6;
+.guide-modal__title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--clr-ink);
+  line-height: 1.2;
+  margin-bottom: 0.9rem;
 }
 
-.modal-list {
-  margin-left: 1.2rem;
-  margin-bottom: 1rem;
-  line-height: 1.6;
+.guide-modal__lead {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--clr-mist);
+  line-height: 1.7;
 }
 
-/* Animación de entrada */
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Ejemplo de botón de la tarjeta */
-.service-card-btn {
-  background-color: #006d77;
-  color: #fff;
+/* ── Divider ─────────────────────────────────────────── */
+.guide-modal__divider {
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
+  border-top: 1px solid var(--clr-border);
+  margin: 1.6rem 0;
 }
 
-.service-card-btn:hover {
-  background-color: #004f55;
-}
-
-/* Fondo oscuro semitransparente */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  z-index: 1000;
-}
-
-/* Contenedor del modal */
-.modal-container {
-  background: #fff;
-  border-radius: 12px;
-  max-width: 700px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
-  position: relative;
-  animation: modalFadeIn 0.2s ease-out;
-}
-
-/* Botón de cierre */
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #555;
-}
-
-.modal-close:hover {
-  color: #000;
-}
-
-.modal-link {
-  border-bottom: 1px solid rgb(180, 180, 180);
-  padding-bottom: 1.8rem;
-
-  > span {
-    padding-right: 0.3rem;
-    color: rgb(47, 47, 175);
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  > span:hover {
-    color: rgb(111, 111, 228);
-  }
-}
-
-/* Títulos y textos */
-.modal-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: .3rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.modal-subtitle {
+/* ── Sections ────────────────────────────────────────── */
+.guide-modal__section-title {
+  font-family: var(--font-display);
   font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--clr-ink);
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
 }
 
-.modal-text {
-  margin-bottom: 1rem;
+.guide-modal__text {
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  color: var(--clr-mist);
+  line-height: 1.75;
+}
+
+/* ── Steps (numbered list) ───────────────────────────── */
+.guide-modal__steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.guide-modal__steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  color: var(--clr-ink);
   line-height: 1.6;
 }
 
-.modal-list {
-  margin-left: 1.2rem;
-  margin-bottom: 1rem;
+.guide-modal__step-num {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--clr-stone);
+  border: 1.5px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--clr-forest-dark);
+  margin-top: 0.05rem;
+}
+
+/* ── CTA link ────────────────────────────────────────── */
+.guide-modal__cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--clr-forest-dark);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--clr-forest-dark);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.guide-modal__cta:hover {
+  color: var(--clr-amber);
+  border-color: var(--clr-amber);
+}
+
+/* ── Benefits list ───────────────────────────────────── */
+.guide-modal__benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.guide-modal__benefits li {
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  color: var(--clr-ink);
   line-height: 1.6;
+  padding-left: 1.1rem;
+  position: relative;
 }
 
-/* Animación de entrada */
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.guide-modal__benefits li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--clr-amber);
 }
 
-/* Ejemplo de botón de la tarjeta */
-.service-card-btn {
-  background-color: #006d77;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
+/* ── Footer section ──────────────────────────────────── */
+.guide-modal__section--footer {
+  padding-bottom: 0.5rem;
 }
 
-.service-card-btn:hover {
-  background-color: #004f55;
-}
-
-/* -------------------- */
-/* 📱 MEDIA QUERIES */
-/* -------------------- */
-
-/* Tablets (<= 768px) */
-@media (max-width: 768px) {
-  .modal-container {
-    max-width: 90%;
-    padding: 1.5rem;
-    max-height: 85vh;
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 600px) {
+  .guide-modal {
+    padding: 1.8rem 1.5rem;
+    max-height: 95vh;
+    border-radius: var(--radius-sm);
   }
 
-  .modal-title {
+  .guide-modal__title {
     font-size: 1.6rem;
-  }
-
-  .modal-subtitle {
-    font-size: 1.2rem;
-  }
-
-  .modal-text,
-  .modal-list {
-    font-size: 0.95rem;
-  }
-}
-
-/* Móviles (<= 480px) */
-@media (max-width: 480px) {
-  .modal-container {
-    max-width: 100%;
-    max-height: 100vh;
-    border-radius: 0; /* ocupa toda la pantalla */
-    padding: 1rem;
-  }
-
-  .modal-title {
-    font-size: 1.4rem;
-  }
-
-  .modal-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .modal-text,
-  .modal-list {
-    font-size: 0.9rem;
-  }
-
-  .modal-close {
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 1.3rem;
   }
 }

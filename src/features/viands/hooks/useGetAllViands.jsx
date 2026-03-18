@@ -1,46 +1,21 @@
-import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../../auth/api/apiClient";
 
 function useGetAllViands() {
-  const [viands, setViands] = useState([]);
-  const [viandsLoading, setViandsLoading] = useState(true);
-  const [viandsError, setViandsError] = useState(false);
-  const [isAddViandModalOpen, setIsAddViandModalOpen] = useState(null);
-  const [isModifyViandModalOpen, setIsModifyViandModalOpen] = useState(null);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getAllViands = async () => {
-      try {
-        const { data } = await apiClient.get("/viand");
-        setViands(data);
-      } catch (error) {
-        setViandsError(true);
-      } finally {
-        setViandsLoading(false);
-      }
-    };
+  const {
+    data: viands = [],
+    isLoading: viandsLoading,
+    isError: viandsError,
+  } = useQuery({
+    queryKey: ["viands"],
+    queryFn: () => apiClient.get("/viand").then((r) => r.data),
+  });
 
-    getAllViands();
-  }, []);
+  const setViands = (updater) => queryClient.setQueryData(["viands"], updater);
 
-  const handleAddViandModal = () => {
-    setIsAddViandModalOpen(!isAddViandModalOpen);
-  };
-
-  const handleModifyViandModal = () => {
-    setIsModifyViandModalOpen(!isModifyViandModalOpen);
-  };
-
-  return {
-    viands,
-    viandsLoading,
-    viandsError,
-    isAddViandModalOpen,
-    isModifyViandModalOpen,
-    handleAddViandModal,
-    handleModifyViandModal,
-    setViands,
-  };
+  return { viands, viandsLoading, viandsError, setViands };
 }
 
 export default useGetAllViands;

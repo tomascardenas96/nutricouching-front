@@ -1,17 +1,14 @@
-import { useAuth } from "../../auth/hooks/useAuth";
 import PostProvider from "../context/PostProvider";
 import CreatePost from "./CreatePost";
 import PostsList from "./PostsList";
 import "./PostsSection.css";
 
-function PostsSection({ profileId, profilePicture, name }) {
-  const { user } = useAuth();
-
+function PostsSection({ profileId, profilePicture, name, isOwnProfile }) {
   return (
     <PostProvider profileId={profileId}>
       <div className="posts-section_container">
         <div>
-          {profileId === user?.professional?.profile?.profileId && (
+          {isOwnProfile && (
             <div className="new-post_section-container">
               <CreatePost profilePicture={profilePicture} />
             </div>

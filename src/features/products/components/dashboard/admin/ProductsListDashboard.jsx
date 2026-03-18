@@ -1,16 +1,12 @@
 import ProductsCardDashboard from "./ProductsCardDashboard";
-import "./ProductsListDashboard.css";
 
-function ProductsListDashboard({
-  products,
-  setProducts,
-  handleModifyProductModalOpen,
-}) {
+function ProductsListDashboard({ products, setProducts, handleModifyProductModalOpen }) {
   return products.map((product) => (
     <ProductsCardDashboard
+      key={`product-${product.productId}`}
       product={product}
-      handleModifyProductModalOpen={handleModifyProductModalOpen}
       setProducts={setProducts}
+      handleModifyProductModalOpen={handleModifyProductModalOpen}
     />
   ));
 }

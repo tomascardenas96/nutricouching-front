@@ -16,7 +16,7 @@ function useHandleCarouselPages(products, itemsPerPage) {
     setCurrentPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
   };
 
-  return { currentPage, currentProducts, nextPage, previousPage, totalPages };
+  return { currentPage, setCurrentPage, currentProducts, nextPage, previousPage, totalPages };
 }
 
 export default useHandleCarouselPages;

@@ -1,47 +1,143 @@
+/* =====================================================
+   RESULT CARD — search dropdown item
+   ===================================================== */
+
 .result-card {
   list-style: none;
-  height: 3.2rem;
-  display: grid;
-  grid-template-columns: 3rem 1fr;
+  position: relative;
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
+  gap: 0.7rem;
+  padding: 0.6rem 1rem 0.6rem 1.2rem;
   cursor: pointer;
-  padding: 0 0.9rem;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.16s ease;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* thin left accent line — grows on hover */
+.result-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 2.5px;
+  border-radius: 999px;
+  background-color: var(--clr-forest, #3a6b50);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .result-card:hover {
-  background-color: var(--clr-stone);
+  background-color: rgba(45, 80, 58, 0.04);
 }
 
-.result-card .result-card_image {
-  display: grid;
-  place-content: center;
-
-  > img {
-    width: 2.1rem;
-    height: 2.1rem;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    border: 1px solid var(--clr-border);
-  }
+.result-card:hover::before {
+  transform: scaleY(1);
 }
 
-.result-card .result-card_info {
+/* separator between cards */
+.result-card + .result-card {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Avatar ─── */
+.result-card__avatar {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: var(--clr-forest, #3a6b50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.16s ease;
+}
+
+.result-card:hover .result-card__avatar {
+  border-color: rgba(45, 80, 58, 0.3);
+}
+
+.result-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.result-card__avatar-fallback {
   font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ─── Body ─── */
+.result-card__body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.1rem;
+  align-items: flex-start;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
 
-  > p {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--clr-ink);
-  }
+.result-card__name {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--clr-ink);
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1.25;
+  transition: color 0.16s ease;
+}
 
-  > div > span {
-    font-size: 0.68rem;
-    color: var(--clr-mist);
-  }
+.result-card:hover .result-card__name {
+  color: var(--clr-forest, #3a6b50);
+}
+
+.result-card__specialty {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--clr-mist, #888);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1;
+}
+
+/* ─── Arrow ─── */
+.result-card__arrow {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--clr-mist, #888);
+  opacity: 0;
+  transform: translateX(-3px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+.result-card:hover .result-card__arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--clr-forest, #3a6b50);
 }

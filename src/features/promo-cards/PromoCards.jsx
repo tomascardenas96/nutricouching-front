@@ -12,6 +12,7 @@ function PromoCards() {
             title={card.title}
             description={card.description}
             color={card.color}
+            path={card.path}
           />
         ))}
       </div>

@@ -1,21 +1,21 @@
+import { memo, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import useDeletePlan from "../../../../hooks/useDeletePlan";
-import useHandlePlanModals from "../../../../hooks/useHandlePlanModals";
 import "./PlansCardDashboardMobile.css";
 
-function PlansCardDashboardMobile({
+const PlansCardDashboardMobile = memo(function PlansCardDashboardMobile({
   plan,
   setPlans,
   openModifyPlanModal,
-  setSelectedPlan,
 }) {
-  const { handleDeletePlan } = useDeletePlan(setPlans);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { isDeletePlanModalOpen, openDeletePlanModal, closeDeletePlanModal } =
-    useHandlePlanModals(setSelectedPlan);
+  const { handleDeletePlan } = useDeletePlan(setPlans, plan.planId, () =>
+    setIsDeleteModalOpen(false)
+  );
 
   return (
     <>
@@ -25,50 +25,32 @@ function PlansCardDashboardMobile({
         </div>
 
         <div className="info-container">
-          <p className="name">
-            {" "}
-            <b>Nombre:</b>
-            {plan.title}
-          </p>
-
-          <p>
-            <b>Descripción:</b>
-            {plan.description}
-          </p>
-
-          <p>
-            <b>Precio:</b>$ {plan.price}
-          </p>
+          <p className="name">{plan.title}</p>
+          <p className="description">{plan.description}</p>
+          <p className="price">{plan.price === 0 ? "FREE" : `$ ${plan.price}`}</p>
 
           <div className="buttons-container">
-            <button
-              className="edit-btn"
-              onClick={() => openModifyPlanModal(plan)}
-            >
+            <button className="edit-btn" onClick={() => openModifyPlanModal(plan)}>
               <FaEdit /> Editar
             </button>
-            <button
-              className="delete-btn"
-              onClick={() => openDeletePlanModal(plan.planId)}
-            >
-              <MdDelete />
-              Eliminar
+            <button className="delete-btn" onClick={() => setIsDeleteModalOpen(true)}>
+              <MdDelete /> Eliminar
             </button>
           </div>
         </div>
       </div>
 
-      {isDeletePlanModalOpen &&
+      {isDeleteModalOpen &&
         createPortal(
           <ConfirmationModal
             onConfirm={handleDeletePlan}
-            onClose={closeDeletePlanModal}
+            onClose={() => setIsDeleteModalOpen(false)}
             message="¿Desea eliminar este plan?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );
-}
+});
 
 export default PlansCardDashboardMobile;

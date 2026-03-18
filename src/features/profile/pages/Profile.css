@@ -14,16 +14,30 @@
   gap: 0.5rem;
 
   > h1 {
-    font-size: 1.1rem;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--clr-ink);
   }
 
   > p {
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
+    color: var(--clr-mist, #888);
+
+    > a {
+      color: var(--clr-forest, #3a6b50);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
 
     > .arrow {
       padding-top: 0.1rem;
@@ -40,10 +54,12 @@
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
+  margin-top: 0.2rem;
 
   > div {
-    width: 83.5rem;
-    padding: 0 1rem;
+    width: 100%;
+    max-width: 83.5rem;
+    padding: 0 1.5rem;
   }
 }
 
@@ -56,62 +72,35 @@
   }
 
   > div {
-    width: 83.5rem;
-    padding: 0 3rem;
+    width: 100%;
+    max-width: 83.5rem;
+    padding: 0 1.5rem;
     display: grid;
     grid-template-columns: 17rem 1fr 17rem;
-    gap: 2rem;
+    gap: 3rem;
   }
 }
 
 .profile-content .content_left-container {
-  padding-top: 1.2rem;
+  padding-top: 0.5rem;
 }
 
 .profile-content .content_right-container {
-  padding-top: 1.2rem;
-}
-
-@media screen and (max-width: 1400px) {
-  .profile-container .presentation-section {
-    > div {
-      width: 75rem;
-    }
-  }
-
-  .profile-container .profile-content {
-    > div {
-      width: 75rem;
-    }
-  }
+  padding-top: 0.5rem;
 }
 
 @media screen and (max-width: 1200px) {
-  .profile-container .presentation-section {
-    > div {
-      width: 65rem;
-    }
-  }
-
   .profile-container .profile-content {
     > div {
-      width: 65rem;
-      padding: 0 0rem;
+      padding: 0 1.5rem;
     }
   }
 }
 
 @media screen and (max-width: 1050px) {
-  .profile-container .presentation-section {
-    > div {
-      width: 57rem;
-    }
-  }
-
   .profile-container .profile-content {
     > div {
-      width: 57rem;
-      padding: 0 3rem;
+      padding: 0 1.5rem;
       grid-template-columns: 17rem 1fr;
       grid-template-rows: repeat(4, max-content);
 

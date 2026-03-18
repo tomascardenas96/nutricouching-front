@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../../auth/api/apiClient";
 
 function useGetAllUsers() {
-  const [users, setUsers] = useState([]);
-  const [usersLoading, setUsersLoading] = useState(true);
-  const [usersError, setUsersError] = useState(null);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const { data } = await apiClient.get("/user");
-        setUsers(data);
-      } catch (error) {
-        setUsersError(error);
-      } finally {
-        setUsersLoading(false);
-      }
-    };
+  const {
+    data: users = [],
+    isLoading: usersLoading,
+    isError: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => apiClient.get("/user").then((r) => r.data),
+  });
 
-    getUsers();
-  }, []);
+  const setUsers = (updater) => queryClient.setQueryData(["users"], updater);
 
   return { users, setUsers, usersLoading, usersError };
 }

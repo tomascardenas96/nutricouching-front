@@ -1,0 +1,286 @@
+.professionals-page {
+  max-width: 1270px;
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem 4rem;
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.professionals-page__header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.professionals-page__header h1 {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: var(--clr-ink);
+  margin: 0;
+}
+
+.professionals-page__count {
+  font-size: 0.9rem;
+  color: var(--clr-mist, #888);
+  margin: 0;
+}
+
+/* ── Filter bar ─────────────────────────────────────────── */
+.professionals-page__filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* Search row */
+.professionals-page__search {
+  position: relative;
+  max-width: 28rem;
+}
+
+.professionals-page__search input {
+  width: 100%;
+  padding: 0.65rem 2.2rem 0.65rem 2.4rem;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 0.15rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.professionals-page__search input:focus {
+  border-color: var(--clr-forest-dark, #3a6b50);
+}
+
+.professionals-page__search-icon {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: var(--clr-mist, #888);
+  pointer-events: none;
+}
+
+.professionals-page__input-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0.2rem;
+  cursor: pointer;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 50%;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.professionals-page__input-clear:hover {
+  color: #555;
+  background-color: #f0f0f0;
+}
+
+/* Selects row */
+.professionals-page__selects {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.professionals-page__select-wrap {
+  position: relative;
+}
+
+.professionals-page__select {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 2.5rem;
+  padding: 0 2.2rem 0 0.85rem;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 0.15rem;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--clr-ink);
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+  min-width: 14rem;
+}
+
+.professionals-page__select:focus {
+  border-color: var(--clr-forest-dark, #3a6b50);
+}
+
+.professionals-page__select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Has active value */
+.professionals-page__select:not(:disabled):has(option[value=""]:not(:checked)) {
+  border-color: var(--clr-forest, #4a7c59);
+  color: var(--clr-forest-dark, #3a6b50);
+}
+
+/* Clear all button */
+.professionals-page__clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.15rem;
+  background: white;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: #666;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+  white-space: nowrap;
+}
+
+.professionals-page__clear-btn:hover {
+  background-color: #fff5f3;
+  border-color: #db5a42;
+  color: #db5a42;
+}
+
+.professionals-page__clear-btn svg {
+  font-size: 1rem;
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.professionals-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card link wrapper */
+.professionals-page__card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* ── Skeleton ─────────────────────────────────────────────── */
+.professionals-page__skeleton {
+  height: 20rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: professionals-shimmer 1.4s infinite;
+}
+
+@keyframes professionals-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Empty / error ────────────────────────────────────────── */
+.professionals-page__message {
+  color: var(--clr-mist, #888);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+/* ── Pagination ───────────────────────────────────────────── */
+.professionals-page__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.professionals-page__pagination-btn,
+.professionals-page__pagination-arrow {
+  min-width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid rgb(199, 199, 199);
+  background: transparent;
+  border-radius: 0.15rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--clr-ink);
+}
+
+.professionals-page__pagination-btn:hover,
+.professionals-page__pagination-arrow:hover:not(:disabled) {
+  background-color: rgb(240, 240, 240);
+}
+
+.professionals-page__pagination-btn.active {
+  background-color: var(--clr-forest-dark, #3a6b50);
+  border-color: var(--clr-forest-dark, #3a6b50);
+  color: #fff;
+}
+
+.professionals-page__pagination-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .professionals-page__selects {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .professionals-page__select-wrap {
+    width: 100%;
+  }
+
+  .professionals-page__select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .professionals-page__clear-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .professionals-page__header h1 {
+    font-size: 1.75rem;
+  }
+
+  .professionals-page__search {
+    max-width: 100%;
+  }
+
+  .professionals-page__grid {
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 1rem;
+  }
+}

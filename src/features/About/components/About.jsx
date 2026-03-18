@@ -43,7 +43,7 @@ function About() {
           ))}
         </ul>
 
-        <Link to="/filter/professionals" className="about__cta">
+        <Link to="/professionals" className="about__cta">
           Ver más
         </Link>
       </div>

@@ -3,12 +3,13 @@ import { DashboardContext } from "./DashboardContext";
 
 function DashboardProvider({ children }) {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const selectOptionDashboardMenu = (option) => {
     setSelectedOption(option);
+    setSearchTerm("");
   };
 
-  // Definimos la opcion por defecto dependiendo si se abre el menu de root o professional.
   useEffect(() => {
     const pathname = window.location.pathname;
     if (pathname === "/root") {
@@ -22,7 +23,7 @@ function DashboardProvider({ children }) {
 
   return (
     <DashboardContext.Provider
-      value={{ selectedOption, selectOptionDashboardMenu }}
+      value={{ selectedOption, selectOptionDashboardMenu, searchTerm, setSearchTerm }}
     >
       {children}
     </DashboardContext.Provider>

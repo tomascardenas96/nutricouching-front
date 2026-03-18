@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import { useSelectMenuOption } from "../../../../../dashboard/hooks/useSelectMenuOption";
 import useGetAllPlans from "../../../../hooks/useGetAllPlans";
 import useHandlePlanModals from "../../../../hooks/useHandlePlanModals";
 import NewPlanModal from "../modals/NewPlanModal";
 import UpdatePlanModal from "../modals/UpdatePlanModal";
 import PlansCardDashboardMobile from "./PlansCardDashboardMobile";
 import "./PlansRootDashboardMobile.css";
-import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function PlansRootDashboardMobile() {
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const { setPlans, flattedPlans, plansError, plansLoading } = useGetAllPlans();
+  const { searchTerm } = useSelectMenuOption();
 
   const {
     isAddPlanModalOpen,
@@ -19,10 +22,9 @@ function PlansRootDashboardMobile() {
     closeModifyPlanModal,
   } = useHandlePlanModals(setSelectedPlan);
 
-  const { setPlans, flattedPlans, plansError, plansLoading } = useGetAllPlans(
-    setSelectedPlan,
-    null
-  );
+  const filtered = searchTerm
+    ? flattedPlans.filter((p) => p.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+    : flattedPlans;
 
   return (
     <>
@@ -32,25 +34,26 @@ function PlansRootDashboardMobile() {
             <p className="error">Ha ocurrido un error</p>
           ) : plansLoading ? (
             <DashboardListSkeleton />
-          ) : flattedPlans?.length > 0 ? (
+          ) : filtered.length > 0 ? (
             <div className="split-plans-card">
-              {flattedPlans.map((plan) => (
+              {filtered.map((plan) => (
                 <PlansCardDashboardMobile
                   key={`plan-${plan.planId}`}
                   plan={plan}
                   setPlans={setPlans}
                   openModifyPlanModal={openModifyPlanModal}
-                  setSelectedPlan={setSelectedPlan}
                 />
               ))}
             </div>
           ) : (
-            <p className="no-plans">No hay planes aún</p>
+            <p className="no-plans">
+              {searchTerm ? "Sin resultados para la búsqueda" : "No hay planes aún"}
+            </p>
           )}
         </div>
 
         {!plansError && !plansLoading && (
-          <div className="add-product_btn" onClick={handleAddPlanModal}>
+          <div className="add-plan_btn" onClick={handleAddPlanModal}>
             <button>Agregar plan</button>
           </div>
         )}
@@ -63,16 +66,13 @@ function PlansRootDashboardMobile() {
             setPlans={setPlans}
             closeModifyPlanModal={closeModifyPlanModal}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
 
       {isAddPlanModalOpen &&
         createPortal(
-          <NewPlanModal
-            setPlans={setPlans}
-            handleAddPlanModal={handleAddPlanModal}
-          />,
-          document.body
+          <NewPlanModal setPlans={setPlans} handleAddPlanModal={handleAddPlanModal} />,
+          document.getElementById("root-portal")
         )}
     </>
   );

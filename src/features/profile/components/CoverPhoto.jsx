@@ -1,8 +1,7 @@
 import { useState } from "react";
-import "./CoverPhoto.css";
-import { FaCamera } from "react-icons/fa";
-import { HOST } from "../../../api/data";
 import { createPortal } from "react-dom";
+import { FaCamera } from "react-icons/fa";
+import "./CoverPhoto.css";
 import UploadCoverModal from "./modals/UploadCoverModal";
 
 function CoverPhoto({
@@ -18,10 +17,9 @@ function CoverPhoto({
     <>
       <div className="cover-photo">
         {!image ? (
-          <img
-            src="/assets/no-pic.jpg"
-            alt="Foto de perfil de profesional sin URL seleccionada"
-          />
+          <div className="cover-photo__default" aria-hidden="true">
+            <div className="cover-photo__default-grain" />
+          </div>
         ) : (
           <img
             src={image}

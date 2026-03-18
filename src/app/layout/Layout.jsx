@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { useSSEEvent } from "../../services/useSSEEvent";
@@ -10,7 +11,10 @@ import Header from "./header/Header";
 import "./Layout.css";
 import NotificationPopUp from "./notifications/NotificationPopUp";
 
+const NO_FOOTER_ROUTES = ["/contact"];
+
 function Layout({ children }) {
+  const { pathname } = useLocation();
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isNotificationsModalOpen, setIsNotificationsModalOpen] =
     useState(false);
@@ -80,16 +84,18 @@ function Layout({ children }) {
           />
         </section>
 
-        {children}
+        <div className="layout-content">{children}</div>
         <Toaster
           toastOptions={{
             style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
           }}
         />
 
-        <section className="footer_container">
-          <Footer />
-        </section>
+        {!NO_FOOTER_ROUTES.includes(pathname) && (
+          <section className="footer_container">
+            <Footer />
+          </section>
+        )}
 
         {/* {user && (
           <NotificationPopUp

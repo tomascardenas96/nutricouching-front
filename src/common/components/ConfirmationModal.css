@@ -4,61 +4,87 @@
   height: 100dvh;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.606);
+  background-color: rgba(0, 0, 0, 0.55);
   display: grid;
   place-content: center;
   z-index: 3000;
 }
 
 .confirmation-modal {
-  width: 28rem;
-  height: 13rem;
+  width: 26rem;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
+  gap: 1.8rem;
+  padding: 2.2rem 2rem 2rem;
 
   & p {
-    font-family: var(--primary-font);
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #222;
+    text-align: center;
+    line-height: 1.5;
   }
 
   & .confirmation-modal_options-icons {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 1rem;
   }
 
   & .confirm-reject_icon {
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     cursor: pointer;
-    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.648));
-  }
+    transition: opacity 0.15s ease, transform 0.1s ease;
 
-  & .confirm-reject_icon:active {
-    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.648));
+    &:active {
+      transform: scale(0.93);
+    }
   }
 
   & .confirm-reject_icon-red {
-    color: #cc3f0c;
+    padding: 0.7rem;
+    background-color: #fff1f0;
+    border: 1px solid #ffd6d2;
+    border-radius: 50%;
+    color: #d63031;
+    width: 2.6rem;
+    height: 2.6rem;
+    display: grid;
+    place-content: center;
+
+    &:hover {
+      background-color: #ffe0dc;
+    }
   }
 
   & .confirm-reject_icon-green {
-    color: #72b01d;
+    padding: 0.7rem;
+    background-color: #f0faf0;
+    border: 1px solid #c8e6c8;
+    border-radius: 50%;
+    color: #2e7d32;
+    width: 2.6rem;
+    height: 2.6rem;
+    display: grid;
+    place-content: center;
+
+    &:hover {
+      background-color: #ddf0dd;
+    }
   }
 }
 
 @media screen and (max-width: 480px) {
-.confirmation-modal {
-  width: 100%;
-  padding: 0 1rem;
-  text-align: center;
-  line-height: 1.7rem;
-  height: 12rem;
-  padding-bottom: .5rem;
-  border-radius: 0;
-}
-
+  .confirmation-modal {
+    width: 100%;
+    border-radius: 0;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
 }

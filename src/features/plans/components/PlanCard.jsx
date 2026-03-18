@@ -1,7 +1,6 @@
 import { BsCart4 } from "react-icons/bs";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { toast } from "sonner";
-import { HOST } from "../../../api/data";
 import CardPrice from "./CardPrice";
 import "./PlanCard.css";
 
@@ -50,7 +49,7 @@ function PlanCard({
       </div>
 
       <div className="card_name-options-container">
-        <h3>{`> ${title}`}</h3>
+        <h3>{title}</h3>
 
         <form onSubmit={(e) => e.preventDefault()}>
           {type === "premium" || type === "off" ? (

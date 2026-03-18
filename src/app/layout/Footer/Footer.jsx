@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Productos", to: "/#products" },
   { label: "Viandas", to: "/#viands" },
   { label: "Testimonios", to: "/#testimonials" },
+  { label: "Contacto", to: "/contact" },
 ];
 
 const SOCIAL_LINKS = [

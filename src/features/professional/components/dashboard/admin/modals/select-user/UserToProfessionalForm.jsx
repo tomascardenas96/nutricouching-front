@@ -40,10 +40,10 @@ function UserToProfessionalForm({
       </div>
 
       <div className="professionals-list_assign-professional">
-        <h1 className="manage-professional-modal_section-title">
-          Designar un profesional:
+        <p className="manage-professional-modal_section-title">
+          Designar un profesional
           <span className="professionals-modal_required-field">*</span>
-        </h1>
+        </p>
         <input
           type="text"
           placeholder="Buscar usuario por e-mail"

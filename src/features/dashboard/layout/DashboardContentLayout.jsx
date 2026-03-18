@@ -1,12 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { IoReturnUpBack, IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import apiClient from "../../auth/api/apiClient";
 import { useAuth } from "../../auth/hooks/useAuth";
 import { useSelectMenuOption } from "../hooks/useSelectMenuOption";
 import "./DashboardContentLayout.css";
 
 function DashboardContentLayout({ children }) {
   const { user } = useAuth();
-  const { selectedOption } = useSelectMenuOption();
+  const { selectedOption, searchTerm, setSearchTerm } = useSelectMenuOption();
+
+  const { data: activeUser } = useQuery({
+    queryKey: ["active-user"],
+    queryFn: async () => {
+      const { data } = await apiClient.get("/auth/active-user");
+      return data;
+    },
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const profilePicture = activeUser?.professional?.profile?.picture;
 
   return (
     <div className="admin-dashboard">
@@ -17,8 +30,8 @@ function DashboardContentLayout({ children }) {
             {user?.name} {user?.lastname}
           </span>
           <img
-            src={user?.professional?.profile?.picture}
-            alt="Foto de perfil de google en el dashboard de Cohesiva"
+            src={profilePicture}
+            alt="Foto de perfil en el dashboard"
           />
         </div>
       </div>
@@ -33,7 +46,12 @@ function DashboardContentLayout({ children }) {
 
             <div className="filter-section">
               <div className="filter">
-                <input type="search" placeholder="Filtrar por nombre" />
+                <input
+                  type="search"
+                  placeholder="Filtrar por nombre"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <IoSearchOutline className="search-icon" />
               </div>
             </div>

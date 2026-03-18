@@ -1,26 +1,27 @@
 import { FaArrowRight } from "react-icons/fa";
-import { HOST } from "../../../../api/data";
 import "./ProfessionalFilterResultCard.css";
 import { professionalSpecialties } from "../../../../lib/professional";
 
 function ProfessionalFilterResultCard({ fullname, image, specialties }) {
   return (
-    <div className="professional-filter-result-card">
-      <div className="result-professional_image">
+    <div className="pro-card">
+      <div className="pro-card__image-wrap">
         <img
-          src={image}
-          alt="Foto de perfil de usuario dentro del filtro"
+          src={image || "/assets/no-picture-profile.webp"}
+          alt={fullname}
+          loading="lazy"
+          onError={(e) => { e.currentTarget.src = "/assets/no-picture-profile.webp"; }}
         />
       </div>
 
-      <div className="result-professional_user-information">
-        <h1>{fullname}</h1>
-        <p>{professionalSpecialties(specialties)}</p>
-      </div>
+      <div className="pro-card__body">
+        <p className="pro-card__specialty">{professionalSpecialties(specialties)}</p>
+        <h2 className="pro-card__name">{fullname}</h2>
 
-      <div className="result-professional_navigate-profile">
-        <p>Ver Perfil</p>
-        <FaArrowRight className="arrow-icon" />
+        <div className="pro-card__cta">
+          Ver perfil
+          <FaArrowRight className="pro-card__cta-arrow" />
+        </div>
       </div>
     </div>
   );

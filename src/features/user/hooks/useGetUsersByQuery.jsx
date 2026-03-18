@@ -1,12 +1,25 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import apiClient from "../../auth/api/apiClient";
 
 function useGetUsersByQuery() {
-  const [usersByQuery, setUsersByQuery] = useState([]);
-  const [usersByQueryLoading, setUsersByQueryLoading] = useState(true);
-  const [usersByQueryError, setUsersByQueryError] = useState(null);
   const [userInputGetUsersByQuery, setUserInputGetUsersByQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
+
+  const {
+    data: allUsers = [],
+    isLoading: usersByQueryLoading,
+    isError: usersByQueryError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => apiClient.get("/user").then((r) => r.data),
+  });
+
+  const usersByQuery = useMemo(() => {
+    if (!userInputGetUsersByQuery.trim()) return [];
+    const q = userInputGetUsersByQuery.toLowerCase();
+    return allUsers.filter((u) => u.email?.toLowerCase().includes(q));
+  }, [allUsers, userInputGetUsersByQuery]);
 
   const handleSelectUserAndCloseModal = (user) => {
     setSelectedUser(user);
@@ -15,21 +28,6 @@ function useGetUsersByQuery() {
 
   const handleUnselectUser = () => {
     setSelectedUser(null);
-  };
-
-  useEffect(() => {
-    handleSubmitGetUsersByQuery();
-  }, [userInputGetUsersByQuery]);
-
-  const handleSubmitGetUsersByQuery = async () => {
-    try {
-      const { data } = await apiClient.get(`/user/filter?email=${userInputGetUsersByQuery}`);
-      setUsersByQuery(data);
-    } catch (error) {
-      setUsersByQueryError(true);
-    } finally {
-      setUsersByQueryLoading(false);
-    }
   };
 
   const handleChangeUserInputUsersByQuery = (e) => {

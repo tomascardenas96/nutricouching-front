@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../../auth/api/apiClient";
 
 function useGetProfessionals() {
-  const [professionals, setProfessionals] = useState([]);
-  const [professionalsLoading, setProfessionalsLoading] = useState(false);
-  const [professionalsError, setProfessionalsError] = useState(false);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const getAllProfessionals = async () => {
-      setProfessionalsLoading(true);
-      try {
-        const { data } = await apiClient.get("/professional");
-        setProfessionals(data);
-      } catch (error) {
-        console.error(error);
-        setProfessionalsError(true);
-      } finally {
-        setProfessionalsLoading(false);
-      }
-    };
+  const {
+    data: professionals = [],
+    isLoading: professionalsLoading,
+    isError: professionalsError,
+  } = useQuery({
+    queryKey: ["professionals"],
+    queryFn: () => apiClient.get("/professional").then((r) => r.data),
+  });
 
-    getAllProfessionals();
-  }, []);
+  const setProfessionals = (updater) =>
+    queryClient.setQueryData(["professionals"], updater);
 
   return {
     professionals,

@@ -1,4 +1,5 @@
 import { createPortal } from "react-dom";
+import { useState } from "react";
 import SpecialtyDropdownNewProfessional from "./SpecialtyDropdownNewProfessional";
 import "./SpecialtyProfessionalForm.css";
 import { GrClose } from "react-icons/gr";
@@ -21,20 +22,43 @@ function SpecialtyProfessionalForm({
   isModalAddSpecialtyOpen,
   setSelectedSpecialties,
 }) {
+  const [inputFocused, setInputFocused] = useState(false);
+
   return (
     <div className="specialty-professional-form_container">
-      <h1 className="manage-professional-modal_section-title">
-        Especialidades:
+      <p className="manage-professional-modal_section-title">
+        Especialidades
         <span className="professionals-modal_required-field">*</span>
-      </h1>
+      </p>
 
-      <input
-        type="text"
-        placeholder="Selecciona una o mas especialidades"
-        className="manage-professional-modal_section-input specialty-input"
-        onChange={handleChangeSpecialtiesUserInput}
-        value={specialtiesUserInput}
-      />
+      <div style={{ position: "relative" }}>
+        <input
+          type="text"
+          placeholder="Selecciona una o mas especialidades"
+          className="manage-professional-modal_section-input specialty-input"
+          onChange={handleChangeSpecialtiesUserInput}
+          value={specialtiesUserInput}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setTimeout(() => setInputFocused(false), 150)}
+        />
+
+        {(specialtiesUserInput || inputFocused) && (
+          <SpecialtyDropdownNewProfessional
+            specialties={specialties}
+            specialtiesLoading={specialtiesLoading}
+            specialtiesError={specialtiesError}
+            handleSelectSpecialty={handleSelectSpecialty}
+            handleUnselectSpecialty={handleUnselectSpecialty}
+            setSpecialties={setSpecialties}
+            handleChangeCreateSpecialty={handleChangeCreateSpecialty}
+            handleCloseAddSpecialtyModal={handleCloseAddSpecialtyModal}
+            handleOpenAddSpecialtyModal={handleOpenAddSpecialtyModal}
+            handleSubmitCreateSpecialty={handleSubmitCreateSpecialty}
+            isModalAddSpecialtyOpen={isModalAddSpecialtyOpen}
+            setSelectedSpecialties={setSelectedSpecialties}
+          />
+        )}
+      </div>
 
       {selectedSpecialties?.length ? (
         <ul className="selected-specialties_card">
@@ -52,23 +76,6 @@ function SpecialtyProfessionalForm({
         <p className="professional-modal_no-selected-data">
           No hay especialidades seleccionadas
         </p>
-      )}
-
-      {specialtiesUserInput && (
-        <SpecialtyDropdownNewProfessional
-          specialties={specialties}
-          specialtiesLoading={specialtiesLoading}
-          specialtiesError={specialtiesError}
-          handleSelectSpecialty={handleSelectSpecialty}
-          handleUnselectSpecialty={handleUnselectSpecialty}
-          setSpecialties={setSpecialties}
-          handleChangeCreateSpecialty={handleChangeCreateSpecialty}
-          handleCloseAddSpecialtyModal={handleCloseAddSpecialtyModal}
-          handleOpenAddSpecialtyModal={handleOpenAddSpecialtyModal}
-          handleSubmitCreateSpecialty={handleSubmitCreateSpecialty}
-          isModalAddSpecialtyOpen={isModalAddSpecialtyOpen}
-          setSelectedSpecialties={setSelectedSpecialties}
-        />
       )}
 
       {isModalAddSpecialtyOpen &&

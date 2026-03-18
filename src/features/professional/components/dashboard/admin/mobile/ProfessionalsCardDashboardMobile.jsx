@@ -1,53 +1,59 @@
+import { memo } from "react";
 import { createPortal } from "react-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import useDeleteProfessional from "../../../../hooks/useDeleteProfessional";
+import useProfessionalModals from "../../../../hooks/useProfessionalModals";
 import "./ProfessionalsCardDashboardMobile.css";
 
-function ProfessionalsCardDashboardMobile({
-  selectedProfessional,
+const ROLE_LABELS = { admin: "Admin", professional: "Profesional", user: "Usuario" };
+
+const ProfessionalsCardDashboardMobile = memo(function ProfessionalsCardDashboardMobile({
   professional,
   setProfessionals,
   handleModifyProfessionalModalOpen,
-  closeModal,
-  handleDeleteProfessionalModalOpen,
-  handleCloseDeleteModal,
-  isDeleteProfessionalModalOpen,
 }) {
+  const { selectedProfessional, setSelectedProfessional } = { selectedProfessional: null, setSelectedProfessional: () => {} };
+
+  const {
+    isDeleteProfessionalModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+  } = useProfessionalModals(setSelectedProfessional);
+
   const { handleDeleteProfessional } = useDeleteProfessional(
     setProfessionals,
-    selectedProfessional,
+    professional,
     handleCloseDeleteModal
   );
-
-  console.log(professional);
 
   return (
     <>
       <div className="professional-card-dashboard-container">
         <div className="image-container">
-          <img
-            src={professional.profile.picture}
-            alt="foto del profesional del dashboard superuser"
-          />
+          {professional?.profile?.picture ? (
+            <img
+              src={professional.profile.picture}
+              alt={professional.fullname}
+            />
+          ) : (
+            <div className="professional-card__avatar">
+              {professional.fullname?.[0]?.toUpperCase()}
+            </div>
+          )}
         </div>
 
         <div className="info-container">
-          <p className="name">
-            {" "}
-            <b>Nombre:</b>
-            {professional.fullname}
-          </p>
+          <div className="professional-card__header">
+            <p className="name">{professional.fullname}</p>
+            <span className={`role-badge role-badge--${professional.role}`}>
+              {ROLE_LABELS[professional.role] ?? professional.role}
+            </span>
+          </div>
 
-          <p>
-            <b>E-mail:</b>
-            {professional.email}
-          </p>
-          <p>
-            <b>Role:</b>
-            {professional.role}
-          </p>
+          <p className="email">{professional.email}</p>
+          {professional.phone && <p className="phone">{professional.phone}</p>}
 
           <div className="buttons-container">
             <button
@@ -58,12 +64,9 @@ function ProfessionalsCardDashboardMobile({
             </button>
             <button
               className="delete-btn"
-              onClick={() =>
-                handleDeleteProfessionalModalOpen(professional.professionalId)
-              }
+              onClick={() => handleOpenDeleteModal(professional)}
             >
-              <MdDelete />
-              Eliminar
+              <MdDelete /> Eliminar
             </button>
           </div>
         </div>
@@ -73,13 +76,13 @@ function ProfessionalsCardDashboardMobile({
         createPortal(
           <ConfirmationModal
             onConfirm={handleDeleteProfessional}
-            onClose={closeModal}
+            onClose={handleCloseDeleteModal}
             message="¿Desea eliminar este profesional?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );
-}
+});
 
 export default ProfessionalsCardDashboardMobile;

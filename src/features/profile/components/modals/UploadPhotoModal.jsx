@@ -20,9 +20,9 @@ function UploadPhotoModal({ profileId, onClose, setProfessionalProfile }) {
       isButtonEnabled={!!!noFileSelected}
     >
       <div className="upload-photo-modal">
-        <label className="upload-photo_input" htmlFor="upload-photo">
+        <label className="upload-photo_input" htmlFor="upload-profile-photo">
           <div>
-            <input type="file" id="upload-photo" onChange={handleFileChange} />
+            <input type="file" id="upload-profile-photo" onChange={handleFileChange} />
             <FaCamera />
             Subir foto
           </div>

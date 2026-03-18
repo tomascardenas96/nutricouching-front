@@ -1,5 +1,7 @@
-import React from "react";
 import "./ScheduleNewProfessionalForm.css";
+
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const DAY_LABELS = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"];
 
 function ScheduleNewProfessionalForm({
   handleChangeDaysSchedule,
@@ -11,30 +13,33 @@ function ScheduleNewProfessionalForm({
 }) {
   return (
     <>
-      <h1 className="manage-professional-modal_section-title">
+      <p className="schedule-section-title">
         Horarios de atención
         <span className="professionals-modal_required-field">*</span>
-      </h1>
+      </p>
 
-      <fieldset className="professional-business-days">
-        <legend>Seleccionar días hábiles:</legend>
-        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, idx) => (
-          <label key={day} className="week-days_tags">
+      {/* Day toggles */}
+      <div className="schedule-days-grid">
+        {DAYS.map((day, idx) => (
+          <label
+            key={day}
+            className={`schedule-day-pill${currentSchedule?.day?.includes(day) ? " is-checked" : ""}`}
+          >
             <input
               type="checkbox"
               value={day}
               checked={currentSchedule?.day?.includes(day)}
               onChange={handleChangeDaysSchedule}
             />
-            {spanishDays[idx].charAt(0).toUpperCase() +
-              spanishDays[idx].slice(1)}
+            {DAY_LABELS[idx]}
           </label>
         ))}
-      </fieldset>
+      </div>
 
-      <div className="manage-professionals_time-slot">
-        <div>
-          <h2 className="start-end-time">Desde:</h2>
+      {/* Time + interval row */}
+      <div className="schedule-time-row">
+        <div className="schedule-time-field">
+          <label>Desde</label>
           <input
             type="time"
             name="startTime"
@@ -43,8 +48,8 @@ function ScheduleNewProfessionalForm({
           />
         </div>
 
-        <div>
-          <h2 className="start-end-time">Hasta:</h2>
+        <div className="schedule-time-field">
+          <label>Hasta</label>
           <input
             type="time"
             name="endTime"
@@ -52,67 +57,67 @@ function ScheduleNewProfessionalForm({
             onChange={handleChangeTimeRange}
           />
         </div>
-      </div>
 
-      <div className="manage-professionals_time-slot-button">
-        <div className="time-interval">
-          <h2>Intervalo:</h2>
+        <div className="schedule-time-field">
+          <label>Intervalo</label>
           <select
             name="interval"
             onChange={handleChangeTimeRange}
             value={currentSchedule.interval || ""}
           >
-            <option value="">-</option>
-            {[15, 30, 45, 60].map((numb) => (
-              <option key={numb} value={numb}>
-                {numb} minutos
+            <option value="">—</option>
+            {[15, 30, 45, 60].map((n) => (
+              <option key={n} value={n}>
+                {n} min
               </option>
             ))}
           </select>
         </div>
-
-        <button type="button" onClick={() => addNewSchedule(currentSchedule)}>
-          Agregar horario
-        </button>
       </div>
 
+      <button
+        type="button"
+        className="schedule-add-btn"
+        onClick={() => addNewSchedule(currentSchedule)}
+      >
+        + Agregar horario
+      </button>
+
+      {/* Added schedules */}
       {selectedSchedules?.length === 0 ? (
-        <p className="professional-modal_no-selected-data">
-          No hay días seleccionados.
-        </p>
+        <p className="schedule-empty">No hay horarios configurados aún.</p>
       ) : (
-        selectedSchedules?.map((schedule, idx) => (
-          <div key={idx} className="schedule-item">
-            <h2>Turno {idx + 1}</h2>
-            <div className="schedule_selected-days">
-              {schedule.day.map((day, i) => (
-                <span key={`${day}-${i}`} className="selected-day">
-                  {spanishDays[
-                    ["Mon", "Tue", "Wed", "Thu", "Fri", "Satu", "Sun"].indexOf(
-                      day
-                    )
-                  ]
-                    .charAt(0)
-                    .toUpperCase() +
-                    spanishDays[
-                      [
-                        "Mon",
-                        "Tue",
-                        "Wed",
-                        "Thu",
-                        "Fri",
-                        "Satu",
-                        "Sun",
-                      ].indexOf(day)
-                    ].slice(1)}
+        <div className="schedule-cards-list">
+          {selectedSchedules.map((schedule, idx) => (
+            <div key={idx} className="schedule-card">
+              <span className="schedule-card__index">#{idx + 1}</span>
+
+              <div className="schedule-card__days">
+                {schedule.day.map((day, i) => {
+                  const dayIdx = DAYS.indexOf(day);
+                  const label = dayIdx !== -1
+                    ? spanishDays[dayIdx].slice(0, 3)
+                    : day;
+                  return (
+                    <span key={`${day}-${i}`} className="schedule-card__day-tag">
+                      {label.charAt(0).toUpperCase() + label.slice(1)}
+                    </span>
+                  );
+                })}
+              </div>
+
+              <span className="schedule-card__time">
+                {schedule.startTime} – {schedule.endTime}
+              </span>
+
+              {schedule.interval && (
+                <span className="schedule-card__interval">
+                  c/{schedule.interval}min
                 </span>
-              ))}
+              )}
             </div>
-            <p>
-              Desde las {schedule.startTime}hs hasta las {schedule.endTime}hs
-            </p>
-          </div>
-        ))
+          ))}
+        </div>
       )}
     </>
   );

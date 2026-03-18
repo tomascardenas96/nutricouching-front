@@ -20,8 +20,9 @@ function ProfilePicture({
     <div className="profile-picture">
       {!image ? (
         <img
-          src="/assets/no-pic.jpg"
-          alt="Foto de perfil de profesional sin URL seleccionada"
+          src="/assets/empty-profile.svg"
+          alt="Foto de perfil por defecto"
+          className="profile-picture__no-pic"
         />
       ) : (
         <img

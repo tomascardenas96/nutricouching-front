@@ -1,76 +1,79 @@
 .viand-card-dashboard-container {
-  margin: 0 1.5rem;
+  margin: 0 1rem;
   display: flex;
-  gap: 0.8rem;
-  border-bottom: 1px solid rgb(209, 209, 209);
-  padding-bottom: 1.5rem;
-  color: #666666;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding-bottom: 1.2rem;
 }
 
-.viand-card-dashboard-container .image-container {
+/* ── Image ── */
+.viand-card-dashboard-container .image-container > img {
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: cover;
+  object-position: center;
   border-radius: 50%;
-
-  > img {
-    width: 2.8rem;
-    height: 2.8rem;
-    padding: 0.3rem;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
-    border: 1px solid rgb(209, 209, 209);
-  }
+  flex-shrink: 0;
 }
 
+/* ── Info ── */
 .viand-card-dashboard-container .info-container {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-
-  > .name {
-    font-size: 0.8rem;
-  }
+  gap: 0.3rem;
+  width: 100%;
 }
 
-.viand-card-dashboard-container .info-container .stock-price {
+.viand-card-dashboard-container .name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.viand-card-dashboard-container .stock-price {
   display: flex;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  padding-bottom: 0.1rem;
+  gap: 0.8rem;
+  font-size: 0.78rem;
+  color: #888;
 
   > p {
     display: flex;
-    gap: 0.2rem;
+    gap: 0.25rem;
 
-    > span {
-      font-weight: 600;
-    }
+    > span { font-weight: 600; color: #555; }
   }
 }
 
+/* ── Buttons ── */
 .viand-card-dashboard-container .buttons-container {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.viand-card-dashboard-container .edit-btn,
+.viand-card-dashboard-container .delete-btn {
+  display: flex;
   align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: white;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
 
-  > button {
-    padding: 0.5rem 0.7rem;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: white;
-    border-radius: 0.2rem;
-    font-weight: 400;
-  }
+  &:hover { opacity: 0.75; }
+}
 
-  > .edit-btn {
-    border: 1.3px solid #0f7a0f;
-    color: #0f7a0f;
-  }
+.viand-card-dashboard-container .edit-btn {
+  border: 1.3px solid #1b7a1b;
+  color: #1b7a1b;
+}
 
-  > .delete-btn {
-    border: 1.3px solid #ca6969;
-    color: #ca6969;
-  }
+.viand-card-dashboard-container .delete-btn {
+  border: 1.3px solid #ca6969;
+  color: #ca6969;
 }

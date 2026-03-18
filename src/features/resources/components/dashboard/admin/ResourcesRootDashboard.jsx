@@ -2,17 +2,19 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../common/components/ConfirmationModal";
 import DashboardListSkeleton from "../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import { useSelectMenuOption } from "../../../../dashboard/hooks/useSelectMenuOption";
 import useDeleteResource from "../../../hooks/useDeleteResource";
 import useGetAllResources from "../../../hooks/useGetAllResources";
 import useHandleResourcesModals from "../../../hooks/useHandleResourceModals";
-import "./ResourcesRootDashboard.css";
 import NewResourceModal from "./modals/NewResourceModal";
 import UpdateResourceModal from "./modals/UpdateResourceModal";
+import "./ResourcesRootDashboard.css";
 
 function ResourcesRootDashboard() {
   const [selectedResource, setSelectedResource] = useState(null);
   const { flattedResources, setResources, resourcesLoading, resourcesError } =
     useGetAllResources();
+  const { searchTerm } = useSelectMenuOption();
 
   const {
     isAddResourceModalOpen,
@@ -31,6 +33,12 @@ function ResourcesRootDashboard() {
     closeDeleteResourceModal
   );
 
+  const filtered = searchTerm
+    ? flattedResources.filter((r) =>
+        r.title?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : flattedResources;
+
   return (
     <>
       <div className="resources-dashboard-container">
@@ -38,31 +46,27 @@ function ResourcesRootDashboard() {
           <p className="error">Ha ocurrido un error</p>
         ) : resourcesLoading ? (
           <DashboardListSkeleton />
-        ) : flattedResources?.length > 0 ? (
+        ) : filtered.length > 0 ? (
           <table className="resources-root-dashboard_table">
             <thead>
               <tr>
                 <th className="image-column"></th>
-                <th>Titulo</th>
-                <th className="description-column">Descripcion</th>
+                <th>Título</th>
+                <th className="description-column">Descripción</th>
                 <th className="short-column">Resumen</th>
                 <th className="price-column">Precio</th>
                 <th className="options-column">Opciones</th>
               </tr>
             </thead>
-
             <tbody>
-              {flattedResources?.map((resource) => (
+              {filtered.map((resource) => (
                 <tr
                   className="dashboard_resource-item"
                   key={`resource-${resource.resourceId}`}
                 >
                   <td className="image-row">
                     <div>
-                      <img
-                        src={resource.image}
-                        alt="imagen de recursos dashboard root"
-                      />
+                      <img src={resource.image} alt="imagen de recursos dashboard root" />
                     </div>
                   </td>
                   <td>{resource.title}</td>
@@ -72,30 +76,21 @@ function ResourcesRootDashboard() {
                     {resource.price === 0 ? "FREE" : `$ ${resource.price}`}
                   </td>
                   <td className="options-row">
-                    <p
-                      className="edit"
-                      onClick={() => openModifyResourceModal(resource)}
-                    >
+                    <p className="edit" onClick={() => openModifyResourceModal(resource)}>
                       Editar
                     </p>
-                    <p
-                      className="delete"
-                      onClick={() =>
-                        openDeleteResourceModal(resource.resourceId)
-                      }
-                    >
+                    <p className="delete" onClick={() => openDeleteResourceModal(resource.resourceId)}>
                       Eliminar
                     </p>
                   </td>
-                  <div className="divider-line_container">
-                    <hr className="divider-line" />
-                  </div>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <p className="no-resources">No hay recursos aún</p>
+          <p className="no-resources">
+            {searchTerm ? "Sin resultados para la búsqueda" : "No hay recursos aún"}
+          </p>
         )}
 
         {!resourcesLoading && !resourcesError && (
@@ -111,7 +106,7 @@ function ResourcesRootDashboard() {
             setResources={setResources}
             handleAddResourceModal={handleAddResourceModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
 
       {isModifyResourceModalOpen &&
@@ -121,17 +116,17 @@ function ResourcesRootDashboard() {
             setResources={setResources}
             closeModifyResourceModal={closeModifyResourceModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
 
       {isDeleteResourceModalOpen &&
         createPortal(
           <ConfirmationModal
-            message="¿Eliminar plan?"
+            message="¿Eliminar recurso?"
             onConfirm={handleDeleteResource}
             onClose={closeDeleteResourceModal}
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );

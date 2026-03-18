@@ -49,7 +49,7 @@ function ResourceCard({
       </div>
 
       <div className="card_name-options-container">
-        <h3>{`> ${title}`}</h3>
+        <h3>{title}</h3>
 
         <form onSubmit={(e) => e.preventDefault()}>
           {type === "premium" || type === "off" ? (

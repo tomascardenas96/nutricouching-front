@@ -1,32 +1,41 @@
-import { useState } from "react";
 import { createPortal } from "react-dom";
+import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
+import { useSelectMenuOption } from "../../../../../dashboard/hooks/useSelectMenuOption";
 import useGetProfessionals from "../../../../hooks/useGetProfessionals";
-import useHandleDashboardProfessionalsModals from "../../../../hooks/useHandleDashboardProfessionalsModals";
+import useModifyProfessional from "../../../../hooks/useModifyProfessional";
+import useProfessionalModals from "../../../../hooks/useProfessionalModals";
+import useSelectProfessional from "../../../../hooks/useSelectProfessional";
 import ManageProfessionalModal from "../modals/ManageProfessionalModal";
 import ModifyProfessionalModal from "../modals/ModifyProfessionalModal";
 import ProfessionalsCardDashboardMobile from "./ProfessionalsCardDashboardMobile";
 import "./ProfessionalsRootDashboardMobile.css";
-import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 
 function ProfessionalsRootDashboardMobile() {
-  const [selectedProfessional, setSelectedProfessional] = useState(null);
-  const {
-    professionals,
-    professionalsLoading,
-    professionalsError,
-    setProfessionals,
-  } = useGetProfessionals();
+  const { professionals, setProfessionals, professionalsLoading, professionalsError } =
+    useGetProfessionals();
+
+  const { selectedProfessional, setSelectedProfessional } = useSelectProfessional();
+  const { searchTerm } = useSelectMenuOption();
 
   const {
-    handleAddProfessionalModal,
-    handleModifyProfessionalModalOpen,
-    handleModifyProfessionalModalClose,
-    isAddProfessionalModalOpen,
-    isModifyProfessionalModalOpen,
-    handleDeleteProfessionalModalOpen,
-    handleDeleteProfessionalModalClose,
-    isDeleteProfessionalModalOpen,
-  } = useHandleDashboardProfessionalsModals(setSelectedProfessional);
+    isModifyProfessionalModalOpen, handleOpenModifyModal, handleCloseModifyModal,
+    isAddProfessionalModalOpen, handleAddProfessionalModal,
+  } = useProfessionalModals(setSelectedProfessional);
+
+  const { handleSubmitModifyProfessional } = useModifyProfessional(
+    selectedProfessional, setProfessionals, handleCloseModifyModal
+  );
+
+  const filtered = searchTerm
+    ? professionals.filter((p) => {
+        const q = searchTerm.toLowerCase();
+        return (
+          p.fullname?.toLowerCase().includes(q) ||
+          p.email?.toLowerCase().includes(q) ||
+          p.phone?.toLowerCase().includes(q)
+        );
+      })
+    : professionals;
 
   return (
     <>
@@ -36,37 +45,25 @@ function ProfessionalsRootDashboardMobile() {
             <p className="error">Ha ocurrido un error</p>
           ) : professionalsLoading ? (
             <DashboardListSkeleton />
-          ) : professionals?.length > 0 ? (
-            <>
-              <div className="split-professionals-card">
-                {professionals?.map((professional) => (
-                  <ProfessionalsCardDashboardMobile
-                    key={`professional-${professional.professionalId}`}
-                    professional={professional}
-                    setProfessionals={setProfessionals}
-                    handleModifyProfessionalModalOpen={
-                      handleModifyProfessionalModalOpen
-                    }
-                    handleDeleteProfessionalModalOpen={
-                      handleDeleteProfessionalModalOpen
-                    }
-                    isDeleteProfessionalModalOpen={
-                      isDeleteProfessionalModalOpen
-                    }
-                    closeModal={handleDeleteProfessionalModalClose}
-                  />
-                ))}
-              </div>
-            </>
+          ) : filtered.length > 0 ? (
+            <div className="split-professionals-card">
+              {filtered.map((professional) => (
+                <ProfessionalsCardDashboardMobile
+                  key={`professional-${professional.professionalId}`}
+                  professional={professional}
+                  setProfessionals={setProfessionals}
+                  handleModifyProfessionalModalOpen={handleOpenModifyModal}
+                />
+              ))}
+            </div>
           ) : (
-            <p className="no-professionals">No hay profesionales aún</p>
+            <p className="no-professionals">
+              {searchTerm ? "Sin resultados para la búsqueda" : "No hay profesionales aún"}
+            </p>
           )}
 
           {!professionalsError && !professionalsLoading && (
-            <div
-              className="add-professional_btn"
-              onClick={handleAddProfessionalModal}
-            >
+            <div className="add-professional_btn" onClick={handleAddProfessionalModal}>
               <button>Agregar profesional</button>
             </div>
           )}
@@ -77,23 +74,21 @@ function ProfessionalsRootDashboardMobile() {
         createPortal(
           <ModifyProfessionalModal
             selectedProfessional={selectedProfessional}
-            handleCloseModifyModal={handleModifyProfessionalModalClose}
+            handleCloseModifyModal={handleCloseModifyModal}
             setProfessionals={setProfessionals}
           />,
-          document.body
+          document.getElementById("root-portal")
         )}
 
-      {isAddProfessionalModalOpen &&
-        createPortal(
-          <ManageProfessionalModal
-            handleManageProfessionalsModal={handleAddProfessionalModal}
-            professionals={professionals}
-            professionalsError={professionalsError}
-            professionalsLoading={professionalsLoading}
-            setProfessionals={setProfessionals}
-          />,
-          document.body
-        )}
+      {isAddProfessionalModalOpen && (
+        <ManageProfessionalModal
+          handleManageProfessionalsModal={handleAddProfessionalModal}
+          professionals={professionals}
+          professionalsError={professionalsError}
+          professionalsLoading={professionalsLoading}
+          setProfessionals={setProfessionals}
+        />
+      )}
     </>
   );
 }

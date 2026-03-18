@@ -1,0 +1,58 @@
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+
+.header-logo > div {
+  width: max-content;
+}
+
+.header-logo .logo-container {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  text-decoration: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+
+  .logo-name {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+}
+
+.header-logo img {
+  width: 1.8rem;
+  height: 1.8rem;
+  object-fit: cover;
+  justify-self: center;
+  align-self: center;
+  grid-row: 1 / 3;
+}
+
+.header-logo p {
+  font-family: var(--font-logo);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.644);
+  line-height: 1;
+  display: flex;
+  margin-top: 0.6rem;
+}
+
+.header-logo span {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--clr-forest);
+  letter-spacing: -0.06em;
+  display: flex;
+  margin-top: -0.7rem;
+  color: rgba(0, 0, 0, 0.644);
+}

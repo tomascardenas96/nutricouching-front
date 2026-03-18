@@ -44,7 +44,7 @@ function ViandsHome() {
         <ProductsCarousel items={latestViands} addItemToCart={addItemToCart} />
       )}
 
-      <SeeMoreBtn text="Más Viandas" />
+      <SeeMoreBtn text="Más Viandas" to="/viands" />
     </div>
   );
 }

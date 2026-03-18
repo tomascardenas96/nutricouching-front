@@ -1,78 +1,108 @@
 .professional-card-dashboard-container {
-  margin: 0 1.5rem;
+  margin: 0 1rem;
   display: flex;
-  gap: 0.8rem;
-  border-bottom: 1px solid rgb(209, 209, 209);
-  padding-bottom: 1.5rem;
-  color: #666666;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding-bottom: 1.2rem;
 }
 
-.professional-card-dashboard-container .image-container {
+/* ── Avatar ── */
+.professional-card__avatar {
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
-
-  > img {
-    width: 2.8rem;
-    height: 2.8rem;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
-    border: 1px solid rgb(209, 209, 209);
-  }
+  background-color: var(--clr-amber, #c9a84c);
+  color: white;
+  display: grid;
+  place-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
+.professional-card-dashboard-container .image-container > img {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+}
+
+/* ── Info ── */
 .professional-card-dashboard-container .info-container {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-
-  > p {
-    font-size: 0.8rem;
-    display: flex;
-    gap: 0.4rem;
-  }
+  gap: 0.3rem;
+  width: 100%;
 }
 
-.professional-card-dashboard-container .info-container .email {
+.professional-card__header {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
-  font-size: 0.8rem;
-  padding-bottom: 0.1rem;
-  gap: 0.4rem;
-
-  > p {
-    display: flex;
-    gap: 0.2rem;
-
-    > span {
-      font-weight: 600;
-    }
-  }
+  flex-wrap: wrap;
 }
 
+.professional-card-dashboard-container .name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.professional-card-dashboard-container .email {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+.professional-card-dashboard-container .phone {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+/* ── Role badge ── */
+.role-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.role-badge--user         { background-color: #f0f0f0; color: #555; }
+.role-badge--admin        { background-color: #e8f0fe; color: #1a56db; }
+.role-badge--professional { background-color: #e6f4ea; color: #1e7e34; }
+
+/* ── Buttons ── */
 .professional-card-dashboard-container .buttons-container {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.professional-card-dashboard-container .edit-btn,
+.professional-card-dashboard-container .delete-btn {
+  display: flex;
   align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: white;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
 
-  > button {
-    padding: 0.5rem 0.7rem;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: white;
-    border-radius: 0.2rem;
-    font-weight: 400;
-  }
+  &:hover { opacity: 0.75; }
+}
 
-  > .edit-btn {
-    border: 1.3px solid #0f7a0f;
-    color: #0f7a0f;
-  }
+.professional-card-dashboard-container .edit-btn {
+  border: 1.3px solid #1b7a1b;
+  color: #1b7a1b;
+}
 
-  > .delete-btn {
-    border: 1.3px solid #ca6969;
-    color: #ca6969;
-  }
+.professional-card-dashboard-container .delete-btn {
+  border: 1.3px solid #ca6969;
+  color: #ca6969;
 }

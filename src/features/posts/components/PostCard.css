@@ -1,7 +1,7 @@
 .post-card {
-  background-color: white;
-  border-radius: 0.3rem;
-  border: 1px solid #e4e4e4;
+  background-color: var(--clr-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
   padding: 1.5rem;
   padding-bottom: 0.8rem;
   display: flex;
@@ -41,7 +41,7 @@
   left: 0;
   width: 100vw;
   height: 100dvh;
-  background-color: rgba(0, 0, 0, 0.626);
+  background-color: rgba(0, 0, 0, 0.925);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -75,7 +75,8 @@
     object-fit: cover;
     object-position: center;
     border-radius: 0.3rem;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.037),
+    box-shadow:
+      0 0 10px 5px rgba(0, 0, 0, 0.037),
       0 0 20px 10px rgba(0, 0, 0, 0.062);
   }
 }
@@ -83,7 +84,7 @@
 .post-card .post-card_quantity-likes {
   font-size: 0.7rem;
   margin: 0.5rem 0 0.2rem;
-  color: rgb(49, 49, 49);
+  color: var(--clr-mist, #888);
 }
 
 .post-card .post-card_divider-line {
@@ -136,9 +137,9 @@
   }
 
   > .options-modal {
-    background-color: white;
-    border-radius: var(--modal-radius);
-    box-shadow: var(--modal-shadow);
+    background-color: var(--clr-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
     position: absolute;
     right: 1.8rem;
     top: 0.5rem;
@@ -174,13 +175,14 @@
 .post-card_header .description .name_hour {
   > p {
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     height: 0.85rem;
     cursor: pointer;
+    color: var(--clr-ink);
   }
 
   > span {
     font-size: 0.7rem;
-    color: rgb(78, 78, 78);
+    color: var(--clr-mist, #888);
   }
 }

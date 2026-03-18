@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { createPortal } from "react-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -5,7 +6,7 @@ import ConfirmationModal from "../../../../../../common/components/ConfirmationM
 import useDeleteViand from "../../../../hooks/useDeleteViand";
 import "./ViandsCardDashboardMobile.css";
 
-function ViandsCardDashboardMobile({
+const ViandsCardDashboardMobile = memo(function ViandsCardDashboardMobile({
   viand,
   setViands,
   handleModifyViandModalOpen,
@@ -19,7 +20,7 @@ function ViandsCardDashboardMobile({
 
   return (
     <>
-      <div className="product-card-dashboard-container">
+      <div className="viand-card-dashboard-container">
         <div className="image-container">
           <img
             src={viand.image}
@@ -65,10 +66,10 @@ function ViandsCardDashboardMobile({
             onClose={closeDeleteViandModal}
             message="¿Desea eliminar esta vianda?"
           />,
-          document.getElementById("root")
+          document.getElementById("root-portal")
         )}
     </>
   );
-}
+});
 
 export default ViandsCardDashboardMobile;
