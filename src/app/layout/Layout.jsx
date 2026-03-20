@@ -42,17 +42,18 @@ function Layout({ children }) {
 
   useSSEEvent("afterPurchaseNotify", (data) => {
     if (data.service !== "cart") return;
-    setIsCartModalOpen(false);
     switch (data.status) {
       case "rejected":
+        setIsCartModalOpen(false);
         toast.error(data.message);
         break;
       case "approved":
+        setIsCartModalOpen(false);
         toast.success(data.message);
         setElementsInCart([]);
         break;
       case "pending":
-        toast.info(data.message);
+        toast.info("Tu pago está siendo procesado. Te notificaremos cuando se confirme.");
         break;
     }
   });
@@ -60,6 +61,12 @@ function Layout({ children }) {
   return (
     <main>
       <div className="blur-background"></div>
+
+      <Toaster
+        toastOptions={{
+          style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
+        }}
+      />
 
       <section className="main-background">
         {/* Carrito de compras */}
@@ -83,11 +90,6 @@ function Layout({ children }) {
           />
         </section>
 
-        <Toaster
-          toastOptions={{
-            style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
-          }}
-        />
         <div className="layout-content">{children}</div>
 
         {!NO_FOOTER_ROUTES.includes(pathname) && (
