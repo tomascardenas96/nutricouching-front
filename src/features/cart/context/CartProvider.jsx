@@ -3,6 +3,7 @@ import apiClient from "../../auth/api/apiClient";
 import { useAuth } from "../../auth/hooks/useAuth";
 import useAddElementsToCartWhenLogin from "../hooks/useAddElementsToCartWhenLogin";
 import useGetElementsByCartId from "../hooks/useGetElementsByCartId";
+import { useSSEEvent } from "../../../services/useSSEEvent";
 import { CartActionsContext, CartStateContext } from "./CartContext";
 
 function CartProvider({ children }) {
@@ -60,6 +61,13 @@ function CartProvider({ children }) {
       hasSyncedCart.current = true;
     }
   }, [user, activeCart]);
+
+  // SSE — pago de carrito aprobado: reemplazar carrito activo con el nuevo vacío
+  useSSEEvent("sendNewCart", (newCart) => {
+    setActiveCart(newCart);
+    setElementsInCart([]);
+    hasSyncedCart.current = false;
+  });
 
   // State context value — recreated only when data changes
   const stateValue = useMemo(

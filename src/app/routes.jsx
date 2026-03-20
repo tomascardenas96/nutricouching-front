@@ -17,6 +17,9 @@ const ProductsPage = lazy(() => import("../features/products/pages/ProductsPage"
 const ViandsPage = lazy(() => import("../features/viands/pages/ViandsPage"));
 const ContactPage = lazy(() => import("../features/contact/pages/ContactPage"));
 const NotFound = lazy(() => import("../features/not-found/NotFound"));
+const PaymentSuccess = lazy(() => import("../features/payments/pages/PaymentSuccess"));
+const PaymentFailure = lazy(() => import("../features/payments/pages/PaymentFailure"));
+const PaymentPending = lazy(() => import("../features/payments/pages/PaymentPending"));
 
 function GuestRoute() {
   const { user, isLoading } = useAuth();
@@ -49,6 +52,9 @@ export default function AppRoutes() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/viands" element={<ViandsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/home/success" element={<PaymentSuccess />} />
+          <Route path="/home/failure" element={<PaymentFailure />} />
+          <Route path="/home/pending" element={<PaymentPending />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRole="admin" />}>

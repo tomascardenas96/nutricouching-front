@@ -25,16 +25,25 @@ function useCreatePreferenceMP(elementsInCart, activeCart) {
   const handleCreatePreference = async (elementsInCart) => {
     setPreferenceLoading(true);
     try {
-      const { data } = await apiClient.post("/mercadopago/preference", elementsInCart);
+      const cartId = activeCart?.cartId;
+      const body = elementsInCart.map(({ cartItemId, product, viand, quantity }) => ({
+        cartItemId,
+        cart: { cartId },
+        ...(product ? { product } : {}),
+        ...(viand ? { viand } : {}),
+        quantity,
+      }));
 
-      handleCreateOrder(activeCart?.cartId, total);
+      const { data } = await apiClient.post("/mercadopago/preference", body);
+
+      handleCreateOrder(cartId, total);
 
       if (createOrderError) {
         toast.error("Error al crear una orden de compra");
         return;
       }
 
-      window.location.href = data.init_point;
+      window.open(data.init_point, "_blank");
     } catch (error) {
       console.error(error);
     } finally {

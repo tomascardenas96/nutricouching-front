@@ -2,16 +2,15 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 import { useAuth } from "../../features/auth/hooks/useAuth";
-import { useSSEEvent } from "../../services/useSSEEvent";
 import CartModal from "../../features/cart/components/CartModal";
 import { useActiveCart } from "../../features/cart/hooks/useActiveCart";
 import { useCartItems } from "../../features/cart/hooks/useCartItems";
+import { useSSEEvent } from "../../services/useSSEEvent";
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
 import "./Layout.css";
-import NotificationPopUp from "./notifications/NotificationPopUp";
 
-const NO_FOOTER_ROUTES = ["/contact"];
+const NO_FOOTER_ROUTES = ["/contact", "/success", "/failure", "/pending"];
 
 function Layout({ children }) {
   const { pathname } = useLocation();
@@ -84,12 +83,12 @@ function Layout({ children }) {
           />
         </section>
 
-        <div className="layout-content">{children}</div>
         <Toaster
           toastOptions={{
             style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
           }}
         />
+        <div className="layout-content">{children}</div>
 
         {!NO_FOOTER_ROUTES.includes(pathname) && (
           <section className="footer_container">
