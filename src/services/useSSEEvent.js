@@ -12,12 +12,13 @@ import { sseClient } from "./sseClient";
  */
 export function useSSEEvent(event, callback) {
     const token = useSelector((state) => state.auth.token);
-    const isEmailConfirmed = useSelector((state) => state.auth.user?.isEmailConfirmed);
+    // const isEmailConfirmed = useSelector((state) => state.auth.user?.isEmailConfirmed);
     const callbackRef = useRef(callback);
     callbackRef.current = callback;
 
     useEffect(() => {
-        if (!token || !isEmailConfirmed) {
+        // if (!token || !isEmailConfirmed) {
+        if (!token) {
             sseClient.disconnect();
             return;
         }
@@ -28,5 +29,6 @@ export function useSSEEvent(event, callback) {
         sseClient.on(event, handler);
 
         return () => sseClient.off(event, handler);
-    }, [token, isEmailConfirmed, event]);
+    // }, [token, isEmailConfirmed, event]);
+    }, [token, event]);
 }
