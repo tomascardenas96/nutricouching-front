@@ -23,7 +23,7 @@ function ProductCard({ product, onAddToCart }) {
     <button
       className={`product-card${isOutOfStock ? " product-card--out-of-stock" : ""}${adding ? " product-card--adding" : ""}`}
       onClick={handleClick}
-      disabled={isOutOfStock}
+      disabled={isOutOfStock || adding}
       aria-label={`Agregar ${product.name} al carrito`}
     >
       <div className="product-card__image-wrapper">

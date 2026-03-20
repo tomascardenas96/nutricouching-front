@@ -8,12 +8,12 @@ import useSelectSpecialty from "../../../../hooks/useSelectSpecialty";
 import AssignSpecialtyModal from "../modals/AssignSpecialtyModal";
 import SpecialtiesProfessionalCardDashboardMobile from "./SpecialtiesProfessionalCardDashboardMobile";
 import "./SpecialtiesProfessionalDashboardMobile.css";
-import { useAuth } from "../../../../../auth/hooks/useAuth";
+import useActiveProfessional from "../../../../../professional/hooks/useActiveProfessional";
 
 function SpecialtiesProfessionalDashboardMobile() {
-  const { user } = useAuth();
+  const { professionalId } = useActiveProfessional();
   const { specialties, specialtiesError, specialtiesLoading, setSpecialties } =
-    useGetAllSpecialtiesByProfessional(user?.professional?.professionalId);
+    useGetAllSpecialtiesByProfessional(professionalId);
 
   const { selectedSpecialty, setSelectedSpecialty } = useSelectSpecialty();
 

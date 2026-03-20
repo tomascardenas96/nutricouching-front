@@ -28,36 +28,39 @@ function CartModal({ handleCartModal, activeCart }) {
     setElementsInCart,
     activeCart,
     setProductsInCart,
-    setViandsInCart
+    setViandsInCart,
   );
 
   // Guest handlers
   const { handleRemoveProduct } = useRemoveProductFromCart(setProductsInCart);
   const { handleRemoveViand } = useRemoveViandFromCart(setViandsInCart);
-  const { addUnityOfProduct, subtractUnityOfProduct } = useAddOrSubtractProduct(setProductsInCart);
-  const { addUnityOfViand, subtractUnityOfViand } = useAddOrSubtractViand(setViandsInCart);
+  const { addUnityOfProduct, subtractUnityOfProduct } =
+    useAddOrSubtractProduct(setProductsInCart);
+  const { addUnityOfViand, subtractUnityOfViand } =
+    useAddOrSubtractViand(setViandsInCart);
 
   // Logged-in handlers (operate by cartItemId)
-  const { handleAddOrSubtractElement, handleRemoveElement } = useAddOrSubtractElement(setElementsInCart);
+  const { handleAddOrSubtractElement, handleRemoveElement } =
+    useAddOrSubtractElement(setElementsInCart);
 
   const productsFromElements = useMemo(
     () => elementsInCart.filter((e) => e.product),
-    [elementsInCart]
+    [elementsInCart],
   );
   const viandsFromElements = useMemo(
     () => elementsInCart.filter((e) => e.viand),
-    [elementsInCart]
+    [elementsInCart],
   );
 
   const calculateTotal = useMemo(() => {
     if (!user) {
       const subTotalProducts = productsInCart.reduce(
         (acc, p) => acc + (p?.price ?? 0) * p.quantity,
-        0
+        0,
       );
       const subTotalViands = viandsInCart.reduce(
         (acc, v) => acc + (v?.price ?? 0) * v.quantity,
-        0
+        0,
       );
       return subTotalProducts + subTotalViands;
     }
@@ -78,15 +81,14 @@ function CartModal({ handleCartModal, activeCart }) {
   return (
     <section className="cart-modal_container" onClick={handleCartModal}>
       <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
-
         {/* ── Header ── */}
         <div className="cart-modal_header">
           <div className="cart-modal_header-icon">
             <BsCart3 />
           </div>
           <div className="cart-modal_header-text">
-            <h1>Carrito</h1>
-            <p>Nutricoaching</p>
+            <h1>Carrito de Compras</h1>
+            <p>Cohesiva Salud</p>
           </div>
           <button
             className="cart-modal_close-btn"
@@ -99,7 +101,6 @@ function CartModal({ handleCartModal, activeCart }) {
 
         {/* ── Scrollable body ── */}
         <div className="cart-modal_body">
-
           {/* Productos */}
           <div className="cart-modal_section">
             <button
@@ -110,35 +111,44 @@ function CartModal({ handleCartModal, activeCart }) {
               {totalProductCount > 0 && (
                 <span className="cart-section_badge">{totalProductCount}</span>
               )}
-              <span className={`cart-section_chevron ${isProductsListDeployed ? "cart-section_chevron--open" : ""}`}>
+              <span
+                className={`cart-section_chevron ${isProductsListDeployed ? "cart-section_chevron--open" : ""}`}
+              >
                 ▾
               </span>
             </button>
 
-            <div className={`cart-section_list ${isProductsListDeployed ? "cart-section_list--open" : ""}`}>
+            <div
+              className={`cart-section_list ${isProductsListDeployed ? "cart-section_list--open" : ""}`}
+            >
               {!productsInCart.length && !productsFromElements.length && (
                 <div className="cart-empty-state">
                   <p>No hay productos aún</p>
                 </div>
               )}
-              {!user && productsInCart.map((product) => (
-                <ProductInCartCard
-                  key={`product-cart-local-${product.productId}`}
-                  product={product}
-                  quantity={product.quantity}
-                  remove={handleRemoveProduct}
-                  add={addUnityOfProduct}
-                  subtract={subtractUnityOfProduct}
-                />
-              ))}
+              {!user &&
+                productsInCart.map((product) => (
+                  <ProductInCartCard
+                    key={`product-cart-local-${product.productId}`}
+                    product={product}
+                    quantity={product.quantity}
+                    remove={handleRemoveProduct}
+                    add={addUnityOfProduct}
+                    subtract={subtractUnityOfProduct}
+                  />
+                ))}
               {productsFromElements.map((element) => (
                 <ProductInCartCard
                   key={`product-cart-${element.cartItemId}`}
                   product={element.product}
                   quantity={element.quantity}
                   remove={() => handleRemoveElement(element.cartItemId)}
-                  add={() => handleAddOrSubtractElement(element.cartItemId, "add")}
-                  subtract={() => handleAddOrSubtractElement(element.cartItemId, "subtract")}
+                  add={() =>
+                    handleAddOrSubtractElement(element.cartItemId, "add")
+                  }
+                  subtract={() =>
+                    handleAddOrSubtractElement(element.cartItemId, "subtract")
+                  }
                 />
               ))}
             </div>
@@ -154,35 +164,44 @@ function CartModal({ handleCartModal, activeCart }) {
               {totalViandCount > 0 && (
                 <span className="cart-section_badge">{totalViandCount}</span>
               )}
-              <span className={`cart-section_chevron ${isViandsListDeployed ? "cart-section_chevron--open" : ""}`}>
+              <span
+                className={`cart-section_chevron ${isViandsListDeployed ? "cart-section_chevron--open" : ""}`}
+              >
                 ▾
               </span>
             </button>
 
-            <div className={`cart-section_list ${isViandsListDeployed ? "cart-section_list--open" : ""}`}>
+            <div
+              className={`cart-section_list ${isViandsListDeployed ? "cart-section_list--open" : ""}`}
+            >
               {!viandsInCart.length && !viandsFromElements.length && (
                 <div className="cart-empty-state">
                   <p>No hay viandas aún</p>
                 </div>
               )}
-              {!user && viandsInCart.map((viand) => (
-                <ProductInCartCard
-                  key={`viand-cart-local-${viand.viandId}`}
-                  viand={viand}
-                  quantity={viand.quantity}
-                  remove={handleRemoveViand}
-                  add={addUnityOfViand}
-                  subtract={subtractUnityOfViand}
-                />
-              ))}
+              {!user &&
+                viandsInCart.map((viand) => (
+                  <ProductInCartCard
+                    key={`viand-cart-local-${viand.viandId}`}
+                    viand={viand}
+                    quantity={viand.quantity}
+                    remove={handleRemoveViand}
+                    add={addUnityOfViand}
+                    subtract={subtractUnityOfViand}
+                  />
+                ))}
               {viandsFromElements.map((element) => (
                 <ProductInCartCard
                   key={`viand-cart-${element.cartItemId}`}
                   viand={element.viand}
                   quantity={element.quantity}
                   remove={() => handleRemoveElement(element.cartItemId)}
-                  add={() => handleAddOrSubtractElement(element.cartItemId, "add")}
-                  subtract={() => handleAddOrSubtractElement(element.cartItemId, "subtract")}
+                  add={() =>
+                    handleAddOrSubtractElement(element.cartItemId, "add")
+                  }
+                  subtract={() =>
+                    handleAddOrSubtractElement(element.cartItemId, "subtract")
+                  }
                 />
               ))}
             </div>

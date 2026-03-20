@@ -14,7 +14,7 @@
 .dashboard-layout_container > .dashboard > .left-menu {
   background-color: white;
   display: grid;
-  grid-template-rows: 6rem 1fr;
+  grid-template-rows: 5rem 1fr;
   padding: 0 1.2rem;
   gap: 1.5rem;
   border-right: 1px solid #ebebeb;

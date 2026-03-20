@@ -5,7 +5,7 @@ import { GoBook } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
 import { LuTimer } from "react-icons/lu";
 import { PiStudentLight, PiTagThin } from "react-icons/pi";
-import { BiListUl } from "react-icons/bi";
+import { BiListUl, BiCategory } from "react-icons/bi";
 import { TbHealthRecognition } from "react-icons/tb";
 import "./ItemMenuDashboard.css";
 
@@ -23,6 +23,7 @@ function ItemMenuDashboard({ option, isSelected, selectOptionDashboardMenu }) {
         {option === "Productos" && <AiOutlineProduct className="icon" />}
         {option === "Viandas" && <TbHealthRecognition className="icon" />}
         {option === "Especialidades" && <PiStudentLight className="icon" />}
+        {option === "Categorias" && <BiCategory className="icon" />}
         {option === "Planes" && <PiTagThin />}
         {option === "Turnos" && <GoBook className="icon" />}
         {option === "Horarios de Atencion" && <LuTimer className="icon" />}

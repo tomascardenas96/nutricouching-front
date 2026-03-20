@@ -22,14 +22,14 @@
 
 .banner__container .banner__icon {
   background-color: white;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   display: grid;
   place-content: center;
 
   & img {
-    width: 3rem;
+    width: 2.5rem;
   }
 }
 

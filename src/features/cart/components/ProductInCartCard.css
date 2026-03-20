@@ -1,15 +1,15 @@
 /* =====================================================
-   PRODUCT IN CART CARD
+   PRODUCT IN CART CARD — BOTANICAL LUXURY REDESIGN
    ===================================================== */
 
 @keyframes cartItemIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateX(14px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
@@ -17,54 +17,75 @@
 
 .cart-product-card {
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  gap: 0.75rem;
-  padding: 0.9rem 1.5rem;
-  border-bottom: 1px solid var(--clr-border);
+  grid-template-columns: 4.2rem 1fr;
+  gap: 0.9rem;
+  padding: 1rem 1.6rem;
+  margin: 0 0.6rem;
+  border-radius: 0.7rem;
   background: transparent;
   position: relative;
-  transition: background-color 0.18s ease;
-  animation: cartItemIn 0.3s ease both;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+  animation: cartItemIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .cart-product-card:hover {
-  background-color: rgba(88, 108, 92, 0.04);
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 12px rgba(88, 108, 92, 0.06);
+}
+
+/* Subtle separator between items */
+.cart-product-card + .cart-product-card {
+  border-top: 1px solid rgba(88, 108, 92, 0.06);
+  margin-top: 0.15rem;
 }
 
 /* Staggered entry delays */
 .cart-product-card:nth-child(1) { animation-delay: 0.04s; }
-.cart-product-card:nth-child(2) { animation-delay: 0.09s; }
-.cart-product-card:nth-child(3) { animation-delay: 0.14s; }
-.cart-product-card:nth-child(4) { animation-delay: 0.19s; }
-.cart-product-card:nth-child(5) { animation-delay: 0.24s; }
+.cart-product-card:nth-child(2) { animation-delay: 0.1s; }
+.cart-product-card:nth-child(3) { animation-delay: 0.16s; }
+.cart-product-card:nth-child(4) { animation-delay: 0.22s; }
+.cart-product-card:nth-child(5) { animation-delay: 0.28s; }
+.cart-product-card:nth-child(6) { animation-delay: 0.34s; }
 
 /* ── Remove button ───────────────────────────────────── */
 
 .remove-product {
   position: absolute;
-  top: 0.7rem;
-  right: 1.1rem;
+  top: 0.6rem;
+  right: 0.8rem;
   background: none;
   border: none;
   padding: 0.25rem;
   color: var(--clr-mist);
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   display: grid;
   place-content: center;
-  border-radius: 50%;
+  border-radius: 0.35rem;
   width: 1.5rem;
   height: 1.5rem;
+  opacity: 0;
   transition:
-    color 0.18s ease,
-    background-color 0.18s ease,
-    transform 0.18s ease;
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.cart-product-card:hover .remove-product {
+  opacity: 1;
 }
 
 .remove-product:hover {
   color: #c0392b;
   background-color: rgba(192, 57, 43, 0.08);
-  transform: scale(1.1);
+  transform: scale(1.12);
+}
+
+.remove-product:active {
+  transform: scale(0.9);
 }
 
 /* ── Image ───────────────────────────────────────────── */
@@ -72,14 +93,21 @@
 .cart-product_img {
   display: grid;
   place-content: center;
+  align-self: center;
 }
 
 .cart-product_img img {
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.65rem;
   object-fit: cover;
   background-color: var(--clr-stone);
+  box-shadow: 0 2px 8px rgba(46, 53, 48, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.cart-product-card:hover .cart-product_img img {
+  transform: scale(1.04);
 }
 
 /* ── Info block ──────────────────────────────────────── */
@@ -87,33 +115,36 @@
 .cart-product_info {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
   min-width: 0;
-  padding-right: 1.6rem;
+  padding-right: 1.4rem;
+  justify-content: center;
 }
 
 .cart-product_description {
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--clr-ink);
   text-transform: capitalize;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 .cart-product_unit-price {
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--clr-mist);
+  letter-spacing: 0.01em;
 }
 
 .cart-product_row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.2rem;
+  margin-top: 0.4rem;
 }
 
 /* ── Quantity controls ───────────────────────────────── */
@@ -121,29 +152,35 @@
 .cart-product_amount {
   display: flex;
   align-items: center;
-  border: 1.5px solid var(--clr-border);
-  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(88, 108, 92, 0.15);
+  border-radius: 0.5rem;
   overflow: hidden;
-  height: 1.75rem;
-  transition: border-color 0.18s ease;
+  height: 1.85rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .cart-product_amount:hover {
-  border-color: var(--clr-sage);
+  border-color: rgba(88, 108, 92, 0.3);
+  box-shadow: 0 1px 4px rgba(88, 108, 92, 0.08);
 }
 
 .cart-product_amount span {
-  width: 1.75rem;
+  width: 1.85rem;
   height: 100%;
   display: grid;
   place-content: center;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--clr-forest);
   cursor: pointer;
   font-family: var(--font-body);
   user-select: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .cart-product_amount span:hover {
@@ -152,18 +189,18 @@
 }
 
 .cart-product_amount span:active {
-  background-color: rgba(88, 108, 92, 0.2);
+  background-color: rgba(88, 108, 92, 0.18);
 }
 
 .cart-product_amount p {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
   color: var(--clr-ink);
-  min-width: 1.5rem;
+  min-width: 1.6rem;
   text-align: center;
-  border-left: 1.5px solid var(--clr-border);
-  border-right: 1.5px solid var(--clr-border);
+  border-left: 1.5px solid rgba(88, 108, 92, 0.1);
+  border-right: 1.5px solid rgba(88, 108, 92, 0.1);
   height: 100%;
   display: grid;
   place-content: center;
@@ -173,7 +210,8 @@
 
 .cart-product_sub-total {
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--clr-ink);
+  letter-spacing: -0.01em;
 }

@@ -3,7 +3,6 @@
   display: grid;
   min-height: 100vh;
   grid-template-rows: 6rem 1fr 4rem;
-  padding: 0 2rem;
   justify-self: center;
 }
 
@@ -69,7 +68,9 @@
   display: grid;
   grid-template-rows: 7rem 1fr;
   border-radius: 0.6rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
   padding-bottom: 1.7rem;
   border: 1px solid #e8e8e8;
 }
@@ -140,7 +141,9 @@
         outline: none;
         font-size: 0.85rem;
         color: #333;
-        transition: border-color 0.15s ease, background-color 0.15s ease;
+        transition:
+          border-color 0.15s ease,
+          background-color 0.15s ease;
       }
 
       > input:focus {
@@ -166,13 +169,36 @@
 
 .admin-dashboard .admin-dashboard_home {
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: flex-end;
+}
 
-  > p {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.82rem;
-    color: #aaa;
+.admin-dashboard_home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #666;
+  text-decoration: none;
+  border: 1px solid #e2e2e2;
+  background-color: #fafafa;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+
+  > svg {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background-color: #fff;
+    border-color: #c8c8c8;
+    color: #333;
   }
 }
 

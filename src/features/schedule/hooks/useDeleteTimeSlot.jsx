@@ -1,14 +1,14 @@
 import { toast } from "sonner";
-import { useAuth } from "../../auth/hooks/useAuth";
 import apiClient from "../../auth/api/apiClient";
+import useActiveProfessional from "../../professional/hooks/useActiveProfessional";
 
 function useDeleteTimeSlot(setAvailabilities, handleCloseDeleteModal) {
-  const { user } = useAuth();
+  const { professionalId } = useActiveProfessional();
 
   const handleDeleteTimeSlot = async (startTime, day) => {
     const deleteTimeSlot = async () => {
       const { data } = await apiClient.delete(
-        `/availability?startTime=${startTime}&professionalId=${user?.professional?.professionalId}&day=${day}`
+        `/availability?startTime=${startTime}&professionalId=${professionalId}&day=${day}`
       );
 
       return data;

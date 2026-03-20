@@ -1,5 +1,5 @@
 .section.promo-cards {
-  padding: 3rem 0;
+  padding: 3rem 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,9 +7,9 @@
 
 .section.promo-cards .container {
   width: 90%;
-  max-width: 60rem;
+  max-width: 65rem;
   display: flex;
-  gap: 1.5rem;
+  gap: 2.5rem;
   justify-content: center;
   align-items: center;
 }

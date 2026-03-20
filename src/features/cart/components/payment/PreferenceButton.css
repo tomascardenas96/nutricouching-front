@@ -1,42 +1,97 @@
+/* =====================================================
+   PREFERENCE BUTTON — BOTANICAL LUXURY REDESIGN
+   ===================================================== */
+
 button.confirm-purchase,
 button.loading-purchase {
   width: 100%;
-  height: 2.75rem;
+  height: 2.9rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.65rem;
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  background-color: var(--clr-forest);
+  letter-spacing: 0.03em;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
+  position: relative;
+  overflow: hidden;
   transition:
-    background-color 0.2s ease,
-    transform 0.15s ease;
+    transform 0.15s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Gradient background */
+button.confirm-purchase {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 108, 92, 0.9) 0%,
+    rgba(42, 56, 48, 0.95) 100%
+  );
+  box-shadow:
+    0 2px 8px rgba(88, 108, 92, 0.2),
+    0 0 0 0 rgba(88, 108, 92, 0);
 }
 
 button.confirm-purchase:hover {
-  background-color: var(--clr-forest-dark);
+  box-shadow:
+    0 4px 16px rgba(88, 108, 92, 0.3),
+    0 0 0 2px rgba(88, 108, 92, 0.08);
 }
 
 button.confirm-purchase:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
+/* Shimmer effect on hover */
+button.confirm-purchase::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.1) 55%,
+    transparent 65%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+button.confirm-purchase:hover::after {
+  opacity: 1;
+  animation: shimmer 1.8s ease infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Loading state */
 button.loading-purchase {
-  background-color: rgba(88, 108, 92, 0.35);
+  background: rgba(88, 108, 92, 0.25);
   cursor: not-allowed;
+  box-shadow: none;
 }
 
+/* Icons */
 button.confirm-purchase .cart-option_icons,
 button.loading-purchase .cart-option_icons {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.8);
   flex-shrink: 0;
   position: static;
+  transition: transform 0.3s ease;
+}
+
+button.confirm-purchase:hover .cart-option_icons {
+  transform: scale(1.08);
 }

@@ -1,14 +1,14 @@
 import { toast } from "sonner";
-import { useAuth } from "../../auth/hooks/useAuth";
 import apiClient from "../../auth/api/apiClient";
+import useActiveProfessional from "../../professional/hooks/useActiveProfessional";
 
 function useHandleUnassignSpecialty(setSpecialties, onClose) {
-  const { user } = useAuth();
+  const { professionalId } = useActiveProfessional();
 
   const handleUnassignSpecialty = async (specialtyId) => {
     const unassignSpecialty = async () => {
       const { data } = await apiClient.patch(
-        `/specialty/unlink/${specialtyId}/professional/${user.professional.professionalId}`
+        `/specialty/unlink/${specialtyId}/professional/${professionalId}`
       );
 
       return data;
@@ -23,10 +23,7 @@ function useHandleUnassignSpecialty(setSpecialties, onClose) {
         onClose();
         return "Especialidad eliminada exitosamente!";
       },
-      error: (error) => {
-        console.log(error);
-        return "Error al eliminar una especialidad";
-      },
+      error: () => "Error al eliminar una especialidad",
     });
   };
   return { handleUnassignSpecialty };

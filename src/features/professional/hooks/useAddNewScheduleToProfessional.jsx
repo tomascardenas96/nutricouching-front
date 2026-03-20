@@ -1,24 +1,24 @@
 import { toast } from "sonner";
-import { useAuth } from "../../auth/hooks/useAuth";
 import apiClient from "../../auth/api/apiClient";
+import useActiveProfessional from "./useActiveProfessional";
 
 function useAddNewScheduleToProfessional(
   setAvailabilities,
   selectedSchedules,
   onClose
 ) {
-  const { user } = useAuth();
+  const { professionalId } = useActiveProfessional();
 
   const handleSubmitAddNewSchedule = async (e, schedule) => {
     e.preventDefault();
 
     const addNewSchedule = async () => {
-      if (!!!schedule.length) {
+      if (!schedule.length) {
         throw new Error("Debe seleccionar al menos un horario");
       }
 
       const { data } = await apiClient.post(
-        `/availability/${user?.professional?.professionalId}`,
+        `/availability/${professionalId}`,
         schedule
       );
 

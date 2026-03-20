@@ -62,12 +62,10 @@ function DashboardContentLayout({ children }) {
       </div>
 
       <div className="admin-dashboard_home">
-        <p>
-          <Link to="/">
-            <IoReturnUpBack />
-            Volver a home
-          </Link>
-        </p>
+        <Link to="/" className="admin-dashboard_home-btn">
+          <IoReturnUpBack />
+          Volver a home
+        </Link>
       </div>
     </div>
   );

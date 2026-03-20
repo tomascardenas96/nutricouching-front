@@ -46,7 +46,7 @@ function useAddItemToCart(type, setElementsInCart) {
         });
         toast.success(message);
       } else {
-        handleAddOneElementToCart(item, setElementsInCart);
+        return handleAddOneElementToCart(item, setElementsInCart);
       }
     },
     [user, setGuestCart, idField, storageKey, arrayKey, message, handleAddOneElementToCart, setElementsInCart]

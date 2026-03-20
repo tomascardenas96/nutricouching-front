@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../../../../common/components/ConfirmationModal";
 import DashboardListSkeleton from "../../../../../../common/components/dashboard/loader/DashboardListSkeleton";
 import { getSpanishDay } from "../../../../../../lib/date";
-import { useAuth } from "../../../../../auth/hooks/useAuth";
+import useActiveProfessional from "../../../../../professional/hooks/useActiveProfessional";
 import useAvailabilityModals from "../../../../hooks/useAvailabilityModals";
 import useDeleteTimeSlot from "../../../../hooks/useDeleteTimeSlot";
 import useGetAvailabilitiesByProfessional from "../../../../hooks/useGetAvailabilitiesByProfessional";
@@ -13,8 +13,7 @@ import SchedulesCardDashboardMobile from "./SchedulesCardDashboardMobile";
 import "./SchedulesProfessionalDashboardMobile.css";
 
 function SchedulesProfessionalDashboardMobile() {
-  const { user } = useAuth();
-  const professionalId = user?.professional?.professionalId;
+  const { professionalId } = useActiveProfessional();
 
   const { selectedAvailability, setSelectedAvailability } =
     useSelectAvailability();

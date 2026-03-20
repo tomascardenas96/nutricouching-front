@@ -24,11 +24,13 @@ function useAddOneElementToCartWhenLoggedIn() {
       return data;
     };
 
-    toast.promise(addToCart(), {
+    const promise = addToCart();
+    toast.promise(promise, {
       loading: "Agregando al carrito...",
       success: "Producto agregado al carrito",
       error: "Ocurrió un error al agregar el producto al carrito",
     });
+    return promise;
   };
 
   return { handleAddOneElementToCart };
