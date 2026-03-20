@@ -1,5 +1,4 @@
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { IoMdClose } from "react-icons/io";
+import BaseModal from "../../../../../../common/components/BaseModal";
 import useCreateProfessional from "../../../../../professional/hooks/useCreateProfessional";
 import useHandleProfessionalSchedule from "../../../../../professional/hooks/useHandleProfessionalSchedule";
 import useAddNewSpecialty from "../../../../../specialties/hooks/useAddNewSpecialty";
@@ -75,93 +74,79 @@ function ManageProfessionalModal({
   );
 
   return (
-    <section className="manage-professional-modal_container">
-      <form
-        className="manage-professional-modal"
-        onSubmit={(e) =>
-          handleSubmitCreateProfessional(
-            e,
-            selectedUser.userId,
-            selectedSchedules
-          )
-        }
-      >
-        {/* Titulo del formulario */}
-        <div className="manage-professional_title">
-          <h1>ABM de profesionales</h1>
-          <IoMdClose
-            className="manage-professional_modal-close"
-            onClick={handleManageProfessionalsModal}
-          />
-        </div>
-
-        {/* Inputs del formulario */}
-        <div className="manage-professional_items-container">
-          <div className="manage-professional_list">
-            <UserToProfessionalForm
-              professionals={professionals}
-              professionalsError={professionalsError}
-              professionalsLoading={professionalsLoading}
-              handleChangeUserInputUsersByQuery={
-                handleChangeUserInputUsersByQuery
-              }
-              userInputGetUsersByQuery={userInputGetUsersByQuery}
-              usersByQuery={usersByQuery}
-              usersByQueryError={usersByQueryError}
-              usersByQueryLoading={usersByQueryLoading}
-              setProfessionals={setProfessionals}
-              handleSelectUserAndCloseModal={handleSelectUserAndCloseModal}
-              selectedUser={selectedUser}
-              handleUnselectUser={handleUnselectUser}
-            />
-          </div>
-
-          <div className="manage-professional_specialty">
-            <SpecialtyProfessionalForm
-              handleChangeSpecialtiesUserInput={
-                handleChangeSpecialtiesUserInput
-              }
-              specialtiesUserInput={specialtiesUserInput}
-              specialties={specialties}
-              specialtiesLoading={specialtiesLoading}
-              specialtiesError={specialtiesError}
-              handleSelectSpecialty={handleSelectSpecialty}
-              handleUnselectSpecialty={handleUnselectSpecialty}
-              selectedSpecialties={selectedSpecialties}
-              setSpecialties={setSpecialties}
-              handleChangeCreateSpecialty={handleChangeCreateSpecialty}
-              handleCloseAddSpecialtyModal={handleCloseAddSpecialtyModal}
-              handleOpenAddSpecialtyModal={handleOpenAddSpecialtyModal}
-              handleSubmitCreateSpecialty={handleSubmitCreateSpecialty}
-              isModalAddSpecialtyOpen={isModalAddSpecialtyOpen}
-              setSelectedSpecialties={setSelectedSpecialties}
-            />
-          </div>
-
-          <div className="manage-professional_schedules">
-            <ScheduleNewProfessionalForm
-              handleChangeDaysSchedule={handleChangeDaysSchedule}
-              handleChangeTimeRange={handleChangeTimeRange}
-              currentSchedule={currentSchedule}
-              selectedSchedules={selectedSchedules}
-              addNewSchedule={addNewSchedule}
-              spanishDays={spanishDays}
-            />
-          </div>
-        </div>
-
-        {/* Botones del formulario */}
-        <div className="manage-professional_accept-cancel">
-          <ImCross
-            className="add-cancel-professional add-cancel-professional_close"
+    <BaseModal
+      isOpen={true}
+      onClose={closeModal}
+      onSubmit={(e) =>
+        handleSubmitCreateProfessional(e, selectedUser.userId, selectedSchedules)
+      }
+      title="ABM de profesionales"
+      size="lg"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
             onClick={closeModal}
-          />
-          <button type="submit">
-            <ImCheckmark className="add-cancel-professional add-cancel-professional_done" />
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Confirmar
           </button>
         </div>
-      </form>
-    </section>
+      }
+    >
+      <div className="manage-professional_items-container">
+        <div className="manage-professional_list">
+          <UserToProfessionalForm
+            professionals={professionals}
+            professionalsError={professionalsError}
+            professionalsLoading={professionalsLoading}
+            handleChangeUserInputUsersByQuery={handleChangeUserInputUsersByQuery}
+            userInputGetUsersByQuery={userInputGetUsersByQuery}
+            usersByQuery={usersByQuery}
+            usersByQueryError={usersByQueryError}
+            usersByQueryLoading={usersByQueryLoading}
+            setProfessionals={setProfessionals}
+            handleSelectUserAndCloseModal={handleSelectUserAndCloseModal}
+            selectedUser={selectedUser}
+            handleUnselectUser={handleUnselectUser}
+          />
+        </div>
+
+        <div className="manage-professional_specialty">
+          <SpecialtyProfessionalForm
+            handleChangeSpecialtiesUserInput={handleChangeSpecialtiesUserInput}
+            specialtiesUserInput={specialtiesUserInput}
+            specialties={specialties}
+            specialtiesLoading={specialtiesLoading}
+            specialtiesError={specialtiesError}
+            handleSelectSpecialty={handleSelectSpecialty}
+            handleUnselectSpecialty={handleUnselectSpecialty}
+            selectedSpecialties={selectedSpecialties}
+            setSpecialties={setSpecialties}
+            handleChangeCreateSpecialty={handleChangeCreateSpecialty}
+            handleCloseAddSpecialtyModal={handleCloseAddSpecialtyModal}
+            handleOpenAddSpecialtyModal={handleOpenAddSpecialtyModal}
+            handleSubmitCreateSpecialty={handleSubmitCreateSpecialty}
+            isModalAddSpecialtyOpen={isModalAddSpecialtyOpen}
+            setSelectedSpecialties={setSelectedSpecialties}
+          />
+        </div>
+
+        <div className="manage-professional_schedules">
+          <ScheduleNewProfessionalForm
+            handleChangeDaysSchedule={handleChangeDaysSchedule}
+            handleChangeTimeRange={handleChangeTimeRange}
+            currentSchedule={currentSchedule}
+            selectedSchedules={selectedSchedules}
+            addNewSchedule={addNewSchedule}
+            spanishDays={spanishDays}
+          />
+        </div>
+      </div>
+    </BaseModal>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "./ForgotPasswordModal.css";
+import BaseModal from "../../../../common/components/BaseModal";
 import useSendForgotPasswordMail from "../../hooks/useSendForgotPasswordMail";
+import "./ForgotPasswordModal.css";
 
 function ForgotPasswordModal({ handleOpenForgotPasswordModal }) {
   const [userEmail, setUserEmail] = useState("");
@@ -9,37 +10,42 @@ function ForgotPasswordModal({ handleOpenForgotPasswordModal }) {
   );
 
   return (
-    <div
-      className="forgot-password_modal"
-      onClick={handleOpenForgotPasswordModal}
+    <BaseModal
+      isOpen={true}
+      onClose={handleOpenForgotPasswordModal}
+      onSubmit={(e) => handleSendForgotPasswordMail(e, userEmail)}
+      title="Recuperar Contraseña"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={handleOpenForgotPasswordModal}
+          >
+            Volver al login
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Enviar
+          </button>
+        </div>
+      }
     >
-      <div className="forgot-password" onClick={(e) => e.stopPropagation()}>
-        <h2 className="title">Recuperar Contraseña</h2>
-
-        <form onSubmit={(e) => handleSendForgotPasswordMail(e, userEmail)}>
-          <p>
-            Te enviaremos un mensaje a tu correo electronico con un link para
-            reestablecer la contraseña
-          </p>
-
-          <label htmlFor="email">
-            {" "}
-            Ingrese su e-mail
-            <input
-              type="email"
-              name="email"
-              onChange={(e) => setUserEmail(e.target.value)}
-              value={userEmail}
-            />
-          </label>
-
-          <div className="send-button">
-            <input type="submit" value="Enviar" />
-            <p onClick={handleOpenForgotPasswordModal}>Volver al login</p>
-          </div>
-        </form>
+      <div className="forgot-password_body">
+        <p>
+          Te enviaremos un mensaje a tu correo electronico con un link para
+          reestablecer la contraseña
+        </p>
+        <label htmlFor="email">
+          Ingrese su e-mail
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => setUserEmail(e.target.value)}
+            value={userEmail}
+          />
+        </label>
       </div>
-    </div>
+    </BaseModal>
   );
 }
 

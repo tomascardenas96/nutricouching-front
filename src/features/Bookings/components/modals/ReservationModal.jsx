@@ -1,7 +1,7 @@
 import { IoIosTime } from "react-icons/io";
+import BaseModal from "../../../../common/components/BaseModal";
 import { useAuth } from "../../../auth/hooks/useAuth";
 import useGetProfessionalSchedule from "../../../schedule/hooks/useGetProfessionalSchedule";
-import useGetProfessionalsByService from "../../../professional/hooks/useGetProfessionalsByService";
 import useGetProfessionalsBySpecialty from "../../../professional/hooks/useGetProfessionalsBySpecialty";
 import useGetAllSpecialtiesByService from "../../../specialties/hooks/useGetAllSpecialtiesByService";
 import useBookAppointment from "../../hooks/useBookAppointment";
@@ -15,16 +15,12 @@ function ReservationModal({
   const { user } = useAuth();
   const {
     specialties,
-    specialtiesError,
-    specialtiesLoading,
     selectedSpecialty,
     setSelectedSpecialty,
   } = useGetAllSpecialtiesByService(selectedService);
 
   const {
     professionalsBySpecialty,
-    professionalsBySpecialtyError,
-    professionalsBySpecialtyLoading,
     setSelectedProfessional,
     selectedProfessional,
   } = useGetProfessionalsBySpecialty(selectedSpecialty);
@@ -51,95 +47,93 @@ function ReservationModal({
     setEndTime
   );
 
-  const { professionalsByService } = useGetProfessionalsByService(
-    selectedService?.serviceId
-  );
-
-  // Le damos un maximo y un minimo de dias para mostrar en el calendario (Hasta 1 mes)
   const today = new Date();
   const nextMonth = new Date();
   nextMonth.setMonth(today.getMonth() + 2);
-
   const formDate = (date) => date.toISOString().split("T")[0];
 
   return (
-    <section
-      className="request-reservation_modal"
-      onClick={handleOpenRequestReservation}
+    <BaseModal
+      isOpen={true}
+      onClose={handleOpenRequestReservation}
+      onSubmit={handleSubmitBookAppointment}
+      title={`Solicitar turno: ${selectedService?.title}`}
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={handleOpenRequestReservation}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Reservar turno <IoIosTime />
+          </button>
+        </div>
+      }
     >
-      <div className="request-reservation" onClick={(e) => e.stopPropagation()}>
-        <div className="reservation_title">
-          <h1>SOLICITAR TURNO: </h1>
-          <h2>{selectedService?.title}</h2>
-        </div>
-
-        <div className="reservation_body">
-          <form onSubmit={handleSubmitBookAppointment}>
-            <label htmlFor="specialty">
-              Indique una especialidad
-              <select onChange={(e) => setSelectedSpecialty(e.target.value)}>
-                <option value="">Indique una especialidad</option>
-                {specialties?.map((specialty) => (
-                  <option
-                    key={`specialty-${specialty.specialtyId}`}
-                    value={specialty.specialtyId}
-                  >
-                    {specialty.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label htmlFor="professional">
-              Seleccione un profesional
-              <select
-                id="professional"
-                onChange={(e) => setSelectedProfessional(e.target.value)}
+      <div className="reservation_body">
+        <label htmlFor="specialty">
+          Indique una especialidad
+          <select onChange={(e) => setSelectedSpecialty(e.target.value)}>
+            <option value="">Indique una especialidad</option>
+            {specialties?.map((specialty) => (
+              <option
+                key={`specialty-${specialty.specialtyId}`}
+                value={specialty.specialtyId}
               >
-                <option value="">Seleccione un profesional</option>
-                {professionalsBySpecialty?.map((professional) => (
-                  <option
-                    key={professional.professionalId}
-                    value={professional.professionalId}
-                  >
-                    {professional.fullname}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label htmlFor="date">
-              Fecha
-              <input
-                type="date"
-                id="date"
-                onChange={(e) => setSelectedDate(e.target.value)}
-                min={formDate(today)}
-                max={formDate(nextMonth)}
-              />
-            </label>
-            <label htmlFor="time">
-              Hora
-              <select
-                id="time"
-                onChange={(e) => setSelectedTime(e.target.value)}
+                {specialty.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label htmlFor="professional">
+          Seleccione un profesional
+          <select
+            id="professional"
+            onChange={(e) => setSelectedProfessional(e.target.value)}
+          >
+            <option value="">Seleccione un profesional</option>
+            {professionalsBySpecialty?.map((professional) => (
+              <option
+                key={professional.professionalId}
+                value={professional.professionalId}
               >
-                <option value="">Seleccione un horario</option>
-                {professionalSchedule?.map((time) => (
-                  <option key={time.availabilityId} value={time.startTime}>
-                    {time.startTime}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <div className="reservation_btn">
-              <button type="submit">
-                Reservar turno <IoIosTime />{" "}
-              </button>
-            </div>
-          </form>
-        </div>
+                {professional.fullname}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label htmlFor="date">
+          Fecha
+          <input
+            type="date"
+            id="date"
+            onChange={(e) => setSelectedDate(e.target.value)}
+            min={formDate(today)}
+            max={formDate(nextMonth)}
+          />
+        </label>
+
+        <label htmlFor="time">
+          Hora
+          <select
+            id="time"
+            onChange={(e) => setSelectedTime(e.target.value)}
+          >
+            <option value="">Seleccione un horario</option>
+            {professionalSchedule?.map((time) => (
+              <option key={time.availabilityId} value={time.startTime}>
+                {time.startTime}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
-    </section>
+    </BaseModal>
   );
 }
 

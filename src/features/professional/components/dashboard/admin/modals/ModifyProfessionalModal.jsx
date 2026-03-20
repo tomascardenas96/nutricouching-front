@@ -1,5 +1,6 @@
 import ModalWindow from "../../../../../../common/components/dashboard/ModalWindow";
 import useModifyProfessional from "../../../../hooks/useModifyProfessional";
+import NoPicture from "/assets/empty-profile.svg";
 import "./ModifyProfessionalModal.css";
 
 const ROLE_LABELS = {
@@ -36,13 +37,11 @@ function ModifyProfessionalModal({
       <div className="modify-pro__identity">
         <div className="modify-pro__avatar">
           <img
-            src={
-              selectedProfessional?.profile?.picture ||
-              "/assets/no-picture-profile.webp"
-            }
+            src={selectedProfessional?.profile?.picture || NoPicture}
             alt={selectedProfessional?.fullname}
             onError={(e) => {
-              e.currentTarget.src = "/assets/no-picture-profile.webp";
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = NoPicture;
             }}
           />
         </div>

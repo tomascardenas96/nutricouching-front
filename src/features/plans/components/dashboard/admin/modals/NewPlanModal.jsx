@@ -1,5 +1,5 @@
+import BaseModal from "../../../../../../common/components/BaseModal";
 import useCreatePlan from "../../../../hooks/useCreatePlan";
-import "./NewPlanModal.css";
 
 function NewPlanModal({ setPlans, handleAddPlanModal }) {
   const {
@@ -7,13 +7,31 @@ function NewPlanModal({ setPlans, handleAddPlanModal }) {
     handleChangeInput,
     handleChangePdf,
     handleChangeImage,
-    imagePreview,
     createPlanInput,
   } = useCreatePlan(setPlans, handleAddPlanModal);
 
   return (
-    <div className="new-plan-modal_bg">
-      <form onSubmit={handleCreatePlan}>
+    <BaseModal
+      isOpen={true}
+      onClose={handleAddPlanModal}
+      onSubmit={handleCreatePlan}
+      title="Nuevo Plan"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={handleAddPlanModal}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Crear
+          </button>
+        </div>
+      }
+    >
+      <div className="plan-modal_fields">
         <label htmlFor="title">
           Titulo
           <input
@@ -63,11 +81,8 @@ function NewPlanModal({ setPlans, handleAddPlanModal }) {
           Imagen
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
-
-        <span onClick={handleAddPlanModal}>Cerrar</span>
-        <button>Crear</button>
-      </form>
-    </div>
+      </div>
+    </BaseModal>
   );
 }
 

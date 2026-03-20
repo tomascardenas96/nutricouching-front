@@ -17,6 +17,8 @@
   object-fit: cover;
   border: 1.5px solid var(--clr-border);
   flex-shrink: 0;
+  object-position: top top;
+  padding-bottom: 0.3rem;
 }
 
 .modify-pro__identity-info {

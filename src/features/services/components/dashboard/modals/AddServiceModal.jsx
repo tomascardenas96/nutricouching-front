@@ -1,5 +1,4 @@
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { IoMdClose } from "react-icons/io";
+import BaseModal from "../../../../../common/components/BaseModal";
 import useCreateService from "../../../hooks/useCreateService";
 import "./AddServiceModal.css";
 
@@ -14,86 +13,78 @@ function AddServiceModal({ handleAddServiceModal, setServices }) {
   } = useCreateService(handleAddServiceModal, setServices);
 
   return (
-    <section
-      className="modal-cms_add-service_container"
-      onClick={handleAddServiceModal}
-    >
-      <form
-        className="add-service-modal_form"
-        onClick={(e) => e.stopPropagation()}
-        onSubmit={handleSubmitCreateService}
-      >
-        <div className="add-service_title">
-          <h1>Agregar servicio</h1>
-          <IoMdClose
-            className="add-service-modal-close"
+    <BaseModal
+      isOpen={true}
+      onClose={handleAddServiceModal}
+      onSubmit={handleSubmitCreateService}
+      title="Agregar servicio"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
             onClick={handleAddServiceModal}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Guardar
+          </button>
+        </div>
+      }
+    >
+      <div className="add-service_body">
+        <label htmlFor="title">
+          <input
+            type="text"
+            placeholder="Titulo"
+            name="title"
+            onChange={handleChangeCreateService}
+            value={createServiceInput.title}
           />
-        </div>
-
-        <div className="add-service_body">
-          <label htmlFor="title">
-            <input
-              type="text"
-              placeholder="Titulo"
-              name="title"
-              onChange={handleChangeCreateService}
-              value={createServiceInput.title}
-            />
-          </label>
-          <label htmlFor="description">
-            <input
-              type="text"
-              placeholder="Descripcion"
-              name="description"
-              onChange={handleChangeCreateService}
-              value={createServiceInput.description}
-            />
-          </label>
-          <label htmlFor="price">
-            <input
-              type="number"
-              placeholder="Precio"
-              name="price"
-              onChange={handleChangeCreateService}
-              value={createServiceInput.price}
-            />
-          </label>
-          <label htmlFor="image" className="add-service_upload-photo">
-            <div>
-              {fileCreateService ? (
-                <img
-                  src={imagePreviewCreateService}
-                  alt="add-service-picture"
-                  className="add-service_selected-image-preview"
-                />
-              ) : (
-                <img
-                  src="/src/public/assets/no-picture.png"
-                  alt="no-picture-selected"
-                />
-              )}
-            </div>
-            <p>Selecciona una foto</p>
-            <input
-              type="file"
-              id="image"
-              onChange={handleChangeCreateProductFile}
-            />
-          </label>
-        </div>
-
-        <div className="add-service_buttons">
-          <ImCross className="add-cancel-service add-cancel-service_close" />
+        </label>
+        <label htmlFor="description">
+          <input
+            type="text"
+            placeholder="Descripcion"
+            name="description"
+            onChange={handleChangeCreateService}
+            value={createServiceInput.description}
+          />
+        </label>
+        <label htmlFor="price">
+          <input
+            type="number"
+            placeholder="Precio"
+            name="price"
+            onChange={handleChangeCreateService}
+            value={createServiceInput.price}
+          />
+        </label>
+        <label htmlFor="image" className="add-service_upload-photo">
           <div>
-            <label htmlFor="add-service_submit">
-              <input type="submit" id="add-service_submit" />
-              <ImCheckmark className="add-cancel-service add-cancel-service_done" />
-            </label>
+            {fileCreateService ? (
+              <img
+                src={imagePreviewCreateService}
+                alt="add-service-picture"
+                className="add-service_selected-image-preview"
+              />
+            ) : (
+              <img
+                src="/assets/no-picture.png"
+                alt="no-picture-selected"
+              />
+            )}
           </div>
-        </div>
-      </form>
-    </section>
+          <p>Selecciona una foto</p>
+          <input
+            type="file"
+            id="image"
+            onChange={handleChangeCreateProductFile}
+          />
+        </label>
+      </div>
+    </BaseModal>
   );
 }
 

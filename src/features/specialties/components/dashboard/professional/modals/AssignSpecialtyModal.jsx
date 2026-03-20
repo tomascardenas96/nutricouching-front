@@ -1,18 +1,16 @@
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { IoMdClose } from "react-icons/io";
+import BaseModal from "../../../../../../common/components/BaseModal";
+import useActiveProfessional from "../../../../../professional/hooks/useActiveProfessional";
 import useAssignSpecialtyToProfessional from "../../../../hooks/useAssignSpecialtyToProfessional";
 import useGetAllSpecialties from "../../../../hooks/useGetAllSpecialties";
 import "./AssignSpecialtyModal.css";
-import { useAuth } from "../../../../../auth/hooks/useAuth";
 
 function AssignSpecialtyModal({
   professionalSpecialties,
   onClose,
   setSpecialties,
 }) {
-  const { user } = useAuth();
-  const { errorSpecialties, loadingSpecialties, specialties } =
-    useGetAllSpecialties();
+  const { professionalId } = useActiveProfessional();
+  const { specialties } = useGetAllSpecialties();
 
   const isSpecialtyExistent = (specialtyId) => {
     return professionalSpecialties?.some(
@@ -27,54 +25,45 @@ function AssignSpecialtyModal({
   } = useAssignSpecialtyToProfessional(setSpecialties, onClose);
 
   return (
-    <div className="add-specialty-modal_container">
-      <form
-        className="add-specialty-modal"
-        onSubmit={(e) =>
-          assignSpecialtyToProfessional(
-            e,
-            selectedSpecialtyId,
-            user.professional.professionalId
-          )
-        }
-      >
-        <div className="add-specialty_title">
-          <h1>Agregar Especialidad</h1>
-          <IoMdClose onClick={onClose} className="close-modal_icon" />
-        </div>
-
-        <div className="add-specialty_body">
-          <select onChange={handleChangeSelectSpecialty}>
-            <option value="">Seleccione una especialidad</option>
-            {specialties.map((specialty) => {
-              if (isSpecialtyExistent(specialty.specialtyId)) return;
-
-              return (
-                <option
-                  key={`specialty-${specialty.specialtyId}`}
-                  value={specialty.specialtyId}
-                >
-                  {specialty.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-
-        <div className="submit-add-specialty_options">
-          <ImCross
-            className="add-cancel-specialty add-cancel-specialty_close"
+    <BaseModal
+      isOpen={true}
+      onClose={onClose}
+      onSubmit={(e) =>
+        assignSpecialtyToProfessional(e, selectedSpecialtyId, professionalId)
+      }
+      title="Agregar Especialidad"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
             onClick={onClose}
-          />
-          <div>
-            <label htmlFor="add-specialty_submit">
-              <input type="submit" id="add-specialty_submit" />
-              <ImCheckmark className="add-cancel-specialty add-cancel-specialty_done" />
-            </label>
-          </div>
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Asignar
+          </button>
         </div>
-      </form>
-    </div>
+      }
+    >
+      <div className="add-specialty_body">
+        <select onChange={handleChangeSelectSpecialty}>
+          <option value="">Seleccione una especialidad</option>
+          {specialties.map((specialty) => {
+            if (isSpecialtyExistent(specialty.specialtyId)) return null;
+            return (
+              <option
+                key={`specialty-${specialty.specialtyId}`}
+                value={specialty.specialtyId}
+              >
+                {specialty.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    </BaseModal>
   );
 }
 

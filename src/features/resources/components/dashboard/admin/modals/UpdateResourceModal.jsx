@@ -1,5 +1,5 @@
+import BaseModal from "../../../../../../common/components/BaseModal";
 import useModifyResource from "../../../../hooks/useModifyResource";
-import "./UpdateResourceModal.css";
 
 function UpdateResourceModal({
   selectedResource,
@@ -11,7 +11,6 @@ function UpdateResourceModal({
     modifyResourceInput,
     handleChangeInput,
     handleChangeImage,
-    imagePreview,
   } = useModifyResource(
     selectedResource,
     closeModifyResourceModal,
@@ -19,8 +18,27 @@ function UpdateResourceModal({
   );
 
   return (
-    <div className="modify-resource-modal_bg">
-      <form onSubmit={handleModifyResource}>
+    <BaseModal
+      isOpen={true}
+      onClose={closeModifyResourceModal}
+      onSubmit={handleModifyResource}
+      title="Modificar Recurso"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={closeModifyResourceModal}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Modificar
+          </button>
+        </div>
+      }
+    >
+      <div className="plan-modal_fields">
         <label htmlFor="title">
           Titulo
           <input
@@ -61,7 +79,7 @@ function UpdateResourceModal({
           />
         </label>
 
-        <label htmlFor="price">
+        <label htmlFor="isOffer">
           ¿Esta en oferta?
           <select
             name="isOffer"
@@ -78,11 +96,8 @@ function UpdateResourceModal({
           Imagen
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
-
-        <span onClick={closeModifyResourceModal}>Cerrar</span>
-        <button>Modificar</button>
-      </form>
-    </div>
+      </div>
+    </BaseModal>
   );
 }
 

@@ -1,82 +1,8 @@
-@keyframes modalBgIn {
-  from { background-color: transparent; backdrop-filter: blur(0); }
-  to { background-color: rgba(20, 28, 22, 0.45); backdrop-filter: blur(4px); }
-}
-
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.96) translateY(0.4rem); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.modal-cms_add-viand_container {
-  position: fixed;
-  height: 100dvh;
+.add-viand_body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   width: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(20, 28, 22, 0.45);
-  backdrop-filter: blur(4px);
-  display: grid;
-  place-content: center;
-  z-index: 3000;
-  animation: modalBgIn 0.2s ease forwards;
-}
-
-.add-viand-modal_form {
-  width: 30rem;
-  min-height: 40rem;
-  max-height: 45rem;
-  background-color: var(--clr-cream);
-  border-radius: 0.75rem;
-  border: 1px solid var(--clr-border);
-  box-shadow: 0 20px 60px rgba(20, 28, 22, 0.18), 0 4px 16px rgba(20, 28, 22, 0.08);
-  display: grid;
-  grid-template-rows: 4.5rem 1fr 5rem;
-  animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  overflow: hidden;
-}
-
-.add-viand-modal_form > .add-viand_title {
-  border-bottom: 1px solid var(--clr-border);
-  display: grid;
-  place-content: center;
-  position: relative;
-  background-color: var(--clr-white);
-  border-radius: 0.75rem 0.75rem 0 0;
-
-  & h1 {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--clr-ink);
-    letter-spacing: -0.01em;
-  }
-
-  & .add-viand-modal-close {
-    position: absolute;
-    right: 1.25rem;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: var(--clr-mist);
-    font-size: 1rem;
-    padding: 0.3rem;
-    border-radius: 0.4rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
-
-    &:hover {
-      background-color: var(--clr-stone);
-      color: var(--clr-ink);
-    }
-  }
-}
-
-.add-viand-modal_form > .add-viand_body {
-  display: grid;
-  grid-template-rows: repeat(4, 4rem) max-content 1fr;
-  width: 100%;
-  padding: 0 2rem;
-  overflow-y: auto;
 
   & label {
     display: flex;
@@ -118,6 +44,7 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    margin-top: 0.5rem;
 
     & .ingredients-header {
       display: flex;
@@ -263,110 +190,5 @@
         color: var(--clr-ink);
       }
     }
-  }
-}
-
-/* Footer buttons */
-.add-viand-modal_form > .add-viand_buttons {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0 1.5rem;
-  border-top: 1px solid var(--clr-border);
-  background-color: var(--clr-white);
-  border-radius: 0 0 0.75rem 0.75rem;
-}
-
-.add-viand_buttons > div {
-  display: contents;
-}
-
-.add-cancel-viand {
-  cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
-
-  &:active {
-    transform: scale(0.96);
-  }
-}
-
-.add-cancel-viand_close {
-  width: 100%;
-  height: 2.3rem;
-  padding: 0 0.75rem;
-  background-color: transparent;
-  border: 1.5px solid var(--clr-border);
-  border-radius: 0.5rem;
-  color: var(--clr-mist);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  box-sizing: border-box;
-
-  &::after {
-    content: "Cancelar";
-    font-family: var(--font-body);
-    font-size: 0.84rem;
-    font-weight: 500;
-    color: var(--clr-mist);
-  }
-
-  &:hover {
-    background-color: var(--clr-stone);
-    color: var(--clr-ink);
-
-    &::after {
-      color: var(--clr-ink);
-    }
-  }
-}
-
-.add-cancel-viand_done {
-  width: 100%;
-  height: 2.3rem;
-  padding: 0 0.75rem;
-  background-color: var(--clr-forest);
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  box-sizing: border-box;
-
-  &::after {
-    content: "Confirmar";
-    font-family: var(--font-body);
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: white;
-  }
-
-  &:hover {
-    background-color: var(--clr-forest-dark);
-  }
-}
-
-.add-viand_buttons > div > label {
-  display: contents;
-}
-
-#add-viand_submit {
-  display: none;
-}
-
-@media screen and (max-width: 520px) {
-  .modal-cms_add-viand_container {
-    align-items: flex-end;
-  }
-
-  .add-viand-modal_form {
-    width: 100%;
-    border-radius: 0.75rem 0.75rem 0 0;
   }
 }

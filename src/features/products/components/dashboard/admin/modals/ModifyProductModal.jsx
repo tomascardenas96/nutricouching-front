@@ -1,6 +1,4 @@
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { IoMdClose } from "react-icons/io";
-import { HOST } from "../../../../../../api/data";
+import BaseModal from "../../../../../../common/components/BaseModal";
 import useModifyProduct from "../../../../hooks/useModifyProduct";
 import "./ModifyProductModal.css";
 
@@ -23,94 +21,86 @@ function ModifyProductModal({
   );
 
   return (
-    <section
-      className="modal-cms_modify-product_container"
-      onClick={handleModifyProductModalClose}
+    <BaseModal
+      isOpen={true}
+      onClose={handleModifyProductModalClose}
+      onSubmit={handleSubmitModifyProduct}
+      title="Modificar producto"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={handleModifyProductModalClose}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Guardar
+          </button>
+        </div>
+      }
     >
-      <form
-        className="modify-product-modal_form"
-        onSubmit={handleSubmitModifyProduct}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="modify-product_title">
-          <h1>Modificar producto</h1>
-          <IoMdClose
-            className="modify-product-modal-close"
-            onClick={handleModifyProductModalClose}
+      <div className="modify-product_body">
+        <label htmlFor="name">
+          <input
+            type="text"
+            placeholder="Nombre"
+            name="name"
+            value={modifyProductInput.name}
+            onChange={handleChangeModifyProduct}
           />
-        </div>
-
-        <div className="modify-product_body">
-          <label htmlFor="name">
-            <input
-              type="text"
-              placeholder="Nombre"
-              name="name"
-              value={modifyProductInput.name}
-              onChange={handleChangeModifyProduct}
-            />
-          </label>
-          <label htmlFor="description">
-            <input
-              type="text"
-              placeholder="Descripcion"
-              name="description"
-              value={modifyProductInput.description}
-              onChange={handleChangeModifyProduct}
-            />
-          </label>
-          <label htmlFor="stock">
-            <input
-              type="number"
-              placeholder="Stock"
-              name="stock"
-              value={modifyProductInput.stock}
-              onChange={handleChangeModifyProduct}
-            />
-          </label>
-          <label htmlFor="price">
-            <input
-              type="number"
-              placeholder="Precio"
-              name="price"
-              value={modifyProductInput.price}
-              onChange={handleChangeModifyProduct}
-            />
-          </label>
-          <label htmlFor="image" className="modify-product_upload-photo">
-            <div>
-              {" "}
-              {fileModifyProduct ? (
-                <img
-                  src={imagePreviewModifyProduct}
-                  alt="selected-image-modify-product"
-                />
-              ) : (
-                <img
-                  src={modifyProductInput.image}
-                  alt="selected-product-picture"
-                />
-              )}
-            </div>
-            <p>Selecciona una foto</p>
-            <input type="file" id="image" onChange={handleChangeSelectedFile} />
-          </label>
-        </div>
-
-        <div className="modify-product_buttons">
-          <ImCross
-            className="modify-cancel-product modify-cancel-product_close"
-            onClick={handleModifyProductModalClose}
+        </label>
+        <label htmlFor="description">
+          <input
+            type="text"
+            placeholder="Descripcion"
+            name="description"
+            value={modifyProductInput.description}
+            onChange={handleChangeModifyProduct}
           />
+        </label>
+        <label htmlFor="stock">
+          <input
+            type="number"
+            placeholder="Stock"
+            name="stock"
+            value={modifyProductInput.stock}
+            onChange={handleChangeModifyProduct}
+          />
+        </label>
+        <label htmlFor="price">
+          <input
+            type="number"
+            placeholder="Precio"
+            name="price"
+            value={modifyProductInput.price}
+            onChange={handleChangeModifyProduct}
+          />
+        </label>
+        <label htmlFor="image" className="modify-product_upload-photo">
           <div>
-            <label htmlFor="modify-product_submit">
-              <input type="submit" id="modify-product_submit" />
-              <ImCheckmark className="modify-cancel-product modify-cancel-product_done" />
-            </label>
+            {fileModifyProduct ? (
+              <img
+                src={imagePreviewModifyProduct}
+                alt="selected-image-modify-product"
+              />
+            ) : (
+              <img
+                src={modifyProductInput.image}
+                alt="selected-product-picture"
+              />
+            )}
           </div>
-        </div>
-      </form>
-    </section>
+          <p>Selecciona una foto</p>
+          <input
+            type="file"
+            id="image"
+            onChange={handleChangeSelectedFile}
+          />
+        </label>
+      </div>
+    </BaseModal>
   );
 }
 

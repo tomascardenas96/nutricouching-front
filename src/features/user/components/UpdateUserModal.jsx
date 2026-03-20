@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { ImCheckmark, ImCross } from "react-icons/im";
 import ConfirmationModal from "../../../common/components/ConfirmationModal";
 import InputError from "../../../common/components/InputError";
+import BaseModal from "../../../common/components/BaseModal";
 import useUpdateUserInformation from "../hooks/useUpdateUserInformation";
 import "./UpdateUserModal.css";
 
@@ -26,19 +26,33 @@ function UpdateUserModal({
   );
 
   return (
-    <div className="update-user_modal">
-      <form
+    <>
+      <BaseModal
+        isOpen={true}
+        onClose={handleOpenUpdateUserModal}
         onSubmit={(e) => {
           e.preventDefault();
           setConfirmChangesModal(true);
         }}
+        title="Actualizar Datos de Usuario"
+        footer={
+          <div className="bm-footer__actions">
+            <button
+              type="button"
+              className="bm-btn bm-btn--secondary"
+              onClick={handleOpenUpdateUserModal}
+            >
+              Cancelar
+            </button>
+            <button type="submit" className="bm-btn bm-btn--primary">
+              Guardar
+            </button>
+          </div>
+        }
       >
-        <h2>Actualizar Datos de Usuario</h2>
-
         <div className="user-form">
           <div className="main-info">
             <label htmlFor="name">
-              {" "}
               <input
                 type="text"
                 name="name"
@@ -61,7 +75,7 @@ function UpdateUserModal({
             </label>
           </div>
 
-          <h2>Cambiar Contraseña</h2>
+          <h3 className="update-user_section-title">Cambiar Contraseña</h3>
 
           <div className="password-info">
             <label htmlFor="oldPassword">
@@ -80,7 +94,6 @@ function UpdateUserModal({
                     : "",
                 }}
               />
-
               {currentPasswordError && (
                 <div className="input-error_container">
                   <InputError message={currentPasswordError} />
@@ -106,7 +119,6 @@ function UpdateUserModal({
                       : "",
                 }}
               />
-
               {passwordCharError && (
                 <div className="input-error_container">
                   <InputError message={passwordCharError} />
@@ -130,7 +142,6 @@ function UpdateUserModal({
                     : "",
                 }}
               />
-
               {incorrectConfirmPassword && (
                 <div className="input-error_container">
                   <InputError message={incorrectConfirmPassword} />
@@ -139,22 +150,7 @@ function UpdateUserModal({
             </label>
           </div>
         </div>
-
-        <div className="option-btns_update-user">
-          <label
-            htmlFor="cancel-update-user"
-            onClick={handleOpenUpdateUserModal}
-          >
-            <input type="button" id="cancel-update-user" />
-            <ImCross className="confirm-reject_icon confirm-reject_icon-red" />
-          </label>
-
-          <label htmlFor="update-user">
-            <input type="submit" id="update-user" />
-            <ImCheckmark className="confirm-reject_icon confirm-reject_icon-green" />
-          </label>
-        </div>
-      </form>
+      </BaseModal>
 
       {confirmChangesModal &&
         createPortal(
@@ -165,7 +161,7 @@ function UpdateUserModal({
           />,
           document.body
         )}
-    </div>
+    </>
   );
 }
 

@@ -21,11 +21,17 @@ function ModifySpecialtyRootModal({
   const { categories, areCategoriesLoading, categoriesError } =
     useGetCategories();
 
+  const hasChanges =
+    modifySpecialtyInput.name !== selectedSpecialty?.name ||
+    modifySpecialtyInput.categoryId !== selectedSpecialty?.category?.categoryId;
+
   return (
     <ModalWindow
       onClose={handleCloseModifyModal}
       onSubmit={handleSubmitModifySpecialty}
       title="Modificar Especialidad"
+      buttonText="Guardar"
+      isButtonEnabled={hasChanges}
     >
       <div className="modify-specialty_modal">
         <label htmlFor="name">
@@ -40,34 +46,21 @@ function ModifySpecialtyRootModal({
 
         <label htmlFor="categoryId">
           Categoria
-          <select name="categoryId" onChange={handleChangeModifySpecialty}>
-            <option value={selectedSpecialty?.categorycategoryId}>
-              {selectedSpecialty?.category?.name}
-            </option>
-            {categories?.map(
-              (category) =>
-                selectedSpecialty?.category?.categoryId !==
-                  category?.categoryId && (
-                  <option
-                    key={`category-${category?.categoryId}`}
-                    value={category?.categoryId}
-                  >
-                    {category?.name}
-                  </option>
-                )
-            )}
+          <select
+            name="categoryId"
+            value={modifySpecialtyInput.categoryId}
+            onChange={handleChangeModifySpecialty}
+          >
+            {categories?.map((category) => (
+              <option
+                key={`category-${category?.categoryId}`}
+                value={category?.categoryId}
+              >
+                {category?.name}
+              </option>
+            ))}
           </select>
         </label>
-
-        <button
-          disabled={
-            selectedSpecialty.name === modifySpecialtyInput.name &&
-            selectedSpecialty.category.categoryId ===
-              modifySpecialtyInput.categoryId
-          }
-        >
-          Enviar
-        </button>
       </div>
     </ModalWindow>
   );

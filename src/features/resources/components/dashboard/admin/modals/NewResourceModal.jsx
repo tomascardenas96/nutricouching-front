@@ -1,5 +1,5 @@
+import BaseModal from "../../../../../../common/components/BaseModal";
 import useCreateResource from "../../../../hooks/useCreateResource";
-import "./NewResourceModal.css";
 
 function NewResourceModal({ setResources, handleAddResourceModal }) {
   const {
@@ -7,13 +7,31 @@ function NewResourceModal({ setResources, handleAddResourceModal }) {
     handleChangeInput,
     handleChangePdf,
     handleChangeImage,
-    imagePreview,
     createResourceInput,
   } = useCreateResource(setResources, handleAddResourceModal);
 
   return (
-    <div className="new-resource-modal_bg">
-      <form onSubmit={handleCreateResource}>
+    <BaseModal
+      isOpen={true}
+      onClose={handleAddResourceModal}
+      onSubmit={handleCreateResource}
+      title="Nuevo Recurso"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={handleAddResourceModal}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Crear
+          </button>
+        </div>
+      }
+    >
+      <div className="plan-modal_fields">
         <label htmlFor="title">
           Titulo
           <input
@@ -63,16 +81,8 @@ function NewResourceModal({ setResources, handleAddResourceModal }) {
           Imagen
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
-
-        <span
-          className="btn"
-          onClick={handleAddResourceModal}
-        >
-          Cerrar
-        </span>
-        <button className="btn">Crear</button>
-      </form>
-    </div>
+      </div>
+    </BaseModal>
   );
 }
 

@@ -1,5 +1,5 @@
+import BaseModal from "../../../../../../common/components/BaseModal";
 import useModifyPlan from "../../../../hooks/useModifyPlan";
-import "./UpdatePlanModal.css";
 
 function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
   const {
@@ -7,12 +7,30 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
     modifyPlanInput,
     handleChangeInput,
     handleChangeImage,
-    imagePreview,
   } = useModifyPlan(selectedPlan, closeModifyPlanModal, setPlans);
 
   return (
-    <div className="modify-plan-modal_bg">
-      <form onSubmit={handleModifyPlan}>
+    <BaseModal
+      isOpen={true}
+      onClose={closeModifyPlanModal}
+      onSubmit={handleModifyPlan}
+      title="Modificar Plan"
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={closeModifyPlanModal}
+          >
+            Cancelar
+          </button>
+          <button type="submit" className="bm-btn bm-btn--primary">
+            Modificar
+          </button>
+        </div>
+      }
+    >
+      <div className="plan-modal_fields">
         <label htmlFor="title">
           Titulo
           <input
@@ -53,7 +71,7 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
           />
         </label>
 
-        <label htmlFor="price">
+        <label htmlFor="isOffer">
           ¿Esta en oferta?
           <select
             name="isOffer"
@@ -70,11 +88,8 @@ function UpdatePlanModal({ selectedPlan, setPlans, closeModifyPlanModal }) {
           Imagen
           <input type="file" name="image" onChange={handleChangeImage} />
         </label>
-
-        <span onClick={closeModifyPlanModal}>Cerrar</span>
-        <button>Modificar</button>
-      </form>
-    </div>
+      </div>
+    </BaseModal>
   );
 }
 
