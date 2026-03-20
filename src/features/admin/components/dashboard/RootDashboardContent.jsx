@@ -49,6 +49,16 @@ const SpecialtiesRootDashboardMobile = lazy(() =>
     "../../../specialties/components/dashboard/admin/mobile/SpecialtiesRootDashboardMobile"
   )
 );
+const CategoriesRootDashboard = lazy(() =>
+  import(
+    "../../../category/components/dashboard/admin/CategoriesRootDashboard"
+  )
+);
+const CategoriesRootDashboardMobile = lazy(() =>
+  import(
+    "../../../category/components/dashboard/admin/mobile/CategoriesRootDashboardMobile"
+  )
+);
 const PlansRootDashboard = lazy(() =>
   import("../../../plans/components/dashboard/admin/PlansRootDashboard")
 );
@@ -72,6 +82,7 @@ const SECTIONS = {
   Productos: [ProductsRootDashboard, ProductsRootDashboardMobile],
   Viandas: [ViandsRootDashboard, ViandsRootDashboardMobile],
   Especialidades: [SpecialtiesRootDashboard, SpecialtiesRootDashboardMobile],
+  Categorias: [CategoriesRootDashboard, CategoriesRootDashboardMobile],
   Planes: [PlansRootDashboard, PlansRootDashboardMobile],
   Recursos: [ResourcesRootDashboard, ResourcesRootDashboardMobile],
 };

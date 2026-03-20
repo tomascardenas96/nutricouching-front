@@ -22,7 +22,7 @@ function useGetCategories() {
     }
   };
 
-  return { categories, areCategoriesLoading, categoriesError };
+  return { categories, setCategories, areCategoriesLoading, categoriesError };
 }
 
 export default useGetCategories;

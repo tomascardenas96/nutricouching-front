@@ -1,0 +1,50 @@
+.category-card-dashboard-container {
+  margin: 0 1rem;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding-bottom: 1.2rem;
+}
+
+.category-card-dashboard-container .info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.category-card-dashboard-container .name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.category-card-dashboard-container .buttons-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.category-card-dashboard-container .edit-btn,
+.category-card-dashboard-container .delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: white;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 0.75; }
+}
+
+.category-card-dashboard-container .edit-btn {
+  border: 1.3px solid #1b7a1b;
+  color: #1b7a1b;
+}
+
+.category-card-dashboard-container .delete-btn {
+  border: 1.3px solid #ca6969;
+  color: #ca6969;
+}

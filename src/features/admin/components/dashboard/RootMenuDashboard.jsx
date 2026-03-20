@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { MdOutlineDashboard } from "react-icons/md";
 import ItemMenuDashboard from "../../../../common/components/dashboard/ItemMenuDashboard";
 import { useSelectMenuOption } from "../../../dashboard/hooks/useSelectMenuOption";
 import "./RootMenuDashboard.css";
@@ -11,21 +13,29 @@ function RootMenuDashboard() {
     "Productos",
     "Viandas",
     "Especialidades",
+    "Categorias",
     "Planes",
-    "Recursos"
+    "Recursos",
   ];
 
   return (
-    <ul className="root-menu-dashboard">
-      {rootMenu.map((option, index) => (
-        <ItemMenuDashboard
-          key={`menu-${option}${index}`}
-          option={option}
-          isSelected={selectedOption === option}
-          selectOptionDashboardMenu={selectOptionDashboardMenu}
-        />
-      ))}
-    </ul>
+    <div className="root-menu-dashboard">
+      <ul>
+        {rootMenu.map((option, index) => (
+          <ItemMenuDashboard
+            key={`menu-${option}${index}`}
+            option={option}
+            isSelected={selectedOption === option}
+            selectOptionDashboardMenu={selectOptionDashboardMenu}
+          />
+        ))}
+      </ul>
+
+      {/* <Link to="/professional" className="root-menu-dashboard__professional-link">
+        <MdOutlineDashboard />
+        Dashboard profesional
+      </Link> */}
+    </div>
   );
 }
 
