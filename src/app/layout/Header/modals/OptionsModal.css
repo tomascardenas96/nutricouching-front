@@ -1,44 +1,91 @@
-.options-modal_container {
+@keyframes options-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.options-modal {
   position: absolute;
-  width: 13rem;
+  width: 15.5rem;
   background-color: var(--clr-white);
   border: 1px solid var(--clr-border);
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 0.65rem);
   right: 0;
   z-index: 500;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  padding: 0.4rem 0;
-  display: flex;
-  flex-direction: column;
+  border-radius: 0.8rem;
+  box-shadow:
+    0 2px 8px rgba(30, 41, 32, 0.06),
+    0 12px 40px rgba(30, 41, 32, 0.13);
+  overflow: hidden;
+  animation: options-modal-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 
-  /* Arrow */
+  /* Arrow caret */
   &::before {
     content: "";
     position: absolute;
     top: -5px;
-    right: 0.85rem;
+    right: 1.1rem;
     width: 9px;
     height: 9px;
-    background-color: var(--clr-white);
+    background-color: #f7f3ee;
     border-top: 1px solid var(--clr-border);
     border-left: 1px solid var(--clr-border);
     transform: rotate(45deg);
+    z-index: 1;
   }
 }
 
+/* ── Header ── */
 .options-modal__header {
-  padding: 0.6rem 0.9rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(145deg, #f7f3ee 0%, #ede8df 100%);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.options-modal__avatar {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--clr-forest) 0%,
+    var(--clr-forest-dark) 100%
+  );
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: grid;
+  place-content: center;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(42, 56, 48, 0.3);
+}
+
+.options-modal__user-info {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.08rem;
 }
 
 .options-modal__name {
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.83rem;
   font-weight: 600;
   color: var(--clr-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 .options-modal__email {
@@ -50,40 +97,77 @@
   text-overflow: ellipsis;
 }
 
+.options-modal__badge {
+  margin-top: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.59rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-forest);
+  background: rgba(88, 108, 92, 0.1);
+  border: 1px solid rgba(88, 108, 92, 0.22);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  width: fit-content;
+}
+
+/* ── Divider ── */
 .options-modal__divider {
   height: 1px;
   background-color: var(--clr-border);
-  margin: 0.3rem 0;
+  margin: 0.25rem 0;
 }
 
+/* ── Items ── */
 .options-modal__item {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--clr-ink);
-  padding: 0.55rem 0.9rem;
+  padding: 0.62rem 1rem;
   cursor: pointer;
-  transition: background-color 0.15s ease;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition:
+    background-color 0.13s ease,
+    border-color 0.13s ease,
+    color 0.13s ease;
 
-  > a {
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
-    display: flex;
-    align-items: center;
+  &:hover {
+    background-color: var(--clr-stone);
+    border-left-color: var(--clr-forest);
   }
 }
 
-.options-modal__item:hover {
-  background-color: var(--clr-stone);
+.options-modal__item-icon {
+  font-size: 0.88rem;
+  opacity: 0.65;
+  flex-shrink: 0;
+  transition: opacity 0.13s ease;
 }
 
+.options-modal__item:hover .options-modal__item-icon {
+  opacity: 1;
+}
+
+/* ── Logout ── */
 .options-modal__item--logout {
   color: var(--clr-amber);
-}
 
-.options-modal__item--logout:hover {
-  background-color: rgba(200, 96, 44, 0.06);
+  & .options-modal__item-icon {
+    color: var(--clr-amber);
+  }
+
+  &:hover {
+    background-color: rgba(245, 93, 62, 0.06);
+    border-left-color: var(--clr-amber);
+  }
 }
