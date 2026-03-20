@@ -5,7 +5,7 @@ import apiClient from "../../auth/api/apiClient";
 
 function useUpdateUserInformation(
   setConfirmChangesModal,
-  setIsUpdateUserModalOpen
+  setIsUpdateUserModalOpen,
 ) {
   const { user } = useAuth();
 
@@ -53,7 +53,7 @@ function useUpdateUserInformation(
       try {
         const { data } = await apiClient.patch(
           `/auth/update/${user.userId}`,
-          updateUserInput
+          updateUserInput,
         );
         return data;
       } catch (error) {
@@ -95,7 +95,6 @@ function useUpdateUserInformation(
         updateUserInput.password.length > 12) &&
       (updateUserInput.password || confirmNewPassword)
     ) {
-      console.log(updateUserInput.password.length);
       setPasswordCharError("La contraseña debe tener entre 8 y 12 caracteres");
       hasErrors = true;
     }

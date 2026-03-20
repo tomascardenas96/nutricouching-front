@@ -48,13 +48,11 @@ class SSEClient {
         // Si es transitorio, onerror no throw y fetchEventSource reintenta automáticamente.
         let intentionalStop = false;
 
-        console.log("[SSE] _start → conectando...");
         fetchEventSource(`${BASE_URL}/sse`, {
             headers: { Authorization: `Bearer ${token}` },
             signal: this._controller.signal,
             openWhenHidden: true,
             onopen: async (response) => {
-                console.log("[SSE] onopen →", response.status, response.ok ? "✓ conectado" : "✗ error");
                 if (response.ok) return;
                 if (response.status === 401 && !isRetry) {
                     intentionalStop = true;
@@ -66,13 +64,11 @@ class SSEClient {
                 throw new Error(`SSE error: ${response.status}`);
             },
             onmessage: ({ event, data }) => {
-                console.log("[SSE] mensaje →", event, data);
                 try {
                     this._emit(event, JSON.parse(data));
                 } catch { }
             },
             onerror: (err) => {
-                console.error("[SSE] onerror →", err);
                 if (intentionalStop) throw err;
             },
         }).catch(() => { });

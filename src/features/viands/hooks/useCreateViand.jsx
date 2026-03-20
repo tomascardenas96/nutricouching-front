@@ -35,7 +35,7 @@ function useCreateViand(setViands, handleAddViandModal) {
     setCreateViandInput((prev) => ({
       ...prev,
       ingredients: prev.ingredients.map((ing) =>
-        ing.id === id ? { ...ing, [field]: value } : ing
+        ing.id === id ? { ...ing, [field]: value } : ing,
       ),
     }));
   };
@@ -58,7 +58,7 @@ function useCreateViand(setViands, handleAddViandModal) {
       formData.append("price", createViandInput.price);
       formData.append(
         "ingredients",
-        JSON.stringify(createViandInput.ingredients)
+        JSON.stringify(createViandInput.ingredients),
       );
       if (fileCreateViand) formData.append("file", fileCreateViand);
 
@@ -69,7 +69,6 @@ function useCreateViand(setViands, handleAddViandModal) {
     toast.promise(createViand(), {
       loading: "Creando vianda...",
       error: (error) => {
-        console.log(error);
         return "Error al crear una vianda";
       },
       success: (data) => {
