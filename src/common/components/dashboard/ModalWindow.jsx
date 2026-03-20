@@ -1,7 +1,5 @@
-import { FaCalendar } from "react-icons/fa";
-import "./ModalWindow.css";
-import { IoMdClose } from "react-icons/io";
 import { MdOutlineDone } from "react-icons/md";
+import BaseModal from "../BaseModal";
 
 function ModalWindow({
   children,
@@ -13,43 +11,33 @@ function ModalWindow({
   isButtonEnabled,
 }) {
   return (
-    <div className="modal-window_background" onClick={onClose}>
-      <div className="modal-window" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-window_header">
-          <h1>
-            {icon} {title}
-          </h1>
-          <IoMdClose className="close-icon" onClick={onClose} />
+    <BaseModal
+      isOpen={true}
+      onClose={onClose}
+      onSubmit={onSubmit}
+      title={title}
+      icon={icon}
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
+            onClick={onClose}
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            className="bm-btn bm-btn--primary"
+            disabled={!isButtonEnabled}
+          >
+            <MdOutlineDone /> {buttonText}
+          </button>
         </div>
-
-        <form onSubmit={onSubmit}>
-          {children}
-
-          <div className="submit-button">
-            <hr />
-            <div className="booking-buttons">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  onClose();
-                }}
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                className={
-                  isButtonEnabled ? "enabled-button" : "disabled-button"
-                }
-                disabled={!isButtonEnabled}
-              >
-                <MdOutlineDone /> {buttonText}
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+      }
+    >
+      {children}
+    </BaseModal>
   );
 }
 

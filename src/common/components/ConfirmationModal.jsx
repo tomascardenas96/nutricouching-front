@@ -1,23 +1,36 @@
-import { ImCheckmark, ImCross } from "react-icons/im";
-import "./ConfirmationModal.css";
+import BaseModal from "./BaseModal";
 
-function ConfirmationModal({ isOpen, onClose, onConfirm, message }) {
+function ConfirmationModal({ onClose, onConfirm, message }) {
   return (
-    <div className="confirmation-modal_background" onClick={onClose}>
-      <div className="confirmation-modal" onClick={(e) => e.stopPropagation()}>
-        <p>{message || "¿Estás seguro de realizar esta acción?"}</p>
-        <div className="confirmation-modal_options-icons">
-          <ImCross
+    <BaseModal
+      isOpen={true}
+      onClose={onClose}
+      title="Confirmar acción"
+      size="sm"
+      zIndex={4000}
+      footer={
+        <div className="bm-footer__actions">
+          <button
+            type="button"
+            className="bm-btn bm-btn--secondary"
             onClick={onClose}
-            className="confirm-reject_icon confirm-reject_icon-red"
-          />
-          <ImCheckmark
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="bm-btn bm-btn--primary"
             onClick={onConfirm}
-            className="confirm-reject_icon confirm-reject_icon-green"
-          />
+          >
+            Confirmar
+          </button>
         </div>
-      </div>
-    </div>
+      }
+    >
+      <p className="bm-confirm-msg">
+        {message || "¿Estás seguro de realizar esta acción?"}
+      </p>
+    </BaseModal>
   );
 }
 
