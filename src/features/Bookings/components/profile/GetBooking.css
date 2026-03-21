@@ -1,227 +1,383 @@
+/* ═══════════════════════════════════════════════════
+   GetBooking — Refined booking wizard
+   ═══════════════════════════════════════════════════ */
+
+@keyframes gb-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gb-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gb-check-pop {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ── Container ── */
 .get-booking_modal {
-  width: 35rem;
+  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 0 2rem;
+  gap: 0;
+  padding: 0.25rem 0 1.5rem;
   transition: all 0.3s ease;
+  overflow-x: hidden;
 
   & input {
     display: none;
   }
-
-  & label {
-    transition: all 0.3s ease;
-  }
-
-  & .get-booking_no-options {
-    font-size: 0.8rem;
-    text-align: center;
-  }
-
-  .radio-input:checked + label {
-    background-color: rgba(0, 0, 0, 0.756);
-    color: white;
-    font-weight: 500;
-  }
-
-  .radio-input:checked + label:hover {
-    transform: none;
-    background-color: rgba(0, 0, 0, 0.756);
-  }
-
-  .radio-input + label:hover {
-    transform: scale(1.01);
-    background-color: rgba(128, 128, 128, 0.121);
-  }
-
-  & h2 {
-    font-size: 1rem;
-    font-weight: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  & h2.select-date {
-    margin-bottom: 0.8rem;
-  }
 }
 
-.get-booking_modal .specialties-by-professional_list {
-  width: 85%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  > div {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  & label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    display: flex;
-    height: 3rem;
-    align-items: center;
-    border-radius: 0.3rem;
-    border: 1px solid rgba(0, 0, 0, 0.148);
-    cursor: pointer;
-    justify-content: center;
-  }
+/* ── Step section wrapper ── */
+.gb-step {
+  animation: gb-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  position: relative;
+  padding: 1.25rem 1.5rem;
 }
 
-.get-booking_modal .date-picker {
+.gb-step + .gb-step {
+  border-top: 1px solid var(--clr-border);
+}
+
+/* ── Step header ── */
+.gb-step__header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.132);
-  margin: 1rem 0;
-  width: 100% !important;
-
-  > .myCalendar {
-    margin-top: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.174);
-    padding: 1rem;
-    border-radius: 0.3rem;
-    width: 100% !important;
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0;
-
-    & .rdp-caption_label {
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    & .rdp-chevron {
-      font-weight: 500;
-      fill: rgb(46, 46, 46);
-    }
-
-    & .rdp-selected .rdp-day_button {
-      border-radius: 0.4rem;
-      background-color: rgba(0, 0, 0, 0.756);
-      color: white;
-      border: none;
-      font-weight: 400;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    & .rdp-day_button {
-      font-size: 0.9rem;
-    }
-  }
+  gap: 0.65rem;
+  margin-bottom: 1rem;
 }
 
-.get-booking_modal hr {
-  width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.132);
-  margin-bottom: 0.8rem;
+.gb-step__number {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--clr-forest);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
 }
 
-.get-booking_modal .available-times {
-  width: 100%;
+.gb-step__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--clr-ink);
+  letter-spacing: 0.01em;
+}
+
+.gb-step__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--clr-mist);
+  margin-top: -0.35rem;
+  margin-bottom: 0.5rem;
+  padding-left: 2.25rem;
+}
+
+/* ═══ STEP 1 — Specialties ═══ */
+.gb-specialties {
   display: flex;
   flex-direction: column;
-  width: 85%;
-  border: 1px dashed rgba(0, 0, 0, 0.233);
-  border-radius: 0.5rem;
-  padding: 1.5rem 1.5rem 2.5rem;
-  animation: show-up 0.3s ease-out;
-
-  > p {
-    font-size: 0.8rem;
-  }
-
-  > h2,
-  p {
-    text-align: center;
-  }
-
-  > .times-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1.5rem;
-
-    & label {
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-      height: 3rem;
-      border-radius: 0.4rem;
-      border: 1px solid rgba(0, 0, 0, 0.148);
-      font-size: 0.95rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.7rem;
-      transition: all 1s ease;
-    }
-  }
+  gap: 0.45rem;
 }
 
-@keyframes show-up {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+.gb-specialty-option {
+  position: relative;
 }
 
-.get-booking_modal .summary-booking {
-  border-top: 1px solid rgba(0, 0, 0, 0.132);
-  width: 85%;
-  padding: 1.5rem 0;
-
-  > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 1rem 1.5rem;
-    border-radius: 0.8rem;
-    background-color: rgba(129, 222, 129, 0.121);
-    margin-top: 1rem;
-    border: 1px solid rgba(129, 222, 129, 0.212);
-
-    > .summary-details {
-      font-size: 0.85rem;
-      padding: 0.5rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    > .right {
-      text-align: end;
-    }
-  }
+.gb-specialty-option label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--clr-ink);
 }
 
+.gb-specialty-option label::before {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-border);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  background: var(--clr-white);
+}
+
+.gb-specialty-option label::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--clr-forest);
+  transform: scale(0);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+
+  /* Checkmark via box-shadow */
+  box-shadow:
+    inset 0 0 0 2.5px var(--clr-forest),
+    inset 0 0 0 4px var(--clr-white);
+}
+
+.gb-specialty-option label:hover {
+  border-color: var(--clr-sage);
+  background: rgba(88, 108, 92, 0.03);
+}
+
+/* Selected state */
+.gb-specialty-option input:checked + label {
+  border-color: var(--clr-forest);
+  background: rgba(88, 108, 92, 0.06);
+  font-weight: 500;
+  color: var(--clr-forest-dark);
+}
+
+.gb-specialty-option input:checked + label::before {
+  border-color: var(--clr-forest);
+}
+
+.gb-specialty-option input:checked + label::after {
+  transform: scale(1);
+  animation: gb-check-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ═══ STEP 2 — Calendar ═══ */
+.gb-calendar-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.gb-calendar-wrap .myCalendar {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: var(--clr-white);
+}
+
+.gb-calendar-wrap .myCalendar .rdp-caption_label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--clr-ink);
+  text-transform: capitalize;
+}
+
+.gb-calendar-wrap .myCalendar .rdp-chevron {
+  fill: var(--clr-sage);
+}
+
+.gb-calendar-wrap .myCalendar .rdp-day_button {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--clr-ink);
+  border-radius: var(--radius-md);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.gb-calendar-wrap .myCalendar .rdp-day_button:hover {
+  background: rgba(88, 108, 92, 0.08);
+}
+
+.gb-calendar-wrap .myCalendar .rdp-selected .rdp-day_button {
+  background: var(--clr-forest);
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-md);
+}
+
+.gb-calendar-wrap .myCalendar .rdp-today:not(.rdp-selected) .rdp-day_button {
+  color: var(--clr-forest-dark);
+  font-weight: 600;
+}
+
+/* ═══ STEP 3 — Time slots ═══ */
+.gb-times-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.gb-time-option label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.7rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-white);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 400;
+  color: var(--clr-ink);
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.gb-time-option label .gb-time-icon {
+  color: var(--clr-sage);
+  font-size: 0.95rem;
+  display: flex;
+  transition: color 0.2s ease;
+}
+
+.gb-time-option label:hover {
+  border-color: var(--clr-sage);
+  background: rgba(88, 108, 92, 0.03);
+}
+
+.gb-time-option input:checked + label {
+  border-color: var(--clr-forest);
+  background: var(--clr-forest);
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(88, 108, 92, 0.25);
+}
+
+.gb-time-option input:checked + label .gb-time-icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ═══ STEP 4 — Summary ═══ */
+.gb-summary {
+  animation: gb-scale-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.gb-summary-card {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 108, 92, 0.07) 0%,
+    rgba(88, 108, 92, 0.03) 100%
+  );
+  border: 1px solid rgba(88, 108, 92, 0.15);
+  border-radius: 0.6rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.gb-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+.gb-summary-row + .gb-summary-row {
+  border-top: 1px solid rgba(88, 108, 92, 0.08);
+}
+
+.gb-summary-label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--clr-mist);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gb-summary-value {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--clr-ink);
+  text-align: right;
+}
+
+/* ── Warning / empty states ── */
+.gb-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--clr-mist);
+  line-height: 1.5;
+}
+
+.gb-no-times {
+  text-align: center;
+  padding: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: var(--clr-mist);
+  background: var(--clr-stone);
+  border-radius: var(--radius-md);
+  margin: 0 1.5rem;
+  animation: gb-fade-up 0.3s ease forwards;
+}
+
+/* ═══ Responsive ═══ */
 @media screen and (max-width: 580px) {
   .get-booking_modal {
     width: 100%;
   }
-}
 
-@media screen and (max-width: 480px) {
-  .get-booking_modal .available-times {
-    > .times-list {
-      gap: 0.5rem;
-    }
+  .gb-step {
+    padding: 1rem 1.25rem;
   }
 }
 
-@media screen and (max-width: 420px) {
-  .get-booking_modal .available-times {
-    > .times-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
+@media screen and (max-width: 480px) {
+  .gb-times-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  .gb-summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .gb-summary-value {
+    text-align: left;
   }
 }
