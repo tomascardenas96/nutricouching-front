@@ -54,7 +54,7 @@ function GuideModal({ setOpen }) {
 
           <Link
             className="guide-modal__cta"
-            to="/professionals"
+            to="/professionals?category=nutrición"
             onClick={() => setOpen(false)}
           >
             Ver profesionales de nutrición →

@@ -15,11 +15,10 @@ const ITEMS_PER_PAGE = 12;
 function ProfessionalsPage() {
   const location = useLocation();
 
-  const [nameQuery, setNameQuery] = useState(() => {
-    const params = new URLSearchParams(location.search);
-    return params.get("name") || "";
-  });
+  const initialParams = new URLSearchParams(location.search);
+  const [nameQuery, setNameQuery] = useState(initialParams.get("name") || "");
   const [debouncedName, setDebouncedName] = useState(nameQuery);
+  const [categoryFromUrl] = useState(initialParams.get("category") || "");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState("");
 
@@ -51,6 +50,16 @@ function ProfessionalsPage() {
     return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
   }, [specialties, selectedCategory]);
 
+  // Resolve category name from URL to categoryId once categories load
+  useEffect(() => {
+    if (categoryFromUrl && allCategories.length > 0 && !selectedCategory) {
+      const match = allCategories.find(
+        (cat) => cat.name.toLowerCase() === categoryFromUrl.toLowerCase(),
+      );
+      if (match) setSelectedCategory(match.categoryId);
+    }
+  }, [categoryFromUrl, allCategories, selectedCategory]);
+
   // Reset specialty when category changes
   useEffect(() => {
     setSelectedSpecialty("");
@@ -62,7 +71,12 @@ function ProfessionalsPage() {
     isLoading: professionalsLoading,
     isError: professionalsError,
   } = useQuery({
-    queryKey: ["professionals-filter", debouncedName, selectedSpecialty, selectedCategory],
+    queryKey: [
+      "professionals-filter",
+      debouncedName,
+      selectedSpecialty,
+      selectedCategory,
+    ],
     queryFn: () => {
       const params = new URLSearchParams();
       if (debouncedName) params.set("name", debouncedName);
@@ -74,14 +88,24 @@ function ProfessionalsPage() {
     },
   });
 
-  const { currentPage, setCurrentPage, currentProducts, nextPage, previousPage, totalPages } =
-    useHandleCarouselPages(professionals, ITEMS_PER_PAGE);
+  const {
+    currentPage,
+    setCurrentPage,
+    currentProducts,
+    nextPage,
+    previousPage,
+    totalPages,
+  } = useHandleCarouselPages(professionals, ITEMS_PER_PAGE);
 
   useEffect(() => {
     setCurrentPage(0);
   }, [debouncedName, selectedCategory, selectedSpecialty, setCurrentPage]);
 
-  const activeFiltersCount = [nameQuery, selectedCategory, selectedSpecialty].filter(Boolean).length;
+  const activeFiltersCount = [
+    nameQuery,
+    selectedCategory,
+    selectedSpecialty,
+  ].filter(Boolean).length;
 
   const clearAllFilters = () => {
     setNameQuery("");
@@ -160,7 +184,10 @@ function ProfessionalsPage() {
           </div>
 
           {activeFiltersCount > 0 && (
-            <button className="professionals-page__clear-btn" onClick={clearAllFilters}>
+            <button
+              className="professionals-page__clear-btn"
+              onClick={clearAllFilters}
+            >
               <IoClose />
               Limpiar filtros
             </button>
@@ -178,32 +205,38 @@ function ProfessionalsPage() {
       )}
 
       {professionalsError && (
-        <p className="professionals-page__message">Error al cargar profesionales</p>
-      )}
-
-      {!professionalsLoading && !professionalsError && professionals.length === 0 && (
         <p className="professionals-page__message">
-          No hay profesionales que coincidan con los filtros seleccionados
+          Error al cargar profesionales
         </p>
       )}
 
-      {!professionalsLoading && !professionalsError && currentProducts.length > 0 && (
-        <div className="professionals-page__grid">
-          {currentProducts.map((professional) => (
-            <Link
-              key={professional.professionalId}
-              to={`/profile/${professional.profile.profileName}`}
-              className="professionals-page__card-link"
-            >
-              <ProfessionalFilterResultCard
-                fullname={professional.fullname}
-                image={professional.profile.picture}
-                specialties={professional.specialty}
-              />
-            </Link>
-          ))}
-        </div>
-      )}
+      {!professionalsLoading &&
+        !professionalsError &&
+        professionals.length === 0 && (
+          <p className="professionals-page__message">
+            No hay profesionales que coincidan con los filtros seleccionados
+          </p>
+        )}
+
+      {!professionalsLoading &&
+        !professionalsError &&
+        currentProducts.length > 0 && (
+          <div className="professionals-page__grid">
+            {currentProducts.map((professional) => (
+              <Link
+                key={professional.professionalId}
+                to={`/profile/${professional.profile.profileName}`}
+                className="professionals-page__card-link"
+              >
+                <ProfessionalFilterResultCard
+                  fullname={professional.fullname}
+                  image={professional.profile.picture}
+                  specialties={professional.specialty}
+                />
+              </Link>
+            ))}
+          </div>
+        )}
 
       {totalPages > 1 && (
         <div className="professionals-page__pagination">
