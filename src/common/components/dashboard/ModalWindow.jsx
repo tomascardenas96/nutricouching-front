@@ -9,6 +9,7 @@ function ModalWindow({
   icon,
   buttonText,
   isButtonEnabled,
+  size,
 }) {
   return (
     <BaseModal
@@ -17,6 +18,7 @@ function ModalWindow({
       onSubmit={onSubmit}
       title={title}
       icon={icon}
+      size={size}
       footer={
         <div className="bm-footer__actions">
           <button

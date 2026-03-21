@@ -15,8 +15,13 @@ function ProductCard({ product, onAddToCart }) {
   const handleClick = async () => {
     if (isOutOfStock || adding || !onAddToCart) return;
     setAdding(true);
-    await onAddToCart(product);
-    setTimeout(() => setAdding(false), 500);
+    try {
+      await onAddToCart(product);
+    } catch {
+      // El toast de error ya se muestra en el hook
+    } finally {
+      setTimeout(() => setAdding(false), 500);
+    }
   };
 
   return (

@@ -90,6 +90,13 @@ body {
   color: var(--clr-ink);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  caret-color: transparent;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: auto;
 }
 
 /* Scrollbar */
@@ -120,6 +127,11 @@ body {
 #root-portal {
   position: fixed;
   z-index: 9999;
+  pointer-events: none;
+}
+
+#root-portal > * {
+  pointer-events: auto;
 }
 
 .rdp-root {

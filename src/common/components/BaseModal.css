@@ -1,11 +1,21 @@
 @keyframes bm-overlay-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes bm-card-in {
-  from { opacity: 0; transform: scale(0.96) translateY(0.4rem); }
-  to   { opacity: 1; transform: scale(1)    translateY(0);      }
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* ── Overlay ── */
@@ -35,9 +45,15 @@
 }
 
 /* ── Sizes ── */
-.bm-card--sm { width: 22rem; }
-.bm-card--md { width: 28rem; }
-.bm-card--lg { width: 38rem; }
+.bm-card--sm {
+  width: 22rem;
+}
+.bm-card--md {
+  width: 28rem;
+}
+.bm-card--lg {
+  width: 32rem;
+}
 
 /* ── Header ── */
 .bm-header {
@@ -79,7 +95,9 @@
   background: transparent;
   color: var(--clr-mist);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
   font-size: 1.2rem;
   flex-shrink: 0;
 }
@@ -91,7 +109,7 @@
 
 /* ── Body ── */
 .bm-body {
-  padding: 1.25rem 1.5rem;
+  padding: 0 0.5rem;
   overflow-y: auto;
   flex: 1;
 }
@@ -130,14 +148,19 @@
   font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
 }
 
-.bm-btn:active { transform: scale(0.97); }
+.bm-btn:active {
+  transform: scale(0.97);
+}
 
 .bm-btn--primary {
   background-color: var(--clr-forest);
@@ -173,7 +196,9 @@
   border: none;
 }
 
-.bm-btn:disabled:active { transform: none; }
+.bm-btn:disabled:active {
+  transform: none;
+}
 
 /* ── Plan/Resource form fields (shared) ── */
 .plan-modal_fields {
@@ -202,7 +227,9 @@
       color: var(--clr-ink);
       outline: none;
       background-color: var(--clr-white);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
       font-weight: 400;
       letter-spacing: normal;
 

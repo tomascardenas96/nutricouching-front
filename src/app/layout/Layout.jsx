@@ -64,7 +64,7 @@ function Layout({ children }) {
 
       <Toaster
         toastOptions={{
-          style: { height: "2.9rem", paddingLeft: ".9rem", gap: ".7rem" },
+          style: { minHeight: "2.9rem", padding: ".65rem .9rem", gap: ".7rem" },
         }}
       />
 

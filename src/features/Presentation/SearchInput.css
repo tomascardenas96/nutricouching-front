@@ -31,6 +31,10 @@
   box-shadow: 0 2px 16px rgba(61, 80, 69, 0.15);
 }
 
+.filter-professionals_input:placeholder-shown {
+  caret-color: transparent;
+}
+
 /* Search icon button — circular, positioned inside the pill on the right */
 .filter-professionals_input ~ .search-icon {
   position: absolute;
