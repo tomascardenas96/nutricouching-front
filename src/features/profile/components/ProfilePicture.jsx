@@ -18,57 +18,59 @@ function ProfilePicture({
 
   return (
     <div className="profile-picture">
-      {!image ? (
-        <img
-          src="/assets/empty-profile.svg"
-          alt="Foto de perfil por defecto"
-          className="profile-picture__no-pic"
-        />
-      ) : (
-        <img
-          src={image}
-          alt="Foto de perfil del profesional en Cohesiva Salud"
-          onClick={() => setIsFullPhotoSelected(true)}
-        />
-      )}
-      {isProfileOwner && (
-        <label
-          className="upload-icon"
-          htmlFor="upload-professional-file"
-          onClick={() => setIsUploadProfilePictureOpen(true)}
-        >
-          <FaCamera />
-        </label>
-      )}
-
-      {isFullPhotoSelected &&
-        createPortal(
-          <div className="full-size-image_container">
-            <div>
-              <img
-                src={image}
-                alt="Foto de perfil del profesional en Cohesiva Salud"
-                onClick={() => setIsFullPhotoSelected(true)}
-              />
-
-              <IoMdClose
-                className="close-icon"
-                onClick={() => setIsFullPhotoSelected(false)}
-              />
-            </div>
-          </div>,
-          document.getElementById("profile")
+      <div>
+        {!image ? (
+          <img
+            src="/assets/empty-profile.svg"
+            alt="Foto de perfil por defecto"
+            className="profile-picture__no-pic"
+          />
+        ) : (
+          <img
+            src={image}
+            alt="Foto de perfil del profesional en Cohesiva Salud"
+            onClick={() => setIsFullPhotoSelected(true)}
+          />
+        )}
+        {isProfileOwner && (
+          <label
+            className="upload-icon"
+            htmlFor="upload-professional-file"
+            onClick={() => setIsUploadProfilePictureOpen(true)}
+          >
+            <FaCamera />
+          </label>
         )}
 
-      {isUploadProfilePictureOpen &&
-        createPortal(
-          <UploadPhotoModal
-            profileId={profileId}
-            onClose={() => setIsUploadProfilePictureOpen(false)}
-            setProfessionalProfile={setProfessionalProfile}
-          />,
-          document.getElementById("profile")
-        )}
+        {isFullPhotoSelected &&
+          createPortal(
+            <div className="full-size-image_container">
+              <div>
+                <img
+                  src={image}
+                  alt="Foto de perfil del profesional en Cohesiva Salud"
+                  onClick={() => setIsFullPhotoSelected(true)}
+                />
+
+                <IoMdClose
+                  className="close-icon"
+                  onClick={() => setIsFullPhotoSelected(false)}
+                />
+              </div>
+            </div>,
+            document.getElementById("profile"),
+          )}
+
+        {isUploadProfilePictureOpen &&
+          createPortal(
+            <UploadPhotoModal
+              profileId={profileId}
+              onClose={() => setIsUploadProfilePictureOpen(false)}
+              setProfessionalProfile={setProfessionalProfile}
+            />,
+            document.getElementById("profile"),
+          )}
+      </div>
     </div>
   );
 }

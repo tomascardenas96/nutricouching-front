@@ -3,7 +3,7 @@
   position: absolute;
   inset: 0;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
-  background: linear-gradient(160deg, #d4956a 0%, #e8c08a 50%, #f5e4c0 100%);
+  background: rgba(88, 108, 92, 0.84);
   opacity: 0.9;
   overflow: hidden;
 }
@@ -18,7 +18,7 @@
 
 /* ── Cover container ── */
 .cover-photo {
-  height: 15rem;
+  height: 11rem;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   position: relative;
   background-color: var(--clr-stone);
