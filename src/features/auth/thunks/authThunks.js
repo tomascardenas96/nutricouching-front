@@ -10,6 +10,10 @@ export const loginUser = (credentials) => async (dispatch) => {
     dispatch(loginStart());
     try {
         const { token, refreshToken, user } = await authApi.login(credentials);
+        if (user?.isDisabled) {
+            dispatch(loginFailure("Tu cuenta ha sido suspendida. Contactá al soporte para más información."));
+            return false;
+        }
         dispatch(loginSuccess({ token, refreshToken, user }));
         return true;
     } catch (error) {
@@ -28,6 +32,10 @@ export const loadUserProfile = () => async (dispatch, getState) => {
 
     try {
         const user = await authApi.getUserProfile();
+        if (user?.isDisabled) {
+            dispatch(logout());
+            return;
+        }
         // Leer el token actual DESPUÉS de la llamada: el interceptor pudo haber
         // hecho un refresh y rotado el token durante el await anterior.
         const currentToken = getState().auth.token;

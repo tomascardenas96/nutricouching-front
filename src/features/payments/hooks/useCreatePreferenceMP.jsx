@@ -45,7 +45,11 @@ function useCreatePreferenceMP(elementsInCart, activeCart) {
 
       window.open(data.init_point, "_blank");
     } catch (error) {
-      console.error(error);
+      if (error?.response?.data?.message === "Usuario bloqueado") {
+        toast.error("Tu cuenta se encuentra suspendida. No podés realizar compras.");
+      } else {
+        toast.error("Ocurrió un error al procesar el pago");
+      }
     } finally {
       setPreferenceLoading(false);
     }

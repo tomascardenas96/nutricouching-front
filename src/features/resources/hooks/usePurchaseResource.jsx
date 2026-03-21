@@ -14,7 +14,11 @@ function usePurchaseResource() {
       const { data } = await apiClient.post(`/resource/${resourceId}/purchase`);
       window.open(data.init_point, "_blank");
     } catch (error) {
-      toast.error("Ocurrio un error al procesar el pago");
+      if (error?.response?.data?.message === "Usuario bloqueado") {
+        toast.error("Tu cuenta se encuentra suspendida. No podés realizar compras.");
+      } else {
+        toast.error("Ocurrió un error al procesar el pago");
+      }
     } finally {
       setLoadingResourceId(null);
       setPaymentLoading(false);

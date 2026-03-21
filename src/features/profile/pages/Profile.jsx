@@ -9,6 +9,7 @@ import useGetProfileByName from "../hooks/useGetProfileByName";
 import useSwitchSectionProfile from "../hooks/useSwitchSectionProfile";
 import "./Profile.css";
 import FullSpinner from "../../../common/components/FullSpinner";
+import ProfileUnavailable from "../components/ProfileUnavailable";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -54,6 +55,9 @@ function Profile() {
         </p>
       </div>
     );
+
+  if (professional.isDisabled || profile.isDisabled)
+    return <ProfileUnavailable />;
 
   return (
     <div className="profile-container" id="profile">

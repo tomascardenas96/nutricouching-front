@@ -43,7 +43,12 @@ function useBookAppointment(onClose, professionalSchedule) {
 
         return "Turno reservado exitosamente!";
       },
-      error: (error) => error.message,
+      error: (error) => {
+        if (error?.response?.data?.message === "Usuario bloqueado") {
+          return "Tu cuenta se encuentra suspendida. No podés reservar turnos.";
+        }
+        return error.message;
+      },
     });
   };
 

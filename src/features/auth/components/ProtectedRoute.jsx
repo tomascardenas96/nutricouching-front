@@ -7,6 +7,10 @@ function ProtectedRoute({ allowedRole }) {
 
   if (isLoading) return <FullSpinner />;
 
+  if (user?.isDisabled) {
+    return <Navigate to="/" replace />;
+  }
+
   if (user?.role === "admin" || user?.role === allowedRole) {
     return <Outlet />;
   }

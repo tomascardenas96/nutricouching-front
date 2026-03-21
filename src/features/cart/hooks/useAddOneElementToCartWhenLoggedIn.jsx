@@ -28,7 +28,12 @@ function useAddOneElementToCartWhenLoggedIn() {
     toast.promise(promise, {
       loading: "Agregando al carrito...",
       success: "Producto agregado al carrito",
-      error: "Ocurrió un error al agregar el producto al carrito",
+      error: (err) => {
+        if (err?.response?.data?.message === "Usuario bloqueado") {
+          return "Tu cuenta se encuentra suspendida. No podés agregar productos al carrito.";
+        }
+        return "Ocurrió un error al agregar el producto al carrito";
+      },
     });
     return promise;
   };
