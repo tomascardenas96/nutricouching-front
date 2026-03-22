@@ -4,6 +4,7 @@ import { IoSend } from "react-icons/io5";
 import { PostContext } from "../context/PostContext";
 import "./CreatePost.css";
 import { IoMdClose } from "react-icons/io";
+import noProfilePicture from "/assets/empty-profile.svg";
 
 function CreatePost({ profilePicture }) {
   const {
@@ -33,7 +34,7 @@ function CreatePost({ profilePicture }) {
             />
           ) : (
             <img
-              src="/assets/no-pic.jpg"
+              src={noProfilePicture}
               alt="Foto de perfil del usuario al crear una publicacion"
             />
           )}

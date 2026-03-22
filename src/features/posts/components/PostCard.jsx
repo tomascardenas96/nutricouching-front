@@ -9,6 +9,7 @@ import { createPortal } from "react-dom";
 import ConfirmationModal from "../../../common/components/ConfirmationModal";
 import useDeletePost from "../hooks/useDeletePost";
 import useToggleLike from "../hooks/useToggleLike";
+import noProfilePicture from "/assets/empty-profile.svg";
 
 function PostCard({
   body,
@@ -34,7 +35,7 @@ function PostCard({
   const { toggleLike, liked, likeAmount } = useToggleLike(
     isLiked,
     likeCount,
-    postId
+    postId,
   );
 
   return (
@@ -42,10 +43,17 @@ function PostCard({
       <div className="post-card_header">
         <div className="description">
           <div className="header_image">
-            <img
-              src={profilePicture}
-              alt="Foto de perfil de profesional en tarjeta de publicacion"
-            />
+            {profilePicture ? (
+              <img
+                src={profilePicture}
+                alt="Foto de perfil de profesional en tarjeta de publicacion"
+              />
+            ) : (
+              <img
+                src={noProfilePicture}
+                alt="Foto de perfil de profesional en tarjeta de publicacion"
+              />
+            )}
           </div>
 
           <div className="name_hour">
@@ -116,7 +124,7 @@ function PostCard({
             message="¿Seguro que deseas eliminar la publicacion?"
             onClose={handleCloseDeleteModal}
           />,
-          document.getElementById("root-portal")
+          document.getElementById("root-portal"),
         )}
     </div>
   );
